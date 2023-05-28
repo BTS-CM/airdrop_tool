@@ -10,6 +10,8 @@ import {
     Table,
     Button,
     ScrollArea,
+    Accordion,
+    JsonInput,
     Group
 } from '@mantine/core';
 
@@ -27,16 +29,20 @@ export default function Leaderboard(properties) {
     const [value, setValue] = useState('bitshares');
 
     let assetName = "1.3.0";
+    let titleName = "token";
     let leaderboardJSON = [];
     if (value === 'bitshares') {
         leaderboardJSON = btsLeaderboard;
         assetName = "BTS";
+        titleName = "Bitshares";
     } else if (value === 'bitshares_testnet') {
         leaderboardJSON = btsTestnetLeaderboard;
         assetName = "TEST";
+        titleName = "Bitshares (Testnet)";
     } else if (value === 'tusc') {
         leaderboardJSON = tuscLeaderboard;
         assetName = "TUSC"
+        titleName = "TUSC";
     }
 
     let tableRows = leaderboardJSON.map((ticket) => {
@@ -50,7 +56,7 @@ export default function Leaderboard(properties) {
                     <td width={200}>
                         {
                             ticket.tickets.map(id => {
-                                return <Link href={`/Ticket/${value}/${id}`}>
+                                return <Link key={`bTicket_${id}`} href={`/Ticket/${value}/${id}`}>
                                             <Badge style={{margin:'1px'}}>{id}</Badge>
                                         </Link>
                             })
@@ -83,6 +89,31 @@ export default function Leaderboard(properties) {
                 </Group>
             </Radio.Group>
         </Card>
+
+        {
+            !tableRows || !tableRows.length 
+            ?   null
+            :   <Card shadow="md" radius="md" padding="xl" style={{marginTop:'25px'}}>
+                    <Accordion>
+                        <Accordion.Item key="json" value={"leaderboard_json"}>
+                            <Accordion.Control>
+                                {titleName} Leaderboard JSON
+                            </Accordion.Control>
+                            <Accordion.Panel style={{backgroundColor: '#FAFAFA'}}>
+                                <JsonInput
+                                    placeholder="Textarea will autosize to fit the content"
+                                    defaultValue={JSON.stringify(leaderboardJSON)}
+                                    validationError="Invalid JSON"
+                                    formatOnBlur
+                                    autosize
+                                    minRows={4}
+                                    maxRows={15}
+                                />
+                            </Accordion.Panel>
+                        </Accordion.Item>
+                    </Accordion>
+                </Card>
+        }
 
         {
             !tableRows || !tableRows.length 

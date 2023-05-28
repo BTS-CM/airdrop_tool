@@ -60,8 +60,6 @@ export default function CalculatedAirdrops(properties) {
                                         </Accordion.Item>
                             })
 
-                            console.log({plannedAirdropData})
-
     return (<>
         <Card shadow="md" radius="md" padding="xl" style={{marginTop:'25px'}}>
             <Title order={2} ta="center" mt="sm">

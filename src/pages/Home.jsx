@@ -101,7 +101,7 @@ export default function Home(properties) {
                     </Text>
                 </Card>
             </Link>
-            <Link href="/airdrop">
+            <Link href="/CalculatedAirdrops">
                 <Card shadow="md" radius="md" padding="xl">
                     <ThemeIcon variant="light" size={40} radius={40}>
                         <HiOutlinePaperAirplane />

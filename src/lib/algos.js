@@ -361,38 +361,39 @@ function executeCalculation (
     leaderboardJSON
 ) {
     let generatedNumbers = {};
-    let uniqueNums = [];
-    let lastTicketVal = leaderboardJSON.at(-1).range.to;
+    let winningTickets = [];
+    let winners = {};
 
     for (let i = 0; i < distributions.length; i++) {
+        // Calculate winning tickets for each algo chosen, 1 at a time
         let algoType = distributions[i];
         let algoTickets = getTickets(algoType, filtered_signature);
 
-        algoTickets = deduplicate === "Yes"
-                        ? [...new Set(algoTickets)] // remove algo based duplicates
-                        : algoTickets;
+        if (deduplicate === "Yes") {
+            // User chose to avoid unique tickets being chosen multiple times
+            algoTickets = [...new Set(algoTickets)];
+            algoTickets = algoTickets.filter(item => !winningTickets.includes(item));
+        }
+        
+        if (alwaysWinning === "Yes") {
+            // User chose for tickets to always find a winner
+            let lastTicketVal = leaderboardJSON.at(-1).range.to;
+            algoTickets = algoTickets.map(num => {
+                if (num <= lastTicketVal) {
+                    return num;
+                }
+        
+                let adjustedNum = num - (Math.floor(num / lastTicketVal) * lastTicketVal);
+        
+                return adjustedNum;
+            })
+        }
 
-        algoTickets = algoTickets.filter(item => !uniqueNums.includes(item));
-        uniqueNums = uniqueNums.concat(algoTickets);
-
-        algoTickets = alwaysWinning === "Yes"
-                        ? algoTickets.map(num => {
-                            if (num <= lastTicketVal) {
-                                return num;
-                            }
-                    
-                            let adjustedNum = num - (Math.floor(num / lastTicketVal) * lastTicketVal);
-                    
-                            return adjustedNum;
-                        })
-                        : algoTickets;
-
+        winningTickets = winningTickets.concat(algoTickets);
         generatedNumbers[algoType] = algoTickets;
     }
 
-    // {'pi': [{ticket: 1},2,3], ... }
-
-    let winners = {};
+    // Iterate through 
     for (const [key, value] of Object.entries(generatedNumbers)) {
         let algo = key;
         let algoNums = value;
@@ -411,7 +412,7 @@ function executeCalculation (
 
    let summary = [];
    for (const [key, value] of Object.entries(winners)) {
-       let currentPercent = ((value.length / uniqueNums.length) * 100).toFixed(5);
+       let currentPercent = ((value.length / winningTickets.length) * 100).toFixed(5);
        summary.push({
            id: key,
            tickets: value.sort((a,b) => a.ticket-b.ticket),

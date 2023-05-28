@@ -95,7 +95,12 @@ export default function CalculatedAirdrops(properties) {
             !tableRows || !tableRows.length 
             ?   <Card shadow="md" radius="md" padding="xl" style={{marginTop:'25px'}}>
                     <Title order={4} ta="center" mt="sm">
-                        No airdrops for this blockchain seem to have been created yet?
+                        No airdrops for this blockchain seem to have been created yet?<br/>
+                        <Link href="/Calculate">
+                            <Button mt="sm">
+                                Calculate airdrop
+                            </Button>
+                        </Link>
                     </Title>
                 </Card>
             :   <Card shadow="md" radius="md" padding="xl" style={{marginTop:'25px'}}>

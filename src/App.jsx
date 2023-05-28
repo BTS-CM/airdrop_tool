@@ -16,6 +16,21 @@ import {
   Image,
 } from '@mantine/core';
 
+import { 
+  HiOutlineTicket,
+  HiOutlineDatabase,
+  HiViewList,
+  HiOutlineCalculator,
+  HiOutlineSave,
+  HiOutlinePaperAirplane,
+  HiPlus,
+  HiOutlineLogin,
+  HiOutlineWifi,
+  HiOutlineChartPie,
+  HiSearch,
+  HiOutlineQuestionMarkCircle
+} from "react-icons/hi";
+
 import Home from "./pages/Home";
 import Fetch from "./pages/Fetch";
 import Tickets from "./pages/Tickets";
@@ -63,16 +78,24 @@ function App() {
                           <a className="link">Home</a>
                         </Menu.Item>
                       </Link>
-                      <Link href="/fetch">
-                        <Menu.Item>
-                          <a className="link">Fetch tickets</a>
-                        </Menu.Item>
-                      </Link>
+                      <Menu.Divider />
                       <Link href="/create">
                         <Menu.Item>
                           <a className="link">Create ticket</a>
                         </Menu.Item>
                       </Link>
+                      <Menu.Divider />
+                      <Link href="/fetch">
+                        <Menu.Item>
+                          <a className="link">Fetch tickets</a>
+                        </Menu.Item>
+                      </Link>
+                      <Link href="/calculate">
+                        <Menu.Item>
+                          <a className="link">Calculate airdrop</a>
+                        </Menu.Item>
+                      </Link>
+                      <Menu.Divider />
                       <Link href="/analyze">
                         <Menu.Item>
                           <a className="link">Analyze tickets</a>
@@ -83,19 +106,15 @@ function App() {
                           <a className="link">Ticket leaderboard</a>
                         </Menu.Item>
                       </Link>
-                      <Link href="/calculate">
-                        <Menu.Item>
-                          <a className="link">Calculate airdrop</a>
-                        </Menu.Item>
-                      </Link>
                       <Link href="/CalculatedAirdrops">
                         <Menu.Item>
                           <a className="link">Calculated airdrops</a>
                         </Menu.Item>
                       </Link>
-                      <Link href="/airdrop">
+                      <Menu.Divider />
+                      <Link href="/faq">
                         <Menu.Item>
-                          <a className="link">Perform airdrop</a>
+                          <a className="link">FAQ</a>
                         </Menu.Item>
                       </Link>
                   </Menu.Dropdown>
