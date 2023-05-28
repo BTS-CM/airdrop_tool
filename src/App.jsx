@@ -28,7 +28,8 @@ import {
   HiOutlineWifi,
   HiOutlineChartPie,
   HiSearch,
-  HiOutlineQuestionMarkCircle
+  HiOutlineQuestionMarkCircle,
+  HiOutlineHome
 } from "react-icons/hi";
 
 import Home from "./pages/Home";
@@ -41,6 +42,7 @@ import Calculate from "./pages/Calculate";
 import CalculatedAirdrops from "./pages/CalculatedAirdrops";
 import Airdrop from "./pages/Airdrop";
 import PlannedAirdrop from "./pages/PlannedAirdrop";
+import PerformAirdrop from "./pages/PerformAirdrop";
 import Nodes from "./pages/Nodes";
 import Ticket from "./pages/Ticket";
 import Account from "./pages/Account";
@@ -74,46 +76,46 @@ function App() {
                   <Menu.Dropdown>
                     <Menu.Label>Main menu</Menu.Label>
                       <Link href="/">
-                        <Menu.Item>
+                        <Menu.Item icon={<HiOutlineHome />}>
                           <a className="link">Home</a>
                         </Menu.Item>
                       </Link>
                       <Menu.Divider />
                       <Link href="/create">
-                        <Menu.Item>
+                        <Menu.Item icon={<HiPlus />}>
                           <a className="link">Create ticket</a>
                         </Menu.Item>
                       </Link>
                       <Menu.Divider />
                       <Link href="/fetch">
-                        <Menu.Item>
+                        <Menu.Item icon={<HiOutlineTicket />}>
                           <a className="link">Fetch tickets</a>
                         </Menu.Item>
                       </Link>
                       <Link href="/calculate">
-                        <Menu.Item>
+                        <Menu.Item icon={<HiOutlineCalculator />}>
                           <a className="link">Calculate airdrop</a>
                         </Menu.Item>
                       </Link>
-                      <Menu.Divider />
-                      <Link href="/analyze">
-                        <Menu.Item>
-                          <a className="link">Analyze tickets</a>
-                        </Menu.Item>
-                      </Link>
-                      <Link href="/leaderboard">
-                        <Menu.Item>
-                          <a className="link">Ticket leaderboard</a>
-                        </Menu.Item>
-                      </Link>
                       <Link href="/CalculatedAirdrops">
-                        <Menu.Item>
+                        <Menu.Item icon={<HiOutlineChartPie />}>
                           <a className="link">Calculated airdrops</a>
                         </Menu.Item>
                       </Link>
                       <Menu.Divider />
+                      <Link href="/analyze">
+                        <Menu.Item icon={<HiOutlineDatabase />}>
+                          <a className="link">Analyze tickets</a>
+                        </Menu.Item>
+                      </Link>
+                      <Link href="/leaderboard">
+                        <Menu.Item icon={<HiViewList />}>
+                          <a className="link">Ticket leaderboard</a>
+                        </Menu.Item>
+                      </Link>
+                      <Menu.Divider />
                       <Link href="/faq">
-                        <Menu.Item>
+                        <Menu.Item icon={<HiOutlineQuestionMarkCircle />}>
                           <a className="link">FAQ</a>
                         </Menu.Item>
                       </Link>
@@ -151,6 +153,7 @@ function App() {
               <Route path="/Ticket/:env/:id" component={Ticket} />
               <Route path="/Account/:env/:id" component={Account} />
               <Route path="/PlannedAirdrop/:env/:id" component={PlannedAirdrop} />
+              <Route path="/PerformAirdrop/:env/:id" component={PerformAirdrop} />
 
               <Route path="/Create" component={Create} />
               <Route path="/Analyze" component={Analyze} />

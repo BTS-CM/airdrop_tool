@@ -19,7 +19,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { airdropStore } from '../lib/states';
 
-export default function CalculatedAirdrops(properties) {
+export default function PlannedAirdrop(properties) {
     const btsAirdrops = airdropStore((state) => state.bitshares)
     const btsTestnetAirdrops = airdropStore((state) => state.bitshares_testnet)
     const tuscAirdrops = airdropStore((state) => state.tusc)
@@ -63,9 +63,15 @@ export default function CalculatedAirdrops(properties) {
     return (<>
         <Card shadow="md" radius="md" padding="xl" style={{marginTop:'25px'}}>
             <Title order={2} ta="center" mt="sm">
-                Planned airdrop contents<br/>
-                <Link href="/CalculatedAirdrops">
+                Planned airdrop contents
+                <br/>
+                <Link href={`/PerformAirdrop/${properties.params.env}/${properties.params.id}`}>
                     <Button compact>
+                        Perform Airdrop
+                    </Button>
+                </Link>
+                <Link href="/CalculatedAirdrops">
+                    <Button style={{marginLeft: '10px'}} compact>
                         Back
                     </Button>
                 </Link>
