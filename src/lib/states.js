@@ -144,6 +144,64 @@ const leaderboardStore = create(
   ),
 );
 
+const airdropStore = create(
+  persist(
+    (set, get) => ({
+      bitshares: [],
+      bitshares_testnet: [],
+      tusc: [],
+      changeAirdrops: (env, airdrop) => {
+        let currentAirdrops;      
+        if (env === 'bitshares') {
+          currentAirdrops = get().bitshares;
+          set({ bitshares: currentAirdrops.concat(airdrop) });
+        } else if (env === 'bitshares_testnet') {
+          currentAirdrops = get().bitshares_testnet;
+          set({ bitshares_testnet: currentAirdrops.concat(airdrop) });
+        } else if (env === 'tusc') {
+          currentAirdrops = get().tusc;
+          set({ tusc: currentAirdrops.concat(airdrop) });
+        }
+      },
+      eraseAirdrops: (env) => {
+        console.log(`Erasing all ${env} airdrops!`)
+        if (env === 'bitshares') {
+          set({ bitshares: [] });
+        } else if (env === 'bitshares_testnet') {
+          set({ bitshares_testnet: [] });
+        } else if (env === 'tusc') {
+          set({ tusc: [] });
+        }
+      },
+      eraseOne: (env, airdropID) => {
+        console.log(`Erasing one ${env} airdrop with ID ${airdropID}!`);
+        
+        let currentAirdrops;
+        if (env === "bitshares") {
+          currentAirdrops = get().bitshares;
+        } else if (env === "bitshares_testnet") {
+          currentAirdrops = get().bitshares_testnet;
+        } else if (env === "tusc") {
+          currentAirdrops = get().tusc;
+        }
+
+        let newAirdrops = currentAirdrops.filter(x => x.id != airdropID);
+
+        if (env === 'bitshares') {
+          set({ bitshares: newAirdrops });
+        } else if (env === 'bitshares_testnet') {
+          set({ bitshares_testnet: newAirdrops });
+        } else if (env === 'tusc') {
+          set({ tusc: newAirdrops });
+        }
+      }
+    }),
+    {
+      name: 'airdropStorage',
+    },
+  ),
+);
+
 /**
  * airdrop tool related
  */
@@ -362,4 +420,5 @@ export {
   leaderboardStore,
   identitiesStore,
   localePreferenceStore,
+  airdropStore
 };

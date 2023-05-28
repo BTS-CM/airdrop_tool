@@ -267,7 +267,7 @@ export default function Analyze(properties) {
                     </Title>
                 </Card>
             :   <Card shadow="md" radius="md" padding="xl" style={{marginTop:'25px'}}>      
-                    <Table>
+                    <Table highlightOnHover>
                         <thead>
                             <tr>
                                 <th>id</th>

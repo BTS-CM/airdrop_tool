@@ -35,7 +35,7 @@ export default function Home(properties) {
             The following features are available for the Bitshares blockchains!
         </Text>
 
-        <SimpleGrid cols={3} spacing="xl" mt={50} breakpoints={[{ maxWidth: 'md', cols: 1 }]}>
+        <SimpleGrid cols={3} spacing="xl" mt={50} breakpoints={[{ maxWidth: 'md', cols: 2 }, { maxWidth: 'sm', cols: 1 }, ]}>
             <Link href="/fetch">
                 <Card shadow="md" radius="md" padding="xl">
                     <ThemeIcon variant="light" size={40} radius={40}>
@@ -88,13 +88,13 @@ export default function Home(properties) {
                     </Text>
                 </Card>
             </Link>
-            <Link href="/plannedAirdrops">
+            <Link href="/CalculatedAirdrops">
                 <Card shadow="md" radius="md" padding="xl">
                     <ThemeIcon variant="light" size={40} radius={40}>
                         <HiOutlineChartPie />
                     </ThemeIcon>
                     <Text fz="lg" fw={500} mt="sm">
-                        Planned airdrop analysis
+                        Calculated airdrop analysis
                     </Text>
                     <Text fz="sm" c="dimmed" mt="sm">
                         Verify the contents of calculated airdrops prior to execution on the blockchain

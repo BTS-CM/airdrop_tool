@@ -23,7 +23,9 @@ import Create from "./pages/Create";
 import Analyze from "./pages/Analyze";
 import Leaderboard from "./pages/Leaderboard";
 import Calculate from "./pages/Calculate";
+import CalculatedAirdrops from "./pages/CalculatedAirdrops";
 import Airdrop from "./pages/Airdrop";
+import PlannedAirdrop from "./pages/PlannedAirdrop";
 import Nodes from "./pages/Nodes";
 import Ticket from "./pages/Ticket";
 import Account from "./pages/Account";
@@ -47,7 +49,7 @@ function App() {
                   alt="Bitshares logo"
                   caption="Bitshares BEET Airdrop tool"
                 />
-                <Menu shadow="md" width={200} style={{marginLeft: '10px'}}>
+                <Menu shadow="md" width={200} style={{marginLeft: '75px'}}>
                   <Menu.Target>
                     <Button>
                       📃 Menu
@@ -86,6 +88,11 @@ function App() {
                           <a className="link">Calculate airdrop</a>
                         </Menu.Item>
                       </Link>
+                      <Link href="/CalculatedAirdrops">
+                        <Menu.Item>
+                          <a className="link">Calculated airdrops</a>
+                        </Menu.Item>
+                      </Link>
                       <Link href="/airdrop">
                         <Menu.Item>
                           <a className="link">Perform airdrop</a>
@@ -115,20 +122,6 @@ function App() {
                       </Link>
                   </Menu.Dropdown>
                 </Menu>
-
-                <Menu shadow="md" width={200} style={{marginLeft: '10px'}}>
-                  <Menu.Target>
-                    <Button>
-                      📖 Locale
-                    </Button>
-                  </Menu.Target>
-
-                  <Menu.Dropdown>
-                    <Menu.Item>
-                      <a className="link">English</a>
-                    </Menu.Item>
-                  </Menu.Dropdown>
-                </Menu>
               </div>
             </Col>
             <Col span={12}>
@@ -138,11 +131,13 @@ function App() {
 
               <Route path="/Ticket/:env/:id" component={Ticket} />
               <Route path="/Account/:env/:id" component={Account} />
+              <Route path="/PlannedAirdrop/:env/:id" component={PlannedAirdrop} />
 
               <Route path="/Create" component={Create} />
               <Route path="/Analyze" component={Analyze} />
               <Route path="/Leaderboard" component={Leaderboard} />
               <Route path="/Calculate" component={Calculate} />
+              <Route path="/CalculatedAirdrops" component={CalculatedAirdrops} />
               <Route path="/Airdrop" component={Airdrop} />
 
               <Route path="/faq" component={FAQ} />
