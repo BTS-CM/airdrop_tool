@@ -239,6 +239,22 @@ const appStore = create((set, get) => ({
       }
     }
   },
+  replaceNodes: (env, nodes) => {
+    console.log({env, nodes})
+    if (env === 'bitshares') {
+      set(async (state) => ({
+        nodes: { ...state.nodes, bitshares: nodes },
+      }))
+    } else if (env === 'bitshares_testnet') {
+      set(async (state) => ({
+        nodes: { ...state.nodes, bitshares_testnet: nodes },
+      }))
+    } else if (env === 'tusc') {
+      set(async (state) => ({
+        nodes: { ...state.nodes, tusc: nodes },
+      }))
+    }
+  },
   changeURL: (env) => {
     /**
      * The current node url isn't healthy anymore
