@@ -33,16 +33,6 @@ export default function CalculatedAirdrops(properties) {
     } else if (value === 'tusc') {
         chosenAirdropData = tuscAirdrops;
     }
-    
-    /*
-        <td width={200}>
-            {
-                airdrop.algos.map(algo => {
-                    return <Badge style={{margin:'1px'}}>{algo}</Badge>
-                })
-            }
-        </td>
-    */
 
     let tableRows = chosenAirdropData && chosenAirdropData.length
                         ? chosenAirdropData.map((airdrop) => {

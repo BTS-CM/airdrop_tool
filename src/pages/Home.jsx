@@ -24,6 +24,21 @@ import {
     HiOutlineQuestionMarkCircle
 } from "react-icons/hi";
 
+/*
+            <Link href="/faq">
+                <Card shadow="md" radius="md" padding="xl">
+                    <ThemeIcon variant="light" size={40} radius={40}>
+                        <HiSearch />
+                    </ThemeIcon>
+                    <Text fz="lg" fw={500} mt="sm">
+                        Account search
+                    </Text>
+                    <Text fz="sm" c="dimmed" mt="sm">
+                        Search for blockchain accounts
+                    </Text>
+                </Card>
+            </Link>
+*/
 
 export default function Home(properties) {
     return <>
@@ -130,19 +145,6 @@ export default function Home(properties) {
             <Link href="/faq">
                 <Card shadow="md" radius="md" padding="xl">
                     <ThemeIcon variant="light" size={40} radius={40}>
-                        <HiSearch />
-                    </ThemeIcon>
-                    <Text fz="lg" fw={500} mt="sm">
-                        Account search
-                    </Text>
-                    <Text fz="sm" c="dimmed" mt="sm">
-                        Search for blockchain accounts
-                    </Text>
-                </Card>
-            </Link>
-            <Link href="/faq">
-                <Card shadow="md" radius="md" padding="xl">
-                    <ThemeIcon variant="light" size={40} radius={40}>
                         <HiOutlineQuestionMarkCircle />
                     </ThemeIcon>
                     <Text fz="lg" fw={500} mt="sm">
@@ -150,19 +152,6 @@ export default function Home(properties) {
                     </Text>
                     <Text fz="sm" c="dimmed" mt="sm">
                         Learn more about airdrops, tickets and blockchains
-                    </Text>
-                </Card>
-            </Link>
-            <Link href="/links">
-                <Card shadow="md" radius="md" padding="xl">
-                    <ThemeIcon variant="light" size={40} radius={40}>
-                        <HiOutlineLogin />
-                    </ThemeIcon>
-                    <Text fz="lg" fw={500} mt="sm">
-                        BEET account linking
-                    </Text>
-                    <Text fz="sm" c="dimmed" mt="sm">
-                        Link this Dapp to your Bitshares BEET multiwallet for later use
                     </Text>
                 </Card>
             </Link>

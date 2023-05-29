@@ -10,6 +10,8 @@ import {
     Group,
     ActionIcon
 } from '@mantine/core';
+import { HiOutlineChartPie } from "react-icons/hi"
+
 import { Link, Route, useLocation } from "wouter";
 import { appStore, ticketStore } from '../lib/states';
 
@@ -24,16 +26,20 @@ export default function Account(properties) {
     const tuscTickets = ticketStore((state) => state.tusc)
 
     let assetName = "";
+    let chainName = "";
     let targetJSON = [];
     if (properties.params.env === 'bitshares') {
         targetJSON = btsTickets;
         assetName = "BTS";
+        chainName = "Bitshares"
     } else if (properties.params.env === 'bitshares_testnet') {
         targetJSON = btsTestnetTickets;
         assetName = "TEST";
+        chainName = "Bitshares (Testnet)"
     } else if (properties.params.env === 'tusc') {
         targetJSON = tuscTickets;
         assetName = "TUSC";
+        chainName = "TUSC"
     }
 
     let retrievedAccountTickets = targetJSON.filter(x => x.account === properties.params.id);
@@ -257,6 +263,7 @@ export default function Account(properties) {
                 </Text>
             </Card>
         </SimpleGrid>
+        
         <Card shadow="md" radius="md" padding="xl" style={{marginTop:'25px'}}>
             <Table>
                 <thead>
@@ -277,5 +284,21 @@ export default function Account(properties) {
                 </tbody>
             </Table>
         </Card>
+
+        <SimpleGrid cols={1} spacing="xl" mt={50} ml={75} mr={75}>
+            <Card ta="center" shadow="md" radius="md" padding="xl">
+                <Text fz="lg" fw={500} mt="md">
+                    <HiOutlineChartPie /> Want to gain influence and improve your airdrop odds?
+                </Text>
+                <Text fz="sm" c="dimmed" m="sm">
+                    Create another ticket on the {chainName} blockchain
+                </Text>
+                <Link href={`/Create/${properties.params.env}/${properties.params.id}`}>
+                    <Button m="sm">
+                        Create new ticket
+                    </Button>
+                </Link>
+            </Card>
+        </SimpleGrid>
     </>;
 }
