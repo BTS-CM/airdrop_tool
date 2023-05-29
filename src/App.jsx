@@ -29,7 +29,9 @@ import {
   HiOutlineChartPie,
   HiSearch,
   HiOutlineQuestionMarkCircle,
-  HiOutlineHome
+  HiOutlineHome,
+  HiWifi,
+  HiOutlineIdentification,
 } from "react-icons/hi";
 
 import Home from "./pages/Home";
@@ -132,12 +134,12 @@ function App() {
                   <Menu.Dropdown>
                     <Menu.Label>Settings</Menu.Label>
                       <Link href="/nodes">
-                        <Menu.Item>
+                        <Menu.Item icon={<HiWifi />}>
                           <a className="link">Change nodes</a>
                         </Menu.Item>
                       </Link>
                       <Link href="/links">
-                        <Menu.Item>
+                        <Menu.Item icon={<HiOutlineIdentification />}>
                           <a className="link">Beet Dapp links</a>
                         </Menu.Item>
                       </Link>
@@ -156,6 +158,7 @@ function App() {
               <Route path="/PerformAirdrop/:env/:id" component={PerformAirdrop} />
 
               <Route path="/Create" component={Create} />
+              <Route path="/Create/:id" component={Create} />
               <Route path="/Analyze" component={Analyze} />
               <Route path="/Leaderboard" component={Leaderboard} />
               <Route path="/Calculate" component={Calculate} />

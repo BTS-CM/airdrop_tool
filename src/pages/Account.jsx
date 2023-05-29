@@ -193,10 +193,10 @@ export default function Account(properties) {
                     Locked for 180 days
                 </Text>
                 <Text fz="sm" c="dimmed" mt="sm">
-                    {smallLock.length} tickets ({((smallLock.length/validTickets.length)*100).toFixed(2)} %)
+                    {smallLock.length} tickets ({validTickets.length ? ((smallLock.length/validTickets.length)*100).toFixed(2) : 0} %)
                 </Text>
                 <Text fz="sm" c="dimmed" mt="sm">
-                    {smallLocked} {assetName} locked ({((smallLocked/lockedQuantity)*100).toFixed(2)} %)
+                    {smallLocked} {assetName} locked ({lockedQuantity ? ((smallLocked/lockedQuantity)*100).toFixed(2) : 0} %)
                 </Text>
                 <Text fz="sm" c="dimmed" mt="sm">
                     {smallLocked * 2} {assetName} vote weight
@@ -210,10 +210,10 @@ export default function Account(properties) {
                     Locked for 360 days
                 </Text>
                 <Text fz="sm" c="dimmed" mt="sm">
-                    {medLock.length} tickets ({((medLock.length/validTickets.length)*100).toFixed(2)} %)
+                    {medLock.length} tickets ({validTickets.length ? ((medLock.length/validTickets.length)*100).toFixed(2) : 0} %)
                 </Text>
                 <Text fz="sm" c="dimmed" mt="sm">
-                    {medLocked} {assetName} locked ({((medLocked/lockedQuantity)*100).toFixed(2)} %)
+                    {medLocked} {assetName} locked ({lockedQuantity ? ((medLocked/lockedQuantity)*100).toFixed(2) : 0} %)
                 </Text>
                 <Text fz="sm" c="dimmed" mt="sm">
                     {medLocked * 4} {assetName} vote weight
@@ -227,10 +227,10 @@ export default function Account(properties) {
                     Locked for 720 days
                 </Text>
                 <Text fz="sm" c="dimmed" mt="sm">
-                    {lgLock.length} tickets ({((lgLock.length/validTickets.length)*100).toFixed(2)} %)
+                    {lgLock.length} tickets ({validTickets.length ? ((lgLock.length/validTickets.length)*100).toFixed(2) : 0} %)
                 </Text>
                 <Text fz="sm" c="dimmed" mt="sm">
-                    {lgLocked} {assetName} locked ({((lgLocked/lockedQuantity)*100).toFixed(2)} %)
+                    {lgLocked} {assetName} locked ({lockedQuantity ? ((lgLocked/lockedQuantity)*100).toFixed(2) : 0} %)
                 </Text>
                 <Text fz="sm" c="dimmed" mt="sm">
                     {lgLocked * 8} {assetName} vote weight
@@ -244,10 +244,10 @@ export default function Account(properties) {
                     Locked forever
                 </Text>
                 <Text fz="sm" c="dimmed" mt="sm">
-                    {xlLock.length} tickets ({((xlLock.length/validTickets.length)*100).toFixed(2)} %)
+                    {xlLock.length} tickets ({validTickets.length ? ((xlLock.length/validTickets.length)*100).toFixed(2) : 0} %)
                 </Text>
                 <Text fz="sm" c="dimmed" mt="sm">
-                    {xlLocked} {assetName} locked ({((xlLocked/lockedQuantity)*100).toFixed(2)} %)
+                    {xlLocked} {assetName} locked ({lockedQuantity ? ((xlLocked/lockedQuantity)*100).toFixed(2) : 0} %)
                 </Text>
                 <Text fz="sm" c="dimmed" mt="sm">
                     {xlLocked * 8} {assetName} vote weight

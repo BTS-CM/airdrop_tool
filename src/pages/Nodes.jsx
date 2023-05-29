@@ -19,7 +19,8 @@ import {
 
 import {
     HiChevronUp,
-    HiChevronDown
+    HiChevronDown,
+    HiX
 } from 'react-icons/hi'
 
 import { appStore } from '../lib/states';
@@ -39,6 +40,7 @@ function array_move(arr, old_index, new_index) {
 export default function Nodes(properties) {
     const blockchainNodes = appStore((state) => state.nodes);
     const replaceNodes = appStore((state) => state.replaceNodes);
+    const removeURL = appStore((state) => state.removeURL);
 
     const [value, setValue] = useState('bitshares');
     const [itrValue, setItrValue] = useState(0);
@@ -47,26 +49,33 @@ export default function Nodes(properties) {
     let referenceNodes = blockchainNodes[value];
     let tableRows = referenceNodes.map((item, i) => (
         <tr key={item}>
-          <td>
-              {item}
-          </td>
-          <td>
-              <ActionIcon onClick={() => {
-                  setItrValue(i + 1);
-                  replaceNodes(value, array_move(referenceNodes, i, i-1))
-              }}>
-                  <HiChevronUp />
-              </ActionIcon>
-          </td>
-          <td>
-              <ActionIcon onClick={() => {
-                  setItrValue(i + 1);
-                  replaceNodes(value, array_move(referenceNodes, i, i+1))
-              }}>
-                  <HiChevronDown />
-              </ActionIcon>
-          </td>
-  
+            <td>
+                {item}
+            </td>
+            <td>
+                <ActionIcon onClick={() => {
+                    setItrValue(i + 1);
+                    replaceNodes(value, array_move(referenceNodes, i, i-1))
+                }}>
+                    <HiChevronUp />
+                </ActionIcon>
+            </td>
+            <td>
+                <ActionIcon onClick={() => {
+                    setItrValue(i + 1);
+                    replaceNodes(value, array_move(referenceNodes, i, i+1))
+                }}>
+                    <HiChevronDown />
+                </ActionIcon>
+            </td>
+            <td>
+                <ActionIcon onClick={() => {
+                    setItrValue(i + 1);
+                    removeURL(value, item);
+                }}>
+                    <HiX />
+                </ActionIcon>
+            </td>
         </tr>
       ));
     
@@ -93,7 +102,14 @@ export default function Nodes(properties) {
                       <HiChevronDown />
                   </ActionIcon>
               </td>
-      
+              <td>
+                  <ActionIcon onClick={() => {
+                      setItrValue(i + 1);
+                      removeURL(value, item);
+                  }}>
+                      <HiX />
+                  </ActionIcon>
+              </td>
             </tr>
           ));
     }, [itrValue]);
@@ -126,6 +142,7 @@ export default function Nodes(properties) {
                         <th>
                             Current {value} blockchain node order
                         </th>
+                        <th></th>
                         <th></th>
                         <th></th>
                     </tr>

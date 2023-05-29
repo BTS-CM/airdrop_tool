@@ -27,6 +27,7 @@
     "bitsharesjs-ws": "^6.0.0",
     "blakejs": "^1.2.1",
     "buffer": "^6.0.3",
+    "crypto-js": "^4.1.1",
     "eslint": "^8.32.0",
     "events": "^3.3.0",
     "i18next": "^22.4.9",
