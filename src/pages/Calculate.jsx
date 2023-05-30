@@ -52,7 +52,8 @@ export default function Calculate(properties) {
         { name: 'Cubed', value: 'cubed', desc: 'Split hash into 3 digit chunks, cube each chunk, output tickets.' },
         { name: 'Bouncing ball', value: 'bouncing_ball', desc: 'path of ball bouncing in matrix -> pick tickets along path' },
         { name: 'Alien blood', value: 'alien_blood', desc: 'Picks alien blood splatter spots; it burns directly down through the hull' },
-        { name: 'Average point lines', value: 'avg_point_lines', desc: 'Calculate the avg x/y/z coordinates -> draw lines to this from each vector => reward those on line' }
+        { name: 'Average point lines', value: 'avg_point_lines', desc: 'Calculate the avg x/y/z coordinates -> draw lines to this from each vector => reward those on line' },
+        { name: 'Freebie', value: 'freebie', desc: 'Each ticket holding account gets 1 winning ticket' }
     ];
 
     const toggleRow = (id) => setSelection((current) => current.includes(id) ? current.filter((item) => item !== id) : [...current, id]);

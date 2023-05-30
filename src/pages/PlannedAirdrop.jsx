@@ -25,15 +25,19 @@ export default function PlannedAirdrop(properties) {
     const tuscAirdrops = airdropStore((state) => state.tusc)
 
     let assetName = "";
+    let chainName = "";
     let plannedAirdropData = {};
     if (properties.params.env === 'bitshares') {
         plannedAirdropData = btsAirdrops.find(x => properties.params.id === x.id);
+        chainName = "Bitshares";
         assetName = "BTS";
     } else if (properties.params.env === 'bitshares_testnet') {
         plannedAirdropData = btsTestnetAirdrops.find(x => properties.params.id === x.id);
+        chainName = "Bitshares (testnet)";
         assetName = "TEST";
     } else if (properties.params.env === 'tusc') {
         plannedAirdropData = tuscAirdrops.find(x => properties.params.id === x.id);
+        chainName = "TUSC";
         assetName = "TUSC";
     }
 
@@ -63,7 +67,7 @@ export default function PlannedAirdrop(properties) {
     return (<>
         <Card shadow="md" radius="md" padding="xl" style={{marginTop:'25px'}}>
             <Title order={2} ta="center" mt="sm">
-                Planned airdrop contents
+                Planned {chainName} airdrop contents
                 <br/>
                 <Link href={`/PerformAirdrop/${properties.params.env}/${properties.params.id}`}>
                     <Button compact>

@@ -303,12 +303,22 @@ function bouncing_ball(initialChunks, maxDistance) {
 }
 
 /**
+ * Give each ticket holding account a free ticket
+ * @param {Array} leaderboardJSON
+ * @returns {Array}
+ */
+function freebie (leaderboardJSON) {
+    return leaderboardJSON.map(user => user.range.from);
+}
+
+/**
  * Given a ticket algorithm and signature, return chosen tickets.
  * @param {String} algoType 
  * @param {String} filtered_signature 
+ * @param {Array} leaderboardJSON
  * @returns {Array}
  */
-function getTickets (algoType, filtered_signature) {
+function getTickets (algoType, filtered_signature, leaderboardJSON) {
     let initialChunks = chunk(filtered_signature, 9);
 
     let minVector = new Vector3(0, 0, 0);
@@ -340,6 +350,8 @@ function getTickets (algoType, filtered_signature) {
         case "bouncing_ball":
             return bouncing_ball(initialChunks, maxDistance);
             break;
+        case "freebie":
+            return freebie(leaderboardJSON);
         default:
             console.log(`Unknown algo type: ${algoType}`);
     }
@@ -352,6 +364,7 @@ function getTickets (algoType, filtered_signature) {
  * @param {String} deduplicate
  * @param {String} alwaysWinning
  * @param {Array} leaderboardJSON
+ * @returns {Object}
  */
 function executeCalculation (
     filtered_signature,
@@ -367,7 +380,7 @@ function executeCalculation (
     for (let i = 0; i < distributions.length; i++) {
         // Calculate winning tickets for each algo chosen, 1 at a time
         let algoType = distributions[i];
-        let algoTickets = getTickets(algoType, filtered_signature);
+        let algoTickets = getTickets(algoType, filtered_signature, leaderboardJSON);
 
         if (deduplicate === "Yes") {
             // User chose to avoid unique tickets being chosen multiple times
@@ -434,5 +447,6 @@ export {
     cubed,
     avg_point_lines,
     alien_blood,
-    bouncing_ball
+    bouncing_ball,
+    freebie
 };

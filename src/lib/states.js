@@ -182,7 +182,6 @@ const appStore = create(
         }
       },
       replaceNodes: (env, nodes) => {
-        console.log({env, nodes})
         if (env === 'bitshares') {
           set(async (state) => ({
             nodes: { ...state.nodes, bitshares: nodes },

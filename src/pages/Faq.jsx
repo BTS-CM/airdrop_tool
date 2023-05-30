@@ -41,6 +41,11 @@ export default function FAQ(properties) {
             panel: 'Airdrop fee cost will increase if there are many airdrop recipients. Fees are set by blockchain committees and can change over time as their marketcap changes, so plan ahead for additional tokens to account for fees associated with airdrops. This tool will batch airdrop recipients together to reduce fees.'
         },
         {
+            key: 'ltm',
+            control: 'How can I reduce the fees associated with performing an airdrop?',
+            panel: 'You can purchase a Life-Time Membership (LTM) for approx $100 in the reference web app, this will effectively reduce fees by 80%'
+        },
+        {
             key: 'license',
             control: 'Is this tool open source? What is its license?',
             panel: 'This tool is fully open source, available on Github and is MIT licensed. Do not pay for this software.'
