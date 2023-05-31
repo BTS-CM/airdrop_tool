@@ -1,18 +1,11 @@
-import { useState } from "react";
-import { invoke } from "@tauri-apps/api/tauri";
-import { Link, Route, useLocation } from "wouter";
+import { Link, Route } from "wouter";
 
 import {
   Menu,
-  Text,
   Container,
-  Center,
-  Group,
   Grid,
   Col,
-  Paper,
   Button,
-  Divider,
   Image,
 } from '@mantine/core';
 
@@ -21,17 +14,11 @@ import {
   HiOutlineDatabase,
   HiViewList,
   HiOutlineCalculator,
-  HiOutlineSave,
-  HiOutlinePaperAirplane,
   HiPlus,
-  HiOutlineLogin,
-  HiOutlineWifi,
   HiOutlineChartPie,
-  HiSearch,
   HiOutlineQuestionMarkCircle,
   HiOutlineHome,
   HiWifi,
-  HiOutlineIdentification,
 } from "react-icons/hi";
 
 import Home from "./pages/Home";
@@ -51,9 +38,6 @@ import Account from "./pages/Account";
 import FAQ from "./pages/Faq";
 
 function App() {
-
-  const [location, setLocation] = useLocation();
-
   return (
     <div className="App">
       <header className="App-header">

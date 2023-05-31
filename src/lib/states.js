@@ -1,8 +1,5 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { connect, checkBeet, link } from 'beet-js';
-
-import { testNodes } from './stateQueries';
 import config from '../config/config.json';
 
 const localePreferenceStore = create(
@@ -152,34 +149,6 @@ const appStore = create(
         bitshares: config.bitshares.nodeList.map((node) => node.url),
         bitshares_testnet: config.bitshares_testnet.nodeList.map((node) => node.url),
         tusc: config.tusc.nodeList.map((node) => node.url)
-      },
-      setNodes: async (env) => {
-        /**
-         * Testing then storing the bitshares nodes for blockchain queries
-         */  
-        let response;
-        try {
-          response = await testNodes(env);
-        } catch (error) {
-          console.log(error);
-          return;
-        }
-
-        if (response) {
-          if (env === 'bitshares') {
-            set(async (state) => ({
-              nodes: { ...state.nodes, bitshares: await response },
-            }))
-          } else if (env === 'bitshares_testnet') {
-            set(async (state) => ({
-              nodes: { ...state.nodes, bitshares_testnet: await response },
-            }))
-          } else if (env === 'tusc') {
-            set(async (state) => ({
-              nodes: { ...state.nodes, tusc: await response },
-            }))
-          }
-        }
       },
       replaceNodes: (env, nodes) => {
         if (env === 'bitshares') {
