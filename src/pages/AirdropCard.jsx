@@ -15,7 +15,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { appStore } from '../lib/states';
 import DeepLink from '../lib/DeepLink';
 
-export default function PerformAirdrop(properties) {
+export default function AirdropCard(properties) {
 
     let tokenQuantity = properties.tokenQuantity;
     let tokenName = properties.tokenName;
@@ -27,8 +27,10 @@ export default function PerformAirdrop(properties) {
     let winnerChunkQty = properties.winnerChunkQty;
     let env = properties.env;
     let ticketQty = properties.ticketQty;
+    let tokenDetails = properties.tokenDetails;
+    let quantityWinners = properties.quantityWinners;
 
-    const [deepLink, setDeepLink] = useState();
+    const [airdropData, setAirdropData] = useState();
     const [tx, setTX] = useState();
     const [inProgress, setInProgress] = useState(false);
     const [opened, { open, close }] = useDisclosure(false);
@@ -75,17 +77,17 @@ export default function PerformAirdrop(properties) {
             return {
                 fee: {
                     amount: 0,
-                    asset_id: "1.3.0"
+                    asset_id: tokenDetails.id
                 },
                 from: accountID,
                 to: x.id,
                 amount: {
                     amount: parseFloat(
                         distroMethod === "Proportionally"
-                        ?  ((x.qty/ticketQty)*tokenQuantity).toFixed(5)
-                        :  (((1/winners.length)*tokenQuantity).toFixed(5)) * chunk.length
+                        ?  ((x.qty/ticketQty)*tokenQuantity).toFixed(tokenDetails.precision)
+                        :  (((1/quantityWinners)*tokenQuantity).toFixed(tokenDetails.precision))
                     ) * 100000,
-                    asset_id: "1.3.0"
+                    asset_id: tokenDetails.id
                 }
             }
         })
@@ -161,15 +163,14 @@ export default function PerformAirdrop(properties) {
         }
 
         setInProgress(false);
-        console.log({relevantChain, encryptedPayload})
-        setDeepLink(`rawbeet://api?chain=${relevantChain}&request=${encryptedPayload}`);
+        setAirdropData(encryptedPayload);
     }
 
     let currentChunkValue = distroMethod === "Proportionally"
         ?   parseFloat(chunk.map(z => {
                 return ((z.qty/ticketQty)*tokenQuantity).toFixed(5)
             }).reduce((accumulator, ticket) => accumulator + parseFloat(ticket), 0).toFixed(5))
-        :   (((1/winners.length)*tokenQuantity).toFixed(5)) * chunk.length;
+        :   (((1/quantityWinners)*tokenQuantity).toFixed(5)) * chunk.length;
 
     return <Card key={`airdrop_${chunkItr}`} mt="md" shadow="md" radius="md" padding="xl">
                 <Text>
@@ -182,23 +183,23 @@ export default function PerformAirdrop(properties) {
                 <Modal
                     opened={opened}
                     onClose={() => {
-                        setDeepLink();
+                        setAirdropData();
                         close();
                         setTX();
                     }}
                     title={`Airdrop #${chunkItr + 1}/${winnerChunkQty}`}
                 >
                     {
-                        !deepLink && !inProgress
+                        !airdropData && !inProgress
                             ?   <>
-                                    <Text>Via raw Beet deeplink</Text>
+                                    <Text>Via local file upload</Text>
                                     <Text m="sm" fz="xs">
-                                        1. Launch the BEET wallet and navigate to "Raw Link" in the menu.<br/>
-                                        2. From this page you can either allow all operations, or solely allow operation 0 "Transfer" (then click save).<br/>
-                                        3. Once "Ready for raw links" shows in Beet submit this request.
+                                        1. Launch the BEET wallet and navigate to "Local" in the menu.<br/>
+                                        2. At this page either allow all, or allow just operation 0 "Transfer".<br/>
+                                        3. Once at the local upload page, click the button below to proceed.
                                     </Text>
                                     <Button mt="md" onClick={async () => await generateDeepLink(chunk, chunkItr.toString())}>
-                                        Generate Deeplink
+                                        Generate airdrop JSON file
                                     </Button>
                                 </>
                             : null
@@ -209,7 +210,7 @@ export default function PerformAirdrop(properties) {
                             : null
                     }
                     {
-                        deepLink
+                        airdropData
                             ?   <>
                                     <Text>Raw deeplink generated</Text>
                                     <Text fz="xs">
@@ -217,12 +218,19 @@ export default function PerformAirdrop(properties) {
                                         2. A BEET prompt will display.<br/>
                                         3. Verify the prompt's contents before approving the airdrop.
                                     </Text>
-                                    <a href={deepLink}>
+                                    
+                                    <a
+                                        href={"data:text/json;charset=utf-8," + airdropData}
+                                        download={`airdrop_${chunkItr + 1}.json`}
+                                        target="_blank"
+                                    >
                                         <Button mt="md">
-                                            Submit to Beet
+                                            Download airdrop JSON
                                         </Button>
                                     </a>
-                                    <Accordion mt="md">
+                                    
+
+                                    <Accordion mt="xs">
                                         <Accordion.Item key="json" value={"operation_json"}>
                                             <Accordion.Control>
                                                 Proposed airdrop operation JSON

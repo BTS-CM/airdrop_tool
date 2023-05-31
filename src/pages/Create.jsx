@@ -162,7 +162,6 @@ export default function Create(properties) {
             return;
         }
 
-        console.log({relevantChain, encryptedPayload})
         setDeepLink(`rawbeet://api?chain=${relevantChain}&request=${encryptedPayload}`);
     }
 
