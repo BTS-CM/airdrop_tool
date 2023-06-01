@@ -33,7 +33,7 @@ const ticketStore = create(
         }
       },
       eraseTickets: (env) => {
-        console.log(`Erasing ${env} tickets!`)
+        console.log(`Erasing ${env} tickets!`);
         if (env === 'bitshares') {
           set({ bitshares: [] });
         } else if (env === 'bitshares_testnet') {
@@ -41,7 +41,7 @@ const ticketStore = create(
         } else if (env === 'tusc') {
           set({ tusc: [] });
         }
-      }
+      },
     }),
     {
       name: 'ticketStorage',
@@ -65,7 +65,7 @@ const leaderboardStore = create(
         }
       },
       eraseLeaders: (env) => {
-        console.log(`Erasing ${env} leaderboards!`)
+        console.log(`Erasing ${env} leaderboards!`);
         if (env === 'bitshares') {
           set({ bitshares: [] });
         } else if (env === 'bitshares_testnet') {
@@ -73,7 +73,7 @@ const leaderboardStore = create(
         } else if (env === 'tusc') {
           set({ tusc: [] });
         }
-      }
+      },
     }),
     {
       name: 'leaderboardStorage',
@@ -88,7 +88,7 @@ const airdropStore = create(
       bitshares_testnet: [],
       tusc: [],
       changeAirdrops: (env, airdrop) => {
-        let currentAirdrops;      
+        let currentAirdrops;
         if (env === 'bitshares') {
           currentAirdrops = get().bitshares;
           set({ bitshares: currentAirdrops.concat(airdrop) });
@@ -101,7 +101,7 @@ const airdropStore = create(
         }
       },
       eraseAirdrops: (env) => {
-        console.log(`Erasing all ${env} airdrops!`)
+        console.log(`Erasing all ${env} airdrops!`);
         if (env === 'bitshares') {
           set({ bitshares: [] });
         } else if (env === 'bitshares_testnet') {
@@ -112,7 +112,7 @@ const airdropStore = create(
       },
       eraseOne: (env, airdropID) => {
         console.log(`Erasing one ${env} airdrop with ID ${airdropID}!`);
-        
+
         let currentAirdrops;
         if (env === "bitshares") {
           currentAirdrops = get().bitshares;
@@ -122,7 +122,7 @@ const airdropStore = create(
           currentAirdrops = get().tusc;
         }
 
-        let newAirdrops = currentAirdrops.filter(x => x.id != airdropID);
+        const newAirdrops = currentAirdrops.filter((x) => x.id != airdropID);
 
         if (env === 'bitshares') {
           set({ bitshares: newAirdrops });
@@ -131,7 +131,7 @@ const airdropStore = create(
         } else if (env === 'tusc') {
           set({ tusc: newAirdrops });
         }
-      }
+      },
     }),
     {
       name: 'airdropStorage',
@@ -148,21 +148,21 @@ const appStore = create(
       nodes: {
         bitshares: config.bitshares.nodeList.map((node) => node.url),
         bitshares_testnet: config.bitshares_testnet.nodeList.map((node) => node.url),
-        tusc: config.tusc.nodeList.map((node) => node.url)
+        tusc: config.tusc.nodeList.map((node) => node.url),
       },
       replaceNodes: (env, nodes) => {
         if (env === 'bitshares') {
           set(async (state) => ({
             nodes: { ...state.nodes, bitshares: nodes },
-          }))
+          }));
         } else if (env === 'bitshares_testnet') {
           set(async (state) => ({
             nodes: { ...state.nodes, bitshares_testnet: nodes },
-          }))
+          }));
         } else if (env === 'tusc') {
           set(async (state) => ({
             nodes: { ...state.nodes, tusc: nodes },
-          }))
+          }));
         }
       },
       changeURL: (env) => {
@@ -178,48 +178,47 @@ const appStore = create(
         if (env === 'bitshares') {
           set(async (state) => ({
             nodes: { ...state.nodes, bitshares: nodesToChange },
-          }))
+          }));
         } else if (env === 'bitshares_testnet') {
           set(async (state) => ({
             nodes: { ...state.nodes, bitshares_testnet: nodesToChange },
-          }))
+          }));
         } else if (env === 'tusc') {
           set(async (state) => ({
             nodes: { ...state.nodes, tusc: nodesToChange },
-          }))
+          }));
         }
-
       },
       reset: () => set({
         nodes: {
           bitshares: [],
           bitshares_testnet: [],
-          tusc: []
-        }
+          tusc: [],
+        },
       }),
       removeURL: (env, url) => {
         let nodesToChange = get().nodes[env];
-        nodesToChange = nodesToChange.filter(x => x !== url);
-        
+        nodesToChange = nodesToChange.filter((x) => x !== url);
+
         if (env === 'bitshares') {
           set((state) => ({
             nodes: { ...state.nodes, bitshares: nodesToChange },
-          }))
+          }));
         } else if (env === 'bitshares_testnet') {
           set((state) => ({
             nodes: { ...state.nodes, bitshares_testnet: nodesToChange },
-          }))
+          }));
         } else if (env === 'tusc') {
           set((state) => ({
             nodes: { ...state.nodes, tusc: nodesToChange },
-          }))
+          }));
         }
       },
     }),
     {
-        name: 'nodeStorage',
-    }
-  )
+      name: 'nodeStorage',
+    },
+  ),
 );
 
 export {
@@ -227,5 +226,5 @@ export {
   ticketStore,
   leaderboardStore,
   localePreferenceStore,
-  airdropStore
+  airdropStore,
 };

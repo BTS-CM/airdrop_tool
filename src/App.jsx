@@ -1,4 +1,6 @@
-import { Link, Route } from "wouter";
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import React from "react";
+import { Link, Route, useLocation } from "wouter";
 
 import {
   Menu,
@@ -9,7 +11,7 @@ import {
   Image,
 } from '@mantine/core';
 
-import { 
+import {
   HiOutlineTicket,
   HiOutlineDatabase,
   HiViewList,
@@ -37,13 +39,27 @@ import Ticket from "./pages/Ticket";
 import Account from "./pages/Account";
 import FAQ from "./pages/Faq";
 
+function openGallery() {
+  window.electron.openURL('gallery');
+}
+
+function openGit() {
+  window.electron.openURL('toolGithub');
+}
+
+function openBeet() {
+  window.electron.openURL('beetGithub');
+}
+
 function App() {
+  const [location, setLocation] = useLocation();
+
   return (
     <div className="App">
       <header className="App-header">
         <Container>
           <Grid key="about" grow>
-            <Col mt={"xl"} ta={"left"} span={1}>
+            <Col mt="xl" ta="left" span={1}>
               <Menu shadow="md" width={200}>
                 <Menu.Target>
                   <Button>
@@ -53,68 +69,70 @@ function App() {
 
                 <Menu.Dropdown>
                   <Menu.Label>Main menu</Menu.Label>
-                    <Link href="/">
-                      <Menu.Item icon={<HiOutlineHome />}>
-                        <a className="link">Home</a>
-                      </Menu.Item>
-                    </Link>
-                    <Menu.Divider />
-                    <Link href="/create">
-                      <Menu.Item icon={<HiPlus />}>
-                        <a className="link">Create ticket</a>
-                      </Menu.Item>
-                    </Link>
-                    <Menu.Divider />
-                    <Link href="/fetch">
-                      <Menu.Item icon={<HiOutlineTicket />}>
-                        <a className="link">Fetch tickets</a>
-                      </Menu.Item>
-                    </Link>
-                    <Link href="/calculate">
-                      <Menu.Item icon={<HiOutlineCalculator />}>
-                        <a className="link">Calculate airdrop</a>
-                      </Menu.Item>
-                    </Link>
-                    <Link href="/CalculatedAirdrops">
-                      <Menu.Item icon={<HiOutlineChartPie />}>
-                        <a className="link">Calculated airdrops</a>
-                      </Menu.Item>
-                    </Link>
-                    <Menu.Divider />
-                    <Link href="/analyze">
-                      <Menu.Item icon={<HiOutlineDatabase />}>
-                        <a className="link">Analyze tickets</a>
-                      </Menu.Item>
-                    </Link>
-                    <Link href="/leaderboard">
-                      <Menu.Item icon={<HiViewList />}>
-                        <a className="link">Ticket leaderboard</a>
-                      </Menu.Item>
-                    </Link>
-                    <Menu.Divider />
-                    <Link href="/faq">
-                      <Menu.Item icon={<HiOutlineQuestionMarkCircle />}>
-                        <a className="link">FAQ</a>
-                      </Menu.Item>
-                    </Link>
-                    <Link href="/nodes">
-                      <Menu.Item icon={<HiWifi />}>
-                        <a className="link">Change nodes</a>
-                      </Menu.Item>
-                    </Link>
+                  <Link href="./">
+                    <Menu.Item icon={<HiOutlineHome />}>
+                      <a className="link">Home</a>
+                    </Menu.Item>
+                  </Link>
+                  <Menu.Divider />
+                  <Link href="./create">
+                    <Menu.Item icon={<HiPlus />}>
+                      <a className="link">Create ticket</a>
+                    </Menu.Item>
+                  </Link>
+                  <Menu.Divider />
+                  <Link href="./fetch">
+                    <Menu.Item icon={<HiOutlineTicket />}>
+                      <a className="link">Fetch tickets</a>
+                    </Menu.Item>
+                  </Link>
+                  <Link href="./calculate">
+                    <Menu.Item icon={<HiOutlineCalculator />}>
+                      <a className="link">Calculate airdrop</a>
+                    </Menu.Item>
+                  </Link>
+                  <Link href="./CalculatedAirdrops">
+                    <Menu.Item icon={<HiOutlineChartPie />}>
+                      <a className="link">Calculated airdrops</a>
+                    </Menu.Item>
+                  </Link>
+                  <Menu.Divider />
+                  <Link href="./analyze">
+                    <Menu.Item icon={<HiOutlineDatabase />}>
+                      <a className="link">Analyze tickets</a>
+                    </Menu.Item>
+                  </Link>
+                  <Link href="./leaderboard">
+                    <Menu.Item icon={<HiViewList />}>
+                      <a className="link">Ticket leaderboard</a>
+                    </Menu.Item>
+                  </Link>
+                  <Menu.Divider />
+                  <Link href="./faq">
+                    <Menu.Item icon={<HiOutlineQuestionMarkCircle />}>
+                      <a className="link">FAQ</a>
+                    </Menu.Item>
+                  </Link>
+                  <Link href="./nodes">
+                    <Menu.Item icon={<HiWifi />}>
+                      <a className="link">Change nodes</a>
+                    </Menu.Item>
+                  </Link>
                 </Menu.Dropdown>
-              </Menu> 
+              </Menu>
             </Col>
-            <Col ta={"Center"} span={10}>
+            <Col ta="Center" span={10}>
               <div style={{ width: 350, marginLeft: 'auto', marginRight: 'auto' }}>
                 <Image
-                  style={{width: 350}}
+                  style={{ width: 350 }}
                   radius="md"
-                  src="/logo2.png"
+                  src="./logo2.png"
                   alt="Bitshares logo"
                   caption="Bitshares BEET Airdrop tool"
                 />
-
+                <p>
+                  {location}
+                </p>
               </div>
             </Col>
             <Col span={12}>
@@ -137,6 +155,38 @@ function App() {
 
               <Route path="/faq" component={FAQ} />
               <Route path="/Nodes" component={Nodes} />
+            </Col>
+            <Col ta="center" span={12}>
+              <Button
+                variant="default"
+                color="dark"
+                sx={{ marginTop: '15px', marginRight: '5px' }}
+                onClick={() => {
+                  openGallery();
+                }}
+              >
+                NFTEA Gallery
+              </Button>
+              <Button
+                variant="default"
+                color="dark"
+                sx={{ marginTop: '15px', marginRight: '5px' }}
+                onClick={() => {
+                  openGit();
+                }}
+              >
+                Github Repo
+              </Button>
+              <Button
+                variant="default"
+                color="dark"
+                sx={{ marginTop: '15px', marginRight: '5px' }}
+                onClick={() => {
+                  openBeet();
+                }}
+              >
+                Beet
+              </Button>
             </Col>
           </Grid>
         </Container>
