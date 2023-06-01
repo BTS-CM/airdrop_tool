@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from "wouter";
+import { Link } from "react-router-dom";
 import {
   Title,
   Text,
@@ -48,19 +48,19 @@ export default function Leaderboard(properties) {
   const tableRows = leaderboardJSON.map((ticket) => (
     <tr key={ticket.id}>
       <td>
-        <Link href={`/Account/${value}/${ticket.id}`}>
+        <Link style={{ textDecoration: 'none' }} to={`/Account/${value}/${ticket.id}`}>
           {ticket.id}
         </Link>
       </td>
       <td>{ticket.amount}</td>
       <td width={200}>
         {
-                            ticket.tickets.map((id) => (
-                              <Link key={`bTicket_${id}`} href={`/Ticket/${value}/${id}`}>
-                                <Badge style={{ margin: '1px' }}>{id}</Badge>
-                              </Link>
-                            ))
-                        }
+          ticket.tickets.map((id) => (
+            <Link style={{ textDecoration: 'none' }} key={`bTicket_${id}`} to={`/Ticket/${value}/${id}`}>
+              <Badge style={{ margin: '1px' }}>{id}</Badge>
+            </Link>
+          ))
+        }
       </td>
       <td>{ticket.percent.toFixed(5)}</td>
       <td>{ticket.range.from}</td>

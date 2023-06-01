@@ -8,7 +8,7 @@ import { Vector3, Line3 } from 'three';
  */
 function chunk(arr, chunkSize) {
   if (chunkSize <= 0 || chunkSize > arr.length) {
-    throw "Invalid chunk size";
+    throw new Error("Invalid chunk size");
   }
 
   const refArr = (arr).toLocaleString('fullwide', { useGrouping: false });
@@ -30,7 +30,7 @@ function filterParseInt(parseTarget) {
 
   let finalValue;
   for (let i = 0; i < vals.length; i++) {
-    if (parseInt(vals[i]) > 0) {
+    if (parseInt(vals[i], 10) > 0) {
       finalValue = parseTarget.substring(i, vals.length);
       break;
     } else {
@@ -38,7 +38,7 @@ function filterParseInt(parseTarget) {
     }
   }
 
-  return !finalValue ? 0 : parseInt(finalValue);
+  return !finalValue ? 0 : parseInt(finalValue, 10);
 }
 
 /**
@@ -72,7 +72,7 @@ function extractTickets(quantity, targetLine, increment) {
     ticketValue = (z * 1000000) + ((y * 1000) + x);
 
     chosenTickets.push(
-      parseInt(ticketValue),
+      parseInt(ticketValue, 10),
     );
   }
   return chosenTickets;
@@ -109,12 +109,12 @@ function reverse_pi(chunks) {
   const reversedChunks = chunks.map((x) => filterParseInt(x.split("").reverse().join("")));
 
   for (let i = 0; i < reversedChunks.length; i++) {
-    const current = parseInt(Math.sqrt(reversedChunks[i]));
+    const current = parseInt(Math.sqrt(reversedChunks[i]), 10);
 
     for (let y = i; y < reversedChunks.length - i; y++) {
-      const nextValue = parseInt(Math.sqrt(reversedChunks[y]));
+      const nextValue = parseInt(Math.sqrt(reversedChunks[y]), 10);
       piChunks.push(
-        parseInt((current * nextValue) * Math.PI),
+        parseInt((current * nextValue) * Math.PI, 10),
       );
     }
   }
@@ -131,12 +131,12 @@ function reverse_pi(chunks) {
 function forward_pi(chunks) {
   const piChunks = [];
   for (let i = 0; i < chunks.length; i++) {
-    const current = parseInt(Math.sqrt(filterParseInt(chunks[i])));
+    const current = parseInt(Math.sqrt(filterParseInt(chunks[i])), 10);
 
     for (let y = i; y < chunks.length - i; y++) {
-      const nextValue = parseInt(Math.sqrt(filterParseInt(chunks[y])));
+      const nextValue = parseInt(Math.sqrt(filterParseInt(chunks[y])), 10);
       piChunks.push(
-        parseInt((current * nextValue) * Math.PI),
+        parseInt((current * nextValue) * Math.PI, 10),
       );
     }
   }
@@ -152,7 +152,7 @@ function forward_pi(chunks) {
  */
 function cubed(filtered_signature) {
   const smallerChunks = chunk(filtered_signature, 3).map((x) => filterParseInt(x));
-  const cubedChunks = smallerChunks.map((x) => parseInt(x * x * x));
+  const cubedChunks = smallerChunks.map((x) => parseInt(x * x * x, 10));
   return cubedChunks;
 }
 
@@ -177,9 +177,9 @@ function avg_point_lines(chunks, maxDistance) {
   }
 
   const avgVector = new Vector3(
-    parseInt(xTally / vectorChunks.length),
-    parseInt(yTally / vectorChunks.length),
-    parseInt(zTally / vectorChunks.length),
+    parseInt(xTally / vectorChunks.length, 10),
+    parseInt(yTally / vectorChunks.length, 10),
+    parseInt(zTally / vectorChunks.length, 10),
   );
 
   const avg_lines = vectorChunks.map((vector) => {
@@ -194,7 +194,7 @@ function avg_point_lines(chunks, maxDistance) {
   let chosenTickets = [];
   for (let i = 0; i < avg_lines.length; i++) {
     const currentLine = avg_lines[i];
-    const qty = parseInt((currentLine.distanceSq() / maxDistance) * 999);
+    const qty = parseInt((currentLine.distanceSq() / maxDistance) * 999, 10);
     const currentChosenTickets = extractTickets(qty, currentLine, 0.001);
     chosenTickets = [...chosenTickets, ...currentChosenTickets];
   }
@@ -261,8 +261,8 @@ function bouncing_ball(initialChunks, maxDistance) {
     const nvArray = nextVector.toArray();
     if (nvArray[2] <= cvArray[2]) {
       // going down
-      const xAxis = (parseInt(nvArray[0]) + parseInt(cvArray[0])) / 2;
-      const yAxis = (parseInt(nvArray[1]) + parseInt(cvArray[1])) / 2;
+      const xAxis = (parseInt(nvArray[0], 10) + parseInt(cvArray[0], 10)) / 2;
+      const yAxis = (parseInt(nvArray[1], 10) + parseInt(cvArray[1], 10)) / 2;
 
       bouncingVectors.push(
         new Vector3(xAxis, yAxis, 0),
@@ -287,7 +287,7 @@ function bouncing_ball(initialChunks, maxDistance) {
     pathOfBall.push({
       line: new Line3(currentVector, nextVector),
       distance,
-      qtyPicks: distance > 0 ? parseInt((distance / maxDistance) * 999) : 0,
+      qtyPicks: distance > 0 ? parseInt((distance / maxDistance) * 999, 10) : 0,
     });
   }
 
@@ -328,32 +328,25 @@ function getTickets(algoType, filtered_signature, leaderboardJSON) {
   switch (algoType) {
     case "forward":
       return forward(initialChunks);
-      break;
     case "reverse":
       return reverse(initialChunks);
-      break;
     case "pi":
       return forward_pi(initialChunks);
-      break;
     case "reverse_pi":
       return reverse_pi(initialChunks);
-      break;
     case "cubed":
       return cubed(filtered_signature);
-      break;
     case "avg_point_lines":
       return avg_point_lines(initialChunks, maxDistance);
-      break;
     case "alien_blood":
       return alien_blood(filtered_signature);
-      break;
     case "bouncing_ball":
       return bouncing_ball(initialChunks, maxDistance);
-      break;
     case "freebie":
       return freebie(leaderboardJSON);
     default:
       console.log(`Unknown algo type: ${algoType}`);
+      return [];
   }
 }
 
@@ -385,6 +378,7 @@ function executeCalculation(
     if (deduplicate === "Yes") {
       // User chose to avoid unique tickets being chosen multiple times
       algoTickets = [...new Set(algoTickets)];
+      // eslint-disable-next-line no-loop-func
       algoTickets = algoTickets.filter((item) => !winningTickets.includes(item));
     }
 
@@ -413,10 +407,11 @@ function executeCalculation(
 
     for (let i = 0; i < algoNums.length; i++) {
       const currentNumber = algoNums[i];
-      const search = leaderboardJSON.find((x) => currentNumber >= x.range.from && currentNumber <= x.range.to);
+      const search = leaderboardJSON
+        .find((x) => currentNumber >= x.range.from && currentNumber <= x.range.to);
 
       if (search) {
-        winners[search.id] = winners.hasOwnProperty(search.id)
+        winners[search.id] = Object.prototype.hasOwnProperty.call(winners, search.id)
           ? [...winners[search.id], { ticket: currentNumber, algo }]
           : [{ ticket: currentNumber, algo }];
       }

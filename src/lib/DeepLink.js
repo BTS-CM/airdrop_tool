@@ -1,3 +1,4 @@
+/* eslint-disable default-param-last */
 import aes from "crypto-js/aes";
 import Base64 from 'crypto-js/enc-base64';
 import Utf8 from 'crypto-js/enc-utf8';
@@ -99,8 +100,8 @@ class DeepLink {
       };
       const handle_payload = function handlePayload(builder) {
         return new Promise((resolve, reject) => {
-          if (builder.operations.length != builder.operations.length) {
-            throw "Serialized and constructed operation count differs";
+          if (builder.operations.length !== builder.operations.length) {
+            throw new Error("Serialized and constructed operation count differs");
           }
           const args = [
             "signAndBroadcast",
@@ -146,7 +147,7 @@ class DeepLink {
         }
       };
     } else if (!options.sign && options.broadcast) {
-      throw "Unsupported injection";
+      throw new Error("Unsupported injection");
     }
     return TransactionBuilder;
   }

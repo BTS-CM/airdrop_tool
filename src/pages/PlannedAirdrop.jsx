@@ -1,25 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from "wouter";
+import { Link, useParams } from "react-router-dom";
 import {
   Title,
   Text,
   SimpleGrid,
   Badge,
   Card,
-  Radio,
-  Table,
   Button,
-  ScrollArea,
-  Group,
   Tooltip,
   Accordion,
   JsonInput,
 } from '@mantine/core';
-import { v4 as uuidv4 } from 'uuid';
 
 import { airdropStore } from '../lib/states';
 
 export default function PlannedAirdrop(properties) {
+  const params = useParams();
+
   const btsAirdrops = airdropStore((state) => state.bitshares);
   const btsTestnetAirdrops = airdropStore((state) => state.bitshares_testnet);
   const tuscAirdrops = airdropStore((state) => state.tusc);
@@ -27,16 +24,16 @@ export default function PlannedAirdrop(properties) {
   let assetName = "";
   let chainName = "";
   let plannedAirdropData = {};
-  if (properties.params.env === 'bitshares') {
-    plannedAirdropData = btsAirdrops.find((x) => properties.params.id === x.id);
+  if (params.env === 'bitshares') {
+    plannedAirdropData = btsAirdrops.find((x) => params.id === x.id);
     chainName = "Bitshares";
     assetName = "BTS";
-  } else if (properties.params.env === 'bitshares_testnet') {
-    plannedAirdropData = btsTestnetAirdrops.find((x) => properties.params.id === x.id);
+  } else if (params.env === 'bitshares_testnet') {
+    plannedAirdropData = btsTestnetAirdrops.find((x) => params.id === x.id);
     chainName = "Bitshares (testnet)";
     assetName = "TEST";
-  } else if (properties.params.env === 'tusc') {
-    plannedAirdropData = tuscAirdrops.find((x) => properties.params.id === x.id);
+  } else if (params.env === 'tusc') {
+    plannedAirdropData = tuscAirdrops.find((x) => params.id === x.id);
     chainName = "TUSC";
     assetName = "TUSC";
   }
@@ -47,16 +44,20 @@ export default function PlannedAirdrop(properties) {
     .map((winner) => (
       <Accordion.Item value={`${winner.id}_acc`}>
         <Accordion.Control>
-          "
-          <Link href={`/Account/${properties.params.env}/${winner.id}`}>{winner.id}</Link>
-          " has
+          &quot;
+          <Link to={`/Account/${params.env}/${winner.id}`}>{winner.id}</Link>
+          &quot; has
           {winner.qty}
           {' '}
           winning ticket
           {winner.qty > 1 ? "s" : ""}
           {' '}
           (
-          {parseFloat(winner.percent) > 1 ? parseFloat(winner.percent).toFixed(2) : parseFloat(winner.percent).toFixed(5)}
+          {
+            parseFloat(winner.percent) > 1
+              ? parseFloat(winner.percent).toFixed(2)
+              : parseFloat(winner.percent).toFixed(5)
+          }
           %)
         </Accordion.Control>
         <Accordion.Panel style={{ backgroundColor: '#FAFAFA' }}>
@@ -83,12 +84,12 @@ export default function PlannedAirdrop(properties) {
         {' '}
         airdrop contents
         <br />
-        <Link href={`/PerformAirdrop/${properties.params.env}/${properties.params.id}`}>
+        <Link to={`/PerformAirdrop/${params.env}/${params.id}`}>
           <Button compact>
             Perform Airdrop
           </Button>
         </Link>
-        <Link href="/CalculatedAirdrops">
+        <Link to="/CalculatedAirdrops">
           <Button style={{ marginLeft: '10px' }} compact>
             Back
           </Button>

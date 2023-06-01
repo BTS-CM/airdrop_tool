@@ -21,6 +21,7 @@ module.exports = {
     "no-underscore-dangle": "off",
     quotes: "off",
     "react/jsx-indent": "off",
+    "no-restricted-syntax": "off",
     'react/jsx-props-no-spreading': 'off',
     'no-async-promise-executor': 'off',
     'no-plusplus': 'off',

@@ -3,12 +3,13 @@
 An airdropping tool for Bitshares based blockchains.
 
 * Fetches tickets
+* Creates blockchain tickets
 * Creates ticket leaderboards
+* Enables ticket & account analysis
 * Enables airdrop distribution calculation based on provably fair inputs
-* Create a ticket
-* Perform batches of airdrops
+* Begin airdropping blockchain tokens in custom sized batches
 
-This tool integrates with the [latest BEET wallet](https://github.com/bitshares/releases).
+This tool integrates with the [latest BEET wallet](https://github.com/bitshares/beet/releases).
 
 If interested in running the code locally follow these terminal steps:
 * run `yarn install`

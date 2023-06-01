@@ -122,7 +122,7 @@ const airdropStore = create(
           currentAirdrops = get().tusc;
         }
 
-        const newAirdrops = currentAirdrops.filter((x) => x.id != airdropID);
+        const newAirdrops = currentAirdrops.filter((x) => x.id !== airdropID);
 
         if (env === 'bitshares') {
           set({ bitshares: newAirdrops });

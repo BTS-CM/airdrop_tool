@@ -17,16 +17,18 @@ const createWindow = () => {
       contextIsolation: false,
       preload: path.join(__dirname, "preload.js"),
       partition: 'persist:nft_airdrop_tool',
-    },
+    }
   });
 
   const indexURL = app.isPackaged
     ? url.format({
-      pathname: path.join(__dirname, './index.html'),
+      pathname: path.join(__dirname, '/index.html'),
       protocol: 'file:',
       slashes: true,
     })
     : "http://localhost:3001";
+
+
   mainWindow.loadURL(indexURL);
 
   // Automatically open Chrome's DevTools in development mode.

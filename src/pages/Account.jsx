@@ -12,7 +12,7 @@ import {
 } from '@mantine/core';
 import { HiOutlineChartPie } from "react-icons/hi";
 
-import { Link, Route, useLocation } from "wouter";
+import { Link, useParams } from "react-router-dom";
 import { appStore, ticketStore } from '../lib/states';
 
 function humanReadableFloat(satoshis, precision) {
@@ -20,6 +20,8 @@ function humanReadableFloat(satoshis, precision) {
 }
 
 export default function Account(properties) {
+  const params = useParams();
+  
   const btsTickets = ticketStore((state) => state.bitshares);
   const btsTestnetTickets = ticketStore((state) => state.bitshares_testnet);
   const tuscTickets = ticketStore((state) => state.tusc);
@@ -27,27 +29,27 @@ export default function Account(properties) {
   let assetName = "";
   let chainName = "";
   let targetJSON = [];
-  if (properties.params.env === 'bitshares') {
+  if (params.env === 'bitshares') {
     targetJSON = btsTickets;
     assetName = "BTS";
     chainName = "Bitshares";
-  } else if (properties.params.env === 'bitshares_testnet') {
+  } else if (params.env === 'bitshares_testnet') {
     targetJSON = btsTestnetTickets;
     assetName = "TEST";
     chainName = "Bitshares (Testnet)";
-  } else if (properties.params.env === 'tusc') {
+  } else if (params.env === 'tusc') {
     targetJSON = tuscTickets;
     assetName = "TUSC";
     chainName = "TUSC";
   }
 
-  const retrievedAccountTickets = targetJSON.filter((x) => x.account === properties.params.id);
+  const retrievedAccountTickets = targetJSON.filter((x) => x.account === params.id);
 
   const ids = [];
   const tableRows = retrievedAccountTickets.map((ticket) => (
     <tr key={ticket.id}>
       <td>
-        <Link href={`/Ticket/${properties.params.env}/${ticket.id}`} style={{ textDecoration: 'none' }}>
+        <Link to={`/Ticket/${params.env}/${ticket.id}`} style={{ textDecoration: 'none' }}>
           {ticket.id}
         </Link>
       </td>
@@ -366,7 +368,7 @@ export default function Account(properties) {
             {' '}
             blockchain
           </Text>
-          <Link href={`/Create/${properties.params.env}/${properties.params.id}`}>
+          <Link to={`/Create/${params.env}/${params.id}`}>
             <Button m="sm">
               Create new ticket
             </Button>

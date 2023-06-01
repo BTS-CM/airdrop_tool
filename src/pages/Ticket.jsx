@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 import React, { useState } from 'react';
 import {
   Title,
@@ -10,29 +11,31 @@ import {
   Group,
   ActionIcon,
 } from '@mantine/core';
-import { Link, Route, useLocation } from "wouter";
+import { Link, useParams } from "react-router-dom";
 
 import { appStore, ticketStore } from '../lib/states';
 
 export default function Ticket(properties) {
+  const params = useParams();
+
   const btsTickets = ticketStore((state) => state.bitshares);
   const btsTestnetTickets = ticketStore((state) => state.bitshares_testnet);
   const tuscTickets = ticketStore((state) => state.tusc);
 
   let assetName = "";
   let targetJSON = [];
-  if (properties.params.env === 'bitshares') {
+  if (params.env === 'bitshares') {
     targetJSON = btsTickets;
     assetName = "BTS";
-  } else if (properties.params.env === 'bitshares_testnet') {
+  } else if (params.env === 'bitshares_testnet') {
     targetJSON = btsTestnetTickets;
     assetName = "TEST";
-  } else if (properties.params.env === 'tusc') {
+  } else if (params.env === 'tusc') {
     targetJSON = tuscTickets;
     assetName = "TUSC";
   }
 
-  const retrievedTicket = targetJSON.filter((x) => x.id === properties.params.id);
+  const retrievedTicket = targetJSON.filter((x) => x.id === params.id);
 
   return (
     <>
@@ -54,7 +57,7 @@ export default function Ticket(properties) {
                       Ticket owner
                     </Text>
                     <Text fz="sm" c="dimmed" mt="sm">
-                      <Link href={`/Account/${properties.params.env}/${retrievedTicket[0].account}`} style={{ textDecoration: 'none' }}>
+                      <Link to={`/Account/${params.env}/${retrievedTicket[0].account}`} style={{ textDecoration: 'none' }}>
                         {retrievedTicket[0].account}
                       </Link>
                     </Text>

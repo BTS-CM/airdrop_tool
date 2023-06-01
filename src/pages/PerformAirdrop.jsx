@@ -1,5 +1,7 @@
+/* eslint-disable max-len */
+/* eslint-disable react/jsx-one-expression-per-line */
 import React, { useEffect, useState } from 'react';
-import { Link } from "wouter";
+import { Link, useParams } from "react-router-dom";
 import {
   Title,
   Text,
@@ -17,6 +19,7 @@ import {
   JsonInput,
   Loader,
   TextInput,
+  ActionIcon,
 } from '@mantine/core';
 import { TransactionBuilder } from 'bitsharesjs';
 import { Apis } from "bitsharesjs-ws";
@@ -61,6 +64,12 @@ function blockchainFloat(satoshis, precision) {
   return satoshis * 10 ** precision;
 }
 
+/**
+ * Retrieve the details of an asset from the blockchain
+ * @param {String} node
+ * @param {String} searchInput
+ * @returns {Object}
+ */
 async function getAsset(node, searchInput) {
   try {
     await Apis.instance(node, true).init_promise;
@@ -91,6 +100,8 @@ async function getAsset(node, searchInput) {
 }
 
 export default function PerformAirdrop(properties) {
+  const params = useParams();
+
   const btsAirdrops = airdropStore((state) => state.bitshares);
   const btsTestnetAirdrops = airdropStore((state) => state.bitshares_testnet);
   const tuscAirdrops = airdropStore((state) => state.tusc);
@@ -103,42 +114,44 @@ export default function PerformAirdrop(properties) {
   const [distroMethod, setDistroMethod] = useState("Proportionally");
 
   const nodes = appStore((state) => state.nodes);
-  const currentNodes = nodes[properties.params.env];
+  const currentNodes = nodes[params.env];
 
   let assetName = "";
   let titleName = "token";
   let relevantChain = "";
   let plannedAirdropData = {};
 
-  if (properties.params.env === 'bitshares') {
-    plannedAirdropData = btsAirdrops.find((x) => properties.params.id === x.id);
+  if (params.env === 'bitshares') {
+    plannedAirdropData = btsAirdrops.find((x) => params.id === x.id);
     assetName = "BTS";
     relevantChain = 'BTS';
     titleName = "Bitshares";
-  } else if (properties.params.env === 'bitshares_testnet') {
-    plannedAirdropData = btsTestnetAirdrops.find((x) => properties.params.id === x.id);
+  } else if (params.env === 'bitshares_testnet') {
+    plannedAirdropData = btsTestnetAirdrops.find((x) => params.id === x.id);
     assetName = "TEST";
     relevantChain = 'BTS_TEST';
     titleName = "Bitshares (Testnet)";
-  } else if (properties.params.env === 'tusc') {
-    plannedAirdropData = tuscAirdrops.find((x) => properties.params.id === x.id);
+  } else if (params.env === 'tusc') {
+    plannedAirdropData = tuscAirdrops.find((x) => params.id === x.id);
     assetName = "TUSC";
     relevantChain = 'TUSC';
     titleName = "TUSC";
   }
 
   useEffect(() => {
-    if (properties.params.env === 'bitshares') {
+    if (params.env === 'bitshares') {
       onTokenName("BTS");
-    } else if (properties.params.env === 'bitshares_testnet') {
+    } else if (params.env === 'bitshares_testnet') {
       onTokenName("TEST");
-    } else if (properties.params.env === 'tusc') {
+    } else if (params.env === 'tusc') {
       onTokenName("TUSC");
     }
   }, []);
 
   const winners = plannedAirdropData.calculatedAirdrop.summary;
-  const ticketQty = winners.map((x) => x.qty).reduce((accumulator, ticket) => accumulator + parseInt(ticket), 0);
+  const ticketQty = winners
+    .map((x) => x.qty)
+    .reduce((accumulator, ticket) => accumulator + parseInt(ticket, 10), 0);
 
   const sortedWinners = winners.sort((a, b) => b.qty - a.qty);
   let tokenRows = [];
@@ -199,14 +212,17 @@ export default function PerformAirdrop(properties) {
     const valid = tokenRows
       .sort((a, b) => b.assignedTokens - a.assignedTokens)
       .filter((user) => user.assignedTokens > humanReadableFloat(1, tokenDetails.precision) || (tokenDetails.precision === 0 && tokenDetails.readableMax === 1 && parseFloat(user.assignedTokens) === 1));
-    winnerChunks = valid.length ? sliceIntoChunks(valid.sort((a, b) => b.qty - a.qty), batchSize) : [];
+
+    winnerChunks = valid.length
+      ? sliceIntoChunks(valid.sort((a, b) => b.qty - a.qty), batchSize)
+      : [];
 
     validRows = valid.length
       ? valid
         .map((winner) => (
           <tr key={winner.id}>
             <td>
-              <Link href={`/Account/${properties.params.env}/${winner.id}`} style={{ textDecoration: 'none' }}>
+              <Link style={{ textDecoration: 'none' }} to={`/Account/${params.env}/${winner.id}`}>
                 {winner.id}
               </Link>
             </td>
@@ -224,15 +240,15 @@ export default function PerformAirdrop(properties) {
 
     invalidRows = tokenRows
       .filter((user) => user.assignedTokens < humanReadableFloat(1, tokenDetails.precision) || (tokenDetails.precision === 0 && tokenDetails.readableMax === 1 && parseFloat(user.assignedTokens) < 1))
-      .map((winner) => (
-        <tr key={winner.id}>
+      .map((loser) => (
+        <tr key={loser.id}>
           <td>
-            <Link href={`/Account/${properties.params.env}/${winner.id}`} style={{ textDecoration: 'none' }}>
-              {winner.id}
+            <Link style={{ textDecoration: 'none' }} to={`/Account/${params.env}/${loser.id}`}>
+              {loser.id}
             </Link>
           </td>
           <td>
-            {winner.qty}
+            {loser.qty}
           </td>
           <td>
             0
@@ -254,7 +270,7 @@ export default function PerformAirdrop(properties) {
         chunkItr={i}
         winnerChunkQty={winnerChunks.length}
         quantityWinners={validRows.length}
-        env={properties.params.env}
+        env={params.env}
         ticketQty={ticketQty}
         key={`airdrop_card_${i}`}
         tokenDetails={tokenDetails}
@@ -300,12 +316,12 @@ export default function PerformAirdrop(properties) {
         {' '}
         blockchain
         <br />
-        <Link href={`/PlannedAirdrop/${properties.params.env}/${properties.params.id}`}>
+        <Link to={`/PlannedAirdrop/${params.env}/${params.id}`}>
           <Button compact>
             Airdrop summary
           </Button>
         </Link>
-        <Link href="/CalculatedAirdrops">
+        <Link to="/CalculatedAirdrops">
           <Button ml="sm" compact>
             Calculated airdrops
           </Button>
@@ -393,44 +409,28 @@ export default function PerformAirdrop(properties) {
                               Airdrop summary
                             </Text>
                             <Text fz="sm" c="dimmed" mt="xs">
-                              ID: 
-{' '}
-{plannedAirdropData.id}
+                              ID: {plannedAirdropData.id}
                             </Text>
                             <Text fz="sm" c="dimmed" mt="xs">
-                              Hash: 
-{' '}
-{plannedAirdropData.hash}
+                              Hash: {plannedAirdropData.hash}
                             </Text>
                             <Text fz="sm" c="dimmed" mt="xs">
-                              Deduplicated: 
-{' '}
-{plannedAirdropData.deduplicate}
+                              Deduplicated: {plannedAirdropData.deduplicate}
                             </Text>
                             <Text fz="sm" c="dimmed" mt="xs">
-                              Only winning tickets: 
-{' '}
-{plannedAirdropData.alwaysWinning}
+                              Only winning tickets: {plannedAirdropData.alwaysWinning}
                             </Text>
                             <Text fz="sm" c="dimmed" mt="xs">
-                              Blocknumber: 
-{' '}
-{plannedAirdropData.blockNumber}
+                              Blocknumber: {plannedAirdropData.blockNumber}
                             </Text>
                             <Text fz="sm" c="dimmed" mt="xs">
-                              Algorithms: 
-{' '}
-{plannedAirdropData.algos.join(", ")}
+                              Algorithms: {plannedAirdropData.algos.join(", ")}
                             </Text>
                             <Text fz="sm" c="dimmed" mt="xs">
-                              Winners: 
-{' '}
-{plannedAirdropData.calculatedAirdrop.summary.length}
+                              Winners: {plannedAirdropData.calculatedAirdrop.summary.length}
                             </Text>
                             <Text fz="sm" c="dimmed" mt="xs">
-                              Winning ticket qty: 
-{' '}
-{ticketQty}
+                              Winning ticket qty: {ticketQty}
                             </Text>
                           </Card>
                           <Card shadow="md" radius="md" padding="sm">
@@ -459,7 +459,9 @@ export default function PerformAirdrop(properties) {
                               placeholder={batchSize}
                               label="Size of airdrop transfer batches"
                               style={{ maxWidth: '400px', marginTop: '10px' }}
-                              onChange={(event) => onBatchSize(parseInt(event.currentTarget.value))}
+                              onChange={
+                                (event) => onBatchSize(parseInt(event.currentTarget.value, 10))
+                              }
                             />
                             <Radio.Group
                               value={distroMethod}
@@ -485,7 +487,11 @@ export default function PerformAirdrop(properties) {
                                               placeholder={tokenQuantity}
                                               label="Enter the quantity of tokens you wish to airdrop"
                                               style={{ maxWidth: '400px', marginTop: '10px' }}
-                                              onChange={(event) => onTokenQuantity(parseFloat(event.currentTarget.value))}
+                                              onChange={
+                                                (event) => onTokenQuantity(
+                                                  parseFloat(event.currentTarget.value)
+                                                )
+                                              }
                                             />
                                           )
                                           : null
@@ -509,49 +515,49 @@ export default function PerformAirdrop(properties) {
 
                           </Card>
                           {
-                                    !validRows || !validRows.length
-                                      ? (
-                                        <Card shadow="md" radius="md" padding="sm" style={{ backgroundColor: '#FAFAFA' }}>
-                                          <Text fz="lg" fw={500} mt="md">
-                                            <HiOutlineShieldExclamation />
-                                            {' '}
-                                            Nothing to airdrop
-                                          </Text>
-                                          <Text fz="sm" c="dimmed" mt="xs">
-                                            Given there are no valid tickets, there's nothing to airdrop.
-                                          </Text>
-                                          <Text fz="sm" c="dimmed" mt="xs">
-                                            Adjust the airdrop settings or calculate another airdrop to proceed.
-                                          </Text>
-                                        </Card>
-                                      )
-                                      : (
-                                        <Card shadow="md" radius="md" padding="sm" style={{ backgroundColor: '#FAFAFA' }}>
-                                          <Text fz="lg" fw={500} mt="md">
-                                            <HiOutlineShieldCheck />
-                                            {' '}
-                                            Proceed with airdrop?
-                                          </Text>
-                                          <Text fz="sm" c="dimmed" mt="xs">
-                                            With a batch limit of
-                                            {' '}
-                                            {batchSize}
-                                            ,
-                                            {validRows.length / batchSize < 1 ? 1 : Math.ceil(validRows.length / batchSize)}
-                                            {' '}
-                                            {validRows.length / batchSize < 1 ? "batch is" : "batches are"}
-                                            {' '}
-                                            required to complete this airdrop.
-                                          </Text>
-                                          <Text fz="sm" c="dimmed" mt="xs">
-                                            Keep in mind the transaction and block size limits when planning batches of airdrops.
-                                          </Text>
-                                          {
-                                                    airdropCards
-                                                }
-                                        </Card>
-                                      )
-                                }
+                            !validRows || !validRows.length
+                              ? (
+                                <Card shadow="md" radius="md" padding="sm" style={{ backgroundColor: '#FAFAFA' }}>
+                                  <Text fz="lg" fw={500} mt="md">
+                                    <HiOutlineShieldExclamation />
+                                    {' '}
+                                    Nothing to airdrop
+                                  </Text>
+                                  <Text fz="sm" c="dimmed" mt="xs">
+                                    Given there are no valid tickets, there&apos;s nothing to airdrop.
+                                  </Text>
+                                  <Text fz="sm" c="dimmed" mt="xs">
+                                    Adjust the airdrop settings or calculate another airdrop to proceed.
+                                  </Text>
+                                </Card>
+                              )
+                              : (
+                                <Card shadow="md" radius="md" padding="sm" style={{ backgroundColor: '#FAFAFA' }}>
+                                  <Text fz="lg" fw={500} mt="md">
+                                    <HiOutlineShieldCheck />
+                                    {' '}
+                                    Proceed with airdrop?
+                                  </Text>
+                                  <Text fz="sm" c="dimmed" mt="xs">
+                                    With a batch limit of
+                                    {' '}
+                                    {batchSize}
+                                    ,
+                                    {validRows.length / batchSize < 1 ? 1 : Math.ceil(validRows.length / batchSize)}
+                                    {' '}
+                                    {validRows.length / batchSize < 1 ? "batch is" : "batches are"}
+                                    {' '}
+                                    required to complete this airdrop.
+                                  </Text>
+                                  <Text fz="sm" c="dimmed" mt="xs">
+                                    Keep in mind the transaction and block size limits when planning batches of airdrops.
+                                  </Text>
+                                  {
+                                            airdropCards
+                                        }
+                                </Card>
+                              )
+                          }
                         </SimpleGrid>
                       </Card>
                     </SimpleGrid>

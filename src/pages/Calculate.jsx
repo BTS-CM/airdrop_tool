@@ -1,5 +1,6 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useState } from 'react';
-import { Link } from "wouter";
+import { Link } from 'react-router-dom';
 import { Apis } from 'bitsharesjs-ws';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -56,7 +57,9 @@ export default function Calculate(properties) {
     { name: 'Freebie', value: 'freebie', desc: 'Each ticket holding account gets 1 winning ticket' },
   ];
 
-  const toggleRow = (id) => setSelection((current) => (current.includes(id) ? current.filter((item) => item !== id) : [...current, id]));
+  const toggleRow = (id) => setSelection(
+    (current) => (current.includes(id) ? current.filter((item) => item !== id) : [...current, id])
+  );
 
   let assetName = "1.3.0";
   let leaderboardJSON = [];
@@ -196,12 +199,12 @@ export default function Calculate(properties) {
         <Button m="xs" onClick={() => setProgress('planning')}>
           Calculate another airdrop?
         </Button>
-        <Link href={`/PlannedAirdrop/${value}/${randID}`}>
+        <Link to={`/PlannedAirdrop/${value}/${randID}`}>
           <Button m="xs">
             View generated airdrop
           </Button>
         </Link>
-        <Link href="/CalculatedAirdrops">
+        <Link to="/CalculatedAirdrops">
           <Button m="xs">
             View all generated airdrops
           </Button>

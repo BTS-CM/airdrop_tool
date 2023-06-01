@@ -1,5 +1,6 @@
+/* eslint-disable max-len */
 import React, { useState } from 'react';
-import { Link } from "wouter";
+import { Link } from "react-router-dom";
 
 import {
   Title,
@@ -25,7 +26,7 @@ import {
 } from "react-icons/hi";
 
 /*
-            <Link href="/faq">
+            <Link style={{ textDecoration: 'none' }} to="/faq">
                 <Card shadow="md" radius="md" padding="xl">
                     <ThemeIcon variant="light" size={40} radius={40}>
                         <HiSearch />
@@ -52,7 +53,7 @@ export default function Home(properties) {
       </Text>
 
       <SimpleGrid cols={3} spacing="xl" mt={50} breakpoints={[{ maxWidth: 'md', cols: 2 }, { maxWidth: 'sm', cols: 1 }]}>
-        <Link href="/fetch">
+        <Link style={{ textDecoration: 'none' }} to="/fetch">
           <Card shadow="md" radius="md" padding="xl">
             <ThemeIcon variant="light" size={40} radius={40}>
               <HiOutlineTicket />
@@ -65,7 +66,7 @@ export default function Home(properties) {
             </Text>
           </Card>
         </Link>
-        <Link href="/analyze">
+        <Link style={{ textDecoration: 'none' }} to="/analyze">
           <Card shadow="md" radius="md" padding="xl">
             <ThemeIcon variant="light" size={40} radius={40}>
               <HiOutlineDatabase />
@@ -78,7 +79,7 @@ export default function Home(properties) {
             </Text>
           </Card>
         </Link>
-        <Link href="/leaderboard">
+        <Link style={{ textDecoration: 'none' }} to="/leaderboard">
           <Card shadow="md" radius="md" padding="xl">
             <ThemeIcon variant="light" size={40} radius={40}>
               <HiViewList />
@@ -91,7 +92,7 @@ export default function Home(properties) {
             </Text>
           </Card>
         </Link>
-        <Link href="/calculate">
+        <Link style={{ textDecoration: 'none' }} to="/calculate">
           <Card shadow="md" radius="md" padding="xl">
             <ThemeIcon variant="light" size={40} radius={40}>
               <HiOutlineCalculator />
@@ -104,7 +105,7 @@ export default function Home(properties) {
             </Text>
           </Card>
         </Link>
-        <Link href="/CalculatedAirdrops">
+        <Link style={{ textDecoration: 'none' }} to="/CalculatedAirdrops">
           <Card shadow="md" radius="md" padding="xl">
             <ThemeIcon variant="light" size={40} radius={40}>
               <HiOutlineChartPie />
@@ -117,7 +118,7 @@ export default function Home(properties) {
             </Text>
           </Card>
         </Link>
-        <Link href="/CalculatedAirdrops">
+        <Link style={{ textDecoration: 'none' }} to="/CalculatedAirdrops">
           <Card shadow="md" radius="md" padding="xl">
             <ThemeIcon variant="light" size={40} radius={40}>
               <HiOutlinePaperAirplane />
@@ -130,7 +131,7 @@ export default function Home(properties) {
             </Text>
           </Card>
         </Link>
-        <Link href="/create">
+        <Link style={{ textDecoration: 'none' }} to="/create">
           <Card shadow="md" radius="md" padding="xl">
             <ThemeIcon variant="light" size={40} radius={40}>
               <HiPlus />
@@ -143,7 +144,7 @@ export default function Home(properties) {
             </Text>
           </Card>
         </Link>
-        <Link href="/faq">
+        <Link style={{ textDecoration: 'none' }} to="/faq">
           <Card shadow="md" radius="md" padding="xl">
             <ThemeIcon variant="light" size={40} radius={40}>
               <HiOutlineQuestionMarkCircle />
@@ -156,7 +157,7 @@ export default function Home(properties) {
             </Text>
           </Card>
         </Link>
-        <Link href="/nodes">
+        <Link style={{ textDecoration: 'none' }} to="/nodes">
           <Card shadow="md" radius="md" padding="xl">
             <ThemeIcon variant="light" size={40} radius={40}>
               <HiOutlineWifi />

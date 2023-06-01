@@ -52,11 +52,11 @@ export default function AirdropCard(properties) {
 
   /**
      * Generating an airdrop Beet deep link
-     * @param {Array} chunk
+     * @param {Array} currentChunk
      * @param {String} key
      * @returns {String}
      */
-  async function generateDeepLink(chunk, key) {
+  async function generateDeepLink(currentChunk, key) {
     setInProgress(true);
     const beetLink = new DeepLink(
       'Airdrop tool airdropping',
@@ -72,7 +72,7 @@ export default function AirdropCard(properties) {
       false,
     );
 
-    const ops = chunk.map((x) => ({
+    const ops = currentChunk.map((x) => ({
       fee: {
         amount: 0,
         asset_id: tokenDetails.id,
@@ -164,7 +164,11 @@ export default function AirdropCard(properties) {
   }
 
   const currentChunkValue = distroMethod === "Proportionally"
-    ? parseFloat(chunk.map((z) => ((z.qty / ticketQty) * tokenQuantity).toFixed(5)).reduce((accumulator, ticket) => accumulator + parseFloat(ticket), 0).toFixed(5))
+    ? parseFloat(
+      chunk
+        .map((z) => ((z.qty / ticketQty) * tokenQuantity).toFixed(5))
+        .reduce((accumulator, ticket) => accumulator + parseFloat(ticket), 0).toFixed(5)
+    )
     : (((1 / quantityWinners) * tokenQuantity).toFixed(5)) * chunk.length;
 
   return (
@@ -202,13 +206,18 @@ export default function AirdropCard(properties) {
                             <>
                               <Text>Via local file upload</Text>
                               <Text m="sm" fz="xs">
-                                1. Launch the BEET wallet and navigate to "Local" in the menu.
+                                1. Launch the BEET wallet and navigate to &quot;Local&quot; in the menu.
                                 <br />
-                                2. At this page either allow all, or allow just operation 0 "Transfer".
+                                2. At this page either allow all, or allow just operation 0 &quot;Transfer&quot;.
                                 <br />
                                 3. Once at the local upload page, click the button below to proceed.
                               </Text>
-                              <Button mt="md" onClick={async () => await generateDeepLink(chunk, chunkItr.toString())}>
+                              <Button
+                                mt="md"
+                                onClick={
+                                  async () => await generateDeepLink(chunk, chunkItr.toString())
+                                }
+                              >
                                 Generate airdrop JSON file
                               </Button>
                             </>
@@ -230,7 +239,7 @@ export default function AirdropCard(properties) {
                                 <br />
                                 2. A BEET prompt will display.
                                 <br />
-                                3. Verify the prompt's contents before approving the airdrop.
+                                3. Verify the prompt&apos;s contents before approving the airdrop.
                               </Text>
 
                               <a

@@ -1,6 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-import { Link, Route, useLocation } from "wouter";
+
+import { 
+  Link,
+  Routes,
+  Route,
+  useLocation
+} from 'react-router-dom';
 
 import {
   Menu,
@@ -52,8 +58,7 @@ function openBeet() {
 }
 
 function App() {
-  const [location, setLocation] = useLocation();
-
+  const location = useLocation();
   return (
     <div className="App">
       <header className="App-header">
@@ -69,53 +74,53 @@ function App() {
 
                 <Menu.Dropdown>
                   <Menu.Label>Main menu</Menu.Label>
-                  <Link href="./">
+                  <Link style={{ textDecoration: 'none' }} to="/">
                     <Menu.Item icon={<HiOutlineHome />}>
-                      <a className="link">Home</a>
+                      Home
                     </Menu.Item>
                   </Link>
                   <Menu.Divider />
-                  <Link href="./create">
+                  <Link style={{ textDecoration: 'none' }} to="./create">
                     <Menu.Item icon={<HiPlus />}>
-                      <a className="link">Create ticket</a>
+                      Create ticket
                     </Menu.Item>
                   </Link>
                   <Menu.Divider />
-                  <Link href="./fetch">
+                  <Link style={{ textDecoration: 'none' }} to="./fetch">
                     <Menu.Item icon={<HiOutlineTicket />}>
-                      <a className="link">Fetch tickets</a>
+                      Fetch tickets
                     </Menu.Item>
                   </Link>
-                  <Link href="./calculate">
+                  <Link style={{ textDecoration: 'none' }} to="./calculate">
                     <Menu.Item icon={<HiOutlineCalculator />}>
-                      <a className="link">Calculate airdrop</a>
+                      Calculate airdrop
                     </Menu.Item>
                   </Link>
-                  <Link href="./CalculatedAirdrops">
+                  <Link style={{ textDecoration: 'none' }} to="./CalculatedAirdrops">
                     <Menu.Item icon={<HiOutlineChartPie />}>
-                      <a className="link">Calculated airdrops</a>
+                      Calculated airdrops
                     </Menu.Item>
                   </Link>
                   <Menu.Divider />
-                  <Link href="./analyze">
+                  <Link style={{ textDecoration: 'none' }} to="./analyze">
                     <Menu.Item icon={<HiOutlineDatabase />}>
-                      <a className="link">Analyze tickets</a>
+                      Analyze tickets
                     </Menu.Item>
                   </Link>
-                  <Link href="./leaderboard">
+                  <Link style={{ textDecoration: 'none' }} to="./leaderboard">
                     <Menu.Item icon={<HiViewList />}>
-                      <a className="link">Ticket leaderboard</a>
+                      Ticket leaderboard
                     </Menu.Item>
                   </Link>
                   <Menu.Divider />
-                  <Link href="./faq">
+                  <Link style={{ textDecoration: 'none' }} to="./faq">
                     <Menu.Item icon={<HiOutlineQuestionMarkCircle />}>
-                      <a className="link">FAQ</a>
+                      FAQ
                     </Menu.Item>
                   </Link>
-                  <Link href="./nodes">
+                  <Link style={{ textDecoration: 'none' }} to="./nodes">
                     <Menu.Item icon={<HiWifi />}>
-                      <a className="link">Change nodes</a>
+                      Change nodes
                     </Menu.Item>
                   </Link>
                 </Menu.Dropdown>
@@ -130,31 +135,29 @@ function App() {
                   alt="Bitshares logo"
                   caption="Bitshares BEET Airdrop tool"
                 />
-                <p>
-                  {location}
-                </p>
               </div>
             </Col>
             <Col span={12}>
-              <Route path="/" component={Home} />
-              <Route path="/Fetch" component={Fetch} />
-              <Route path="/Tickets/:env" component={Tickets} />
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/Fetch" element={<Fetch />} />
+                <Route path="/Tickets/:env" element={<Tickets />} />
+                <Route path="/Ticket/:env/:id" element={<Ticket />} />
+                <Route path="/Account/:env/:id" element={<Account />} />
+                <Route path="/PlannedAirdrop/:env/:id" element={<PlannedAirdrop />} />
+                <Route path="/PerformAirdrop/:env/:id" element={<PerformAirdrop />} />
 
-              <Route path="/Ticket/:env/:id" component={Ticket} />
-              <Route path="/Account/:env/:id" component={Account} />
-              <Route path="/PlannedAirdrop/:env/:id" component={PlannedAirdrop} />
-              <Route path="/PerformAirdrop/:env/:id" component={PerformAirdrop} />
+                <Route path="/Create" element={<Create />} />
+                <Route path="/Create/:env/:id" element={<Create />} />
+                <Route path="/Analyze" element={<Analyze />} />
+                <Route path="/Leaderboard" element={<Leaderboard />} />
+                <Route path="/Calculate" element={<Calculate />} />
+                <Route path="/CalculatedAirdrops" element={<CalculatedAirdrops />} />
+                <Route path="/Airdrop" element={<Airdrop />} />
 
-              <Route path="/Create" component={Create} />
-              <Route path="/Create/:env/:id" component={Create} />
-              <Route path="/Analyze" component={Analyze} />
-              <Route path="/Leaderboard" component={Leaderboard} />
-              <Route path="/Calculate" component={Calculate} />
-              <Route path="/CalculatedAirdrops" component={CalculatedAirdrops} />
-              <Route path="/Airdrop" component={Airdrop} />
-
-              <Route path="/faq" component={FAQ} />
-              <Route path="/Nodes" component={Nodes} />
+                <Route path="/faq" element={<FAQ />} />
+                <Route path="/Nodes" element={<Nodes />} />
+              </Routes>
             </Col>
             <Col ta="center" span={12}>
               <Button

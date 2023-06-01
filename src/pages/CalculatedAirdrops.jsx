@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from "wouter";
+import { Link } from 'react-router-dom';
 import {
   Title,
   Text,
@@ -38,7 +38,7 @@ export default function CalculatedAirdrops(properties) {
     ? chosenAirdropData.map((airdrop) => (
       <tr key={airdrop.id}>
         <td>
-          <Link href={`/PlannedAirdrop/${value}/${airdrop.id}`}>
+          <Link to={`/PlannedAirdrop/${value}/${airdrop.id}`}>
             <Button compact style={{ margin: '1px' }}>
               {airdrop.id.slice(0, 8)}
               ...
@@ -93,7 +93,7 @@ export default function CalculatedAirdrops(properties) {
                   <Title order={4} ta="center" mt="sm">
                     No airdrops for this blockchain seem to have been created yet?
                     <br />
-                    <Link href="/Calculate">
+                    <Link to="/Calculate">
                       <Button mt="sm">
                         Calculate airdrop
                       </Button>

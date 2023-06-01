@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Apis } from 'bitsharesjs-ws';
-import { Link } from "wouter";
+import { Link } from "react-router-dom";
 import {
   Title,
   Text,
@@ -49,9 +49,10 @@ export default function Fetch(properties) {
       } catch (error) {
         console.log(error);
         changeURL(value);
-        return reject({
+        reject(new Error({
           error, location: 'init', node: nodes[value][0], env: value,
-        });
+        }));
+        return;
       }
 
       let object;
@@ -59,12 +60,13 @@ export default function Fetch(properties) {
         object = await Apis.instance().db_api().exec("list_tickets", [100, fromID]);
       } catch (error) {
         console.log(error);
-        return reject({
+        reject(new Error({
           error, location: 'exec', node: nodes[value][0], env: value,
-        });
+        }));
+        return;
       }
 
-      return resolve(object);
+      resolve(object);
     });
   }
 
@@ -73,16 +75,16 @@ export default function Fetch(properties) {
     console.log("Fetching tickets");
 
     let currentTickets;
-    if (value == 'bitshares') {
+    if (value === 'bitshares') {
       currentTickets = btsTickets;
-    } else if (value == 'bitshares_testnet') {
+    } else if (value === 'bitshares_testnet') {
       currentTickets = btsTestnetTickets;
-    } else if (value == 'tusc') {
+    } else if (value === 'tusc') {
       currentTickets = tuscTickets;
     }
 
     const lastID = currentTickets && currentTickets.length
-      ? parseInt((currentTickets.at(-1).id).split("1.18.")[1]) + 1
+      ? parseInt((currentTickets.at(-1).id).split("1.18.")[1], 10) + 1
       : 0;
 
     const ids = [];
@@ -101,11 +103,11 @@ export default function Fetch(properties) {
         break;
       }
 
-      for (let i = 0; i < response.length; i++) {
-        if (!currentTickets.find((x) => x.id === response[i].id)) {
-          if (!ids.includes(response[i].id)) {
-            ids.push(response[i].id);
-            updatedTickets.push(response[i]);
+      for (let k = 0; k < response.length; k++) {
+        if (!currentTickets.find((x) => x.id === response[k].id)) {
+          if (!ids.includes(response[k].id)) {
+            ids.push(response[k].id);
+            updatedTickets.push(response[k]);
           }
         }
       }
@@ -126,18 +128,20 @@ export default function Fetch(properties) {
 
     // Now calculating and storing this blockchain's leaderboard in persistant zustand state
 
-    const filteredTickets = mergedTickets.filter((x) => x.current_type != "liquid");
+    const filteredTickets = mergedTickets.filter((x) => x.current_type !== "liquid");
 
     const userTicketQty = {};
     const tallies = {};
     let sum = 0.00000;
+
+    console.log({ filteredTickets });
 
     for (let i = 0; i < filteredTickets.length; i++) {
       const currentTicket = filteredTickets[i];
       const { id } = currentTicket;
       const currentAccount = currentTicket.account;
       const ticketType = currentTicket.current_type;
-      let currentAmount = parseInt(currentTicket.amount.amount);
+      let currentAmount = parseInt(currentTicket.amount.amount, 10);
 
       if (ticketType === "lock_180_days") {
         currentAmount *= 2;
@@ -153,19 +157,25 @@ export default function Fetch(properties) {
 
       sum += parseFloat(humanReadableFloat(currentAmount, 5).toFixed(5));
 
-      if (!tallies.hasOwnProperty(currentAccount)) {
+      if (!Object.prototype.hasOwnProperty.call(tallies, currentAccount)) {
         tallies[currentAccount] = currentAmount;
         userTicketQty[currentAccount] = [id];
-      } else {
-        tallies[currentAccount] += currentAmount;
-        userTicketQty[currentAccount].push(id);
+        continue;
       }
+
+      tallies[currentAccount] += currentAmount;
+      userTicketQty[currentAccount].push(id);
     }
 
     const leaderboard = [];
     let from = 0;
     for (const key of Object.keys(tallies)) {
-      const currentValue = parseFloat(humanReadableFloat(parseInt(tallies[key]), 5).toFixed(5));
+      const currentValue = parseFloat(
+        humanReadableFloat(
+          parseInt(tallies[key], 10),
+          5,
+        ).toFixed(5),
+      );
 
       leaderboard.push({
         id: key,
@@ -181,8 +191,8 @@ export default function Fetch(properties) {
     for (let i = 0; i < sortedLeaderboard.length; i++) {
       const current = sortedLeaderboard[i];
       current.range = {
-        from: parseInt(from),
-        to: parseInt(from + current.amount),
+        from: parseInt(from, 10),
+        to: parseInt(from + current.amount, 10),
       };
       finalLeaderboard.push(current);
       from += current.amount + 1;
@@ -258,30 +268,41 @@ export default function Fetch(properties) {
               <td>{btsTickets.length}</td>
               <td>
                 {
-                                btsTickets.length
-                                  ? (btsTickets.map((x) => x.value).reduce((partialSum, a) => parseInt(partialSum) + parseInt(a), 0) / 100000).toFixed(0)
-                                  : 0
-                            }
+                  btsTickets.length
+                    ? (
+                      btsTickets
+                        .map((x) => x.value)
+                        .reduce((partialSum, a) => parseInt(partialSum, 10) + parseInt(a, 10), 0) / 100000
+                    ).toFixed(0)
+                    : 0
+                }
               </td>
               <td>
                 {
-                                btsTickets.length
-                                  ? (
-                                    <Link href="../Tickets/bitshares">
-                                      <ActionIcon>📄</ActionIcon>
-                                    </Link>
-                                  )
-                                  : <a>⛔</a>
-                            }
+                    btsTickets.length
+                      ? (
+                        <Link style={{textDecoration: 'none'}} to="../Tickets/bitshares">
+                          <ActionIcon>📄</ActionIcon>
+                        </Link>
+                      )
+                      : <a>⛔</a>
+                }
               </td>
               <td>
-                <ActionIcon onClick={() => {
-                  eraseTickets('bitshares');
-                  eraseLeaders('bitshares');
-                }}
-                >
-                  ❌
-                </ActionIcon>
+                {
+                  btsTickets.length
+                    ? (
+                        <ActionIcon onClick={() => {
+                          eraseTickets('bitshares');
+                          eraseLeaders('bitshares');
+                        }}
+                        >
+                          ❌
+                        </ActionIcon>
+                    )
+                    : (<ActionIcon disabled>❌</ActionIcon>)
+                }
+
               </td>
             </tr>
             <tr key="BTS_TEST">
@@ -289,16 +310,21 @@ export default function Fetch(properties) {
               <td>{btsTestnetTickets.length}</td>
               <td>
                 {
-                                btsTestnetTickets.length
-                                  ? (btsTestnetTickets.map((x) => x.value).reduce((partialSum, a) => parseInt(partialSum) + parseInt(a), 0) / 100000).toFixed(0)
-                                  : 0
-                            }
+                  btsTestnetTickets.length
+                    ? (
+                      btsTestnetTickets
+                        .map((x) => x.value)
+                        .reduce((partialSum, a) => parseInt(partialSum, 10) + parseInt(a, 10), 0)
+                        / 100000 // TODO: Swap for human readable formula
+                    ).toFixed(0)
+                    : 0
+                }
               </td>
               <td>
                 {
                                 btsTestnetTickets.length
                                   ? (
-                                    <Link href="../Tickets/bitshares_testnet">
+                                    <Link style={{textDecoration: 'none'}} to="../Tickets/bitshares_testnet">
                                       <ActionIcon>📄</ActionIcon>
                                     </Link>
                                   )
@@ -320,16 +346,21 @@ export default function Fetch(properties) {
               <td>{tuscTickets.length}</td>
               <td>
                 {
-                                tuscTickets.length
-                                  ? (tuscTickets.map((x) => x.value).reduce((partialSum, a) => parseInt(partialSum) + parseInt(a), 0) / 100000).toFixed(0)
-                                  : 0
-                            }
+                  tuscTickets.length
+                    ? (
+                      tuscTickets
+                        .map((x) => x.value)
+                        .reduce((partialSum, a) => parseInt(partialSum, 10) + parseInt(a, 10), 0)
+                        / 100000
+                    ).toFixed(0)
+                    : 0
+                }
               </td>
               <td>
                 {
                                 tuscTickets.length
                                   ? (
-                                    <Link href="../Tickets/tusc">
+                                    <Link style={{textDecoration: 'none'}} to="../Tickets/tusc">
                                       <ActionIcon>📄</ActionIcon>
                                     </Link>
                                   )

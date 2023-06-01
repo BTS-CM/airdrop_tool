@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { useState } from 'react';
 import { useDisclosure } from '@mantine/hooks';
 import { TransactionBuilder } from 'bitsharesjs';
@@ -18,16 +19,20 @@ import {
   Group,
   Badge,
 } from '@mantine/core';
+import { Link, useParams } from "react-router-dom";
 
 import { leaderboardStore, appStore } from '../lib/states';
 import DeepLink from '../lib/DeepLink';
 
 export default function Create(properties) {
-  const [value, setValue] = useState((properties.params && properties.params.env) ?? 'bitshares');
+  const params = useParams();
+  const [value, setValue] = useState(
+    (params && params.env) ?? 'bitshares'
+  );
   const [ticketType, setTicketType] = useState("lock_180_days");
   const [beetType, setBeetType] = useState();
   const [deepLink, setDeepLink] = useState();
-  const [accountID, onAccountID] = useState((properties.params && properties.params.id) ?? "1.2.x");
+  const [accountID, onAccountID] = useState((params && params.id) ?? "1.2.x");
 
   const [tokenQuantity, onTokenQuantity] = useState(1);
   const [opened, { open, close }] = useDisclosure(false);
@@ -46,17 +51,20 @@ export default function Create(properties) {
 
   if (value === 'bitshares') {
     leaderboardJSON = btsLeaderboard;
-    currentlyLocked = btsLeaderboard.reduce((accumulator, entry) => accumulator + parseInt(entry.amount), 0);
+    currentlyLocked = btsLeaderboard
+      .reduce((accumulator, entry) => accumulator + parseInt(entry.amount, 10), 0);
     assetName = "BTS";
     relevantChain = 'BTS';
   } else if (value === 'bitshares_testnet') {
     leaderboardJSON = btsTestnetLeaderboard;
-    currentlyLocked = btsTestnetLeaderboard.reduce((accumulator, entry) => accumulator + parseInt(entry.amount), 0);
+    currentlyLocked = btsTestnetLeaderboard
+      .reduce((accumulator, entry) => accumulator + parseInt(entry.amount, 10), 0);
     assetName = "TEST";
     relevantChain = 'BTS_TEST';
   } else if (value === 'tusc') {
     leaderboardJSON = tuscLeaderboard;
-    currentlyLocked = tuscLeaderboard.reduce((accumulator, entry) => accumulator + parseInt(entry.amount), 0);
+    currentlyLocked = tuscLeaderboard
+      .reduce((accumulator, entry) => accumulator + parseInt(entry.amount, 10), 0);
     assetName = "TUSC";
     relevantChain = 'TUSC';
   }
@@ -243,11 +251,11 @@ export default function Create(properties) {
                         <>
                           <Text>Via raw Beet deeplink</Text>
                           <Text m="sm" fz="xs">
-                            1. Launch the BEET wallet and navigate to "Raw Link" in the menu.
+                            1. Launch the BEET wallet and navigate to &quot;Raw Link&quot; in the menu.
                             <br />
-                            2. From this page you can either allow all operations, or solely allow operation 57 "Ticket create" (then click save).
+                            2. From this page you can either allow all operations, or solely allow operation 57 &quot;Ticket create&quot; (then click save).
                             <br />
-                            3. Once "Ready for raw links" shows in Beet submit this request.
+                            3. Once &quot;Ready for raw links&quot; shows in Beet submit this request.
                           </Text>
                           <TextInput
                             type="string"
@@ -284,7 +292,7 @@ export default function Create(properties) {
                             <br />
                             2. A BEET prompt will display, verify the contents then approve the create ticket prompt.
                             <br />
-                            3. Go to the 'Fetch tickets' page to download your ticket for analysis.
+                            3. Go to the &quot;Fetch tickets&quot; page to download your ticket for analysis.
                           </Text>
                           <a href={deepLink}>
                             <Button m="xs">

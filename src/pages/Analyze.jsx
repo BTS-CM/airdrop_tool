@@ -11,7 +11,7 @@ import {
   ScrollArea,
   ActionIcon,
 } from '@mantine/core';
-import { Link, Route, useLocation } from "wouter";
+import { Link } from "react-router-dom";
 import { appStore, ticketStore } from '../lib/states';
 
 function humanReadableFloat(satoshis, precision) {
@@ -40,12 +40,12 @@ export default function Analyze(properties) {
   const tableRows = targetJSON.map((ticket) => (
     <tr key={ticket.id}>
       <td>
-        <Link href={`/Ticket/${value}/${ticket.id}`} style={{ textDecoration: 'none' }}>
+        <Link to={`/Ticket/${value}/${ticket.id}`} style={{ textDecoration: 'none' }}>
           {ticket.id}
         </Link>
       </td>
       <td>
-        <Link href={`/Account/${value}/${ticket.account}`} style={{ textDecoration: 'none' }}>
+        <Link to={`/Account/${value}/${ticket.account}`} style={{ textDecoration: 'none' }}>
           {ticket.account}
         </Link>
       </td>
@@ -68,7 +68,7 @@ export default function Analyze(properties) {
   ));
 
   const validTickets = targetJSON.map((ticket) => {
-    if (ticket.current_type != "liquid") {
+    if (ticket.current_type !== "liquid") {
       return ticket;
     }
     return null;
@@ -103,32 +103,32 @@ export default function Analyze(properties) {
   }).filter((x) => x);
 
   const lockedQuantity = (validTickets.reduce(
-    (accumulator, ticket) => accumulator + parseInt(ticket.amount.amount),
+    (accumulator, ticket) => accumulator + parseInt(ticket.amount.amount, 10),
     0,
   ) / 10000).toFixed(0);
 
   const smallLocked = (smallLock.reduce(
-    (accumulator, ticket) => accumulator + parseInt(ticket.amount.amount),
+    (accumulator, ticket) => accumulator + parseInt(ticket.amount.amount, 10),
     0,
   ) / 10000).toFixed(0);
 
   const medLocked = (medLock.reduce(
-    (accumulator, ticket) => accumulator + parseInt(ticket.amount.amount),
+    (accumulator, ticket) => accumulator + parseInt(ticket.amount.amount, 10),
     0,
   ) / 10000).toFixed(0);
 
   const lgLocked = (lgLock.reduce(
-    (accumulator, ticket) => accumulator + parseInt(ticket.amount.amount),
+    (accumulator, ticket) => accumulator + parseInt(ticket.amount.amount, 10),
     0,
   ) / 10000).toFixed(0);
 
   const xlLocked = (xlLock.reduce(
-    (accumulator, ticket) => accumulator + parseInt(ticket.amount.amount),
+    (accumulator, ticket) => accumulator + parseInt(ticket.amount.amount, 10),
     0,
   ) / 10000).toFixed(0);
 
   const boostedValue = (validTickets.reduce(
-    (accumulator, ticket) => accumulator + parseInt(ticket.value),
+    (accumulator, ticket) => accumulator + parseInt(ticket.value, 10),
     0,
   ) / 10000).toFixed(0);
 
