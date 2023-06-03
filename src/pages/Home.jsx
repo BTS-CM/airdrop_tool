@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 import {
   Title,
@@ -42,6 +43,7 @@ import {
 */
 
 export default function Home(properties) {
+  const { t, i18n } = useTranslation();
   return (
     <>
       <Title order={2} ta="center" mt="sm">

@@ -11,6 +11,7 @@ import {
 import { TransactionBuilder } from 'bitsharesjs';
 import { Apis } from "bitsharesjs-ws";
 import { useDisclosure } from '@mantine/hooks';
+import { useTranslation } from 'react-i18next';
 
 import { appStore } from '../lib/states';
 import DeepLink from '../lib/DeepLink';
@@ -57,6 +58,7 @@ export default function AirdropCard(properties) {
      * @returns {String}
      */
   async function generateDeepLink(currentChunk, key) {
+    const { t, i18n } = useTranslation();
     setInProgress(true);
     const beetLink = new DeepLink(
       'Airdrop tool airdropping',
@@ -180,16 +182,9 @@ export default function AirdropCard(properties) {
         {winnerChunkQty}
       </Text>
       <Text fz="sm" c="dimmed">
-        {chunk.length}
-        {' '}
-        accounts
-        {chunk.length > 1 ? `(from ${chunk[0].id} to ${chunk[chunk.length - 1].id})` : null}
+        {`${chunk.length} accounts ${chunk.length > 1 ? `(from ${chunk[0].id} to ${chunk[chunk.length - 1].id})` : null}`}
         <br />
-        { currentChunkValue }
-        {' '}
-        {tokenName || assetName}
-        {' '}
-        being distributed
+        { `${currentChunkValue} ${tokenName || assetName} being distributed` }
       </Text>
       <Modal
         opened={opened}
@@ -201,87 +196,86 @@ export default function AirdropCard(properties) {
         title={`Airdrop #${chunkItr + 1}/${winnerChunkQty}`}
       >
         {
-                        !airdropData && !inProgress
-                          ? (
-                            <>
-                              <Text>Via local file upload</Text>
-                              <Text m="sm" fz="xs">
-                                1. Launch the BEET wallet and navigate to &quot;Local&quot; in the menu.
-                                <br />
-                                2. At this page either allow all, or allow just operation 0 &quot;Transfer&quot;.
-                                <br />
-                                3. Once at the local upload page, click the button below to proceed.
-                              </Text>
-                              <Button
-                                mt="md"
-                                onClick={
-                                  async () => await generateDeepLink(chunk, chunkItr.toString())
-                                }
-                              >
-                                Generate airdrop JSON file
-                              </Button>
-                            </>
-                          )
-                          : null
-                    }
+          !airdropData && !inProgress
+            ? (
+              <>
+                <Text>Via local file upload</Text>
+                <Text m="sm" fz="xs">
+                  1. Launch the BEET wallet and navigate to &quot;Local&quot; in the menu.
+                  <br />
+                  2. At this page either allow all, or allow just operation 0 &quot;Transfer&quot;.
+                  <br />
+                  3. Once at the local upload page, click the button below to proceed.
+                </Text>
+                <Button
+                  mt="md"
+                  onClick={
+                    async () => await generateDeepLink(chunk, chunkItr.toString())
+                  }
+                >
+                  Generate airdrop JSON file
+                </Button>
+              </>
+            )
+            : null
+        }
         {
-                        inProgress
-                          ? <Loader size="xs" variant="dots" />
-                          : null
-                    }
+          inProgress
+            ? <Loader size="xs" variant="dots" />
+            : null
+        }
         {
-                        airdropData
-                          ? (
-                            <>
-                              <Text>Raw deeplink generated</Text>
-                              <Text fz="xs">
-                                1. Your BEET deeplink has been generated, click the button to proceed.
-                                <br />
-                                2. A BEET prompt will display.
-                                <br />
-                                3. Verify the prompt&apos;s contents before approving the airdrop.
-                              </Text>
+          airdropData
+            ? (
+              <>
+                <Text>Raw deeplink generated</Text>
+                <Text fz="xs">
+                  1. Your BEET deeplink has been generated, click the button to proceed.
+                  <br />
+                  2. A BEET prompt will display.
+                  <br />
+                  3. Verify the prompt&apos;s contents before approving the airdrop.
+                </Text>
 
-                              <a
-                                href={`data:text/json;charset=utf-8,${airdropData}`}
-                                download={`airdrop_${chunkItr + 1}.json`}
-                                target="_blank"
-                                rel="noreferrer"
-                              >
-                                <Button mt="md">
-                                  Download airdrop JSON
-                                </Button>
-                              </a>
+                <a
+                  href={`data:text/json;charset=utf-8,${airdropData}`}
+                  download={`airdrop_${chunkItr + 1}.json`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <Button mt="md">
+                    Download airdrop JSON
+                  </Button>
+                </a>
 
-                              <Accordion mt="xs">
-                                <Accordion.Item key="json" value="operation_json">
-                                  <Accordion.Control>
-                                    Proposed airdrop operation JSON
-                                  </Accordion.Control>
-                                  <Accordion.Panel style={{ backgroundColor: '#FAFAFA' }}>
-                                    <JsonInput
-                                      placeholder="Textarea will autosize to fit the content"
-                                      defaultValue={JSON.stringify(tx)}
-                                      validationError="Invalid JSON"
-                                      formatOnBlur
-                                      autosize
-                                      minRows={4}
-                                      maxRows={15}
-                                    />
-                                  </Accordion.Panel>
-                                </Accordion.Item>
-                              </Accordion>
-                            </>
-                          )
-                          : null
-                    }
+                <Accordion mt="xs">
+                  <Accordion.Item key="json" value="operation_json">
+                    <Accordion.Control>
+                      Proposed airdrop operation JSON
+                    </Accordion.Control>
+                    <Accordion.Panel style={{ backgroundColor: '#FAFAFA' }}>
+                      <JsonInput
+                        placeholder="Textarea will autosize to fit the content"
+                        defaultValue={JSON.stringify(tx)}
+                        validationError="Invalid JSON"
+                        formatOnBlur
+                        autosize
+                        minRows={4}
+                        maxRows={15}
+                      />
+                    </Accordion.Panel>
+                  </Accordion.Item>
+                </Accordion>
+              </>
+            )
+            : null
+        }
       </Modal>
       {
-                    accountID.length > 5
-                      ? <Button mt="md" onClick={open}>Begin airdrop</Button>
-                      : <Button mt="md" disabled>Begin airdrop</Button>
-                }
-
+        accountID.length > 5
+          ? <Button mt="md" onClick={open}>Begin airdrop</Button>
+          : <Button mt="md" disabled>Begin airdrop</Button>
+      }
     </Card>
   );
 }

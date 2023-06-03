@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 import {
   Title,
   Text,
@@ -22,6 +23,7 @@ function humanReadableFloat(satoshis, precision) {
 }
 
 export default function Leaderboard(properties) {
+  const { t, i18n } = useTranslation();
   const btsLeaderboard = leaderboardStore((state) => state.bitshares);
   const btsTestnetLeaderboard = leaderboardStore((state) => state.bitshares_testnet);
   const tuscLeaderboard = leaderboardStore((state) => state.tusc);

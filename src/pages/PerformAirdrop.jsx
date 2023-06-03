@@ -2,6 +2,7 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 import {
   Title,
   Text,
@@ -31,7 +32,7 @@ import {
   HiOutlineShieldCheck,
 } from "react-icons/hi";
 
-import { airdropStore, appStore } from '../lib/states';
+import { airdropStore, appStore, leaderboardStore } from '../lib/states';
 import DeepLink from '../lib/DeepLink';
 import AirdropCard from './AirdropCard';
 
@@ -100,11 +101,16 @@ async function getAsset(node, searchInput) {
 }
 
 export default function PerformAirdrop(properties) {
+  const { t, i18n } = useTranslation();
   const params = useParams();
 
   const btsAirdrops = airdropStore((state) => state.bitshares);
   const btsTestnetAirdrops = airdropStore((state) => state.bitshares_testnet);
   const tuscAirdrops = airdropStore((state) => state.tusc);
+
+  const btsLeaderboard = leaderboardStore((state) => state.bitshares);
+  const btsTestnetLeaderboard = leaderboardStore((state) => state.bitshares_testnet);
+  const tuscLeaderboard = leaderboardStore((state) => state.tusc);
 
   const [tokenQuantity, onTokenQuantity] = useState(1);
   const [tokenName, onTokenName] = useState("");
@@ -112,6 +118,11 @@ export default function PerformAirdrop(properties) {
   const [tokenDetails, setTokenDetails] = useState();
   const [batchSize, onBatchSize] = useState(50);
   const [distroMethod, setDistroMethod] = useState("Proportionally");
+  const [tokenReq, setTokenReq] = useState("no");
+  
+  const [winnerBalances, setWinnerBalances] = useState();
+  const [requiredToken, onRequiredToken] = useState();
+  const [requiredTokenQty, onRequiredTokenQty] = useState(1);
 
   const nodes = appStore((state) => state.nodes);
   const currentNodes = nodes[params.env];
@@ -120,19 +131,23 @@ export default function PerformAirdrop(properties) {
   let titleName = "token";
   let relevantChain = "";
   let plannedAirdropData = {};
+  let envLeaderboard = [];
 
   if (params.env === 'bitshares') {
     plannedAirdropData = btsAirdrops.find((x) => params.id === x.id);
+    envLeaderboard = btsLeaderboard;
     assetName = "BTS";
     relevantChain = 'BTS';
     titleName = "Bitshares";
   } else if (params.env === 'bitshares_testnet') {
     plannedAirdropData = btsTestnetAirdrops.find((x) => params.id === x.id);
+    envLeaderboard = btsTestnetLeaderboard;
     assetName = "TEST";
     relevantChain = 'BTS_TEST';
     titleName = "Bitshares (Testnet)";
   } else if (params.env === 'tusc') {
     plannedAirdropData = tuscAirdrops.find((x) => params.id === x.id);
+    envLeaderboard = tuscLeaderboard;
     assetName = "TUSC";
     relevantChain = 'TUSC';
     titleName = "TUSC";
@@ -147,6 +162,63 @@ export default function PerformAirdrop(properties) {
       onTokenName("TUSC");
     }
   }, []);
+
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(async () => {
+      if (tokenName && tokenName.length) {
+        setTokenDetails(); // erase last search
+
+        let assetDetails;
+        try {
+          assetDetails = await getAsset(currentNodes[0], tokenName);
+        } catch (error) {
+          console.log(error);
+          return;
+        }
+
+        if (!assetDetails) {
+          return;
+        }
+
+        setTokenDetails({
+          id: assetDetails.id,
+          precision: assetDetails.precision,
+          max_supply: assetDetails.options.max_supply,
+          readableMax: humanReadableFloat(assetDetails.options.max_supply, assetDetails.precision),
+        }); // store new
+      }
+    }, 1000);
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [tokenName]);
+
+  const [requiredTokenDetails, setRequiredTokenDetails] = useState();
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(async () => {
+      if (requiredToken && requiredToken.length) {
+        setRequiredTokenDetails(); // erase last search
+
+        let assetDetails;
+        try {
+          assetDetails = await getAsset(currentNodes[0], requiredToken);
+        } catch (error) {
+          console.log(error);
+          return;
+        }
+
+        if (!assetDetails) {
+          return;
+        }
+
+        setRequiredTokenDetails({
+          id: assetDetails.id,
+          precision: assetDetails.precision,
+        }); // store new
+      }
+    }, 1000);
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [requiredToken]);
 
   const winners = plannedAirdropData.calculatedAirdrop.summary;
   const ticketQty = winners
@@ -278,35 +350,6 @@ export default function PerformAirdrop(properties) {
     ))
     : [];
 
-  useEffect(() => {
-    const delayDebounceFn = setTimeout(async () => {
-      if (tokenName && tokenName.length) {
-        setTokenDetails(); // erase last search
-
-        let assetDetails;
-        try {
-          assetDetails = await getAsset(currentNodes[0], tokenName);
-        } catch (error) {
-          console.log(error);
-          return;
-        }
-
-        if (!assetDetails) {
-          return;
-        }
-
-        setTokenDetails({
-          id: assetDetails.id,
-          precision: assetDetails.precision,
-          max_supply: assetDetails.options.max_supply,
-          readableMax: humanReadableFloat(assetDetails.options.max_supply, assetDetails.precision),
-        }); // store new
-      }
-    }, 1000);
-
-    return () => clearTimeout(delayDebounceFn);
-  }, [tokenName]);
-
   return (
     <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
       <Title order={2} ta="center" mt="sm">
@@ -329,240 +372,288 @@ export default function PerformAirdrop(properties) {
       </Title>
 
       {
-                !plannedAirdropData
-                  ? <Text>Ticket not found</Text>
-                  : (
-                    <SimpleGrid cols={2} spacing="sm" mt={10} breakpoints={[{ maxWidth: 'md', cols: 2 }]}>
-                      <Card shadow="md" radius="md" padding="xl" mt={20}>
-                        {
-                                !tokenDetails
-                                  ? (
-                                    <>
-                                      <Loader variant="dots" />
-                                      <Text size="md">
-                                        Loading asset data
-                                      </Text>
-                                    </>
-                                  )
-                                  : null
-                            }
-                        {
-                                validRows && validRows.length
-                                  ? (
-                                    <>
-                                      <Text>
-                                        <HiOutlineEmojiHappy />
-                                        {' '}
-                                        Ticket holders included in airdrop
-                                      </Text>
-                                      <Table highlightOnHover>
-                                        <thead>
-                                          <tr>
-                                            <th>id</th>
-                                            <th>Quantity</th>
-                                            <th>Allocated tokens</th>
-                                          </tr>
-                                        </thead>
-                                        <tbody>
-                                          {validRows}
-                                        </tbody>
-                                      </Table>
-                                    </>
-                                  )
-                                  : null
-                            }
+        !plannedAirdropData
+          ? <Text>Ticket not found</Text>
+          : (
+            <SimpleGrid cols={2} spacing="sm" mt={10} breakpoints={[{ maxWidth: 'md', cols: 2 }]}>
+              <Card shadow="md" radius="md" padding="xl" mt={20}>
+                {
+                  !tokenDetails
+                    ? (
+                      <>
+                        <Loader variant="dots" />
+                        <Text size="md">
+                          Loading asset data
+                        </Text>
+                      </>
+                    )
+                    : null
+                }
+                {
+                  !winnerBalances && tokenReq && tokenReq === 'yes'
+                    ? (
+                      <>
+                        <Loader variant="dots" />
+                        <Text size="md">
+                          Processing user balances for required token
+                        </Text>
+                      </>
+                    )
+                    : null
+                }
+                {
+                  validRows && validRows.length
+                    ? (
+                      <>
+                        <Text>
+                          <HiOutlineEmojiHappy />
+                          {' '}
+                          Ticket holders included in airdrop
+                        </Text>
+                        <Table highlightOnHover>
+                          <thead>
+                            <tr>
+                              <th>id</th>
+                              <th>Quantity</th>
+                              <th>Allocated tokens</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {validRows}
+                          </tbody>
+                        </Table>
+                      </>
+                    )
+                    : null
+                }
 
-                        {
-                                invalidRows && invalidRows.length
-                                  ? (
-                                    <>
-                                      <Text mt="md">
-                                        <HiOutlineEmojiSad />
-                                        {' '}
-                                        Disqualified from airdrop
-                                      </Text>
-                                      <Text c="dimmed" mb="sm">
-                                        Unable to include the following ticket holders in airdrops.
-                                      </Text>
-                                      <Table style={{ backgroundColor: 'dimmed' }}>
-                                        <thead>
-                                          <tr>
-                                            <th>id</th>
-                                            <th>Quantity</th>
-                                            <th>Reward</th>
-                                          </tr>
-                                        </thead>
-                                        <tbody>
-                                          {invalidRows}
-                                        </tbody>
-                                      </Table>
-                                    </>
-                                  )
-                                  : null
-                            }
+                {
+                  invalidRows && invalidRows.length
+                    ? (
+                      <>
+                        <Text mt="md">
+                          <HiOutlineEmojiSad />
+                          {' '}
+                          Disqualified from airdrop
+                        </Text>
+                        <Text c="dimmed" mb="sm">
+                          Unable to include the following ticket holders in airdrops.
+                        </Text>
+                        <Table style={{ backgroundColor: 'dimmed' }}>
+                          <thead>
+                            <tr>
+                              <th>id</th>
+                              <th>Quantity</th>
+                              <th>Reward</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {invalidRows}
+                          </tbody>
+                        </Table>
+                      </>
+                    )
+                    : null
+                }
 
-                      </Card>
-                      <Card>
-                        <SimpleGrid cols={1} spacing="sm">
-                          <Card shadow="md" radius="md" padding="xl">
-                            <Text fz="lg" fw={500} mt="xs">
-                              Airdrop summary
-                            </Text>
-                            <Text fz="sm" c="dimmed" mt="xs">
-                              ID: {plannedAirdropData.id}
-                            </Text>
-                            <Text fz="sm" c="dimmed" mt="xs">
-                              Hash: {plannedAirdropData.hash}
-                            </Text>
-                            <Text fz="sm" c="dimmed" mt="xs">
-                              Deduplicated: {plannedAirdropData.deduplicate}
-                            </Text>
-                            <Text fz="sm" c="dimmed" mt="xs">
-                              Only winning tickets: {plannedAirdropData.alwaysWinning}
-                            </Text>
-                            <Text fz="sm" c="dimmed" mt="xs">
-                              Blocknumber: {plannedAirdropData.blockNumber}
-                            </Text>
-                            <Text fz="sm" c="dimmed" mt="xs">
-                              Algorithms: {plannedAirdropData.algos.join(", ")}
-                            </Text>
-                            <Text fz="sm" c="dimmed" mt="xs">
-                              Winners: {plannedAirdropData.calculatedAirdrop.summary.length}
-                            </Text>
-                            <Text fz="sm" c="dimmed" mt="xs">
-                              Winning ticket qty: {ticketQty}
-                            </Text>
-                          </Card>
-                          <Card shadow="md" radius="md" padding="sm">
-                            <Text fz="lg" fw={600} mt="md">
-                              Airdrop options
-                            </Text>
+              </Card>
+              <Card>
+                <SimpleGrid cols={1} spacing="sm">
+                  <Card shadow="md" radius="md" padding="xl">
+                    <Text fz="lg" fw={500} mt="xs">
+                      Airdrop summary
+                    </Text>
+                    <Text fz="sm" c="dimmed" mt="xs">
+                      ID: {plannedAirdropData.id}
+                    </Text>
+                    <Text fz="sm" c="dimmed" mt="xs">
+                      Hash: {plannedAirdropData.hash}
+                    </Text>
+                    <Text fz="sm" c="dimmed" mt="xs">
+                      Deduplicated: {plannedAirdropData.deduplicate}
+                    </Text>
+                    <Text fz="sm" c="dimmed" mt="xs">
+                      Only winning tickets: {plannedAirdropData.alwaysWinning}
+                    </Text>
+                    <Text fz="sm" c="dimmed" mt="xs">
+                      Blocknumber: {plannedAirdropData.blockNumber}
+                    </Text>
+                    <Text fz="sm" c="dimmed" mt="xs">
+                      Algorithms: {plannedAirdropData.algos.join(", ")}
+                    </Text>
+                    <Text fz="sm" c="dimmed" mt="xs">
+                      Winners: {plannedAirdropData.calculatedAirdrop.summary.length}
+                    </Text>
+                    <Text fz="sm" c="dimmed" mt="xs">
+                      Winning ticket qty: {ticketQty}
+                    </Text>
+                  </Card>
+                  <Card shadow="md" radius="md" padding="sm">
+                    <Text fz="lg" fw={600} mt="md">
+                      Airdrop options
+                    </Text>
+                    <TextInput
+                      type="string"
+                      withAsterisk
+                      placeholder={accountID}
+                      label={`Enter your ${titleName} account ID`}
+                      style={{ maxWidth: '400px' }}
+                      onChange={(event) => onAccountID(event.currentTarget.value)}
+                    />
+                    <TextInput
+                      type="string"
+                      withAsterisk
+                      placeholder={tokenName || assetName}
+                      label="Enter the name of the asset you wish to airdrop"
+                      style={{ maxWidth: '400px', marginTop: '10px' }}
+                      onChange={(event) => onTokenName(event.currentTarget.value)}
+                    />
+                    <TextInput
+                      type="number"
+                      withAsterisk
+                      placeholder={batchSize}
+                      label="Size of airdrop transfer batches"
+                      style={{ maxWidth: '400px', marginTop: '10px' }}
+                      onChange={
+                        (event) => onBatchSize(parseInt(event.currentTarget.value, 10))
+                      }
+                    />
+                    {
+                      distroMethod !== "RoundRobin"
+                        ? (
+                          <TextInput
+                            type="number"
+                            withAsterisk
+                            placeholder={tokenQuantity}
+                            label="Enter the quantity of tokens you wish to airdrop"
+                            style={{ maxWidth: '400px', marginTop: '10px' }}
+                            onChange={
+                              (event) => onTokenQuantity(
+                                parseFloat(event.currentTarget.value)
+                              )
+                            }
+                          />
+                        )
+                        : null
+                    }
+                    <Radio.Group
+                      value={distroMethod}
+                      onChange={setDistroMethod}
+                      name="distroMethod"
+                      label="How should tokens be allocated to winners?"
+                      style={{ marginTop: '10px' }}
+                      withAsterisk
+                    >
+                      <Group mt="xs">
+                        <Radio value="Equally" label="Equally between winning account IDs" />
+                        <Radio value="Proportionally" label="Proportional to tickets won" />
+                        <Radio value="RoundRobin" label="Allocate whole tokens in a round robin manner" />
+                      </Group>
+                    </Radio.Group>
+                    <Radio.Group
+                      value={tokenReq}
+                      onChange={setTokenReq}
+                      name="tokenReq"
+                      label="Introduce additional token requirement?"
+                      style={{ marginTop: '10px' }}
+                      withAsterisk
+                    >
+                      <Group mt="xs">
+                        <Radio value="yes" label="Yes" />
+                        <Radio value="no" label="No" />
+                      </Group>
+                    </Radio.Group>
+                    {
+                      tokenReq && tokenReq === "yes"
+                        ? (
+                          <>
                             <TextInput
                               type="string"
                               withAsterisk
-                              placeholder={accountID}
-                              label={`Enter your ${titleName} account ID`}
-                              style={{ maxWidth: '400px' }}
-                              onChange={(event) => onAccountID(event.currentTarget.value)}
-                            />
-                            <TextInput
-                              type="string"
-                              withAsterisk
-                              placeholder={tokenName || assetName}
-                              label="Enter the name of the asset you wish to airdrop"
+                              placeholder={requiredToken}
+                              label="Provide the required token's symbol"
                               style={{ maxWidth: '400px', marginTop: '10px' }}
-                              onChange={(event) => onTokenName(event.currentTarget.value)}
+                              onChange={
+                                (event) => onRequiredToken(
+                                  event.currentTarget.value
+                                )
+                              }
                             />
                             <TextInput
                               type="number"
                               withAsterisk
-                              placeholder={batchSize}
-                              label="Size of airdrop transfer batches"
+                              placeholder={requiredTokenQty}
+                              label="Provide the quantity of required tokens"
                               style={{ maxWidth: '400px', marginTop: '10px' }}
                               onChange={
-                                (event) => onBatchSize(parseInt(event.currentTarget.value, 10))
+                                (event) => onRequiredTokenQty(
+                                  parseFloat(event.currentTarget.value)
+                                )
                               }
                             />
-                            <Radio.Group
-                              value={distroMethod}
-                              onChange={setDistroMethod}
-                              name="distroMethod"
-                              label="How should tokens be allocated to winners?"
-                              style={{ marginTop: '10px' }}
-                              withAsterisk
-                            >
-                              <Group mt="xs">
-                                <Radio value="Equally" label="Equally between winning account IDs" />
-                                <Radio value="Proportionally" label="Proportional to tickets won" />
-                                <Radio value="RoundRobin" label="Allocate whole tokens in a round robin manner" />
-                              </Group>
-                            </Radio.Group>
+                          </>
+                        )
+                        : null
+                    }
 
-                            {
-                                        distroMethod !== "RoundRobin"
-                                          ? (
-                                            <TextInput
-                                              type="number"
-                                              withAsterisk
-                                              placeholder={tokenQuantity}
-                                              label="Enter the quantity of tokens you wish to airdrop"
-                                              style={{ maxWidth: '400px', marginTop: '10px' }}
-                                              onChange={
-                                                (event) => onTokenQuantity(
-                                                  parseFloat(event.currentTarget.value)
-                                                )
-                                              }
-                                            />
-                                          )
-                                          : null
-                                    }
+                    {
+                      distroMethod === "RoundRobin"
+                        ? (
+                          <NumberInput
+                            mt="sm"
+                            withAsterisk
+                            min={0}
+                            max={10000000000000}
+                            label="Enter the quantity of tokens you wish to airdrop"
+                            value={tokenQuantity}
+                            onChange={onTokenQuantity}
+                          />
+                        )
+                        : null
+                    }
 
-                            {
-                                        distroMethod === "RoundRobin"
-                                          ? (
-                                            <NumberInput
-                                              mt="sm"
-                                              withAsterisk
-                                              min={0}
-                                              max={10000000000000}
-                                              label="Enter the quantity of tokens you wish to airdrop"
-                                              value={tokenQuantity}
-                                              onChange={onTokenQuantity}
-                                            />
-                                          )
-                                          : null
-                                    }
-
-                          </Card>
+                  </Card>
+                  {
+                    !validRows || !validRows.length
+                      ? (
+                        <Card shadow="md" radius="md" padding="sm" style={{ backgroundColor: '#FAFAFA' }}>
+                          <Text fz="lg" fw={500} mt="md">
+                            <HiOutlineShieldExclamation />
+                            {' '}
+                            Nothing to airdrop
+                          </Text>
+                          <Text fz="sm" c="dimmed" mt="xs">
+                            Given there are no valid tickets, there&apos;s nothing to airdrop.
+                          </Text>
+                          <Text fz="sm" c="dimmed" mt="xs">
+                            Adjust the airdrop settings or calculate another airdrop to proceed.
+                          </Text>
+                        </Card>
+                      )
+                      : (
+                        <Card shadow="md" radius="md" padding="sm" style={{ backgroundColor: '#FAFAFA' }}>
+                          <Text fz="lg" fw={500} mt="md">
+                            <HiOutlineShieldCheck />
+                            {' '}
+                            Proceed with airdrop?
+                          </Text>
+                          <Text fz="sm" c="dimmed" mt="xs">
+                            {`With a batch limit of ${batchSize}, ${validRows.length / batchSize < 1 ? 1 : Math.ceil(validRows.length / batchSize)} ${validRows.length / batchSize < 1 ? "batch is" : "batches are"} required to complete this airdrop.`}
+                          </Text>
+                          <Text fz="sm" c="dimmed" mt="xs">
+                            Keep in mind the transaction and block size limits when planning batches of airdrops.
+                          </Text>
                           {
-                            !validRows || !validRows.length
-                              ? (
-                                <Card shadow="md" radius="md" padding="sm" style={{ backgroundColor: '#FAFAFA' }}>
-                                  <Text fz="lg" fw={500} mt="md">
-                                    <HiOutlineShieldExclamation />
-                                    {' '}
-                                    Nothing to airdrop
-                                  </Text>
-                                  <Text fz="sm" c="dimmed" mt="xs">
-                                    Given there are no valid tickets, there&apos;s nothing to airdrop.
-                                  </Text>
-                                  <Text fz="sm" c="dimmed" mt="xs">
-                                    Adjust the airdrop settings or calculate another airdrop to proceed.
-                                  </Text>
-                                </Card>
-                              )
-                              : (
-                                <Card shadow="md" radius="md" padding="sm" style={{ backgroundColor: '#FAFAFA' }}>
-                                  <Text fz="lg" fw={500} mt="md">
-                                    <HiOutlineShieldCheck />
-                                    {' '}
-                                    Proceed with airdrop?
-                                  </Text>
-                                  <Text fz="sm" c="dimmed" mt="xs">
-                                    With a batch limit of
-                                    {' '}
-                                    {batchSize}
-                                    ,
-                                    {validRows.length / batchSize < 1 ? 1 : Math.ceil(validRows.length / batchSize)}
-                                    {' '}
-                                    {validRows.length / batchSize < 1 ? "batch is" : "batches are"}
-                                    {' '}
-                                    required to complete this airdrop.
-                                  </Text>
-                                  <Text fz="sm" c="dimmed" mt="xs">
-                                    Keep in mind the transaction and block size limits when planning batches of airdrops.
-                                  </Text>
-                                  {
-                                            airdropCards
-                                        }
-                                </Card>
-                              )
+                            airdropCards
                           }
-                        </SimpleGrid>
-                      </Card>
-                    </SimpleGrid>
-                  )
-            }
+                        </Card>
+                      )
+                  }
+                </SimpleGrid>
+              </Card>
+            </SimpleGrid>
+          )
+      }
     </Card>
   );
 }

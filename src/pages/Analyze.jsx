@@ -12,6 +12,8 @@ import {
   ActionIcon,
 } from '@mantine/core';
 import { Link } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
+
 import { appStore, ticketStore } from '../lib/states';
 
 function humanReadableFloat(satoshis, precision) {
@@ -19,6 +21,7 @@ function humanReadableFloat(satoshis, precision) {
 }
 
 export default function Analyze(properties) {
+  const { t, i18n } = useTranslation();
   const btsTickets = ticketStore((state) => state.bitshares);
   const btsTestnetTickets = ticketStore((state) => state.bitshares_testnet);
   const tuscTickets = ticketStore((state) => state.tusc);

@@ -44,6 +44,7 @@ import Nodes from "./pages/Nodes";
 import Ticket from "./pages/Ticket";
 import Account from "./pages/Account";
 import FAQ from "./pages/Faq";
+import Asset from "./pages/Asset";
 
 function openGallery() {
   window.electron.openURL('gallery');
@@ -143,6 +144,7 @@ function App() {
                 <Route path="/Fetch" element={<Fetch />} />
                 <Route path="/Tickets/:env" element={<Tickets />} />
                 <Route path="/Ticket/:env/:id" element={<Ticket />} />
+                <Route path="/Asset/:env/:id" element={<Asset />} />
                 <Route path="/Account/:env/:id" element={<Account />} />
                 <Route path="/PlannedAirdrop/:env/:id" element={<PlannedAirdrop />} />
                 <Route path="/PerformAirdrop/:env/:id" element={<PerformAirdrop />} />

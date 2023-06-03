@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import {
   Title,
@@ -14,6 +15,7 @@ import {
 } from '@mantine/core';
 
 export default function Airdrop(properties) {
+  const { t, i18n } = useTranslation();
   const [value, setValue] = useState('bitshares');
 
   const airdropJSON = [{

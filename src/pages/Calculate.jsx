@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Apis } from 'bitsharesjs-ws';
 import { v4 as uuidv4 } from 'uuid';
+import { useTranslation } from 'react-i18next';
 
 import {
   Title,
@@ -24,6 +25,7 @@ import { executeCalculation } from '../lib/algos';
 import { appStore, leaderboardStore, airdropStore } from '../lib/states';
 
 export default function Calculate(properties) {
+  const { t, i18n } = useTranslation();
   const btsLeaderboard = leaderboardStore((state) => state.bitshares);
   const btsTestnetLeaderboard = leaderboardStore((state) => state.bitshares_testnet);
   const tuscLeaderboard = leaderboardStore((state) => state.tusc);

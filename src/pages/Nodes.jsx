@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   Title,
   Text,
@@ -37,6 +38,7 @@ function array_move(arr, old_index, new_index) {
 }
 
 export default function Nodes(properties) {
+  const { t, i18n } = useTranslation();
   const blockchainNodes = appStore((state) => state.nodes);
   const replaceNodes = appStore((state) => state.replaceNodes);
   const removeURL = appStore((state) => state.removeURL);

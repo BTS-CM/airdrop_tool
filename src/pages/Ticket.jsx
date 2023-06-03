@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   Title,
   Text,
@@ -16,6 +17,7 @@ import { Link, useParams } from "react-router-dom";
 import { appStore, ticketStore } from '../lib/states';
 
 export default function Ticket(properties) {
+  const { t, i18n } = useTranslation();
   const params = useParams();
 
   const btsTickets = ticketStore((state) => state.bitshares);

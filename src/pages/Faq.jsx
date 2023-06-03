@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { Container, Title, Accordion } from '@mantine/core';
 
 export default function FAQ(properties) {
+  const { t, i18n } = useTranslation();
   const contents = [
     {
       key: 'how_airdrop',

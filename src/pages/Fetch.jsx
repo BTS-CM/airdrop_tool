@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Apis } from 'bitsharesjs-ws';
+import { Apis as tuscApis } from 'tuscjs-ws';
+
 import { Link } from "react-router-dom";
 import {
   Title,
@@ -11,15 +13,19 @@ import {
   Button,
   ActionIcon,
   Group,
+  Loader,
 } from '@mantine/core';
+import { useTranslation } from 'react-i18next';
 
 import { appStore, ticketStore, leaderboardStore } from '../lib/states';
+//import { fetchUserBalances, fetchLeaderboardData } from '../lib/directQueries';
 
 function humanReadableFloat(satoshis, precision) {
   return satoshis / 10 ** precision;
 }
 
 export default function Fetch(properties) {
+  const { t, i18n } = useTranslation();
   const btsTickets = ticketStore((state) => state.bitshares);
   const btsTestnetTickets = ticketStore((state) => state.bitshares_testnet);
   const tuscTickets = ticketStore((state) => state.tusc);
@@ -35,40 +41,6 @@ export default function Fetch(properties) {
 
   const [value, setValue] = useState('bitshares');
   const [inProgress, setInProgress] = useState(false);
-
-  /**
-     * Retrieve the object contents
-     * @param {String} fromID (next ticket id)
-     * @returns {Object}
-     */
-  async function fetchObjects(fromID) {
-    return new Promise(async (resolve, reject) => {
-      console.log("Fetching tickets");
-      try {
-        await Apis.instance(nodes[value][0], true).init_promise;
-      } catch (error) {
-        console.log(error);
-        changeURL(value);
-        reject(new Error({
-          error, location: 'init', node: nodes[value][0], env: value,
-        }));
-        return;
-      }
-
-      let object;
-      try {
-        object = await Apis.instance().db_api().exec("list_tickets", [100, fromID]);
-      } catch (error) {
-        console.log(error);
-        reject(new Error({
-          error, location: 'exec', node: nodes[value][0], env: value,
-        }));
-        return;
-      }
-
-      resolve(object);
-    });
-  }
 
   async function execFetch() {
     setInProgress(true);
@@ -87,12 +59,28 @@ export default function Fetch(properties) {
       ? parseInt((currentTickets.at(-1).id).split("1.18.")[1], 10) + 1
       : 0;
 
+    try {
+      if (value === 'tusc') {
+        await tuscApis.instance(nodes[value][0], true).init_promise;
+      } else {
+        await Apis.instance(nodes[value][0], true).init_promise;
+      }
+    } catch (error) {
+      console.log(error);
+      changeURL(value);
+      return;
+    }
+
     const ids = [];
     const updatedTickets = [];
     for (let i = 0; i < 100; i++) {
       let response;
       try {
-        response = await fetchObjects(`1.18.${lastID + (i * 100)}`);
+        if (value === 'tusc') {
+          response = await tuscApis.instance().db_api().exec("list_tickets", [100, `1.18.${lastID + (i * 100)}`]);
+        } else {
+          response = await Apis.instance().db_api().exec("list_tickets", [100, `1.18.${lastID + (i * 100)}`]);
+        }
       } catch (error) {
         console.log(error);
         break;
@@ -124,18 +112,14 @@ export default function Fetch(properties) {
     }
 
     const mergedTickets = currentTickets.concat(updatedTickets);
-    changeTickets(value, mergedTickets);
-
-    // Now calculating and storing this blockchain's leaderboard in persistant zustand state
-
     const filteredTickets = mergedTickets.filter((x) => x.current_type !== "liquid");
 
+    // Analysis
+
+    console.log("Tallying data")
     const userTicketQty = {};
     const tallies = {};
     let sum = 0.00000;
-
-    console.log({ filteredTickets });
-
     for (let i = 0; i < filteredTickets.length; i++) {
       const currentTicket = filteredTickets[i];
       const { id } = currentTicket;
@@ -167,6 +151,7 @@ export default function Fetch(properties) {
       userTicketQty[currentAccount].push(id);
     }
 
+    console.log("Creating leaderboard")
     const leaderboard = [];
     let from = 0;
     for (const key of Object.keys(tallies)) {
@@ -185,21 +170,90 @@ export default function Fetch(properties) {
       });
     }
 
-    const sortedLeaderboard = leaderboard.sort((a, b) => b.amount - a.amount);
+    console.log("Fetching user balances")
+    const resultingLeaderboard = [];
+    for (let i = 0; i < leaderboard.length; i++) {
+      const accountID = leaderboard[i].id;
 
-    const finalLeaderboard = [];
+      let response;
+      try {
+        response = value === 'tusc'
+          ? await tuscApis.instance().db_api().exec("get_account_balances", [accountID, []]) // TUSC
+          : await Apis.instance().db_api().exec("get_account_balances", [accountID, []]); // BTS && BTS_TEST
+      } catch (error) {
+        console.log(error);
+        return;
+      }
+
+      if (!response || !response.length) {
+        console.log(`user ${accountID} has no balances`);
+        resultingLeaderboard.push(leaderboard[i]);
+        continue;
+      }
+
+      resultingLeaderboard.push({ ...leaderboard[i], balances: response });
+
+      /*
+      const asset_ids = response.map((x) => x.asset_id);
+
+      let symbols;
+      try {
+        if (value === 'tusc') {
+          symbols = await tuscApis.instance().db_api().exec('lookup_asset_symbols', [asset_ids]);
+        } else {
+          symbols = await Apis.instance().db_api().exec('lookup_asset_symbols', [asset_ids]);
+        }
+      } catch (error) {
+        console.log(error);
+        resultingLeaderboard.push(finalLeaderboard[i]);
+        continue;
+      }
+      */
+
+      /*
+      if (value === 'tusc') {
+        tuscApis.close();
+      } else {
+        Apis.close();
+      }
+      
+
+      const filteredSymbols = symbols.filter((x) => x !== null);
+
+      const finalData = response.map((x) => {
+        const currentSymbol = filteredSymbols.find((y) => y.id === x.asset_id);
+        return {
+          symbol: currentSymbol.symbol,
+          precision: currentSymbol.precision,
+          amount: x.amount,
+          id: x.asset_id,
+        };
+      }).filter(
+        (x) => humanReadableFloat(x.amount, x.precision) >= humanReadableFloat(1, x.precision)
+      );
+      */
+
+      //resultingLeaderboard.push({ ...finalLeaderboard[i], balances: finalData });
+    }
+
+    const sortedLeaderboard = resultingLeaderboard.sort((a, b) => b.amount - a.amount);
+
+    console.log("Calculating ticket ranges");
+    let finalLeaderboard = [];
     for (let i = 0; i < sortedLeaderboard.length; i++) {
       const current = sortedLeaderboard[i];
       current.range = {
         from: parseInt(from, 10),
         to: parseInt(from + current.amount, 10),
       };
+
       finalLeaderboard.push(current);
       from += current.amount + 1;
     }
 
-    changeLeaders(value, finalLeaderboard);
     setInProgress(false);
+    changeTickets(value, mergedTickets);
+    changeLeaders(value, finalLeaderboard);
   }
 
   return (
@@ -219,34 +273,33 @@ export default function Fetch(properties) {
         >
           <Group mt="xs">
             {
-                        !inProgress
-                          ? <Radio value="bitshares" label="Bitshares" />
-                          : <Radio disabled value="bitshares" label="Bitshares" />
-                    }
+                !inProgress
+                  ? <Radio value="bitshares" label="Bitshares" />
+                  : <Radio disabled value="bitshares" label="Bitshares" />
+            }
             {
-                        !inProgress
-                          ? <Radio value="bitshares_testnet" label="Bitshares (Testnet)" />
-                          : <Radio disabled value="bitshares_testnet" label="Bitshares (Testnet)" />
-                    }
+                !inProgress
+                  ? <Radio value="bitshares_testnet" label="Bitshares (Testnet)" />
+                  : <Radio disabled value="bitshares_testnet" label="Bitshares (Testnet)" />
+            }
             {
-                        !inProgress
-                          ? <Radio value="tusc" label="TUSC" />
-                          : <Radio disabled value="tusc" label="TUSC" />
-                    }
+                !inProgress
+                  ? <Radio value="tusc" label="TUSC" />
+                  : <Radio disabled value="tusc" label="TUSC" />
+            }
             {
-                        !inProgress
-                          ? (
-                            <Button onClick={() => execFetch()} style={{ marginLeft: '20px' }}>
-                              Fetch tickets
-                            </Button>
-                          )
-                          : (
-                            <Button disabled style={{ marginLeft: '20px' }}>
-                              ⏳ Fetching
-                            </Button>
-                          )
-                    }
-
+                !inProgress
+                  ? (
+                    <Button onClick={() => execFetch()} style={{ marginLeft: '20px' }}>
+                      Fetch tickets
+                    </Button>
+                  )
+                  : (
+                    <Button disabled style={{ marginLeft: '20px' }}>
+                      ⏳ Fetching
+                    </Button>
+                  )
+            }
           </Group>
         </Radio.Group>
       </Card>
@@ -319,17 +372,18 @@ export default function Fetch(properties) {
                     ).toFixed(0)
                     : 0
                 }
+                
               </td>
               <td>
                 {
-                                btsTestnetTickets.length
-                                  ? (
-                                    <Link style={{textDecoration: 'none'}} to="../Tickets/bitshares_testnet">
-                                      <ActionIcon>📄</ActionIcon>
-                                    </Link>
-                                  )
-                                  : <a>⛔</a>
-                            }
+                  btsTestnetTickets.length
+                    ? (
+                      <Link style={{textDecoration: 'none'}} to="../Tickets/bitshares_testnet">
+                        <ActionIcon>📄</ActionIcon>
+                      </Link>
+                    )
+                    : <a>⛔</a>
+                }
               </td>
               <td>
                 <ActionIcon onClick={() => {

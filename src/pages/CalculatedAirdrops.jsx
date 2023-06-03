@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+
 import {
   Title,
   Text,
@@ -17,6 +19,7 @@ import {
 import { airdropStore } from '../lib/states';
 
 export default function CalculatedAirdrops(properties) {
+  const { t, i18n } = useTranslation();
   const btsAirdrops = airdropStore((state) => state.bitshares);
   const btsTestnetAirdrops = airdropStore((state) => state.bitshares_testnet);
   const tuscAirdrops = airdropStore((state) => state.tusc);

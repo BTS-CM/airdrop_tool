@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 import {
   Title,
   Text,
@@ -15,6 +16,7 @@ import {
 import { airdropStore } from '../lib/states';
 
 export default function PlannedAirdrop(properties) {
+  const { t, i18n } = useTranslation();
   const params = useParams();
 
   const btsAirdrops = airdropStore((state) => state.bitshares);
@@ -46,12 +48,8 @@ export default function PlannedAirdrop(properties) {
         <Accordion.Control>
           &quot;
           <Link to={`/Account/${params.env}/${winner.id}`}>{winner.id}</Link>
-          &quot; has
-          {winner.qty}
-          {' '}
-          winning ticket
-          {winner.qty > 1 ? "s" : ""}
-          {' '}
+          &quot;
+          {` has ${winner.qty} winning ticket${winner.qty > 1 ? "s" : ""} `}
           (
           {
             parseFloat(winner.percent) > 1
@@ -181,8 +179,8 @@ export default function PlannedAirdrop(properties) {
                         </Text>
                         <Text fz="sm" c="dimmed" mt="sm" p="sm">
                           {
-                                    plannedAirdropData.filtered_signature
-                                }
+                              plannedAirdropData.filtered_signature
+                          }
                         </Text>
                       </Card>
                     </SimpleGrid>
@@ -194,31 +192,31 @@ export default function PlannedAirdrop(properties) {
       </Title>
       <Accordion>
         {
-                    !plannedAirdropData
-                      ? null
-                      : winnerAccordions
-                }
+          !plannedAirdropData
+            ? null
+            : winnerAccordions
+        }
       </Accordion>
 
       {
-                !plannedAirdropData
-                  ? null
-                  : (
-                    <SimpleGrid cols={1} spacing="xl" mt={50}>
-                      <Card shadow="md" radius="md" padding="xl">
-                        <JsonInput
-                          label="Raw JSON data"
-                          placeholder="Textarea will autosize to fit the content"
-                          defaultValue={JSON.stringify(plannedAirdropData)}
-                          validationError="Invalid JSON"
-                          formatOnBlur
-                          autosize
-                          minRows={4}
-                          maxRows={15}
-                        />
-                      </Card>
-                    </SimpleGrid>
-                  )
+        !plannedAirdropData
+          ? null
+          : (
+            <SimpleGrid cols={1} spacing="xl" mt={50}>
+              <Card shadow="md" radius="md" padding="xl">
+                <JsonInput
+                  label="Raw JSON data"
+                  placeholder="Textarea will autosize to fit the content"
+                  defaultValue={JSON.stringify(plannedAirdropData)}
+                  validationError="Invalid JSON"
+                  formatOnBlur
+                  autosize
+                  minRows={4}
+                  maxRows={15}
+                />
+              </Card>
+            </SimpleGrid>
+          )
             }
     </Card>
   );

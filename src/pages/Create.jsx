@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useDisclosure } from '@mantine/hooks';
 import { TransactionBuilder } from 'bitsharesjs';
 import { Apis } from "bitsharesjs-ws";
+import { useTranslation } from 'react-i18next';
 import {
   Title,
   Text,
@@ -25,6 +26,7 @@ import { leaderboardStore, appStore } from '../lib/states';
 import DeepLink from '../lib/DeepLink';
 
 export default function Create(properties) {
+  const { t, i18n } = useTranslation();
   const params = useParams();
   const [value, setValue] = useState(
     (params && params.env) ?? 'bitshares'
