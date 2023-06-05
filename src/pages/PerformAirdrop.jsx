@@ -69,15 +69,16 @@ function blockchainFloat(satoshis, precision) {
  * Retrieve the details of an asset from the blockchain
  * @param {String} node
  * @param {String} searchInput
+ * @param {String} env
  * @returns {Object}
  */
-async function getAsset(node, searchInput) {
+async function getAsset(node, searchInput, env) {
   try {
     await Apis.instance(node, true).init_promise;
   } catch (error) {
     console.log(error);
     const { changeURL } = appStore.getState();
-    changeURL();
+    changeURL(env);
     return;
   }
 
@@ -119,10 +120,14 @@ export default function PerformAirdrop(properties) {
   const [batchSize, onBatchSize] = useState(50);
   const [distroMethod, setDistroMethod] = useState("Proportionally");
   const [tokenReq, setTokenReq] = useState("no");
-  
-  const [winnerBalances, setWinnerBalances] = useState();
+
   const [requiredToken, onRequiredToken] = useState();
-  const [requiredTokenQty, onRequiredTokenQty] = useState(1);
+  const [requiredTokenQty, onRequiredTokenQty] = useState();
+
+  const [finalTokenQuantity, setFinalTokenQuantity] = useState(1);
+  const [requiredTokenDetails, setRequiredTokenDetails] = useState();
+  const [finalReqQty, setFinalReqQty] = useState();
+
 
   const nodes = appStore((state) => state.nodes);
   const currentNodes = nodes[params.env];
@@ -163,6 +168,7 @@ export default function PerformAirdrop(properties) {
     }
   }, []);
 
+  // Lookup the token to airdrop
   useEffect(() => {
     const delayDebounceFn = setTimeout(async () => {
       if (tokenName && tokenName.length) {
@@ -192,7 +198,18 @@ export default function PerformAirdrop(properties) {
     return () => clearTimeout(delayDebounceFn);
   }, [tokenName]);
 
-  const [requiredTokenDetails, setRequiredTokenDetails] = useState();
+  // Quantity of tokens to airdrop
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(async () => {
+      if (tokenQuantity && tokenQuantity > 0) {
+        setFinalTokenQuantity(tokenQuantity); // store new
+      }
+    }, 1000);
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [tokenQuantity]);
+
+  // Optional: Require this token in winner balances
   useEffect(() => {
     const delayDebounceFn = setTimeout(async () => {
       if (requiredToken && requiredToken.length) {
@@ -212,6 +229,7 @@ export default function PerformAirdrop(properties) {
 
         setRequiredTokenDetails({
           id: assetDetails.id,
+          symbol: requiredToken,
           precision: assetDetails.precision,
         }); // store new
       }
@@ -220,35 +238,63 @@ export default function PerformAirdrop(properties) {
     return () => clearTimeout(delayDebounceFn);
   }, [requiredToken]);
 
-  const winners = plannedAirdropData.calculatedAirdrop.summary;
-  const ticketQty = winners
+  // Optional: Require this many tokens in user balance
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(async () => {
+      if (requiredTokenQty && requiredTokenQty > 0) {
+        setFinalReqQty(requiredTokenQty); // store new
+      }
+    }, 1000);
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [requiredTokenQty]);
+
+  // Initial winners
+  let sortedWinners = plannedAirdropData.calculatedAirdrop.summary.map((winner) => ({
+    ...winner,
+    balances: envLeaderboard.find((x) => x.id === winner.id).balances,
+  })).sort((a, b) => b.qty - a.qty);
+
+  if (tokenReq && tokenReq === 'yes' && requiredToken && finalReqQty && requiredTokenDetails) {
+    // Check for mandatory tokens in winner balances
+    sortedWinners = sortedWinners.filter((user) => user.balances.map((asset) => asset.asset_id).includes(requiredTokenDetails.id));
+
+    sortedWinners = sortedWinners.filter((user) => {
+      const foundAsset = user.balances.find((asset) => asset.asset_id === requiredTokenDetails.id);
+      return humanReadableFloat(foundAsset.amount, requiredTokenDetails.precision) >= finalReqQty;
+    });
+  }
+
+  const ticketQty = sortedWinners
     .map((x) => x.qty)
     .reduce((accumulator, ticket) => accumulator + parseInt(ticket, 10), 0);
 
-  const sortedWinners = winners.sort((a, b) => b.qty - a.qty);
   let tokenRows = [];
-  let remainingTokens = 0;
-  for (let i = 0; i < sortedWinners.length; i++) {
+  let remainingTokens = finalTokenQuantity ?? 0;
+  const itrQty = distroMethod === "RoundRobin" && finalTokenQuantity
+    ? finalTokenQuantity
+    : sortedWinners.length;
+
+  for (let i = 0; i < itrQty; i++) {
     if (i === 0) {
       tokenRows = [];
-      remainingTokens = tokenQuantity;
+      remainingTokens = finalTokenQuantity;
     }
 
     if (distroMethod === "Proportionally") {
       tokenRows.push({
         ...sortedWinners[i],
-        assignedTokens: ((sortedWinners[i].qty / ticketQty) * tokenQuantity),
+        assignedTokens: ((sortedWinners[i].qty / ticketQty) * finalTokenQuantity),
       });
     } else if (distroMethod === "Equally") {
       tokenRows.push({
         ...sortedWinners[i],
-        assignedTokens: ((1 / sortedWinners.length) * tokenQuantity),
+        assignedTokens: ((1 / sortedWinners.length) * finalTokenQuantity),
       });
     } else if (distroMethod === "RoundRobin") {
-      if (i === sortedWinners.length - 1) {
-        // loop back around
-        i = 0;
-      }
+      let algoItr = i >= sortedWinners.length
+        ? Math.round(((i / sortedWinners.length) % 1) * sortedWinners.length)
+        : i;
 
       if (remainingTokens < 1) {
         // No more to allocate
@@ -257,7 +303,8 @@ export default function PerformAirdrop(properties) {
 
       remainingTokens -= 1;
 
-      const currentWinner = sortedWinners[i];
+      const currentWinner = sortedWinners[algoItr];
+      console.log({currentWinner, algoItr})
       let existingRow = tokenRows.find((x) => currentWinner.id === x.id);
       if (!existingRow) {
         tokenRows.push({
@@ -276,7 +323,7 @@ export default function PerformAirdrop(properties) {
   let validRows = [];
   let invalidRows = [];
   let winnerChunks = [];
-  if (!tokenDetails) {
+  if (!tokenDetails || (requiredToken && finalReqQty && !requiredTokenDetails)) {
     validRows = [];
     invalidRows = [];
     winnerChunks = [];
@@ -390,7 +437,7 @@ export default function PerformAirdrop(properties) {
                     : null
                 }
                 {
-                  !winnerBalances && tokenReq && tokenReq === 'yes'
+                  tokenReq && tokenReq === 'yes' && requiredToken && finalReqQty && !requiredTokenDetails
                     ? (
                       <>
                         <Loader variant="dots" />
@@ -518,24 +565,20 @@ export default function PerformAirdrop(properties) {
                         (event) => onBatchSize(parseInt(event.currentTarget.value, 10))
                       }
                     />
-                    {
-                      distroMethod !== "RoundRobin"
-                        ? (
-                          <TextInput
-                            type="number"
-                            withAsterisk
-                            placeholder={tokenQuantity}
-                            label="Enter the quantity of tokens you wish to airdrop"
-                            style={{ maxWidth: '400px', marginTop: '10px' }}
-                            onChange={
-                              (event) => onTokenQuantity(
-                                parseFloat(event.currentTarget.value)
-                              )
-                            }
-                          />
-                        )
-                        : null
-                    }
+                    <TextInput
+                      type="number"
+                      withAsterisk
+                      placeholder={tokenQuantity}
+                      label="Enter the quantity of tokens you wish to airdrop"
+                      style={{ maxWidth: '400px', marginTop: '10px' }}
+                      onChange={
+                        (event) => {
+                          onTokenQuantity(
+                            parseFloat(event.currentTarget.value)
+                          );
+                        }
+                      }
+                    />
                     <Radio.Group
                       value={distroMethod}
                       onChange={setDistroMethod}
@@ -595,23 +638,6 @@ export default function PerformAirdrop(properties) {
                         )
                         : null
                     }
-
-                    {
-                      distroMethod === "RoundRobin"
-                        ? (
-                          <NumberInput
-                            mt="sm"
-                            withAsterisk
-                            min={0}
-                            max={10000000000000}
-                            label="Enter the quantity of tokens you wish to airdrop"
-                            value={tokenQuantity}
-                            onChange={onTokenQuantity}
-                          />
-                        )
-                        : null
-                    }
-
                   </Card>
                   {
                     !validRows || !validRows.length
