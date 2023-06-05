@@ -1,1 +1,19 @@
-{}
+{
+    "airdrop": "Airdrop",
+    "accounts": "accounts",
+    "from": "from",
+    "to": "to",
+    "distro": "being distributed",
+    "method": "Via local file upload",
+    "preStep1": "1. Launch the BEET wallet and navigate to 'Local' in the menu.",
+    "preStep2": "2. At this page either allow all, or allow just operation 0 'Transfer'.",
+    "preStep3": "3. Once at the local upload page, click the button below to proceed.",
+    "generate": "Generate airdrop JSON file",
+    "confirmation": "Airdrop JSON generated",
+    "download1": "1. Your airdrop JSON has been generated, click the button to download it.",
+    "download2": "2. From the BEET Local page, upload the JSON file, a prompt should appear.",
+    "download3": "3. Verify the prompt's contents before approving the airdrop.",
+    "downloadButton": "Download airdrop JSON",
+    "viewJSON": "Proposed airdrop operation JSON",
+    "begin": "Begin airdrop"
+}

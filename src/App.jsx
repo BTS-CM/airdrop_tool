@@ -16,6 +16,7 @@ import {
   Button,
   Image,
 } from '@mantine/core';
+import { useTranslation } from 'react-i18next';
 
 import {
   HiOutlineTicket,
@@ -37,7 +38,6 @@ import Analyze from "./pages/Analyze";
 import Leaderboard from "./pages/Leaderboard";
 import Calculate from "./pages/Calculate";
 import CalculatedAirdrops from "./pages/CalculatedAirdrops";
-import Airdrop from "./pages/Airdrop";
 import PlannedAirdrop from "./pages/PlannedAirdrop";
 import PerformAirdrop from "./pages/PerformAirdrop";
 import Nodes from "./pages/Nodes";
@@ -59,6 +59,7 @@ function openBeet() {
 }
 
 function App() {
+  const { t, i18n } = useTranslation();
   const location = useLocation();
   return (
     <div className="App">
@@ -69,59 +70,59 @@ function App() {
               <Menu shadow="md" width={200}>
                 <Menu.Target>
                   <Button>
-                    📃 Menu
+                    📃 {t("app:menu.btn")}
                   </Button>
                 </Menu.Target>
 
                 <Menu.Dropdown>
-                  <Menu.Label>Main menu</Menu.Label>
+                  <Menu.Label>{t("app:menu.label")}</Menu.Label>
                   <Link style={{ textDecoration: 'none' }} to="/">
                     <Menu.Item icon={<HiOutlineHome />}>
-                      Home
+                      {t("app:menu.home")}
                     </Menu.Item>
                   </Link>
                   <Menu.Divider />
                   <Link style={{ textDecoration: 'none' }} to="./create">
                     <Menu.Item icon={<HiPlus />}>
-                      Create ticket
+                      {t("app:menu.createTicket")}
                     </Menu.Item>
                   </Link>
                   <Menu.Divider />
                   <Link style={{ textDecoration: 'none' }} to="./fetch">
                     <Menu.Item icon={<HiOutlineTicket />}>
-                      Fetch tickets
+                      {t("app:menu.fetchTickets")}
                     </Menu.Item>
                   </Link>
                   <Link style={{ textDecoration: 'none' }} to="./calculate">
                     <Menu.Item icon={<HiOutlineCalculator />}>
-                      Calculate airdrop
+                      {t("app:menu.calculateAirdrop")}
                     </Menu.Item>
                   </Link>
                   <Link style={{ textDecoration: 'none' }} to="./CalculatedAirdrops">
                     <Menu.Item icon={<HiOutlineChartPie />}>
-                      Calculated airdrops
+                      {t("app:menu.calculatedAirdrops")}
                     </Menu.Item>
                   </Link>
                   <Menu.Divider />
                   <Link style={{ textDecoration: 'none' }} to="./analyze">
                     <Menu.Item icon={<HiOutlineDatabase />}>
-                      Analyze tickets
+                      {t("app:menu.analyzeTickets")}
                     </Menu.Item>
                   </Link>
                   <Link style={{ textDecoration: 'none' }} to="./leaderboard">
                     <Menu.Item icon={<HiViewList />}>
-                      Ticket leaderboard
+                      {t("app:menu.ticketLeaderboard")}
                     </Menu.Item>
                   </Link>
                   <Menu.Divider />
                   <Link style={{ textDecoration: 'none' }} to="./faq">
                     <Menu.Item icon={<HiOutlineQuestionMarkCircle />}>
-                      FAQ
+                      {t("app:menu.faq")}
                     </Menu.Item>
                   </Link>
                   <Link style={{ textDecoration: 'none' }} to="./nodes">
                     <Menu.Item icon={<HiWifi />}>
-                      Change nodes
+                      {t("app:menu.changeNodes")}
                     </Menu.Item>
                   </Link>
                 </Menu.Dropdown>
@@ -155,7 +156,6 @@ function App() {
                 <Route path="/Leaderboard" element={<Leaderboard />} />
                 <Route path="/Calculate" element={<Calculate />} />
                 <Route path="/CalculatedAirdrops" element={<CalculatedAirdrops />} />
-                <Route path="/Airdrop" element={<Airdrop />} />
 
                 <Route path="/faq" element={<FAQ />} />
                 <Route path="/Nodes" element={<Nodes />} />

@@ -1,1 +1,25 @@
-{}
+{
+    "one": "has 1 winning ticket ",
+    "many": "has {{qty}} winning tickets ",
+    "jsonLabel": "{{id}}'s winning ticket JSON",
+    "header": {
+        "title": "planned {{chainName}} airdrop contents",
+        "continue": "Perform Airdrop",
+        "back": "Back"
+    },
+    "missingData": "Ticket not found",
+    "details": {
+        "id": "ID",
+        "hash": "Hash",
+        "dedupe": "Deduplicated",
+        "onlyWins": "Only winning tickets",
+        "blockNum": "Block number",
+        "algos": "Algorithms"
+    },
+    "basis": {
+        "witSig": "Witness signature",
+        "filtSig": "Filtered signature"
+    },
+    "winners": "Winners",
+    "json": "Raw JSON data"
+}

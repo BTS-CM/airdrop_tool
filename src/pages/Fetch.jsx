@@ -18,7 +18,6 @@ import {
 import { useTranslation } from 'react-i18next';
 
 import { appStore, ticketStore, leaderboardStore } from '../lib/states';
-//import { fetchUserBalances, fetchLeaderboardData } from '../lib/directQueries';
 
 function humanReadableFloat(satoshis, precision) {
   return satoshis / 10 ** precision;
@@ -116,7 +115,7 @@ export default function Fetch(properties) {
 
     // Analysis
 
-    console.log("Tallying data")
+    console.log("Tallying data");
     const userTicketQty = {};
     const tallies = {};
     let sum = 0.00000;
@@ -151,7 +150,7 @@ export default function Fetch(properties) {
       userTicketQty[currentAccount].push(id);
     }
 
-    console.log("Creating leaderboard")
+    console.log("Creating leaderboard");
     const leaderboard = [];
     let from = 0;
     for (const key of Object.keys(tallies)) {
@@ -170,7 +169,7 @@ export default function Fetch(properties) {
       });
     }
 
-    console.log("Fetching user balances")
+    console.log("Fetching user balances");
     const resultingLeaderboard = [];
     for (let i = 0; i < leaderboard.length; i++) {
       const accountID = leaderboard[i].id;
@@ -192,54 +191,12 @@ export default function Fetch(properties) {
       }
 
       resultingLeaderboard.push({ ...leaderboard[i], balances: response });
-
-      /*
-      const asset_ids = response.map((x) => x.asset_id);
-
-      let symbols;
-      try {
-        if (value === 'tusc') {
-          symbols = await tuscApis.instance().db_api().exec('lookup_asset_symbols', [asset_ids]);
-        } else {
-          symbols = await Apis.instance().db_api().exec('lookup_asset_symbols', [asset_ids]);
-        }
-      } catch (error) {
-        console.log(error);
-        resultingLeaderboard.push(finalLeaderboard[i]);
-        continue;
-      }
-      */
-
-      /*
-      if (value === 'tusc') {
-        tuscApis.close();
-      } else {
-        Apis.close();
-      }
-      
-
-      const filteredSymbols = symbols.filter((x) => x !== null);
-
-      const finalData = response.map((x) => {
-        const currentSymbol = filteredSymbols.find((y) => y.id === x.asset_id);
-        return {
-          symbol: currentSymbol.symbol,
-          precision: currentSymbol.precision,
-          amount: x.amount,
-          id: x.asset_id,
-        };
-      }).filter(
-        (x) => humanReadableFloat(x.amount, x.precision) >= humanReadableFloat(1, x.precision)
-      );
-      */
-
-      //resultingLeaderboard.push({ ...finalLeaderboard[i], balances: finalData });
     }
 
     const sortedLeaderboard = resultingLeaderboard.sort((a, b) => b.amount - a.amount);
 
     console.log("Calculating ticket ranges");
-    let finalLeaderboard = [];
+    const finalLeaderboard = [];
     for (let i = 0; i < sortedLeaderboard.length; i++) {
       const current = sortedLeaderboard[i];
       current.range = {
@@ -260,15 +217,15 @@ export default function Fetch(properties) {
     <>
       <Card shadow="md" radius="md" padding="xl">
         <Title order={2} ta="center" mt="sm">
-          Fetch tickets from the blockchain
+          {t("fetch:topCard.title")}
         </Title>
 
         <Radio.Group
           value={value}
           onChange={setValue}
           name="chosenBlockchain"
-          label="Select the target blockchain"
-          description="Graphene based blockchains only"
+          label={t("fetch:topCard.label")}
+          description={t("fetch:topCard.desc")}
           withAsterisk
         >
           <Group mt="xs">
@@ -291,12 +248,12 @@ export default function Fetch(properties) {
                 !inProgress
                   ? (
                     <Button onClick={() => execFetch()} style={{ marginLeft: '20px' }}>
-                      Fetch tickets
+                      {t("fetch:topCard.btn1")}
                     </Button>
                   )
                   : (
                     <Button disabled style={{ marginLeft: '20px' }}>
-                      ⏳ Fetching
+                      ⏳ {t("fetch:topCard.btn2")}
                     </Button>
                   )
             }
@@ -308,11 +265,11 @@ export default function Fetch(properties) {
         <Table>
           <thead>
             <tr>
-              <th>Blockchain</th>
-              <th>Tickets</th>
-              <th>Quantity tokens locked</th>
-              <th>JSON</th>
-              <th>Delete</th>
+              <th>{t("fetch:secondCard.th1")}</th>
+              <th>{t("fetch:secondCard.th2")}</th>
+              <th>{t("fetch:secondCard.th3")}</th>
+              <th>{t("fetch:secondCard.th4")}</th>
+              <th>{t("fetch:secondCard.th5")}</th>
             </tr>
           </thead>
           <tbody>

@@ -36,7 +36,7 @@ export default function Tickets(properties) {
   return (
     <Card shadow="md" radius="md" padding="xl">
       <Title order={2} ta="center" mt="sm">
-        Ticket JSON
+        {t("tickets:json")}
       </Title>
 
       <JsonInput

@@ -1,1 +1,43 @@
-{}
+{
+    "title": "Welcome to the Bitshares Beet Airdrop tool!",
+    "desc": "The following features are available for the Bitshares blockchains!",
+    "footer": "To make full use of the feature set available in this tool, the Bitshares BEET multiwallet is required.",
+    "grid": {
+        "ticketRetrieval": {
+            "title": "Ticket retrieval",
+            "desc": "Fetch blockchain voting tickets"
+        },
+        "ticketAnalysis": {
+            "title": "Ticket data analysis",
+            "desc": "Analyze the contents of voting tickets"
+        },
+        "ticketLeaderboard": {
+            "title": "Ticket leaderboards",
+            "desc": "Sorts voting tickets into leaderboards"
+        },
+        "airdropCalc": {
+            "title": "Airdrop calculation",
+            "desc": "Create airdrop vectors with provably random blockchain based inputs"
+        },
+        "airdropAnalysis": {
+            "title": "Calculated airdrop analysis",
+            "desc": "Verify the contents of calculated airdrops prior to execution on the blockchain"
+        },
+        "airdropExecute": {
+            "title": "Airdrop execution",
+            "desc": "Perform token airdrops on the blockchain"
+        },
+        "createTicket": {
+            "title": "Ticket creation",
+            "desc": "Lock tokens to vote and get airdrops"
+        },
+        "faq": {
+            "title": "Frequently asked questions",
+            "desc": "Learn more about airdrops, tickets and blockchains"
+        },
+        "nodes": {
+            "title": "Configurable nodes",
+            "desc": "Switch between blockchain nodes"
+        }
+    }
+}

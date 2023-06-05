@@ -1,1 +1,16 @@
-{}
+{
+    "topCard": {
+        "title": "Fetch tickets from the blockchain",
+        "label": "Select the target blockchain",
+        "desc": "Graphene based blockchains only",
+        "btn1": "Fetch tickets",
+        "btn2": "Fetching"
+    },
+    "secondCard": {
+        "th1": "Blockchain",
+        "th2": "Tickets",
+        "th3": "Quantity tokens locked",
+        "th4": "JSON",
+        "th5": "Delete"
+    }
+}

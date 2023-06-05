@@ -37,7 +37,7 @@ export default function Account(properties) {
   const btsLeaderboard = leaderboardStore((state) => state.bitshares);
   const btsTestnetLeaderboard = leaderboardStore((state) => state.bitshares_testnet);
   const tuscLeaderboard = leaderboardStore((state) => state.tusc);
-  
+
   const nodes = appStore((state) => state.nodes);
   const changeURL = appStore((state) => state.changeURL);
 
@@ -113,7 +113,7 @@ export default function Account(properties) {
   let accountBalanceRows = currentAccountBalances && currentAccountBalances.balances.length
     ? currentAccountBalances.balances.map((x) => {
       return (
-        <Link style={{textDecoration: 'none'}} to={`/Asset/${params.env}/${x.asset_id}`}>
+        <Link key={x.asset_id} style={{textDecoration: 'none'}} to={`/Asset/${params.env}/${x.asset_id}`}>
           <Badge m="xs">
               {x.asset_id}
           </Badge>
@@ -367,7 +367,7 @@ export default function Account(properties) {
                 <Card shadow="md" radius="md" padding="xl">
                     <Loader />
                     <Text>
-                      Loading account details!
+                      {t('account:loadingAccount')}
                     </Text>
                 </Card>
               )
@@ -384,7 +384,7 @@ export default function Account(properties) {
                     {`${accountDetails.name} (${params.id})`}
                   </Text>
                   <Text>
-                    Quantity tokens: {accountBalanceRows.length}
+                    {t('Account:qtyTokens')}: {accountBalanceRows.length}
                   </Text>
                 </Card>
               )
@@ -395,12 +395,10 @@ export default function Account(properties) {
               ? (
                 <Card shadow="md" radius="md">
                   <Text fz="lg" fw={500} mt="md">
-                    Account balances
+                    {t('account:accountBalances')}
                   </Text>
                   <ScrollArea h={475}>
-                    <Table>
-                        {accountBalanceRows}
-                    </Table>
+                    {accountBalanceRows}
                   </ScrollArea>
                 </Card>
               )

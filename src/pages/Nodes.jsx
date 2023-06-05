@@ -125,15 +125,15 @@ export default function Nodes(properties) {
     <>
       <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
         <Title order={2} ta="center" mt="sm">
-          Blockchain node configuration
+          {t("Nodes:title")}
         </Title>
 
         <Radio.Group
           value={value}
           onChange={setValue}
           name="chosenBlockchain"
-          label="Select the target blockchain"
-          description="Graphene based blockchains only"
+          label={t("Nodes:radio.label")}
+          description={t("Nodes:radio.desc")}
           withAsterisk
         >
           <Group mt="xs">
@@ -148,11 +148,7 @@ export default function Nodes(properties) {
           <thead>
             <tr>
               <th>
-                Current
-                {' '}
-                {value}
-                {' '}
-                blockchain node order
+                {t("Nodes:th1", value)}
               </th>
               <th />
               <th />
@@ -167,16 +163,12 @@ export default function Nodes(properties) {
 
       <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
         <Title order={4} ta="left" mt="sm">
-          Interesed in using your own
-          {' '}
-          {value}
-          {' '}
-          blockchain node?
+          {t("Nodes:title2", value)}
         </Title>
         <TextInput
           type="string"
           placeholder={nodeURL}
-          label={`Enter an URL for the ${value} blockchain`}
+          label={t("urlLabel", value)}
           style={{ maxWidth: '350px', marginTop: '20px' }}
           onChange={(event) => setNodeURL(event.currentTarget.value)}
         />
@@ -187,7 +179,7 @@ export default function Nodes(properties) {
             replaceNodes(value, referenceNodes.push(nodeURL));
           }}
         >
-          Submit
+          {t("Nodes:btn")}
         </Button>
       </Card>
     </>

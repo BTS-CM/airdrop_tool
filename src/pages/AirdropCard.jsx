@@ -17,6 +17,8 @@ import { appStore } from '../lib/states';
 import DeepLink from '../lib/DeepLink';
 
 export default function AirdropCard(properties) {
+  const { t, i18n } = useTranslation();
+
   const { tokenQuantity } = properties;
   const { tokenName } = properties;
   const { distroMethod } = properties;
@@ -58,7 +60,6 @@ export default function AirdropCard(properties) {
      * @returns {String}
      */
   async function generateDeepLink(currentChunk, key) {
-    const { t, i18n } = useTranslation();
     setInProgress(true);
     const beetLink = new DeepLink(
       'Airdrop tool airdropping',
@@ -109,6 +110,8 @@ export default function AirdropCard(properties) {
     for (let i = 0; i < ops.length; i++) {
       tr.add_type_operation('transfer', ops[i]);
     }
+
+    console.log({tr, node: currentNodes[0]})
 
     try {
       await tr.update_head_block();
@@ -176,15 +179,15 @@ export default function AirdropCard(properties) {
   return (
     <Card key={`airdrop_${chunkItr}`} mt="md" shadow="md" radius="md" padding="xl">
       <Text>
-        Airdrop #
+        {t("airdropCard:airdrop")} #
         {chunkItr + 1}
         /
         {winnerChunkQty}
       </Text>
       <Text fz="sm" c="dimmed">
-        {`${chunk.length} accounts ${chunk.length > 1 ? `(from ${chunk[0].id} to ${chunk[chunk.length - 1].id})` : null}`}
+        {`${chunk.length} ${t("airdropCard:accounts")} ${chunk.length > 1 ? `(${t("airdropCard:from")} ${chunk[0].id} ${t("airdropCard:to")} ${chunk[chunk.length - 1].id})` : null}`}
         <br />
-        { `${currentChunkValue} ${tokenName || assetName} being distributed` }
+        { `${currentChunkValue} ${tokenName || assetName} ${t("airdropCard:distro")}` }
       </Text>
       <Modal
         opened={opened}
@@ -193,19 +196,19 @@ export default function AirdropCard(properties) {
           close();
           setTX();
         }}
-        title={`Airdrop #${chunkItr + 1}/${winnerChunkQty}`}
+        title={`${t("airdropCard:airdrop")} #${chunkItr + 1}/${winnerChunkQty}`}
       >
         {
           !airdropData && !inProgress
             ? (
               <>
-                <Text>Via local file upload</Text>
+                <Text>{t("airdropCard:method")}</Text>
                 <Text m="sm" fz="xs">
-                  1. Launch the BEET wallet and navigate to &quot;Local&quot; in the menu.
+                  {t("airdropCard:preStep1")}
                   <br />
-                  2. At this page either allow all, or allow just operation 0 &quot;Transfer&quot;.
+                  {t("airdropCard:preStep2")}
                   <br />
-                  3. Once at the local upload page, click the button below to proceed.
+                  {t("airdropCard:preStep3")}
                 </Text>
                 <Button
                   mt="md"
@@ -213,7 +216,7 @@ export default function AirdropCard(properties) {
                     async () => await generateDeepLink(chunk, chunkItr.toString())
                   }
                 >
-                  Generate airdrop JSON file
+                  {t("airdropCard:generate")}
                 </Button>
               </>
             )
@@ -228,13 +231,13 @@ export default function AirdropCard(properties) {
           airdropData
             ? (
               <>
-                <Text>Raw deeplink generated</Text>
+                <Text>{t("airdropCard:confirmation")}</Text>
                 <Text fz="xs">
-                  1. Your BEET deeplink has been generated, click the button to proceed.
+                  {t("airdropCard:download1")}
                   <br />
-                  2. A BEET prompt will display.
+                  {t("airdropCard:download2")}
                   <br />
-                  3. Verify the prompt&apos;s contents before approving the airdrop.
+                  {t("airdropCard:download3")}
                 </Text>
 
                 <a
@@ -244,14 +247,14 @@ export default function AirdropCard(properties) {
                   rel="noreferrer"
                 >
                   <Button mt="md">
-                    Download airdrop JSON
+                    {t("airdropCard:downloadButton")}
                   </Button>
                 </a>
 
                 <Accordion mt="xs">
                   <Accordion.Item key="json" value="operation_json">
                     <Accordion.Control>
-                      Proposed airdrop operation JSON
+                      {t("airdropCard:viewJSON")}
                     </Accordion.Control>
                     <Accordion.Panel style={{ backgroundColor: '#FAFAFA' }}>
                       <JsonInput
@@ -273,8 +276,8 @@ export default function AirdropCard(properties) {
       </Modal>
       {
         accountID.length > 5
-          ? <Button mt="md" onClick={open}>Begin airdrop</Button>
-          : <Button mt="md" disabled>Begin airdrop</Button>
+          ? <Button mt="md" onClick={open}>{t("airdropCard:begin")}</Button>
+          : <Button mt="md" disabled>{t("airdropCard:begin")}</Button>
       }
     </Card>
   );

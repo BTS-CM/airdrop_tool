@@ -17,9 +17,9 @@ window.electron = {
     const languages = ['en'];
     const pages = [
       'account',
-      'airdrop',
       'airdropCard',
       'analyze',
+      'app',
       'calculate',
       'calculatedAirdrops',
       'create',

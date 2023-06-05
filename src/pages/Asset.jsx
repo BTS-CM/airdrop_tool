@@ -108,19 +108,18 @@ export default function Account(properties) {
 
   let assetRows;
   if (assetDetails) {
-    console.log({assetDetails})
     assetRows = [
       <Text>
-        Symbol: {assetDetails.symbol}
+        {t("asset:symbol")}: {assetDetails.symbol}
       </Text>,
       <Text>
-        Isser: {assetDetails.issuer}
+        {t("asset:issuer")}: {assetDetails.issuer}
       </Text>,
       <Text>
-        Precision: {assetDetails.precision}
+        {t("asset:precision")}: {assetDetails.precision}
       </Text>,
       <Text>
-        Max supply : {
+        {t("asset:maxSupply")}: {
           humanReadableFloat(
             assetDetails.options.max_supply,
             assetDetails.precision
@@ -128,14 +127,14 @@ export default function Account(properties) {
         }
       </Text>,
       <Text>
-        Dynamic data ID: {assetDetails.dynamic_asset_data_id}
+        {t("asset:dynamicData")}: {assetDetails.dynamic_asset_data_id}
       </Text>,
-      <br/>,
+      <br />,
       <Text>
-        Amount of ticket holders holding this: {tableRows.length}
+        {t("asset:qty")}: {tableRows.length}
       </Text>,
       <Text>
-        Total amount held by ticket holders: {
+        {t("asset:total")}: {
           humanReadableFloat(
             foundBalanceValues.reduce(
               (accumulator, ticket) => accumulator + parseInt(ticket.value, 10),
@@ -155,8 +154,8 @@ export default function Account(properties) {
           <Table>
             <thead>
               <tr>
-                <th>Account ID</th>
-                <th>Balance</th>
+                <th>{t("asset:th1")}</th>
+                <th>{t("asset:th2")}</th>
               </tr>
             </thead>
             <tbody>
@@ -166,9 +165,9 @@ export default function Account(properties) {
         </ScrollArea>
       </Card>
       <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
-        <Title order={4}>Asset details</Title>
-        <Text>Blockchain: {chainName}</Text>
-        <Text>ID: {params.id}</Text>
+        <Title order={4}>{t("asset:title")}</Title>
+        <Text>{t("asset:chain")}: {chainName}</Text>
+        <Text>{t("asset:id")}: {params.id}</Text>
         {
           assetRows ?? null
         }

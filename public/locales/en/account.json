@@ -1,4 +1,7 @@
 {
+    "loadingAccount": "Loading account details!",
+    "qtyTokens": "Quantity tokens",
+    "accountBalances": "Account balances",
     "locked": "locked",
     "values": "ticket values",
     "created": "Total created tickets",

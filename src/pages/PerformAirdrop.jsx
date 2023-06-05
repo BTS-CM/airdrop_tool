@@ -128,7 +128,6 @@ export default function PerformAirdrop(properties) {
   const [requiredTokenDetails, setRequiredTokenDetails] = useState();
   const [finalReqQty, setFinalReqQty] = useState();
 
-
   const nodes = appStore((state) => state.nodes);
   const currentNodes = nodes[params.env];
 
@@ -304,7 +303,6 @@ export default function PerformAirdrop(properties) {
       remainingTokens -= 1;
 
       const currentWinner = sortedWinners[algoItr];
-      console.log({currentWinner, algoItr})
       let existingRow = tokenRows.find((x) => currentWinner.id === x.id);
       if (!existingRow) {
         tokenRows.push({
@@ -321,11 +319,9 @@ export default function PerformAirdrop(properties) {
   }
 
   let validRows = [];
-  let invalidRows = [];
   let winnerChunks = [];
   if (!tokenDetails || (requiredToken && finalReqQty && !requiredTokenDetails)) {
     validRows = [];
-    invalidRows = [];
     winnerChunks = [];
   } else {
     const valid = tokenRows
@@ -356,26 +352,6 @@ export default function PerformAirdrop(properties) {
           </tr>
         ))
       : null;
-
-    invalidRows = tokenRows
-      .filter((user) => user.assignedTokens < humanReadableFloat(1, tokenDetails.precision) || (tokenDetails.precision === 0 && tokenDetails.readableMax === 1 && parseFloat(user.assignedTokens) < 1))
-      .map((loser) => (
-        <tr key={loser.id}>
-          <td>
-            <Link style={{ textDecoration: 'none' }} to={`/Account/${params.env}/${loser.id}`}>
-              {loser.id}
-            </Link>
-          </td>
-          <td>
-            {loser.qty}
-          </td>
-          <td>
-            0
-            {' '}
-            {tokenName || assetName}
-          </td>
-        </tr>
-      ));
   }
 
   const airdropCards = winnerChunks && winnerChunks.length
@@ -400,27 +376,23 @@ export default function PerformAirdrop(properties) {
   return (
     <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
       <Title order={2} ta="center" mt="sm">
-        Perform airdrop on the
-        {' '}
-        {titleName}
-        {' '}
-        blockchain
+        {t("performAirdrop:header.title", { titleName })}
         <br />
         <Link to={`/PlannedAirdrop/${params.env}/${params.id}`}>
           <Button compact>
-            Airdrop summary
+            {t("performAirdrop:header.back")}
           </Button>
         </Link>
         <Link to="/CalculatedAirdrops">
           <Button ml="sm" compact>
-            Calculated airdrops
+            {t("performAirdrop:header.others")}
           </Button>
         </Link>
       </Title>
 
       {
         !plannedAirdropData
-          ? <Text>Ticket not found</Text>
+          ? <Text>{t("performAirdrop:noTicket")}</Text>
           : (
             <SimpleGrid cols={2} spacing="sm" mt={10} breakpoints={[{ maxWidth: 'md', cols: 2 }]}>
               <Card shadow="md" radius="md" padding="xl" mt={20}>
@@ -430,7 +402,7 @@ export default function PerformAirdrop(properties) {
                       <>
                         <Loader variant="dots" />
                         <Text size="md">
-                          Loading asset data
+                          {t("performAirdrop:grid.left.loading")}
                         </Text>
                       </>
                     )
@@ -442,7 +414,7 @@ export default function PerformAirdrop(properties) {
                       <>
                         <Loader variant="dots" />
                         <Text size="md">
-                          Processing user balances for required token
+                          {t("performAirdrop:grid.left.processing")}
                         </Text>
                       </>
                     )
@@ -455,14 +427,14 @@ export default function PerformAirdrop(properties) {
                         <Text>
                           <HiOutlineEmojiHappy />
                           {' '}
-                          Ticket holders included in airdrop
+                          {t("performAirdrop:grid.left.table.title")}
                         </Text>
                         <Table highlightOnHover>
                           <thead>
                             <tr>
-                              <th>id</th>
-                              <th>Quantity</th>
-                              <th>Allocated tokens</th>
+                              <th>{t("performAirdrop:grid.left.table.th1")}</th>
+                              <th>{t("performAirdrop:grid.left.table.th2")}</th>
+                              <th>{t("performAirdrop:grid.left.table.th3")}</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -473,77 +445,47 @@ export default function PerformAirdrop(properties) {
                     )
                     : null
                 }
-
-                {
-                  invalidRows && invalidRows.length
-                    ? (
-                      <>
-                        <Text mt="md">
-                          <HiOutlineEmojiSad />
-                          {' '}
-                          Disqualified from airdrop
-                        </Text>
-                        <Text c="dimmed" mb="sm">
-                          Unable to include the following ticket holders in airdrops.
-                        </Text>
-                        <Table style={{ backgroundColor: 'dimmed' }}>
-                          <thead>
-                            <tr>
-                              <th>id</th>
-                              <th>Quantity</th>
-                              <th>Reward</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {invalidRows}
-                          </tbody>
-                        </Table>
-                      </>
-                    )
-                    : null
-                }
-
               </Card>
               <Card>
                 <SimpleGrid cols={1} spacing="sm">
                   <Card shadow="md" radius="md" padding="xl">
                     <Text fz="lg" fw={500} mt="xs">
-                      Airdrop summary
+                      {t("performAirdrop:grid.right.summary.title")}
                     </Text>
                     <Text fz="sm" c="dimmed" mt="xs">
-                      ID: {plannedAirdropData.id}
+                      {t("performAirdrop:grid.right.summary.id")}: {plannedAirdropData.id}
                     </Text>
                     <Text fz="sm" c="dimmed" mt="xs">
-                      Hash: {plannedAirdropData.hash}
+                      {t("performAirdrop:grid.right.summary.hash")}: {plannedAirdropData.hash}
                     </Text>
                     <Text fz="sm" c="dimmed" mt="xs">
-                      Deduplicated: {plannedAirdropData.deduplicate}
+                      {t("performAirdrop:grid.right.summary.dedupe")}: {plannedAirdropData.deduplicate}
                     </Text>
                     <Text fz="sm" c="dimmed" mt="xs">
-                      Only winning tickets: {plannedAirdropData.alwaysWinning}
+                      {t("performAirdrop:grid.right.summary.onlyWins")}: {plannedAirdropData.alwaysWinning}
                     </Text>
                     <Text fz="sm" c="dimmed" mt="xs">
-                      Blocknumber: {plannedAirdropData.blockNumber}
+                      {t("performAirdrop:grid.right.summary.blockno")}: {plannedAirdropData.blockNumber}
                     </Text>
                     <Text fz="sm" c="dimmed" mt="xs">
-                      Algorithms: {plannedAirdropData.algos.join(", ")}
+                      {t("performAirdrop:grid.right.summary.algos")}: {plannedAirdropData.algos.join(", ")}
                     </Text>
                     <Text fz="sm" c="dimmed" mt="xs">
-                      Winners: {plannedAirdropData.calculatedAirdrop.summary.length}
+                      {t("performAirdrop:grid.right.summary.winners")}: {plannedAirdropData.calculatedAirdrop.summary.length}
                     </Text>
                     <Text fz="sm" c="dimmed" mt="xs">
-                      Winning ticket qty: {ticketQty}
+                      {t("performAirdrop:grid.right.summary.ticketWinQty")}: {ticketQty}
                     </Text>
                   </Card>
                   <Card shadow="md" radius="md" padding="sm">
                     <Text fz="lg" fw={600} mt="md">
-                      Airdrop options
+                      {t("performAirdrop:grid.right.options.title")}
                     </Text>
                     <TextInput
                       type="string"
                       withAsterisk
                       placeholder={accountID}
-                      label={`Enter your ${titleName} account ID`}
+                      label={t("performAirdrop:grid.right.options.titleName", { titleName })}
                       style={{ maxWidth: '400px' }}
                       onChange={(event) => onAccountID(event.currentTarget.value)}
                     />
@@ -551,7 +493,7 @@ export default function PerformAirdrop(properties) {
                       type="string"
                       withAsterisk
                       placeholder={tokenName || assetName}
-                      label="Enter the name of the asset you wish to airdrop"
+                      label={t("performAirdrop:grid.right.options.assetName")}
                       style={{ maxWidth: '400px', marginTop: '10px' }}
                       onChange={(event) => onTokenName(event.currentTarget.value)}
                     />
@@ -559,7 +501,7 @@ export default function PerformAirdrop(properties) {
                       type="number"
                       withAsterisk
                       placeholder={batchSize}
-                      label="Size of airdrop transfer batches"
+                      label={t("performAirdrop:grid.right.options.batchSize")}
                       style={{ maxWidth: '400px', marginTop: '10px' }}
                       onChange={
                         (event) => onBatchSize(parseInt(event.currentTarget.value, 10))
@@ -569,7 +511,7 @@ export default function PerformAirdrop(properties) {
                       type="number"
                       withAsterisk
                       placeholder={tokenQuantity}
-                      label="Enter the quantity of tokens you wish to airdrop"
+                      label={t("performAirdrop:grid.right.options.tokenQuantity")}
                       style={{ maxWidth: '400px', marginTop: '10px' }}
                       onChange={
                         (event) => {
@@ -583,27 +525,42 @@ export default function PerformAirdrop(properties) {
                       value={distroMethod}
                       onChange={setDistroMethod}
                       name="distroMethod"
-                      label="How should tokens be allocated to winners?"
+                      label={t("performAirdrop:grid.right.options.distroRadio.title")}
                       style={{ marginTop: '10px' }}
                       withAsterisk
                     >
                       <Group mt="xs">
-                        <Radio value="Equally" label="Equally between winning account IDs" />
-                        <Radio value="Proportionally" label="Proportional to tickets won" />
-                        <Radio value="RoundRobin" label="Allocate whole tokens in a round robin manner" />
+                        <Radio
+                          value="Equally"
+                          label={t("performAirdrop:grid.right.options.distroRadio.equally")}
+                        />
+                        <Radio
+                          value="Proportionally"
+                          label={t("performAirdrop:grid.right.options.distroRadio.proportionally")}
+                        />
+                        <Radio
+                          value="RoundRobin"
+                          label={t("performAirdrop:grid.right.options.distroRadio.roundRobin")}
+                        />
                       </Group>
                     </Radio.Group>
                     <Radio.Group
                       value={tokenReq}
                       onChange={setTokenReq}
                       name="tokenReq"
-                      label="Introduce additional token requirement?"
+                      label={t("performAirdrop:grid.right.options.reqRadio.title")}
                       style={{ marginTop: '10px' }}
                       withAsterisk
                     >
                       <Group mt="xs">
-                        <Radio value="yes" label="Yes" />
-                        <Radio value="no" label="No" />
+                        <Radio
+                          value="yes"
+                          label={t("performAirdrop:grid.right.options.reqRadio.yes")}
+                        />
+                        <Radio
+                          value="no"
+                          label={t("performAirdrop:grid.right.options.reqRadio.no")}
+                        />
                       </Group>
                     </Radio.Group>
                     {
@@ -614,7 +571,7 @@ export default function PerformAirdrop(properties) {
                               type="string"
                               withAsterisk
                               placeholder={requiredToken}
-                              label="Provide the required token's symbol"
+                              label={t("performAirdrop:grid.right.options.reqRadio.requiredToken")}
                               style={{ maxWidth: '400px', marginTop: '10px' }}
                               onChange={
                                 (event) => onRequiredToken(
@@ -626,7 +583,7 @@ export default function PerformAirdrop(properties) {
                               type="number"
                               withAsterisk
                               placeholder={requiredTokenQty}
-                              label="Provide the quantity of required tokens"
+                              label={t("performAirdrop:grid.right.options.reqRadio.requiredTokenQty")}
                               style={{ maxWidth: '400px', marginTop: '10px' }}
                               onChange={
                                 (event) => onRequiredTokenQty(
@@ -646,13 +603,13 @@ export default function PerformAirdrop(properties) {
                           <Text fz="lg" fw={500} mt="md">
                             <HiOutlineShieldExclamation />
                             {' '}
-                            Nothing to airdrop
+                            {t("performAirdrop:grid.right.invalid.title")}
                           </Text>
                           <Text fz="sm" c="dimmed" mt="xs">
-                            Given there are no valid tickets, there&apos;s nothing to airdrop.
+                            {t("performAirdrop:grid.right.invalid.reason")}
                           </Text>
                           <Text fz="sm" c="dimmed" mt="xs">
-                            Adjust the airdrop settings or calculate another airdrop to proceed.
+                            {t("performAirdrop:grid.right.invalid.resolution")}
                           </Text>
                         </Card>
                       )
@@ -661,13 +618,17 @@ export default function PerformAirdrop(properties) {
                           <Text fz="lg" fw={500} mt="md">
                             <HiOutlineShieldCheck />
                             {' '}
-                            Proceed with airdrop?
+                            {t("performAirdrop:grid.right.valid.title")}
                           </Text>
                           <Text fz="sm" c="dimmed" mt="xs">
-                            {`With a batch limit of ${batchSize}, ${validRows.length / batchSize < 1 ? 1 : Math.ceil(validRows.length / batchSize)} ${validRows.length / batchSize < 1 ? "batch is" : "batches are"} required to complete this airdrop.`}
+                            {
+                              validRows.length / batchSize < 1
+                                ? t("performAirdrop:grid.right.valid.single", { batchSize })
+                                : t("performAirdrop:grid.right.valid.multi", { batchSize, qtyBatches: Math.ceil(validRows.length / batchSize) })
+                            }
                           </Text>
                           <Text fz="sm" c="dimmed" mt="xs">
-                            Keep in mind the transaction and block size limits when planning batches of airdrops.
+                            {t("performAirdrop:grid.right.valid.reminder")}
                           </Text>
                           {
                             airdropCards

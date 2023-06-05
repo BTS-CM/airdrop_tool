@@ -49,8 +49,12 @@ export default function PlannedAirdrop(properties) {
           &quot;
           <Link to={`/Account/${params.env}/${winner.id}`}>{winner.id}</Link>
           &quot;
-          {` has ${winner.qty} winning ticket${winner.qty > 1 ? "s" : ""} `}
-          (
+          {
+            winner.qty > 1
+              ? t("plannedAirdrop:many", { qty: winner.qty })
+              : t("plannedAirdrop:one")
+          }
+           (
           {
             parseFloat(winner.percent) > 1
               ? parseFloat(winner.percent).toFixed(2)
@@ -60,7 +64,7 @@ export default function PlannedAirdrop(properties) {
         </Accordion.Control>
         <Accordion.Panel style={{ backgroundColor: '#FAFAFA' }}>
           <JsonInput
-            label={`${winner.id}'s winning ticket JSON`}
+            label={t("plannedAirdrop:jsonLabel", {id: winner.id})}
             placeholder="Textarea will autosize to fit the content"
             defaultValue={JSON.stringify(winner.tickets)}
             validationError="Invalid JSON"
@@ -76,119 +80,114 @@ export default function PlannedAirdrop(properties) {
   return (
     <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
       <Title order={2} ta="center" mt="sm">
-        Planned
-        {' '}
-        {chainName}
-        {' '}
-        airdrop contents
+        {t("plannedAirdrop:header.title", { chainName })}
         <br />
         <Link to={`/PerformAirdrop/${params.env}/${params.id}`}>
           <Button compact>
-            Perform Airdrop
+            {t("plannedAirdrop:header.continue")}
           </Button>
         </Link>
         <Link to="/CalculatedAirdrops">
           <Button style={{ marginLeft: '10px' }} compact>
-            Back
+            {t("plannedAirdrop:header.back")}
           </Button>
         </Link>
       </Title>
 
       {
-                !plannedAirdropData
-                  ? <Text>Ticket not found</Text>
-                  : (
-                    <SimpleGrid cols={3} spacing="xl" mt={50} breakpoints={[{ maxWidth: 'md', cols: 2 }]}>
-                      <Card shadow="md" radius="md" padding="xl">
-                        <Text fz="lg" fw={500} mt="md">
-                          ID
-                        </Text>
-                        <Text fz="sm" c="dimmed" mt="sm">
-                          {plannedAirdropData.id}
-                        </Text>
-                      </Card>
-                      <Card shadow="md" radius="md" padding="xl">
-                        <Text fz="lg" fw={500} mt="md">
-                          Hash
-                        </Text>
-                        <Text fz="sm" c="dimmed" mt="sm">
-                          {plannedAirdropData.hash}
-                        </Text>
-                      </Card>
-                      <Card shadow="md" radius="md" padding="xl">
-                        <Text fz="lg" fw={500} mt="md">
-                          Deduplicated
-                        </Text>
-                        <Text fz="sm" c="dimmed" mt="sm">
-                          {plannedAirdropData.deduplicate}
-                        </Text>
-                      </Card>
-                      <Card shadow="md" radius="md" padding="xl">
-                        <Text fz="lg" fw={500} mt="md">
-                          Only winning tickets
-                        </Text>
-                        <Text fz="sm" c="dimmed" mt="sm">
-                          {plannedAirdropData.alwaysWinning}
-                        </Text>
-                      </Card>
-                      <Card shadow="md" radius="md" padding="xl">
-                        <Text fz="lg" fw={500} mt="md">
-                          Blocknumber
-                        </Text>
-                        <Text fz="sm" c="dimmed" mt="sm">
-                          {plannedAirdropData.blockNumber}
-                        </Text>
-                      </Card>
-                      <Card shadow="md" radius="md" padding="xl">
-                        <Text fz="lg" fw={500} mt="md">
-                          Algorithms
-                        </Text>
-                        <Text fz="sm" c="dimmed" mt="sm">
-                          {
-                                    plannedAirdropData.algos.map((algo) => (
-                                      <Tooltip label={`${plannedAirdropData.calculatedAirdrop.generatedNumbers[algo].length} tickets`}>
-                                        <Badge key={algo} style={{ margin: '1px' }}>{algo}</Badge>
-                                      </Tooltip>
-                                    ))
-                                }
-                        </Text>
-                      </Card>
-                    </SimpleGrid>
-                  )
-
-            }
+        !plannedAirdropData
+          ? <Text>{t("plannedAirdrop:missingData")}</Text>
+          : (
+            <SimpleGrid cols={3} spacing="xl" mt={50} breakpoints={[{ maxWidth: 'md', cols: 2 }]}>
+              <Card shadow="md" radius="md" padding="xl">
+                <Text fz="lg" fw={500} mt="md">
+                  {t("plannedAirdrop:details.id")}
+                </Text>
+                <Text fz="sm" c="dimmed" mt="sm">
+                  {plannedAirdropData.id}
+                </Text>
+              </Card>
+              <Card shadow="md" radius="md" padding="xl">
+                <Text fz="lg" fw={500} mt="md">
+                  {t("plannedAirdrop:details.hash")}
+                </Text>
+                <Text fz="sm" c="dimmed" mt="sm">
+                  {plannedAirdropData.hash}
+                </Text>
+              </Card>
+              <Card shadow="md" radius="md" padding="xl">
+                <Text fz="lg" fw={500} mt="md">
+                  {t("plannedAirdrop:details.dedupe")}
+                </Text>
+                <Text fz="sm" c="dimmed" mt="sm">
+                  {plannedAirdropData.deduplicate}
+                </Text>
+              </Card>
+              <Card shadow="md" radius="md" padding="xl">
+                <Text fz="lg" fw={500} mt="md">
+                  {t("plannedAirdrop:details.onlyWins")}
+                </Text>
+                <Text fz="sm" c="dimmed" mt="sm">
+                  {plannedAirdropData.alwaysWinning}
+                </Text>
+              </Card>
+              <Card shadow="md" radius="md" padding="xl">
+                <Text fz="lg" fw={500} mt="md">
+                  {t("plannedAirdrop:details.blockNum")}
+                </Text>
+                <Text fz="sm" c="dimmed" mt="sm">
+                  {plannedAirdropData.blockNumber}
+                </Text>
+              </Card>
+              <Card shadow="md" radius="md" padding="xl">
+                <Text fz="lg" fw={500} mt="md">
+                  {t("plannedAirdrop:details.algos")}
+                </Text>
+                <Text fz="sm" c="dimmed" mt="sm">
+                  {
+                    plannedAirdropData.algos.map((algo) => (
+                      <Tooltip label={`${plannedAirdropData.calculatedAirdrop.generatedNumbers[algo].length} tickets`}>
+                        <Badge key={algo} style={{ margin: '1px' }}>{algo}</Badge>
+                      </Tooltip>
+                    ))
+                  }
+                </Text>
+              </Card>
+            </SimpleGrid>
+          )
+      }
 
       {
-                !plannedAirdropData
-                  ? null
-                  : (
-                    <SimpleGrid cols={1} spacing="xl" mt={50}>
-                      <Card shadow="md" radius="md" padding="xl" style={{ wordWrap: 'break-word' }}>
-                        <Text fz="lg" fw={500} mt="md">
-                          Witness signature
-                        </Text>
-                        <Text fz="sm" c="dimmed" mt="sm" p="sm">
-                          {
-                                    plannedAirdropData.witness_signature
-                                }
-                        </Text>
-                      </Card>
-                      <Card shadow="md" radius="md" padding="xl" style={{ wordWrap: 'break-word' }}>
-                        <Text fz="lg" fw={500} mt="md">
-                          Filtered signature
-                        </Text>
-                        <Text fz="sm" c="dimmed" mt="sm" p="sm">
-                          {
-                              plannedAirdropData.filtered_signature
-                          }
-                        </Text>
-                      </Card>
-                    </SimpleGrid>
-                  )
-            }
+        !plannedAirdropData
+          ? null
+          : (
+            <SimpleGrid cols={1} spacing="xl" mt={50}>
+              <Card shadow="md" radius="md" padding="xl" style={{ wordWrap: 'break-word' }}>
+                <Text fz="lg" fw={500} mt="md">
+                  {t("plannedAirdrop:basis.witSig")}
+                </Text>
+                <Text fz="sm" c="dimmed" mt="sm" p="sm">
+                  {
+                      plannedAirdropData.witness_signature
+                  }
+                </Text>
+              </Card>
+              <Card shadow="md" radius="md" padding="xl" style={{ wordWrap: 'break-word' }}>
+                <Text fz="lg" fw={500} mt="md">
+                  {t("plannedAirdrop:basis.filtSig")}
+                </Text>
+                <Text fz="sm" c="dimmed" mt="sm" p="sm">
+                  {
+                      plannedAirdropData.filtered_signature
+                  }
+                </Text>
+              </Card>
+            </SimpleGrid>
+          )
+      }
 
       <Title order={4} pt="md" ta="left" mt="sm">
-        Winners
+      {t("plannedAirdrop:winners")}
       </Title>
       <Accordion>
         {
@@ -205,7 +204,7 @@ export default function PlannedAirdrop(properties) {
             <SimpleGrid cols={1} spacing="xl" mt={50}>
               <Card shadow="md" radius="md" padding="xl">
                 <JsonInput
-                  label="Raw JSON data"
+                  label={t("plannedAirdrop:json")}
                   placeholder="Textarea will autosize to fit the content"
                   defaultValue={JSON.stringify(plannedAirdropData)}
                   validationError="Invalid JSON"
@@ -217,7 +216,7 @@ export default function PlannedAirdrop(properties) {
               </Card>
             </SimpleGrid>
           )
-            }
+      }
     </Card>
   );
 }

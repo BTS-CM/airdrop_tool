@@ -179,15 +179,15 @@ export default function Create(properties) {
     <>
       <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
         <Title order={2} ta="center" mt="sm">
-          Create a Ticket
+          {t("create:title")}
         </Title>
 
         <Radio.Group
           value={value}
           onChange={setValue}
           name="chosenBlockchain"
-          label="Select the target blockchain"
-          description="Graphene based blockchains only"
+          label={t("create:radioA.label")}
+          description={t("create:radioA.desc")}
           withAsterisk
         >
           <Group mt="xs">
@@ -201,41 +201,41 @@ export default function Create(properties) {
           value={ticketType}
           onChange={setTicketType}
           name="lockType"
-          label="Select your desired ticket type"
-          description="Longer lock durations grants greater voting weight."
+          label={t("create:radioB.label")}
+          description={t("create:radioB.desc")}
           style={{ marginTop: '20px' }}
           withAsterisk
         >
           <Group mt="xs">
-            <Radio value="lock_180_days" label="Lock for 180 days (200% boost)" />
-            <Radio value="lock_360_days" label="Lock for 360 days (400% boost)" />
-            <Radio value="lock_720_days" label="Lock for 720 days (800% boost)" />
-            <Radio value="lock_forever" label="Lock forever (800% boost)" />
+            <Radio value="lock_180_days" label={t("create:radioB.sm")} />
+            <Radio value="lock_360_days" label={t("create:radioB.md")} />
+            <Radio value="lock_720_days" label={t("create:radioB.lg")} />
+            <Radio value="lock_forever" label={t("create:radioB.xl")} />
           </Group>
         </Radio.Group>
 
         <TextInput
           type="number"
           placeholder={tokenQuantity}
-          label={`Enter the quantity of ${assetName} you wish to lock`}
+          label={t("create:qty")}
           style={{ maxWidth: '300px', marginTop: '20px' }}
           onChange={(event) => onTokenQuantity(event.currentTarget.value)}
         />
 
         <Text fz="md" style={{ marginTop: '15px' }}>
-          By locking
+          {t("create:text.lock")}
           {' '}
           {tokenQuantity}
           {' '}
           {assetName}
           {' '}
-          your ticket will be equivalent to
+          {t("create:text.equivalent")}
           {' '}
           {tokenLockValue}
           {' '}
           {assetName}
           {' '}
-          in terms of voting and airdrop surface area.
+          {t("create:text.area")}
         </Text>
 
         <Modal
@@ -245,117 +245,118 @@ export default function Create(properties) {
             setDeepLink();
             close();
           }}
-          title="Creating a ticket"
+          title={t("create:modal.title")}
         >
           {
-                    !deepLink
+            !deepLink
+              ? (
+                <>
+                  <Text>{t("create:modal.noDL.title")}</Text>
+                  <Text m="sm" fz="xs">
+                    1. {t("create:modal.noDL.step1")}
+                    <br />
+                    2. {t("create:modal.noDL.step2")}
+                    <br />
+                    3. {t("create:modal.noDL.step3")}
+                  </Text>
+                  <TextInput
+                    type="string"
+                    placeholder={accountID}
+                    m="sm"
+                    label={t("create:modal.noDL.label")}
+                    style={{ maxWidth: '300px' }}
+                    onChange={(event) => onAccountID(event.currentTarget.value)}
+                  />
+                  {
+                    accountID !== "1.2.x" && accountID.length > 4
                       ? (
-                        <>
-                          <Text>Via raw Beet deeplink</Text>
-                          <Text m="sm" fz="xs">
-                            1. Launch the BEET wallet and navigate to &quot;Raw Link&quot; in the menu.
-                            <br />
-                            2. From this page you can either allow all operations, or solely allow operation 57 &quot;Ticket create&quot; (then click save).
-                            <br />
-                            3. Once &quot;Ready for raw links&quot; shows in Beet submit this request.
-                          </Text>
-                          <TextInput
-                            type="string"
-                            placeholder={accountID}
-                            m="sm"
-                            label={`Enter your ${value} account ID`}
-                            style={{ maxWidth: '300px' }}
-                            onChange={(event) => onAccountID(event.currentTarget.value)}
-                          />
-                          {
-                                accountID !== "1.2.x" && accountID.length > 4
-                                  ? (
-                                    <Button m="xs" onClick={async () => await generateDeepLink()}>
-                                      Generate raw deeplink
-                                    </Button>
-                                  )
-                                  : (
-                                    <Button m="xs" disabled>
-                                      Generate raw deeplink
-                                    </Button>
-                                  )
-                            }
-                        </>
+                        <Button m="xs" onClick={async () => await generateDeepLink()}>
+                          {t("create:modal.noDL.btn")}
+                        </Button>
                       )
-                      : null
-                }
+                      : (
+                        <Button m="xs" disabled>
+                          {t("create:modal.noDL.btn")}
+                        </Button>
+                      )
+                  }
+                </>
+              )
+              : null
+          }
           {
-                    deepLink
-                      ? (
-                        <>
-                          <Text>Raw deeplink generated</Text>
-                          <Text fz="xs">
-                            1. Your BEET deeplink has been generated, click the button to proceed.
-                            <br />
-                            2. A BEET prompt will display, verify the contents then approve the create ticket prompt.
-                            <br />
-                            3. Go to the &quot;Fetch tickets&quot; page to download your ticket for analysis.
-                          </Text>
-                          <a href={deepLink}>
-                            <Button m="xs">
-                              Broadcast to BEET
-                            </Button>
-                          </a>
-                          <Button
-                            m="xs"
-                            onClick={() => {
-                              setDeepLink();
-                            }}
-                          >
-                            Back
-                          </Button>
-                        </>
-                      )
-                      : null
-                }
+            deepLink
+              ? (
+                <>
+                  <Text>{t("create:modal.DL.title")}</Text>
+                  <Text fz="xs">
+                    1. {t("create:modal.DL.step1")}
+                    <br />
+                    2. {t("create:modal.DL.step2")}
+                    <br />
+                    3. {t("create:modal.DL.step3")}
+                  </Text>
+                  <a href={deepLink}>
+                    <Button m="xs">
+                      {t("create:modal.DL.beetBTN")}
+                    </Button>
+                  </a>
+                  <Button
+                    m="xs"
+                    onClick={() => {
+                      setDeepLink();
+                    }}
+                  >
+                    {t("create:modal.DL.back")}
+                  </Button>
+                </>
+              )
+              : null
+          }
         </Modal>
 
         <Group position="center">
-          <Button style={{ marginTop: '20px' }} onClick={open}>Ask BEET to create ticket</Button>
+          <Button style={{ marginTop: '20px' }} onClick={open}>
+            {t("create:askBEET")}
+          </Button>
         </Group>
       </Card>
 
       <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
         <Title order={5} ta="center" mt="xs">
-          As a result of creating this ticket, the top 10 leaderboard stats will change as such
+          {t("create:leaderChange.title")}
         </Title>
         <Table miw={800} verticalSpacing="sm" mt="md">
           <thead>
             <tr>
-              <th align="left">ID</th>
-              <th align="left">Amount</th>
-              <th align="left">Before</th>
-              <th align="left">After</th>
+              <th align="left">{t("create:leaderChange.th1")}</th>
+              <th align="left">{t("create:leaderChange.th2")}</th>
+              <th align="left">{t("create:leaderChange.th3")}</th>
+              <th align="left">{t("create:leaderChange.th4")}</th>
             </tr>
           </thead>
           <tbody>
             {
-                        leaderboardJSON.slice(0, 10).map((leader) => (
-                          <tr key={leader.id}>
-                            <td>{leader.id}</td>
-                            <td>{leader.amount}</td>
-                            <td>
-                              {leader.percent.toFixed(2)}
-                              {' '}
-                              %
-                            </td>
-                            <td>
-                              {((leader.amount / (currentlyLocked + tokenLockValue)) * 100).toFixed(2)}
-                              {' '}
-                              %
-                            </td>
-                          </tr>
-                        ))
-                    }
+              leaderboardJSON.slice(0, 10).map((leader) => (
+                <tr key={leader.id}>
+                  <td>{leader.id}</td>
+                  <td>{leader.amount}</td>
+                  <td>
+                    {leader.percent.toFixed(2)}
+                    {' '}
+                    %
+                  </td>
+                  <td>
+                    {((leader.amount / (currentlyLocked + tokenLockValue)) * 100).toFixed(2)}
+                    {' '}
+                    %
+                  </td>
+                </tr>
+              ))
+            }
           </tbody>
         </Table>
       </Card>
-
     </>
   );
 }
