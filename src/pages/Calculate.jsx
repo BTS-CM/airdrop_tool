@@ -47,17 +47,12 @@ export default function Calculate(properties) {
 
   const [progress, setProgress] = useState('planning'); // planning, calculating, completed
 
-  const calculationTypes = [
-    { name: 'Forward chunks', value: 'forward', desc: 'Split hash into ticket numbers.' },
-    { name: 'Reverse chunks', value: 'reverse', desc: 'Reverse hash then split into ticket numbers.' },
-    { name: 'PI', value: 'pi', desc: 'Split hash, do some math then multiply by PI for ticket numbers.' },
-    { name: 'Reverse PI', value: 'reverse_pi', desc: 'Split hash, reverse hash chunks, do math, multiply by PI, output tickets.' },
-    { name: 'Cubed', value: 'cubed', desc: 'Split hash into 3 digit chunks, cube each chunk, output tickets.' },
-    { name: 'Bouncing ball', value: 'bouncing_ball', desc: 'path of ball bouncing in matrix -> pick tickets along path' },
-    { name: 'Alien blood', value: 'alien_blood', desc: 'Picks alien blood splatter spots; it burns directly down through the hull' },
-    { name: 'Average point lines', value: 'avg_point_lines', desc: 'Calculate the avg x/y/z coordinates -> draw lines to this from each vector => reward those on line' },
-    { name: 'Freebie', value: 'freebie', desc: 'Each ticket holding account gets 1 winning ticket' },
-  ];
+  const calculationTypes = ['forward', 'reverse', 'pi', 'reverse_pi', 'cubed', 'bouncing_ball', 'alien_blood', 'avg_point_lines', 'freebie']
+    .map((x) => ({
+      name: t(`calculate:calcs.${x}.name`),
+      value: x,
+      desc: t(`calculate:calcs.${x}.desc`)
+    }));
 
   const toggleRow = (id) => setSelection(
     (current) => (current.includes(id) ? current.filter((item) => item !== id) : [...current, id])
@@ -186,7 +181,7 @@ export default function Calculate(properties) {
     return (
       <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
         <Title order={4} ta="left" mt="xs">
-          Performing airdrop calculations, please wait!
+          {t("calculate:calculatingTitle")}
         </Title>
       </Card>
     );
@@ -196,19 +191,19 @@ export default function Calculate(properties) {
     return (
       <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
         <Title order={4} ta="left" mt="xs">
-          Successfully completed airdrop calculations!
+          {t("calculate:completed.title")}
         </Title>
         <Button m="xs" onClick={() => setProgress('planning')}>
-          Calculate another airdrop?
+          {t("calculate:completed.anotherBtn")}
         </Button>
         <Link to={`/PlannedAirdrop/${value}/${randID}`}>
           <Button m="xs">
-            View generated airdrop
+            {t("calculate:completed.airdropBtn")}
           </Button>
         </Link>
         <Link to="/CalculatedAirdrops">
           <Button m="xs">
-            View all generated airdrops
+            {t("calculate:completed.generatedBtn")}
           </Button>
         </Link>
       </Card>
@@ -219,15 +214,15 @@ export default function Calculate(properties) {
     <>
       <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
         <Title order={4} ta="left" mt="xs">
-          Calculate a provably fair airdrop distribution for which blockchain?
+          {t("calculate:title")}
         </Title>
 
         <Radio.Group
           value={value}
           onChange={setValue}
           name="chosenBlockchain"
-          label="Select the target blockchain"
-          description="Graphene based blockchains only"
+          label={t("calculate:radioLabel")}
+          description={t("calculate:radioDesc")}
           withAsterisk
         >
           <Group mt="xs">
@@ -239,148 +234,147 @@ export default function Calculate(properties) {
       </Card>
 
       {
-            !leaderboardJSON || !leaderboardJSON.length
-              ? null
-              : (
-                <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
-                  <Title order={4} ta="left" mt="xs">
-                    What kind of blockhash do you want to use for initial provably random input?
-                  </Title>
-                  <Radio.Group
-                    value={hash}
-                    onChange={setHash}
-                    name="chosenHash"
-                    label="Select an initial hash type"
-                    description="Original, or securely hashed?"
-                    withAsterisk
-                  >
-                    <Group mt="xs">
-                      <Radio value="plain" label="Plain witness signature string" />
-                      <Radio value="Blake2B" label="Blake2B (512 bit) hash of witness signature" />
-                      <Radio value="Blake2S" label="Blake2S (256 bit) hash of witness signature" />
-                    </Group>
-                  </Radio.Group>
-                </Card>
-              )
-        }
+        !leaderboardJSON || !leaderboardJSON.length
+          ? null
+          : (
+            <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
+              <Title order={4} ta="left" mt="xs">
+                {t("calculate:hash.title")}
+              </Title>
+              <Radio.Group
+                value={hash}
+                onChange={setHash}
+                name="chosenHash"
+                label={t("calculate:hash.radioLabel")}
+                description={t("calculate:hash.radioDesc")}
+                withAsterisk
+              >
+                <Group mt="xs">
+                  <Radio value="plain" label={t("calculate:hash.plain")} />
+                  <Radio value="Blake2B" label={`Blake2B (512 bit) ${t("calculate:hash.witSig")}`} />
+                  <Radio value="Blake2S" label={`Blake2B (256 bit) ${t("calculate:hash.witSig")}`} />
+                </Group>
+              </Radio.Group>
+            </Card>
+          )
+      }
 
       {
-            !leaderboardJSON || !leaderboardJSON.length
-              ? null
-              : (
-                <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
-                  <Title order={4} ta="left" mt="xs">
-                    Winning ticket options
-                  </Title>
-                  <Radio.Group
-                    value={deduplicate}
-                    onChange={setDeduplicate}
-                    name="chosenDuplicate"
-                    label="Should winning tickets be deduplicated?"
-                    description="I.e. can a ticket win more than once? Yes or no?"
-                    withAsterisk
-                  >
-                    <Group mt="xs">
-                      <Radio value="Yes" label="Yes" />
-                      <Radio value="No" label="No" />
-                    </Group>
-                  </Radio.Group>
-                  <Radio.Group
-                    value={alwaysWinning}
-                    onChange={setAlwaysWinning}
-                    name="chosenWinning"
-                    label="Should winning tickets always be chosen?"
-                    description="E.g. If 600 tickets exist, convert #1000 into #400. (drawn - last)"
-                    withAsterisk
-                    style={{ marginTop: '15px' }}
-                  >
-                    <Group mt="xs">
-                      <Radio value="Yes" label="Yes" />
-                      <Radio value="No" label="No" />
-                    </Group>
-                  </Radio.Group>
-                </Card>
-              )
-        }
+        !leaderboardJSON || !leaderboardJSON.length
+          ? null
+          : (
+            <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
+              <Title order={4} ta="left" mt="xs">
+                {t("calculate:ticket.title")}
+              </Title>
+              <Radio.Group
+                value={deduplicate}
+                onChange={setDeduplicate}
+                name="chosenDuplicate"
+                label={t("calculate:ticket.radioLabel")}
+                description={t("calculate:ticket.radioDesc")}
+                withAsterisk
+              >
+                <Group mt="xs">
+                  <Radio value="Yes" label={t("calculate:ticket.yes")} />
+                  <Radio value="No" label={t("calculate:ticket.no")} />
+                </Group>
+              </Radio.Group>
+              <Radio.Group
+                value={alwaysWinning}
+                onChange={setAlwaysWinning}
+                name="chosenWinning"
+                label={t("calculate:ticket.winLabel")}
+                description={t("calculate:ticket.winDesc")}
+                withAsterisk
+                style={{ marginTop: '15px' }}
+              >
+                <Group mt="xs">
+                  <Radio value="Yes" label={t("calculate:ticket.yes")} />
+                  <Radio value="No" label={t("calculate:ticket.no")} />
+                </Group>
+              </Radio.Group>
+            </Card>
+          )
+      }
 
       {
-            !leaderboardJSON || !leaderboardJSON.length
-              ? null
-              : (
-                <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
-                  <Title order={4} ta="left" mt="xs">
-                    Enter the block number you wish to use for airdrop purposes
-                  </Title>
-                  <TextInput
-                    type="number"
-                    placeholder={blockNumber}
-                    label="Block number"
-                    style={{ maxWidth: '250px' }}
-                    onChange={(event) => onBlockNumber(event.currentTarget.value)}
-                  />
-                </Card>
-              )
-        }
+        !leaderboardJSON || !leaderboardJSON.length
+          ? null
+          : (
+            <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
+              <Title order={4} ta="left" mt="xs">
+                {t("calculate:blockNum.title")}
+              </Title>
+              <TextInput
+                type="number"
+                placeholder={blockNumber}
+                label={t("calculate:blockNum.label")}
+                style={{ maxWidth: '250px' }}
+                onChange={(event) => onBlockNumber(event.currentTarget.value)}
+              />
+            </Card>
+          )
+      }
 
       {
-            !leaderboardJSON || !leaderboardJSON.length
-              ? (
-                <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
-                  <Title order={3} ta="center" mt="sm">
-                    You must fetch the ticket data for this blockchain.
-                  </Title>
-                </Card>
-              )
-              : (
-                <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
-                  <Title order={4} ta="left" mt="xs">
-                    Select your prefered method(s) for generating provably fair airdrop distributions
-                  </Title>
-                  <ScrollArea>
-                    <Table miw={800} verticalSpacing="sm">
-                      <thead>
-                        <tr>
-                          <th style={{ width: '40px' }} />
-                          <th>Type</th>
-                          <th>Description</th>
-                        </tr>
-                      </thead>
-                      <tbody>{rows}</tbody>
-                    </Table>
-                  </ScrollArea>
-                </Card>
-              )
-        }
+        !leaderboardJSON || !leaderboardJSON.length
+          ? (
+            <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
+              <Title order={3} ta="center" mt="sm">
+                {t("calculate:fetchTickets")}
+              </Title>
+            </Card>
+          )
+          : (
+            <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
+              <Title order={4} ta="left" mt="xs">
+                {t("calculate:distro.title")}
+              </Title>
+              <ScrollArea>
+                <Table miw={800} verticalSpacing="sm">
+                  <thead>
+                    <tr>
+                      <th style={{ width: '40px' }} />
+                      <th>{t("calculate:distro.th1")}</th>
+                      <th>{t("calculate:distro.th2")}</th>
+                    </tr>
+                  </thead>
+                  <tbody>{rows}</tbody>
+                </Table>
+              </ScrollArea>
+            </Card>
+          )
+      }
 
       {
-            !leaderboardJSON || !leaderboardJSON.length
-              ? null
-              : (
-                <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
-                  <Title order={4} ta="left" mt="xs">
-                    Proceed with airdrop calculation
-                  </Title>
-                  <Text>
-                    Your calculated airdrop vector will be made available in the airdrop page once completed.
-                  </Text>
-                  {
-                        !selection.length
-                          ? (
-                            <Button disabled style={{ marginTop: '10px' }}>
-                              Perform airdrop calculation
-                            </Button>
-                          )
-                          : (
-                            <Button style={{ marginTop: '10px' }} onClick={() => performCalculation()}>
-                              Perform airdrop calculation
-                            </Button>
-                          )
-                    }
+        !leaderboardJSON || !leaderboardJSON.length
+          ? null
+          : (
+            <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
+              <Title order={4} ta="left" mt="xs">
+                {t("calculate:proceed.title")}
+              </Title>
+              <Text>
+                {t("calculate:proceed.desc")}
+              </Text>
+              {
+                    !selection.length
+                      ? (
+                        <Button disabled style={{ marginTop: '10px' }}>
+                          {t("calculate:proceed.btn")}
+                        </Button>
+                      )
+                      : (
+                        <Button style={{ marginTop: '10px' }} onClick={() => performCalculation()}>
+                          {t("calculate:proceed.btn")}
+                        </Button>
+                      )
+                }
 
-                </Card>
-              )
-        }
-
+            </Card>
+          )
+      }
     </>
   );
 }

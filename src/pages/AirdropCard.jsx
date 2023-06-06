@@ -16,6 +16,16 @@ import { useTranslation } from 'react-i18next';
 import { appStore } from '../lib/states';
 import DeepLink from '../lib/DeepLink';
 
+/**
+ * Convert human readable quantity into the token's blockchain representation
+ * @param {Float} satoshis
+ * @param {Number} precision
+ * @returns {Number}
+ */
+function blockchainFloat(satoshis, precision) {
+  return satoshis * 10 ** precision;
+}
+
 export default function AirdropCard(properties) {
   const { t, i18n } = useTranslation();
 
@@ -110,8 +120,6 @@ export default function AirdropCard(properties) {
     for (let i = 0; i < ops.length; i++) {
       tr.add_type_operation('transfer', ops[i]);
     }
-
-    console.log({tr, node: currentNodes[0]})
 
     try {
       await tr.update_head_block();

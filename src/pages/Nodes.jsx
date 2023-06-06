@@ -125,15 +125,15 @@ export default function Nodes(properties) {
     <>
       <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
         <Title order={2} ta="center" mt="sm">
-          {t("Nodes:title")}
+          {t("nodes:title")}
         </Title>
 
         <Radio.Group
           value={value}
           onChange={setValue}
           name="chosenBlockchain"
-          label={t("Nodes:radio.label")}
-          description={t("Nodes:radio.desc")}
+          label={t("nodes:radio.label")}
+          description={t("nodes:radio.desc")}
           withAsterisk
         >
           <Group mt="xs">
@@ -148,7 +148,7 @@ export default function Nodes(properties) {
           <thead>
             <tr>
               <th>
-                {t("Nodes:th1", value)}
+                {t("nodes:th1", { value })}
               </th>
               <th />
               <th />
@@ -163,12 +163,12 @@ export default function Nodes(properties) {
 
       <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
         <Title order={4} ta="left" mt="sm">
-          {t("Nodes:title2", value)}
+          {t("nodes:title2", { value })}
         </Title>
         <TextInput
           type="string"
           placeholder={nodeURL}
-          label={t("urlLabel", value)}
+          label={t("nodes:urlLabel", { value })}
           style={{ maxWidth: '350px', marginTop: '20px' }}
           onChange={(event) => setNodeURL(event.currentTarget.value)}
         />
@@ -179,7 +179,7 @@ export default function Nodes(properties) {
             replaceNodes(value, referenceNodes.push(nodeURL));
           }}
         >
-          {t("Nodes:btn")}
+          {t("nodes:btn")}
         </Button>
       </Card>
     </>

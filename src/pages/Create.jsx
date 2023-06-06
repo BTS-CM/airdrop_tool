@@ -1,8 +1,7 @@
 /* eslint-disable max-len */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDisclosure } from '@mantine/hooks';
-import { TransactionBuilder } from 'bitsharesjs';
-import { Apis } from "bitsharesjs-ws";
+
 import { useTranslation } from 'react-i18next';
 import {
   Title,
@@ -23,7 +22,17 @@ import {
 import { Link, useParams } from "react-router-dom";
 
 import { leaderboardStore, appStore } from '../lib/states';
-import DeepLink from '../lib/DeepLink';
+import { generateDeepLink } from '../lib/generate';
+
+/**
+ * Convert human readable quantity into the token's blockchain representation
+ * @param {Float} satoshis
+ * @param {Number} precision
+ * @returns {Number}
+ */
+function blockchainFloat(satoshis, precision) {
+  return satoshis * 10 ** precision;
+}
 
 export default function Create(properties) {
   const { t, i18n } = useTranslation();
@@ -32,9 +41,10 @@ export default function Create(properties) {
     (params && params.env) ?? 'bitshares'
   );
   const [ticketType, setTicketType] = useState("lock_180_days");
-  const [beetType, setBeetType] = useState();
   const [deepLink, setDeepLink] = useState();
   const [accountID, onAccountID] = useState((params && params.id) ?? "1.2.x");
+
+  const [deepLinkItr, setDeepLinkItr] = useState(0);
 
   const [tokenQuantity, onTokenQuantity] = useState(1);
   const [opened, { open, close }] = useDisclosure(false);
@@ -87,93 +97,40 @@ export default function Create(properties) {
     tokenLockValue = tokenQuantity * 8;
   }
 
-  async function generateDeepLink() {
-    const beetLink = new DeepLink(
-      'Airdrop tool creating ticket',
-      relevantChain,
-      'airdrop_tool',
-      'localhost',
-      '',
-    );
-
-    const TXBuilder = await beetLink.inject(
-      TransactionBuilder,
-      { sign: true, broadcast: true },
-      false,
-    );
-
-    try {
-      await Apis.instance(
-        currentNodes[0],
-        true,
-        10000,
-        { enableCrypto: false, enableOrders: true },
-        (error) => console.log(error),
-      ).init_promise;
-    } catch (error) {
-      console.log(`api instance: ${error}`);
-      return;
-    }
-
-    const tr = new TXBuilder();
-    tr.add_type_operation(
-      'ticket_create',
-      {
+  useEffect(() => {
+    async function fetchData() {
+      const opContents = {
         account: accountID,
         target_type: targetType,
         amount: {
-          amount: tokenQuantity * 100000,
+          amount: blockchainFloat(tokenQuantity, 5),
           asset_id: "1.3.0",
         },
-        extensions: [],
-      },
-    );
+        extensions: []
+      };
 
-    try {
-      await tr.update_head_block();
-    } catch (error) {
-      console.error(error);
-      return;
+      let payload;
+      try {
+        payload = await generateDeepLink(
+          relevantChain,
+          currentNodes[0],
+          'ticket_create',
+          opContents
+        );
+      } catch (error) {
+        console.log(error);
+        return;
+      }
+
+      if (payload && payload.length) {
+        setDeepLink(`rawbeet://api?chain=${relevantChain}&request=${payload}`);
+      }
     }
 
-    try {
-      await tr.set_required_fees();
-    } catch (error) {
-      console.error(error);
-      return;
+    if (deepLinkItr && deepLinkItr > 0) {
+      fetchData();
     }
-
-    try {
-      tr.set_expire_seconds(7200);
-    } catch (error) {
-      console.error(error);
-      return;
-    }
-
-    try {
-      tr.add_signer("inject_wif");
-    } catch (error) {
-      console.error(error);
-      return;
-    }
-
-    try {
-      tr.finalize();
-    } catch (error) {
-      console.error(error);
-      return;
-    }
-
-    let encryptedPayload;
-    try {
-      encryptedPayload = await tr.encrypt();
-    } catch (error) {
-      console.error(error);
-      return;
-    }
-
-    setDeepLink(`rawbeet://api?chain=${relevantChain}&request=${encryptedPayload}`);
-  }
+  }, [deepLinkItr]);
 
   return (
     <>
@@ -241,7 +198,6 @@ export default function Create(properties) {
         <Modal
           opened={opened}
           onClose={() => {
-            setBeetType();
             setDeepLink();
             close();
           }}
@@ -270,7 +226,10 @@ export default function Create(properties) {
                   {
                     accountID !== "1.2.x" && accountID.length > 4
                       ? (
-                        <Button m="xs" onClick={async () => await generateDeepLink()}>
+                        <Button
+                          m="xs"
+                          onClick={() => setDeepLinkItr(deepLinkItr + 1)}
+                        >
                           {t("create:modal.noDL.btn")}
                         </Button>
                       )
