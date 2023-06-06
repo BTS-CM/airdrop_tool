@@ -45,19 +45,15 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: 16.17.0
-    
-    # Temporarily disabling to generate newest release
-    #- name: Instruct yarn to use cache
-    #  run: yarn --prefer-offline
 
     - name: Clean yarn cache
       run: yarn cache clean
 
     - name: Install
-      run: yarn install --force --network-timeout 100000
+      run: yarn install --force --network-timeout 100000 --bail=false
     
     - name: package
-      run: yarn run electron:package:${{ matrix.os }}
+      run: yarn run electron:package:${{ matrix.os }} --bail=false
 
     - name: Upload .${{ matrix.release_format }} file
       uses: actions/upload-artifact@v3
