@@ -54,7 +54,7 @@ jobs:
       run: yarn cache clean
 
     - name: Install
-      run: yarn install --force
+      run: yarn install --force --network-timeout 100000
     
     - name: package
       run: yarn run electron:package:${{ matrix.os }}
