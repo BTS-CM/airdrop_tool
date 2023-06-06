@@ -1,0 +1,12 @@
+{
+    "none": "Biglietto non trovato",
+    "id": "ID biglietto",
+    "owner": "Proprietario del biglietto",
+    "currentType": "Tipo di biglietto attuale",
+    "targetType": "Tipo di biglietto di destinazione",
+    "storedTickets": "{{assetName}} memorizzato nel biglietto",
+    "ticketValue": "{{assetName}} valore del biglietto",
+    "currentStatus": "Stato attuale del biglietto",
+    "nextUpgrade": "Prossimo orario di aggiornamento automatico",
+    "nextDowngrade": "Orario del prossimo downgrade automatico"
+}

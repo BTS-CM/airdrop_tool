@@ -1,0 +1,19 @@
+{
+    "airdrop": "Airdrop",
+    "accounts": "contas",
+    "from": "de",
+    "to": "para",
+    "distro": "sendo distribuído",
+    "method": "Por upload de arquivo local",
+    "preStep1": "1. Inicie a carteira BEET e navegue até 'Local' no menu.",
+    "preStep2": "2. Nesta página, permita tudo ou apenas a operação 0 'Transferir'.",
+    "preStep3": "3. Na página de upload local, clique no botão abaixo para continuar.",
+    "generate": "Gerar arquivo JSON airdrop",
+    "confirmation": "Airdrop JSON gerado",
+    "download1": "1. Seu airdrop JSON foi gerado, clique no botão para baixá-lo.",
+    "download2": "2. Na página BEET Local, carregue o arquivo JSON, um prompt deve aparecer.",
+    "download3": "3. Verifique o conteúdo do prompt antes de aprovar o airdrop.",
+    "downloadButton": "Baixar airdrop JSON",
+    "viewJSON": "JSON da operação airdrop proposta",
+    "begin": "Iniciar lançamento aéreo"
+  }

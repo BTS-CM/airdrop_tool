@@ -1,0 +1,14 @@
+{
+    "symbol": "Symbol",
+    "issuer": "Udsteder",
+    "precision": "Præcision",
+    "maxSupply": "Max udbud",
+    "dynamicData": "Dynamisk data-id",
+    "qty": "Mængde af billetholdere, der holder dette",
+    "total": "Samlet beløb, som billetindehavere besidder",
+    "th1": "Konto-id",
+    "th2": "Balance",
+    "title": "Aktivdetaljer",
+    "chain": "Blockchain",
+    "id": "ID"
+  }

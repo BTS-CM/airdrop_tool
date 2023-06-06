@@ -1,0 +1,11 @@
+{
+    "title": "Plokiahela sõlme konfiguratsioon",
+    "radio": {
+      "label": "Valige sihtplokiahel",
+      "desc": "Ainult grafeenipõhised plokiahelad"
+    },
+    "th1": "Praegune {{value}} plokiahela sõlmede järjestus",
+    "title2": "Huvitatud enda oma kasutamisest {{value}} plokiahela sõlm?",
+    "urlLabel": "Sisestage URL {{value}} plokiahel",
+    "btn": "Esita"
+  }

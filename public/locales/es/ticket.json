@@ -1,0 +1,12 @@
+{
+    "none": "Boleto no encontrado",
+    "id": "Identificación de entradas",
+    "owner": "dueño del boleto",
+    "currentType": "Tipo de billete actual",
+    "targetType": "Tipo de entrada de destino",
+    "storedTickets": "{{assetName}} almacenado en el boleto",
+    "ticketValue": "{{assetName}} valor del boleto",
+    "currentStatus": "Estado actual del boleto",
+    "nextUpgrade": "Próxima hora de actualización automática",
+    "nextDowngrade": "Próxima hora de degradación automática"
+  }

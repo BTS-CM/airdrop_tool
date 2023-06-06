@@ -1,0 +1,81 @@
+{
+    "calcs": {
+      "forward": {
+        "name": "Jupid edasi",
+        "desc": "Jagage räsi piletinumbriteks."
+      },
+      "reverse": {
+        "name": "Tagurpidi tükid",
+        "desc": "Pöördräsi jagatakse seejärel piletinumbriteks."
+      },
+      "pi": {
+        "name": "PI",
+        "desc": "Jagage räsi, tehke matemaatikat ja seejärel korrutage piletinumbrite saamiseks PI-ga."
+      },
+      "reverse_pi": {
+        "name": "Vastupidine PI",
+        "desc": "Räsi jagamine, räsitükkide ümberpööramine, matemaatika tegemine, PI-ga korrutamine, piletite väljastamine."
+      },
+      "cubed": {
+        "name": "Kuubikud",
+        "desc": "Jagage räsi 3-kohalisteks tükkideks, lõigake iga tükk kuubikuks, väljastage piletid."
+      },
+      "bouncing_ball": {
+        "name": "Põrkav pall",
+        "desc": "maatriksis põrgatava palli tee -> vali piletid mööda teed"
+      },
+      "alien_blood": {
+        "name": "Võõras veri",
+        "desc": "korjab tulnukate verepritsmed; "
+      },
+      "avg_point_lines": {
+        "name": "Keskmised punktijooned",
+        "desc": "Arvutage keskmised x/y/z koordinaadid -> tõmmake igast vektorist jooned => premeerige real olevaid"
+      },
+      "freebie": {
+        "name": "Tasuta",
+        "desc": "Igale piletikontole saab 1 võidupileti"
+      }
+    },
+    "calculatingTitle": "Õhutilkade arvutuste tegemine, palun oodake!",
+    "completed": {
+      "title": "Õhutilkade arvutused on edukalt lõpule viidud!",
+      "anotherBtn": "Kas arvutada veel üks õhulangus?",
+      "airdropBtn": "Kuva loodud õhutilk",
+      "generatedBtn": "Vaadake kõiki loodud õhutilku"
+    },
+    "title": "Millise plokiahela jaoks arvutage välja tõestatavalt õiglane õhutilkade jaotus?",
+    "radioLabel": "Valige sihtplokiahel",
+    "radioDesc": "Ainult grafeenipõhised plokiahelad",
+    "hash": {
+      "title": "Millist blockhashit soovite kasutada esialgse tõestatavalt juhusliku sisendi jaoks?",
+      "radioLabel": "Valige esialgne räsitüüp",
+      "radioDesc": "Originaal või turvaliselt räsitud?",
+      "plain": "Tavaline tunnistaja allkirja string",
+      "witSig": "tunnistaja allkirja räsi"
+    },
+    "ticket": {
+      "title": "Võidupiletite valikud",
+      "radioLabel": "Kas võitnud piletid tuleks eemaldada?",
+      "radioDesc": "St. ",
+      "yes": "Jah",
+      "no": "Ei",
+      "winLabel": "Kas alati tuleks valida võidupiletid?",
+      "winDesc": "Nt. "
+    },
+    "blockNum": {
+      "title": "Sisestage ploki number, mida soovite lennuväljal kasutada",
+      "label": "Blokeeri number"
+    },
+    "fetchTickets": "Peate hankima selle plokiahela piletiandmed.",
+    "distro": {
+      "title": "Valige oma eelistatud meetodid tõestatavalt õiglaste õhutilkade jaotuste genereerimiseks",
+      "th1": "Tüüp",
+      "th2": "Kirjeldus"
+    },
+    "proceed": {
+      "title": "Jätkake õhutilga arvutamisega",
+      "desc": "Teie arvutatud õhulanguse vektor tehakse pärast lõpetamist kättesaadavaks õhulanguse lehel.",
+      "btn": "Tehke õhutilga arvutus"
+    }
+  }

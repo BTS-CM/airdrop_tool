@@ -1,0 +1,65 @@
+{
+    "header": {
+      "title": "Execute o lançamento aéreo no {{titleName}} blockchain",
+      "back": "Resumo do lançamento aéreo",
+      "others": "airdrops calculados"
+    },
+    "noTicket": "Bilhete não encontrado",
+    "grid": {
+      "left": {
+        "loading": "Carregando dados de ativos",
+        "processing": "Processando saldos do usuário para o token necessário",
+        "table": {
+          "title": "Titulares de ingressos incluídos no airdrop",
+          "th1": "eu ia",
+          "th2": "Quantidade",
+          "th3": "Tokens alocados"
+        }
+      },
+      "right": {
+        "summary": {
+          "title": "Resumo do lançamento aéreo",
+          "id": "EU IA",
+          "hash": "Cerquilha",
+          "dedupe": "Desduplicado",
+          "onlyWins": "Apenas bilhetes premiados",
+          "blockno": "Número do bloco",
+          "algos": "Algoritmos",
+          "winners": "vencedores",
+          "ticketWinQty": "Quantidade de bilhetes premiados"
+        },
+        "options": {
+          "title": "Opções de lançamento aéreo",
+          "titleName": "Insira o seu {{titleName}} ID da conta",
+          "assetName": "Digite o nome do ativo que você deseja lançar no ar",
+          "batchSize": "Tamanho dos lotes de transferência de airdrop",
+          "tokenQuantity": "Insira a quantidade de tokens que você deseja lançar no ar",
+          "distroRadio": {
+            "title": "Como os tokens devem ser alocados aos vencedores?",
+            "equally": "Igualmente entre IDs de contas vencedoras",
+            "proportionally": "Proporcional aos bilhetes ganhos",
+            "roundRobin": "Alocar tokens inteiros de maneira round robin"
+          },
+          "reqRadio": {
+            "title": "Introduzir um requisito de token adicional?",
+            "yes": "Sim",
+            "no": "Não",
+            "requiredToken": "Forneça o símbolo do token necessário",
+            "requiredTokenQty": "Forneça a quantidade de tokens necessários"
+          }
+        },
+        "invalid": {
+          "title": "Nada para airdrop",
+          "reason": "Dado que não há bilhetes válidos, não há nada para lançar no ar.",
+          "resolution": "Ajuste as configurações de airdrop ou calcule outro airdrop para prosseguir."
+        },
+        "valid": {
+          "title": "Continuar com o lançamento aéreo?",
+          "note": "Tenha em mente os limites de tamanho de transação e bloco ao planejar lotes de airdrops.",
+          "single": "Com um limite de lote de {{batchSize}}, 1 lote é necessário para concluir este airdrop.",
+          "multi": "Com um limite de lote de {{batchSize}}, {{qtyBatches}} lotes são necessários para concluir este airdrop.",
+          "reminder": "Tenha em mente os limites de tamanho de transação e bloco ao planejar lotes de airdrops."
+        }
+      }
+    }
+  }

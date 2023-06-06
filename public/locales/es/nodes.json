@@ -1,0 +1,11 @@
+{
+    "title": "Configuración de nodos de cadena de bloques",
+    "radio": {
+      "label": "Seleccione la cadena de bloques de destino",
+      "desc": "Solo cadenas de bloques basadas en grafeno"
+    },
+    "th1": "Actual {{value}} orden de los nodos de la cadena de bloques",
+    "title2": "Interesado en usar su propia {{value}} nodo de cadena de bloques?",
+    "urlLabel": "Introduzca una URL para el {{value}} cadena de bloques",
+    "btn": "Entregar"
+  }

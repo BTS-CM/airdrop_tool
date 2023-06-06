@@ -1,0 +1,51 @@
+{
+    "how_airdrop": {
+      "control": "Hvordan udfører jeg en airdrop?",
+      "panel": "Hent blockchain-billetterne, beregn et airdrop mod et bloknummer, bekræft indholdet af airdrop på analysesiden, og begynd derefter airdrop via airdrop-udførelsessiden. "
+    },
+    "why_beet": {
+      "control": "Hvorfor bruger dette værktøj BEET multiwallet?",
+      "panel": "Bitshares BEET multiwallet er en multi-blockchain tegnebog, der understøtter Bitshares, Bitshares testnet og TUSC, perfekt til denne app. "
+    },
+    "how_tickets": {
+      "control": "Hvordan opretter jeg en billet?",
+      "panel": "Du kan enten oprette en billet via 'opret billet'-siden eller inden for hver blockchains reference wallet-stemmeside. "
+    },
+    "why_ticket": {
+      "control": "Hvorfor skal jeg oprette en billet?",
+      "panel": "Der er flere grunde til at oprette blockchain-billetter, såsom at få stemmeret over vidner, udvalgs- og arbejderforslagsresultater, samt at blive et mål for potentielle fremtidige flydrop!"
+    },
+    "how_undo_ticket": {
+      "control": "Hvordan får jeg mine tokens ud af en billet?",
+      "panel": "Hvis din billet har kortere varighed end evigt, så kan du udløse en billetudtrækning via referencepungen. "
+    },
+    "how_report_issue": {
+      "control": "Hvordan kan jeg rapportere et problem med dette værktøj?",
+      "panel": "Rapportér venligst problemer til github-repoen."
+    },
+    "fees": {
+      "control": "Hvad er blockchain-gebyrerne forbundet med airdrops?",
+      "panel": "Airdrop-gebyromkostninger vil stige, hvis der er mange airdrop-modtagere. "
+    },
+    "ltm": {
+      "control": "Hvordan kan jeg reducere gebyrerne forbundet med at udføre en airdrop?",
+      "panel": "Du kan købe et livstidsmedlemskab (LTM) for ca. $100 i referencewebappen, dette vil effektivt reducere gebyrerne med 80 %"
+    },
+    "license": {
+      "control": "Er dette værktøj open source? ",
+      "panel": "Dette værktøj er fuldt open source, tilgængeligt på Github og er MIT-licenseret. "
+    },
+    "missing_tickets": {
+      "control": "Jeg kan ikke finde min nye billet",
+      "panel": "Dette værktøj opdaterer ikke automatisk hentede billetter; "
+    },
+    "new_algos": {
+      "control": "Jeg har en idé til en airdrop-beregningsalgoritme, kan den inkluderes?",
+      "panel": "Da dette værktøj er fuldt åben kildekode, skal du oprette et problem med ideen og potentielt oprette en pull-anmodning for at få den nye algoritme inkluderet. "
+    },
+    "alternative_wallet": {
+      "control": "Kan jeg bruge en anden tegnebog end BEET multiwallet?",
+      "panel": "Dette værktøj fungerer i øjeblikket kun med BEET multiwallet til at udføre airdrops. "
+    },
+    "title": "Ofte stillede spørgsmål"
+  }

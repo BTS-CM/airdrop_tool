@@ -1,0 +1,12 @@
+{
+    "none": "Billet blev ikke fundet",
+    "id": "Billet-id",
+    "owner": "Billet ejer",
+    "currentType": "Nuværende billettype",
+    "targetType": "Mål billettype",
+    "storedTickets": "{{assetName}} gemt i billetten",
+    "ticketValue": "{{assetName}} billet værdi",
+    "currentStatus": "Aktuel billetstatus",
+    "nextUpgrade": "Næste automatiske opdateringstidspunkt",
+    "nextDowngrade": "Næste automatisk nedgraderingstid"
+  }

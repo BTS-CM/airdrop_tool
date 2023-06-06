@@ -1,0 +1,16 @@
+{
+    "menu": {
+      "btn": "Speisekarte",
+      "label": "Hauptmenü",
+      "home": "Heim",
+      "language": "Sprache",
+      "createTicket": "Ticket erstellen",
+      "fetchTickets": "Karten holen",
+      "calculateAirdrop": "Airdrop berechnen",
+      "calculatedAirdrops": "Berechnete Lufttropfen",
+      "analyzeTickets": "Tickets analysieren",
+      "ticketLeaderboard": "Ticket-Bestenliste",
+      "faq": "FAQ",
+      "changeNodes": "Knoten ändern"
+    }
+  }

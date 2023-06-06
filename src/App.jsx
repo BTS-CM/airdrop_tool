@@ -15,6 +15,8 @@ import {
   Col,
   Button,
   Image,
+  Select,
+  ScrollArea,
 } from '@mantine/core';
 import { useTranslation } from 'react-i18next';
 
@@ -46,6 +48,8 @@ import Account from "./pages/Account";
 import FAQ from "./pages/Faq";
 import Asset from "./pages/Asset";
 
+import { localePreferenceStore } from "./lib/states";
+
 function openGallery() {
   window.electron.openURL('gallery');
 }
@@ -61,16 +65,59 @@ function openBeet() {
 function App() {
   const { t, i18n } = useTranslation();
   const location = useLocation();
+
+  const changeLocale = localePreferenceStore((state) => state.changeLocale);
+  const locale = localePreferenceStore((state) => state.locale);
+
+  /**
+   * Set the i18n locale
+   * @param {String} newLocale
+   */
+  function setLanguage(newLocale) {
+    try {
+      i18n.changeLanguage(newLocale);
+    } catch (error) {
+      console.log(error);
+      return;
+    }
+
+    try {
+      changeLocale(newLocale);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const languages = [
+    { value: 'en', label: 'English' },
+    { value: 'da', label: 'Dansk' },
+    { value: 'de', label: 'Deutsche' },
+    { value: 'et', label: 'Eesti' },
+    { value: 'es', label: 'Español' },
+    { value: 'fr', label: 'Français' },
+    { value: 'it', label: 'Italiano' },
+    { value: 'ja', label: '日本語' },
+    { value: 'ko', label: '한국어' },
+    { value: 'pt', label: 'Português' },
+    { value: 'th', label: 'ไทย' },
+  ];
+
+  const localeItems = languages.map((lang) => {
+    return <Menu.Item key={`lang_${lang.value}`} onClick={() => setLanguage(lang.value)}>
+            { lang.label }
+          </Menu.Item>
+  });
+
   return (
     <div className="App">
       <header className="App-header">
         <Container>
           <Grid key="about" grow>
             <Col mt="xl" ta="left" span={1}>
-              <Menu shadow="md" width={200}>
+              <Menu shadow="md" width={200} position="right-start">
                 <Menu.Target>
                   <Button>
-                    📃 {t("app:menu.btn")}
+                    {t("app:menu.btn")}
                   </Button>
                 </Menu.Target>
 
@@ -127,8 +174,21 @@ function App() {
                   </Link>
                 </Menu.Dropdown>
               </Menu>
+              <br/>
+              <Menu shadow="md" mt="sm" width={200} position="right-start">
+                <Menu.Target>
+                  <Button compact>
+                    { languages.find(x => x.value === locale).label }
+                  </Button>
+                </Menu.Target>
+                <Menu.Dropdown>
+                  <ScrollArea h={200}>
+                    { localeItems }
+                  </ScrollArea>
+                </Menu.Dropdown>
+              </Menu>
             </Col>
-            <Col ta="Center" span={10}>
+            <Col ta="Center" span={9}>
               <div style={{ width: 350, marginLeft: 'auto', marginRight: 'auto' }}>
                 <Image
                   style={{ width: 350 }}

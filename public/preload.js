@@ -13,8 +13,7 @@ window.electron = {
   openURL: async (target) => _openURL(target),
   fetchLocales: () => {
     const translations = {};
-    //const languages = ['en', 'da', 'de', 'et', 'es', 'fr', 'it', 'ja', 'ko', 'pt', 'th'];
-    const languages = ['en'];
+    const languages = ['en', 'da', 'de', 'et', 'es', 'fr', 'it', 'ja', 'ko', 'pt', 'th'];
     const pages = [
       'account',
       'airdropCard',
@@ -28,7 +27,6 @@ window.electron = {
       'fetch',
       'home',
       'leaderboard',
-      'links',
       'nodes',
       'performAirdrop',
       'plannedAirdrop',

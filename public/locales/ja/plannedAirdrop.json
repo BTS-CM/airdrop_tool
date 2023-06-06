@@ -1,0 +1,25 @@
+{
+    "one": "当たり券が1枚あります ",
+    "many": "もっている {{qty}} 当選チケット ",
+    "jsonLabel": "{{id}}の当選チケットJSON",
+    "header": {
+      "title": "計画された {{chainName}} エアドロップの内容",
+      "continue": "エアドロップを実行する",
+      "back": "戻る"
+    },
+    "missingData": "チケットが見つかりません",
+    "details": {
+      "id": "ID",
+      "hash": "ハッシュ",
+      "dedupe": "重複排除済み",
+      "onlyWins": "当選チケットのみ",
+      "blockNum": "ブロック番号",
+      "algos": "アルゴリズム"
+    },
+    "basis": {
+      "witSig": "証人の署名",
+      "filtSig": "フィルタリングされた署名"
+    },
+    "winners": "勝者",
+    "json": "生の JSON データ"
+  }

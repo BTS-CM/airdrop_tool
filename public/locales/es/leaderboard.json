@@ -1,0 +1,17 @@
+{
+    "title": "Tablas de clasificación de boletos de blockchain",
+    "radio": {
+      "label": "Seleccione la cadena de bloques de destino",
+      "desc": "Solo cadenas de bloques basadas en grafeno"
+    },
+    "json": "Clasificación JSON",
+    "table": {
+      "none": "Debe obtener los datos del ticket para esta cadena de bloques.",
+      "th1": "ID de usuario",
+      "th2": "Cantidad impulsada",
+      "th3": "Entradas",
+      "th4": "Por ciento",
+      "th5": "Boleto",
+      "th6": "Boleto"
+    }
+  }

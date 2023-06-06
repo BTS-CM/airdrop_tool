@@ -1,0 +1,48 @@
+{
+    "title": "Créer un billet",
+    "radioA": {
+      "label": "Sélectionnez la blockchain cible",
+      "desc": "Blockchains à base de graphène uniquement"
+    },
+    "radioB": {
+      "label": "Sélectionnez le type de billet souhaité",
+      "desc": "Des durées de verrouillage plus longues accordent un plus grand poids de vote.",
+      "sm": "Verrouiller pendant 180 jours (augmentation de 200 %)",
+      "md": "Verrouillage pendant 360 jours (augmentation de 400 %)",
+      "lg": "Verrouillage pendant 720 jours (boost de 800 %)",
+      "xl": "Verrouiller pour toujours (boost de 800 %)"
+    },
+    "qty": "Entrez la quantité que vous souhaitez verrouiller",
+    "text": {
+      "lock": "En verrouillant",
+      "equivalent": "votre billet équivaudra à",
+      "area": "en termes de surface de vote et de largage."
+    },
+    "modal": {
+      "title": "Création d'un billet",
+      "noDL": {
+        "title": "Via le lien profond de la betterave crue",
+        "step1": "Lancez le portefeuille BEET et accédez à \"Raw Link\" dans le menu.",
+        "step2": "À partir de cette page, vous pouvez soit autoriser toutes les opérations, soit autoriser uniquement l'opération 57 \"Créer un ticket\" (puis cliquez sur Enregistrer).",
+        "step3": "Une fois que \"Ready for raw links\" s'affiche dans Beet, soumettez cette demande.",
+        "label": "Entrez votre identifiant de compte",
+        "btn": "Générer un lien profond brut"
+      },
+      "DL": {
+        "title": "Lien profond brut généré",
+        "step1": "Votre lien profond BEET a été généré, cliquez sur le bouton pour continuer.",
+        "step2": "Une invite BEET s'affichera, vérifiez le contenu, puis approuvez l'invite de création de ticket.",
+        "step3": "Rendez-vous sur la page « Récupérer les tickets » pour télécharger votre ticket pour analyse.",
+        "beetBTN": "Diffusé sur BEET",
+        "back": "Dos"
+      }
+    },
+    "askBEET": "Demander à BEET de créer un ticket",
+    "leaderChange": {
+      "title": "À la suite de la création de ce ticket, les statistiques des 10 meilleurs classements peuvent changer en tant que telles",
+      "th1": "IDENTIFIANT",
+      "th2": "Montant",
+      "th3": "Avant",
+      "th4": "Après"
+    }
+  }

@@ -1,0 +1,17 @@
+{
+    "title": "Tabelas de classificação de tickets Blockchain",
+    "radio": {
+      "label": "Selecione o blockchain de destino",
+      "desc": "Apenas blockchains baseados em grafeno"
+    },
+    "json": "Classificação JSON",
+    "table": {
+      "none": "Você deve buscar os dados do ticket para este blockchain.",
+      "th1": "ID do usuário",
+      "th2": "Valor Aumentado",
+      "th3": "Ingressos",
+      "th4": "Por cento",
+      "th5": "Bilhete",
+      "th6": "Bilhete"
+    }
+  }

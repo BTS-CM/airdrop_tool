@@ -1,0 +1,25 @@
+{
+    "one": "1개의 당첨 티켓이 있습니다 ",
+    "many": "가지다 {{qty}} 당첨 티켓 ",
+    "jsonLabel": "{{id}}의 당첨 티켓 JSON",
+    "header": {
+      "title": "예정 {{chainName}} 에어드롭 내용",
+      "continue": "에어드롭 수행",
+      "back": "뒤쪽에"
+    },
+    "missingData": "티켓을 찾을 수 없음",
+    "details": {
+      "id": "ID",
+      "hash": "해시시",
+      "dedupe": "중복 제거됨",
+      "onlyWins": "당첨 티켓만",
+      "blockNum": "블록 번호",
+      "algos": "알고리즘"
+    },
+    "basis": {
+      "witSig": "증인 서명",
+      "filtSig": "필터링된 서명"
+    },
+    "winners": "수상자",
+    "json": "원시 JSON 데이터"
+  }

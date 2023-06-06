@@ -1,0 +1,16 @@
+{
+    "topCard": {
+      "title": "Hankige piletid plokiahelast",
+      "label": "Valige sihtplokiahel",
+      "desc": "Ainult grafeenipõhised plokiahelad",
+      "btn1": "Too piletid",
+      "btn2": "Tõmbamine"
+    },
+    "secondCard": {
+      "th1": "Plokiahel",
+      "th2": "Piletid",
+      "th3": "Koguse märgid lukus",
+      "th4": "JSON",
+      "th5": "Kustuta"
+    }
+  }

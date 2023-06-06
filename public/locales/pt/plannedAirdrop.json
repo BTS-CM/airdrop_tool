@@ -1,0 +1,25 @@
+{
+    "one": "tem 1 bilhete premiado ",
+    "many": "tem {{qty}} bilhetes premiados ",
+    "jsonLabel": "{{id}}bilhete premiado JSON",
+    "header": {
+      "title": "planejado {{chainName}} conteúdo do airdrop",
+      "continue": "Executar Airdrop",
+      "back": "Voltar"
+    },
+    "missingData": "Bilhete não encontrado",
+    "details": {
+      "id": "EU IA",
+      "hash": "Cerquilha",
+      "dedupe": "Desduplicado",
+      "onlyWins": "Apenas bilhetes premiados",
+      "blockNum": "Número do bloco",
+      "algos": "Algoritmos"
+    },
+    "basis": {
+      "witSig": "Assinatura da testemunha",
+      "filtSig": "Assinatura filtrada"
+    },
+    "winners": "vencedores",
+    "json": "Dados JSON brutos"
+  }

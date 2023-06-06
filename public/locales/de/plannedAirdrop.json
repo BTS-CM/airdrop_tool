@@ -1,0 +1,25 @@
+{
+    "one": "hat 1 Gewinnlos ",
+    "many": "hat {{qty}} gewinnende Tickets ",
+    "jsonLabel": "{{id}}'s Gewinnerticket JSON",
+    "header": {
+      "title": "geplant {{chainName}} Airdrop-Inhalte",
+      "continue": "Führen Sie einen Airdrop durch",
+      "back": "Zurück"
+    },
+    "missingData": "Ticket nicht gefunden",
+    "details": {
+      "id": "AUSWEIS",
+      "hash": "Hash",
+      "dedupe": "Dedupliziert",
+      "onlyWins": "Nur Gewinnlose",
+      "blockNum": "Blocknummer",
+      "algos": "Algorithmen"
+    },
+    "basis": {
+      "witSig": "Zeugen Unterschrift",
+      "filtSig": "Gefilterte Signatur"
+    },
+    "winners": "Gewinner",
+    "json": "Rohe JSON-Daten"
+  }

@@ -1,0 +1,11 @@
+{
+    "title": "Configuração do nó Blockchain",
+    "radio": {
+      "label": "Selecione o blockchain de destino",
+      "desc": "Apenas blockchains baseados em grafeno"
+    },
+    "th1": "Atual {{value}} ordem do nó blockchain",
+    "title2": "Interessado em usar o seu próprio {{value}} nó blockchain?",
+    "urlLabel": "Digite um URL para o {{value}} blockchain",
+    "btn": "Enviar"
+  }

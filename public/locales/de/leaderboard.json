@@ -1,0 +1,17 @@
+{
+    "title": "Blockchain-Ticket-Bestenlisten",
+    "radio": {
+      "label": "Wählen Sie die Zielblockchain aus",
+      "desc": "Nur Blockchains auf Graphenbasis"
+    },
+    "json": "Bestenliste JSON",
+    "table": {
+      "none": "Sie müssen die Ticketdaten für diese Blockchain abrufen.",
+      "th1": "Benutzer-ID",
+      "th2": "Erhöhter Betrag",
+      "th3": "Tickets",
+      "th4": "Prozent",
+      "th5": "Fahrkarte",
+      "th6": "Fahrkarte"
+    }
+  }

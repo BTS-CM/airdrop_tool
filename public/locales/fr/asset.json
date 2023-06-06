@@ -1,0 +1,14 @@
+{
+    "symbol": "Symbole",
+    "issuer": "Émetteur",
+    "precision": "Précision",
+    "maxSupply": "Approvisionnement maximum",
+    "dynamicData": "ID de données dynamiques",
+    "qty": "Nombre de détenteurs de billets détenant ce",
+    "total": "Montant total détenu par les détenteurs de billets",
+    "th1": "identifiant de compte",
+    "th2": "Équilibre",
+    "title": "Détails de l'actif",
+    "chain": "Chaîne de blocs",
+    "id": "IDENTIFIANT"
+  }

@@ -1,0 +1,14 @@
+{
+    "symbol": "Symbol",
+    "issuer": "Aussteller",
+    "precision": "Präzision",
+    "maxSupply": "Maximaler Vorrat",
+    "dynamicData": "Dynamische Daten-ID",
+    "qty": "Anzahl der Ticketinhaber, die dieses besitzen",
+    "total": "Gesamtbetrag der Ticketinhaber",
+    "th1": "Konto-ID",
+    "th2": "Gleichgewicht",
+    "title": "Asset-Details",
+    "chain": "Blockchain",
+    "id": "AUSWEIS"
+  }

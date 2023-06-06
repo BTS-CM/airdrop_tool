@@ -1,0 +1,51 @@
+{
+    "how_airdrop": {
+      "control": "Kuidas õhutilku sooritada?",
+      "panel": "Tõmmake plokiahela piletid, arvutage airdrop ploki numbri alusel, kontrollige analüüsilehel airdropi sisu ja alustage seejärel airdropi täitmislehe kaudu. "
+    },
+    "why_beet": {
+      "control": "Miks see tööriist kasutab BEET multirahakotti?",
+      "panel": "Bitshares BEET mitme rahakott on mitme plokiahelaga rahakott, mis toetab Bitsharesi, Bitsharesi testneti ja TUSC-i, mis sobib selle rakenduse jaoks suurepäraselt. "
+    },
+    "how_tickets": {
+      "control": "Kuidas piletit luua?",
+      "panel": "Pileti saate luua lehe \"loo pileti\" kaudu või iga plokiahela viiterahakoti hääletuslehel. "
+    },
+    "why_ticket": {
+      "control": "Miks ma peaksin pileti looma?",
+      "panel": "Plokiahela piletite loomiseks on mitu põhjust, näiteks hääleõiguse saamine tunnistajate üle, komisjonide ja töötajate ettepanekute tulemused, samuti potentsiaalsete tulevaste lendude sihtmärgiks saamine!"
+    },
+    "how_undo_ticket": {
+      "control": "Kuidas ma saan oma märgid piletist välja võtta?",
+      "panel": "Kui teie pileti kehtivusaeg on lühem kui igavesti, saate viiterahakoti kaudu pileti välja võtta. "
+    },
+    "how_report_issue": {
+      "control": "Kuidas saan selle tööriistaga seotud probleemist teatada?",
+      "panel": "Teatage probleemidest githubi repole."
+    },
+    "fees": {
+      "control": "Millised on airdropsiga seotud plokiahela tasud?",
+      "panel": "Kui lennupileti saajaid on palju, tõuseb lennupileti tasu. "
+    },
+    "ltm": {
+      "control": "Kuidas ma saan vähendada lendu langetamisega seotud tasusid?",
+      "panel": "Saate osta eluaegse liikmelisuse (LTM) ligikaudu 100 dollari eest võrdlusveebirakenduses, see vähendab tasusid 80%"
+    },
+    "license": {
+      "control": "Kas see tööriist on avatud lähtekoodiga? ",
+      "panel": "See tööriist on täielikult avatud lähtekoodiga, saadaval Githubis ja sellel on MIT-litsents. "
+    },
+    "missing_tickets": {
+      "control": "Ma ei leia oma uut piletit",
+      "panel": "See tööriist ei värskenda toodud pileteid automaatselt; "
+    },
+    "new_algos": {
+      "control": "Mul on idee õhutilga arvutusalgoritmi kohta, kas seda saab lisada?",
+      "panel": "Kuna see tööriist on täielikult avatud lähtekoodiga, looge ideega probleem ja potentsiaalselt looge tõmbetaotlus uue algoritmi kaasamiseks. "
+    },
+    "alternative_wallet": {
+      "control": "Kas ma saan kasutada teist rahakotti peale BEET multirahakoti?",
+      "panel": "See tööriist töötab praegu ainult koos BEET-i multirahakotiga, et sooritada õhku. "
+    },
+    "title": "Korduma kippuvad küsimused"
+  }

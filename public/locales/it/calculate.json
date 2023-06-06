@@ -1,0 +1,81 @@
+{
+    "calcs": {
+      "forward": {
+        "name": "Pezzi in avanti",
+        "desc": "Dividi l'hash in numeri di biglietto."
+      },
+      "reverse": {
+        "name": "Pezzi inversi",
+        "desc": "L'hash inverso viene quindi suddiviso in numeri di biglietto."
+      },
+      "pi": {
+        "name": "PI",
+        "desc": "Dividi l'hash, fai un po' di matematica e poi moltiplica per PI per i numeri dei biglietti."
+      },
+      "reverse_pi": {
+        "name": "PI inverso",
+        "desc": "Dividi hash, blocchi di hash inversi, fai matematica, moltiplica per PI, emetti ticket."
+      },
+      "cubed": {
+        "name": "A cubetti",
+        "desc": "Dividi l'hash in blocchi di 3 cifre, cubi ogni blocco, emetti i ticket."
+      },
+      "bouncing_ball": {
+        "name": "Palla che rimbalza",
+        "desc": "percorso della pallina che rimbalza nella matrice -> seleziona i biglietti lungo il percorso"
+      },
+      "alien_blood": {
+        "name": "Sangue alieno",
+        "desc": "Raccoglie macchie di schizzi di sangue alieno; "
+      },
+      "avg_point_lines": {
+        "name": "Linee di punti medi",
+        "desc": "Calcola le coordinate medie x/y/z -> disegna linee su questo da ciascun vettore => premia quelli in linea"
+      },
+      "freebie": {
+        "name": "Omaggio",
+        "desc": "Ogni conto titolare di biglietti ottiene 1 biglietto vincente"
+      }
+    },
+    "calculatingTitle": "Calcolo dell'airdrop in corso, attendere!",
+    "completed": {
+      "title": "Calcoli Airdrop completati con successo!",
+      "anotherBtn": "Calcolare un altro lancio aereo?",
+      "airdropBtn": "Visualizza l'airdrop generato",
+      "generatedBtn": "Visualizza tutti i lanci generati"
+    },
+    "title": "Calcolare una distribuzione airdrop dimostrabilmente equa per quale blockchain?",
+    "radioLabel": "Seleziona la blockchain di destinazione",
+    "radioDesc": "Solo blockchain basate su grafene",
+    "hash": {
+      "title": "Che tipo di blockhash vuoi usare per l'input iniziale dimostrabilmente casuale?",
+      "radioLabel": "Seleziona un tipo di hash iniziale",
+      "radioDesc": "Originale o hash sicuro?",
+      "plain": "Semplice stringa della firma del testimone",
+      "witSig": "hash della firma del testimone"
+    },
+    "ticket": {
+      "title": "Opzioni di biglietti vincenti",
+      "radioLabel": "I biglietti vincenti devono essere deduplicati?",
+      "radioDesc": "Cioè. ",
+      "yes": "SÌ",
+      "no": "NO",
+      "winLabel": "I biglietti vincenti devono essere sempre scelti?",
+      "winDesc": "Per esempio. "
+    },
+    "blockNum": {
+      "title": "Inserisci il numero di blocco che desideri utilizzare per scopi di airdrop",
+      "label": "Numero di blocco"
+    },
+    "fetchTickets": "Devi recuperare i dati del ticket per questa blockchain.",
+    "distro": {
+      "title": "Seleziona i tuoi metodi preferiti per generare distribuzioni di airdrop dimostrabilmente eque",
+      "th1": "Tipo",
+      "th2": "Descrizione"
+    },
+    "proceed": {
+      "title": "Procedi con il calcolo del lancio aereo",
+      "desc": "Il tuo vettore airdrop calcolato sarà reso disponibile nella pagina airdrop una volta completato.",
+      "btn": "Eseguire il calcolo del lancio aereo"
+    }
+  }

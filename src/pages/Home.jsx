@@ -175,7 +175,7 @@ export default function Home(properties) {
       </SimpleGrid>
 
       <Text c="dimmed" ta="center" mt="md">
-        To make full use of the feature set available in this tool, the Bitshares BEET multiwallet is required.
+        {t("home:footer")}
       </Text>
     </>
   );

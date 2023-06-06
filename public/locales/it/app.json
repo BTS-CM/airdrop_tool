@@ -1,0 +1,16 @@
+{
+    "menu": {
+      "btn": "Menù",
+      "label": "Menu principale",
+      "home": "Casa",
+      "language": "Lingua",
+      "createTicket": "Crea biglietto",
+      "fetchTickets": "Recupera i biglietti",
+      "calculateAirdrop": "Calcola lancio aereo",
+      "calculatedAirdrops": "Lanci aerei calcolati",
+      "analyzeTickets": "Analizza i biglietti",
+      "ticketLeaderboard": "Classifica dei biglietti",
+      "faq": "FAQ",
+      "changeNodes": "Cambia nodi"
+    }
+  }

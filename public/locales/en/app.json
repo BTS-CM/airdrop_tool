@@ -3,6 +3,7 @@
         "btn": "Menu",
         "label": "Main menu",
         "home": "Home",
+        "language": "Language",
         "createTicket": "Create ticket",
         "fetchTickets": "Fetch tickets",
         "calculateAirdrop": "Calculate airdrop",

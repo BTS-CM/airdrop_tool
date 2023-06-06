@@ -1,0 +1,43 @@
+{
+    "title": "¡Bienvenido a la herramienta Bitshares Beet Airdrop!",
+    "desc": "¡Las siguientes funciones están disponibles para las cadenas de bloques de Bitshares!",
+    "footer": "Para hacer un uso completo del conjunto de funciones disponible en esta herramienta, se requiere la billetera múltiple Bitshares BEET.",
+    "grid": {
+      "ticketRetrieval": {
+        "title": "Recuperación de boletos",
+        "desc": "Obtener boletos de votación de blockchain"
+      },
+      "ticketAnalysis": {
+        "title": "Análisis de datos de boletos",
+        "desc": "Analizar el contenido de las papeletas de votación"
+      },
+      "ticketLeaderboard": {
+        "title": "Tablas de clasificación de boletos",
+        "desc": "Ordena los boletos de votación en tablas de clasificación"
+      },
+      "airdropCalc": {
+        "title": "Cálculo de lanzamiento aéreo",
+        "desc": "Cree vectores de lanzamiento aéreo con entradas basadas en blockchain probablemente aleatorias"
+      },
+      "airdropAnalysis": {
+        "title": "Análisis de lanzamiento aéreo calculado",
+        "desc": "Verifique el contenido de los lanzamientos desde el aire calculados antes de la ejecución en la cadena de bloques"
+      },
+      "airdropExecute": {
+        "title": "Ejecución de lanzamiento aéreo",
+        "desc": "Realice lanzamientos aéreos de tokens en la cadena de bloques"
+      },
+      "createTicket": {
+        "title": "Creación de boletos",
+        "desc": "Bloquee tokens para votar y obtener airdrops"
+      },
+      "faq": {
+        "title": "Preguntas frecuentes",
+        "desc": "Obtenga más información sobre lanzamientos aéreos, boletos y cadenas de bloques"
+      },
+      "nodes": {
+        "title": "Nodos configurables",
+        "desc": "Cambiar entre nodos de blockchain"
+      }
+    }
+  }

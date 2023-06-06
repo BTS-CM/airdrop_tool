@@ -1,0 +1,48 @@
+{
+    "title": "Crear un boleto",
+    "radioA": {
+      "label": "Seleccione la cadena de bloques de destino",
+      "desc": "Solo cadenas de bloques basadas en grafeno"
+    },
+    "radioB": {
+      "label": "Seleccione el tipo de entrada que desee",
+      "desc": "Las duraciones de bloqueo más largas otorgan un mayor peso de votación.",
+      "sm": "Bloqueo por 180 días (aumento del 200 %)",
+      "md": "Bloqueo por 360 días (aumento del 400 %)",
+      "lg": "Bloqueo por 720 días (aumento del 800 %)",
+      "xl": "Bloquear para siempre (aumento del 800 %)"
+    },
+    "qty": "Ingrese la cantidad que desea bloquear",
+    "text": {
+      "lock": "al bloquear",
+      "equivalent": "tu billete equivaldrá a",
+      "area": "en términos de superficie de votación y airdrop."
+    },
+    "modal": {
+      "title": "Creando un boleto",
+      "noDL": {
+        "title": "A través del enlace profundo de remolacha sin procesar",
+        "step1": "Inicie la billetera BEET y navegue hasta 'Raw Link' en el menú.",
+        "step2": "Desde esta página, puede permitir todas las operaciones o permitir únicamente la operación 57 'Crear ticket' (luego hacer clic en guardar).",
+        "step3": "Una vez que se muestre 'Listo para enlaces sin procesar' en Beet, envíe esta solicitud.",
+        "label": "Ingrese su ID de cuenta",
+        "btn": "Generar un enlace profundo sin procesar"
+      },
+      "DL": {
+        "title": "Enlace profundo sin procesar generado",
+        "step1": "Se ha generado su enlace profundo BEET, haga clic en el botón para continuar.",
+        "step2": "Aparecerá un aviso de BEET, verifique el contenido y luego apruebe el aviso de creación de ticket.",
+        "step3": "Vaya a la página 'Obtener boletos' para descargar su boleto para su análisis.",
+        "beetBTN": "Transmitir a BEET",
+        "back": "Atrás"
+      }
+    },
+    "askBEET": "Pídele a BEET que cree un ticket",
+    "leaderChange": {
+      "title": "Como resultado de la creación de este boleto, las 10 estadísticas principales de la tabla de clasificación pueden cambiar como tal",
+      "th1": "IDENTIFICACIÓN",
+      "th2": "Cantidad",
+      "th3": "Antes",
+      "th4": "Después"
+    }
+  }

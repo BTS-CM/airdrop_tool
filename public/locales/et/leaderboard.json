@@ -1,0 +1,17 @@
+{
+    "title": "Blockchaini piletite edetabelid",
+    "radio": {
+      "label": "Valige sihtplokiahel",
+      "desc": "Ainult grafeenipõhised plokiahelad"
+    },
+    "json": "Edetabeli JSON",
+    "table": {
+      "none": "Peate hankima selle plokiahela piletiandmed.",
+      "th1": "kasutaja ID",
+      "th2": "Suurendatud summa",
+      "th3": "Piletid",
+      "th4": "protsenti",
+      "th5": "Pilet",
+      "th6": "Pilet"
+    }
+  }

@@ -1,0 +1,16 @@
+{
+    "menu": {
+      "btn": "メニュー",
+      "label": "メインメニュー",
+      "home": "家",
+      "language": "言語",
+      "createTicket": "チケットの作成",
+      "fetchTickets": "チケットを取得する",
+      "calculateAirdrop": "エアドロップを計算する",
+      "calculatedAirdrops": "計算されたエアドロップ",
+      "analyzeTickets": "チケットを分析する",
+      "ticketLeaderboard": "チケットリーダーボード",
+      "faq": "よくある質問",
+      "changeNodes": "ノードを変更する"
+    }
+  }

@@ -1,0 +1,12 @@
+{
+    "none": "Billet introuvable",
+    "id": "ID de billets",
+    "owner": "Propriétaire du billet",
+    "currentType": "Type de billet actuel",
+    "targetType": "Type de billet cible",
+    "storedTickets": "{{assetName}} stocké dans le ticket",
+    "ticketValue": "{{assetName}} valeur du billet",
+    "currentStatus": "Statut actuel du ticket",
+    "nextUpgrade": "Heure de la prochaine mise à jour automatique",
+    "nextDowngrade": "Heure de la prochaine rétrogradation automatique"
+  }

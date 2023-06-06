@@ -1,0 +1,17 @@
+{
+    "title": "Classifiche dei biglietti Blockchain",
+    "radio": {
+      "label": "Seleziona la blockchain di destinazione",
+      "desc": "Solo blockchain basate su grafene"
+    },
+    "json": "Classifica JSON",
+    "table": {
+      "none": "Devi recuperare i dati del ticket per questa blockchain.",
+      "th1": "ID utente",
+      "th2": "Importo potenziato",
+      "th3": "Biglietti",
+      "th4": "Per cento",
+      "th5": "Biglietto",
+      "th6": "Biglietto"
+    }
+  }
