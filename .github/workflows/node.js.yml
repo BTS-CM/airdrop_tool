@@ -41,7 +41,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
     
-    - name: Use Node.js 18.x
+    - name: Use Node.js 16.17.0
       uses: actions/setup-node@v3
       with:
         node-version: 16.17.0
@@ -50,9 +50,14 @@ jobs:
     #- name: Instruct yarn to use cache
     #  run: yarn --prefer-offline
 
-    - run: yarn cache clean
-    - run: yarn install --force --network-timeout 1000000 --network-concurrency 1
-    - run: yarn run electron:package:${{ matrix.os }}
+    - name: Clean yarn cache
+      run: yarn cache clean
+
+    - name: Install
+      run: yarn install --force
+    
+    - name: package
+      run: yarn run electron:package:${{ matrix.os }}
 
     - name: Upload .${{ matrix.release_format }} file
       uses: actions/upload-artifact@v3
