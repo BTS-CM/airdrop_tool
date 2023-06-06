@@ -49,9 +49,6 @@ jobs:
     - name: Clean yarn cache
       run: yarn cache clean
 
-    - name: Clean npm cache
-      run: npm cache clean
-
     - name: timeoutBoost
       run: yarn config set network-timeout 600000 -g
 
