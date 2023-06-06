@@ -39,7 +39,7 @@
     },
     "askBEET": "Ask BEET to create ticket",
     "leaderChange": {
-        "title": "As a result of creating this ticket, the top 10 leaderboard stats will change as such",
+        "title": "As a result of creating this ticket, the top 10 leaderboard stats may change as such",
         "th1": "ID",
         "th2": "Amount",
         "th3": "Before",

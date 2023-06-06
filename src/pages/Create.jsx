@@ -99,7 +99,7 @@ export default function Create(properties) {
 
   useEffect(() => {
     async function fetchData() {
-      const opContents = {
+      const opContents = [{
         account: accountID,
         target_type: targetType,
         amount: {
@@ -107,11 +107,12 @@ export default function Create(properties) {
           asset_id: "1.3.0",
         },
         extensions: []
-      };
+      }];
 
       let payload;
       try {
         payload = await generateDeepLink(
+          'create_ticket',
           relevantChain,
           currentNodes[0],
           'ticket_create',
@@ -224,7 +225,7 @@ export default function Create(properties) {
                     onChange={(event) => onAccountID(event.currentTarget.value)}
                   />
                   {
-                    accountID !== "1.2.x" && accountID.length > 4
+                    accountID !== "1.2.x" && accountID.length > 4 && accountID.includes("1.2.")
                       ? (
                         <Button
                           m="xs"

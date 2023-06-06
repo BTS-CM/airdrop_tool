@@ -1,98 +1,114 @@
+/* eslint-disable consistent-return */
 import { TransactionBuilder } from 'bitsharesjs';
-import { Apis } from "bitsharesjs-ws";
-import DeepLink from './DeepLink';
+import { TransactionBuilder as TuscTB } from 'tuscjs';
+import { Apis } from 'bitsharesjs-ws';
+import { Apis as tuscApis } from 'tuscjs-ws';
+import { v4 as uuidv4 } from 'uuid';
 
 /**
  * Returns deeplink contents
+ * @param {String} appName
  * @param {String} chain
  * @param {String} node
  * @param {String} opType
- * @param {Object} opContents
+ * @param {Array} operations
  * @returns {Object}
  */
-async function generateDeepLink(chain, node, opType, opContents) {
-  console.log({
-    chain, node, opType, opContents
-  })
-  
-  const beetLink = new DeepLink(
-    'creating_ticket',
-    chain,
-    'airdrop_tool',
-    'localhost'
-  );
+async function generateDeepLink(appName, chain, node, opType, operations) {
+  return new Promise(async (resolve, reject) => {
+    // eslint-disable-next-line no-unused-expressions
+    console.log({chain})
+    try {
+      if (chain === "TUSC") {
+        await tuscApis.instance(
+          node,
+          true,
+          10000,
+          { enableCrypto: false, enableOrders: true },
+          (error) => console.log(error),
+        ).init_promise;
+      } else {
+        await Apis.instance(
+          node,
+          true,
+          10000,
+          { enableCrypto: false, enableOrders: true },
+          (error) => console.log(error),
+        ).init_promise;
+      }
+    } catch (error) {
+      console.log(error);
+      reject();
+      return;
+    }
 
-  let TXBuilder;
-  try {
-    TXBuilder = await beetLink.inject(
-      TransactionBuilder,
-      { sign: true, broadcast: true }
-    );
-  } catch (error) {
-    console.log(error);
-    return;
-  }
+    const tr = chain === "TUSC" ? new TuscTB() : new TransactionBuilder();
+    for (let i = 0; i < operations.length; i++) {
+      tr.add_type_operation(opType, operations[i]);
+    }
 
-  try {
-    await Apis.instance(
-      node,
-      true,
-      10000,
-      { enableCrypto: false, enableOrders: true },
-      (error) => console.log(error),
-    ).init_promise;
-  } catch (error) {
-    console.log(`api instance: ${error}`);
-    return;
-  }
+    try {
+      await tr.update_head_block();
+    } catch (error) {
+      console.error(error);
+      reject();
+      return;
+    }
 
-  const tr = new TXBuilder();
-  tr.add_type_operation(opType, opContents);
+    try {
+      await tr.set_required_fees();
+    } catch (error) {
+      console.error(error);
+      reject();
+      return;
+    }
 
-  try {
-    await tr.update_head_block();
-  } catch (error) {
-    console.error(error);
-    return;
-  }
+    try {
+      tr.set_expire_seconds(7200);
+    } catch (error) {
+      console.error(error);
+      reject();
+      return;
+    }
 
-  try {
-    await tr.set_required_fees();
-  } catch (error) {
-    console.error(error);
-    return;
-  }
+    try {
+      tr.finalize();
+    } catch (error) {
+      console.error(error);
+      reject();
+      return;
+    }
 
-  try {
-    tr.set_expire_seconds(7200);
-  } catch (error) {
-    console.error(error);
-    return;
-  }
+    const request = {
+      type: 'api',
+      id: await uuidv4(),
+      payload: {
+        method: 'injectedCall',
+        params: [
+          "signAndBroadcast",
+          JSON.stringify(tr.toObject()),
+          [],
+        ],
+        appName,
+        chain,
+        browser: 'airdrop_tool',
+        origin: 'localhost'
+      }
+    };
 
-  try {
-    tr.add_signer("inject_wif");
-  } catch (error) {
-    console.error(error);
-    return;
-  }
+    let encodedPayload;
+    try {
+      encodedPayload = encodeURIComponent(
+        JSON.stringify(request),
+      );
+    } catch (error) {
+      console.log(error);
+      reject();
+      return;
+    }
 
-  try {
-    tr.finalize();
-  } catch (error) {
-    console.error(error);
-    return;
-  }
-
-  let encryptedPayload;
-  try {
-    encryptedPayload = await tr.encrypt();
-  } catch (error) {
-    console.error(error);
-    return;
-  }
-
-  return encryptedPayload;
+    resolve(encodedPayload);
+  });
 }
 
 export {

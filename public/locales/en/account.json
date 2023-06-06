@@ -16,6 +16,7 @@
     "xlBoost": "800% vote multiplier",
     "tickets": "tickets",
     "voteWeight": "vote weight",
+    "untracked": "Balances for this user not yet tracked",
     "table": {
         "th1": "id",
         "th2": "account",

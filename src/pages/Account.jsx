@@ -86,6 +86,7 @@ export default function Account(properties) {
     }
   }, []);
 
+
   let currentLeaderboard = [];
   let assetName = "";
   let chainName = "";
@@ -109,6 +110,9 @@ export default function Account(properties) {
 
 
   let currentAccountBalances = currentLeaderboard.find((x) => x.id === params.id);
+
+  console.log({accountDetails, currentAccountBalances})
+
 
   let accountBalanceRows = currentAccountBalances && currentAccountBalances.balances.length
     ? currentAccountBalances.balances.map((x) => {
@@ -374,7 +378,7 @@ export default function Account(properties) {
               : null
           }
           {
-            currentAccountBalances && accountDetails
+            accountDetails
               ? (
                 <Card shadow="md" radius="md">
                   <Text fz="lg" fw={500} mt="md">
@@ -383,9 +387,19 @@ export default function Account(properties) {
                   <Text>
                     {`${accountDetails.name} (${params.id})`}
                   </Text>
-                  <Text>
-                    {t('Account:qtyTokens')}: {accountBalanceRows.length}
-                  </Text>
+                  {
+                    accountBalanceRows
+                      ? (
+                          <Text>
+                            {t('account:qtyTokens')}: {accountBalanceRows.length}
+                          </Text>
+                      )
+                      : (
+                          <Text>
+                            {t('account:untracked')}
+                          </Text>
+                      )
+                  }
                 </Card>
               )
               : null

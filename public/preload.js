@@ -20,6 +20,7 @@ window.electron = {
       'airdropCard',
       'analyze',
       'app',
+      'asset',
       'calculate',
       'calculatedAirdrops',
       'create',

@@ -22,7 +22,6 @@ import {
   TextInput,
   ActionIcon,
 } from '@mantine/core';
-import { TransactionBuilder } from 'bitsharesjs';
 import { Apis } from "bitsharesjs-ws";
 
 import {
@@ -116,6 +115,7 @@ export default function PerformAirdrop(properties) {
   const [tokenQuantity, onTokenQuantity] = useState(1);
   const [tokenName, onTokenName] = useState("");
   const [accountID, onAccountID] = useState("1.2.x");
+  const [myID, setMyID] = useState();
   const [tokenDetails, setTokenDetails] = useState();
   const [batchSize, onBatchSize] = useState(50);
   const [distroMethod, setDistroMethod] = useState("Proportionally");
@@ -166,6 +166,17 @@ export default function PerformAirdrop(properties) {
       onTokenName("TUSC");
     }
   }, []);
+
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(async () => {
+      setMyID();
+      if (accountID && accountID.length && accountID.length > 4 && accountID.includes("1.2.")) {
+        setMyID(accountID);
+      }
+    }, 1000);
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [accountID]);
 
   // Lookup the token to airdrop
   useEffect(() => {
@@ -262,6 +273,11 @@ export default function PerformAirdrop(properties) {
       const foundAsset = user.balances.find((asset) => asset.asset_id === requiredTokenDetails.id);
       return humanReadableFloat(foundAsset.amount, requiredTokenDetails.precision) >= finalReqQty;
     });
+  }
+
+  if (myID) {
+    // User provided their ID -> filter their id from airdrop!
+    sortedWinners = sortedWinners.filter((user) => user.id !== myID);
   }
 
   const ticketQty = sortedWinners

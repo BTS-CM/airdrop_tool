@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Text,
   Card,
@@ -8,23 +8,11 @@ import {
   JsonInput,
   Accordion,
 } from '@mantine/core';
-import { TransactionBuilder } from 'bitsharesjs';
-import { Apis } from "bitsharesjs-ws";
 import { useDisclosure } from '@mantine/hooks';
 import { useTranslation } from 'react-i18next';
 
 import { appStore } from '../lib/states';
-import DeepLink from '../lib/DeepLink';
-
-/**
- * Convert human readable quantity into the token's blockchain representation
- * @param {Float} satoshis
- * @param {Number} precision
- * @returns {Number}
- */
-function blockchainFloat(satoshis, precision) {
-  return satoshis * 10 ** precision;
-}
+import { generateDeepLink } from '../lib/generate';
 
 export default function AirdropCard(properties) {
   const { t, i18n } = useTranslation();
@@ -45,6 +33,8 @@ export default function AirdropCard(properties) {
   const [airdropData, setAirdropData] = useState();
   const [tx, setTX] = useState();
   const [inProgress, setInProgress] = useState(false);
+  const [deepLinkItr, setDeepLinkItr] = useState(0);
+
   const [opened, { open, close }] = useDisclosure(false);
 
   const nodes = appStore((state) => state.nodes);
@@ -63,119 +53,6 @@ export default function AirdropCard(properties) {
     relevantChain = 'TUSC';
   }
 
-  /**
-     * Generating an airdrop Beet deep link
-     * @param {Array} currentChunk
-     * @param {String} key
-     * @returns {String}
-     */
-  async function generateDeepLink(currentChunk, key) {
-    setInProgress(true);
-    const beetLink = new DeepLink(
-      'Airdrop tool airdropping',
-      relevantChain,
-      'airdrop_tool',
-      'localhost',
-      '',
-    );
-
-    const TXBuilder = await beetLink.inject(
-      TransactionBuilder,
-      { sign: true, broadcast: true },
-      false,
-    );
-
-    const ops = currentChunk.map((x) => ({
-      fee: {
-        amount: 0,
-        asset_id: tokenDetails.id,
-      },
-      from: accountID,
-      to: x.id,
-      amount: {
-        amount: parseFloat(
-          distroMethod === "Proportionally"
-            ? ((x.qty / ticketQty) * tokenQuantity).toFixed(tokenDetails.precision)
-            : (((1 / quantityWinners) * tokenQuantity).toFixed(tokenDetails.precision)),
-        ) * 100000,
-        asset_id: tokenDetails.id,
-      },
-    }));
-
-    try {
-      await Apis.instance(
-        currentNodes[0],
-        true,
-        10000,
-        { enableCrypto: false, enableOrders: true },
-        (error) => console.log(error),
-      ).init_promise;
-    } catch (error) {
-      console.log(`api instance: ${error}`);
-      setInProgress(false);
-      return;
-    }
-
-    const tr = new TXBuilder();
-    for (let i = 0; i < ops.length; i++) {
-      tr.add_type_operation('transfer', ops[i]);
-    }
-
-    try {
-      await tr.update_head_block();
-    } catch (error) {
-      console.error(error);
-      setInProgress(false);
-      return;
-    }
-
-    try {
-      await tr.set_required_fees();
-    } catch (error) {
-      console.error(error);
-      setInProgress(false);
-      return;
-    }
-
-    try {
-      tr.set_expire_seconds(7200);
-    } catch (error) {
-      console.error(error);
-      setInProgress(false);
-      return;
-    }
-
-    try {
-      tr.add_signer("inject_wif");
-    } catch (error) {
-      console.error(error);
-      setInProgress(false);
-      return;
-    }
-
-    try {
-      tr.finalize();
-    } catch (error) {
-      console.error(error);
-      setInProgress(false);
-      return;
-    }
-
-    setTX(tr);
-
-    let encryptedPayload;
-    try {
-      encryptedPayload = await tr.encrypt();
-    } catch (error) {
-      console.error(error);
-      setInProgress(false);
-      return;
-    }
-
-    setInProgress(false);
-    setAirdropData(encryptedPayload);
-  }
-
   const currentChunkValue = distroMethod === "Proportionally"
     ? parseFloat(
       chunk
@@ -183,6 +60,55 @@ export default function AirdropCard(properties) {
         .reduce((accumulator, ticket) => accumulator + parseFloat(ticket), 0).toFixed(5)
     )
     : (((1 / quantityWinners) * tokenQuantity).toFixed(5)) * chunk.length;
+
+  useEffect(() => {
+    async function fetchData() {
+      setInProgress(true);
+
+      const ops = chunk.map((x) => ({
+        fee: {
+          amount: 0,
+          asset_id: tokenDetails.id,
+        },
+        from: accountID,
+        to: x.id,
+        amount: {
+          amount: parseFloat(
+            distroMethod === "Proportionally"
+              ? ((x.qty / ticketQty) * tokenQuantity).toFixed(tokenDetails.precision)
+              : (((1 / quantityWinners) * tokenQuantity).toFixed(tokenDetails.precision)),
+          ) * 100000,
+          asset_id: tokenDetails.id,
+        },
+      }));
+
+      setTX(ops);
+
+      let payload;
+      try {
+        payload = await generateDeepLink(
+          'airdrop',
+          relevantChain,
+          currentNodes[0],
+          'transfer',
+          ops
+        );
+      } catch (error) {
+        console.log(error);
+        return;
+      }
+
+      if (payload && payload.length) {
+        setAirdropData(payload);
+      }
+
+      setInProgress(false);
+    }
+
+    if (deepLinkItr && deepLinkItr > 0) {
+      fetchData();
+    }
+  }, [deepLinkItr]);
 
   return (
     <Card key={`airdrop_${chunkItr}`} mt="md" shadow="md" radius="md" padding="xl">
@@ -220,9 +146,7 @@ export default function AirdropCard(properties) {
                 </Text>
                 <Button
                   mt="md"
-                  onClick={
-                    async () => await generateDeepLink(chunk, chunkItr.toString())
-                  }
+                  onClick={() => setDeepLinkItr(deepLinkItr + 1)}
                 >
                   {t("airdropCard:generate")}
                 </Button>

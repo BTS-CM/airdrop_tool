@@ -1448,7 +1448,7 @@ base64-js@^1.3.1, base64-js@^1.5.1:
     socket.io-client "^4.5.1"
     uuid "^8.3.2"
 
-bigi@^1.1.0, bigi@^1.4.2:
+bigi@1.4.2, bigi@^1.1.0, bigi@^1.4.2:
   version "1.4.2"
   resolved "https://registry.yarnpkg.com/bigi/-/bigi-1.4.2.tgz#9c665a95f88b8b08fc05cfd731f561859d725825"
   integrity sha512-ddkU+dFIuEIW8lE7ZwdIAf2UPoM90eaprg5m3YXAVVTmKlqV/9BX4A2M8BOK2yOq6/VgZFVhK6QAxJebhlbhzw==
@@ -1461,20 +1461,13 @@ bitsharesjs-ws@^6.0.0:
     isomorphic-ws "^4.0.1"
     ws "^8.4.0"
 
-bitsharesjs-ws@^6.0.1:
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/bitsharesjs-ws/-/bitsharesjs-ws-6.0.1.tgz#14bbe4114a2dec150bdca0802847ef73556c2589"
-  integrity sha512-fTdd0VmtIy/kciPuv/2dHsVu+gak3bDd2JjbZuw1BDAxrAWDkSFZkh28TPFmaQG9QLSg/HaMLumbswSKc9JFkQ==
-  dependencies:
-    isomorphic-ws "^4.0.1"
-    ws "^8.4.0"
-
-"bitsharesjs@https://github.com/bitshares/bitsharesjs#develop":
-  version "6.0.1"
-  resolved "https://github.com/bitshares/bitsharesjs#22a16992043c4e4f7dc9bb4dbfe84dcfc0f62888"
+bitsharesjs@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/bitsharesjs/-/bitsharesjs-6.0.0.tgz#1de869e6e9c9f5ba17b7a3c4baf67e9f78b9bb82"
+  integrity sha512-KSYvLvbRLNZ+cdzAiQ6YuryZx1b7yXnz7pOBzbRt5yz+7KIh7OUFUJBQ45G6wwBIc3kqnxcZVOsISwl7hLoGFQ==
   dependencies:
     bigi "^1.4.2"
-    bitsharesjs-ws "^6.0.1"
+    bitsharesjs-ws "^6.0.0"
     bs58 "^4.0.1"
     bytebuffer "^5.0.1"
     create-hash "^1.2.0"
@@ -1541,7 +1534,7 @@ browserslist@^4.21.3:
     node-releases "^2.0.6"
     update-browserslist-db "^1.0.9"
 
-bs58@^4.0.1:
+bs58@4.0.1, bs58@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/bs58/-/bs58-4.0.1.tgz#be161e76c354f6f788ae4071f63f34e8c4f0a42a"
   integrity sha512-Ok3Wdf5vOIlBrgCvTq96gBkJw+JUEzdBgyaza5HLtPm7yTHkjRy8+JzNyHF7BHa0bNWOQIp3m5YF0nnFcOIKLw==
@@ -1628,7 +1621,7 @@ builder-util@23.6.0:
     stat-mode "^1.0.0"
     temp-file "^3.4.0"
 
-bytebuffer@^5.0.1:
+bytebuffer@5.0.1, bytebuffer@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/bytebuffer/-/bytebuffer-5.0.1.tgz#582eea4b1a873b6d020a48d58df85f0bba6cfddd"
   integrity sha512-IuzSdmADppkZ6DlpycMkm8l9zeEq16fWtLvunEwFiYciR/BHo4E8/xs5piFquG+Za8OWmMqHF8zuRviz2LHvRQ==
@@ -1865,7 +1858,7 @@ crc@^3.8.0:
   dependencies:
     buffer "^5.1.0"
 
-create-hash@^1.1.0, create-hash@^1.2.0:
+create-hash@1.2.0, create-hash@^1.1.0, create-hash@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/create-hash/-/create-hash-1.2.0.tgz#889078af11a63756bcfb59bd221996be3a9ef196"
   integrity sha512-z00bCGNHDG8mHAkP7CtT1qVu+bFQUPjYq/4Iv3C3kWjTFV10zIjfSoeqXo9Asws8gwSHDGj/hl2u4OGIjapeCg==
@@ -1876,7 +1869,7 @@ create-hash@^1.1.0, create-hash@^1.2.0:
     ripemd160 "^2.0.1"
     sha.js "^2.4.0"
 
-create-hmac@^1.1.7:
+create-hmac@1.1.7, create-hmac@^1.1.7:
   version "1.1.7"
   resolved "https://registry.yarnpkg.com/create-hmac/-/create-hmac-1.1.7.tgz#69170c78b3ab957147b2b8b04572e47ead2243ff"
   integrity sha512-MJG9liiZ+ogc4TzUwuvbER1JRdgvUFSB5+VR/g5h82fGaIRWMWddtKBHi7/sVhfjQZ6SehlyhvQYrcYkaUIpLg==
@@ -1903,6 +1896,11 @@ cross-spawn@^7.0.1, cross-spawn@^7.0.2, cross-spawn@^7.0.3:
     path-key "^3.1.0"
     shebang-command "^2.0.0"
     which "^2.0.1"
+
+crypto-js@3.1.9-1:
+  version "3.1.9-1"
+  resolved "https://registry.yarnpkg.com/crypto-js/-/crypto-js-3.1.9-1.tgz#fda19e761fc077e01ffbfdc6e9fdfc59e8806cd8"
+  integrity sha512-W93aKztssqf29OvUlqfikzGyYbD1rpkXvGP9IQ1JchLY3bxaLXZSWYbwrtib2vk8DobrDzX7PIXcDWHp0B6Ymw==
 
 crypto-js@^4.1.1:
   version "4.1.1"
@@ -1964,6 +1962,11 @@ decompress-response@^6.0.0:
   integrity sha512-aW35yZM6Bb/4oJlZncMH2LCoZtJXTRxES17vE3hoRiowU2kWHaJKFkSBDnDR+cm9J+9QhXmREyIfv0pji9ejCQ==
   dependencies:
     mimic-response "^3.1.0"
+
+deep-equal@1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/deep-equal/-/deep-equal-1.0.1.tgz#f5d260292b660e084eff4cdbc9f08ad3247448b5"
+  integrity sha512-bHtC0iYvWhyaTzvV3CZgPeZQqCOBGyGsVV7v4eevpdkLHfiSrXUdBG+qAuSz4RI70sszvjQ1QSZ98An1yNwpSw==
 
 deep-equal@^2.0.5:
   version "2.0.5"
@@ -2076,7 +2079,7 @@ dotenv@^9.0.2:
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-9.0.2.tgz#dacc20160935a37dea6364aa1bef819fb9b6ab05"
   integrity sha512-I9OvvrHp4pIARv4+x9iuewrWycX6CcZtoAu1XrzPxc5UygMJXJZYmBsynku8IkrJwgypE5DGNjDPmPRhDCptUg==
 
-ecurve@^1.0.6:
+ecurve@1.0.6, ecurve@^1.0.6:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/ecurve/-/ecurve-1.0.6.tgz#dfdabbb7149f8d8b78816be5a7d5b83fcf6de797"
   integrity sha512-/BzEjNfiSuB7jIWKcS/z8FK9jNjmEWvUV2YZ4RLSmcDtP7Lq0m6FvDuSnJpBlDpGRpfRQeTLGLBI8H+kEv0r+w==
@@ -2617,7 +2620,7 @@ esutils@^2.0.2:
   resolved "https://registry.yarnpkg.com/esutils/-/esutils-2.0.3.tgz#74d2eb4de0b8da1293711910d50775b9b710ef64"
   integrity sha512-kVscqXk4OCp68SZ0dkgEKVi6/8ij300KBWTJq32P/dYeWTSwK41WyTxalN1eRmA5Z9UU/LX9D7FWSmV9SAYx6g==
 
-event-emitter@^0.3.5:
+event-emitter@0.3.5, event-emitter@^0.3.5:
   version "0.3.5"
   resolved "https://registry.yarnpkg.com/event-emitter/-/event-emitter-0.3.5.tgz#df8c69eef1647923c7157b9ce83840610b02cc39"
   integrity sha512-D9rRn9y7kLPnJ+hMq7S/nhvoKwwvVJahBi2BPmx3bvbsEdK3W9ii8cBSGjP+72/LnM4n6fo3+dkCX5FeTQruXA==
@@ -3086,6 +3089,11 @@ ignore@^5.2.0:
   version "5.2.1"
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-5.2.1.tgz#c2b1f76cb999ede1502f3a226a9310fdfe88d46c"
   integrity sha512-d2qQLzTJ9WxQftPAuEQpSPmKqzxePjzVbpAVv62AQ64NTL+wR4JkrVqR/LqFsFEUsHDAiId52mJteHDFuDkElA==
+
+immutable@3.8.2:
+  version "3.8.2"
+  resolved "https://registry.yarnpkg.com/immutable/-/immutable-3.8.2.tgz#c2439951455bb39913daf281376f1530e104adf3"
+  integrity sha512-15gZoQ38eYjEjxkorfbcgBKBL6R7T459OuK+CpcWt7O3KF4uPCx2tD0uFETlUDIyo+1789crbMhTvQBSR5yBMg==
 
 immutable@^4.0.0:
   version "4.1.0"
@@ -4273,6 +4281,11 @@ scheduler@^0.23.0:
   dependencies:
     loose-envify "^1.1.0"
 
+secure-random@1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/secure-random/-/secure-random-1.1.1.tgz#0880f2d8c5185f4bcb4684058c836b4ddb07145a"
+  integrity sha512-dJKPuNsv2fAl8JmYiGX5jbMBnga+m6UdirQmwKPLHSj5YRyqxmfqckgD+s1NsVhQJg2JXM05MptWcKnnu1h9YQ==
+
 secure-random@^1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/secure-random/-/secure-random-1.1.2.tgz#ed103b460a851632d420d46448b2a900a41e7f7c"
@@ -4640,12 +4653,37 @@ tslib@^2.4.0:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.4.1.tgz#0d0bfbaac2880b91e22df0768e55be9753a5b17e"
   integrity sha512-tGyy4dAjRIEwI7BzsB0lynWgOpfqjUdq91XXAlIWD2OwKBH7oCl/GZG/HT4BOHrTlPMOASlMQ7veyTqpmRcrNA==
 
+"tuscjs-ws@git+https://github.com/BTS-CM/tuscjs-ws.git":
+  version "0.1.0"
+  resolved "git+https://github.com/BTS-CM/tuscjs-ws.git#f889053698969aedc13cddc91dd55d36826da60e"
+  dependencies:
+    isomorphic-ws "^4.0.1"
+    ws "^4.1.0"
+
 "tuscjs-ws@https://github.com/BTS-CM/tuscjs-ws.git":
   version "0.1.0"
   resolved "https://github.com/BTS-CM/tuscjs-ws.git#f889053698969aedc13cddc91dd55d36826da60e"
   dependencies:
     isomorphic-ws "^4.0.1"
     ws "^4.1.0"
+
+"tuscjs@https://github.com/BTS-CM/tuscjs.git":
+  version "0.1.1"
+  resolved "https://github.com/BTS-CM/tuscjs.git#5724bf72ba578c047060e531cc736df14722e7bd"
+  dependencies:
+    bigi "1.4.2"
+    bs58 "4.0.1"
+    bytebuffer "5.0.1"
+    create-hash "1.2.0"
+    create-hmac "1.1.7"
+    crypto-js "3.1.9-1"
+    deep-equal "1.0.1"
+    ecurve "1.0.6"
+    event-emitter "0.3.5"
+    immutable "3.8.2"
+    safe-buffer "^5.2.1"
+    secure-random "1.1.1"
+    tuscjs-ws "git+https://github.com/BTS-CM/tuscjs-ws.git"
 
 type-check@^0.4.0, type-check@~0.4.0:
   version "0.4.0"
