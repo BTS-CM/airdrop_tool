@@ -1,0 +1,48 @@
+{
+    "title": "Create a Ticket",
+    "radioA": {
+        "label": "Select the target blockchain",
+        "desc": "Graphene based blockchains only"
+    },
+    "radioB": {
+        "label": "Select your desired ticket type",
+        "desc": "Longer lock durations grants greater voting weight.",
+        "sm": "Lock for 180 days (200% boost)",
+        "md": "Lock for 360 days (400% boost)",
+        "lg": "Lock for 720 days (800% boost)",
+        "xl": "Lock forever (800% boost)"
+    },
+    "qty": "Enter the quantity you wish to lock",
+    "text": {
+        "lock": "By locking",
+        "equivalent": "your ticket will be equivalent to",
+        "area": "in terms of voting and airdrop surface area."
+    },
+    "modal": {
+        "title": "Creating a ticket",
+        "noDL": {
+            "title": "Via raw Beet deeplink",
+            "step1": "Launch the BEET wallet and navigate to 'Raw Link' in the menu.",
+            "step2": "From this page you can either allow all operations, or solely allow operation 57 'Ticket create' (then click save).",
+            "step3": "Once 'Ready for raw links' shows in Beet submit this request.",
+            "label": "Enter your account ID",
+            "btn": "Generate raw deeplink"
+        },
+        "DL": {
+            "title": "Raw deeplink generated",
+            "step1": "Your BEET deeplink has been generated, click the button to proceed.",
+            "step2": "A BEET prompt will display, verify the contents then approve the create ticket prompt.",
+            "step3": "Go to the 'Fetch tickets' page to download your ticket for analysis.",
+            "beetBTN": "Broadcast to BEET",
+            "back": "Back"
+        }
+    },
+    "askBEET": "Ask BEET to create ticket",
+    "leaderChange": {
+        "title": "As a result of creating this ticket, the top 10 leaderboard stats may change as such",
+        "th1": "ID",
+        "th2": "Amount",
+        "th3": "Before",
+        "th4": "After"
+    }
+}

@@ -16,6 +16,7 @@ module.exports = {
   plugins: ["react"],
   rules: {
     camelcase: "off",
+    "react/jsx-one-expression-per-line": "off",
     "no-console": "off",
     "no-unused-vars": "off",
     "no-underscore-dangle": "off",
@@ -25,6 +26,7 @@ module.exports = {
     'react/jsx-props-no-spreading': 'off',
     'no-async-promise-executor': 'off',
     'no-plusplus': 'off',
+    'comma-dangle': 'off',
     'no-await-in-loop': 'off',
     'no-continue': 'off',
     'linebreak-style': 'off',

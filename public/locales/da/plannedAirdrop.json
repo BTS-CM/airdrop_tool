@@ -1,0 +1,25 @@
+{
+    "one": "har 1 vinderkupon ",
+    "many": "har {{qty}} vinde billetter ",
+    "jsonLabel": "{{id}}'s vindende billet JSON",
+    "header": {
+      "title": "planlagt {{chainName}} airdrop indhold",
+      "continue": "Udfør Airdrop",
+      "back": "Tilbage"
+    },
+    "missingData": "Billet blev ikke fundet",
+    "details": {
+      "id": "ID",
+      "hash": "Hash",
+      "dedupe": "Deduplikeret",
+      "onlyWins": "Kun vinderbilletter",
+      "blockNum": "Bloknummer",
+      "algos": "Algoritmer"
+    },
+    "basis": {
+      "witSig": "Vidnets underskrift",
+      "filtSig": "Filtreret signatur"
+    },
+    "winners": "Vindere",
+    "json": "Rå JSON-data"
+  }

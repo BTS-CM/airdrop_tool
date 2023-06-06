@@ -1,0 +1,16 @@
+{
+    "topCard": {
+      "title": "Buscar tickets do blockchain",
+      "label": "Selecione o blockchain de destino",
+      "desc": "Apenas blockchains baseados em grafeno",
+      "btn1": "Buscar ingressos",
+      "btn2": "Buscando"
+    },
+    "secondCard": {
+      "th1": "Blockchain",
+      "th2": "Ingressos",
+      "th3": "Tokens de quantidade bloqueados",
+      "th4": "JSON",
+      "th5": "Excluir"
+    }
+  }

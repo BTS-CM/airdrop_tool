@@ -1,0 +1,65 @@
+{
+    "header": {
+        "title": "Perform airdrop on the {{titleName}} blockchain",
+        "back": "Airdrop summary",
+        "others": "Calculated airdrops"
+    },
+    "noTicket": "Ticket not found",
+    "grid": {
+        "left": {
+            "loading": "Loading asset data",
+            "processing": "Processing user balances for required token",
+            "table": {
+                "title": "Ticket holders included in airdrop",
+                "th1": "id",
+                "th2": "Quantity",
+                "th3": "Allocated tokens"
+            }
+        },
+        "right": {
+            "summary": {
+                "title": "Airdrop summary",
+                "id": "ID",
+                "hash": "Hash",
+                "dedupe": "Deduplicated",
+                "onlyWins": "Only winning tickets",
+                "blockno": "Blocknumber",
+                "algos": "Algorithms",
+                "winners": "Winners",
+                "ticketWinQty": "Winning ticket qty"
+            },
+            "options": {
+                "title": "Airdrop options",
+                "titleName": "Enter your {{titleName}} account ID",
+                "assetName": "Enter the name of the asset you wish to airdrop",
+                "batchSize": "Size of airdrop transfer batches",
+                "tokenQuantity": "Enter the quantity of tokens you wish to airdrop",
+                "distroRadio": {
+                    "title": "How should tokens be allocated to winners?",
+                    "equally": "Equally between winning account IDs",
+                    "proportionally": "Proportional to tickets won",
+                    "roundRobin": "Allocate whole tokens in a round robin manner"
+                },
+                "reqRadio": {
+                    "title": "Introduce additional token requirement?",
+                    "yes": "Yes",
+                    "no": "No",
+                    "requiredToken": "Provide the required token's symbol",
+                    "requiredTokenQty": "Provide the quantity of required tokens"
+                }
+            },
+            "invalid": {
+                "title": "Nothing to airdrop",
+                "reason": "Given there are no valid tickets, there's nothing to airdrop.",
+                "resolution": "Adjust the airdrop settings or calculate another airdrop to proceed."
+            },
+            "valid": {
+                "title": "Proceed with airdrop?",
+                "note": "Keep in mind the transaction and block size limits when planning batches of airdrops.",
+                "single": "With a batch limit of {{batchSize}}, 1 batch is required to complete this airdrop.",
+                "multi": "With a batch limit of {{batchSize}}, {{qtyBatches}} batches are required to complete this airdrop.",
+                "reminder": "Keep in mind the transaction and block size limits when planning batches of airdrops."
+            }
+        }
+    }
+}

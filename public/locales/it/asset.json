@@ -1,0 +1,14 @@
+{
+    "symbol": "Simbolo",
+    "issuer": "Emittente",
+    "precision": "Precisione",
+    "maxSupply": "Fornitura massima",
+    "dynamicData": "ID dati dinamici",
+    "qty": "Numero di possessori di biglietti in possesso di questo",
+    "total": "Importo totale detenuto dai possessori di biglietti",
+    "th1": "Account ID",
+    "th2": "Bilancia",
+    "title": "Dettagli della risorsa",
+    "chain": "Blockchain",
+    "id": "ID"
+  }

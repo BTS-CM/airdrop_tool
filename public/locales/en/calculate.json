@@ -1,0 +1,81 @@
+{
+    "calcs": {
+        "forward": {
+            "name": "Forward chunks",
+            "desc": "Split hash into ticket numbers."
+        },
+        "reverse": {
+            "name": "Reverse chunks",
+            "desc": "Reverse hash then split into ticket numbers."
+        },
+        "pi": {
+            "name": "PI",
+            "desc": "Split hash, do some math then multiply by PI for ticket numbers."
+        },
+        "reverse_pi": {
+            "name": "Reverse PI",
+            "desc": "Split hash, reverse hash chunks, do math, multiply by PI, output tickets."
+        },
+        "cubed": {
+            "name": "Cubed",
+            "desc": "Split hash into 3 digit chunks, cube each chunk, output tickets."
+        },
+        "bouncing_ball": {
+            "name": "Bouncing ball",
+            "desc": "path of ball bouncing in matrix -> pick tickets along path"
+        },
+        "alien_blood": {
+            "name": "Alien blood",
+            "desc": "Picks alien blood splatter spots; it burns directly down through the hull"
+        },
+        "avg_point_lines": {
+            "name": "Average point lines",
+            "desc": "Calculate the avg x/y/z coordinates -> draw lines to this from each vector => reward those on line"
+        },
+        "freebie": {
+            "name": "Freebie",
+            "desc": "Each ticket holding account gets 1 winning ticket"
+        }
+    },
+    "calculatingTitle": "Performing airdrop calculations, please wait!",
+    "completed": {
+        "title": "Successfully completed airdrop calculations!",
+        "anotherBtn": "Calculate another airdrop?",
+        "airdropBtn": "View generated airdrop",
+        "generatedBtn": "View all generated airdrops"
+    },
+    "title": "Calculate a provably fair airdrop distribution for which blockchain?",
+    "radioLabel": "Select the target blockchain",
+    "radioDesc": "Graphene based blockchains only",
+    "hash": {
+        "title": "What kind of blockhash do you want to use for initial provably random input?",
+        "radioLabel": "Select an initial hash type",
+        "radioDesc": "Original, or securely hashed?",
+        "plain": "Plain witness signature string",
+        "witSig": "hash of witness signature"
+    },
+    "ticket": {
+        "title": "Winning ticket options",
+        "radioLabel": "Should winning tickets be deduplicated?",
+        "radioDesc": "I.e. can a ticket win more than once? Yes or no?",
+        "yes": "Yes",
+        "no": "No",
+        "winLabel": "Should winning tickets always be chosen?",
+        "winDesc": "E.g. If 600 tickets exist, convert #1000 into #400. (drawn - last)"
+    },
+    "blockNum": {
+        "title": "Enter the block number you wish to use for airdrop purposes",
+        "label": "Block number"
+    },
+    "fetchTickets": "You must fetch the ticket data for this blockchain.",
+    "distro": {
+        "title": "Select your prefered methods for generating provably fair airdrop distributions",
+        "th1": "Type",
+        "th2": "Description"
+    },
+    "proceed": {
+        "title": "Proceed with airdrop calculation",
+        "desc": "Your calculated airdrop vector will be made available in the airdrop page once completed.",
+        "btn": "Perform airdrop calculation"
+    }
+}

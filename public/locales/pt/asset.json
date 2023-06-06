@@ -1,0 +1,14 @@
+{
+    "symbol": "Símbolo",
+    "issuer": "Emissor",
+    "precision": "Precisão",
+    "maxSupply": "Fornecimento máximo",
+    "dynamicData": "ID de dados dinâmicos",
+    "qty": "Quantidade de titulares de bilhetes que possuem este",
+    "total": "Montante total em poder dos titulares de bilhetes",
+    "th1": "ID da conta",
+    "th2": "Equilíbrio",
+    "title": "Detalhes do recurso",
+    "chain": "Blockchain",
+    "id": "EU IA"
+  }

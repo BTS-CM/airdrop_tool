@@ -1,0 +1,65 @@
+{
+    "header": {
+      "title": "Udfør airdrop på {{titleName}} blockchain",
+      "back": "Airdrop oversigt",
+      "others": "Beregnet luftdråber"
+    },
+    "noTicket": "Billet blev ikke fundet",
+    "grid": {
+      "left": {
+        "loading": "Indlæser aktivdata",
+        "processing": "Behandler brugersaldi for påkrævet token",
+        "table": {
+          "title": "Billetholdere inkluderet i airdrop",
+          "th1": "id",
+          "th2": "Antal",
+          "th3": "Tildelte tokens"
+        }
+      },
+      "right": {
+        "summary": {
+          "title": "Airdrop oversigt",
+          "id": "ID",
+          "hash": "Hash",
+          "dedupe": "Deduplikeret",
+          "onlyWins": "Kun vinderbilletter",
+          "blockno": "Bloknummer",
+          "algos": "Algoritmer",
+          "winners": "Vindere",
+          "ticketWinQty": "Vinderbillet antal"
+        },
+        "options": {
+          "title": "Airdrop muligheder",
+          "titleName": "Indtast dit {{titleName}} Konto-id",
+          "assetName": "Indtast navnet på det aktiv, du ønsker at airdrop",
+          "batchSize": "Størrelse på airdrop-overførselspartier",
+          "tokenQuantity": "Indtast det antal tokens, du ønsker at airdrop",
+          "distroRadio": {
+            "title": "Hvordan skal tokens tildeles til vindere?",
+            "equally": "Ligesom mellem vindende konto-id'er",
+            "proportionally": "Proportional til vundne billetter",
+            "roundRobin": "Tildel hele tokens på en round robin måde"
+          },
+          "reqRadio": {
+            "title": "Vil du indføre yderligere tokenkrav?",
+            "yes": "Ja",
+            "no": "Ingen",
+            "requiredToken": "Angiv det påkrævede tokens symbol",
+            "requiredTokenQty": "Angiv mængden af ​​nødvendige tokens"
+          }
+        },
+        "invalid": {
+          "title": "Intet at airdroppe",
+          "reason": "Da der ikke er nogen gyldige billetter, er der intet at sende.",
+          "resolution": "Juster airdrop-indstillingerne, eller beregn endnu et airdrop for at fortsætte."
+        },
+        "valid": {
+          "title": "Fortsæt med airdrop?",
+          "note": "Husk grænserne for transaktions- og blokstørrelse, når du planlægger partier af luftdråber.",
+          "single": "Med en batchgrænse på {{batchSize}}, 1 batch er påkrævet for at fuldføre denne airdrop.",
+          "multi": "Med en batchgrænse på {{batchSize}}, {{qtyBatches}} batches er nødvendige for at fuldføre denne airdrop.",
+          "reminder": "Husk grænserne for transaktions- og blokstørrelse, når du planlægger partier af luftdråber."
+        }
+      }
+    }
+  }

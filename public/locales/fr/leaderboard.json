@@ -1,0 +1,17 @@
+{
+    "title": "Classements des tickets Blockchain",
+    "radio": {
+      "label": "Sélectionnez la blockchain cible",
+      "desc": "Blockchains à base de graphène uniquement"
+    },
+    "json": "Classement JSON",
+    "table": {
+      "none": "Vous devez récupérer les données du ticket pour cette blockchain.",
+      "th1": "ID de l'utilisateur",
+      "th2": "Montant boosté",
+      "th3": "Des billets",
+      "th4": "Pour cent",
+      "th5": "Billet",
+      "th6": "Billet"
+    }
+  }

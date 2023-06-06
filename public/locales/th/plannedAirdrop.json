@@ -1,0 +1,25 @@
+{
+    "one": "มีตั๋วถูกรางวัล 1 ใบ ",
+    "many": "มี {{qty}} ชนะตั๋ว ",
+    "jsonLabel": "{{id}}JSON ของตั๋วที่ชนะ",
+    "header": {
+      "title": "วางแผนไว้ {{chainName}} เนื้อหาของ airdrop",
+      "continue": "ดำเนินการ Airdrop",
+      "back": "กลับ"
+    },
+    "missingData": "ไม่พบตั๋ว",
+    "details": {
+      "id": "รหัส",
+      "hash": "กัญชา",
+      "dedupe": "ซ้ำซ้อน",
+      "onlyWins": "เฉพาะตั๋วที่ชนะ",
+      "blockNum": "บล็อคเบอร์",
+      "algos": "อัลกอริทึม"
+    },
+    "basis": {
+      "witSig": "ลายเซ็นพยาน",
+      "filtSig": "ลายเซ็นที่ผ่านการกรอง"
+    },
+    "winners": "ผู้ชนะ",
+    "json": "ข้อมูล JSON ดิบ"
+  }

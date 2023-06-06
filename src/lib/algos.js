@@ -202,6 +202,7 @@ function avg_point_lines(chunks, maxDistance) {
   console.log(`avg_point_lines: ${chosenTickets.length} tickets chosen`);
   return chosenTickets;
 }
+
 /**
  * Picks alien blood splatter spots; it burns directly down through the hull
  * 0 - 997,002,999 (extend via z axis)
@@ -312,6 +313,18 @@ function freebie(leaderboardJSON) {
 }
 
 /**
+ * Converts the filtered hash into a single ticket
+ * @param {Array} initialChunks
+ * @returns {Number}
+ */
+/*
+function single_winner(initialChunks) {
+  let chunkSum = initialChunks.reduce((accumulator, chunk) => accumulator + filterParseInt(chunk), 0);
+  return [((filterParseInt(chunkSum) / 3600570502) % 1) * 3600570502];
+}
+*/
+
+/**
  * Given a ticket algorithm and signature, return chosen tickets.
  * @param {String} algoType
  * @param {String} filtered_signature
@@ -344,6 +357,8 @@ function getTickets(algoType, filtered_signature, leaderboardJSON) {
       return bouncing_ball(initialChunks, maxDistance);
     case "freebie":
       return freebie(leaderboardJSON);
+    //case "single_winner":
+    //  return single_winner(initialChunks);
     default:
       console.log(`Unknown algo type: ${algoType}`);
       return [];
@@ -444,4 +459,5 @@ export {
   alien_blood,
   bouncing_ball,
   freebie,
+  //single_winner,
 };

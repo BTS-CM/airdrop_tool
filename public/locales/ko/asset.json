@@ -1,0 +1,14 @@
+{
+    "symbol": "상징",
+    "issuer": "발급자",
+    "precision": "정도",
+    "maxSupply": "최대 공급",
+    "dynamicData": "동적 데이터 ID",
+    "qty": "이를 보유한 티켓 소지자 수",
+    "total": "티켓 소지자가 보유한 총 금액",
+    "th1": "계정 ID",
+    "th2": "균형",
+    "title": "자산 세부정보",
+    "chain": "블록체인",
+    "id": "ID"
+  }

@@ -1,0 +1,19 @@
+{
+    "airdrop": "Entrega por paracaídas",
+    "accounts": "cuentas",
+    "from": "de",
+    "to": "a",
+    "distro": "siendo distribuido",
+    "method": "A través de la carga de archivos locales",
+    "preStep1": "1. Inicie la billetera BEET y navegue hasta 'Local' en el menú.",
+    "preStep2": "2. En esta página, permita todo o permita solo la operación 0 'Transferir'.",
+    "preStep3": "3. Una vez en la página de carga local, haga clic en el botón de abajo para continuar.",
+    "generate": "Generar archivo JSON de lanzamiento aéreo",
+    "confirmation": "Airdrop JSON generado",
+    "download1": "1. Se ha generado su airdrop JSON, haga clic en el botón para descargarlo.",
+    "download2": "2. Desde la página local de BEET, cargue el archivo JSON; debería aparecer un aviso.",
+    "download3": "3. Verifique el contenido del aviso antes de aprobar el airdrop.",
+    "downloadButton": "Descargar airdrop JSON",
+    "viewJSON": "JSON de operación de lanzamiento desde el aire propuesta",
+    "begin": "Comenzar lanzamiento aéreo"
+  }

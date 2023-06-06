@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+
 import {
   Title,
   Text,
@@ -17,6 +19,7 @@ import {
 import { airdropStore } from '../lib/states';
 
 export default function CalculatedAirdrops(properties) {
+  const { t, i18n } = useTranslation();
   const btsAirdrops = airdropStore((state) => state.bitshares);
   const btsTestnetAirdrops = airdropStore((state) => state.bitshares_testnet);
   const tuscAirdrops = airdropStore((state) => state.tusc);
@@ -67,15 +70,15 @@ export default function CalculatedAirdrops(properties) {
     <>
       <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
         <Title order={2} ta="center" mt="sm">
-          Calculated airdrops
+          {t("calculatedAirdrops:title")}
         </Title>
 
         <Radio.Group
           value={value}
           onChange={setValue}
           name="chosenBlockchain"
-          label="Select the target blockchain"
-          description="Graphene based blockchains only"
+          label={t("calculatedAirdrops:radioLbl")}
+          description={t("calculatedAirdrops:radioDesc")}
           withAsterisk
         >
           <Group mt="xs">
@@ -87,41 +90,41 @@ export default function CalculatedAirdrops(properties) {
       </Card>
 
       {
-            !tableRows || !tableRows.length
-              ? (
-                <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
-                  <Title order={4} ta="center" mt="sm">
-                    No airdrops for this blockchain seem to have been created yet?
-                    <br />
-                    <Link to="/Calculate">
-                      <Button mt="sm">
-                        Calculate airdrop
-                      </Button>
-                    </Link>
-                  </Title>
-                </Card>
-              )
-              : (
-                <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
-                  <Table>
-                    <thead>
-                      <tr>
-                        <th>ID</th>
-                        <th>Hash</th>
-                        <th>Block number</th>
-                        <th>Winners</th>
-                        <th>Algos</th>
-                        <th>Deduplicated</th>
-                        <th>Only winners</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {tableRows}
-                    </tbody>
-                  </Table>
-                </Card>
-              )
-        }
+        !tableRows || !tableRows.length
+          ? (
+            <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
+              <Title order={4} ta="center" mt="sm">
+                {t("calculatedAirdrops:none.title")}
+                <br />
+                <Link to="/Calculate">
+                  <Button mt="sm">
+                    {t("calculatedAirdrops:none.btn")}
+                  </Button>
+                </Link>
+              </Title>
+            </Card>
+          )
+          : (
+            <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
+              <Table>
+                <thead>
+                  <tr>
+                    <th>{t("calculatedAirdrops:table.th1")}</th>
+                    <th>{t("calculatedAirdrops:table.th2")}</th>
+                    <th>{t("calculatedAirdrops:table.th3")}</th>
+                    <th>{t("calculatedAirdrops:table.th4")}</th>
+                    <th>{t("calculatedAirdrops:table.th5")}</th>
+                    <th>{t("calculatedAirdrops:table.th6")}</th>
+                    <th>{t("calculatedAirdrops:table.th7")}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {tableRows}
+                </tbody>
+              </Table>
+            </Card>
+          )
+      }
     </>
   );
 }

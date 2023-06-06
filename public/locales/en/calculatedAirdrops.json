@@ -1,0 +1,18 @@
+{
+    "title": "Calculated airdrops",
+    "radioLbl": "Select the target blockchain",
+    "radioDesc": "Graphene based blockchains only",
+    "none": {
+        "title": "No airdrops for this blockchain seem to have been created yet?",
+        "btn": "Calculate airdrop"
+    },
+    "table": {
+        "th1": "ID",
+        "th2": "Hash",
+        "th3": "Block number",
+        "th4": "Winners",
+        "th5": "Algorithms",
+        "th6": "Deduplicated",
+        "th7": "Only winners"
+    } 
+}

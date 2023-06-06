@@ -1,8 +1,8 @@
 /* eslint-disable max-len */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDisclosure } from '@mantine/hooks';
-import { TransactionBuilder } from 'bitsharesjs';
-import { Apis } from "bitsharesjs-ws";
+
+import { useTranslation } from 'react-i18next';
 import {
   Title,
   Text,
@@ -22,17 +22,29 @@ import {
 import { Link, useParams } from "react-router-dom";
 
 import { leaderboardStore, appStore } from '../lib/states';
-import DeepLink from '../lib/DeepLink';
+import { generateDeepLink } from '../lib/generate';
+
+/**
+ * Convert human readable quantity into the token's blockchain representation
+ * @param {Float} satoshis
+ * @param {Number} precision
+ * @returns {Number}
+ */
+function blockchainFloat(satoshis, precision) {
+  return satoshis * 10 ** precision;
+}
 
 export default function Create(properties) {
+  const { t, i18n } = useTranslation();
   const params = useParams();
   const [value, setValue] = useState(
     (params && params.env) ?? 'bitshares'
   );
   const [ticketType, setTicketType] = useState("lock_180_days");
-  const [beetType, setBeetType] = useState();
   const [deepLink, setDeepLink] = useState();
   const [accountID, onAccountID] = useState((params && params.id) ?? "1.2.x");
+
+  const [deepLinkItr, setDeepLinkItr] = useState(0);
 
   const [tokenQuantity, onTokenQuantity] = useState(1);
   const [opened, { open, close }] = useDisclosure(false);
@@ -85,107 +97,55 @@ export default function Create(properties) {
     tokenLockValue = tokenQuantity * 8;
   }
 
-  async function generateDeepLink() {
-    const beetLink = new DeepLink(
-      'Airdrop tool creating ticket',
-      relevantChain,
-      'airdrop_tool',
-      'localhost',
-      '',
-    );
-
-    const TXBuilder = await beetLink.inject(
-      TransactionBuilder,
-      { sign: true, broadcast: true },
-      false,
-    );
-
-    try {
-      await Apis.instance(
-        currentNodes[0],
-        true,
-        10000,
-        { enableCrypto: false, enableOrders: true },
-        (error) => console.log(error),
-      ).init_promise;
-    } catch (error) {
-      console.log(`api instance: ${error}`);
-      return;
-    }
-
-    const tr = new TXBuilder();
-    tr.add_type_operation(
-      'ticket_create',
-      {
+  useEffect(() => {
+    async function fetchData() {
+      const opContents = [{
         account: accountID,
         target_type: targetType,
         amount: {
-          amount: tokenQuantity * 100000,
+          amount: blockchainFloat(tokenQuantity, 5),
           asset_id: "1.3.0",
         },
-        extensions: [],
-      },
-    );
+        extensions: []
+      }];
 
-    try {
-      await tr.update_head_block();
-    } catch (error) {
-      console.error(error);
-      return;
+      let payload;
+      try {
+        payload = await generateDeepLink(
+          'create_ticket',
+          relevantChain,
+          currentNodes[0],
+          'ticket_create',
+          opContents
+        );
+      } catch (error) {
+        console.log(error);
+        return;
+      }
+
+      if (payload && payload.length) {
+        setDeepLink(`rawbeet://api?chain=${relevantChain}&request=${payload}`);
+      }
     }
 
-    try {
-      await tr.set_required_fees();
-    } catch (error) {
-      console.error(error);
-      return;
+    if (deepLinkItr && deepLinkItr > 0) {
+      fetchData();
     }
-
-    try {
-      tr.set_expire_seconds(7200);
-    } catch (error) {
-      console.error(error);
-      return;
-    }
-
-    try {
-      tr.add_signer("inject_wif");
-    } catch (error) {
-      console.error(error);
-      return;
-    }
-
-    try {
-      tr.finalize();
-    } catch (error) {
-      console.error(error);
-      return;
-    }
-
-    let encryptedPayload;
-    try {
-      encryptedPayload = await tr.encrypt();
-    } catch (error) {
-      console.error(error);
-      return;
-    }
-
-    setDeepLink(`rawbeet://api?chain=${relevantChain}&request=${encryptedPayload}`);
-  }
+  }, [deepLinkItr]);
 
   return (
     <>
       <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
         <Title order={2} ta="center" mt="sm">
-          Create a Ticket
+          {t("create:title")}
         </Title>
 
         <Radio.Group
           value={value}
           onChange={setValue}
           name="chosenBlockchain"
-          label="Select the target blockchain"
-          description="Graphene based blockchains only"
+          label={t("create:radioA.label")}
+          description={t("create:radioA.desc")}
           withAsterisk
         >
           <Group mt="xs">
@@ -199,161 +159,164 @@ export default function Create(properties) {
           value={ticketType}
           onChange={setTicketType}
           name="lockType"
-          label="Select your desired ticket type"
-          description="Longer lock durations grants greater voting weight."
+          label={t("create:radioB.label")}
+          description={t("create:radioB.desc")}
           style={{ marginTop: '20px' }}
           withAsterisk
         >
           <Group mt="xs">
-            <Radio value="lock_180_days" label="Lock for 180 days (200% boost)" />
-            <Radio value="lock_360_days" label="Lock for 360 days (400% boost)" />
-            <Radio value="lock_720_days" label="Lock for 720 days (800% boost)" />
-            <Radio value="lock_forever" label="Lock forever (800% boost)" />
+            <Radio value="lock_180_days" label={t("create:radioB.sm")} />
+            <Radio value="lock_360_days" label={t("create:radioB.md")} />
+            <Radio value="lock_720_days" label={t("create:radioB.lg")} />
+            <Radio value="lock_forever" label={t("create:radioB.xl")} />
           </Group>
         </Radio.Group>
 
         <TextInput
           type="number"
           placeholder={tokenQuantity}
-          label={`Enter the quantity of ${assetName} you wish to lock`}
+          label={t("create:qty")}
           style={{ maxWidth: '300px', marginTop: '20px' }}
           onChange={(event) => onTokenQuantity(event.currentTarget.value)}
         />
 
         <Text fz="md" style={{ marginTop: '15px' }}>
-          By locking
+          {t("create:text.lock")}
           {' '}
           {tokenQuantity}
           {' '}
           {assetName}
           {' '}
-          your ticket will be equivalent to
+          {t("create:text.equivalent")}
           {' '}
           {tokenLockValue}
           {' '}
           {assetName}
           {' '}
-          in terms of voting and airdrop surface area.
+          {t("create:text.area")}
         </Text>
 
         <Modal
           opened={opened}
           onClose={() => {
-            setBeetType();
             setDeepLink();
             close();
           }}
-          title="Creating a ticket"
+          title={t("create:modal.title")}
         >
           {
-                    !deepLink
+            !deepLink
+              ? (
+                <>
+                  <Text>{t("create:modal.noDL.title")}</Text>
+                  <Text m="sm" fz="xs">
+                    1. {t("create:modal.noDL.step1")}
+                    <br />
+                    2. {t("create:modal.noDL.step2")}
+                    <br />
+                    3. {t("create:modal.noDL.step3")}
+                  </Text>
+                  <TextInput
+                    type="string"
+                    placeholder={accountID}
+                    m="sm"
+                    label={t("create:modal.noDL.label")}
+                    style={{ maxWidth: '300px' }}
+                    onChange={(event) => onAccountID(event.currentTarget.value)}
+                  />
+                  {
+                    accountID !== "1.2.x" && accountID.length > 4 && accountID.includes("1.2.")
                       ? (
-                        <>
-                          <Text>Via raw Beet deeplink</Text>
-                          <Text m="sm" fz="xs">
-                            1. Launch the BEET wallet and navigate to &quot;Raw Link&quot; in the menu.
-                            <br />
-                            2. From this page you can either allow all operations, or solely allow operation 57 &quot;Ticket create&quot; (then click save).
-                            <br />
-                            3. Once &quot;Ready for raw links&quot; shows in Beet submit this request.
-                          </Text>
-                          <TextInput
-                            type="string"
-                            placeholder={accountID}
-                            m="sm"
-                            label={`Enter your ${value} account ID`}
-                            style={{ maxWidth: '300px' }}
-                            onChange={(event) => onAccountID(event.currentTarget.value)}
-                          />
-                          {
-                                accountID !== "1.2.x" && accountID.length > 4
-                                  ? (
-                                    <Button m="xs" onClick={async () => await generateDeepLink()}>
-                                      Generate raw deeplink
-                                    </Button>
-                                  )
-                                  : (
-                                    <Button m="xs" disabled>
-                                      Generate raw deeplink
-                                    </Button>
-                                  )
-                            }
-                        </>
+                        <Button
+                          m="xs"
+                          onClick={() => setDeepLinkItr(deepLinkItr + 1)}
+                        >
+                          {t("create:modal.noDL.btn")}
+                        </Button>
                       )
-                      : null
-                }
+                      : (
+                        <Button m="xs" disabled>
+                          {t("create:modal.noDL.btn")}
+                        </Button>
+                      )
+                  }
+                </>
+              )
+              : null
+          }
           {
-                    deepLink
-                      ? (
-                        <>
-                          <Text>Raw deeplink generated</Text>
-                          <Text fz="xs">
-                            1. Your BEET deeplink has been generated, click the button to proceed.
-                            <br />
-                            2. A BEET prompt will display, verify the contents then approve the create ticket prompt.
-                            <br />
-                            3. Go to the &quot;Fetch tickets&quot; page to download your ticket for analysis.
-                          </Text>
-                          <a href={deepLink}>
-                            <Button m="xs">
-                              Broadcast to BEET
-                            </Button>
-                          </a>
-                          <Button
-                            m="xs"
-                            onClick={() => {
-                              setDeepLink();
-                            }}
-                          >
-                            Back
-                          </Button>
-                        </>
-                      )
-                      : null
-                }
+            deepLink
+              ? (
+                <>
+                  <Text>{t("create:modal.DL.title")}</Text>
+                  <Text fz="xs">
+                    1. {t("create:modal.DL.step1")}
+                    <br />
+                    2. {t("create:modal.DL.step2")}
+                    <br />
+                    3. {t("create:modal.DL.step3")}
+                  </Text>
+                  <a href={deepLink}>
+                    <Button m="xs">
+                      {t("create:modal.DL.beetBTN")}
+                    </Button>
+                  </a>
+                  <Button
+                    m="xs"
+                    onClick={() => {
+                      setDeepLink();
+                    }}
+                  >
+                    {t("create:modal.DL.back")}
+                  </Button>
+                </>
+              )
+              : null
+          }
         </Modal>
 
         <Group position="center">
-          <Button style={{ marginTop: '20px' }} onClick={open}>Ask BEET to create ticket</Button>
+          <Button style={{ marginTop: '20px' }} onClick={open}>
+            {t("create:askBEET")}
+          </Button>
         </Group>
       </Card>
 
       <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
         <Title order={5} ta="center" mt="xs">
-          As a result of creating this ticket, the top 10 leaderboard stats will change as such
+          {t("create:leaderChange.title")}
         </Title>
         <Table miw={800} verticalSpacing="sm" mt="md">
           <thead>
             <tr>
-              <th align="left">ID</th>
-              <th align="left">Amount</th>
-              <th align="left">Before</th>
-              <th align="left">After</th>
+              <th align="left">{t("create:leaderChange.th1")}</th>
+              <th align="left">{t("create:leaderChange.th2")}</th>
+              <th align="left">{t("create:leaderChange.th3")}</th>
+              <th align="left">{t("create:leaderChange.th4")}</th>
             </tr>
           </thead>
           <tbody>
             {
-                        leaderboardJSON.slice(0, 10).map((leader) => (
-                          <tr key={leader.id}>
-                            <td>{leader.id}</td>
-                            <td>{leader.amount}</td>
-                            <td>
-                              {leader.percent.toFixed(2)}
-                              {' '}
-                              %
-                            </td>
-                            <td>
-                              {((leader.amount / (currentlyLocked + tokenLockValue)) * 100).toFixed(2)}
-                              {' '}
-                              %
-                            </td>
-                          </tr>
-                        ))
-                    }
+              leaderboardJSON.slice(0, 10).map((leader) => (
+                <tr key={leader.id}>
+                  <td>{leader.id}</td>
+                  <td>{leader.amount}</td>
+                  <td>
+                    {leader.percent.toFixed(2)}
+                    {' '}
+                    %
+                  </td>
+                  <td>
+                    {((leader.amount / (currentlyLocked + tokenLockValue)) * 100).toFixed(2)}
+                    {' '}
+                    %
+                  </td>
+                </tr>
+              ))
+            }
           </tbody>
         </Table>
       </Card>
-
     </>
   );
 }

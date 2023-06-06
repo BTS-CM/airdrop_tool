@@ -1,0 +1,25 @@
+{
+    "one": "on 1 võidupilet ",
+    "many": "on {{qty}} võitnud pileteid ",
+    "jsonLabel": "{{id}}võitnud pileti JSON",
+    "header": {
+      "title": "planeeritud {{chainName}} õhutilga sisu",
+      "continue": "Tehke Airdrop",
+      "back": "tagasi"
+    },
+    "missingData": "Piletit ei leitud",
+    "details": {
+      "id": "ID",
+      "hash": "Räsi",
+      "dedupe": "Deduplikeeritud",
+      "onlyWins": "Ainult võidupiletid",
+      "blockNum": "Blokeeri number",
+      "algos": "Algoritmid"
+    },
+    "basis": {
+      "witSig": "Tunnistaja allkiri",
+      "filtSig": "Filtreeritud allkiri"
+    },
+    "winners": "Võitjad",
+    "json": "JSON-i töötlemata andmed"
+  }

@@ -1,0 +1,25 @@
+{
+    "one": "tiene 1 boleto ganador ",
+    "many": "tiene {{qty}} boletos ganadores ",
+    "jsonLabel": "{{id}}El boleto ganador de JSON",
+    "header": {
+      "title": "planificado {{chainName}} contenido de lanzamiento aéreo",
+      "continue": "Realizar lanzamiento aéreo",
+      "back": "Atrás"
+    },
+    "missingData": "Boleto no encontrado",
+    "details": {
+      "id": "IDENTIFICACIÓN",
+      "hash": "Picadillo",
+      "dedupe": "deduplicado",
+      "onlyWins": "Solo boletos ganadores",
+      "blockNum": "Número de bloque",
+      "algos": "Algoritmos"
+    },
+    "basis": {
+      "witSig": "Firma de testigo",
+      "filtSig": "Firma filtrada"
+    },
+    "winners": "Ganadores",
+    "json": "Datos JSON sin procesar"
+  }

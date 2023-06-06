@@ -1,0 +1,12 @@
+{
+    "none": "Ticket nicht gefunden",
+    "id": "Ticketnummer",
+    "owner": "Ticketbesitzer",
+    "currentType": "Aktueller Tickettyp",
+    "targetType": "Zieltickettyp",
+    "storedTickets": "{{assetName}} im Ticket gespeichert",
+    "ticketValue": "{{assetName}} Ticketwert",
+    "currentStatus": "Aktueller Ticketstatus",
+    "nextUpgrade": "Nächste automatische Aktualisierungszeit",
+    "nextDowngrade": "Nächster automatischer Downgrade-Zeitpunkt"
+  }

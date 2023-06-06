@@ -1,0 +1,43 @@
+{
+    "title": "Tere tulemast tööriista Bitshares Beet Airdrop!",
+    "desc": "Bitsharesi plokiahelate jaoks on saadaval järgmised funktsioonid!",
+    "footer": "Selle tööriista funktsioonide täielikuks kasutamiseks on vaja Bitshares BEET multirahakotti.",
+    "grid": {
+      "ticketRetrieval": {
+        "title": "Pileti kättesaamine",
+        "desc": "Hankige plokiahela hääletuspiletid"
+      },
+      "ticketAnalysis": {
+        "title": "Piletiandmete analüüs",
+        "desc": "Analüüsige hääletuspiletite sisu"
+      },
+      "ticketLeaderboard": {
+        "title": "Piletite edetabelid",
+        "desc": "Sorteerib hääletuspiletid edetabelitesse"
+      },
+      "airdropCalc": {
+        "title": "Õhutilga arvutamine",
+        "desc": "Looge airdrop vektorid tõestatavalt juhuslike plokiahelapõhiste sisenditega"
+      },
+      "airdropAnalysis": {
+        "title": "Arvutatud õhutilga analüüs",
+        "desc": "Enne plokiahelas käivitamist kontrollige arvutatud õhutilkade sisu"
+      },
+      "airdropExecute": {
+        "title": "Airdropi teostus",
+        "desc": "Sooritage plokiahelal token airdrops"
+      },
+      "createTicket": {
+        "title": "Pileti loomine",
+        "desc": "Hääletamiseks ja õhupiiskade saamiseks lukustage märgid"
+      },
+      "faq": {
+        "title": "Korduma kippuvad küsimused",
+        "desc": "Lugege lisateavet airdropsi, piletite ja plokiahelate kohta"
+      },
+      "nodes": {
+        "title": "Konfigureeritavad sõlmed",
+        "desc": "Vahetage plokiahela sõlmede vahel"
+      }
+    }
+  }

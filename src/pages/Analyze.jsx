@@ -12,6 +12,8 @@ import {
   ActionIcon,
 } from '@mantine/core';
 import { Link } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
+
 import { appStore, ticketStore } from '../lib/states';
 
 function humanReadableFloat(satoshis, precision) {
@@ -19,6 +21,7 @@ function humanReadableFloat(satoshis, precision) {
 }
 
 export default function Analyze(properties) {
+  const { t, i18n } = useTranslation();
   const btsTickets = ticketStore((state) => state.bitshares);
   const btsTestnetTickets = ticketStore((state) => state.bitshares_testnet);
   const tuscTickets = ticketStore((state) => state.tusc);
@@ -145,15 +148,15 @@ export default function Analyze(properties) {
     <>
       <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
         <Title order={2} ta="center" mt="sm">
-          Blockchain ticket analysis
+          {t("analyze:title")}
         </Title>
 
         <Radio.Group
           value={value}
           onChange={setValue}
           name="chosenBlockchain"
-          label="Select the target blockchain"
-          description="Graphene based blockchains only"
+          label={t("analyze:radioLabel")}
+          description={t("analyze:radioDesc")}
           withAsterisk
         >
           <Group mt="xs">
@@ -172,7 +175,7 @@ export default function Analyze(properties) {
                     <Text fz="lg" fw={500} mt="md">
                       {assetName}
                       {' '}
-                      locked
+                      {t("analyze:locked")}
                     </Text>
                     <Text fz="sm" c="dimmed" mt="sm">
                       {lockedQuantity}
@@ -182,7 +185,7 @@ export default function Analyze(properties) {
                     <Text fz="lg" fw={500} mt="md">
                       {assetName}
                       {' '}
-                      Boosted value
+                      {t("analyze:boosted")}
                     </Text>
                     <Text fz="sm" c="dimmed" mt="sm">
                       {boostedValue}
@@ -190,7 +193,7 @@ export default function Analyze(properties) {
                   </Card>
                   <Card shadow="md" radius="md" padding="xl">
                     <Text fz="lg" fw={500} mt="md">
-                      Unique users
+                      {t("analyze:unique")}
                     </Text>
                     <Text fz="sm" c="dimmed" mt="sm">
                       {uniqueCount}
@@ -198,7 +201,7 @@ export default function Analyze(properties) {
                   </Card>
                   <Card shadow="md" radius="md" padding="xl">
                     <Text fz="lg" fw={500} mt="md">
-                      Active tickets
+                      {t("analyze:active")}
                     </Text>
                     <Text fz="sm" c="dimmed" mt="sm">
                       {validTickets.length}
@@ -207,12 +210,12 @@ export default function Analyze(properties) {
 
                   <Card shadow="md" radius="md" padding="xl">
                     <Text fz="lg" fw={500} mt="md">
-                      Locked for 180 days
+                      {t("analyze:smLock")}
                     </Text>
                     <Text fz="sm" c="dimmed" mt="sm">
                       {smallLock.length}
                       {' '}
-                      tickets (
+                      {t("analyze:tickets")} (
                       {((smallLock.length / uniqueCount) * 100).toFixed(2)}
                       {' '}
                       %)
@@ -228,17 +231,17 @@ export default function Analyze(properties) {
                       %)
                     </Text>
                     <Text fz="xs" c="dimmed" mt="sm">
-                      200% vote multiplier
+                      {t("analyze:smMulti")}
                     </Text>
                   </Card>
                   <Card shadow="md" radius="md" padding="xl">
                     <Text fz="lg" fw={500} mt="md">
-                      Locked for 360 days
+                      {t("analyze:mdLock")}
                     </Text>
                     <Text fz="sm" c="dimmed" mt="sm">
                       {medLock.length}
                       {' '}
-                      tickets (
+                      {t("analyze:tickets")} (
                       {((medLock.length / uniqueCount) * 100).toFixed(2)}
                       {' '}
                       %)
@@ -254,17 +257,17 @@ export default function Analyze(properties) {
                       %)
                     </Text>
                     <Text fz="xs" c="dimmed" mt="sm">
-                      400% vote multiplier
+                      {t("analyze:mdMulti")}
                     </Text>
                   </Card>
                   <Card shadow="md" radius="md" padding="xl">
                     <Text fz="lg" fw={500} mt="md">
-                      Locked for 720 days
+                      {t("analyze:lgLock")}
                     </Text>
                     <Text fz="sm" c="dimmed" mt="sm">
                       {lgLock.length}
                       {' '}
-                      tickets (
+                      {t("analyze:tickets")} (
                       {((lgLock.length / uniqueCount) * 100).toFixed(2)}
                       {' '}
                       %)
@@ -280,17 +283,17 @@ export default function Analyze(properties) {
                       %)
                     </Text>
                     <Text fz="xs" c="dimmed" mt="sm">
-                      800% vote multiplier
+                      {t("analyze:lgMulti")}
                     </Text>
                   </Card>
                   <Card shadow="md" radius="md" padding="xl">
                     <Text fz="lg" fw={500} mt="md">
-                      Locked forever
+                      {t("analyze:xlLock")}
                     </Text>
                     <Text fz="sm" c="dimmed" mt="sm">
                       {xlLock.length}
                       {' '}
-                      tickets (
+                      {t("analyze:tickets")} (
                       {((xlLock.length / uniqueCount) * 100).toFixed(2)}
                       {' '}
                       %)
@@ -306,7 +309,7 @@ export default function Analyze(properties) {
                       %)
                     </Text>
                     <Text fz="xs" c="dimmed" mt="sm">
-                      800% vote multiplier
+                      {t("analyze:xlMulti")}
                     </Text>
                   </Card>
                 </SimpleGrid>
@@ -318,7 +321,7 @@ export default function Analyze(properties) {
               ? (
                 <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
                   <Title order={3} ta="center" mt="sm">
-                    You must fetch the ticket data for this blockchain.
+                    {t("analyze:fetchTickets")}
                   </Title>
                 </Card>
               )
@@ -327,15 +330,15 @@ export default function Analyze(properties) {
                   <Table highlightOnHover>
                     <thead>
                       <tr>
-                        <th>id</th>
-                        <th>account</th>
-                        <th>current type</th>
-                        <th>target type</th>
-                        <th>amount</th>
-                        <th>current status</th>
-                        <th>value</th>
-                        <th>next update time</th>
-                        <th>next downgrade time</th>
+                        <th>{t("analyze:th1")}</th>
+                        <th>{t("analyze:th2")}</th>
+                        <th>{t("analyze:th3")}</th>
+                        <th>{t("analyze:th4")}</th>
+                        <th>{t("analyze:th5")}</th>
+                        <th>{t("analyze:th6")}</th>
+                        <th>{t("analyze:th7")}</th>
+                        <th>{t("analyze:th8")}</th>
+                        <th>{t("analyze:th9")}</th>
                       </tr>
                     </thead>
                     <tbody>

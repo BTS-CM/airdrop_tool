@@ -1,0 +1,37 @@
+{
+    "loadingAccount": "Indlæser kontooplysninger!",
+    "qtyTokens": "Mængde-tokens",
+    "accountBalances": "Kontosaldi",
+    "locked": "Låst",
+    "values": "billetværdier",
+    "created": "Samlet oprettede billetter",
+    "active": "Aktive billetter",
+    "smallLock": "Låst i 180 dage",
+    "smallBoost": "200% stemmemultiplikator",
+    "medLock": "Låst i 360 dage",
+    "medBoost": "400% stemmemultiplikator",
+    "lgLock": "Låst i 720 dage",
+    "lgBoost": "800% stemmemultiplikator",
+    "xlLock": "Låst for altid",
+    "xlBoost": "800% stemmemultiplikator",
+    "tickets": "billetter",
+    "voteWeight": "stemmevægt",
+    "untracked": "Saldi for denne bruger er endnu ikke sporet",
+    "table": {
+      "th1": "id",
+      "th2": "konto",
+      "th3": "nuværende type",
+      "th4": "måltype",
+      "th5": "beløb",
+      "th6": "nuværende status",
+      "th7": "værdi",
+      "th8": "næste opdateringstidspunkt",
+      "th9": "næste nedgraderingstidspunkt"
+    },
+    "footer": {
+      "title": "Vil du have indflydelse og forbedre dine airdrop odds?",
+      "create": "Opret endnu en billet på",
+      "blockchain": "blockchain",
+      "button": "Opret ny billet"
+    }
+  }

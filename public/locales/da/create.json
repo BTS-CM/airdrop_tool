@@ -1,0 +1,48 @@
+{
+    "title": "Opret en billet",
+    "radioA": {
+      "label": "Vælg den ønskede blockchain",
+      "desc": "Kun grafenbaserede blockchains"
+    },
+    "radioB": {
+      "label": "Vælg din ønskede billettype",
+      "desc": "Længere låsetid giver større stemmevægt.",
+      "sm": "Lås i 180 dage (200 % boost)",
+      "md": "Lås i 360 dage (400 % boost)",
+      "lg": "Lås i 720 dage (800 % boost)",
+      "xl": "Lås for evigt (800 % boost)"
+    },
+    "qty": "Indtast det antal, du ønsker at låse",
+    "text": {
+      "lock": "Ved at låse",
+      "equivalent": "din billet vil svare til",
+      "area": "med hensyn til afstemning og airdrop overfladeareal."
+    },
+    "modal": {
+      "title": "Oprettelse af en billet",
+      "noDL": {
+        "title": "Via rå Beet deeplink",
+        "step1": "Start BEET-pungen og naviger til 'Raw Link' i menuen.",
+        "step2": "Fra denne side kan du enten tillade alle handlinger eller udelukkende tillade operation 57 'Billetopret' (klik derefter på Gem).",
+        "step3": "Når 'Klar til rå links' vises i Beet, indsend denne anmodning.",
+        "label": "Indtast dit konto-id",
+        "btn": "Generer råt deeplink"
+      },
+      "DL": {
+        "title": "Rå dyblink genereret",
+        "step1": "Dit BEET-dyblink er blevet genereret, klik på knappen for at fortsætte.",
+        "step2": "Der vises en BEET-prompt, bekræft indholdet og godkend derefter opret billet-prompten.",
+        "step3": "Gå til siden 'Hent billetter' for at downloade din billet til analyse.",
+        "beetBTN": "Sendes til BEET",
+        "back": "Tilbage"
+      }
+    },
+    "askBEET": "Bed BEET om at oprette billet",
+    "leaderChange": {
+      "title": "Som et resultat af at oprette denne billet, kan top 10 leaderboard-statistikker ændre sig som sådan",
+      "th1": "ID",
+      "th2": "Beløb",
+      "th3": "Før",
+      "th4": "Efter"
+    }
+  }

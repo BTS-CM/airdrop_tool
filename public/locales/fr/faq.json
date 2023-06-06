@@ -1,0 +1,51 @@
+{
+    "how_airdrop": {
+      "control": "Comment effectuer un airdrop ?",
+      "panel": "Récupérez les tickets blockchain, calculez un largage par rapport à un numéro de bloc, vérifiez le contenu du largage dans la page d'analyse, puis commencez le largage via la page d'exécution du largage. "
+    },
+    "why_beet": {
+      "control": "Pourquoi cet outil utilise-t-il le multiportefeuille BEET ?",
+      "panel": "Le multiwallet Bitshares BEET est un portefeuille multi-blockchain, prenant en charge Bitshares, Bitshares testnet et TUSC, parfait pour cette application. "
+    },
+    "how_tickets": {
+      "control": "Comment créer un ticket ?",
+      "panel": "Vous pouvez soit créer un ticket via la page \"créer un ticket\", soit dans chaque page de vote du portefeuille de référence des blockchains. "
+    },
+    "why_ticket": {
+      "control": "Pourquoi créer un ticket ?",
+      "panel": "Il existe plusieurs raisons de créer des tickets blockchain, comme l'obtention du droit de vote sur les témoins, le résultat de la proposition du comité et des travailleurs, ainsi que le fait de devenir une cible pour de futurs parachutages potentiels !"
+    },
+    "how_undo_ticket": {
+      "control": "Comment retirer mes tokens d'un ticket ?",
+      "panel": "Si votre billet a une durée inférieure à une durée indéterminée, vous pouvez alors déclencher un retrait de billet via le portefeuille de référence. "
+    },
+    "how_report_issue": {
+      "control": "Comment puis-je signaler un problème avec cet outil ?",
+      "panel": "Veuillez signaler les problèmes au référentiel github."
+    },
+    "fees": {
+      "control": "Quels sont les frais de blockchain associés aux parachutages ?",
+      "panel": "Le coût des frais de largage augmentera s'il y a de nombreux destinataires de largage. "
+    },
+    "ltm": {
+      "control": "Comment puis-je réduire les frais associés à l'exécution d'un airdrop ?",
+      "panel": "Vous pouvez acheter un abonnement à vie (LTM) pour environ 100 $ dans l'application Web de référence, ce qui réduira efficacement les frais de 80 %"
+    },
+    "license": {
+      "control": "Cet outil est-il open source ? ",
+      "panel": "Cet outil est entièrement open source, disponible sur Github et sous licence MIT. "
+    },
+    "missing_tickets": {
+      "control": "Je n'arrive pas à trouver mon nouveau billet",
+      "panel": "Cet outil ne met pas automatiquement à jour les tickets récupérés ; "
+    },
+    "new_algos": {
+      "control": "J'ai une idée d'algorithme de calcul de largage, peut-elle être incluse ?",
+      "panel": "Étant donné que cet outil est entièrement open source, créez un problème avec l'idée et créez éventuellement une demande d'extraction pour inclure le nouvel algorithme. "
+    },
+    "alternative_wallet": {
+      "control": "Puis-je utiliser un autre portefeuille autre que le multiwallet BEET ?",
+      "panel": "Cet outil ne fonctionne actuellement qu'avec le multiwallet BEET pour effectuer des parachutages. "
+    },
+    "title": "Questions fréquemment posées"
+  }

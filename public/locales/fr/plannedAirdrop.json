@@ -1,0 +1,25 @@
+{
+    "one": "a 1 ticket gagnant ",
+    "many": "a {{qty}} billets gagnants ",
+    "jsonLabel": "{{id}}le ticket gagnant JSON",
+    "header": {
+      "title": "prévu {{chainName}} contenu du parachutage",
+      "continue": "Effectuer un largage aérien",
+      "back": "Dos"
+    },
+    "missingData": "Billet introuvable",
+    "details": {
+      "id": "IDENTIFIANT",
+      "hash": "Hacher",
+      "dedupe": "Dédoublonné",
+      "onlyWins": "Seuls les billets gagnants",
+      "blockNum": "Numéro de bloc",
+      "algos": "Algorithmes"
+    },
+    "basis": {
+      "witSig": "Signature du témoin",
+      "filtSig": "Signature filtrée"
+    },
+    "winners": "Gagnants",
+    "json": "Données JSON brutes"
+  }

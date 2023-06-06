@@ -1,0 +1,12 @@
+{
+    "none": "Ticket not found",
+    "id": "Ticket ID",
+    "owner": "Ticket owner",
+    "currentType": "Current ticket type",
+    "targetType": "Target ticket type",
+    "storedTickets": "{{assetName}} stored in ticket",
+    "ticketValue": "{{assetName}} ticket value",
+    "currentStatus": "Current ticket status",
+    "nextUpgrade": "Next auto update time",
+    "nextDowngrade": "Next auto downgrade time"
+}

@@ -1,0 +1,37 @@
+{
+    "loadingAccount": "Loading account details!",
+    "qtyTokens": "Quantity tokens",
+    "accountBalances": "Account balances",
+    "locked": "locked",
+    "values": "ticket values",
+    "created": "Total created tickets",
+    "active": "Active tickets",
+    "smallLock": "Locked for 180 days",
+    "smallBoost": "200% vote multiplier",
+    "medLock": "Locked for 360 days",
+    "medBoost": "400% vote multiplier",
+    "lgLock": "Locked for 720 days",
+    "lgBoost": "800% vote multiplier",
+    "xlLock": "Locked forever",
+    "xlBoost": "800% vote multiplier",
+    "tickets": "tickets",
+    "voteWeight": "vote weight",
+    "untracked": "Balances for this user not yet tracked",
+    "table": {
+        "th1": "id",
+        "th2": "account",
+        "th3": "current type",
+        "th4": "target type",
+        "th5": "amount",
+        "th6": "current status",
+        "th7": "value",
+        "th8": "next update time",
+        "th9": "next downgrade time"
+    },
+    "footer": {
+        "title": "Want to gain influence and improve your airdrop odds?",
+        "create": "Create another ticket on the",
+        "blockchain": "blockchain",
+        "button": "Create new ticket"
+    }
+}

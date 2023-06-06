@@ -1,0 +1,51 @@
+{
+    "how_airdrop": {
+      "control": "Wie führe ich einen Airdrop durch?",
+      "panel": "Rufen Sie die Blockchain-Tickets ab, berechnen Sie einen Airdrop anhand einer Blocknummer, überprüfen Sie den Inhalt des Airdrops auf der Analyseseite und beginnen Sie dann mit dem Airdrop über die Airdrop-Ausführungsseite. "
+    },
+    "why_beet": {
+      "control": "Warum verwendet dieses Tool das BEET-Multiwallet?",
+      "panel": "Das Bitshares BEET Multiwallet ist ein Multi-Blockchain-Wallet, das Bitshares, Bitshares Testnet und TUSC unterstützt und perfekt für diese App geeignet ist. "
+    },
+    "how_tickets": {
+      "control": "Wie erstelle ich ein Ticket?",
+      "panel": "Sie können ein Ticket entweder über die Seite „Ticket erstellen“ oder auf der Abstimmungsseite der jeweiligen Blockchain-Referenz-Wallet erstellen. "
+    },
+    "why_ticket": {
+      "control": "Warum sollte ich ein Ticket erstellen?",
+      "panel": "Es gibt mehrere Gründe, Blockchain-Tickets zu erstellen, z. B. die Erlangung von Stimmrechten über Zeugen, das Ergebnis von Ausschuss- und Arbeitnehmervorschlägen sowie die Möglichkeit, zum Ziel potenzieller zukünftiger Luftabwürfe zu werden!"
+    },
+    "how_undo_ticket": {
+      "control": "Wie bekomme ich meine Token aus einem Ticket?",
+      "panel": "Wenn Ihr Ticket eine kürzere Laufzeit als ewig hat, können Sie über das Referenz-Wallet eine Ticket-Auszahlung auslösen. "
+    },
+    "how_report_issue": {
+      "control": "Wie kann ich ein Problem mit diesem Tool melden?",
+      "panel": "Bitte melden Sie Probleme dem Github-Repo."
+    },
+    "fees": {
+      "control": "Welche Blockchain-Gebühren fallen bei Airdrops an?",
+      "panel": "Die Kosten für die Airdrop-Gebühr steigen, wenn es viele Airdrop-Empfänger gibt. "
+    },
+    "ltm": {
+      "control": "Wie kann ich die Gebühren für die Durchführung eines Airdrops senken?",
+      "panel": "Sie können eine lebenslange Mitgliedschaft (LTM) für ca. 100 $ in der Referenz-Web-App erwerben. Dadurch werden die Gebühren effektiv um 80 % gesenkt."
+    },
+    "license": {
+      "control": "Ist dieses Tool Open Source? ",
+      "panel": "Dieses Tool ist vollständig Open Source, auf Github verfügbar und MIT-lizenziert. "
+    },
+    "missing_tickets": {
+      "control": "Ich kann mein neues Ticket nicht finden",
+      "panel": "Dieses Tool aktualisiert abgerufene Tickets nicht automatisch; "
+    },
+    "new_algos": {
+      "control": "Ich habe eine Idee für einen Airdrop-Berechnungsalgorithmus. Kann dieser einbezogen werden?",
+      "panel": "Da dieses Tool vollständig Open Source ist, erstellen Sie ein Problem mit der Idee und erstellen Sie möglicherweise eine Pull-Anfrage, um den neuen Algorithmus einzubinden. "
+    },
+    "alternative_wallet": {
+      "control": "Kann ich ein anderes Wallet als das BEET-Multiwallet verwenden?",
+      "panel": "Dieses Tool funktioniert derzeit nur mit dem BEET-Multiwallet zur Durchführung von Airdrops. "
+    },
+    "title": "Häufig gestellte Fragen"
+  }

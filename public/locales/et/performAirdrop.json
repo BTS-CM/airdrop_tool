@@ -1,0 +1,65 @@
+{
+    "header": {
+      "title": "Tehke õhutilk {{titleName}} plokiahel",
+      "back": "Airdropi kokkuvõte",
+      "others": "Arvutatud õhutilgad"
+    },
+    "noTicket": "Piletit ei leitud",
+    "grid": {
+      "left": {
+        "loading": "Varade andmete laadimine",
+        "processing": "Nõutava märgi kasutajasaldode töötlemine",
+        "table": {
+          "title": "Piletihoidjad kuuluvad airdropi komplekti",
+          "th1": "id",
+          "th2": "Kogus",
+          "th3": "Eraldatud märgid"
+        }
+      },
+      "right": {
+        "summary": {
+          "title": "Airdropi kokkuvõte",
+          "id": "ID",
+          "hash": "Räsi",
+          "dedupe": "Deduplikeeritud",
+          "onlyWins": "Ainult võidupiletid",
+          "blockno": "Plokinumber",
+          "algos": "Algoritmid",
+          "winners": "Võitjad",
+          "ticketWinQty": "Võidupileti kogus"
+        },
+        "options": {
+          "title": "Airdropi valikud",
+          "titleName": "Sisestage oma {{titleName}} Konto ID",
+          "assetName": "Sisestage selle vara nimi, mida soovite eetrisse saata",
+          "batchSize": "Õhutilga ülekandepartiide suurus",
+          "tokenQuantity": "Sisestage žetoonide kogus, mida soovite õhust välja lasta",
+          "distroRadio": {
+            "title": "Kuidas tuleks žetoone võitjatele eraldada?",
+            "equally": "Samamoodi võitnud konto ID-de vahel",
+            "proportionally": "Proportsionaalne võidetud piletitega",
+            "roundRobin": "Eraldage terved märgid ümmarguse meetodiga"
+          },
+          "reqRadio": {
+            "title": "Kas kehtestada täiendavad märginõuded?",
+            "yes": "Jah",
+            "no": "Ei",
+            "requiredToken": "Esitage nõutava märgi sümbol",
+            "requiredTokenQty": "Esitage vajalike žetoonide kogus"
+          }
+        },
+        "invalid": {
+          "title": "Pole midagi õhku lasta",
+          "reason": "Arvestades, et kehtivaid pileteid pole, pole ka midagi lendu lasta.",
+          "resolution": "Jätkamiseks reguleerige õhutilku sätteid või arvutage välja mõni muu õhutilk."
+        },
+        "valid": {
+          "title": "Kas jätkata airdropiga?",
+          "note": "Pidage õhutilkade partiide kavandamisel silmas tehingute ja ploki suuruse piiranguid.",
+          "single": "Partiipiiranguga {{batchSize}}, selle õhutilgutamiseks on vaja 1 partii.",
+          "multi": "Partiipiiranguga {{batchSize}}, {{qtyBatches}} selle õhutilga täitmiseks on vaja partiid.",
+          "reminder": "Pidage õhutilkade partiide kavandamisel silmas tehingute ja ploki suuruse piiranguid."
+        }
+      }
+    }
+  }

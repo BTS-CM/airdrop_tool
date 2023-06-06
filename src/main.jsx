@@ -1,12 +1,16 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App";
+//import ReactDOM from "react-dom/client";
+import { createRoot } from 'react-dom/client';
 import { HashRouter } from "react-router-dom";
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <HashRouter>
-      <App />
-    </HashRouter>
-  </React.StrictMode>,
+import App from "./App";
+
+import './localization/index';
+
+const container = document.getElementById('root');
+const root = createRoot(container);
+root.render(
+  <HashRouter>
+    <App />
+  </HashRouter>
 );

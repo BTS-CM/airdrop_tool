@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 import {
   Title,
   Text,
@@ -22,6 +23,7 @@ function humanReadableFloat(satoshis, precision) {
 }
 
 export default function Leaderboard(properties) {
+  const { t, i18n } = useTranslation();
   const btsLeaderboard = leaderboardStore((state) => state.bitshares);
   const btsTestnetLeaderboard = leaderboardStore((state) => state.bitshares_testnet);
   const tuscLeaderboard = leaderboardStore((state) => state.tusc);
@@ -72,15 +74,15 @@ export default function Leaderboard(properties) {
     <>
       <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
         <Title order={2} ta="center" mt="sm">
-          Blockchain ticket leaderboards
+          {t("leaderboard:title")}
         </Title>
 
         <Radio.Group
           value={value}
           onChange={setValue}
           name="chosenBlockchain"
-          label="Select the target blockchain"
-          description="Graphene based blockchains only"
+          label={t("leaderboard:radio.label")}
+          description={t("leaderboard:radio.desc")}
           withAsterisk
         >
           <Group mt="xs">
@@ -92,63 +94,63 @@ export default function Leaderboard(properties) {
       </Card>
 
       {
-            !tableRows || !tableRows.length
-              ? null
-              : (
-                <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
-                  <Accordion>
-                    <Accordion.Item key="json" value="leaderboard_json">
-                      <Accordion.Control>
-                        {titleName}
-                        {' '}
-                        Leaderboard JSON
-                      </Accordion.Control>
-                      <Accordion.Panel style={{ backgroundColor: '#FAFAFA' }}>
-                        <JsonInput
-                          placeholder="Textarea will autosize to fit the content"
-                          defaultValue={JSON.stringify(leaderboardJSON)}
-                          validationError="Invalid JSON"
-                          formatOnBlur
-                          autosize
-                          minRows={4}
-                          maxRows={15}
-                        />
-                      </Accordion.Panel>
-                    </Accordion.Item>
-                  </Accordion>
-                </Card>
-              )
-        }
+        !tableRows || !tableRows.length
+          ? null
+          : (
+            <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
+              <Accordion>
+                <Accordion.Item key="json" value="leaderboard_json">
+                  <Accordion.Control>
+                    {titleName}
+                    {' '}
+                    {t("leaderboard:json")}
+                  </Accordion.Control>
+                  <Accordion.Panel style={{ backgroundColor: '#FAFAFA' }}>
+                    <JsonInput
+                      placeholder="Textarea will autosize to fit the content"
+                      defaultValue={JSON.stringify(leaderboardJSON)}
+                      validationError="Invalid JSON"
+                      formatOnBlur
+                      autosize
+                      minRows={4}
+                      maxRows={15}
+                    />
+                  </Accordion.Panel>
+                </Accordion.Item>
+              </Accordion>
+            </Card>
+          )
+      }
 
       {
-            !tableRows || !tableRows.length
-              ? (
-                <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
-                  <Title order={3} ta="center" mt="sm">
-                    You must fetch the ticket data for this blockchain.
-                  </Title>
-                </Card>
-              )
-              : (
-                <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
-                  <Table>
-                    <thead>
-                      <tr>
-                        <th>User ID</th>
-                        <th>Boosted Amount</th>
-                        <th>Tickets</th>
-                        <th>Percent</th>
-                        <th>Ticket # from</th>
-                        <th>Ticket # to</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {tableRows}
-                    </tbody>
-                  </Table>
-                </Card>
-              )
-        }
+        !tableRows || !tableRows.length
+          ? (
+            <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
+              <Title order={3} ta="center" mt="sm">
+                {t("leaderboard:table.none")}
+              </Title>
+            </Card>
+          )
+          : (
+            <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
+              <Table>
+                <thead>
+                  <tr>
+                    <th>{t("leaderboard:table.th1")}</th>
+                    <th>{t("leaderboard:table.th2")}</th>
+                    <th>{t("leaderboard:table.th3")}</th>
+                    <th>{t("leaderboard:table.th4")}</th>
+                    <th>{t("leaderboard:table.th5")}</th>
+                    <th>{t("leaderboard:table.th6")}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {tableRows}
+                </tbody>
+              </Table>
+            </Card>
+          )
+      }
     </>
   );
 }

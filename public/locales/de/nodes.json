@@ -1,0 +1,11 @@
+{
+    "title": "Konfiguration des Blockchain-Knotens",
+    "radio": {
+      "label": "Wählen Sie die Zielblockchain aus",
+      "desc": "Nur Blockchains auf Graphenbasis"
+    },
+    "th1": "Aktuell {{value}} Reihenfolge der Blockchain-Knoten",
+    "title2": "Interessiert daran, Ihr eigenes zu verwenden {{value}} Blockchain-Knoten?",
+    "urlLabel": "Geben Sie eine URL für die ein {{value}} Blockchain",
+    "btn": "Einreichen"
+  }

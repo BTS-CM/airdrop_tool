@@ -1,0 +1,11 @@
+{
+    "title": "Blockchain node konfiguration",
+    "radio": {
+      "label": "Vælg den ønskede blockchain",
+      "desc": "Kun grafenbaserede blockchains"
+    },
+    "th1": "Nuværende {{value}} blockchain node rækkefølge",
+    "title2": "Interesseret i at bruge din egen {{value}} blockchain node?",
+    "urlLabel": "Indtast en URL for {{value}} blockchain",
+    "btn": "Indsend"
+  }

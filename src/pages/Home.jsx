@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 import {
   Title,
@@ -26,30 +27,31 @@ import {
 } from "react-icons/hi";
 
 /*
-            <Link style={{ textDecoration: 'none' }} to="/faq">
-                <Card shadow="md" radius="md" padding="xl">
-                    <ThemeIcon variant="light" size={40} radius={40}>
-                        <HiSearch />
-                    </ThemeIcon>
-                    <Text fz="lg" fw={500} mt="sm">
-                        Account search
-                    </Text>
-                    <Text fz="sm" c="dimmed" mt="sm">
-                        Search for blockchain accounts
-                    </Text>
-                </Card>
-            </Link>
+  <Link style={{ textDecoration: 'none' }} to="/faq">
+      <Card shadow="md" radius="md" padding="xl">
+          <ThemeIcon variant="light" size={40} radius={40}>
+              <HiSearch />
+          </ThemeIcon>
+          <Text fz="lg" fw={500} mt="sm">
+              Account search
+          </Text>
+          <Text fz="sm" c="dimmed" mt="sm">
+              Search for blockchain accounts
+          </Text>
+      </Card>
+  </Link>
 */
 
 export default function Home(properties) {
+  const { t, i18n } = useTranslation();
   return (
     <>
       <Title order={2} ta="center" mt="sm">
-        Welcome to the Bitshares Beet Airdrop tool!
+        {t("home:title")}
       </Title>
 
       <Text c="dimmed" ta="center" mt="md">
-        The following features are available for the Bitshares blockchains!
+        {t("home:desc")}
       </Text>
 
       <SimpleGrid cols={3} spacing="xl" mt={50} breakpoints={[{ maxWidth: 'md', cols: 2 }, { maxWidth: 'sm', cols: 1 }]}>
@@ -59,10 +61,10 @@ export default function Home(properties) {
               <HiOutlineTicket />
             </ThemeIcon>
             <Text fz="lg" fw={500} mt="sm">
-              Ticket retrieval
+              {t("home:grid.ticketRetrieval.title")}
             </Text>
             <Text fz="sm" c="dimmed" mt="sm">
-              Fetch blockchain voting tickets
+              {t("home:grid.ticketRetrieval.desc")}
             </Text>
           </Card>
         </Link>
@@ -72,10 +74,10 @@ export default function Home(properties) {
               <HiOutlineDatabase />
             </ThemeIcon>
             <Text fz="lg" fw={500} mt="sm">
-              Ticket data analysis
+              {t("home:grid.ticketAnalysis.title")}
             </Text>
             <Text fz="sm" c="dimmed" mt="sm">
-              Analyze the contents of voting tickets
+              {t("home:grid.ticketAnalysis.desc")}
             </Text>
           </Card>
         </Link>
@@ -85,10 +87,10 @@ export default function Home(properties) {
               <HiViewList />
             </ThemeIcon>
             <Text fz="lg" fw={500} mt="sm">
-              Ticket leaderboards
+              {t("home:grid.ticketLeaderboard.title")}
             </Text>
             <Text fz="sm" c="dimmed" mt="sm">
-              Sorts voting tickets into leaderboards
+              {t("home:grid.ticketLeaderboard.desc")}
             </Text>
           </Card>
         </Link>
@@ -98,10 +100,10 @@ export default function Home(properties) {
               <HiOutlineCalculator />
             </ThemeIcon>
             <Text fz="lg" fw={500} mt="sm">
-              Airdrop calculation
+              {t("home:grid.airdropCalc.title")}
             </Text>
             <Text fz="sm" c="dimmed" mt="sm">
-              Create airdrop vectors with provably random blockchain based inputs
+              {t("home:grid.airdropCalc.desc")}
             </Text>
           </Card>
         </Link>
@@ -111,10 +113,10 @@ export default function Home(properties) {
               <HiOutlineChartPie />
             </ThemeIcon>
             <Text fz="lg" fw={500} mt="sm">
-              Calculated airdrop analysis
+              {t("home:grid.airdropAnalysis.title")}
             </Text>
             <Text fz="sm" c="dimmed" mt="sm">
-              Verify the contents of calculated airdrops prior to execution on the blockchain
+              {t("home:grid.airdropAnalysis.desc")}
             </Text>
           </Card>
         </Link>
@@ -124,10 +126,10 @@ export default function Home(properties) {
               <HiOutlinePaperAirplane />
             </ThemeIcon>
             <Text fz="lg" fw={500} mt="sm">
-              Airdrop execution
+              {t("home:grid.airdropExecute.title")}
             </Text>
             <Text fz="sm" c="dimmed" mt="sm">
-              Perform token airdrops on the blockchain
+              {t("home:grid.airdropExecute.desc")}
             </Text>
           </Card>
         </Link>
@@ -137,10 +139,10 @@ export default function Home(properties) {
               <HiPlus />
             </ThemeIcon>
             <Text fz="lg" fw={500} mt="sm">
-              Ticket creation
+              {t("home:grid.createTicket.title")}
             </Text>
             <Text fz="sm" c="dimmed" mt="sm">
-              Lock tokens to vote and get airdrops
+              {t("home:grid.createTicket.desc")}
             </Text>
           </Card>
         </Link>
@@ -150,10 +152,10 @@ export default function Home(properties) {
               <HiOutlineQuestionMarkCircle />
             </ThemeIcon>
             <Text fz="lg" fw={500} mt="sm">
-              Frequently asked questions
+              {t("home:grid.faq.title")}
             </Text>
             <Text fz="sm" c="dimmed" mt="sm">
-              Learn more about airdrops, tickets and blockchains
+              {t("home:grid.faq.desc")}
             </Text>
           </Card>
         </Link>
@@ -163,17 +165,17 @@ export default function Home(properties) {
               <HiOutlineWifi />
             </ThemeIcon>
             <Text fz="lg" fw={500} mt="sm">
-              Configurable nodes
+              {t("home:grid.nodes.title")}
             </Text>
             <Text fz="sm" c="dimmed" mt="sm">
-              Switch between blockchain nodes
+              {t("home:grid.nodes.desc")}
             </Text>
           </Card>
         </Link>
       </SimpleGrid>
 
       <Text c="dimmed" ta="center" mt="md">
-        To make full use of the feature set available in this tool, the Bitshares BEET multiwallet is required.
+        {t("home:footer")}
       </Text>
     </>
   );

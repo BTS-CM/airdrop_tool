@@ -1,0 +1,19 @@
+{
+    "airdrop": "Airdrop",
+    "accounts": "kontosid",
+    "from": "alates",
+    "to": "juurde",
+    "distro": "levitatakse",
+    "method": "Kohaliku faili üleslaadimise kaudu",
+    "preStep1": "1. Käivitage BEET rahakott ja navigeerige menüüs jaotisse „Kohalik”.",
+    "preStep2": "2. Sellel lehel kas lubage kõik või lubage ainult toiming 0 „Ülekandmine”.",
+    "preStep3": "3. Kui olete kohalikul üleslaadimislehel, klõpsake jätkamiseks allolevat nuppu.",
+    "generate": "Loo airdrop JSON-fail",
+    "confirmation": "Loodi Airdrop JSON",
+    "download1": "1. Teie airdrop JSON on loodud, selle allalaadimiseks klõpsake nuppu.",
+    "download2": "2. Laadige lehelt BEET Local üles JSON-fail, ilmuma peaks viip.",
+    "download3": "3. Kontrollige enne õhulanguse kinnitamist viipa sisu.",
+    "downloadButton": "Laadige alla airdrop JSON",
+    "viewJSON": "Kavandatav õhulangetamise operatsioon JSON",
+    "begin": "Alustage lendu"
+  }

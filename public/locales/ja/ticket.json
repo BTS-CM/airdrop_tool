@@ -1,0 +1,12 @@
+{
+    "none": "チケットが見つかりません",
+    "id": "チケットID",
+    "owner": "チケット所有者",
+    "currentType": "現在のチケットの種類",
+    "targetType": "対象チケット種類",
+    "storedTickets": "{{assetName}} チケットに保存されている",
+    "ticketValue": "{{assetName}} チケットの価値",
+    "currentStatus": "現在のチケットステータス",
+    "nextUpgrade": "次回の自動更新時刻",
+    "nextDowngrade": "次回の自動ダウングレード時間"
+  }

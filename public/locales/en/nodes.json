@@ -1,0 +1,11 @@
+{
+    "title": "Blockchain node configuration",
+    "radio": {
+        "label": "Select the target blockchain",
+        "desc": "Graphene based blockchains only"
+    },
+    "th1": "Current {{value}} blockchain node order",
+    "title2": "Interested in using your own {{value}} blockchain node?",
+    "urlLabel": "Enter an URL for the {{value}} blockchain",
+    "btn": "Submit"
+}

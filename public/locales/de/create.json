@@ -1,0 +1,48 @@
+{
+    "title": "Erstellen Sie ein Ticket",
+    "radioA": {
+      "label": "Wählen Sie die Zielblockchain aus",
+      "desc": "Nur Blockchains auf Graphenbasis"
+    },
+    "radioB": {
+      "label": "Wählen Sie Ihren gewünschten Tickettyp aus",
+      "desc": "Längere Sperrdauern führen zu einem größeren Abstimmungsgewicht.",
+      "sm": "Sperre für 180 Tage (200 % Boost)",
+      "md": "360 Tage lang sperren (400 % Boost)",
+      "lg": "Sperre für 720 Tage (800 % Boost)",
+      "xl": "Für immer sperren (800 % Boost)"
+    },
+    "qty": "Geben Sie die Menge ein, die Sie sperren möchten",
+    "text": {
+      "lock": "Durch Sperren",
+      "equivalent": "Ihr Ticket entspricht dem",
+      "area": "in Bezug auf Abstimmungs- und Abwurffläche."
+    },
+    "modal": {
+      "title": "Ticket erstellen",
+      "noDL": {
+        "title": "Über den Deeplink zu Rohrüben",
+        "step1": "Starten Sie die BEET-Wallet und navigieren Sie im Menü zu „Raw Link“.",
+        "step2": "Auf dieser Seite können Sie entweder alle Vorgänge zulassen oder nur Vorgang 57 „Ticket erstellen“ zulassen (klicken Sie dann auf „Speichern“).",
+        "step3": "Sobald in Beet „Bereit für Rohlinks“ angezeigt wird, senden Sie diese Anfrage.",
+        "label": "Geben Sie Ihre Konto-ID ein",
+        "btn": "Roh-Deeplink generieren"
+      },
+      "DL": {
+        "title": "Roher Deeplink generiert",
+        "step1": "Ihr BEET-Deeplink wurde generiert. Klicken Sie auf die Schaltfläche, um fortzufahren.",
+        "step2": "Eine BEET-Eingabeaufforderung wird angezeigt. Überprüfen Sie den Inhalt und genehmigen Sie dann die Eingabeaufforderung zum Erstellen eines Tickets.",
+        "step3": "Gehen Sie zur Seite „Tickets abrufen“, um Ihr Ticket zur Analyse herunterzuladen.",
+        "beetBTN": "Ausstrahlung an BEET",
+        "back": "Zurück"
+      }
+    },
+    "askBEET": "Bitten Sie BEET, ein Ticket zu erstellen",
+    "leaderChange": {
+      "title": "Aufgrund der Erstellung dieses Tickets können sich die Statistiken der Top 10 der Bestenliste ändern",
+      "th1": "AUSWEIS",
+      "th2": "Menge",
+      "th3": "Vor",
+      "th4": "Nach"
+    }
+  }

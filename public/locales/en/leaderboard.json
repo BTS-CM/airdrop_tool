@@ -1,0 +1,17 @@
+{
+    "title": "Blockchain ticket leaderboards",
+    "radio": {
+        "label": "Select the target blockchain",
+        "desc": "Graphene based blockchains only"
+    },
+    "json": "Leaderboard JSON",
+    "table": {
+        "none": "You must fetch the ticket data for this blockchain.",
+        "th1": "User ID",
+        "th2": "Boosted Amount",
+        "th3": "Tickets",
+        "th4": "Percent",
+        "th5": "Ticket # from",
+        "th6": "Ticket # to"
+    }
+}

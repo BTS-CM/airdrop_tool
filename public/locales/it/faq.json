@@ -1,0 +1,51 @@
+{
+    "how_airdrop": {
+      "control": "Come eseguo un lancio aereo?",
+      "panel": "Recupera i ticket blockchain, calcola un airdrop rispetto a un numero di blocco, verifica il contenuto dell'airdrop nella pagina di analisi, quindi inizia l'airdrop tramite la pagina di esecuzione dell'airdrop. "
+    },
+    "why_beet": {
+      "control": "Perché questo strumento utilizza il multiwallet BEET?",
+      "panel": "Il multiwallet Bitshares BEET è un portafoglio multi-blockchain, che supporta Bitshares, Bitshares testnet e TUSC, perfetto per questa app. "
+    },
+    "how_tickets": {
+      "control": "Come faccio a creare un biglietto?",
+      "panel": "Puoi creare un ticket tramite la pagina \"crea ticket\" o all'interno di ogni pagina di votazione del portafoglio di riferimento blockchain. "
+    },
+    "why_ticket": {
+      "control": "Perché dovrei creare un biglietto?",
+      "panel": "Esistono diversi motivi per creare ticket blockchain, come ottenere il diritto di voto sui testimoni, l'esito della proposta del comitato e dei lavoratori, oltre a diventare un obiettivo per potenziali lanci aerei futuri!"
+    },
+    "how_undo_ticket": {
+      "control": "Come ottengo i miei gettoni da un biglietto?",
+      "panel": "Se il tuo biglietto ha una durata inferiore a quella per sempre, puoi attivare un ritiro del biglietto tramite il portafoglio di riferimento. "
+    },
+    "how_report_issue": {
+      "control": "Come posso segnalare un problema con questo strumento?",
+      "panel": "Si prega di segnalare i problemi al repository github."
+    },
+    "fees": {
+      "control": "Quali sono le commissioni blockchain associate agli airdrop?",
+      "panel": "Il costo della commissione Airdrop aumenterà se ci sono molti destinatari Airdrop. "
+    },
+    "ltm": {
+      "control": "Come posso ridurre le commissioni associate all'esecuzione di un airdrop?",
+      "panel": "Puoi acquistare un abbonamento a vita (LTM) per circa $ 100 nell'app Web di riferimento, questo ridurrà effettivamente le commissioni dell'80%"
+    },
+    "license": {
+      "control": "Questo strumento è open source? ",
+      "panel": "Questo strumento è completamente open source, disponibile su Github ed è concesso in licenza dal MIT. "
+    },
+    "missing_tickets": {
+      "control": "Non riesco a trovare il mio nuovo biglietto",
+      "panel": "Questo strumento non aggiorna automaticamente i ticket recuperati; "
+    },
+    "new_algos": {
+      "control": "Ho un'idea per un algoritmo di calcolo dell'airdrop, può essere incluso?",
+      "panel": "Poiché questo strumento è completamente open source, crea un problema con l'idea e potenzialmente crea una richiesta pull per includere il nuovo algoritmo. "
+    },
+    "alternative_wallet": {
+      "control": "Posso usare un altro wallet diverso dal multiwallet BEET?",
+      "panel": "Questo strumento attualmente funziona solo con il multiwallet BEET per eseguire lanci aerei. "
+    },
+    "title": "Domande frequenti"
+  }

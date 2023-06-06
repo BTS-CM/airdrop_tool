@@ -1,0 +1,51 @@
+{
+    "how_airdrop": {
+      "control": "Como faço um airdrop?",
+      "panel": "Busque os tíquetes do blockchain, calcule um airdrop em relação a um número de bloco, verifique o conteúdo do airdrop na página de análise e comece o airdrop por meio da página de execução do airdrop. "
+    },
+    "why_beet": {
+      "control": "Por que esta ferramenta usa a multiwallet BEET?",
+      "panel": "A multiwallet Bitshares BEET é uma carteira multi-blockchain, suportando Bitshares, Bitshares testnet e TUSC, perfeita para este aplicativo. "
+    },
+    "how_tickets": {
+      "control": "Como faço para criar um bilhete?",
+      "panel": "Você pode criar um tíquete através da página 'criar tíquete' ou dentro de cada página de votação da carteira de referência de blockchains. "
+    },
+    "why_ticket": {
+      "control": "Por que devo criar um ticket?",
+      "panel": "Existem vários motivos para criar tickets de blockchain, como obter direitos de voto sobre testemunhas, resultado de propostas de comitês e trabalhadores, além de se tornar um alvo para possíveis airdrops futuros!"
+    },
+    "how_undo_ticket": {
+      "control": "Como faço para retirar meus tokens de um ticket?",
+      "panel": "Se o seu bilhete tiver duração inferior a uma eternidade, você poderá acionar a retirada do bilhete por meio da carteira de referência. "
+    },
+    "how_report_issue": {
+      "control": "Como posso relatar um problema com esta ferramenta?",
+      "panel": "Relate os problemas ao repositório do github."
+    },
+    "fees": {
+      "control": "Quais são as taxas de blockchain associadas aos airdrops?",
+      "panel": "O custo da taxa de airdrop aumentará se houver muitos destinatários de airdrop. "
+    },
+    "ltm": {
+      "control": "Como posso reduzir as taxas associadas à realização de um airdrop?",
+      "panel": "Você pode comprar uma associação vitalícia (LTM) por aproximadamente US$ 100 no aplicativo da web de referência, isso reduzirá efetivamente as taxas em 80%"
+    },
+    "license": {
+      "control": "Esta ferramenta é de código aberto? ",
+      "panel": "Esta ferramenta é totalmente open source, disponível no Github e licenciada pelo MIT. "
+    },
+    "missing_tickets": {
+      "control": "Não consigo encontrar o meu novo bilhete",
+      "panel": "Esta ferramenta não atualiza automaticamente os tickets obtidos; "
+    },
+    "new_algos": {
+      "control": "Eu tenho uma ideia para um algoritmo de cálculo de airdrop, ele pode ser incluído?",
+      "panel": "Como essa ferramenta é totalmente de código aberto, crie um problema com a ideia e, potencialmente, crie uma solicitação pull para incluir o novo algoritmo. "
+    },
+    "alternative_wallet": {
+      "control": "Posso usar outra carteira que não seja a multicarteira BEET?",
+      "panel": "Esta ferramenta atualmente funciona apenas com a multiwallet BEET para realizar airdrops. "
+    },
+    "title": "perguntas frequentes"
+  }

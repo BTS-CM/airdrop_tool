@@ -1,0 +1,17 @@
+{
+    "title": "Blockchain billet leaderboards",
+    "radio": {
+      "label": "Vælg den ønskede blockchain",
+      "desc": "Kun grafenbaserede blockchains"
+    },
+    "json": "Leaderboard JSON",
+    "table": {
+      "none": "Du skal hente billetdataene for denne blockchain.",
+      "th1": "bruger ID",
+      "th2": "Boost beløb",
+      "th3": "Billetter",
+      "th4": "Procent",
+      "th5": "Billet",
+      "th6": "Billet"
+    }
+  }

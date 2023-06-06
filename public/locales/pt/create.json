@@ -1,0 +1,48 @@
+{
+    "title": "Criar um bilhete",
+    "radioA": {
+      "label": "Selecione o blockchain de destino",
+      "desc": "Apenas blockchains baseados em grafeno"
+    },
+    "radioB": {
+      "label": "Selecione o tipo de ingresso desejado",
+      "desc": "Durações de bloqueio mais longas concedem maior peso de votação.",
+      "sm": "Bloqueio por 180 dias (aumento de 200%)",
+      "md": "Bloqueio por 360 dias (aumento de 400%)",
+      "lg": "Bloqueio por 720 dias (aumento de 800%)",
+      "xl": "Bloquear para sempre (aumento de 800%)"
+    },
+    "qty": "Insira a quantidade que deseja bloquear",
+    "text": {
+      "lock": "Ao bloquear",
+      "equivalent": "o seu bilhete será equivalente a",
+      "area": "em termos de votação e área de superfície de lançamento aéreo."
+    },
+    "modal": {
+      "title": "Criando um ticket",
+      "noDL": {
+        "title": "Via deeplink de beterraba crua",
+        "step1": "Inicie a carteira BEET e navegue até 'Raw Link' no menu.",
+        "step2": "Nessa página, você pode permitir todas as operações ou apenas permitir a operação 57 'Criar ticket' (em seguida, clique em salvar).",
+        "step3": "Depois que 'Pronto para links brutos' aparecer no Beet, envie esta solicitação.",
+        "label": "Insira o ID da sua conta",
+        "btn": "Gerar deeplink bruto"
+      },
+      "DL": {
+        "title": "Deeplink bruto gerado",
+        "step1": "Seu deeplink BEET foi gerado, clique no botão para prosseguir.",
+        "step2": "Um prompt BEET será exibido, verifique o conteúdo e aprove o prompt de criação de ticket.",
+        "step3": "Acesse a página 'Buscar tickets' para baixar seu ticket para análise.",
+        "beetBTN": "Transmitir para BEET",
+        "back": "Voltar"
+      }
+    },
+    "askBEET": "Peça ao BEET para criar um ticket",
+    "leaderChange": {
+      "title": "Como resultado da criação deste ticket, as 10 principais estatísticas da tabela de classificação podem mudar como tal",
+      "th1": "EU IA",
+      "th2": "Quantia",
+      "th3": "Antes",
+      "th4": "Depois"
+    }
+  }

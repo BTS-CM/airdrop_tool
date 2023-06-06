@@ -1,0 +1,12 @@
+{
+    "none": "Piletit ei leitud",
+    "id": "Pileti ID",
+    "owner": "Pileti omanik",
+    "currentType": "Praegune piletitüüp",
+    "targetType": "Sihtpileti tüüp",
+    "storedTickets": "{{assetName}} salvestatud piletisse",
+    "ticketValue": "{{assetName}} pileti väärtus",
+    "currentStatus": "Pileti praegune olek",
+    "nextUpgrade": "Järgmine automaatse värskenduse aeg",
+    "nextDowngrade": "Järgmine automaatse alandamise aeg"
+  }

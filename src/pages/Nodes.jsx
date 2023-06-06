@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   Title,
   Text,
@@ -37,6 +38,7 @@ function array_move(arr, old_index, new_index) {
 }
 
 export default function Nodes(properties) {
+  const { t, i18n } = useTranslation();
   const blockchainNodes = appStore((state) => state.nodes);
   const replaceNodes = appStore((state) => state.replaceNodes);
   const removeURL = appStore((state) => state.removeURL);
@@ -123,15 +125,15 @@ export default function Nodes(properties) {
     <>
       <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
         <Title order={2} ta="center" mt="sm">
-          Blockchain node configuration
+          {t("nodes:title")}
         </Title>
 
         <Radio.Group
           value={value}
           onChange={setValue}
           name="chosenBlockchain"
-          label="Select the target blockchain"
-          description="Graphene based blockchains only"
+          label={t("nodes:radio.label")}
+          description={t("nodes:radio.desc")}
           withAsterisk
         >
           <Group mt="xs">
@@ -146,11 +148,7 @@ export default function Nodes(properties) {
           <thead>
             <tr>
               <th>
-                Current
-                {' '}
-                {value}
-                {' '}
-                blockchain node order
+                {t("nodes:th1", { value })}
               </th>
               <th />
               <th />
@@ -165,16 +163,12 @@ export default function Nodes(properties) {
 
       <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
         <Title order={4} ta="left" mt="sm">
-          Interesed in using your own
-          {' '}
-          {value}
-          {' '}
-          blockchain node?
+          {t("nodes:title2", { value })}
         </Title>
         <TextInput
           type="string"
           placeholder={nodeURL}
-          label={`Enter an URL for the ${value} blockchain`}
+          label={t("nodes:urlLabel", { value })}
           style={{ maxWidth: '350px', marginTop: '20px' }}
           onChange={(event) => setNodeURL(event.currentTarget.value)}
         />
@@ -185,7 +179,7 @@ export default function Nodes(properties) {
             replaceNodes(value, referenceNodes.push(nodeURL));
           }}
         >
-          Submit
+          {t("nodes:btn")}
         </Button>
       </Card>
     </>

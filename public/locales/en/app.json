@@ -1,0 +1,16 @@
+{
+    "menu": {
+        "btn": "Menu",
+        "label": "Main menu",
+        "home": "Home",
+        "language": "Language",
+        "createTicket": "Create ticket",
+        "fetchTickets": "Fetch tickets",
+        "calculateAirdrop": "Calculate airdrop",
+        "calculatedAirdrops": "Calculated airdrops",
+        "analyzeTickets": "Analyze tickets",
+        "ticketLeaderboard": "Ticket leaderboard",
+        "faq": "FAQ",
+        "changeNodes": "Change nodes"
+    }
+}

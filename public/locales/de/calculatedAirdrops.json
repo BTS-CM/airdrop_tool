@@ -1,0 +1,18 @@
+{
+    "title": "Berechnete Lufttropfen",
+    "radioLbl": "Wählen Sie die Zielblockchain aus",
+    "radioDesc": "Nur Blockchains auf Graphenbasis",
+    "none": {
+      "title": "Es scheinen noch keine Airdrops für diese Blockchain erstellt worden zu sein?",
+      "btn": "Airdrop berechnen"
+    },
+    "table": {
+      "th1": "AUSWEIS",
+      "th2": "Hash",
+      "th3": "Blocknummer",
+      "th4": "Gewinner",
+      "th5": "Algorithmen",
+      "th6": "Dedupliziert",
+      "th7": "Nur Gewinner"
+    }
+  }

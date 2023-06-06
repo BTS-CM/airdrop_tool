@@ -1,0 +1,14 @@
+{
+    "symbol": "Símbolo",
+    "issuer": "Editor",
+    "precision": "Precisión",
+    "maxSupply": "Suministro máximo",
+    "dynamicData": "ID de datos dinámicos",
+    "qty": "Cantidad de titulares de boletos que tienen este",
+    "total": "Importe total en poder de los titulares de entradas",
+    "th1": "ID de la cuenta",
+    "th2": "Balance",
+    "title": "Detalles de activos",
+    "chain": "cadena de bloques",
+    "id": "IDENTIFICACIÓN"
+  }

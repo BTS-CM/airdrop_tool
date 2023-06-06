@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import {
   Title,
@@ -15,6 +16,7 @@ import { useParams } from 'react-router-dom';
 import { appStore, ticketStore } from '../lib/states';
 
 export default function Tickets(properties) {
+  const { t, i18n } = useTranslation();
   const params = useParams();
 
   const btsTickets = ticketStore((state) => state.bitshares);
@@ -34,7 +36,7 @@ export default function Tickets(properties) {
   return (
     <Card shadow="md" radius="md" padding="xl">
       <Title order={2} ta="center" mt="sm">
-        Ticket JSON
+        {t("tickets:json")}
       </Title>
 
       <JsonInput

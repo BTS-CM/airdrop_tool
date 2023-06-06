@@ -1,0 +1,16 @@
+{
+    "topCard": {
+      "title": "Récupérer des tickets depuis la blockchain",
+      "label": "Sélectionnez la blockchain cible",
+      "desc": "Blockchains à base de graphène uniquement",
+      "btn1": "Récupérer les billets",
+      "btn2": "Aller chercher"
+    },
+    "secondCard": {
+      "th1": "Chaîne de blocs",
+      "th2": "Des billets",
+      "th3": "Jetons de quantité verrouillés",
+      "th4": "JSON",
+      "th5": "Supprimer"
+    }
+  }

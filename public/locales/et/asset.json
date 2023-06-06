@@ -1,0 +1,14 @@
+{
+    "symbol": "Sümbol",
+    "issuer": "Väljaandja",
+    "precision": "Täpsus",
+    "maxSupply": "Maksimaalne pakkumine",
+    "dynamicData": "Dünaamiliste andmete ID",
+    "qty": "Seda omavate piletiomanike arv",
+    "total": "Piletiomanike kogusumma",
+    "th1": "Konto ID",
+    "th2": "Tasakaal",
+    "title": "Vara üksikasjad",
+    "chain": "Plokiahel",
+    "id": "ID"
+}

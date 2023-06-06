@@ -1,0 +1,16 @@
+{
+    "menu": {
+      "btn": "Menüü",
+      "label": "Peamenüü",
+      "home": "Kodu",
+      "language": "Keel",
+      "createTicket": "Loo pilet",
+      "fetchTickets": "Too piletid",
+      "calculateAirdrop": "Arvutage õhulangus",
+      "calculatedAirdrops": "Arvutatud õhutilgad",
+      "analyzeTickets": "Analüüsige pileteid",
+      "ticketLeaderboard": "Pileti edetabel",
+      "faq": "KKK",
+      "changeNodes": "Muuda sõlme"
+    }
+  }

@@ -1,0 +1,48 @@
+{
+    "title": "Crea un biglietto",
+    "radioA": {
+      "label": "Seleziona la blockchain di destinazione",
+      "desc": "Solo blockchain basate su grafene"
+    },
+    "radioB": {
+      "label": "Seleziona il tipo di biglietto desiderato",
+      "desc": "Durate di blocco più lunghe garantiscono un peso di voto maggiore.",
+      "sm": "Blocco per 180 giorni (aumento del 200%)",
+      "md": "Blocco per 360 giorni (potenziamento del 400%)",
+      "lg": "Blocco per 720 giorni (aumento dell'800%)",
+      "xl": "Blocca per sempre (potenziamento dell'800%)"
+    },
+    "qty": "Inserisci la quantità che desideri bloccare",
+    "text": {
+      "lock": "Bloccando",
+      "equivalent": "il tuo biglietto sarà equivalente a",
+      "area": "in termini di votazione e superficie di lancio."
+    },
+    "modal": {
+      "title": "Creazione di un biglietto",
+      "noDL": {
+        "title": "Tramite deeplink crudo di barbabietola",
+        "step1": "Avvia il portafoglio BEET e vai a \"Raw Link\" nel menu.",
+        "step2": "Da questa pagina è possibile consentire tutte le operazioni o consentire solo l'operazione 57 'Crea ticket' (quindi fare clic su Salva).",
+        "step3": "Una volta che \"Pronto per i collegamenti grezzi\" viene visualizzato in Beet, invia questa richiesta.",
+        "label": "Inserisci il tuo ID account",
+        "btn": "Genera deeplink non elaborato"
+      },
+      "DL": {
+        "title": "Deeplink non elaborato generato",
+        "step1": "Il tuo deeplink BEET è stato generato, fai clic sul pulsante per procedere.",
+        "step2": "Verrà visualizzato un prompt BEET, verificare i contenuti quindi approvare la richiesta di creazione del ticket.",
+        "step3": "Vai alla pagina \"Recupera ticket\" per scaricare il tuo ticket per l'analisi.",
+        "beetBTN": "Trasmesso a BEET",
+        "back": "Indietro"
+      }
+    },
+    "askBEET": "Chiedi a BEET di creare un biglietto",
+    "leaderChange": {
+      "title": "Come risultato della creazione di questo biglietto, le prime 10 statistiche della classifica potrebbero cambiare di conseguenza",
+      "th1": "ID",
+      "th2": "Quantità",
+      "th3": "Prima",
+      "th4": "Dopo"
+    }
+  }

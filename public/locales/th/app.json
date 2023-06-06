@@ -1,0 +1,16 @@
+{
+    "menu": {
+      "btn": "เมนู",
+      "label": "เมนูหลัก",
+      "home": "บ้าน",
+      "language": "ภาษา",
+      "createTicket": "สร้างตั๋ว",
+      "fetchTickets": "ดึงตั๋ว",
+      "calculateAirdrop": "คำนวณการลดลงของอากาศ",
+      "calculatedAirdrops": "คำนวณ airdrops",
+      "analyzeTickets": "วิเคราะห์ตั๋ว",
+      "ticketLeaderboard": "ลีดเดอร์บอร์ดตั๋ว",
+      "faq": "คำถามที่พบบ่อย",
+      "changeNodes": "เปลี่ยนโหนด"
+    }
+  }

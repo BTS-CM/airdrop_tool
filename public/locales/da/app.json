@@ -1,0 +1,16 @@
+{
+    "menu": {
+      "btn": "Menu",
+      "label": "Hovedmenu",
+      "home": "Hjem",
+      "language": "Sprog",
+      "createTicket": "Opret billet",
+      "fetchTickets": "Hent billetter",
+      "calculateAirdrop": "Beregn luftfald",
+      "calculatedAirdrops": "Beregnet luftdråber",
+      "analyzeTickets": "Analyser billetter",
+      "ticketLeaderboard": "Billet leaderboard",
+      "faq": "FAQ",
+      "changeNodes": "Skift noder"
+    }
+  }

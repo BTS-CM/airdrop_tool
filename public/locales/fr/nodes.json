@@ -1,0 +1,11 @@
+{
+    "title": "Configuration du nœud de la chaîne de blocs",
+    "radio": {
+      "label": "Sélectionnez la blockchain cible",
+      "desc": "Blockchains à base de graphène uniquement"
+    },
+    "th1": "Actuel {{value}} ordre des nœuds de la blockchain",
+    "title2": "Intéressé à utiliser le vôtre {{value}} nœud blockchain ?",
+    "urlLabel": "Entrez une URL pour le {{value}} chaîne de blocs",
+    "btn": "Soumettre"
+  }

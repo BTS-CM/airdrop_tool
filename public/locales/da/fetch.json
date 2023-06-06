@@ -1,0 +1,16 @@
+{
+    "topCard": {
+      "title": "Hent billetter fra blockchain",
+      "label": "Vælg den ønskede blockchain",
+      "desc": "Kun grafenbaserede blockchains",
+      "btn1": "Hent billetter",
+      "btn2": "Henter"
+    },
+    "secondCard": {
+      "th1": "Blockchain",
+      "th2": "Billetter",
+      "th3": "Antal tokens låst",
+      "th4": "JSON",
+      "th5": "Slet"
+    }
+  }

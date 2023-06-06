@@ -1,0 +1,14 @@
+{
+    "symbol": "Symbol",
+    "issuer": "Issuer",
+    "precision": "Precision",
+    "maxSupply": "Max supply",
+    "dynamicData": "Dynamic data ID",
+    "qty": "Amount of ticket holders holding this",
+    "total": "Total amount held by ticket holders",
+    "th1": "Account ID",
+    "th2": "Balance",
+    "title": "Asset details",
+    "chain": "Blockchain",
+    "id": "ID"
+}

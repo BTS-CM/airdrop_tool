@@ -1,0 +1,37 @@
+{
+    "loadingAccount": "Chargement des détails du compte !",
+    "qtyTokens": "Jetons de quantité",
+    "accountBalances": "Soldes des comptes",
+    "locked": "fermé à clé",
+    "values": "valeurs des tickets",
+    "created": "Total des tickets créés",
+    "active": "Billets actifs",
+    "smallLock": "Verrouillé pendant 180 jours",
+    "smallBoost": "Multiplicateur de votes de 200 %",
+    "medLock": "Verrouillé pendant 360 jours",
+    "medBoost": "Multiplicateur de votes de 400 %",
+    "lgLock": "Verrouillé pendant 720 jours",
+    "lgBoost": "Multiplicateur de votes de 800 %",
+    "xlLock": "Verrouillé pour toujours",
+    "xlBoost": "Multiplicateur de votes de 800 %",
+    "tickets": "des billets",
+    "voteWeight": "poids des votes",
+    "untracked": "Les soldes de cet utilisateur ne sont pas encore suivis",
+    "table": {
+      "th1": "identifiant",
+      "th2": "compte",
+      "th3": "type actuel",
+      "th4": "type de cible",
+      "th5": "montant",
+      "th6": "statut actuel",
+      "th7": "valeur",
+      "th8": "heure de la prochaine mise à jour",
+      "th9": "prochain downgrade"
+    },
+    "footer": {
+      "title": "Vous voulez gagner en influence et améliorer vos chances de largage ?",
+      "create": "Créer un autre ticket sur le",
+      "blockchain": "chaîne de blocs",
+      "button": "Créer un nouveau billet"
+    }
+  }

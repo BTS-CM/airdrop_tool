@@ -1,0 +1,16 @@
+{
+    "menu": {
+      "btn": "Menu",
+      "label": "Menu principal",
+      "home": "Maison",
+      "language": "Langue",
+      "createTicket": "Créer un billet",
+      "fetchTickets": "Récupérer les billets",
+      "calculateAirdrop": "Calculer le largage",
+      "calculatedAirdrops": "Parachutages calculés",
+      "analyzeTickets": "Analyser les tickets",
+      "ticketLeaderboard": "Classement des billets",
+      "faq": "FAQ",
+      "changeNodes": "Changer de nœuds"
+    }
+  }
