@@ -50,13 +50,13 @@ jobs:
       run: yarn cache clean
 
     - name: Clean npm cache
-      run: npm cache clean --force
+      run: npm cache clean
 
     - name: timeoutBoost
       run: yarn config set network-timeout 600000 -g
 
     - name: Install
-      run: yarn install --force --network-timeout 600000 --bail=false
+      run: yarn install --network-timeout 600000
     
     - name: package
       run: yarn run electron:package:${{ matrix.os }} --bail=false
