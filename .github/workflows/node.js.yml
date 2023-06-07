@@ -46,14 +46,16 @@ jobs:
       with:
         node-version: 16.17.0
 
-    - name: Clean yarn cache
-      run: yarn cache clean
+    #- name: Clean yarn cache
+    #  run: yarn cache clean
 
     - name: Install
-      run: yarn install --network-timeout 100000
-    
+    #  run: yarn install --network-timeout 100000
+      run: npm install
+
     - name: package
-      run: yarn run electron:package:${{ matrix.os }}
+      #run: yarn run electron:package:${{ matrix.os }}
+      run: npm run electron:package:${{ matrix.os }}
 
     - name: Upload .${{ matrix.release_format }} file
       uses: actions/upload-artifact@v3
