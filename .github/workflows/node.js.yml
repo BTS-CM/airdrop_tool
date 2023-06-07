@@ -49,14 +49,11 @@ jobs:
     - name: Clean yarn cache
       run: yarn cache clean
 
-    - name: timeoutBoost
-      run: yarn config set network-timeout 600000 -g
-
     - name: Install
-      run: yarn install --network-timeout 600000
+      run: yarn install --network-timeout 100000
     
     - name: package
-      run: yarn run electron:package:${{ matrix.os }} --bail=false
+      run: yarn run electron:package:${{ matrix.os }}
 
     - name: Upload .${{ matrix.release_format }} file
       uses: actions/upload-artifact@v3
