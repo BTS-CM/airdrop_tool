@@ -197,7 +197,12 @@ export default function Fetch(properties) {
     console.log("Fetching user balances");
 
     const accountResults = [];
-    const leaderboardBatches = _.chunk(leaderboard, 49);
+    const leaderboardBatches = _.chunk(
+      leaderboard,
+      value === 'bitshares'
+        ? 50
+        : 10
+    );
     for (let i = 0; i < leaderboardBatches.length; i++) {
       let currentBatch = leaderboardBatches[i];
       let fetchedAccounts;

@@ -387,9 +387,15 @@ export default function Account(properties) {
                   <Text>
                     LTM: {currentAccount.account.ltm ? 'True' : 'False'}
                   </Text>
-                  <Text>
-                    {t('account:createTime')}: {currentAccount.account.creation_time}
-                  </Text>
+                  {
+                    currentAccount.account.creation_time
+                      ? (
+                        <Text>
+                          {t('account:createTime')}: {currentAccount.account.creation_time}
+                        </Text>
+                      )
+                      : null
+                  }
                   {
                     accountBalanceRows
                       ? (
