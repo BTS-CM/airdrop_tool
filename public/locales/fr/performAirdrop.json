@@ -1,65 +1,68 @@
 {
-    "header": {
-      "title": "Effectuez un largage sur le {{titleName}} chaîne de blocs",
-      "back": "Résumé du largage",
-      "others": "Parachutages calculés"
+  "header": {
+    "title": "Effectuez un largage sur le {{titleName}} chaîne de blocs",
+    "back": "Résumé du largage",
+    "others": "Parachutages calculés"
+  },
+  "noTicket": "Billet introuvable",
+  "grid": {
+    "left": {
+      "loading": "Chargement des données d'actif",
+      "processing": "Traitement des soldes des utilisateurs pour le jeton requis",
+      "table": {
+        "title": "Détenteurs de billets inclus dans le largage aérien",
+        "th1": "identifiant",
+        "th2": "Quantité",
+        "th3": "Jetons alloués"
+      }
     },
-    "noTicket": "Billet introuvable",
-    "grid": {
-      "left": {
-        "loading": "Chargement des données d'actif",
-        "processing": "Traitement des soldes des utilisateurs pour le jeton requis",
-        "table": {
-          "title": "Détenteurs de billets inclus dans le largage aérien",
-          "th1": "identifiant",
-          "th2": "Quantité",
-          "th3": "Jetons alloués"
+    "right": {
+      "summary": {
+        "title": "Résumé du largage",
+        "id": "IDENTIFIANT",
+        "hash": "Hacher",
+        "dedupe": "Dédoublonné",
+        "onlyWins": "Seuls les billets gagnants",
+        "blockno": "Numéro de bloc",
+        "algos": "Algorithmes",
+        "winners": "Gagnants",
+        "ticketWinQty": "Quantité de billets gagnants"
+      },
+      "options": {
+        "title": "Options de largage aérien",
+        "titleName": "Entrez votre {{titleName}} identifiant de compte",
+        "assetName": "Entrez le nom de l'actif que vous souhaitez airdrop",
+        "batchSize": "Taille des lots de transfert de parachutage",
+        "tokenQuantity": "Entrez la quantité de jetons que vous souhaitez airdrop",
+        "distroRadio": {
+          "title": "Comment les jetons devraient-ils être attribués aux gagnants ?",
+          "equally": "À parts égales entre les identifiants de compte gagnants",
+          "proportionally": "Proportionnel aux billets gagnés",
+          "roundRobin": "Allouer des jetons entiers de manière circulaire"
+        },
+        "ltm": {
+          "title": "Exiger une adhésion à vie?"
+        },
+        "reqRadio": {
+          "title": "Introduire une exigence de jeton supplémentaire ?",
+          "yes": "Oui",
+          "no": "Non",
+          "requiredToken": "Indiquez le symbole du jeton requis",
+          "requiredTokenQty": "Fournir la quantité de jetons requis"
         }
       },
-      "right": {
-        "summary": {
-          "title": "Résumé du largage",
-          "id": "IDENTIFIANT",
-          "hash": "Hacher",
-          "dedupe": "Dédoublonné",
-          "onlyWins": "Seuls les billets gagnants",
-          "blockno": "Numéro de bloc",
-          "algos": "Algorithmes",
-          "winners": "Gagnants",
-          "ticketWinQty": "Quantité de billets gagnants"
-        },
-        "options": {
-          "title": "Options de largage aérien",
-          "titleName": "Entrez votre {{titleName}} identifiant de compte",
-          "assetName": "Entrez le nom de l'actif que vous souhaitez airdrop",
-          "batchSize": "Taille des lots de transfert de parachutage",
-          "tokenQuantity": "Entrez la quantité de jetons que vous souhaitez airdrop",
-          "distroRadio": {
-            "title": "Comment les jetons devraient-ils être attribués aux gagnants ?",
-            "equally": "À parts égales entre les identifiants de compte gagnants",
-            "proportionally": "Proportionnel aux billets gagnés",
-            "roundRobin": "Allouer des jetons entiers de manière circulaire"
-          },
-          "reqRadio": {
-            "title": "Introduire une exigence de jeton supplémentaire ?",
-            "yes": "Oui",
-            "no": "Non",
-            "requiredToken": "Indiquez le symbole du jeton requis",
-            "requiredTokenQty": "Fournir la quantité de jetons requis"
-          }
-        },
-        "invalid": {
-          "title": "Rien à larguer",
-          "reason": "Étant donné qu'il n'y a pas de billets valides, il n'y a rien à larguer.",
-          "resolution": "Ajustez les paramètres de largage ou calculez un autre largage pour continuer."
-        },
-        "valid": {
-          "title": "Continuer le largage ?",
-          "note": "Gardez à l'esprit les limites de transaction et de taille de bloc lors de la planification de lots de parachutages.",
-          "single": "Avec une limite de lot de {{batchSize}}, 1 lot est nécessaire pour terminer ce largage.",
-          "multi": "Avec une limite de lot de {{batchSize}}, {{qtyBatches}} des lots sont nécessaires pour effectuer ce parachutage.",
-          "reminder": "Gardez à l'esprit les limites de transaction et de taille de bloc lors de la planification de lots de parachutages."
-        }
+      "invalid": {
+        "title": "Rien à larguer",
+        "reason": "Étant donné qu'il n'y a pas de billets valides, il n'y a rien à larguer.",
+        "resolution": "Ajustez les paramètres de largage ou calculez un autre largage pour continuer."
+      },
+      "valid": {
+        "title": "Continuer le largage ?",
+        "note": "Gardez à l'esprit les limites de transaction et de taille de bloc lors de la planification de lots de parachutages.",
+        "single": "Avec une limite de lot de {{batchSize}}, 1 lot est nécessaire pour terminer ce largage.",
+        "multi": "Avec une limite de lot de {{batchSize}}, {{qtyBatches}} des lots sont nécessaires pour effectuer ce parachutage.",
+        "reminder": "Gardez à l'esprit les limites de transaction et de taille de bloc lors de la planification de lots de parachutages."
       }
     }
   }
+}

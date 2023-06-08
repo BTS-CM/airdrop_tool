@@ -40,6 +40,9 @@
                     "proportionally": "Proportional to tickets won",
                     "roundRobin": "Allocate whole tokens in a round robin manner"
                 },
+                "ltm": {
+                    "title": "Require a lifetime-membership?"
+                },
                 "reqRadio": {
                     "title": "Introduce additional token requirement?",
                     "yes": "Yes",

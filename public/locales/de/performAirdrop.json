@@ -1,65 +1,68 @@
 {
-    "header": {
-      "title": "Führen Sie einen Airdrop auf dem aus {{titleName}} Blockchain",
-      "back": "Airdrop-Zusammenfassung",
-      "others": "Berechnete Lufttropfen"
+  "header": {
+    "title": "Führen Sie einen Airdrop auf dem aus {{titleName}} Blockchain",
+    "back": "Airdrop-Zusammenfassung",
+    "others": "Berechnete Lufttropfen"
+  },
+  "noTicket": "Ticket nicht gefunden",
+  "grid": {
+    "left": {
+      "loading": "Asset-Daten werden geladen",
+      "processing": "Benutzerguthaben für erforderliches Token werden verarbeitet",
+      "table": {
+        "title": "Ticketinhaber im Airdrop inbegriffen",
+        "th1": "Ausweis",
+        "th2": "Menge",
+        "th3": "Zugewiesene Token"
+      }
     },
-    "noTicket": "Ticket nicht gefunden",
-    "grid": {
-      "left": {
-        "loading": "Asset-Daten werden geladen",
-        "processing": "Benutzerguthaben für erforderliches Token werden verarbeitet",
-        "table": {
-          "title": "Ticketinhaber im Airdrop inbegriffen",
-          "th1": "Ausweis",
-          "th2": "Menge",
-          "th3": "Zugewiesene Token"
+    "right": {
+      "summary": {
+        "title": "Airdrop-Zusammenfassung",
+        "id": "AUSWEIS",
+        "hash": "Hash",
+        "dedupe": "Dedupliziert",
+        "onlyWins": "Nur Gewinnlose",
+        "blockno": "Blocknummer",
+        "algos": "Algorithmen",
+        "winners": "Gewinner",
+        "ticketWinQty": "Anzahl der Gewinnlose"
+      },
+      "options": {
+        "title": "Airdrop-Optionen",
+        "titleName": "Geben Sie Ihr {{titleName}} Konto-ID",
+        "assetName": "Geben Sie den Namen des Assets ein, das Sie per Airdrop abwerfen möchten",
+        "batchSize": "Größe der Airdrop-Transfer-Batches",
+        "tokenQuantity": "Geben Sie die Menge an Token ein, die Sie per Airdrop abwerfen möchten",
+        "distroRadio": {
+          "title": "Wie sollen die Token den Gewinnern zugeteilt werden?",
+          "equally": "Gleichermaßen zwischen Gewinnerkonto-IDs",
+          "proportionally": "Proportional zu den gewonnenen Tickets",
+          "roundRobin": "Weisen Sie ganze Token im Round-Robin-Verfahren zu"
+        },
+        "ltm": {
+          "title": "Benötigen Sie eine lebenslange Mitgliedschaft?"
+        },
+        "reqRadio": {
+          "title": "Zusätzliche Token-Anforderung einführen?",
+          "yes": "Ja",
+          "no": "NEIN",
+          "requiredToken": "Geben Sie das Symbol des erforderlichen Tokens an",
+          "requiredTokenQty": "Geben Sie die Menge der benötigten Token an"
         }
       },
-      "right": {
-        "summary": {
-          "title": "Airdrop-Zusammenfassung",
-          "id": "AUSWEIS",
-          "hash": "Hash",
-          "dedupe": "Dedupliziert",
-          "onlyWins": "Nur Gewinnlose",
-          "blockno": "Blocknummer",
-          "algos": "Algorithmen",
-          "winners": "Gewinner",
-          "ticketWinQty": "Anzahl der Gewinnlose"
-        },
-        "options": {
-          "title": "Airdrop-Optionen",
-          "titleName": "Geben Sie Ihr {{titleName}} Konto-ID",
-          "assetName": "Geben Sie den Namen des Assets ein, das Sie per Airdrop abwerfen möchten",
-          "batchSize": "Größe der Airdrop-Transfer-Batches",
-          "tokenQuantity": "Geben Sie die Menge an Token ein, die Sie per Airdrop abwerfen möchten",
-          "distroRadio": {
-            "title": "Wie sollen die Token den Gewinnern zugeteilt werden?",
-            "equally": "Gleichermaßen zwischen Gewinnerkonto-IDs",
-            "proportionally": "Proportional zu den gewonnenen Tickets",
-            "roundRobin": "Weisen Sie ganze Token im Round-Robin-Verfahren zu"
-          },
-          "reqRadio": {
-            "title": "Zusätzliche Token-Anforderung einführen?",
-            "yes": "Ja",
-            "no": "NEIN",
-            "requiredToken": "Geben Sie das Symbol des erforderlichen Tokens an",
-            "requiredTokenQty": "Geben Sie die Menge der benötigten Token an"
-          }
-        },
-        "invalid": {
-          "title": "Nichts zum Abwerfen",
-          "reason": "Da es keine gültigen Tickets gibt, gibt es nichts zu fliegen.",
-          "resolution": "Passen Sie die Airdrop-Einstellungen an oder berechnen Sie einen weiteren Airdrop, um fortzufahren."
-        },
-        "valid": {
-          "title": "Mit Airdrop fortfahren?",
-          "note": "Beachten Sie bei der Planung von Airdrop-Chargen die Transaktions- und Blockgrößenbeschränkungen.",
-          "single": "Mit einem Chargenlimit von {{batchSize}}, 1 Charge ist erforderlich, um diesen Airdrop abzuschließen.",
-          "multi": "Mit einem Chargenlimit von {{batchSize}}, {{qtyBatches}} Es sind Chargen erforderlich, um diesen Airdrop abzuschließen.",
-          "reminder": "Beachten Sie bei der Planung von Airdrop-Chargen die Transaktions- und Blockgrößenbeschränkungen."
-        }
+      "invalid": {
+        "title": "Nichts zum Abwerfen",
+        "reason": "Da es keine gültigen Tickets gibt, gibt es nichts zu fliegen.",
+        "resolution": "Passen Sie die Airdrop-Einstellungen an oder berechnen Sie einen weiteren Airdrop, um fortzufahren."
+      },
+      "valid": {
+        "title": "Mit Airdrop fortfahren?",
+        "note": "Beachten Sie bei der Planung von Airdrop-Chargen die Transaktions- und Blockgrößenbeschränkungen.",
+        "single": "Mit einem Chargenlimit von {{batchSize}}, 1 Charge ist erforderlich, um diesen Airdrop abzuschließen.",
+        "multi": "Mit einem Chargenlimit von {{batchSize}}, {{qtyBatches}} Es sind Chargen erforderlich, um diesen Airdrop abzuschließen.",
+        "reminder": "Beachten Sie bei der Planung von Airdrop-Chargen die Transaktions- und Blockgrößenbeschränkungen."
       }
     }
   }
+}

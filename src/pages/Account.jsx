@@ -41,9 +41,10 @@ export default function Account(properties) {
   const nodes = appStore((state) => state.nodes);
   const changeURL = appStore((state) => state.changeURL);
 
-  const [accountDetails, setAccountDetails] = useState();
+  //const [accountDetails, setAccountDetails] = useState();
   const [inProgress, setInProgress] = useState(false);
 
+  /*
   useEffect(() => {
     async function fetchData() {
       try {
@@ -85,7 +86,7 @@ export default function Account(properties) {
       fetchData();
     }
   }, []);
-
+  */
 
   let currentLeaderboard = [];
   let assetName = "";
@@ -108,14 +109,10 @@ export default function Account(properties) {
     chainName = "TUSC";
   }
 
+  let currentAccount = currentLeaderboard.find((x) => x.id === params.id);
 
-  let currentAccountBalances = currentLeaderboard.find((x) => x.id === params.id);
-
-  console.log({accountDetails, currentAccountBalances})
-
-
-  let accountBalanceRows = currentAccountBalances && currentAccountBalances.balances.length
-    ? currentAccountBalances.balances.map((x) => {
+  let accountBalanceRows = currentAccount && currentAccount.balances.length
+    ? currentAccount.balances.map((x) => {
       return (
         <Link key={x.asset_id} style={{textDecoration: 'none'}} to={`/Asset/${params.env}/${x.asset_id}`}>
           <Badge m="xs">
@@ -366,7 +363,7 @@ export default function Account(properties) {
         </SimpleGrid>
         <SimpleGrid cols={1} mt={25} breakpoints={[{ maxWidth: 'md', cols: 1 }]}>
           {
-            !currentAccountBalances && inProgress
+            !currentAccount && inProgress
               ? (
                 <Card shadow="md" radius="md" padding="xl">
                     <Loader />
@@ -378,14 +375,20 @@ export default function Account(properties) {
               : null
           }
           {
-            accountDetails
+            currentAccount
               ? (
                 <Card shadow="md" radius="md">
                   <Text fz="lg" fw={500} mt="md">
                     {`${chainName} account details`}
                   </Text>
                   <Text>
-                    {`${accountDetails.name} (${params.id})`}
+                    {`${currentAccount.account.name} (${params.id})`}
+                  </Text>
+                  <Text>
+                    LTM: {currentAccount.account.ltm ? 'True' : 'False'}
+                  </Text>
+                  <Text>
+                    {t('account:createTime')}: {currentAccount.account.creation_time}
                   </Text>
                   {
                     accountBalanceRows
@@ -400,6 +403,9 @@ export default function Account(properties) {
                           </Text>
                       )
                   }
+                  <Text>
+                    {t('account:assetsCreated')}: {currentAccount.account.assets.length}
+                  </Text>
                 </Card>
               )
               : null

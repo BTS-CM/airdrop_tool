@@ -51,7 +51,8 @@ export default function Leaderboard(properties) {
     <tr key={ticket.id}>
       <td>
         <Link style={{ textDecoration: 'none' }} to={`/Account/${value}/${ticket.id}`}>
-          {ticket.id}
+          {ticket.account.name}<br />
+          ({ticket.id})
         </Link>
       </td>
       <td>{ticket.amount}</td>

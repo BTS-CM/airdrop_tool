@@ -119,6 +119,7 @@ export default function PerformAirdrop(properties) {
   const [tokenDetails, setTokenDetails] = useState();
   const [batchSize, onBatchSize] = useState(50);
   const [distroMethod, setDistroMethod] = useState("Proportionally");
+  const [ltmReq, setLTMReq] = useState("no");
   const [tokenReq, setTokenReq] = useState("no");
 
   const [requiredToken, onRequiredToken] = useState();
@@ -273,6 +274,15 @@ export default function PerformAirdrop(properties) {
       const foundAsset = user.balances.find((asset) => asset.asset_id === requiredTokenDetails.id);
       return humanReadableFloat(foundAsset.amount, requiredTokenDetails.precision) >= finalReqQty;
     });
+  }
+
+  if (ltmReq && ltmReq === 'yes') {
+    // Filter out non LTM users from airdrop
+    sortedWinners = sortedWinners.filter((user) => {
+      const id = user.id;
+      const ltm = envLeaderboard.find((x) => x.id === user.id).account.ltm;
+      return ltm ? true : false;
+    })
   }
 
   if (myID) {
@@ -557,6 +567,25 @@ export default function PerformAirdrop(properties) {
                         <Radio
                           value="RoundRobin"
                           label={t("performAirdrop:grid.right.options.distroRadio.roundRobin")}
+                        />
+                      </Group>
+                    </Radio.Group>
+                    <Radio.Group
+                      value={ltmReq}
+                      onChange={setLTMReq}
+                      name="ltmReq"
+                      label={t("performAirdrop:grid.right.options.ltm.title")}
+                      style={{ marginTop: '10px' }}
+                      withAsterisk
+                    >
+                      <Group mt="xs">
+                        <Radio
+                          value="yes"
+                          label={t("performAirdrop:grid.right.options.reqRadio.yes")}
+                        />
+                        <Radio
+                          value="no"
+                          label={t("performAirdrop:grid.right.options.reqRadio.no")}
                         />
                       </Group>
                     </Radio.Group>

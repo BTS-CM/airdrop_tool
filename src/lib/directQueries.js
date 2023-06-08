@@ -135,22 +135,6 @@ async function lookupSymbols(node, env, asset_ids) {
 
     resolve(filtered);
     return;
-
-    /*
-    const finalData = filtered.map((x) => {
-      const currentSymbol = filtered.find((y) => y.id === x.asset_id);
-
-      console.log({currentSymbol})
-      return {
-        symbol: currentSymbol.symbol,
-        precision: currentSymbol.precision,
-        amount: x.amount,
-        id: x.asset_id,
-      };
-    })
-    */
-
-    // .filter((x) => humanReadableFloat(x.amount, x.precision) >= humanReadableFloat(1, x.precision));
   });
 }
 

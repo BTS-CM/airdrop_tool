@@ -85,7 +85,8 @@ export default function Account(properties) {
   const foundBalanceValues = foundBalances.map((user) => {
     return {
       value: user.balances.find((x) => x.asset_id === params.id).amount,
-      id: user.id
+      id: user.id,
+      name: user.account.name
     }
   }).filter((x) => x.value > 0).sort((a, b) => b.value - a.value);
   
@@ -93,7 +94,7 @@ export default function Account(properties) {
     <tr key={user.id}>
       <td>
         <Link to={`/Account/${params.env}/${user.id}`} style={{ textDecoration: 'none' }}>
-          {user.id}
+          {user.name} ({user.id})
         </Link>
       </td>
       <td>

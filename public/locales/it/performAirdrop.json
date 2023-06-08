@@ -1,65 +1,68 @@
 {
-    "header": {
-      "title": "Eseguire l'airdrop sul {{titleName}} blockchain",
-      "back": "Riepilogo dell'airdrop",
-      "others": "Lanci aerei calcolati"
+  "header": {
+    "title": "Eseguire l'airdrop sul {{titleName}} blockchain",
+    "back": "Riepilogo dell'airdrop",
+    "others": "Lanci aerei calcolati"
+  },
+  "noTicket": "Biglietto non trovato",
+  "grid": {
+    "left": {
+      "loading": "Caricamento dati asset",
+      "processing": "Elaborazione dei saldi utente per il token richiesto",
+      "table": {
+        "title": "Possessori di biglietti inclusi in airdrop",
+        "th1": "id",
+        "th2": "Quantità",
+        "th3": "Token assegnati"
+      }
     },
-    "noTicket": "Biglietto non trovato",
-    "grid": {
-      "left": {
-        "loading": "Caricamento dati asset",
-        "processing": "Elaborazione dei saldi utente per il token richiesto",
-        "table": {
-          "title": "Possessori di biglietti inclusi in airdrop",
-          "th1": "id",
-          "th2": "Quantità",
-          "th3": "Token assegnati"
+    "right": {
+      "summary": {
+        "title": "Riepilogo dell'airdrop",
+        "id": "ID",
+        "hash": "Hash",
+        "dedupe": "Deduplicato",
+        "onlyWins": "Solo biglietti vincenti",
+        "blockno": "Numero blocco",
+        "algos": "Algoritmi",
+        "winners": "Vincitori",
+        "ticketWinQty": "Qtà biglietti vincenti"
+      },
+      "options": {
+        "title": "Opzioni Airdrop",
+        "titleName": "Inserisci il tuo {{titleName}} Account ID",
+        "assetName": "Inserisci il nome dell'asset che desideri trasferire",
+        "batchSize": "Dimensione dei lotti di trasferimento airdrop",
+        "tokenQuantity": "Inserisci la quantità di token che desideri lanciare",
+        "distroRadio": {
+          "title": "Come dovrebbero essere assegnati i token ai vincitori?",
+          "equally": "Ugualmente tra gli ID account vincenti",
+          "proportionally": "Proporzionale ai biglietti vinti",
+          "roundRobin": "Assegna interi token in modo round robin"
+        },
+        "ltm": {
+          "title": "Hai bisogno di un abbonamento a vita?"
+        },
+        "reqRadio": {
+          "title": "Introdurre requisiti di token aggiuntivi?",
+          "yes": "SÌ",
+          "no": "NO",
+          "requiredToken": "Fornire il simbolo del token richiesto",
+          "requiredTokenQty": "Fornire la quantità di token richiesti"
         }
       },
-      "right": {
-        "summary": {
-          "title": "Riepilogo dell'airdrop",
-          "id": "ID",
-          "hash": "Hash",
-          "dedupe": "Deduplicato",
-          "onlyWins": "Solo biglietti vincenti",
-          "blockno": "Numero blocco",
-          "algos": "Algoritmi",
-          "winners": "Vincitori",
-          "ticketWinQty": "Qtà biglietti vincenti"
-        },
-        "options": {
-          "title": "Opzioni Airdrop",
-          "titleName": "Inserisci il tuo {{titleName}} Account ID",
-          "assetName": "Inserisci il nome dell'asset che desideri trasferire",
-          "batchSize": "Dimensione dei lotti di trasferimento airdrop",
-          "tokenQuantity": "Inserisci la quantità di token che desideri lanciare",
-          "distroRadio": {
-            "title": "Come dovrebbero essere assegnati i token ai vincitori?",
-            "equally": "Ugualmente tra gli ID account vincenti",
-            "proportionally": "Proporzionale ai biglietti vinti",
-            "roundRobin": "Assegna interi token in modo round robin"
-          },
-          "reqRadio": {
-            "title": "Introdurre requisiti di token aggiuntivi?",
-            "yes": "SÌ",
-            "no": "NO",
-            "requiredToken": "Fornire il simbolo del token richiesto",
-            "requiredTokenQty": "Fornire la quantità di token richiesti"
-          }
-        },
-        "invalid": {
-          "title": "Niente da lanciare",
-          "reason": "Dato che non ci sono biglietti validi, non c'è niente da lanciare.",
-          "resolution": "Regola le impostazioni del lancio aereo o calcola un altro lancio aereo per procedere."
-        },
-        "valid": {
-          "title": "Procedere con l'airdrop?",
-          "note": "Tieni a mente i limiti di dimensione delle transazioni e dei blocchi quando pianifichi lotti di lanci aerei.",
-          "single": "Con un limite di lotto di {{batchSize}}, è necessario 1 lotto per completare questo lancio aereo.",
-          "multi": "Con un limite di lotto di {{batchSize}}, {{qtyBatches}} i lotti sono necessari per completare questo lancio aereo.",
-          "reminder": "Tieni a mente i limiti di dimensione delle transazioni e dei blocchi quando pianifichi lotti di lanci aerei."
-        }
+      "invalid": {
+        "title": "Niente da lanciare",
+        "reason": "Dato che non ci sono biglietti validi, non c'è niente da lanciare.",
+        "resolution": "Regola le impostazioni del lancio aereo o calcola un altro lancio aereo per procedere."
+      },
+      "valid": {
+        "title": "Procedere con l'airdrop?",
+        "note": "Tieni a mente i limiti di dimensione delle transazioni e dei blocchi quando pianifichi lotti di lanci aerei.",
+        "single": "Con un limite di lotto di {{batchSize}}, è necessario 1 lotto per completare questo lancio aereo.",
+        "multi": "Con un limite di lotto di {{batchSize}}, {{qtyBatches}} i lotti sono necessari per completare questo lancio aereo.",
+        "reminder": "Tieni a mente i limiti di dimensione delle transazioni e dei blocchi quando pianifichi lotti di lanci aerei."
       }
     }
   }
+}

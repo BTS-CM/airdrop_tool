@@ -16,11 +16,36 @@ import {
   Loader,
 } from '@mantine/core';
 import { useTranslation } from 'react-i18next';
+import _ from "lodash";
 
 import { appStore, ticketStore, leaderboardStore } from '../lib/states';
 
 function humanReadableFloat(satoshis, precision) {
   return satoshis / 10 ** precision;
+}
+
+/**
+ * Given an array of account IDs, retrieve their account names
+ * @param {Array} accountIDs
+ * @param {Object}
+ */
+function _getFullAccounts(accountIDs) {
+  return new Promise((resolve, reject) => {
+    if (!accountIDs) {
+      resolve([]);
+      return;
+    }
+
+    Apis.instance().db_api().exec("get_full_accounts", [accountIDs, false]).then((results) => {
+      if (results && results.length) {
+        resolve(results);
+      }
+    })
+      .catch((error) => {
+        console.error('Error fetching account details:', error);
+        reject(error);
+      });
+  });
 }
 
 export default function Fetch(properties) {
@@ -170,30 +195,44 @@ export default function Fetch(properties) {
     }
 
     console.log("Fetching user balances");
-    const resultingLeaderboard = [];
-    for (let i = 0; i < leaderboard.length; i++) {
-      const accountID = leaderboard[i].id;
 
-      let response;
+    const accountResults = [];
+    const leaderboardBatches = _.chunk(leaderboard, 49);
+    for (let i = 0; i < leaderboardBatches.length; i++) {
+      let currentBatch = leaderboardBatches[i];
+      let fetchedAccounts;
       try {
-        response = value === 'tusc'
-          ? await tuscApis.instance().db_api().exec("get_account_balances", [accountID, []]) // TUSC
-          : await Apis.instance().db_api().exec("get_account_balances", [accountID, []]); // BTS && BTS_TEST
+        fetchedAccounts = await _getFullAccounts(
+          currentBatch.map((user) => user.id)
+        );
       } catch (error) {
         console.log(error);
-        return;
-      }
-
-      if (!response || !response.length) {
-        console.log(`user ${accountID} has no balances`);
-        resultingLeaderboard.push(leaderboard[i]);
         continue;
       }
 
-      resultingLeaderboard.push({ ...leaderboard[i], balances: response });
+      currentBatch = currentBatch.map((user) => {
+        const foundAccount = fetchedAccounts.find((acc) => acc[0] === user.id)[1];
+
+        return {
+          ...user,
+          balances: foundAccount.balances.map((balance) => {
+            return {amount: balance.balance , asset_id: balance.asset_type}
+          }),
+          account: {
+            name: foundAccount.account.name,
+            ltm: foundAccount.account.id === foundAccount.account.lifetime_referrer,
+            creation_time: foundAccount.account.creation_time,
+            assets: foundAccount.assets
+          }
+        }
+      });
+
+      if (fetchedAccounts && fetchedAccounts.length) {
+        accountResults.push(...currentBatch);
+      }
     }
 
-    const sortedLeaderboard = resultingLeaderboard.sort((a, b) => b.amount - a.amount);
+    const sortedLeaderboard = accountResults.sort((a, b) => b.amount - a.amount);
 
     console.log("Calculating ticket ranges");
     const finalLeaderboard = [];
@@ -291,7 +330,7 @@ export default function Fetch(properties) {
                 {
                     btsTickets.length
                       ? (
-                        <Link style={{textDecoration: 'none'}} to="../Tickets/bitshares">
+                        <Link style={{ textDecoration: 'none' }} to="../Tickets/bitshares">
                           <ActionIcon>📄</ActionIcon>
                         </Link>
                       )
@@ -329,13 +368,13 @@ export default function Fetch(properties) {
                     ).toFixed(0)
                     : 0
                 }
-                
+
               </td>
               <td>
                 {
                   btsTestnetTickets.length
                     ? (
-                      <Link style={{textDecoration: 'none'}} to="../Tickets/bitshares_testnet">
+                      <Link style={{ textDecoration: 'none' }} to="../Tickets/bitshares_testnet">
                         <ActionIcon>📄</ActionIcon>
                       </Link>
                     )
@@ -371,7 +410,7 @@ export default function Fetch(properties) {
                 {
                                 tuscTickets.length
                                   ? (
-                                    <Link style={{textDecoration: 'none'}} to="../Tickets/tusc">
+                                    <Link style={{ textDecoration: 'none' }} to="../Tickets/tusc">
                                       <ActionIcon>📄</ActionIcon>
                                     </Link>
                                   )

@@ -1,65 +1,68 @@
 {
-    "header": {
-      "title": "에서 에어드롭을 수행합니다. {{titleName}} 블록체인",
-      "back": "에어드롭 요약",
-      "others": "계산된 에어드랍"
+  "header": {
+    "title": "에서 에어드롭을 수행합니다. {{titleName}} 블록체인",
+    "back": "에어드롭 요약",
+    "others": "계산된 에어드랍"
+  },
+  "noTicket": "티켓을 찾을 수 없음",
+  "grid": {
+    "left": {
+      "loading": "자산 데이터 로드 중",
+      "processing": "필요한 토큰에 대한 사용자 잔액 처리",
+      "table": {
+        "title": "에어드롭에 포함된 티켓 소지자",
+        "th1": "ID",
+        "th2": "수량",
+        "th3": "할당된 토큰"
+      }
     },
-    "noTicket": "티켓을 찾을 수 없음",
-    "grid": {
-      "left": {
-        "loading": "자산 데이터 로드 중",
-        "processing": "필요한 토큰에 대한 사용자 잔액 처리",
-        "table": {
-          "title": "에어드롭에 포함된 티켓 소지자",
-          "th1": "ID",
-          "th2": "수량",
-          "th3": "할당된 토큰"
+    "right": {
+      "summary": {
+        "title": "에어드롭 요약",
+        "id": "ID",
+        "hash": "해시시",
+        "dedupe": "중복 제거됨",
+        "onlyWins": "당첨 티켓만",
+        "blockno": "블록번호",
+        "algos": "알고리즘",
+        "winners": "수상자",
+        "ticketWinQty": "당첨 티켓 수량"
+      },
+      "options": {
+        "title": "에어드롭 옵션",
+        "titleName": "귀하의 {{titleName}} 계정 ID",
+        "assetName": "에어드롭하려는 자산의 이름을 입력하세요.",
+        "batchSize": "에어드롭 전송 배치의 크기",
+        "tokenQuantity": "에어드롭할 토큰 수량을 입력하세요.",
+        "distroRadio": {
+          "title": "우승자에게 토큰을 어떻게 할당해야 합니까?",
+          "equally": "당첨 계정 ID 간에 동일하게",
+          "proportionally": "당첨된 티켓에 비례",
+          "roundRobin": "라운드 로빈 방식으로 전체 토큰 할당"
+        },
+        "ltm": {
+          "title": "평생 회원이 필요하십니까?"
+        },
+        "reqRadio": {
+          "title": "추가 토큰 요구 사항을 도입하시겠습니까?",
+          "yes": "예",
+          "no": "아니요",
+          "requiredToken": "필요한 토큰의 기호를 제공하십시오.",
+          "requiredTokenQty": "필요한 토큰 수량 제공"
         }
       },
-      "right": {
-        "summary": {
-          "title": "에어드롭 요약",
-          "id": "ID",
-          "hash": "해시시",
-          "dedupe": "중복 제거됨",
-          "onlyWins": "당첨 티켓만",
-          "blockno": "블록번호",
-          "algos": "알고리즘",
-          "winners": "수상자",
-          "ticketWinQty": "당첨 티켓 수량"
-        },
-        "options": {
-          "title": "에어드롭 옵션",
-          "titleName": "당신의 {{titleName}} 계정 ID",
-          "assetName": "에어드롭하려는 자산의 이름을 입력하세요.",
-          "batchSize": "에어드롭 전송 배치의 크기",
-          "tokenQuantity": "에어드롭할 토큰 수량을 입력하세요.",
-          "distroRadio": {
-            "title": "우승자에게 토큰을 어떻게 할당해야 합니까?",
-            "equally": "당첨 계정 ID 간에 동일하게",
-            "proportionally": "당첨된 티켓에 비례",
-            "roundRobin": "라운드 로빈 방식으로 전체 토큰 할당"
-          },
-          "reqRadio": {
-            "title": "추가 토큰 요구 사항을 도입하시겠습니까?",
-            "yes": "예",
-            "no": "아니요",
-            "requiredToken": "필요한 토큰의 기호를 제공하십시오.",
-            "requiredTokenQty": "필요한 토큰 수량 제공"
-          }
-        },
-        "invalid": {
-          "title": "에어드랍할게 없음",
-          "reason": "유효한 티켓이 없기 때문에 에어드롭할 것이 없습니다.",
-          "resolution": "에어드랍 설정을 조정하거나 다른 에어드랍을 계산하여 진행하세요."
-        },
-        "valid": {
-          "title": "에어드롭을 진행하시겠습니까?",
-          "note": "일괄 에어드롭을 계획할 때 트랜잭션 및 블록 크기 제한을 염두에 두십시오.",
-          "single": "배치 한도는 다음과 같습니다. {{batchSize}}, 이 에어드롭을 완료하려면 1 배치가 필요합니다.",
-          "multi": "배치 한도는 다음과 같습니다. {{batchSize}}, {{qtyBatches}} 이 에어드롭을 완료하려면 배치가 필요합니다.",
-          "reminder": "일괄 에어드롭을 계획할 때 트랜잭션 및 블록 크기 제한을 염두에 두십시오."
-        }
+      "invalid": {
+        "title": "에어드랍할게 없음",
+        "reason": "유효한 티켓이 없기 때문에 에어드롭할 것이 없습니다.",
+        "resolution": "에어드랍 설정을 조정하거나 다른 에어드랍을 계산하여 진행하세요."
+      },
+      "valid": {
+        "title": "에어드롭을 진행하시겠습니까?",
+        "note": "일괄 에어드롭을 계획할 때 트랜잭션 및 블록 크기 제한을 염두에 두십시오.",
+        "single": "배치 한도는 다음과 같습니다. {{batchSize}}, 이 에어드롭을 완료하려면 1 배치가 필요합니다.",
+        "multi": "배치 한도는 다음과 같습니다. {{batchSize}}, {{qtyBatches}} 이 에어드롭을 완료하려면 배치가 필요합니다.",
+        "reminder": "일괄 에어드롭을 계획할 때 트랜잭션 및 블록 크기 제한을 염두에 두십시오."
       }
     }
   }
+}

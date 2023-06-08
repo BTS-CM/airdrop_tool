@@ -17,7 +17,6 @@ import { v4 as uuidv4 } from 'uuid';
 async function generateDeepLink(appName, chain, node, opType, operations) {
   return new Promise(async (resolve, reject) => {
     // eslint-disable-next-line no-unused-expressions
-    console.log({chain})
     try {
       if (chain === "TUSC") {
         await tuscApis.instance(
