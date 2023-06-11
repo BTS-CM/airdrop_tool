@@ -1,0 +1,29 @@
+{
+    "title": "Aggiorna il tuo account all'abbonamento a vita?",
+    "radioA": {
+      "label": "Seleziona la blockchain di destinazione",
+      "desc": "Solo blockchain basate su grafene"
+    },
+    "modal": {
+      "title": "Acquisto di un abbonamento a vita",
+      "noDL": {
+        "title": "Tramite deeplink crudo di barbabietola",
+        "step1": "Avvia il portafoglio BEET e vai a \"Raw Link\" nel menu.",
+        "step2": "Da questa pagina è possibile consentire tutte le operazioni o consentire solo l'operazione 8 'account_upgrade' (quindi fare clic su Salva).",
+        "step3": "Una volta che \"Pronto per i collegamenti grezzi\" viene visualizzato in Beet, invia questa richiesta.",
+        "label": "Inserisci il tuo ID account",
+        "btn": "Genera deeplink non elaborato"
+      },
+      "DL": {
+        "title": "Deeplink non elaborato generato",
+        "step1": "Il tuo deeplink BEET è stato generato, fai clic sul pulsante per procedere.",
+        "step2": "Verrà visualizzato un prompt BEET, verificare i contenuti quindi approvare la richiesta di aggiornamento dell'account.",
+        "step3": "Una volta approvato, il tuo account verrà aggiornato in modo permanente, divertiti!",
+        "beetBTN": "Trasmissione",
+        "back": "Indietro"
+      }
+    },
+    "header": "Ti interessa aggiornare il tuo account allo stato di abbonamento a vita?",
+    "secondHeader": "Riduce le commissioni, abilita il meccanismo di referral e ti qualifica per airdrop mirati per l'abbonamento a vita.",
+    "askBEET": "Aggiorna l'account"
+  }

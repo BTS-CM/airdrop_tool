@@ -1,0 +1,29 @@
+{
+    "title": "Upgraden Sie Ihr Konto auf eine lebenslange Mitgliedschaft?",
+    "radioA": {
+      "label": "Wählen Sie die Zielblockchain aus",
+      "desc": "Nur Blockchains auf Graphenbasis"
+    },
+    "modal": {
+      "title": "Kauf einer lebenslangen Mitgliedschaft",
+      "noDL": {
+        "title": "Über den Deeplink zu Rohrüben",
+        "step1": "Starten Sie die BEET-Wallet und navigieren Sie im Menü zu „Raw Link“.",
+        "step2": "Auf dieser Seite können Sie entweder alle Vorgänge zulassen oder nur Vorgang 8 „account_upgrade“ zulassen (klicken Sie dann auf „Speichern“).",
+        "step3": "Sobald in Beet „Bereit für Rohlinks“ angezeigt wird, senden Sie diese Anfrage.",
+        "label": "Geben Sie Ihre Konto-ID ein",
+        "btn": "Roh-Deeplink generieren"
+      },
+      "DL": {
+        "title": "Roher Deeplink generiert",
+        "step1": "Ihr BEET-Deeplink wurde generiert. Klicken Sie auf die Schaltfläche, um fortzufahren.",
+        "step2": "Eine BEET-Eingabeaufforderung wird angezeigt. Überprüfen Sie den Inhalt und genehmigen Sie dann die Aufforderung zur Kontoaktualisierung.",
+        "step3": "Nach der Genehmigung wird Ihr Konto dauerhaft aktualisiert. Viel Spaß!",
+        "beetBTN": "Übertragen",
+        "back": "Zurück"
+      }
+    },
+    "header": "Möchten Sie Ihr Konto auf den Status einer lebenslangen Mitgliedschaft upgraden?",
+    "secondHeader": "Reduziert die Gebühren, aktiviert den Empfehlungsmechanismus und qualifiziert Sie für gezielte Airdrops auf lebenslange Mitgliedschaft.",
+    "askBEET": "Konto aktualisieren"
+  }

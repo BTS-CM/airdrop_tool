@@ -32,7 +32,6 @@ import {
 } from "react-icons/hi";
 
 import { airdropStore, appStore, leaderboardStore } from '../lib/states';
-import DeepLink from '../lib/DeepLink';
 import AirdropCard from './AirdropCard';
 
 function sliceIntoChunks(arr, size) {

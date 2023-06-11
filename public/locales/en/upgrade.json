@@ -1,0 +1,29 @@
+{
+    "title": "Upgrade your account to lifetime membership?",
+    "radioA": {
+        "label": "Select the target blockchain",
+        "desc": "Graphene based blockchains only"
+    },
+    "modal": {
+        "title": "Purchasing a lifetime membership",
+        "noDL": {
+            "title": "Via raw Beet deeplink",
+            "step1": "Launch the BEET wallet and navigate to 'Raw Link' in the menu.",
+            "step2": "From this page you can either allow all operations, or solely allow operation 8 'account_upgrade' (then click save).",
+            "step3": "Once 'Ready for raw links' shows in Beet submit this request.",
+            "label": "Enter your account ID",
+            "btn": "Generate raw deeplink"
+        },
+        "DL": {
+            "title": "Raw deeplink generated",
+            "step1": "Your BEET deeplink has been generated, click the button to proceed.",
+            "step2": "A BEET prompt will display, verify the contents then approve the account upgrade prompt.",
+            "step3": "Once approved, your account will be permanently upgraded, enjoy!",
+            "beetBTN": "Broadcast",
+            "back": "Back"
+        }
+    },
+    "header": "Interested in upgrading your account to lifetime-membership status?",
+    "secondHeader": "Reduces fees, enables the referral mechanism and qualifies you for lifetime membership targetted airdrops.",
+    "askBEET": "Upgrade account"
+}

@@ -1,9 +1,12 @@
 {
   "loadingAccount": "アカウントの詳細を読み込んでいます!",
+  "upgrade": "アップグレード",
   "qtyTokens": "数量トークン",
   "createTime": "作成した",
   "assetsCreated": "作成されたアセット",
   "accountBalances": "口座残高",
+  "disqualified": "IDを持つユーザー {{id}} リーダーボードの資格がありません。",
+  "disqualifiedText": "このユーザーが現在のステータスが安定したチケットを取得すると、その詳細がここにリストされます。",
   "locked": "ロックされた",
   "values": "チケットの価値",
   "created": "作成されたチケットの合計",

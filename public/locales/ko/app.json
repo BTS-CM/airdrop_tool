@@ -1,16 +1,17 @@
 {
-    "menu": {
-      "btn": "메뉴",
-      "label": "메인 메뉴",
-      "home": "집",
-      "language": "언어",
-      "createTicket": "티켓 만들기",
-      "fetchTickets": "티켓 가져오기",
-      "calculateAirdrop": "에어드롭 계산",
-      "calculatedAirdrops": "계산된 에어드랍",
-      "analyzeTickets": "티켓 분석",
-      "ticketLeaderboard": "티켓 리더보드",
-      "faq": "자주하는 질문",
-      "changeNodes": "노드 변경"
-    }
+  "menu": {
+    "btn": "메뉴",
+    "label": "메인 메뉴",
+    "home": "집",
+    "language": "언어",
+    "createTicket": "티켓 만들기",
+    "upgradeAccount": "업그레이드 계정",
+    "fetchTickets": "티켓 가져오기",
+    "calculateAirdrop": "에어드롭 계산",
+    "calculatedAirdrops": "계산된 에어드롭",
+    "analyzeTickets": "티켓 분석",
+    "ticketLeaderboard": "티켓 리더보드",
+    "faq": "자주하는 질문",
+    "changeNodes": "노드 변경"
   }
+}

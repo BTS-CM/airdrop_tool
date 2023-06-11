@@ -30,12 +30,14 @@ import {
   HiOutlineQuestionMarkCircle,
   HiOutlineHome,
   HiWifi,
+  HiOutlineIdentification,
 } from "react-icons/hi";
 
 import Home from "./pages/Home";
 import Fetch from "./pages/Fetch";
 import Tickets from "./pages/Tickets";
 import Create from "./pages/Create";
+import Upgrade from "./pages/Upgrade";
 import Analyze from "./pages/Analyze";
 import Leaderboard from "./pages/Leaderboard";
 import Calculate from "./pages/Calculate";
@@ -134,6 +136,11 @@ function App() {
                       {t("app:menu.createTicket")}
                     </Menu.Item>
                   </Link>
+                  <Link style={{ textDecoration: 'none' }} to="./upgrade">
+                    <Menu.Item icon={<HiOutlineIdentification />}>
+                      {t("app:menu.upgradeAccount")}
+                    </Menu.Item>
+                  </Link>
                   <Menu.Divider />
                   <Link style={{ textDecoration: 'none' }} to="./fetch">
                     <Menu.Item icon={<HiOutlineTicket />}>
@@ -212,6 +219,9 @@ function App() {
 
                 <Route path="/Create" element={<Create />} />
                 <Route path="/Create/:env/:id" element={<Create />} />
+                <Route path="/Upgrade" element={<Upgrade />} />
+                <Route path="/Upgrade/:env/:id" element={<Upgrade />} />
+
                 <Route path="/Analyze" element={<Analyze />} />
                 <Route path="/Leaderboard" element={<Leaderboard />} />
                 <Route path="/Calculate" element={<Calculate />} />

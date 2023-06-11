@@ -1,16 +1,17 @@
 {
-    "menu": {
-      "btn": "Cardápio",
-      "label": "Menu principal",
-      "home": "Lar",
-      "language": "Linguagem",
-      "createTicket": "Criar ticket",
-      "fetchTickets": "Buscar ingressos",
-      "calculateAirdrop": "Calcular lançamento aéreo",
-      "calculatedAirdrops": "airdrops calculados",
-      "analyzeTickets": "Analisar tickets",
-      "ticketLeaderboard": "Tabela de classificação de ingressos",
-      "faq": "Perguntas frequentes",
-      "changeNodes": "Alterar nós"
-    }
+  "menu": {
+    "btn": "Cardápio",
+    "label": "Menu principal",
+    "home": "Lar",
+    "language": "Linguagem",
+    "createTicket": "Criar ticket",
+    "upgradeAccount": "Atualizar conta",
+    "fetchTickets": "Buscar ingressos",
+    "calculateAirdrop": "Calcular lançamento aéreo",
+    "calculatedAirdrops": "airdrops calculados",
+    "analyzeTickets": "Analisar tickets",
+    "ticketLeaderboard": "Tabela de classificação de ingressos",
+    "faq": "Perguntas frequentes",
+    "changeNodes": "Alterar nós"
   }
+}

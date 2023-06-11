@@ -1,9 +1,12 @@
 {
   "loadingAccount": "Kontodaten werden geladen!",
+  "upgrade": "Aktualisierung",
   "qtyTokens": "Mengentoken",
   "createTime": "Erstellt",
   "assetsCreated": "Vermögenswerte erstellt",
   "accountBalances": "Kontostände",
+  "disqualified": "Benutzer mit ID {{id}} qualifiziert sich nicht für die Bestenliste.",
+  "disqualifiedText": "Sobald dieser Benutzer ein Ticket mit einem stabilen aktuellen Status hat, werden seine Daten hier aufgelistet.",
   "locked": "gesperrt",
   "values": "Ticketwerte",
   "created": "Insgesamt erstellte Tickets",

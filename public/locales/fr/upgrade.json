@@ -1,0 +1,29 @@
+{
+    "title": "Mettre à niveau votre compte vers un abonnement à vie ?",
+    "radioA": {
+      "label": "Sélectionnez la blockchain cible",
+      "desc": "Blockchains à base de graphène uniquement"
+    },
+    "modal": {
+      "title": "Achat d'un abonnement à vie",
+      "noDL": {
+        "title": "Via le lien profond de la betterave crue",
+        "step1": "Lancez le portefeuille BEET et accédez à \"Raw Link\" dans le menu.",
+        "step2": "À partir de cette page, vous pouvez soit autoriser toutes les opérations, soit autoriser uniquement l'opération 8 'account_upgrade' (puis cliquez sur Enregistrer).",
+        "step3": "Une fois que \"Ready for raw links\" s'affiche dans Beet, soumettez cette demande.",
+        "label": "Entrez votre identifiant de compte",
+        "btn": "Générer un lien profond brut"
+      },
+      "DL": {
+        "title": "Lien profond brut généré",
+        "step1": "Votre lien profond BEET a été généré, cliquez sur le bouton pour continuer.",
+        "step2": "Une invite BEET s'affichera, vérifiez le contenu, puis approuvez l'invite de mise à niveau du compte.",
+        "step3": "Une fois approuvé, votre compte sera mis à jour de manière permanente, profitez-en !",
+        "beetBTN": "Diffuser",
+        "back": "Dos"
+      }
+    },
+    "header": "Vous souhaitez mettre à niveau votre compte vers le statut de membre à vie ?",
+    "secondHeader": "Réduit les frais, active le mécanisme de parrainage et vous qualifie pour des parachutages ciblés d'adhésion à vie.",
+    "askBEET": "Améliorer le compte"
+  }

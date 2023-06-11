@@ -41,52 +41,7 @@ export default function Account(properties) {
   const nodes = appStore((state) => state.nodes);
   const changeURL = appStore((state) => state.changeURL);
 
-  //const [accountDetails, setAccountDetails] = useState();
   const [inProgress, setInProgress] = useState(false);
-
-  /*
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        if (params.env === 'tusc') {
-          await tuscApis.instance(nodes[params.env][0], true).init_promise;
-        } else {
-          await Apis.instance(nodes[params.env][0], true).init_promise;
-        }
-      } catch (error) {
-        console.log(error);
-        setInProgress(false);
-        changeURL(params.env);
-        return;
-      }
-  
-      let object;
-      try {
-        if (params.env === 'tusc') {
-          object = await tuscApis.instance()
-            .db_api()
-            .exec('get_accounts', [[params.id]]);
-        } else {
-          object = await Apis.instance()
-            .db_api()
-            .exec('get_accounts', [[params.id]]);
-        }
-      } catch (error) {
-        console.log(error);
-        return;
-      }
-
-      if (object && object.length) {
-        setAccountDetails(object[0]);
-      }
-      setInProgress(false);
-    }
-    if (params.env && params.id && !inProgress) {
-      setInProgress(true);
-      fetchData();
-    }
-  }, []);
-  */
 
   let currentLeaderboard = [];
   let assetName = "";
@@ -109,18 +64,16 @@ export default function Account(properties) {
     chainName = "TUSC";
   }
 
-  let currentAccount = currentLeaderboard.find((x) => x.id === params.id);
+  const currentAccount = currentLeaderboard.find((x) => x.id === params.id);
 
-  let accountBalanceRows = currentAccount && currentAccount.balances.length
-    ? currentAccount.balances.map((x) => {
-      return (
-        <Link key={x.asset_id} style={{textDecoration: 'none'}} to={`/Asset/${params.env}/${x.asset_id}`}>
+  const accountBalanceRows = currentAccount && currentAccount.balances.length
+    ? currentAccount.balances.map((x) => (
+        <Link key={x.asset_id} style={{ textDecoration: 'none' }} to={`/Asset/${params.env}/${x.asset_id}`}>
           <Badge m="xs">
               {x.asset_id}
           </Badge>
         </Link>
-      )
-    })
+    ))
     : null;
 
   const retrievedAccountTickets = targetJSON.filter((x) => x.account === params.id);
@@ -375,6 +328,23 @@ export default function Account(properties) {
               : null
           }
           {
+            !currentAccount
+              ? (
+                <Card shadow="md" radius="md">
+                  <Text fz="lg" fw={500} mt="md">
+                    {`${chainName} account details`}
+                  </Text>
+                  <Text>
+                    {t("account:disqualified", { id: params.id })}
+                  </Text>
+                  <Text>
+                    {t("account:disqualifiedText")}
+                  </Text>
+                </Card>
+              )
+              : null
+          }
+          {
             currentAccount
               ? (
                 <Card shadow="md" radius="md">
@@ -385,7 +355,17 @@ export default function Account(properties) {
                     {`${currentAccount.account.name} (${params.id})`}
                   </Text>
                   <Text>
-                    LTM: {currentAccount.account.ltm ? 'True' : 'False'}
+                    LTM: {currentAccount.account.ltm ? 'True' : 'False'} {
+                      currentAccount.account.ltm
+                        ? null
+                        : (
+                            <Link to={`/upgrade/${params.env}/${params.id}`}>
+                              <Button ml="xs" compact variant="outline" color="green">
+                                {t("account:upgrade")}
+                              </Button>
+                            </Link>
+                        )
+                    }
                   </Text>
                   {
                     currentAccount.account.creation_time

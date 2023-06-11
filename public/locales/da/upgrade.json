@@ -1,0 +1,29 @@
+{
+    "title": "Opgradere din konto til livstidsmedlemskab?",
+    "radioA": {
+      "label": "Vælg den ønskede blockchain",
+      "desc": "Kun grafenbaserede blockchains"
+    },
+    "modal": {
+      "title": "Køb af et livstidsmedlemskab",
+      "noDL": {
+        "title": "Via rå Beet deeplink",
+        "step1": "Start BEET-pungen og naviger til 'Raw Link' i menuen.",
+        "step2": "Fra denne side kan du enten tillade alle operationer eller udelukkende tillade operation 8 'account_upgrade' (klik derefter på Gem).",
+        "step3": "Når 'Klar til rå links' vises i Beet, indsend denne anmodning.",
+        "label": "Indtast dit konto-id",
+        "btn": "Generer råt deeplink"
+      },
+      "DL": {
+        "title": "Rå dyblink genereret",
+        "step1": "Dit BEET-dyblink er blevet genereret, klik på knappen for at fortsætte.",
+        "step2": "En BEET-prompt vises, bekræft indholdet og godkend derefter kontoopgraderingsprompten.",
+        "step3": "Når den er godkendt, vil din konto blive permanent opgraderet, god fornøjelse!",
+        "beetBTN": "Udsende",
+        "back": "Tilbage"
+      }
+    },
+    "header": "Interesseret i at opgradere din konto til livstidsmedlemsstatus?",
+    "secondHeader": "Reducerer gebyrer, aktiverer henvisningsmekanismen og kvalificerer dig til livstidsmedlemskab målrettede airdrops.",
+    "askBEET": "Opgrader konto"
+  }

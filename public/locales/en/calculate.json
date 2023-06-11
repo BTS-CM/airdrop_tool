@@ -35,6 +35,10 @@
         "freebie": {
             "name": "Freebie",
             "desc": "Each ticket holding account gets 1 winning ticket"
+        },
+        "forever_freebie": {
+            "name": "Forever freebie",
+            "desc": "Each account holding a ticket with a forever duration and qualifying quantity gets 1 winning ticket"
         }
     },
     "calculatingTitle": "Performing airdrop calculations, please wait!",

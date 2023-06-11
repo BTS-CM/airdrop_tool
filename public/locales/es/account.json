@@ -1,9 +1,12 @@
 {
   "loadingAccount": "¡Cargando detalles de la cuenta!",
+  "upgrade": "Mejora",
   "qtyTokens": "Fichas de cantidad",
   "createTime": "Creado",
   "assetsCreated": "Activos creados",
   "accountBalances": "Saldos de cuentas",
+  "disqualified": "Usuario con DNI {{id}} no califica para la clasificación.",
+  "disqualifiedText": "Una vez que este usuario tenga un ticket con un estado actual estable, sus detalles se enumerarán aquí.",
   "locked": "bloqueado",
   "values": "valores de los boletos",
   "created": "Total de entradas creadas",

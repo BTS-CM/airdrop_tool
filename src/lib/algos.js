@@ -1,5 +1,9 @@
 import { Vector3, Line3 } from 'three';
 
+function humanReadableFloat(satoshis, precision) {
+  return satoshis / 10 ** precision;
+}
+
 /**
  * Splitting arrays into chunks
  * @param {Array} arr
@@ -313,6 +317,24 @@ function freebie(leaderboardJSON) {
 }
 
 /**
+ * Give each account which holds a ticket with forever duration a free ticket
+ * Require a minimum of 1 BTS locked forever to avoid dust locks
+ * @param {Array} leaderboardJSON
+ * @param {Array} relevantTickets
+ * @returns {Array}
+ */
+function forever_freebie(leaderboardJSON, relevantTickets) {
+  const foreverTickets = relevantTickets
+    .filter((ticket) => ticket.target_type === "lock_forever" && humanReadableFloat(ticket.amount.amount, 5) >= 1)
+    .map((validTicket) => validTicket.account);
+
+  const uniqueAccounts = [...new Set(foreverTickets)]
+    .map((user) => leaderboardJSON.find((x) => x.id === user).range.from);
+
+  return uniqueAccounts;
+}
+
+/**
  * Converts the filtered hash into a single ticket
  * @param {Array} initialChunks
  * @returns {Number}
@@ -329,9 +351,10 @@ function single_winner(initialChunks) {
  * @param {String} algoType
  * @param {String} filtered_signature
  * @param {Array} leaderboardJSON
+ * @param {Array} relevantTickets
  * @returns {Array}
  */
-function getTickets(algoType, filtered_signature, leaderboardJSON) {
+function getTickets(algoType, filtered_signature, leaderboardJSON, relevantTickets) {
   const initialChunks = chunk(filtered_signature, 9);
 
   const minVector = new Vector3(0, 0, 0);
@@ -357,6 +380,8 @@ function getTickets(algoType, filtered_signature, leaderboardJSON) {
       return bouncing_ball(initialChunks, maxDistance);
     case "freebie":
       return freebie(leaderboardJSON);
+    case "forever_freebie":
+      return forever_freebie(leaderboardJSON, relevantTickets);
     //case "single_winner":
     //  return single_winner(initialChunks);
     default:
@@ -372,6 +397,7 @@ function getTickets(algoType, filtered_signature, leaderboardJSON) {
  * @param {String} deduplicate
  * @param {String} alwaysWinning
  * @param {Array} leaderboardJSON
+ * @param {Array} relevantTickets
  * @returns {Object}
  */
 function executeCalculation(
@@ -380,6 +406,7 @@ function executeCalculation(
   deduplicate,
   alwaysWinning,
   leaderboardJSON,
+  relevantTickets,
 ) {
   const generatedNumbers = {};
   let winningTickets = [];
@@ -388,7 +415,7 @@ function executeCalculation(
   for (let i = 0; i < distributions.length; i++) {
     // Calculate winning tickets for each algo chosen, 1 at a time
     const algoType = distributions[i];
-    let algoTickets = getTickets(algoType, filtered_signature, leaderboardJSON);
+    let algoTickets = getTickets(algoType, filtered_signature, leaderboardJSON, relevantTickets);
 
     if (deduplicate === "Yes") {
       // User chose to avoid unique tickets being chosen multiple times

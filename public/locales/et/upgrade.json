@@ -1,0 +1,29 @@
+{
+    "title": "Kas uuendada oma konto eluaegseks liikmeks?",
+    "radioA": {
+      "label": "Valige sihtplokiahel",
+      "desc": "Ainult grafeenipõhised plokiahelad"
+    },
+    "modal": {
+      "title": "Eluaegse liikmelisuse ostmine",
+      "noDL": {
+        "title": "Toores peedi sügavlingi kaudu",
+        "step1": "Käivitage BEET rahakott ja navigeerige menüüs 'Raw Link'.",
+        "step2": "Sellel lehel saate lubada kõik toimingud või ainult toimingu 8 'account_upgrade' (seejärel klõpsake nuppu Salvesta).",
+        "step3": "Kui Beetis kuvatakse „Toorlinkide jaoks valmis”, esitage see taotlus.",
+        "label": "Sisestage oma konto ID",
+        "btn": "Looge toores süvalink"
+      },
+      "DL": {
+        "title": "Loodud toores süvalink",
+        "step1": "Teie BEET-sügavlink on loodud, jätkamiseks klõpsake nuppu.",
+        "step2": "Kuvatakse BEET-viip, kontrollige sisu ja kinnitage konto uuendamise viip.",
+        "step3": "Pärast kinnitamist täiendatakse teie kontot jäädavalt, nautige!",
+        "beetBTN": "Saade",
+        "back": "tagasi"
+      }
+    },
+    "header": "Kas olete huvitatud oma konto uuendamisest eluaegseks liikmestaatuseks?",
+    "secondHeader": "Vähendab tasusid, võimaldab suunamismehhanismi ja kvalifitseerub eluaegseks liikmeks sihitud lennupiletite saamiseks.",
+    "askBEET": "Täiendage kontot"
+  }

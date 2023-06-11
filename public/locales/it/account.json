@@ -1,9 +1,12 @@
 {
   "loadingAccount": "Caricamento dei dettagli dell'account!",
+  "upgrade": "Aggiornamento",
   "qtyTokens": "Gettoni quantità",
   "createTime": "Creato",
   "assetsCreated": "Beni creati",
   "accountBalances": "Saldi dei conti",
+  "disqualified": "Utente con ID {{id}} non si qualifica per la classifica.",
+  "disqualifiedText": "Una volta che questo utente ha un ticket con uno stato corrente stabile, i suoi dettagli verranno elencati qui.",
   "locked": "bloccato",
   "values": "valori del biglietto",
   "created": "Ticket creati totali",
@@ -31,7 +34,7 @@
     "th9": "prossimo downgrade"
   },
   "footer": {
-    "title": "Vuoi guadagnare influenza e migliorare le tue probabilità di airdrop?",
+    "title": "Vuoi guadagnare influenza e migliorare le tue probabilità di lancio aereo?",
     "create": "Crea un altro ticket sul",
     "blockchain": "blockchain",
     "button": "Crea nuovo biglietto"

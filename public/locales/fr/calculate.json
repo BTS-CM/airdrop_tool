@@ -1,81 +1,85 @@
 {
-    "calcs": {
-      "forward": {
-        "name": "Transférer des morceaux",
-        "desc": "Divisez le hachage en numéros de ticket."
-      },
-      "reverse": {
-        "name": "Morceaux inversés",
-        "desc": "Hachage inversé puis divisé en numéros de ticket."
-      },
-      "pi": {
-        "name": "PI",
-        "desc": "Divisez le hachage, faites quelques calculs puis multipliez par PI pour les numéros de ticket."
-      },
-      "reverse_pi": {
-        "name": "PI inversé",
-        "desc": "Diviser le hachage, inverser les morceaux de hachage, faire des calculs, multiplier par PI, sortir des tickets."
-      },
-      "cubed": {
-        "name": "Cube",
-        "desc": "Divisez le hachage en morceaux à 3 chiffres, mettez chaque morceau au cube, sortez les tickets."
-      },
-      "bouncing_ball": {
-        "name": "Balle rebondissante",
-        "desc": "chemin de la balle rebondissant dans la matrice -> choisir des billets le long du chemin"
-      },
-      "alien_blood": {
-        "name": "Sang extraterrestre",
-        "desc": "Ramasse les taches de sang extraterrestre ; "
-      },
-      "avg_point_lines": {
-        "name": "Lignes de points moyennes",
-        "desc": "Calculez les coordonnées x/y/z moyennes -> tracez des lignes à partir de chaque vecteur => récompensez ceux en ligne"
-      },
-      "freebie": {
-        "name": "Gratuité",
-        "desc": "Chaque compte de dépôt de billets reçoit 1 billet gagnant"
-      }
+  "calcs": {
+    "forward": {
+      "name": "Transférer des morceaux",
+      "desc": "Divisez le hachage en numéros de ticket."
     },
-    "calculatingTitle": "Calculs de parachutage en cours, veuillez patienter !",
-    "completed": {
-      "title": "Calculs de parachutage terminés avec succès !",
-      "anotherBtn": "Calculer un autre airdrop ?",
-      "airdropBtn": "Voir airdrop généré",
-      "generatedBtn": "Voir tous les parachutages générés"
+    "reverse": {
+      "name": "Morceaux inversés",
+      "desc": "Hachage inversé puis divisé en numéros de ticket."
     },
-    "title": "Calculer une distribution de parachutage équitablement prouvée pour quelle blockchain ?",
-    "radioLabel": "Sélectionnez la blockchain cible",
-    "radioDesc": "Blockchains à base de graphène uniquement",
-    "hash": {
-      "title": "Quel type de blockhash voulez-vous utiliser pour une entrée aléatoire initiale prouvée ?",
-      "radioLabel": "Sélectionnez un type de hachage initial",
-      "radioDesc": "Original ou haché de manière sécurisée ?",
-      "plain": "Chaîne de signature de témoin ordinaire",
-      "witSig": "hachage de la signature du témoin"
+    "pi": {
+      "name": "PI",
+      "desc": "Divisez le hachage, faites quelques calculs puis multipliez par PI pour les numéros de ticket."
     },
-    "ticket": {
-      "title": "Options de billets gagnantes",
-      "radioLabel": "Faut-il dédupliquer les tickets gagnants ?",
-      "radioDesc": "C'est à dire. ",
-      "yes": "Oui",
-      "no": "Non",
-      "winLabel": "Faut-il toujours choisir les billets gagnants ?",
-      "winDesc": "Par exemple. "
+    "reverse_pi": {
+      "name": "PI inversé",
+      "desc": "Diviser le hachage, inverser les morceaux de hachage, faire des calculs, multiplier par PI, sortir des tickets."
     },
-    "blockNum": {
-      "title": "Entrez le numéro de bloc que vous souhaitez utiliser à des fins de parachutage",
-      "label": "Numéro de bloc"
+    "cubed": {
+      "name": "Cube",
+      "desc": "Divisez le hachage en morceaux à 3 chiffres, mettez chaque morceau au cube, sortez les tickets."
     },
-    "fetchTickets": "Vous devez récupérer les données du ticket pour cette blockchain.",
-    "distro": {
-      "title": "Sélectionnez vos méthodes préférées pour générer des distributions de parachutage équitablement prouvées",
-      "th1": "Taper",
-      "th2": "Description"
+    "bouncing_ball": {
+      "name": "Balle rebondissante",
+      "desc": "chemin de la balle rebondissant dans la matrice -> choisir des billets le long du chemin"
     },
-    "proceed": {
-      "title": "Procéder au calcul du largage aérien",
-      "desc": "Votre vecteur de largage calculé sera disponible sur la page de largage une fois terminé.",
-      "btn": "Effectuer le calcul du largage aérien"
+    "alien_blood": {
+      "name": "Sang extraterrestre",
+      "desc": "Ramasse les taches de sang extraterrestre ; "
+    },
+    "avg_point_lines": {
+      "name": "Lignes de points moyennes",
+      "desc": "Calculez les coordonnées x/y/z moyennes -> tracez des lignes à partir de chaque vecteur => récompensez ceux en ligne"
+    },
+    "freebie": {
+      "name": "Gratuité",
+      "desc": "Chaque compte de dépôt de billets reçoit 1 billet gagnant"
+    },
+    "forever_freebie": {
+      "name": "Gratuité pour toujours",
+      "desc": "Chaque compte détenant un ticket d'une durée indéterminée et d'une quantité qualifiante reçoit 1 ticket gagnant"
     }
+  },
+  "calculatingTitle": "Calculs de parachutage en cours, veuillez patienter !",
+  "completed": {
+    "title": "Calculs de parachutage terminés avec succès !",
+    "anotherBtn": "Calculer un autre airdrop ?",
+    "airdropBtn": "Voir airdrop généré",
+    "generatedBtn": "Voir tous les parachutages générés"
+  },
+  "title": "Calculer une distribution de parachutage équitablement prouvée pour quelle blockchain ?",
+  "radioLabel": "Sélectionnez la blockchain cible",
+  "radioDesc": "Blockchains à base de graphène uniquement",
+  "hash": {
+    "title": "Quel type de blockhash voulez-vous utiliser pour une entrée aléatoire initiale prouvée ?",
+    "radioLabel": "Sélectionnez un type de hachage initial",
+    "radioDesc": "Original ou haché de manière sécurisée ?",
+    "plain": "Chaîne de signature de témoin simple",
+    "witSig": "hachage de la signature du témoin"
+  },
+  "ticket": {
+    "title": "Options de billets gagnantes",
+    "radioLabel": "Faut-il dédupliquer les tickets gagnants ?",
+    "radioDesc": "C'est à dire. ",
+    "yes": "Oui",
+    "no": "Non",
+    "winLabel": "Faut-il toujours choisir les billets gagnants ?",
+    "winDesc": "Par exemple. "
+  },
+  "blockNum": {
+    "title": "Entrez le numéro de bloc que vous souhaitez utiliser à des fins de parachutage",
+    "label": "Numéro de bloc"
+  },
+  "fetchTickets": "Vous devez récupérer les données du ticket pour cette blockchain.",
+  "distro": {
+    "title": "Sélectionnez vos méthodes préférées pour générer des distributions de parachutage équitablement prouvées",
+    "th1": "Taper",
+    "th2": "Description"
+  },
+  "proceed": {
+    "title": "Procéder au calcul du largage aérien",
+    "desc": "Votre vecteur de largage calculé sera disponible sur la page de largage une fois terminé.",
+    "btn": "Effectuer le calcul du largage aérien"
   }
+}

@@ -1,9 +1,12 @@
 {
     "loadingAccount": "Loading account details!",
+    "upgrade": "Upgrade",
     "qtyTokens": "Quantity tokens",
     "createTime": "Created",
     "assetsCreated": "Assets created",
     "accountBalances": "Account balances",
+    "disqualified": "User with ID {{id}} does not qualify for leaderboard.",
+    "disqualifiedText": "Once this user has a ticket with a stable current status, their details will be listed here.",
     "locked": "locked",
     "values": "ticket values",
     "created": "Total created tickets",

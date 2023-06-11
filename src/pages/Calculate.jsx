@@ -22,13 +22,17 @@ import {
 import blake from 'blakejs';
 
 import { executeCalculation } from '../lib/algos';
-import { appStore, leaderboardStore, airdropStore } from '../lib/states';
+import { appStore, leaderboardStore, airdropStore, ticketStore } from '../lib/states';
 
 export default function Calculate(properties) {
   const { t, i18n } = useTranslation();
   const btsLeaderboard = leaderboardStore((state) => state.bitshares);
   const btsTestnetLeaderboard = leaderboardStore((state) => state.bitshares_testnet);
   const tuscLeaderboard = leaderboardStore((state) => state.tusc);
+
+  const btsTickets = ticketStore((state) => state.bitshares);
+  const btsTestnetTickets = ticketStore((state) => state.bitshares);
+  const tuscTickets = ticketStore((state) => state.bitshares);
 
   const nodes = appStore((state) => state.nodes);
   const changeURL = appStore((state) => state.changeURL);
@@ -47,7 +51,18 @@ export default function Calculate(properties) {
 
   const [progress, setProgress] = useState('planning'); // planning, calculating, completed
 
-  const calculationTypes = ['forward', 'reverse', 'pi', 'reverse_pi', 'cubed', 'bouncing_ball', 'alien_blood', 'avg_point_lines', 'freebie']
+  const calculationTypes = [
+    'forward',
+    'reverse',
+    'pi',
+    'reverse_pi',
+    'cubed',
+    'bouncing_ball',
+    'alien_blood',
+    'avg_point_lines',
+    'freebie',
+    'forever_freebie',
+  ]
     .map((x) => ({
       name: t(`calculate:calcs.${x}.name`),
       value: x,
@@ -60,14 +75,18 @@ export default function Calculate(properties) {
 
   let assetName = "1.3.0";
   let leaderboardJSON = [];
+  let relevantTickets = [];
   if (value === 'bitshares') {
     leaderboardJSON = btsLeaderboard;
+    relevantTickets = btsTickets;
     assetName = "BTS";
   } else if (value === 'bitshares_testnet') {
     leaderboardJSON = btsTestnetLeaderboard;
+    relevantTickets = btsTestnetTickets;
     assetName = "TEST";
   } else if (value === 'tusc') {
     leaderboardJSON = tuscLeaderboard;
+    relevantTickets = tuscTickets;
     assetName = "TUSC";
   }
 
@@ -153,6 +172,7 @@ export default function Calculate(properties) {
         deduplicate,
         alwaysWinning,
         leaderboardJSON,
+        relevantTickets,
       );
     } catch (error) {
       console.log(error);

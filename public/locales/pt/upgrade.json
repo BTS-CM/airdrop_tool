@@ -1,0 +1,29 @@
+{
+    "title": "Atualize sua conta para associação vitalícia?",
+    "radioA": {
+      "label": "Selecione o blockchain de destino",
+      "desc": "Apenas blockchains baseados em grafeno"
+    },
+    "modal": {
+      "title": "Comprando uma assinatura vitalícia",
+      "noDL": {
+        "title": "Via deeplink de beterraba crua",
+        "step1": "Inicie a carteira BEET e navegue até 'Raw Link' no menu.",
+        "step2": "Nessa página, você pode permitir todas as operações ou permitir apenas a operação 8 'account_upgrade' (em seguida, clique em salvar).",
+        "step3": "Depois que 'Pronto para links brutos' aparecer no Beet, envie esta solicitação.",
+        "label": "Insira o ID da sua conta",
+        "btn": "Gerar deeplink bruto"
+      },
+      "DL": {
+        "title": "Deeplink bruto gerado",
+        "step1": "Seu deeplink BEET foi gerado, clique no botão para continuar.",
+        "step2": "Um prompt BEET será exibido, verifique o conteúdo e aprove o prompt de atualização da conta.",
+        "step3": "Uma vez aprovado, sua conta será permanentemente atualizada, aproveite!",
+        "beetBTN": "Transmissão",
+        "back": "Voltar"
+      }
+    },
+    "header": "Interessado em atualizar sua conta para o status de associação vitalícia?",
+    "secondHeader": "Reduz as taxas, ativa o mecanismo de referência e qualifica você para airdrops direcionados à associação vitalícia.",
+    "askBEET": "Atualizar conta"
+  }

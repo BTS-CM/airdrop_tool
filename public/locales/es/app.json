@@ -1,16 +1,17 @@
 {
-    "menu": {
-      "btn": "Menú",
-      "label": "Menú principal",
-      "home": "Hogar",
-      "language": "Idioma",
-      "createTicket": "Crear Ticket",
-      "fetchTickets": "Obtener boletos",
-      "calculateAirdrop": "Calcular lanzamiento aéreo",
-      "calculatedAirdrops": "Lanzamientos aéreos calculados",
-      "analyzeTickets": "Analizar boletos",
-      "ticketLeaderboard": "Clasificación de entradas",
-      "faq": "Preguntas más frecuentes",
-      "changeNodes": "Cambiar nodos"
-    }
+  "menu": {
+    "btn": "Menú",
+    "label": "Menú principal",
+    "home": "Hogar",
+    "language": "Idioma",
+    "createTicket": "Crear Ticket",
+    "upgradeAccount": "Actualizar cuenta",
+    "fetchTickets": "Obtener boletos",
+    "calculateAirdrop": "Calcular lanzamiento aéreo",
+    "calculatedAirdrops": "Lanzamientos aéreos calculados",
+    "analyzeTickets": "Analizar boletos",
+    "ticketLeaderboard": "Clasificación de entradas",
+    "faq": "Preguntas más frecuentes",
+    "changeNodes": "Cambiar nodos"
   }
+}

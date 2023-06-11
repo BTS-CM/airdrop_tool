@@ -1,81 +1,85 @@
 {
-    "calcs": {
-      "forward": {
-        "name": "Encaminhar pedaços",
-        "desc": "Divida o hash em números de ticket."
-      },
-      "reverse": {
-        "name": "Pedaços reversos",
-        "desc": "O hash reverso é dividido em números de ticket."
-      },
-      "pi": {
-        "name": "PI",
-        "desc": "Divida o hash, faça algumas contas e multiplique por PI para obter os números dos tickets."
-      },
-      "reverse_pi": {
-        "name": "IP reverso",
-        "desc": "Dividir hash, inverter pedaços de hash, fazer contas, multiplicar por PI, gerar tíquetes."
-      },
-      "cubed": {
-        "name": "Ao cubo",
-        "desc": "Divida o hash em pedaços de 3 dígitos, coloque cada pedaço em cubos, tíquetes de saída."
-      },
-      "bouncing_ball": {
-        "name": "bola quicando",
-        "desc": "caminho da bola quicando na matriz -> escolha os bilhetes ao longo do caminho"
-      },
-      "alien_blood": {
-        "name": "Sangue alienígena",
-        "desc": "Pega manchas de respingos de sangue alienígena; "
-      },
-      "avg_point_lines": {
-        "name": "Linhas de ponto médio",
-        "desc": "Calcule as coordenadas médias x/y/z -> desenhe linhas para isso de cada vetor => recompense aqueles na linha"
-      },
-      "freebie": {
-        "name": "Brinde",
-        "desc": "Cada conta detentora de bilhetes recebe 1 bilhete premiado"
-      }
+  "calcs": {
+    "forward": {
+      "name": "Encaminhar pedaços",
+      "desc": "Divida o hash em números de ticket."
     },
-    "calculatingTitle": "Realizando cálculos de airdrop, aguarde!",
-    "completed": {
-      "title": "Cálculos de airdrop concluídos com sucesso!",
-      "anotherBtn": "Calcular outro lançamento aéreo?",
-      "airdropBtn": "Veja o airdrop gerado",
-      "generatedBtn": "Ver todos os airdrops gerados"
+    "reverse": {
+      "name": "Pedaços reversos",
+      "desc": "O hash reverso é dividido em números de ticket."
     },
-    "title": "Calcule uma distribuição de airdrop comprovadamente justa para qual blockchain?",
-    "radioLabel": "Selecione o blockchain de destino",
-    "radioDesc": "Apenas blockchains baseados em grafeno",
-    "hash": {
-      "title": "Que tipo de blockhash você deseja usar para a entrada inicial comprovadamente aleatória?",
-      "radioLabel": "Selecione um tipo de hash inicial",
-      "radioDesc": "Original ou com hash seguro?",
-      "plain": "String de assinatura de testemunha simples",
-      "witSig": "hash de assinatura de testemunha"
+    "pi": {
+      "name": "PI",
+      "desc": "Divida o hash, faça algumas contas e multiplique por PI para obter os números dos tickets."
     },
-    "ticket": {
-      "title": "Opções de bilhetes vencedores",
-      "radioLabel": "Os bilhetes premiados devem ser desduplicados?",
-      "radioDesc": "ou seja ",
-      "yes": "Sim",
-      "no": "Não",
-      "winLabel": "Os bilhetes premiados devem ser sempre escolhidos?",
-      "winDesc": "Por exemplo. "
+    "reverse_pi": {
+      "name": "IP reverso",
+      "desc": "Dividir hash, inverter pedaços de hash, fazer contas, multiplicar por PI, gerar tíquetes."
     },
-    "blockNum": {
-      "title": "Digite o número do bloco que você deseja usar para fins de airdrop",
-      "label": "Número do bloco"
+    "cubed": {
+      "name": "Ao cubo",
+      "desc": "Divida o hash em pedaços de 3 dígitos, coloque cada pedaço em cubos, tíquetes de saída."
     },
-    "fetchTickets": "Você deve buscar os dados do ticket para este blockchain.",
-    "distro": {
-      "title": "Selecione seus métodos preferidos para gerar distribuições de airdrop comprovadamente justas",
-      "th1": "Tipo",
-      "th2": "Descrição"
+    "bouncing_ball": {
+      "name": "bola quicando",
+      "desc": "caminho da bola quicando na matriz -> escolha os bilhetes ao longo do caminho"
     },
-    "proceed": {
-      "title": "Prossiga com o cálculo do airdrop",
-      "desc": "Seu vetor de airdrop calculado será disponibilizado na página de airdrop depois de concluído.",
-      "btn": "Executar cálculo de lançamento aéreo"
+    "alien_blood": {
+      "name": "Sangue alienígena",
+      "desc": "Pega manchas de respingos de sangue alienígena; "
+    },
+    "avg_point_lines": {
+      "name": "Linhas de ponto médio",
+      "desc": "Calcule as coordenadas médias x/y/z -> desenhe linhas para isso de cada vetor => recompense aqueles na linha"
+    },
+    "freebie": {
+      "name": "Brinde",
+      "desc": "Cada conta detentora de bilhetes recebe 1 bilhete premiado"
+    },
+    "forever_freebie": {
+      "name": "Brinde para sempre",
+      "desc": "Cada conta com um tíquete com duração indefinida e quantidade qualificada recebe 1 tíquete vencedor"
     }
+  },
+  "calculatingTitle": "Realizando cálculos de airdrop, aguarde!",
+  "completed": {
+    "title": "Cálculos de airdrop concluídos com sucesso!",
+    "anotherBtn": "Calcular outro lançamento aéreo?",
+    "airdropBtn": "Veja o airdrop gerado",
+    "generatedBtn": "Ver todos os airdrops gerados"
+  },
+  "title": "Calcule uma distribuição de airdrop comprovadamente justa para qual blockchain?",
+  "radioLabel": "Selecione o blockchain de destino",
+  "radioDesc": "Apenas blockchains baseados em grafeno",
+  "hash": {
+    "title": "Que tipo de blockhash você deseja usar para a entrada inicial comprovadamente aleatória?",
+    "radioLabel": "Selecione um tipo de hash inicial",
+    "radioDesc": "Original ou com hash seguro?",
+    "plain": "String de assinatura de testemunha simples",
+    "witSig": "hash de assinatura de testemunha"
+  },
+  "ticket": {
+    "title": "Opções de bilhetes vencedores",
+    "radioLabel": "Os bilhetes premiados devem ser desduplicados?",
+    "radioDesc": "ou seja ",
+    "yes": "Sim",
+    "no": "Não",
+    "winLabel": "Os bilhetes premiados devem ser sempre escolhidos?",
+    "winDesc": "Por exemplo. "
+  },
+  "blockNum": {
+    "title": "Digite o número do bloco que você deseja usar para fins de airdrop",
+    "label": "Número do bloco"
+  },
+  "fetchTickets": "Você deve buscar os dados do ticket para este blockchain.",
+  "distro": {
+    "title": "Selecione seus métodos preferidos para gerar distribuições de airdrop comprovadamente justas",
+    "th1": "Tipo",
+    "th2": "Descrição"
+  },
+  "proceed": {
+    "title": "Prossiga com o cálculo do airdrop",
+    "desc": "Seu vetor de airdrop calculado será disponibilizado na página de airdrop depois de concluído.",
+    "btn": "Executar cálculo de lançamento aéreo"
   }
+}

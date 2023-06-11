@@ -1,81 +1,85 @@
 {
-    "calcs": {
-      "forward": {
-        "name": "Fremadgående bidder",
-        "desc": "Opdel hash i billetnumre."
-      },
-      "reverse": {
-        "name": "Omvendte bidder",
-        "desc": "Omvendt hash opdeles derefter i billetnumre."
-      },
-      "pi": {
-        "name": "PI",
-        "desc": "Opdel hash, lav noget matematik og gang derefter med PI for billetnumre."
-      },
-      "reverse_pi": {
-        "name": "Omvendt PI",
-        "desc": "Opdel hash, reverse hash bidder, lav matematik, gange med PI, output billetter."
-      },
-      "cubed": {
-        "name": "Terninger",
-        "desc": "Opdel hash i 3-cifrede bidder, kub hver chunk, udskriv billetter."
-      },
-      "bouncing_ball": {
-        "name": "Hoppende bold",
-        "desc": "bane for bold hoppende i matrix -> vælg billetter langs stien"
-      },
-      "alien_blood": {
-        "name": "Fremmed blod",
-        "desc": "Plukker fremmede blodstænkspletter; "
-      },
-      "avg_point_lines": {
-        "name": "Gennemsnitlige punktlinjer",
-        "desc": "Beregn de gennemsnitlige x/y/z koordinater -> træk linjer til denne fra hver vektor => belønn dem på linjen"
-      },
-      "freebie": {
-        "name": "Freebie",
-        "desc": "Hver billetbeholdningskonto får 1 vinderkupon"
-      }
+  "calcs": {
+    "forward": {
+      "name": "Fremadgående bidder",
+      "desc": "Opdel hash i billetnumre."
     },
-    "calculatingTitle": "Udfører airdrop-beregninger, vent venligst!",
-    "completed": {
-      "title": "Airdrop-beregninger er gennemført med succes!",
-      "anotherBtn": "Beregn endnu et luftfald?",
-      "airdropBtn": "Se genereret airdrop",
-      "generatedBtn": "Se alle genererede luftdråber"
+    "reverse": {
+      "name": "Omvendte bidder",
+      "desc": "Omvendt hash opdeles derefter i billetnumre."
     },
-    "title": "Beregn en beviseligt retfærdig airdrop-distribution for hvilken blockchain?",
-    "radioLabel": "Vælg den ønskede blockchain",
-    "radioDesc": "Kun grafenbaserede blockchains",
-    "hash": {
-      "title": "Hvilken slags blockhash vil du bruge til indledende beviseligt tilfældige input?",
-      "radioLabel": "Vælg en indledende hash-type",
-      "radioDesc": "Original eller sikkert hashed?",
-      "plain": "Almindelig vidne signaturstreng",
-      "witSig": "hash af vidnets underskrift"
+    "pi": {
+      "name": "PI",
+      "desc": "Opdel hash, lav noget matematik og gang derefter med PI for billetnumre."
     },
-    "ticket": {
-      "title": "Vinderbilletmuligheder",
-      "radioLabel": "Skal vinderbilletter deduplikeres?",
-      "radioDesc": "dvs. ",
-      "yes": "Ja",
-      "no": "Ingen",
-      "winLabel": "Skal vinderbilletter altid vælges?",
-      "winDesc": "F.eks. "
+    "reverse_pi": {
+      "name": "Omvendt PI",
+      "desc": "Opdel hash, reverse hash chunks, lav matematik, gange med PI, output billetter."
     },
-    "blockNum": {
-      "title": "Indtast det bloknummer, du ønsker at bruge til airdrop-formål",
-      "label": "Bloknummer"
+    "cubed": {
+      "name": "Terninger",
+      "desc": "Opdel hash i 3-cifrede bidder, kub hver chunk, udskriv billetter."
     },
-    "fetchTickets": "Du skal hente billetdataene for denne blockchain.",
-    "distro": {
-      "title": "Vælg dine foretrukne metoder til at generere sandsynligt retfærdige luftdråbefordelinger",
-      "th1": "Type",
-      "th2": "Beskrivelse"
+    "bouncing_ball": {
+      "name": "Hoppende bold",
+      "desc": "bane for bold hoppende i matrix -> vælg billetter langs stien"
     },
-    "proceed": {
-      "title": "Fortsæt med beregning af luftfald",
-      "desc": "Din beregnede airdrop-vektor vil blive gjort tilgængelig på airdrop-siden, når den er fuldført.",
-      "btn": "Udfør luftfaldsberegning"
+    "alien_blood": {
+      "name": "Fremmed blod",
+      "desc": "Plukker fremmede blodstænkspletter; "
+    },
+    "avg_point_lines": {
+      "name": "Gennemsnitlige punktlinjer",
+      "desc": "Beregn de gennemsnitlige x/y/z koordinater -> træk linjer til denne fra hver vektor => belønn dem på linjen"
+    },
+    "freebie": {
+      "name": "Freebie",
+      "desc": "Hver billetbeholdningskonto får 1 vinderkupon"
+    },
+    "forever_freebie": {
+      "name": "For evigt gratis",
+      "desc": "Hver konto, der har en billet med en evig varighed og kvalificerende mængde, får 1 vinderkupon"
     }
+  },
+  "calculatingTitle": "Udfører airdrop-beregninger, vent venligst!",
+  "completed": {
+    "title": "Airdrop-beregninger er gennemført med succes!",
+    "anotherBtn": "Beregn endnu et luftfald?",
+    "airdropBtn": "Se genereret airdrop",
+    "generatedBtn": "Se alle genererede luftdråber"
+  },
+  "title": "Beregn en beviseligt retfærdig airdrop-distribution for hvilken blockchain?",
+  "radioLabel": "Vælg den ønskede blockchain",
+  "radioDesc": "Kun grafenbaserede blockchains",
+  "hash": {
+    "title": "Hvilken slags blockhash vil du bruge til indledende beviseligt tilfældige input?",
+    "radioLabel": "Vælg en indledende hash-type",
+    "radioDesc": "Original eller sikkert hashed?",
+    "plain": "Almindelig vidne signaturstreng",
+    "witSig": "hash af vidnets underskrift"
+  },
+  "ticket": {
+    "title": "Vinderbilletmuligheder",
+    "radioLabel": "Skal vinderbilletter deduplikeres?",
+    "radioDesc": "dvs. ",
+    "yes": "Ja",
+    "no": "Ingen",
+    "winLabel": "Skal vinderbilletter altid vælges?",
+    "winDesc": "F.eks. "
+  },
+  "blockNum": {
+    "title": "Indtast det bloknummer, du ønsker at bruge til airdrop-formål",
+    "label": "Bloknummer"
+  },
+  "fetchTickets": "Du skal hente billetdataene for denne blockchain.",
+  "distro": {
+    "title": "Vælg dine foretrukne metoder til at generere beviseligt retfærdige luftdråbefordelinger",
+    "th1": "Type",
+    "th2": "Beskrivelse"
+  },
+  "proceed": {
+    "title": "Fortsæt med beregning af luftfald",
+    "desc": "Din beregnede airdrop-vektor vil blive gjort tilgængelig på airdrop-siden, når den er fuldført.",
+    "btn": "Udfør luftfaldsberegning"
   }
+}

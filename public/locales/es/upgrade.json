@@ -1,0 +1,29 @@
+{
+    "title": "¿Actualizar su cuenta a membresía de por vida?",
+    "radioA": {
+      "label": "Seleccione la cadena de bloques de destino",
+      "desc": "Solo cadenas de bloques basadas en grafeno"
+    },
+    "modal": {
+      "title": "Comprar una membresía de por vida",
+      "noDL": {
+        "title": "A través del enlace profundo de remolacha sin procesar",
+        "step1": "Inicie la billetera BEET y navegue hasta 'Raw Link' en el menú.",
+        "step2": "Desde esta página puede permitir todas las operaciones o permitir únicamente la operación 8 'account_upgrade' (luego haga clic en guardar).",
+        "step3": "Una vez que se muestre 'Listo para enlaces sin procesar' en Beet, envíe esta solicitud.",
+        "label": "Ingrese su ID de cuenta",
+        "btn": "Generar un enlace profundo sin procesar"
+      },
+      "DL": {
+        "title": "Enlace profundo sin procesar generado",
+        "step1": "Se ha generado su enlace profundo BEET, haga clic en el botón para continuar.",
+        "step2": "Aparecerá un aviso de BEET, verifique el contenido y luego apruebe el aviso de actualización de la cuenta.",
+        "step3": "Una vez aprobada, su cuenta se actualizará permanentemente, ¡disfrútelo!",
+        "beetBTN": "Transmisión",
+        "back": "Atrás"
+      }
+    },
+    "header": "¿Está interesado en actualizar su cuenta al estado de membresía de por vida?",
+    "secondHeader": "Reduce las tarifas, habilita el mecanismo de referencia y lo califica para lanzamientos aéreos específicos de membresía de por vida.",
+    "askBEET": "Actualizar cuenta"
+  }

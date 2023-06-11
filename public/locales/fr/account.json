@@ -1,9 +1,12 @@
 {
   "loadingAccount": "Chargement des détails du compte !",
+  "upgrade": "Améliorer",
   "qtyTokens": "Jetons de quantité",
   "createTime": "Créé",
   "assetsCreated": "Actifs créés",
   "accountBalances": "Soldes des comptes",
+  "disqualified": "Utilisateur avec ID {{id}} ne se qualifie pas pour le classement.",
+  "disqualifiedText": "Une fois que cet utilisateur a un ticket avec un statut actuel stable, ses détails seront listés ici.",
   "locked": "fermé à clé",
   "values": "valeurs des tickets",
   "created": "Total des tickets créés",

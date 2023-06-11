@@ -23,6 +23,7 @@ window.electron = {
       'calculate',
       'calculatedAirdrops',
       'create',
+      'upgrade',
       'faq',
       'fetch',
       'home',

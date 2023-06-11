@@ -1,81 +1,85 @@
 {
-    "calcs": {
-      "forward": {
-        "name": "Stücke weiterleiten",
-        "desc": "Teilen Sie den Hash in Ticketnummern auf."
-      },
-      "reverse": {
-        "name": "Stücke umkehren",
-        "desc": "Hash umkehren und dann in Ticketnummern aufteilen."
-      },
-      "pi": {
-        "name": "PI",
-        "desc": "Teilen Sie den Hash auf, rechnen Sie etwas nach und multiplizieren Sie ihn dann mit PI, um die Ticketnummern zu erhalten."
-      },
-      "reverse_pi": {
-        "name": "Reverse PI",
-        "desc": "Hash teilen, Hash-Blöcke umkehren, rechnen, mit PI multiplizieren, Tickets ausgeben."
-      },
-      "cubed": {
-        "name": "Gewürfelt",
-        "desc": "Teilen Sie den Hash in dreistellige Blöcke auf, würfeln Sie jeden Block und geben Sie Tickets aus."
-      },
-      "bouncing_ball": {
-        "name": "Flummi",
-        "desc": "Weg des Balls, der in der Matrix aufspringt -> Tickets entlang des Weges auswählen"
-      },
-      "alien_blood": {
-        "name": "Außerirdisches Blut",
-        "desc": "Entfernt fremde Blutspritzer; "
-      },
-      "avg_point_lines": {
-        "name": "Durchschnittliche Punktlinien",
-        "desc": "Berechnen Sie die durchschnittlichen x/y/z-Koordinaten -> zeichnen Sie von jedem Vektor Linien dorthin => belohnen Sie die Online-Koordinaten"
-      },
-      "freebie": {
-        "name": "Gratis",
-        "desc": "Jedes Loskonto erhält 1 Gewinnlos"
-      }
+  "calcs": {
+    "forward": {
+      "name": "Stücke weiterleiten",
+      "desc": "Teilen Sie den Hash in Ticketnummern auf."
     },
-    "calculatingTitle": "Airdrop-Berechnungen werden durchgeführt, bitte warten!",
-    "completed": {
-      "title": "Airdrop-Berechnungen erfolgreich abgeschlossen!",
-      "anotherBtn": "Einen weiteren Airdrop berechnen?",
-      "airdropBtn": "Generierten Airdrop anzeigen",
-      "generatedBtn": "Alle generierten Airdrops anzeigen"
+    "reverse": {
+      "name": "Stücke umkehren",
+      "desc": "Hash umkehren und dann in Ticketnummern aufteilen."
     },
-    "title": "Berechnen Sie eine nachweislich faire Airdrop-Verteilung für welche Blockchain?",
-    "radioLabel": "Wählen Sie die Zielblockchain aus",
-    "radioDesc": "Nur Blockchains auf Graphenbasis",
-    "hash": {
-      "title": "Welche Art von Blockhash möchten Sie für die erste nachweislich zufällige Eingabe verwenden?",
-      "radioLabel": "Wählen Sie einen anfänglichen Hash-Typ aus",
-      "radioDesc": "Original oder sicher gehasht?",
-      "plain": "Einfache Zeichenkette für die Zeugenunterschrift",
-      "witSig": "Hash der Zeugensignatur"
+    "pi": {
+      "name": "PI",
+      "desc": "Teilen Sie den Hash auf, rechnen Sie etwas nach und multiplizieren Sie ihn dann mit PI, um die Ticketnummern zu erhalten."
     },
-    "ticket": {
-      "title": "Gewinnende Ticketoptionen",
-      "radioLabel": "Sollten Gewinnscheine dedupliziert werden?",
-      "radioDesc": "D.h. ",
-      "yes": "Ja",
-      "no": "NEIN",
-      "winLabel": "Sollten immer Gewinnertickets ausgewählt werden?",
-      "winDesc": "Z.B. "
+    "reverse_pi": {
+      "name": "Reverse PI",
+      "desc": "Hash teilen, Hash-Blöcke umkehren, rechnen, mit PI multiplizieren, Tickets ausgeben."
     },
-    "blockNum": {
-      "title": "Geben Sie die Blocknummer ein, die Sie für Airdrop-Zwecke verwenden möchten",
-      "label": "Blocknummer"
+    "cubed": {
+      "name": "Gewürfelt",
+      "desc": "Teilen Sie den Hash in dreistellige Blöcke auf, würfeln Sie jeden Block und geben Sie Tickets aus."
     },
-    "fetchTickets": "Sie müssen die Ticketdaten für diese Blockchain abrufen.",
-    "distro": {
-      "title": "Wählen Sie Ihre bevorzugten Methoden zur Generierung nachweislich fairer Airdrop-Verteilungen aus",
-      "th1": "Typ",
-      "th2": "Beschreibung"
+    "bouncing_ball": {
+      "name": "Flummi",
+      "desc": "Weg des Balls, der in der Matrix aufspringt -> Tickets entlang des Weges auswählen"
     },
-    "proceed": {
-      "title": "Fahren Sie mit der Airdrop-Berechnung fort",
-      "desc": "Ihr berechneter Airdrop-Vektor wird nach Abschluss auf der Airdrop-Seite verfügbar gemacht.",
-      "btn": "Führen Sie eine Airdrop-Berechnung durch"
+    "alien_blood": {
+      "name": "Außerirdisches Blut",
+      "desc": "Entfernt fremde Blutspritzer; "
+    },
+    "avg_point_lines": {
+      "name": "Durchschnittliche Punktlinien",
+      "desc": "Berechnen Sie die durchschnittlichen x/y/z-Koordinaten -> zeichnen Sie von jedem Vektor Linien dorthin => belohnen Sie die Online-Koordinaten"
+    },
+    "freebie": {
+      "name": "Gratis",
+      "desc": "Jedes Loskonto erhält 1 Gewinnlos"
+    },
+    "forever_freebie": {
+      "name": "Für immer kostenlos",
+      "desc": "Jedes Konto, das ein Los mit unbegrenzter Laufzeit und qualifizierender Menge besitzt, erhält 1 Gewinnlos"
     }
+  },
+  "calculatingTitle": "Airdrop-Berechnungen werden durchgeführt, bitte warten!",
+  "completed": {
+    "title": "Airdrop-Berechnungen erfolgreich abgeschlossen!",
+    "anotherBtn": "Einen weiteren Airdrop berechnen?",
+    "airdropBtn": "Generierten Airdrop anzeigen",
+    "generatedBtn": "Alle generierten Airdrops anzeigen"
+  },
+  "title": "Berechnen Sie eine nachweislich faire Airdrop-Verteilung für welche Blockchain?",
+  "radioLabel": "Wählen Sie die Zielblockchain aus",
+  "radioDesc": "Nur Blockchains auf Graphenbasis",
+  "hash": {
+    "title": "Welche Art von Blockhash möchten Sie für die erste nachweislich zufällige Eingabe verwenden?",
+    "radioLabel": "Wählen Sie einen anfänglichen Hash-Typ aus",
+    "radioDesc": "Original oder sicher gehasht?",
+    "plain": "Einfache Zeichenkette für die Zeugenunterschrift",
+    "witSig": "Hash der Zeugensignatur"
+  },
+  "ticket": {
+    "title": "Gewinnende Ticketoptionen",
+    "radioLabel": "Sollten Gewinnscheine dedupliziert werden?",
+    "radioDesc": "D.h. ",
+    "yes": "Ja",
+    "no": "NEIN",
+    "winLabel": "Sollten immer Gewinnertickets ausgewählt werden?",
+    "winDesc": "Z.B. "
+  },
+  "blockNum": {
+    "title": "Geben Sie die Blocknummer ein, die Sie für Airdrop-Zwecke verwenden möchten",
+    "label": "Blocknummer"
+  },
+  "fetchTickets": "Sie müssen die Ticketdaten für diese Blockchain abrufen.",
+  "distro": {
+    "title": "Wählen Sie Ihre bevorzugten Methoden zur Generierung nachweislich fairer Airdrop-Verteilungen aus",
+    "th1": "Typ",
+    "th2": "Beschreibung"
+  },
+  "proceed": {
+    "title": "Fahren Sie mit der Airdrop-Berechnung fort",
+    "desc": "Ihr berechneter Airdrop-Vektor wird nach Abschluss auf der Airdrop-Seite verfügbar gemacht.",
+    "btn": "Führen Sie eine Airdrop-Berechnung durch"
   }
+}

@@ -1,9 +1,12 @@
 {
   "loadingAccount": "Konto üksikasjade laadimine!",
+  "upgrade": "Uuendage",
   "qtyTokens": "Koguse märgid",
   "createTime": "Loodud",
   "assetsCreated": "Loodud varad",
   "accountBalances": "Kontojäägid",
+  "disqualified": "ID-ga kasutaja {{id}} ei kvalifitseeru edetabelisse.",
+  "disqualifiedText": "Kui sellel kasutajal on stabiilse hetkeolekuga pilet, loetletakse siin tema andmed.",
   "locked": "lukus",
   "values": "pileti väärtused",
   "created": "Loodud pileteid kokku",
