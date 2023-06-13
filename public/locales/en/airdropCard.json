@@ -15,5 +15,15 @@
     "download3": "3. Verify the prompt's contents before approving the airdrop.",
     "downloadButton": "Download airdrop JSON",
     "viewJSON": "Proposed airdrop operation JSON",
-    "begin": "Begin airdrop"
+    "begin": "Begin airdrop",
+    "deeplink": {
+        "noDL": {
+            "title": "Via raw Beet deeplink",
+            "step1": "Launch the BEET wallet and navigate to 'Raw Link' in the menu.",
+            "step2": "From this page you can either allow all operations, or solely allow operation 1 '' (then click save).",
+            "step3": "Once 'Ready for raw links' shows in Beet submit this request.",
+            "label": "Enter your account ID",
+            "btn": "Generate raw deeplink"
+        }
+    }
 }

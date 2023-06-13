@@ -26,7 +26,8 @@
         "blockno": "Plokinumber",
         "algos": "Algoritmid",
         "winners": "Võitjad",
-        "ticketWinQty": "Võidupileti kogus"
+        "ticketWinQty": "Võidupileti kogus",
+        "sendingAccount": "Airdropi saatmine aadressilt"
       },
       "options": {
         "title": "Airdropi valikud",
@@ -60,7 +61,7 @@
         "title": "Kas jätkata airdropiga?",
         "note": "Pidage õhutilkade partiide kavandamisel silmas tehingute ja ploki suuruse piiranguid.",
         "single": "Partiipiiranguga {{batchSize}}, selle õhutilgutamiseks on vaja 1 partii.",
-        "multi": "Partiipiiranguga {{batchSize}}, {{qtyBatches}} selle õhutilga täitmiseks on vaja partiid.",
+        "multi": "Partiipiiranguga {{batchSize}}, {{qtyBatches}} selle õhutilgutamiseks on vaja partiid.",
         "reminder": "Pidage õhutilkade partiide kavandamisel silmas tehingute ja ploki suuruse piiranguid."
       }
     }

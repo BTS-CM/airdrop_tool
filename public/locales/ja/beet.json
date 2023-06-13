@@ -1,0 +1,69 @@
+{
+  "beetlink": {
+    "connected": "Beetウォレットに正常に接続されました。",
+    "linkPrompt": "以下でこのアプリを Beet ウォレットにリンクしてください。",
+    "linkButton": "ビートへのリンク",
+    "beetWait": "BEETプロンプトからの応答を待っています",
+    "backButton": "戻る"
+  },
+  "buy": {
+    "unavailable": "このNFTは現在販売されていません。",
+    "buyPrompt": "このNFTを購入するにはどうすればよいですか?",
+    "beetBuy": "ウォレットで直接",
+    "qrCodes": "QRコード",
+    "local": "ローカルJSON",
+    "confirmation": "購入トランザクションの JSON が生成されました",
+    "download1": "1. 要求した購入操作が生成されました。ボタンをクリックしてダウンロードします。",
+    "download2": "2. BEET ローカル ページから JSON ファイルをアップロードすると、プロンプトが表示されます。",
+    "download3": "3. エアドロップを承認してトランザクションを完了する前に、プロンプトの内容を確認します。",
+    "downloadButton": "JSONをダウンロード",
+    "viewJSON": "提案された操作 JSON",
+    "method": "ローカルファイルアップロード経由",
+    "preStep1": "1. BEET ウォレットを起動し、メニューの「ローカル」に移動します。",
+    "preStep2": "2. このページでは、すべてを許可するか、操作 1 'limit_order_create' のみを許可します。",
+    "preStep3": "3. ローカル アップロード ページにアクセスしたら、下のボタンをクリックして続行します。",
+    "generate": "JSONファイルを生成する",
+    "deepLink": "ディープリンク",
+    "noDL": {
+      "title": "生のディープリンク経由",
+      "step1": "BEETウォレットを起動し、メニューの「Raw Link」に移動します。",
+      "step2": "このページから、すべての操作を許可することも、操作 1 の「指値注文の作成」のみを許可することもできます (その後、「保存」をクリックします)。",
+      "step3": "ウォレットに「Ready for raw links」と表示されたら、このリクエストを送信します。",
+      "btn": "生のディープリンクを生成する"
+    },
+    "DL": {
+      "title": "未加工のディープリンクが生成されました",
+      "step1": "ディープリンクが生成されました。ボタンをクリックして続行してください。",
+      "step2": "プロンプトが表示され、内容を確認して、チケットの作成プロンプトを承認します。",
+      "step3": "「チケットの取得」ページに移動して、分析用のチケットをダウンロードします。",
+      "beetBTN": "ブロードキャスト",
+      "back": "戻る"
+    },
+    "beetConnect": "購入を続けるには、Beet に接続してください。",
+    "beetLink": "購入を続けるには、Beet にリンクしてください。",
+    "beetWait": "BEET クライアントからのユーザー応答を待っています。",
+    "buySuccess": "NFTの買い指値注文のブロードキャストに成功しました」{{boughtAsset}}「その代わりに {{amountToSell}} {{soldAsset}}",
+    "viewPortfolio": "ポートフォリオを見る",
+    "backButton": "戻る",
+    "beetBuyPrompt": "BEETにNFTを購入するように指示します。」{{boughtAsset}}\" ために {{amountToSell}} {{soldAsset}}?",
+    "confirmPurchase": "はい",
+    "rejectPurchase": "いいえ",
+    "generateQR": "QRコードを生成する",
+    "scanQR": "このNFTを購入するには、以下のQRコードをスキャンしてください",
+    "waitQR": "QRコードが生成されるまでお待ちください"
+  },
+  "connect": {
+    "remove": "削除",
+    "previousBEET": "以前にリンクされたどの BEET アカウントを使用したいですか?",
+    "newBEET": "別のアカウントを使用したいですか?",
+    "newBtn": "新しいアカウントで接続する",
+    "back": "戻る",
+    "beetHeader": "このツールは、Bitshares BEET ウォレットで使用するように設計されています。",
+    "beetSubheading": "起動してロックを解除し、下の接続ボタンをクリックして続行します。",
+    "beetConnect": "ビートに接続する",
+    "btsPrompt": "Bitshares BEET ウォレットをまだインストールしていませんか?",
+    "btsGuide": "インストールしたら、ウォレットを作成し、上記の接続に進みます。",
+    "beetDownload": "ビートをダウンロード",
+    "connecting": "BEETへの接続"
+  }
+}

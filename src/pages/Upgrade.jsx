@@ -115,25 +115,25 @@ export default function Upgrade(properties) {
             setDeepLink();
             close();
           }}
-          title={t("upgrade:modal.title")}
+          title={t("modal:deeplink.title")}
         >
           {
             !deepLink
               ? (
                 <>
-                  <Text>{t("upgrade:modal.noDL.title")}</Text>
+                  <Text>{t("modal:deeplink.noDL.title")}</Text>
                   <Text m="sm" fz="xs">
-                    1. {t("upgrade:modal.noDL.step1")}
+                    1. {t("modal:deeplink.noDL.step1")}
                     <br />
-                    2. {t("upgrade:modal.noDL.step2")}
+                    2. {t("modal:deeplink.noDL.step2", { opNum: 8, opName: "Account Upgrade"})}
                     <br />
-                    3. {t("upgrade:modal.noDL.step3")}
+                    3. {t("modal:deeplink.noDL.step3")}
                   </Text>
                   <TextInput
                     type="string"
                     placeholder={accountID}
                     m="sm"
-                    label={t("upgrade:modal.noDL.label")}
+                    label={t("modal:deeplink.noDL.label")}
                     style={{ maxWidth: '300px' }}
                     onChange={(event) => onAccountID(event.currentTarget.value)}
                   />
@@ -144,12 +144,12 @@ export default function Upgrade(properties) {
                           m="xs"
                           onClick={() => setDeepLinkItr(deepLinkItr + 1)}
                         >
-                          {t("upgrade:modal.noDL.btn")}
+                          {t("modal:deeplink.noDL.btn")}
                         </Button>
                       )
                       : (
                         <Button m="xs" disabled>
-                          {t("upgrade:modal.noDL.btn")}
+                          {t("modal:deeplink.noDL.btn")}
                         </Button>
                       )
                   }
@@ -161,17 +161,17 @@ export default function Upgrade(properties) {
             deepLink
               ? (
                 <>
-                  <Text>{t("upgrade:modal.DL.title")}</Text>
+                  <Text>{t("modal:deeplink.DL.title")}</Text>
                   <Text fz="xs">
-                    1. {t("upgrade:modal.DL.step1")}
+                    1. {t("modal:deeplink.DL.step1")}
                     <br />
-                    2. {t("upgrade:modal.DL.step2")}
+                    2. {t("modal:deeplink.DL.step2")}
                     <br />
-                    3. {t("upgrade:modal.DL.step3")}
+                    3. {t("modal:deeplink.DL.step3")}
                   </Text>
                   <a href={deepLink}>
                     <Button m="xs">
-                      {t("upgrade:modal.DL.beetBTN")}
+                      {t("modal:deeplink.DL.beetBTN")}
                     </Button>
                   </a>
                   <Button
@@ -180,7 +180,7 @@ export default function Upgrade(properties) {
                       setDeepLink();
                     }}
                   >
-                    {t("upgrade:modal.DL.back")}
+                    {t("modal:deeplink.DL.back")}
                   </Button>
                 </>
               )

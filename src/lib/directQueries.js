@@ -1,9 +1,42 @@
 import { Apis } from 'bitsharesjs-ws';
-import { Apis as tuscApis} from 'tuscjs-ws';
+import { Apis as tuscApis } from 'tuscjs-ws';
 import { appStore } from './states';
 
 function humanReadableFloat(satoshis, precision) {
   return satoshis / 10 ** precision;
+}
+
+/**
+ * Search for an account, given 1.2.x or an account name.
+ * @param {String} node
+ * @param {String} env
+ * @param {String} search_string
+ * @returns
+ */
+async function accountSearch(node, env, search_string) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (env === 'tusc') {
+        await tuscApis.instance(node, true).init_promise;
+      } else {
+        await Apis.instance(node, true).init_promise;
+      }
+    } catch (error) {
+      console.log(error);
+      reject(error);
+      return;
+    }
+
+    let object;
+    try {
+      object = await Apis.instance().db_api().exec("get_accounts", [[search_string]]);
+    } catch (error) {
+      console.log(error);
+      reject(error);
+    }
+
+    resolve(object);
+  });
 }
 
 /**
@@ -26,10 +59,10 @@ async function fetchLeaderboardData(node, env, accounts) {
       return;
     }
 
-    let finalLeaderboard = [];
+    const finalLeaderboard = [];
     for (let i = 0; i < accounts.length; i++) {
       const accountID = accounts[i].id;
-      
+
       let response;
       try {
         response = env === 'tusc'
@@ -40,20 +73,20 @@ async function fetchLeaderboardData(node, env, accounts) {
         reject();
         return;
       }
-  
+
       if (!response) {
         finalLeaderboard.push(accounts[i]);
         continue;
       }
-  
+
       if (!response.length) {
         // user has no balances..
         finalLeaderboard.push(accounts[i]);
         continue;
       }
-  
+
       const asset_ids = response.map((x) => x.asset_id);
-  
+
       let symbols;
       try {
         if (env === 'tusc') {
@@ -66,7 +99,7 @@ async function fetchLeaderboardData(node, env, accounts) {
         finalLeaderboard.push(accounts[i]);
         continue;
       }
-  
+
       if (env === 'tusc') {
         tuscApis.close();
       } else {
@@ -74,7 +107,7 @@ async function fetchLeaderboardData(node, env, accounts) {
       }
 
       const filteredSymbols = symbols.filter((x) => x !== null);
-  
+
       const finalData = response.map((x) => {
         const currentSymbol = filteredSymbols.find((y) => y.id === x.asset_id);
         return {
@@ -87,7 +120,7 @@ async function fetchLeaderboardData(node, env, accounts) {
         (x) => humanReadableFloat(x.amount, x.precision) >= humanReadableFloat(1, x.precision)
       );
 
-      finalLeaderboard.push({...accounts[i], balances: finalData});
+      finalLeaderboard.push({ ...accounts[i], balances: finalData });
     }
 
     resolve(finalLeaderboard);
@@ -134,11 +167,11 @@ async function lookupSymbols(node, env, asset_ids) {
     }
 
     resolve(filtered);
-    return;
   });
 }
 
 export {
   lookupSymbols,
   fetchLeaderboardData,
+  accountSearch,
 };

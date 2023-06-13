@@ -1,0 +1,69 @@
+{
+  "beetlink": {
+    "connected": "Conectado a la billetera Beet con éxito.",
+    "linkPrompt": "Continúe vinculando esta aplicación a su billetera Beet a continuación.",
+    "linkButton": "Enlace a la remolacha",
+    "beetWait": "Esperando respuesta del indicador BEET",
+    "backButton": "Atrás"
+  },
+  "buy": {
+    "unavailable": "Este NFT no está actualmente a la venta.",
+    "buyPrompt": "¿Cómo le gustaría comprar este NFT?",
+    "beetBuy": "Directamente con billetera",
+    "qrCodes": "códigos QR",
+    "local": "JSON locales",
+    "confirmation": "Transacción de compra generada por JSON",
+    "download1": "1. Se ha generado su operación de compra solicitada, haga clic en el botón para descargarla.",
+    "download2": "2. Desde la página local de BEET, cargue el archivo JSON; debería aparecer un aviso.",
+    "download3": "3. Verifique el contenido del aviso antes de aprobar el airdrop para completar la transacción.",
+    "downloadButton": "Descargar JSON",
+    "viewJSON": "Operación propuesta JSON",
+    "method": "A través de la carga de archivos locales",
+    "preStep1": "1. Inicie la billetera BEET y navegue hasta 'Local' en el menú.",
+    "preStep2": "2. En esta página, permita todo o permita solo la operación 1 'limit_order_create'.",
+    "preStep3": "3. Una vez en la página de carga local, haga clic en el botón de abajo para continuar.",
+    "generate": "Generar archivo JSON",
+    "deepLink": "Enlace profundo",
+    "noDL": {
+      "title": "A través de un enlace profundo sin formato",
+      "step1": "Inicie la billetera BEET y navegue hasta 'Raw Link' en el menú.",
+      "step2": "Desde esta página puede permitir todas las operaciones o permitir únicamente la operación 1 'crear orden limitada' (luego haga clic en guardar).",
+      "step3": "Una vez que aparezca \"Listo para enlaces sin procesar\" en la billetera, envíe esta solicitud.",
+      "btn": "Generar un enlace profundo sin procesar"
+    },
+    "DL": {
+      "title": "Enlace profundo sin procesar generado",
+      "step1": "Su enlace profundo ha sido generado, haga clic en el botón para continuar.",
+      "step2": "Aparecerá un aviso, verifique el contenido y luego apruebe el aviso de creación de ticket.",
+      "step3": "Vaya a la página 'Obtener boletos' para descargar su boleto para su análisis.",
+      "beetBTN": "Transmisión",
+      "back": "Atrás"
+    },
+    "beetConnect": "Para continuar con la compra, conéctese a Beet.",
+    "beetLink": "Para continuar con la compra, enlace con Beet.",
+    "beetWait": "Esperando la respuesta del usuario del cliente BEET.",
+    "buySuccess": "Transmitir con éxito una orden de límite de compra para el NFT \"{{boughtAsset}}\" a cambio de {{amountToSell}} {{soldAsset}}",
+    "viewPortfolio": "ver cartera",
+    "backButton": "Atrás",
+    "beetBuyPrompt": "Indique a BEET que compre el NFT \"{{boughtAsset}}\" para {{amountToSell}} {{soldAsset}}?",
+    "confirmPurchase": "Sí",
+    "rejectPurchase": "No",
+    "generateQR": "Generar código QR",
+    "scanQR": "Para comprar este NFT escanee el siguiente código QR",
+    "waitQR": "Espere mientras se genera su código QR"
+  },
+  "connect": {
+    "remove": "Eliminar",
+    "previousBEET": "¿Qué cuenta BEET previamente vinculada desea utilizar?",
+    "newBEET": "¿Quieres usar una cuenta diferente?",
+    "newBtn": "Conectar con nueva cuenta",
+    "back": "Regresa",
+    "beetHeader": "Esta herramienta está diseñada para usarse con Bitshares BEET Wallet.",
+    "beetSubheading": "Inícielo y desbloquéelo, luego haga clic en el botón de conexión a continuación para continuar.",
+    "beetConnect": "Conéctese a la remolacha",
+    "btsPrompt": "¿Aún no tienes instalada la billetera BEET de Bitshares? ",
+    "btsGuide": "Una vez instalado, cree una billetera y proceda a conectarse arriba.",
+    "beetDownload": "Descargar REMOLACHA",
+    "connecting": "Conexión a BEET"
+  }
+}

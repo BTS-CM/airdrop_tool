@@ -1,0 +1,17 @@
+{
+    "accounts": {
+        "enterID": "Enter an account ID to proceed",
+        "fetchingAccount": "Looking up account",
+        "noAccount": "No such account could be found, check input and try again.",
+        "searchResults": "Search results",
+        "loading": "Loading...",
+        "invalidID": "Invalid Account ID - It must begin with '1.2.' and end in a number.",
+        "accountID": "Account ID (e.g. 1.2.0)",
+        "existingID": "Proceed with an existing account ID from linked Beet account?",
+        "beetReq": "Fetch account ID from Beet wallet",
+        "beetLinked": "Proceed with your Beet linked account"
+    },
+    "accountSearch": {
+        "inputPrompt": "Enter your blockchain account ID/name to proceed"
+    }
+}

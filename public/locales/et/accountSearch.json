@@ -1,0 +1,17 @@
+{
+    "accounts": {
+      "enterID": "Jätkamiseks sisestage konto ID",
+      "fetchingAccount": "Otsin kontot",
+      "noAccount": "Sellist kontot ei leitud, kontrollige sisestust ja proovige uuesti.",
+      "searchResults": "Otsingu tulemused",
+      "loading": "Laadimine...",
+      "invalidID": "Kehtetu konto ID – see peab algama numbriga 1.2. ",
+      "accountID": "Konto ID (nt 1.2.0)",
+      "existingID": "Kas jätkata lingitud Beeti konto olemasoleva konto ID-ga?",
+      "beetReq": "Hankige Beet walletist konto ID",
+      "beetLinked": "Jätkake oma Beetiga seotud kontoga"
+    },
+    "accountSearch": {
+      "inputPrompt": "Jätkamiseks sisestage oma plokiahela konto ID/nimi"
+    }
+  }

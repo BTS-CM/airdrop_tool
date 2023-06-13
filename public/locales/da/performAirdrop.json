@@ -26,7 +26,8 @@
         "blockno": "Bloknummer",
         "algos": "Algoritmer",
         "winners": "Vindere",
-        "ticketWinQty": "Vinderbillet antal"
+        "ticketWinQty": "Vinderbillet antal",
+        "sendingAccount": "Sender airdrop fra"
       },
       "options": {
         "title": "Airdrop muligheder",

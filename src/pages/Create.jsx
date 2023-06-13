@@ -202,25 +202,25 @@ export default function Create(properties) {
             setDeepLink();
             close();
           }}
-          title={t("create:modal.title")}
+          title={t("modal:deeplink.title")}
         >
           {
             !deepLink
               ? (
                 <>
-                  <Text>{t("create:modal.noDL.title")}</Text>
+                  <Text>{t("modal:deeplink.noDL.title")}</Text>
                   <Text m="sm" fz="xs">
-                    1. {t("create:modal.noDL.step1")}
+                    1. {t("modal:deeplink.noDL.step1")}
                     <br />
-                    2. {t("create:modal.noDL.step2")}
+                    2. {t("modal:deeplink.noDL.step2", { opNum: 57, opName: 'Ticket Create' })}
                     <br />
-                    3. {t("create:modal.noDL.step3")}
+                    3. {t("modal:deeplink.noDL.step3")}
                   </Text>
                   <TextInput
                     type="string"
                     placeholder={accountID}
                     m="sm"
-                    label={t("create:modal.noDL.label")}
+                    label={t("modal:deeplink.noDL.label")}
                     style={{ maxWidth: '300px' }}
                     onChange={(event) => onAccountID(event.currentTarget.value)}
                   />
@@ -231,12 +231,12 @@ export default function Create(properties) {
                           m="xs"
                           onClick={() => setDeepLinkItr(deepLinkItr + 1)}
                         >
-                          {t("create:modal.noDL.btn")}
+                          {t("modal:deeplink.noDL.btn")}
                         </Button>
                       )
                       : (
                         <Button m="xs" disabled>
-                          {t("create:modal.noDL.btn")}
+                          {t("modal:deeplink.noDL.btn")}
                         </Button>
                       )
                   }
@@ -248,17 +248,17 @@ export default function Create(properties) {
             deepLink
               ? (
                 <>
-                  <Text>{t("create:modal.DL.title")}</Text>
+                  <Text>{t("modal:deeplink.DL.title")}</Text>
                   <Text fz="xs">
-                    1. {t("create:modal.DL.step1")}
+                    1. {t("modal:deeplink.DL.step1")}
                     <br />
-                    2. {t("create:modal.DL.step2")}
+                    2. {t("modal:deeplink.DL.step2")}
                     <br />
-                    3. {t("create:modal.DL.step3")}
+                    3. {t("modal:deeplink.DL.step3")}
                   </Text>
                   <a href={deepLink}>
                     <Button m="xs">
-                      {t("create:modal.DL.beetBTN")}
+                      {t("modal:deeplink.DL.beetBTN")}
                     </Button>
                   </a>
                   <Button
@@ -267,7 +267,7 @@ export default function Create(properties) {
                       setDeepLink();
                     }}
                   >
-                    {t("create:modal.DL.back")}
+                    {t("modal:deeplink.DL.back")}
                   </Button>
                 </>
               )

@@ -1,0 +1,17 @@
+{
+    "accounts": {
+      "enterID": "アカウント ID を入力して続行してください",
+      "fetchingAccount": "アカウントを調べています",
+      "noAccount": "そのようなアカウントは見つかりませんでした。入力を確認して、もう一度お試しください。",
+      "searchResults": "の検索結果",
+      "loading": "読み込み中...",
+      "invalidID": "無効なアカウント ID - 「1.2」で始まる必要があります。",
+      "accountID": "アカウント ID (例: 1.2.0)",
+      "existingID": "リンクされた Beet アカウントの既存のアカウント ID を使用して続行しますか?",
+      "beetReq": "BeetウォレットからアカウントIDを取得します",
+      "beetLinked": "Beet のリンクされたアカウントを続行します"
+    },
+    "accountSearch": {
+      "inputPrompt": "ブロックチェーンアカウントのID/名前を入力して続行してください"
+    }
+  }

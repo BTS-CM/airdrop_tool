@@ -1,0 +1,69 @@
+{
+  "beetlink": {
+    "connected": "Forbundet til Beet wallet.",
+    "linkPrompt": "Fortsæt med at linke denne app til din Beet-pung nedenfor.",
+    "linkButton": "Link til Beet",
+    "beetWait": "Afventer svar fra BEET-prompt",
+    "backButton": "Tilbage"
+  },
+  "buy": {
+    "unavailable": "Denne NFT er ikke til salg i øjeblikket.",
+    "buyPrompt": "Hvordan vil du købe denne NFT?",
+    "beetBuy": "Direkte med pung",
+    "qrCodes": "QR-koder",
+    "local": "Lokal JSON",
+    "confirmation": "Køb transaktion JSON genereret",
+    "download1": "1. Din anmodede købsoperation er blevet genereret, klik på knappen for at downloade den.",
+    "download2": "2. Fra BEET Local-siden, upload JSON-filen, en prompt skulle vises.",
+    "download3": "3. Bekræft promptens indhold, før du godkender airdrop for at fuldføre transaktionen.",
+    "downloadButton": "Download JSON",
+    "viewJSON": "Foreslået operation JSON",
+    "method": "Via lokal fil upload",
+    "preStep1": "1. Start BEET-pungen og naviger til 'Lokal' i menuen.",
+    "preStep2": "2. På denne side tillader du enten alle, eller tillad kun operation 1 'limit_order_create'.",
+    "preStep3": "3. Når du er kommet til den lokale uploadside, skal du klikke på knappen nedenfor for at fortsætte.",
+    "generate": "Generer JSON-fil",
+    "deepLink": "Dybt link",
+    "noDL": {
+      "title": "Via rå deeplink",
+      "step1": "Start BEET-pungen og naviger til 'Raw Link' i menuen.",
+      "step2": "Fra denne side kan du enten tillade alle operationer eller udelukkende tillade operation 1 'limit order create' (klik derefter på Gem).",
+      "step3": "Når 'Klar til rå links' vises i tegnebogen, indsend denne anmodning.",
+      "btn": "Generer råt deeplink"
+    },
+    "DL": {
+      "title": "Rå dyblink genereret",
+      "step1": "Dit dybe link er blevet genereret, klik på knappen for at fortsætte.",
+      "step2": "Der vises en prompt, bekræft indholdet og godkend derefter opret billet-prompten.",
+      "step3": "Gå til siden 'Hent billetter' for at downloade din billet til analyse.",
+      "beetBTN": "Udsende",
+      "back": "Tilbage"
+    },
+    "beetConnect": "For at fortsætte købet skal du oprette forbindelse til Beet.",
+    "beetLink": "For at fortsætte købet, link til Beet.",
+    "beetWait": "Venter på brugersvar fra BEET-klient.",
+    "buySuccess": "Udsendt en købsgrænseordre for NFT \"{{boughtAsset}}\"til gengæld for {{amountToSell}} {{soldAsset}}",
+    "viewPortfolio": "Se portefølje",
+    "backButton": "Tilbage",
+    "beetBuyPrompt": "Instruer BEET til at købe NFT \"{{boughtAsset}}\" til {{amountToSell}} {{soldAsset}}?",
+    "confirmPurchase": "Ja",
+    "rejectPurchase": "Ingen",
+    "generateQR": "Generer QR-kode",
+    "scanQR": "For at købe denne NFT scan nedenstående QR-kode",
+    "waitQR": "Vent venligst mens din QR-kode genereres"
+  },
+  "connect": {
+    "remove": "Fjerne",
+    "previousBEET": "Hvilken tidligere linket BEET-konto vil du bruge?",
+    "newBEET": "Vil du bruge en anden konto?",
+    "newBtn": "Forbind med ny konto",
+    "back": "Gå tilbage",
+    "beetHeader": "Dette værktøj er designet til brug med Bitshares BEET Wallet.",
+    "beetSubheading": "Start og lås den op, og klik derefter på tilslutningsknappen nedenfor for at fortsætte.",
+    "beetConnect": "Opret forbindelse til Beet",
+    "btsPrompt": "Har du endnu ikke Bitshares BEET-pungen installeret? ",
+    "btsGuide": "Når den er installeret, skal du oprette en tegnebog og fortsætte med at oprette forbindelse ovenfor.",
+    "beetDownload": "Download BEET",
+    "connecting": "Tilslutning til BEET"
+  }
+}

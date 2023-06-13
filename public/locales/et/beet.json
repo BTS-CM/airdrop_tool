@@ -1,0 +1,69 @@
+{
+  "beetlink": {
+    "connected": "Ühendus Beeti rahakotiga õnnestus.",
+    "linkPrompt": "Jätkake selle rakenduse linkimist oma Beeti rahakotiga allpool.",
+    "linkButton": "Link Peedile",
+    "beetWait": "Ootan BEET-viipa vastust",
+    "backButton": "tagasi"
+  },
+  "buy": {
+    "unavailable": "See NFT ei ole praegu müügil.",
+    "buyPrompt": "Kuidas soovite seda NFT-d osta?",
+    "beetBuy": "Otse rahakotiga",
+    "qrCodes": "QR-koodid",
+    "local": "Kohalik JSON",
+    "confirmation": "Ostutehingu JSON loodud",
+    "download1": "1. Teie soovitud ostutoiming on loodud, selle allalaadimiseks klõpsake nuppu.",
+    "download2": "2. Laadige lehelt BEET Local üles JSON-fail, ilmuma peaks viip.",
+    "download3": "3. Kontrollige viipa sisu enne lennupileti kinnitamist tehingu lõpuleviimiseks.",
+    "downloadButton": "Laadige alla JSON",
+    "viewJSON": "Kavandatud toiming JSON",
+    "method": "Kohaliku faili üleslaadimise kaudu",
+    "preStep1": "1. Käivitage BEET rahakott ja navigeerige menüüs jaotisse „Kohalik”.",
+    "preStep2": "2. Sellel lehel kas lubage kõik või lubage ainult operatsioon 1 'limit_order_create'.",
+    "preStep3": "3. Kui olete kohalikul üleslaadimislehel, klõpsake jätkamiseks allolevat nuppu.",
+    "generate": "Looge JSON-fail",
+    "deepLink": "Sügav link",
+    "noDL": {
+      "title": "Toores süvalingi kaudu",
+      "step1": "Käivitage BEET rahakott ja navigeerige menüüs 'Raw Link'.",
+      "step2": "Sellel lehel saate lubada kõik toimingud või lubada ainult toimingu 1 'limiittellimuse loomine' (seejärel klõpsake nuppu Salvesta).",
+      "step3": "Kui rahakotis kuvatakse teade „Toorlinkide jaoks valmis”, esitage see taotlus.",
+      "btn": "Looge toores süvalink"
+    },
+    "DL": {
+      "title": "Loodud toores süvalink",
+      "step1": "Teie süvalink on loodud, jätkamiseks klõpsake nuppu.",
+      "step2": "Kuvatakse viip, kontrollige sisu ja kinnitage pileti loomise viip.",
+      "step3": "Minge lehele Piletite toomine, et oma pilet analüüsiks alla laadida.",
+      "beetBTN": "Saade",
+      "back": "tagasi"
+    },
+    "beetConnect": "Ostu jätkamiseks looge ühendus Beetiga.",
+    "beetLink": "Ostu jätkamiseks linkige Beetiga.",
+    "beetWait": "Ootan kasutaja vastust BEET-kliendilt.",
+    "buySuccess": "NFT ostulimiidi tellimuse edastamine õnnestus{{boughtAsset}}\" vastutasuks {{amountToSell}} {{soldAsset}}",
+    "viewPortfolio": "Vaata portfelli",
+    "backButton": "tagasi",
+    "beetBuyPrompt": "Juhendage BEET-il NFT-d ostma{{boughtAsset}}\" jaoks {{amountToSell}} {{soldAsset}}?",
+    "confirmPurchase": "Jah",
+    "rejectPurchase": "Ei",
+    "generateQR": "Genereeri QR-kood",
+    "scanQR": "Selle NFT ostmiseks skannige allolevat QR-koodi",
+    "waitQR": "Palun oodake, kuni teie QR-kood genereeritakse"
+  },
+  "connect": {
+    "remove": "Eemalda",
+    "previousBEET": "Millist varem lingitud BEET-kontot soovite kasutada?",
+    "newBEET": "Kas soovite kasutada teist kontot?",
+    "newBtn": "Ühendage uue kontoga",
+    "back": "Mine tagasi",
+    "beetHeader": "See tööriist on mõeldud kasutamiseks koos Bitshares BEET Walletiga.",
+    "beetSubheading": "Käivitage see ja avage see, seejärel klõpsake jätkamiseks allolevat ühenduse nuppu.",
+    "beetConnect": "Ühendage Beetiga",
+    "btsPrompt": "Kas teil pole veel Bitshares BEET rahakotti installitud? ",
+    "btsGuide": "Pärast installimist looge rahakott ja jätkake ülaltoodud ühenduse loomist.",
+    "beetDownload": "Laadige alla BEET",
+    "connecting": "Ühenduse loomine teenusega BEET"
+  }
+}

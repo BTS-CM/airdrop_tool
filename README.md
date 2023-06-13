@@ -4,6 +4,7 @@ An airdropping tool for Bitshares based blockchains.
 
 * Fetches tickets
 * Creates blockchain tickets
+* Upgrades accounts to lifetime-membership
 * Creates ticket leaderboards
 * Enables ticket & account analysis
 * Enables airdrop distribution calculation based on provably fair inputs

@@ -13,7 +13,7 @@ import {
   JsonInput,
 } from '@mantine/core';
 
-import { airdropStore } from '../lib/states';
+import { airdropStore, tempStore, beetStore } from '../lib/states';
 
 export default function PlannedAirdrop(properties) {
   const { t, i18n } = useTranslation();
@@ -22,6 +22,13 @@ export default function PlannedAirdrop(properties) {
   const btsAirdrops = airdropStore((state) => state.bitshares);
   const btsTestnetAirdrops = airdropStore((state) => state.bitshares_testnet);
   const tuscAirdrops = airdropStore((state) => state.tusc);
+  const setAccount = tempStore((state) => state.setAccount);
+  const reset = beetStore((state) => state.reset);
+
+  useEffect(() => {
+    setAccount();
+    reset();
+  }, []);
 
   let assetName = "";
   let chainName = "";

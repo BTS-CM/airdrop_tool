@@ -1,0 +1,83 @@
+{
+    "beetlink": {
+        "connected": "Connected to Beet wallet successfully.",
+        "linkPrompt": "Proceed with linking this app to your Beet wallet below.",
+        "linkButton": "Link to Beet",
+        "beetWait": "Waiting on response from BEET prompt",
+        "backButton": "Back"
+    },
+    "accountMode": {
+        "header": "For the account \"{{account}}\" what do you want to do?",
+        "balance": "View NFT portfolio",
+        "issued": "View issued NFTs",
+        "back": "Back",
+        "header2": "Please provide an account id/name:",
+        "chooseBEET": "Ask BEET",
+        "chooseSearch": "Lookup account manually",
+        "beetPrompt": "To continue please connect to Beet.",
+        "linkPrompt": "To continue please link with Beet.",
+        "waiting": "Waiting on user response from BEET client",
+        "save": "Favourite account",
+        "remove": "Remove favourite"
+    },
+    "buy": {
+        "unavailable": "This NFT is not currently for sale.",
+        "buyPrompt": "How would you like to purchase this NFT?",
+        "beetBuy": "Directly with wallet",
+        "qrCodes": "QR codes",
+        "local": "Local JSON",
+        "confirmation": "Buy transaction JSON generated",
+        "download1": "1. Your requested buy operation has been generated, click the button to download it.",
+        "download2": "2. From the BEET Local page, upload the JSON file, a prompt should appear.",
+        "download3": "3. Verify the prompt's contents before approving the airdrop to complete the transaction.",
+        "downloadButton": "Download JSON",
+        "viewJSON": "Proposed operation JSON",
+        "method": "Via local file upload",
+        "preStep1": "1. Launch the BEET wallet and navigate to 'Local' in the menu.",
+        "preStep2": "2. At this page either allow all, or allow just operation 1 'limit_order_create'.",
+        "preStep3": "3. Once at the local upload page, click the button below to proceed.",
+        "generate": "Generate JSON file",   
+        "deepLink": "Deep link",
+        "noDL": {
+            "title": "Via raw deeplink",
+            "step1": "Launch the BEET wallet and navigate to 'Raw Link' in the menu.",
+            "step2": "From this page you can either allow all operations, or solely allow operation 1 'limit order create' (then click save).",
+            "step3": "Once 'Ready for raw links' shows in the wallet, submit this request.",
+            "btn": "Generate raw deeplink"
+        },
+        "DL": {
+            "title": "Raw deeplink generated",
+            "step1": "Your deeplink has been generated, click the button to proceed.",
+            "step2": "A prompt will display, verify the contents then approve the create ticket prompt.",
+            "step3": "Go to the 'Fetch tickets' page to download your ticket for analysis.",
+            "beetBTN": "Broadcast",
+            "back": "Back"
+        },
+        "beetConnect": "To continue purchase, connect to Beet.",
+        "beetLink": "To continue purchase, link with Beet.",
+        "beetWait": "Waiting on user response from BEET client.",
+        "buySuccess": "Successfully broadcast a buy limit order for the NFT \"{{boughtAsset}}\" in return for {{amountToSell}} {{soldAsset}}",
+        "viewPortfolio": "View portfolio",
+        "backButton": "Back",
+        "beetBuyPrompt": "Instruct BEET to purchase the NFT \"{{boughtAsset}}\" for {{amountToSell}} {{soldAsset}}?",
+        "confirmPurchase": "Yes",
+        "rejectPurchase": "No",
+        "generateQR": "Generate QR code",
+        "scanQR": "To buy this NFT scan the below QR code",
+        "waitQR": "Please wait whilst your QR code is generated"
+    },
+    "connect": {
+        "remove": "Remove",
+        "previousBEET": "Which previously linked BEET account do you want to use?",
+        "newBEET": "Want to use a different account?",
+        "newBtn": "Connect with new account",
+        "back": "Go back",
+        "beetHeader": "This tool is designed for use with the Bitshares BEET Wallet.",
+        "beetSubheading": "Launch and unlock it, then click the connect button below to proceed.",
+        "beetConnect": "Connect to Beet",
+        "btsPrompt": "Don't yet have the Bitshares BEET wallet installed? Follow the link below.",
+        "btsGuide": "Once installed, create a wallet and proceed to connect above.",
+        "beetDownload": "Download BEET",
+        "connecting": "Connecting to BEET"
+    }
+}

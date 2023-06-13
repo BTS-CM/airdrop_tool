@@ -1,0 +1,69 @@
+{
+  "beetlink": {
+    "connected": "Connesso al portafoglio Beet con successo.",
+    "linkPrompt": "Procedi con il collegamento di questa app al tuo portafoglio Beet di seguito.",
+    "linkButton": "Collegamento a barbabietola",
+    "beetWait": "In attesa di risposta dal prompt BEET",
+    "backButton": "Indietro"
+  },
+  "buy": {
+    "unavailable": "Questo NFT non è attualmente in vendita.",
+    "buyPrompt": "Come vorresti acquistare questo NFT?",
+    "beetBuy": "Direttamente con il portafoglio",
+    "qrCodes": "Codici QR",
+    "local": "JSON locale",
+    "confirmation": "Acquista transazione JSON generata",
+    "download1": "1. L'operazione di acquisto richiesta è stata generata, fare clic sul pulsante per scaricarla.",
+    "download2": "2. Dalla pagina BEET Local, carica il file JSON, dovrebbe apparire un prompt.",
+    "download3": "3. Verificare il contenuto del prompt prima di approvare l'airdrop per completare la transazione.",
+    "downloadButton": "Scarica JSON",
+    "viewJSON": "Operazione proposta JSON",
+    "method": "Tramite caricamento file locale",
+    "preStep1": "1. Avvia il portafoglio BEET e vai a \"Locale\" nel menu.",
+    "preStep2": "2. In questa pagina consenti tutto o consenti solo l'operazione 1 'limit_order_create'.",
+    "preStep3": "3. Una volta nella pagina di caricamento locale, fare clic sul pulsante in basso per procedere.",
+    "generate": "Genera file JSON",
+    "deepLink": "Collegamento profondo",
+    "noDL": {
+      "title": "Tramite deeplink non elaborato",
+      "step1": "Avvia il portafoglio BEET e vai a \"Raw Link\" nel menu.",
+      "step2": "Da questa pagina è possibile consentire tutte le operazioni o consentire solo l'operazione 1 \"creazione ordine limite\" (quindi fare clic su Salva).",
+      "step3": "Una volta visualizzato \"Pronto per i collegamenti grezzi\" nel portafoglio, invia questa richiesta.",
+      "btn": "Genera deeplink non elaborato"
+    },
+    "DL": {
+      "title": "Deeplink non elaborato generato",
+      "step1": "Il tuo deeplink è stato generato, fai clic sul pulsante per procedere.",
+      "step2": "Verrà visualizzato un prompt, verificare i contenuti, quindi approvare la richiesta di creazione del ticket.",
+      "step3": "Vai alla pagina \"Recupera ticket\" per scaricare il tuo ticket per l'analisi.",
+      "beetBTN": "Trasmissione",
+      "back": "Indietro"
+    },
+    "beetConnect": "Per continuare l'acquisto, connettiti a Beet.",
+    "beetLink": "Per continuare l'acquisto, collega a Beet.",
+    "beetWait": "In attesa della risposta dell'utente dal client BEET.",
+    "buySuccess": "Trasmissione riuscita di un ordine limite di acquisto per l'NFT \"{{boughtAsset}}\" In cambio di {{amountToSell}} {{soldAsset}}",
+    "viewPortfolio": "Visualizza portafoglio",
+    "backButton": "Indietro",
+    "beetBuyPrompt": "Chiedi a BEET di acquistare l'NFT \"{{boughtAsset}}\" per {{amountToSell}} {{soldAsset}}?",
+    "confirmPurchase": "SÌ",
+    "rejectPurchase": "NO",
+    "generateQR": "Genera codice QR",
+    "scanQR": "Per acquistare questo NFT scansiona il codice QR sottostante",
+    "waitQR": "Attendi mentre viene generato il tuo codice QR"
+  },
+  "connect": {
+    "remove": "Rimuovere",
+    "previousBEET": "Quale account BEET precedentemente collegato desideri utilizzare?",
+    "newBEET": "Vuoi usare un account diverso?",
+    "newBtn": "Connettiti con un nuovo account",
+    "back": "Torna indietro",
+    "beetHeader": "Questo strumento è progettato per essere utilizzato con Bitshares BEET Wallet.",
+    "beetSubheading": "Avvialo e sbloccalo, quindi fai clic sul pulsante di connessione in basso per procedere.",
+    "beetConnect": "Connettiti a barbabietola",
+    "btsPrompt": "Non hai ancora installato il portafoglio Bitshares BEET? ",
+    "btsGuide": "Una volta installato, crea un portafoglio e procedi alla connessione sopra.",
+    "beetDownload": "Scarica BARBABIETOLA",
+    "connecting": "Connessione a BEET"
+  }
+}

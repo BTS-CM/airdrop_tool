@@ -26,7 +26,8 @@
         "blockno": "ブロック番号",
         "algos": "アルゴリズム",
         "winners": "勝者",
-        "ticketWinQty": "当選チケット枚数"
+        "ticketWinQty": "当選チケット枚数",
+        "sendingAccount": "エアドロップの送信元"
       },
       "options": {
         "title": "エアドロップのオプション",

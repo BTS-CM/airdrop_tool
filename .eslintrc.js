@@ -16,6 +16,7 @@ module.exports = {
   plugins: ["react"],
   rules: {
     camelcase: "off",
+    "react/jsx-no-useless-fragment": "off",
     "react/jsx-one-expression-per-line": "off",
     "no-console": "off",
     "no-unused-vars": "off",

@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { connect, checkBeet, link } from 'beet-js';
 import config from '../config/config.json';
 
 const localePreferenceStore = create(
@@ -139,6 +140,100 @@ const airdropStore = create(
   ),
 );
 
+const identitiesStore = create(
+  persist(
+    (set, get) => ({
+      identities: [],
+      drafts: [],
+      storedConnections: {},
+      storeConnection: (connection) => {
+        if (!connection || !connection.identity) {
+          return;
+        }
+        const currentConnections = get().storedConnections;
+        if (!currentConnections || !currentConnections[connection.identity.identityhash]) {
+          currentConnections[connection.identity.identityhash] = {
+            beetkey: connection.beetkey,
+            next_identification: connection.next_identification,
+            secret: connection.secret,
+          };
+          set({ storedConnections: currentConnections });
+        }
+      },
+      removeConnection: (identityhash) => {
+        const currentConnections = get().storedConnections;
+        if (currentConnections && currentConnections[identityhash]) {
+          delete currentConnections[identityhash];
+          set({ storedConnections: currentConnections });
+        }
+      },
+      setIdentities: (identity) => {
+        if (!identity) {
+          return;
+        }
+
+        const currentIdentities = get().identities;
+        if (
+          currentIdentities.find(
+            (id) => id.identityHash === identity.identityHash
+              && id.requested.account.id === identity.requested.account.id,
+          )
+        ) {
+          console.log('using existing identity');
+          return;
+        }
+
+        currentIdentities.push(identity);
+        set({ identities: currentIdentities });
+      },
+      removeIdentity: (accountID) => {
+        if (!accountID) {
+          return;
+        }
+        const currentIdentities = get().identities;
+        const newIdentities = currentIdentities.filter((x) => x.requested.account.id !== accountID);
+        set({ identities: newIdentities });
+      },
+      setDrafts: (values, asset_images) => {
+        const currentDrafts = get().drafts;
+
+        // search through currentDrafts for a draft with the same accountID in jsonData
+        const draftIndex = currentDrafts
+          .findIndex((draft) => draft.values.symbol === values.symbol);
+        if (draftIndex !== -1) {
+          // if found, replace the draft with the new one
+          currentDrafts[draftIndex] = { values, asset_images };
+          set({ drafts: currentDrafts });
+          console.log('Draft updated');
+          return;
+        }
+
+        const newDrafts = [...currentDrafts, { values, asset_images }];
+        console.log('Draft saved');
+        set({ drafts: newDrafts });
+      },
+      eraseDraft: (symbol) => {
+        const currentDrafts = get().drafts;
+        const newDrafts = currentDrafts.filter((draft) => draft.values.symbol !== symbol);
+        set({ drafts: newDrafts });
+      },
+    }),
+    {
+      name: 'beetIdentities',
+    },
+  ),
+);
+
+const tempStore = create(
+  (set, get) => ({
+    account: "",
+    setAccount: (newAccount) => set({ account: newAccount }),
+    reset: () => set({
+      account: "",
+    }),
+  })
+);
+
 /**
  * airdrop tool related
  */
@@ -150,6 +245,7 @@ const appStore = create(
         bitshares_testnet: config.bitshares_testnet.nodeList.map((node) => node.url),
         tusc: config.tusc.nodeList.map((node) => node.url),
       },
+      account: "",
       replaceNodes: (env, nodes) => {
         if (env === 'bitshares') {
           set(async (state) => ({
@@ -165,6 +261,7 @@ const appStore = create(
           }));
         }
       },
+      setAccount: (newAccount) => set({ account: newAccount }),
       changeURL: (env) => {
         /**
          * The current node url isn't healthy anymore
@@ -195,6 +292,7 @@ const appStore = create(
           bitshares_testnet: [],
           tusc: [],
         },
+        account: "",
       }),
       removeURL: (env, url) => {
         let nodesToChange = get().nodes[env];
@@ -221,10 +319,119 @@ const appStore = create(
   ),
 );
 
+/**
+ * Beet wallet related
+ */
+const beetStore = create((set, get) => ({
+  connection: null,
+  authenticated: null,
+  isLinked: null,
+  identity: null,
+  connect: async (identity) => {
+    /**
+     * Connect to and authenticate with the Beet client
+     * @param {Object} identity
+     */
+    let beetOnline;
+    try {
+      beetOnline = await checkBeet(true);
+    } catch (error) {
+      console.log(error);
+    }
+
+    if (!beetOnline) {
+      console.log('beet not online');
+      return;
+    }
+
+    let connected;
+    try {
+      connected = await connect(
+        "NFT Viewer",
+        "Application",
+        "localhost",
+        null,
+        identity ?? null
+      );
+    } catch (error) {
+      console.error(error);
+    }
+
+    if (!connected) {
+      console.error("Couldn't connect to Beet");
+      set({
+        connection: null,
+        authenticated: null,
+        isLinked: null
+      });
+      return;
+    }
+
+    set({
+      connection: connected,
+      authenticated: true,
+      isLinked: false
+    });
+  },
+  link: async (environment) => {
+    /**
+     * Re/Link to Beet wallet
+     * @param {String} environment
+     */
+    const currentConnection = get().connection;
+
+    let linkAttempt;
+    try {
+      linkAttempt = await link(environment, currentConnection);
+    } catch (error) {
+      console.error(error);
+      set({ isLinked: null, identity: null });
+      return;
+    }
+
+    if (!currentConnection.identity) {
+      set({ isLinked: null, identity: null });
+      return;
+    }
+
+    const { storeConnection, setIdentities } = identitiesStore.getState();
+
+    try {
+      storeConnection(currentConnection);
+    } catch (error) {
+      console.log(error);
+    }
+
+    const { setAccount } = tempStore.getState();
+    try {
+      setAccount(currentConnection.identity.requested.account.id);
+    } catch (error) {
+      console.log(error);
+    }
+
+    setIdentities(currentConnection.identity);
+
+    set({ isLinked: true, identity: currentConnection.identity });
+  },
+  setConnection: (res) => set({ connection: res }),
+  setAuthenticated: (auth) => set({ authenticated: auth }),
+  setIsLinked: (link) => set({ isLinked: link }),
+  setIdentity: (id) => set({ identity: id }),
+  reset: () => set({
+    connection: null,
+    authenticated: null,
+    isLinked: null,
+    identity: null,
+  })
+}));
+
 export {
   appStore,
+  beetStore,
+  tempStore,
   ticketStore,
   leaderboardStore,
   localePreferenceStore,
+  identitiesStore,
   airdropStore,
 };

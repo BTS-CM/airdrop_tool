@@ -1,0 +1,41 @@
+{
+    "beetlink": {
+      "connected": "เชื่อมต่อกับ Beet wallet เรียบร้อยแล้ว",
+      "linkPrompt": "ดำเนินการต่อโดยเชื่อมโยงแอพนี้กับกระเป๋าเงิน Beet ของคุณด้านล่าง",
+      "linkButton": "เชื่อมโยงไปยังบีท",
+      "beetWait": "กำลังรอการตอบกลับจาก BEET พรอมต์",
+      "backButton": "กลับ"
+    },
+    "buy": {
+      "unavailable": "NFT นี้ยังไม่มีขายในขณะนี้",
+      "buyPrompt": "คุณต้องการซื้อ NFT นี้ด้วยวิธีใด",
+      "beetBuy": "ซื้อผ่านกระเป๋าเงิน BEET",
+      "qrCodes": "การใช้รหัส QR",
+      "beetConnect": "หากต้องการซื้อต่อ ให้เชื่อมต่อกับ Beet",
+      "beetLink": "หากต้องการซื้อต่อ ให้เชื่อมโยงกับ Beet",
+      "beetWait": "กำลังรอการตอบสนองของผู้ใช้จากไคลเอนต์ BEET",
+      "buySuccess": "เผยแพร่คำสั่งจำกัดการซื้อสำหรับ NFT สำเร็จ \"{{boughtAsset}}\"เพื่อตอบแทน {{amountToSell}} {{soldAsset}}",
+      "viewPortfolio": "ดูผลงาน",
+      "backButton": "กลับ",
+      "beetBuyPrompt": "สั่งให้ BEET ซื้อ NFT \"{{boughtAsset}}\" สำหรับ {{amountToSell}} {{soldAsset}}?",
+      "confirmPurchase": "ใช่",
+      "rejectPurchase": "ไม่",
+      "generateQR": "สร้างรหัส QR",
+      "scanQR": "หากต้องการซื้อ NFT นี้ให้สแกนรหัส QR ด้านล่าง",
+      "waitQR": "โปรดรอสักครู่ในขณะที่สร้างรหัส QR ของคุณ"
+    },
+    "connect": {
+      "remove": "ลบ",
+      "previousBEET": "คุณต้องการใช้บัญชี BEET ที่เชื่อมโยงไว้ก่อนหน้านี้ใด",
+      "newBEET": "ต้องการใช้บัญชีอื่นหรือไม่?",
+      "newBtn": "เชื่อมต่อกับบัญชีใหม่",
+      "back": "ย้อนกลับ",
+      "beetHeader": "เครื่องมือนี้ออกแบบมาเพื่อใช้กับ Bitshares BEET Wallet",
+      "beetSubheading": "เปิดและปลดล็อค จากนั้นคลิกปุ่มเชื่อมต่อด้านล่างเพื่อดำเนินการต่อ",
+      "beetConnect": "เชื่อมต่อกับบีท",
+      "btsPrompt": "ยังไม่ได้ติดตั้งกระเป๋าเงิน Bitshares BEET? ",
+      "btsGuide": "เมื่อติดตั้งแล้ว ให้สร้างกระเป๋าเงินและดำเนินการเชื่อมต่อด้านบน",
+      "beetDownload": "ดาวน์โหลดบีท",
+      "connecting": "กำลังเชื่อมต่อกับบีท"
+    }
+  }

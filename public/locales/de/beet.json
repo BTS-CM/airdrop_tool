@@ -1,0 +1,69 @@
+{
+    "beetlink": {
+      "connected": "Erfolgreich mit der Beet-Wallet verbunden.",
+      "linkPrompt": "Fahren Sie mit der Verknüpfung dieser App mit Ihrem Beet-Wallet unten fort.",
+      "linkButton": "Link zu Beet",
+      "beetWait": "Warten auf Antwort von der BEET-Eingabeaufforderung",
+      "backButton": "Zurück"
+    },
+    "buy": {
+      "unavailable": "Dieses NFT steht derzeit nicht zum Verkauf.",
+      "buyPrompt": "Wie möchten Sie diesen NFT kaufen?",
+      "beetBuy": "Direkt mit Geldbörse",
+      "qrCodes": "QR-Codes",
+      "local": "Lokales JSON",
+      "confirmation": "Kauftransaktion JSON generiert",
+      "download1": "1. Ihr angeforderter Kaufvorgang wurde generiert. Klicken Sie auf die Schaltfläche, um ihn herunterzuladen.",
+      "download2": "2. Laden Sie auf der BEET Local-Seite die JSON-Datei hoch. Es sollte eine Eingabeaufforderung angezeigt werden.",
+      "download3": "3. Überprüfen Sie den Inhalt der Eingabeaufforderung, bevor Sie den Airdrop zum Abschluss der Transaktion genehmigen.",
+      "downloadButton": "Laden Sie JSON herunter",
+      "viewJSON": "Vorgeschlagener Vorgang JSON",
+      "method": "Über lokalen Datei-Upload",
+      "preStep1": "1. Starten Sie die BEET-Wallet und navigieren Sie im Menü zu „Lokal“.",
+      "preStep2": "2. Auf dieser Seite entweder alle zulassen oder nur Operation 1 „limit_order_create“ zulassen.",
+      "preStep3": "3. Klicken Sie auf der lokalen Upload-Seite auf die Schaltfläche unten, um fortzufahren.",
+      "generate": "JSON-Datei generieren",
+      "deepLink": "Deep-Link",
+      "noDL": {
+        "title": "Über rohen Deeplink",
+        "step1": "Starten Sie die BEET-Wallet und navigieren Sie im Menü zu „Raw Link“.",
+        "step2": "Auf dieser Seite können Sie entweder alle Vorgänge zulassen oder nur Vorgang 1 „Limit-Order erstellen“ zulassen (klicken Sie dann auf „Speichern“).",
+        "step3": "Sobald im Wallet „Bereit für Raw-Links“ angezeigt wird, senden Sie diese Anfrage.",
+        "btn": "Roh-Deeplink generieren"
+      },
+      "DL": {
+        "title": "Roher Deeplink generiert",
+        "step1": "Ihr Deeplink wurde generiert. Klicken Sie auf die Schaltfläche, um fortzufahren.",
+        "step2": "Eine Eingabeaufforderung wird angezeigt. Überprüfen Sie den Inhalt und genehmigen Sie dann die Eingabeaufforderung zum Erstellen eines Tickets.",
+        "step3": "Gehen Sie zur Seite „Tickets abrufen“, um Ihr Ticket zur Analyse herunterzuladen.",
+        "beetBTN": "Übertragen",
+        "back": "Zurück"
+      },
+      "beetConnect": "Um mit dem Kauf fortzufahren, stellen Sie eine Verbindung zu Beet her.",
+      "beetLink": "Um mit dem Kauf fortzufahren, verlinken Sie mit Beet.",
+      "beetWait": "Warten auf Benutzerantwort vom BEET-Client.",
+      "buySuccess": "Eine Kauf-Limit-Order für den NFT erfolgreich übertragen.{{boughtAsset}}\" im Gegenzug für {{amountToSell}} {{soldAsset}}",
+      "viewPortfolio": "Portfolio ansehen",
+      "backButton": "Zurück",
+      "beetBuyPrompt": "Weisen Sie BEET an, den NFT zu kaufen.{{boughtAsset}}\" für {{amountToSell}} {{soldAsset}}?",
+      "confirmPurchase": "Ja",
+      "rejectPurchase": "NEIN",
+      "generateQR": "QR-Code generieren",
+      "scanQR": "Um dieses NFT zu kaufen, scannen Sie den folgenden QR-Code",
+      "waitQR": "Bitte warten Sie, während Ihr QR-Code generiert wird"
+    },
+    "connect": {
+      "remove": "Entfernen",
+      "previousBEET": "Welches zuvor verknüpfte BEET-Konto möchten Sie verwenden?",
+      "newBEET": "Möchten Sie ein anderes Konto verwenden?",
+      "newBtn": "Mit neuem Konto verbinden",
+      "back": "Geh zurück",
+      "beetHeader": "Dieses Tool ist für die Verwendung mit dem Bitshares BEET Wallet konzipiert.",
+      "beetSubheading": "Starten und entsperren Sie es und klicken Sie dann unten auf die Schaltfläche „Verbinden“, um fortzufahren.",
+      "beetConnect": "Stellen Sie eine Verbindung zu Beet her",
+      "btsPrompt": "Sie haben die Bitshares BEET-Wallet noch nicht installiert? ",
+      "btsGuide": "Erstellen Sie nach der Installation eine Wallet und fahren Sie mit der oben beschriebenen Verbindung fort.",
+      "beetDownload": "Laden Sie BEET herunter",
+      "connecting": "Verbindung zu BEET herstellen"
+    }
+  }

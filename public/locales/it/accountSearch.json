@@ -1,0 +1,17 @@
+{
+    "accounts": {
+      "enterID": "Inserisci un ID account per procedere",
+      "fetchingAccount": "Ricerca del conto",
+      "noAccount": "Non è stato possibile trovare alcun account di questo tipo, controllare l'input e riprovare.",
+      "searchResults": "Risultati di ricerca",
+      "loading": "Caricamento...",
+      "invalidID": "ID account non valido: deve iniziare con \"1.2\". ",
+      "accountID": "ID account (ad es. 1.2.0)",
+      "existingID": "Procedere con un ID account esistente dall'account Beet collegato?",
+      "beetReq": "Recupera l'ID dell'account dal portafoglio Beet",
+      "beetLinked": "Procedi con il tuo account collegato a Beet"
+    },
+    "accountSearch": {
+      "inputPrompt": "Inserisci il tuo ID/nome dell'account blockchain per procedere"
+    }
+  }

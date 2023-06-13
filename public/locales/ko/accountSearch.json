@@ -1,0 +1,17 @@
+{
+    "accounts": {
+      "enterID": "계속하려면 계정 ID를 입력하세요.",
+      "fetchingAccount": "계정 조회",
+      "noAccount": "해당 계정을 찾을 수 없습니다. 입력 내용을 확인하고 다시 시도하십시오.",
+      "searchResults": "검색 결과",
+      "loading": "로드 중...",
+      "invalidID": "잘못된 계정 ID - '1.2'로 시작해야 합니다. ",
+      "accountID": "계정 ID(예: 1.2.0)",
+      "existingID": "연결된 Beet 계정의 기존 계정 ID로 진행하시겠습니까?",
+      "beetReq": "비트 지갑에서 계정 ID 가져오기",
+      "beetLinked": "Beet 연결 계정으로 진행"
+    },
+    "accountSearch": {
+      "inputPrompt": "계속 진행하려면 블록체인 계정 ID/이름을 입력하세요."
+    }
+  }

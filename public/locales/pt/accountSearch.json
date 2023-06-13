@@ -1,0 +1,17 @@
+{
+    "accounts": {
+      "enterID": "Insira um ID de conta para continuar",
+      "fetchingAccount": "Procurando conta",
+      "noAccount": "Essa conta não foi encontrada, verifique a entrada e tente novamente.",
+      "searchResults": "Procurar Resultados",
+      "loading": "Carregando...",
+      "invalidID": "ID de conta inválido - Deve começar com '1.2.' ",
+      "accountID": "ID da conta (por exemplo, 1.2.0)",
+      "existingID": "Prossiga com um ID de conta existente da conta Beet vinculada?",
+      "beetReq": "Buscar ID da conta da carteira Beet",
+      "beetLinked": "Prossiga com sua conta vinculada ao Beet"
+    },
+    "accountSearch": {
+      "inputPrompt": "Insira o ID/nome da sua conta blockchain para prosseguir"
+    }
+  }

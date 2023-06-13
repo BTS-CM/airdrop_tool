@@ -26,7 +26,8 @@
         "blockno": "Numéro de bloc",
         "algos": "Algorithmes",
         "winners": "Gagnants",
-        "ticketWinQty": "Quantité de billets gagnants"
+        "ticketWinQty": "Quantité de billets gagnants",
+        "sendingAccount": "Envoi de parachutage depuis"
       },
       "options": {
         "title": "Options de largage aérien",

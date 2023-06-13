@@ -1,0 +1,39 @@
+{
+    "deeplink": {
+      "noDL": {
+        "title": "Via le lien profond de la betterave crue",
+        "step1": "Lancez le portefeuille BEET et accédez à \"Raw Link\" dans le menu.",
+        "step2": "À partir de cette page, vous pouvez soit autoriser toutes les opérations, soit autoriser uniquement les opérations {{opNum}} '{{opName}}' (puis cliquez sur enregistrer).",
+        "step3": "Une fois que \"Ready for raw links\" s'affiche dans Beet, soumettez cette demande.",
+        "label": "Entrez votre identifiant de compte",
+        "btn": "Générer un lien profond brut"
+      },
+      "DL": {
+        "title": "Lien profond brut généré",
+        "step1": "Votre lien profond BEET a été généré, cliquez sur le bouton pour continuer.",
+        "step2": "Une invite BEET s'affichera, vérifiez le contenu, puis approuvez l'invite de création de ticket.",
+        "step3": "Rendez-vous sur la page « Récupérer les tickets » pour télécharger votre ticket pour analyse.",
+        "beetBTN": "Diffusé sur BEET",
+        "back": "Dos"
+      }
+    },
+    "local": {
+      "noGen": {
+        "title": "Via le téléchargement de fichiers locaux",
+        "step1": "1. Lancez le portefeuille BEET et accédez à \"Local\" dans le menu.",
+        "step2": "2. Sur cette page, autorisez tout ou autorisez uniquement l'opération {{opNum}} '{{opName}}'.",
+        "step3": "3. Une fois sur la page de téléchargement local, cliquez sur le bouton ci-dessous pour continuer.",
+        "btn": "Générer le fichier JSON airdrop"
+      },
+      "generated": {
+        "title": "Fichier JSON local généré",
+        "step1": "1. Votre fichier JSON local a été généré, cliquez sur le bouton pour le télécharger.",
+        "step2": "2. À partir de la page BEET Local, téléchargez le fichier JSON, une invite devrait apparaître.",
+        "step3": "3. Vérifiez le contenu de l'invite avant d'approuver les opérations.",
+        "beetBTN": "Télécharger le fichier JSON"
+      }
+    },
+    "JSON": {
+      "view": "Afficher JSON"
+    }
+  }

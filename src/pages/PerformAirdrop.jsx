@@ -31,8 +31,11 @@ import {
   HiOutlineShieldCheck,
 } from "react-icons/hi";
 
-import { airdropStore, appStore, leaderboardStore } from '../lib/states';
-import AirdropCard from './AirdropCard';
+import {
+  airdropStore, appStore, leaderboardStore, beetStore, tempStore
+} from "../lib/states";
+import AirdropCard from "./AirdropCard";
+import GetAccount from "./GetAccount";
 
 function sliceIntoChunks(arr, size) {
   const chunks = [];
@@ -111,9 +114,15 @@ export default function PerformAirdrop(properties) {
   const btsTestnetLeaderboard = leaderboardStore((state) => state.bitshares_testnet);
   const tuscLeaderboard = leaderboardStore((state) => state.tusc);
 
+  // for beet use
+  const connection = beetStore((state) => state.connection);
+  const isLinked = beetStore((state) => state.isLinked);
+  const identity = beetStore((state) => state.identity);
+  const reset = beetStore((state) => state.reset);
+  const account = tempStore((state) => state.account);
+
   const [tokenQuantity, onTokenQuantity] = useState(1);
   const [tokenName, onTokenName] = useState("");
-  const [accountID, onAccountID] = useState("1.2.x");
   const [myID, setMyID] = useState();
   const [tokenDetails, setTokenDetails] = useState();
   const [batchSize, onBatchSize] = useState(50);
@@ -166,17 +175,6 @@ export default function PerformAirdrop(properties) {
       onTokenName("TUSC");
     }
   }, []);
-
-  useEffect(() => {
-    const delayDebounceFn = setTimeout(async () => {
-      setMyID();
-      if (accountID && accountID.length && accountID.length > 4 && accountID.includes("1.2.")) {
-        setMyID(accountID);
-      }
-    }, 1000);
-
-    return () => clearTimeout(delayDebounceFn);
-  }, [accountID]);
 
   // Lookup the token to airdrop
   useEffect(() => {
@@ -278,10 +276,10 @@ export default function PerformAirdrop(properties) {
   if (ltmReq && ltmReq === 'yes') {
     // Filter out non LTM users from airdrop
     sortedWinners = sortedWinners.filter((user) => {
-      const id = user.id;
-      const ltm = envLeaderboard.find((x) => x.id === user.id).account.ltm;
-      return ltm ? true : false;
-    })
+      const { id } = user;
+      const { ltm } = envLeaderboard.find((x) => x.id === user.id).account;
+      return !!ltm;
+    });
   }
 
   if (myID) {
@@ -316,7 +314,7 @@ export default function PerformAirdrop(properties) {
         assignedTokens: ((1 / sortedWinners.length) * finalTokenQuantity),
       });
     } else if (distroMethod === "RoundRobin") {
-      let algoItr = i >= sortedWinners.length
+      const algoItr = i >= sortedWinners.length
         ? Math.round(((i / sortedWinners.length) % 1) * sortedWinners.length)
         : i;
 
@@ -385,7 +383,6 @@ export default function PerformAirdrop(properties) {
         tokenQuantity={tokenQuantity}
         tokenName={tokenName}
         distroMethod={distroMethod}
-        accountID={accountID}
         chunk={chunk}
         chunkItr={i}
         winnerChunkQty={winnerChunks.length}
@@ -416,9 +413,20 @@ export default function PerformAirdrop(properties) {
       </Title>
 
       {
-        !plannedAirdropData
+        !plannedAirdropData && !account
           ? <Text>{t("performAirdrop:noTicket")}</Text>
-          : (
+          : null
+      }
+
+      {
+        !account
+          ? <GetAccount />
+          : null
+      }
+
+      {
+        plannedAirdropData && account && account.length
+          ? (
             <SimpleGrid cols={2} spacing="sm" mt={10} breakpoints={[{ maxWidth: 'md', cols: 2 }]}>
               <Card shadow="md" radius="md" padding="xl" mt={20}>
                 {
@@ -501,19 +509,16 @@ export default function PerformAirdrop(properties) {
                     <Text fz="sm" c="dimmed" mt="xs">
                       {t("performAirdrop:grid.right.summary.ticketWinQty")}: {ticketQty}
                     </Text>
+                    <Text fz="sm" c="dimmed" mt="xs">
+                      {t("performAirdrop:grid.right.summary.sendingAccount")}: {
+                      identity ? identity.account.name : account
+                      } {identity ? `(${identity.account.id})` : null}
+                    </Text>
                   </Card>
                   <Card shadow="md" radius="md" padding="sm">
                     <Text fz="lg" fw={600} mt="md">
                       {t("performAirdrop:grid.right.options.title")}
                     </Text>
-                    <TextInput
-                      type="string"
-                      withAsterisk
-                      placeholder={accountID}
-                      label={t("performAirdrop:grid.right.options.titleName", { titleName })}
-                      style={{ maxWidth: '400px' }}
-                      onChange={(event) => onAccountID(event.currentTarget.value)}
-                    />
                     <TextInput
                       type="string"
                       withAsterisk
@@ -684,6 +689,7 @@ export default function PerformAirdrop(properties) {
               </Card>
             </SimpleGrid>
           )
+          : null
       }
     </Card>
   );

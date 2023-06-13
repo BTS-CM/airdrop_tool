@@ -1,0 +1,39 @@
+{
+    "deeplink": {
+      "noDL": {
+        "title": "Über den Deeplink zu Rohrüben",
+        "step1": "Starten Sie die BEET-Wallet und navigieren Sie im Menü zu „Raw Link“.",
+        "step2": "Auf dieser Seite können Sie entweder alle Vorgänge zulassen oder nur den Vorgang zulassen {{opNum}} '{{opName}}' (klicken Sie dann auf Speichern).",
+        "step3": "Sobald in Beet „Bereit für Rohlinks“ angezeigt wird, senden Sie diese Anfrage.",
+        "label": "Geben Sie Ihre Konto-ID ein",
+        "btn": "Roh-Deeplink generieren"
+      },
+      "DL": {
+        "title": "Roher Deeplink generiert",
+        "step1": "Ihr BEET-Deeplink wurde generiert. Klicken Sie auf die Schaltfläche, um fortzufahren.",
+        "step2": "Eine BEET-Eingabeaufforderung wird angezeigt. Überprüfen Sie den Inhalt und genehmigen Sie dann die Eingabeaufforderung zum Erstellen eines Tickets.",
+        "step3": "Gehen Sie zur Seite „Tickets abrufen“, um Ihr Ticket zur Analyse herunterzuladen.",
+        "beetBTN": "Ausstrahlung an BEET",
+        "back": "Zurück"
+      }
+    },
+    "local": {
+      "noGen": {
+        "title": "Über lokalen Datei-Upload",
+        "step1": "1. Starten Sie die BEET-Wallet und navigieren Sie im Menü zu „Lokal“.",
+        "step2": "2. Auf dieser Seite können Sie entweder alle oder nur den Betrieb zulassen {{opNum}} '{{opName}}'.",
+        "step3": "3. Klicken Sie auf der lokalen Upload-Seite auf die Schaltfläche unten, um fortzufahren.",
+        "btn": "Generieren Sie eine Airdrop-JSON-Datei"
+      },
+      "generated": {
+        "title": "Lokale JSON-Datei generiert",
+        "step1": "1. Ihre lokale JSON-Datei wurde generiert. Klicken Sie auf die Schaltfläche, um sie herunterzuladen.",
+        "step2": "2. Laden Sie auf der BEET Local-Seite die JSON-Datei hoch. Es sollte eine Eingabeaufforderung angezeigt werden.",
+        "step3": "3. Überprüfen Sie den Inhalt der Eingabeaufforderung, bevor Sie die Vorgänge genehmigen.",
+        "beetBTN": "Laden Sie die JSON-Datei herunter"
+      }
+    },
+    "JSON": {
+      "view": "JSON anzeigen"
+    }
+  }

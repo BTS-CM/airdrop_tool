@@ -26,7 +26,8 @@
         "blockno": "Numero blocco",
         "algos": "Algoritmi",
         "winners": "Vincitori",
-        "ticketWinQty": "Qtà biglietti vincenti"
+        "ticketWinQty": "Qtà biglietti vincenti",
+        "sendingAccount": "Invio di airdrop da"
       },
       "options": {
         "title": "Opzioni Airdrop",

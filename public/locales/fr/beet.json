@@ -1,0 +1,69 @@
+{
+  "beetlink": {
+    "connected": "Connecté au portefeuille Beet avec succès.",
+    "linkPrompt": "Continuez en reliant cette application à votre portefeuille Beet ci-dessous.",
+    "linkButton": "Lien vers la betterave",
+    "beetWait": "En attente de réponse de l'invite BEET",
+    "backButton": "Dos"
+  },
+  "buy": {
+    "unavailable": "Ce NFT n'est pas en vente actuellement.",
+    "buyPrompt": "Comment souhaitez-vous acheter ce NFT ?",
+    "beetBuy": "Directement avec portefeuille",
+    "qrCodes": "Codes QR",
+    "local": "JSON local",
+    "confirmation": "Transaction d'achat JSON générée",
+    "download1": "1. Votre opération d'achat demandée a été générée, cliquez sur le bouton pour la télécharger.",
+    "download2": "2. À partir de la page BEET Local, téléchargez le fichier JSON, une invite devrait apparaître.",
+    "download3": "3. Vérifiez le contenu de l'invite avant d'approuver le parachutage pour terminer la transaction.",
+    "downloadButton": "Télécharger JSON",
+    "viewJSON": "Opération proposée JSON",
+    "method": "Via le téléchargement de fichiers locaux",
+    "preStep1": "1. Lancez le portefeuille BEET et accédez à \"Local\" dans le menu.",
+    "preStep2": "2. Sur cette page, autorisez tout ou autorisez uniquement l'opération 1 'limit_order_create'.",
+    "preStep3": "3. Une fois sur la page de téléchargement local, cliquez sur le bouton ci-dessous pour continuer.",
+    "generate": "Générer un fichier JSON",
+    "deepLink": "Lien profond",
+    "noDL": {
+      "title": "Via lien profond brut",
+      "step1": "Lancez le portefeuille BEET et accédez à \"Raw Link\" dans le menu.",
+      "step2": "À partir de cette page, vous pouvez soit autoriser toutes les opérations, soit autoriser uniquement l'opération 1 \"Création d'ordres limités\" (puis cliquez sur Enregistrer).",
+      "step3": "Une fois que \"Prêt pour les liens bruts\" s'affiche dans le portefeuille, soumettez cette demande.",
+      "btn": "Générer un lien profond brut"
+    },
+    "DL": {
+      "title": "Lien profond brut généré",
+      "step1": "Votre lien profond a été généré, cliquez sur le bouton pour continuer.",
+      "step2": "Une invite s'affichera, vérifiez le contenu puis approuvez l'invite de création de ticket.",
+      "step3": "Rendez-vous sur la page « Récupérer les tickets » pour télécharger votre ticket pour analyse.",
+      "beetBTN": "Diffuser",
+      "back": "Dos"
+    },
+    "beetConnect": "Pour continuer l'achat, connectez-vous à Beet.",
+    "beetLink": "Pour continuer l'achat, créez un lien avec Beet.",
+    "beetWait": "Attente de la réponse de l'utilisateur du client BEET.",
+    "buySuccess": "Diffuser avec succès un ordre d'achat à cours limité pour le NFT \"{{boughtAsset}}\" en échange de {{amountToSell}} {{soldAsset}}",
+    "viewPortfolio": "Voir le portefeuille",
+    "backButton": "Dos",
+    "beetBuyPrompt": "Demandez à BEET d'acheter le NFT \"{{boughtAsset}}\" pour {{amountToSell}} {{soldAsset}}?",
+    "confirmPurchase": "Oui",
+    "rejectPurchase": "Non",
+    "generateQR": "Générer un code QR",
+    "scanQR": "Pour acheter ce NFT, scannez le code QR ci-dessous",
+    "waitQR": "Veuillez patienter pendant que votre code QR est généré"
+  },
+  "connect": {
+    "remove": "Retirer",
+    "previousBEET": "Quel compte BEET précédemment associé souhaitez-vous utiliser ?",
+    "newBEET": "Vous souhaitez utiliser un autre compte ?",
+    "newBtn": "Connectez-vous avec un nouveau compte",
+    "back": "Retourner",
+    "beetHeader": "Cet outil est conçu pour être utilisé avec le portefeuille Bitshares BEET.",
+    "beetSubheading": "Lancez-le et déverrouillez-le, puis cliquez sur le bouton de connexion ci-dessous pour continuer.",
+    "beetConnect": "Connectez-vous à la betterave",
+    "btsPrompt": "Vous n'avez pas encore installé le portefeuille Bitshares BEET ? ",
+    "btsGuide": "Une fois installé, créez un portefeuille et procédez à la connexion ci-dessus.",
+    "beetDownload": "Télécharger BETTERAVE",
+    "connecting": "Se connecter à BEET"
+  }
+}

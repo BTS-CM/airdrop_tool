@@ -1,0 +1,17 @@
+{
+    "accounts": {
+      "enterID": "Indtast et konto-id for at fortsætte",
+      "fetchingAccount": "Søger konto",
+      "noAccount": "Der blev ikke fundet en sådan konto, tjek input og prøv igen.",
+      "searchResults": "Søgeresultater",
+      "loading": "Indlæser...",
+      "invalidID": "Ugyldigt konto-id - det skal begynde med '1.2'. ",
+      "accountID": "Konto-id (f.eks. 1.2.0)",
+      "existingID": "Vil du fortsætte med et eksisterende konto-id fra den linkede Beet-konto?",
+      "beetReq": "Hent konto-id fra Beet wallet",
+      "beetLinked": "Fortsæt med din Beet-linkede konto"
+    },
+    "accountSearch": {
+      "inputPrompt": "Indtast dit blockchain-konto-id/navn for at fortsætte"
+    }
+  }

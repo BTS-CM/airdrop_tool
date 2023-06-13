@@ -1,0 +1,17 @@
+{
+    "accounts": {
+      "enterID": "Geben Sie eine Konto-ID ein, um fortzufahren",
+      "fetchingAccount": "Konto wird gesucht",
+      "noAccount": "Es konnte kein solches Konto gefunden werden. Überprüfen Sie die Eingabe und versuchen Sie es erneut.",
+      "searchResults": "Suchergebnisse",
+      "loading": "Wird geladen...",
+      "invalidID": "Ungültige Konto-ID – Sie muss mit „1.2“ beginnen. ",
+      "accountID": "Konto-ID (z. B. 1.2.0)",
+      "existingID": "Mit einer vorhandenen Konto-ID aus dem verknüpften Beet-Konto fortfahren?",
+      "beetReq": "Konto-ID aus Beet-Wallet abrufen",
+      "beetLinked": "Fahren Sie mit Ihrem mit Beet verknüpften Konto fort"
+    },
+    "accountSearch": {
+      "inputPrompt": "Geben Sie Ihre Blockchain-Konto-ID/Ihren Blockchain-Kontonamen ein, um fortzufahren"
+    }
+  }

@@ -26,7 +26,8 @@
         "blockno": "บล็อคนัมเบอร์",
         "algos": "อัลกอริทึม",
         "winners": "ผู้ชนะ",
-        "ticketWinQty": "จำนวนตั๋วที่ชนะ"
+        "ticketWinQty": "จำนวนตั๋วที่ชนะ",
+        "sendingAccount": "ส่งเครื่องบินจาก"
       },
       "options": {
         "title": "ตัวเลือก Airdrop",

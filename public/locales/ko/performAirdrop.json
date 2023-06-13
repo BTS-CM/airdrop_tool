@@ -2,7 +2,7 @@
   "header": {
     "title": "에서 에어드롭을 수행합니다. {{titleName}} 블록체인",
     "back": "에어드롭 요약",
-    "others": "계산된 에어드랍"
+    "others": "계산된 에어드롭"
   },
   "noTicket": "티켓을 찾을 수 없음",
   "grid": {
@@ -26,7 +26,8 @@
         "blockno": "블록번호",
         "algos": "알고리즘",
         "winners": "수상자",
-        "ticketWinQty": "당첨 티켓 수량"
+        "ticketWinQty": "당첨 티켓 수량",
+        "sendingAccount": "에서 에어드랍 보내기"
       },
       "options": {
         "title": "에어드롭 옵션",

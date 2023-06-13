@@ -1,0 +1,69 @@
+{
+  "beetlink": {
+    "connected": "Conectado à carteira Beet com sucesso.",
+    "linkPrompt": "Prossiga com a vinculação deste aplicativo à sua carteira Beet abaixo.",
+    "linkButton": "Link para Beterraba",
+    "beetWait": "Aguardando a resposta do prompt do BEET",
+    "backButton": "Voltar"
+  },
+  "buy": {
+    "unavailable": "Este NFT não está à venda no momento.",
+    "buyPrompt": "Como você gostaria de comprar este NFT?",
+    "beetBuy": "Diretamente com a carteira",
+    "qrCodes": "Códigos QR",
+    "local": "JSON local",
+    "confirmation": "Comprar transação JSON gerada",
+    "download1": "1. Sua operação de compra solicitada foi gerada, clique no botão para baixá-la.",
+    "download2": "2. Na página BEET Local, carregue o arquivo JSON, um prompt deve aparecer.",
+    "download3": "3. Verifique o conteúdo do prompt antes de aprovar o airdrop para concluir a transação.",
+    "downloadButton": "Baixar JSON",
+    "viewJSON": "JSON da operação proposta",
+    "method": "Por upload de arquivo local",
+    "preStep1": "1. Inicie a carteira BEET e navegue até 'Local' no menu.",
+    "preStep2": "2. Nesta página, permita tudo ou permita apenas a operação 1 'limit_order_create'.",
+    "preStep3": "3. Na página de upload local, clique no botão abaixo para prosseguir.",
+    "generate": "Gerar arquivo JSON",
+    "deepLink": "Link profundo",
+    "noDL": {
+      "title": "Por link direto bruto",
+      "step1": "Inicie a carteira BEET e navegue até 'Raw Link' no menu.",
+      "step2": "A partir desta página, você pode permitir todas as operações ou permitir apenas a operação 1 'criar ordem de limite' (depois clique em salvar).",
+      "step3": "Depois que 'Ready for raw links' aparecer na carteira, envie esta solicitação.",
+      "btn": "Gerar deeplink bruto"
+    },
+    "DL": {
+      "title": "Deeplink bruto gerado",
+      "step1": "Seu deeplink foi gerado, clique no botão para prosseguir.",
+      "step2": "Um prompt será exibido, verifique o conteúdo e aprove o prompt de criação de ticket.",
+      "step3": "Acesse a página 'Buscar tickets' para baixar seu ticket para análise.",
+      "beetBTN": "Transmissão",
+      "back": "Voltar"
+    },
+    "beetConnect": "Para continuar a compra, conecte-se ao Beet.",
+    "beetLink": "Para continuar a compra, vincule-se à Beet.",
+    "beetWait": "Aguardando a resposta do usuário do cliente BEET.",
+    "buySuccess": "Transmitir com sucesso uma ordem de limite de compra para o NFT \"{{boughtAsset}}\" em troca de {{amountToSell}} {{soldAsset}}",
+    "viewPortfolio": "Ver portfólio",
+    "backButton": "Voltar",
+    "beetBuyPrompt": "Instrua o BEET a comprar o NFT \"{{boughtAsset}}\" para {{amountToSell}} {{soldAsset}}?",
+    "confirmPurchase": "Sim",
+    "rejectPurchase": "Não",
+    "generateQR": "Gerar código QR",
+    "scanQR": "Para comprar este NFT digitalize o código QR abaixo",
+    "waitQR": "Aguarde enquanto seu código QR é gerado"
+  },
+  "connect": {
+    "remove": "Remover",
+    "previousBEET": "Qual conta BEET vinculada anteriormente você deseja usar?",
+    "newBEET": "Quer usar uma conta diferente?",
+    "newBtn": "Conectar com nova conta",
+    "back": "Volte",
+    "beetHeader": "Esta ferramenta foi projetada para uso com a Carteira Bitshares BEET.",
+    "beetSubheading": "Inicie e desbloqueie-o e, em seguida, clique no botão de conexão abaixo para prosseguir.",
+    "beetConnect": "Conecte-se à Beterraba",
+    "btsPrompt": "Ainda não tem a carteira Bitshares BEET instalada? ",
+    "btsGuide": "Depois de instalado, crie uma carteira e prossiga para conectar-se acima.",
+    "beetDownload": "Baixar BEET",
+    "connecting": "Conectando ao BEET"
+  }
+}
