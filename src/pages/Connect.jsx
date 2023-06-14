@@ -8,31 +8,30 @@ import {
   Loader,
   Col,
   Paper,
+  Center,
 } from '@mantine/core';
 import { useTranslation } from 'react-i18next';
 
 import { appStore, beetStore, identitiesStore, tempStore } from '../lib/states';
 
+function beetDownload() {
+  window.electron.openURL('github');
+}
+
 export default function Connect(properties) {
   const { relevantChain } = properties;
   const { t, i18n } = useTranslation();
-  
+
   const connect = beetStore((state) => state.connect);
   const setIdentity = beetStore((state) => state.setIdentity);
   const setIsLinked = beetStore((state) => state.setIsLinked);
-
   const setAccount = tempStore((state) => state.setAccount);
-
-  const environment = appStore((state) => state.environment);
-  const setEnvironment = appStore((state) => state.setEnvironment);
-
-  const identities = identitiesStore((state) => state.identities);
   const setIdentities = identitiesStore((state) => state.setIdentities);
+  const storeConnection = identitiesStore((state) => state.storeConnection);
   const removeIdentity = identitiesStore((state) => state.removeIdentity);
   const removeConnection = identitiesStore((state) => state.removeConnection);
-
   const [inProgress, setInProgress] = useState(false);
-
+  
   /**
    * Removing a previously linked identity from the identity store
    * @param {Object} rowIdentity
@@ -51,10 +50,6 @@ export default function Connect(properties) {
     }
   }
 
-  function beetDownload() {
-    window.electron.openURL('github');
-  }
-
   /**
    * Reconnect to Beet with chosen identity
    * @param {Object} identity
@@ -67,14 +62,16 @@ export default function Connect(properties) {
       return;
     }, 5000);
 
+    let newConnection;
     try {
-      await connect(identity);
+      newConnection = await connect(identity);
     } catch (error) {
       console.error(error);
       setInProgress(false);
       return;
     }
 
+    storeConnection(newConnection);
     setAccount(identity.account.id);
     setIsLinked(true);
     setIdentity(identity);
@@ -90,7 +87,6 @@ export default function Connect(properties) {
 
     setTimeout(() => {
       setInProgress(false);
-      return;
     }, 3000);
 
     try {
@@ -104,9 +100,9 @@ export default function Connect(properties) {
     setInProgress(false);
   }
 
-  const relevantIdentities = identities.filter((x) => x.chain === relevantChain);
-
-  const rows = relevantIdentities
+  const identities = identitiesStore((state) => state.identities);
+  const rows = identities
+    .filter((x) => x.chain === relevantChain)
     .map((row) => (
       <tr key={`${row.requested.account.name}_row`}>
         <td>
@@ -123,6 +119,8 @@ export default function Connect(properties) {
             {row.requested.account.id}
             )
           </Button>
+        </td>
+        <td>
           <Button
             sx={{ marginTop: '5px' }}
             variant="subtle"
@@ -145,13 +143,20 @@ export default function Connect(properties) {
       <Col span={12} key="connect">
         <Paper padding="sm" shadow="xs">
           <Box mx="auto" sx={{padding: '10px', paddingTop: '10px'}}>
-            <Text size="md">
+            <Text size="md" align="center">
               {t('beet:connect.previousBEET')}
             </Text>
             <ScrollArea
               sx={{ height: rows.length > 1 && rows.length < 3 ? rows.length * 55 : 120 }}
+              align="center"
             >
-              <Table sx={{ minWidth: 700 }}>
+              <Table highlightOnHover>
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </thead>
                 <tbody>
                   {rows}
                 </tbody>
@@ -161,7 +166,7 @@ export default function Connect(properties) {
         </Paper>
         <br />
         <Paper padding="sm" shadow="xs">
-          <Box mx="auto" sx={{ padding: '10px', paddingTop: '10px' }}>
+          <Box align="center" mx="auto" sx={{ padding: '10px', paddingTop: '10px' }}>
             <Text size="md">
               {t('beet:connect.newBEET')}
             </Text>
@@ -178,7 +183,7 @@ export default function Connect(properties) {
         </Paper>
       </Col>
     );
-  } else if (inProgress === false && !relevantIdentities.length) {
+  } else if (inProgress === false && !rows.length) {
     response = [];
     response.push(
       <Col span={12} key="connect">
@@ -230,12 +235,14 @@ export default function Connect(properties) {
   } else {
     response = (
       <Box mx="auto" sx={{ padding: '10px' }}>
-        <span>
+        <Center>
           <Loader variant="dots" />
-          <Text size="md">
+        </Center>
+        <Center>
+          <Text size="md" mt="sm">
             {t('beet:connect.connecting')}
           </Text>
-        </span>
+        </Center>
       </Box>
     );
   }

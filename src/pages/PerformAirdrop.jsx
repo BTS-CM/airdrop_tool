@@ -395,19 +395,24 @@ export default function PerformAirdrop(properties) {
     ))
     : [];
 
+    //console.log({identity, name: identity.requested.account.name, id: identity.requested.account.id})
+
+    /*
+      <Text fz="sm" c="dimmed" mt="xs">
+        {t("performAirdrop:grid.right.summary.sendingAccount")}: {
+        identity ? identity.requested.account.name : account
+        } {identity ? `(${identity.requested.account.id})` : null}
+      </Text>
+    */
+
   return (
     <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
-      <Title order={2} ta="center" mt="sm">
+      <Title order={3} ta="center" mt="sm">
         {t("performAirdrop:header.title", { titleName })}
         <br />
         <Link to={`/PlannedAirdrop/${params.env}/${params.id}`}>
-          <Button compact>
+          <Button variant="outline" compact>
             {t("performAirdrop:header.back")}
-          </Button>
-        </Link>
-        <Link to="/CalculatedAirdrops">
-          <Button ml="sm" compact>
-            {t("performAirdrop:header.others")}
           </Button>
         </Link>
       </Title>
@@ -509,11 +514,7 @@ export default function PerformAirdrop(properties) {
                     <Text fz="sm" c="dimmed" mt="xs">
                       {t("performAirdrop:grid.right.summary.ticketWinQty")}: {ticketQty}
                     </Text>
-                    <Text fz="sm" c="dimmed" mt="xs">
-                      {t("performAirdrop:grid.right.summary.sendingAccount")}: {
-                      identity ? identity.account.name : account
-                      } {identity ? `(${identity.account.id})` : null}
-                    </Text>
+
                   </Card>
                   <Card shadow="md" radius="md" padding="sm">
                     <Text fz="lg" fw={600} mt="md">

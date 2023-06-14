@@ -149,7 +149,10 @@ export default function AccountSearch(properties) {
           />
         ) : null}
 
-        <SimpleGrid cols={3} sx={{ marginTop: '10px' }}>
+        <SimpleGrid
+          cols={1}
+          sx={{ marginTop: '10px' }}
+        >
           {result ? (
             <Button
               compact

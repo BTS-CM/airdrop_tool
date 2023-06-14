@@ -1,7 +1,7 @@
 {
     "header": {
         "title": "Perform airdrop on the {{titleName}} blockchain",
-        "back": "Airdrop summary",
+        "back": "Back",
         "others": "Calculated airdrops"
     },
     "noTicket": "Ticket not found",

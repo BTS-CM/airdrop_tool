@@ -1,5 +1,6 @@
 {
-    "title": "How do you want to proceed?",
+    "title": "A {{chain}} account is required for this feature",
+    "subtitle": "How do you want to proceed?",
     "search": "Manually search for account",
     "beet": "Continue with wallet"
 }

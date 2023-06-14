@@ -95,7 +95,7 @@ export default function PlannedAirdrop(properties) {
           </Button>
         </Link>
         <Link to="/CalculatedAirdrops">
-          <Button style={{ marginLeft: '10px' }} compact>
+          <Button variant="outline" style={{ marginLeft: '10px' }} compact>
             {t("plannedAirdrop:header.back")}
           </Button>
         </Link>

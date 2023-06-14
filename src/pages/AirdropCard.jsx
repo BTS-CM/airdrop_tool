@@ -15,7 +15,8 @@ import { useDisclosure } from '@mantine/hooks';
 import { useTranslation } from 'react-i18next';
 
 import { appStore, beetStore, tempStore } from '../lib/states';
-import { generateDeepLink } from '../lib/generate';
+import { generateDeepLink, beetBroadcast } from '../lib/generate';
+import GetAccount from './GetAccount';
 
 export default function modal(properties) {
   const { t, i18n } = useTranslation();
@@ -45,7 +46,7 @@ export default function modal(properties) {
   const [inProgress, setInProgress] = useState(false);
   const [deepLinkItr, setDeepLinkItr] = useState(0);
 
-  const [chosen, setChosen] = useState();
+  const [outcome, setOutcome] = useState();
   const [method, setMethod] = useState();
   const [opened, { open, close }] = useDisclosure(false);
 
@@ -73,26 +74,49 @@ export default function modal(properties) {
     )
     : (((1 / quantityWinners) * tokenQuantity).toFixed(5)) * chunk.length;
 
+  const ops = chunk.map((x) => ({
+    fee: {
+      amount: 0,
+      asset_id: tokenDetails.id,
+    },
+    from: account,
+    to: x.id,
+    amount: {
+      amount: parseFloat(
+        distroMethod === "Proportionally"
+          ? ((x.qty / ticketQty) * tokenQuantity).toFixed(tokenDetails.precision)
+          : (((1 / quantityWinners) * tokenQuantity).toFixed(tokenDetails.precision)),
+      ) * 100000,
+      asset_id: tokenDetails.id,
+    },
+  }));
+
+  async function broadcast() {
+    setInProgress(true);
+    setOutcome();
+    let response;
+    try {
+      response = await beetBroadcast(
+        connection,
+        relevantChain,
+        currentNodes[0],
+        'transfer',
+        ops
+      );
+    } catch (error) {
+      console.log(error);
+      setInProgress(false);
+      setOutcome("FAILURE");
+      return;
+    }
+
+    setOutcome("SUCCESS");
+    setInProgress(false);
+  }
+
   useEffect(() => {
     async function fetchData() {
       setInProgress(true);
-
-      const ops = chunk.map((x) => ({
-        fee: {
-          amount: 0,
-          asset_id: tokenDetails.id,
-        },
-        from: account,
-        to: x.id,
-        amount: {
-          amount: parseFloat(
-            distroMethod === "Proportionally"
-              ? ((x.qty / ticketQty) * tokenQuantity).toFixed(tokenDetails.precision)
-              : (((1 / quantityWinners) * tokenQuantity).toFixed(tokenDetails.precision)),
-          ) * 100000,
-          asset_id: tokenDetails.id,
-        },
-      }));
 
       setTX(ops);
 
@@ -138,13 +162,58 @@ export default function modal(properties) {
         </Group>
       </>
     );
+  } else if (outcome) {
+    if (outcome === "SUCCESS") {
+      modalContents = (
+        <>
+          <Text>Successfully broadcast to the blockchain!</Text>
+          <Button onClick={() => {
+            setAirdropData();
+            close();
+            setTX();
+            setMethod();
+            setInProgress();
+            reset();
+          }}>
+            Close
+          </Button>
+        </>
+      )
+    } else if (outcome === "FAILURE") {
+      modalContents = (
+        <>
+          <Text>Prompt failed to broadcast to blockchain.</Text>
+          <Button
+            onClick={() => {
+              setOutcome();
+              reset();
+            }}
+          >
+            Try again
+          </Button>
+        </>
+      )
+    }
   } else if (method === "BEET") {
     // Broadcast via BEET
-    modalContents = (
-      <>
-        <Text>BEET!</Text>
-      </>
-    );
+    if (!identity) {
+      modalContents = (
+        <>
+          <GetAccount beetOnly />
+        </>
+      );
+    }
+    if (connection && identity) {
+      modalContents = (
+        <>
+          <Text>Ready to broadcast airdrop to BEET wallet</Text>
+          <Text>{identity.chain}</Text>
+          <Button mt="sm" onClick={async () => await broadcast()}>
+            {t("modal:deeplink.DL.beetBTN")}
+          </Button>
+        </>
+      );
+    }
   } else if (method === "DEEPLINK") {
     // Construct deeplink
     if (!airdropData && !inProgress) {
@@ -289,8 +358,11 @@ export default function modal(properties) {
         onClose={() => {
           setAirdropData();
           close();
+          setOutcome();
           setTX();
           setMethod();
+          setInProgress();
+          reset();
         }}
         title={`${t("airdropCard:airdrop")} #${chunkItr + 1}/${winnerChunkQty}`}
       >
@@ -308,6 +380,8 @@ export default function modal(properties) {
                 onClick={() => {
                   setMethod();
                   setAirdropData();
+                  setInProgress();
+                  reset();
                 }}
               >
                 Go back

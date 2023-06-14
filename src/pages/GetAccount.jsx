@@ -100,16 +100,8 @@ async function getAsset(node, searchInput, env) {
 export default function GetAccount(properties) {
   const { t, i18n } = useTranslation();
   const params = useParams();
-
-  /*
-  const btsAirdrops = airdropStore((state) => state.bitshares);
-  const btsTestnetAirdrops = airdropStore((state) => state.bitshares_testnet);
-  const tuscAirdrops = airdropStore((state) => state.tusc);
-
-  const btsLeaderboard = leaderboardStore((state) => state.bitshares);
-  const btsTestnetLeaderboard = leaderboardStore((state) => state.bitshares_testnet);
-  const tuscLeaderboard = leaderboardStore((state) => state.tusc);
-  */
+  const { beetOnly } = properties;
+  const { env } = properties;
 
   const setConnection = beetStore((state) => state.setConnection);
   const setAuthenticated = beetStore((state) => state.setAuthenticated);
@@ -118,29 +110,23 @@ export default function GetAccount(properties) {
   const connection = beetStore((state) => state.connection);
   const isLinked = beetStore((state) => state.isLinked);
   const identity = beetStore((state) => state.identity);
-  const reset = beetStore((state) => state.reset);
-
-  const [inProgress, setInProgress] = useState();
-  const [myID, setMyID] = useState();
   const [accountMethod, setAccountMethod] = useState();
 
   const account = tempStore((state) => state.account);
-  const nodes = appStore((state) => state.nodes);
-  const currentNodes = nodes[params.env];
 
   let assetName = "";
   let titleName = "token";
   let relevantChain = "";
 
-  if (params.env === 'bitshares') {
+  if (env === 'bitshares' || params.env === 'bitshares') {
     assetName = "BTS";
     relevantChain = 'BTS';
     titleName = "Bitshares";
-  } else if (params.env === 'bitshares_testnet') {
+  } else if (env === 'bitshares_testnet' || params.env === 'bitshares_testnet') {
     assetName = "TEST";
     relevantChain = 'BTS_TEST';
     titleName = "Bitshares (Testnet)";
-  } else if (params.env === 'tusc') {
+  } else if (env === 'tusc' || params.env === 'tusc') {
     assetName = "TUSC";
     relevantChain = 'TUSC';
     titleName = "TUSC";
@@ -148,15 +134,22 @@ export default function GetAccount(properties) {
 
   return (
     <Card shadow="md" radius="md" padding="sm" style={{ marginTop: '25px' }}>
-      <Text size="md" align="center">
+      <Title order={4} align="center">
         {
           !accountMethod
-            ? t("getAccount:title")
+            ? t("getAccount:title", {chain: titleName})
+            : null
+        }
+      </Title>
+      <Text size="lg" align="center">
+        {
+          !accountMethod
+            ? t("getAccount:subtitle")
             : null
         }
       </Text>
       {
-        !account && !accountMethod
+        !account && !accountMethod && !beetOnly
           ? (
             <Center>
               <Group mt="sm">
@@ -182,7 +175,7 @@ export default function GetAccount(properties) {
         !account && accountMethod === "SEARCH"
           ? (
             <>
-              <AccountSearch env={params.env} />
+              <AccountSearch env={env ?? params.env} />
               <Center>
                 <Button onClick={() => setAccountMethod()}>
                   {t('beet:beetlink.backButton')}
@@ -194,16 +187,13 @@ export default function GetAccount(properties) {
       }
 
       {
-        !account && accountMethod === "BEET"
+        !identity && (beetOnly || accountMethod === "BEET")
           ? (
           <>
             {
               !connection
                 ? (
                   <span>
-                    <Text size="md">
-                      {t('beet:accountMode.beetPrompt')}
-                    </Text>
                     <Connect relevantChain={relevantChain} />
                   </span>
                 )
@@ -222,17 +212,23 @@ export default function GetAccount(properties) {
                 : null
             }
 
-            <Center>
-              <Button
-                onClick={() => {
-                  setAccountMethod();
-                  setConnection();
-                  setAuthenticated();
-                }}
-              >
-                Go back
-              </Button>
-            </Center>
+            {
+              !beetOnly
+                ? (
+                  <Center>
+                    <Button
+                      onClick={() => {
+                        setAccountMethod();
+                        setConnection();
+                        setAuthenticated();
+                      }}
+                    >
+                      Go back
+                    </Button>
+                  </Center>
+                )
+                : null
+            }
           </>
           )
           : null
