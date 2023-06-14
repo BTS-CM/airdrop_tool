@@ -19,7 +19,7 @@ import {
 import { generateDeepLink, beetBroadcast } from '../lib/generate';
 import GetAccount from './GetAccount';
 
-export default function Create(properties) {
+export default function BeetModal(properties) {
   const { t, i18n } = useTranslation();
   const params = useParams();
   const { value } = properties; // 'bitshares'
@@ -29,6 +29,7 @@ export default function Create(properties) {
   const { opName } = properties; // include in i18n
   const { appName } = properties; // include in deeplink/local
   const { requestedMethods } = properties; // avoid bugged deeplinks
+  const { filename } = properties; // for local json file
 
   const [deepLink, setDeepLink] = useState();
   const [deepLinkItr, setDeepLinkItr] = useState(0);
@@ -121,14 +122,13 @@ export default function Create(properties) {
         onClose={() => {
           setDeepLink();
           close();
-          setAccount("");
           setOutcome();
           setTX();
           setMethod();
           setInProgress();
           reset();
         }}
-        title={t("modal:deeplink.title")}
+        title={t("modal:title")}
       >
         {
           inProgress
@@ -137,7 +137,7 @@ export default function Create(properties) {
         }
         {
           !account
-            ? <GetAccount token={value ?? null} env={value ?? null} />
+            ? <GetAccount basic token={value} env={value} />
             : null
         }
         {
@@ -211,13 +211,13 @@ export default function Create(properties) {
           account && method && method === "BEET" && !identity
             ? (
               <>
-                <GetAccount beetOnly />
+                <GetAccount beetOnly token={value ?? null} env={value ?? null} />
               </>
             )
             : null
         }
         {
-          account && method && method === "BEET" && connection && identity
+          account && method && method === "BEET" && connection && identity && !outcome
             ? (
               <>
                 <Text>Ready to broadcast airdrop to BEET wallet</Text>
@@ -308,7 +308,7 @@ export default function Create(properties) {
                 </Text>
                 <a
                   href={`data:text/json;charset=utf-8,${deepLink}`}
-                  download="create_ticket.json"
+                  download={filename}
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -373,6 +373,7 @@ export default function Create(properties) {
                 setDeepLink();
                 setInProgress();
                 reset();
+                setOutcome();
               }}
             >
               Go back

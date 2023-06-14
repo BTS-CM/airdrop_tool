@@ -23,8 +23,10 @@ import { Link, useParams } from "react-router-dom";
 
 import { generateDeepLink } from '../lib/generate';
 import {
-  appStore, leaderboardStore, airdropStore, ticketStore
+  appStore, leaderboardStore, airdropStore, ticketStore, tempStore
 } from '../lib/states';
+
+import BeetModal from './BeetModal';
 
 export default function Upgrade(properties) {
   const { t, i18n } = useTranslation();
@@ -32,12 +34,8 @@ export default function Upgrade(properties) {
   const [value, setValue] = useState(
     (params && params.env) ?? 'bitshares'
   );
-  const [deepLink, setDeepLink] = useState();
-  const [accountID, onAccountID] = useState((params && params.id) ?? "1.2.x");
-  const [deepLinkItr, setDeepLinkItr] = useState(0);
 
-  const [opened, { open, close }] = useDisclosure(false);
-
+  const account = tempStore((state) => state.account);
   const nodes = appStore((state) => state.nodes);
   const currentNodes = nodes[value];
 
@@ -49,36 +47,6 @@ export default function Upgrade(properties) {
   } else if (value === 'tusc') {
     relevantChain = 'TUSC';
   }
-
-  useEffect(() => {
-    async function fetchData() {
-      let payload;
-      try {
-        payload = await generateDeepLink(
-          'airdrop_tool_account_upgrade',
-          relevantChain,
-          currentNodes[0],
-          'account_upgrade',
-          [{
-            account_to_upgrade: accountID,
-            upgrade_to_lifetime_member: true,
-            extensions: []
-          }]
-        );
-      } catch (error) {
-        console.log(error);
-        return;
-      }
-
-      if (payload && payload.length) {
-        setDeepLink(`rawbeet://api?chain=${relevantChain}&request=${payload}`);
-      }
-    }
-
-    if (deepLinkItr && deepLinkItr > 0) {
-      fetchData();
-    }
-  }, [deepLinkItr]);
 
   return (
     <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
@@ -109,90 +77,20 @@ export default function Upgrade(properties) {
           {t("upgrade:secondHeader")}
         </Text>
 
-        <Modal
-          opened={opened}
-          onClose={() => {
-            setDeepLink();
-            close();
-          }}
-          title={t("modal:deeplink.title")}
-        >
-          {
-            !deepLink
-              ? (
-                <>
-                  <Text>{t("modal:deeplink.noDL.title")}</Text>
-                  <Text m="sm" fz="xs">
-                    1. {t("modal:deeplink.noDL.step1")}
-                    <br />
-                    2. {t("modal:deeplink.noDL.step2", { opNum: 8, opName: "Account Upgrade"})}
-                    <br />
-                    3. {t("modal:deeplink.noDL.step3")}
-                  </Text>
-                  <TextInput
-                    type="string"
-                    placeholder={accountID}
-                    m="sm"
-                    label={t("modal:deeplink.noDL.label")}
-                    style={{ maxWidth: '300px' }}
-                    onChange={(event) => onAccountID(event.currentTarget.value)}
-                  />
-                  {
-                    accountID !== "1.2.x" && accountID.length > 4 && accountID.includes("1.2.")
-                      ? (
-                        <Button
-                          m="xs"
-                          onClick={() => setDeepLinkItr(deepLinkItr + 1)}
-                        >
-                          {t("modal:deeplink.noDL.btn")}
-                        </Button>
-                      )
-                      : (
-                        <Button m="xs" disabled>
-                          {t("modal:deeplink.noDL.btn")}
-                        </Button>
-                      )
-                  }
-                </>
-              )
-              : null
-          }
-          {
-            deepLink
-              ? (
-                <>
-                  <Text>{t("modal:deeplink.DL.title")}</Text>
-                  <Text fz="xs">
-                    1. {t("modal:deeplink.DL.step1")}
-                    <br />
-                    2. {t("modal:deeplink.DL.step2")}
-                    <br />
-                    3. {t("modal:deeplink.DL.step3")}
-                  </Text>
-                  <a href={deepLink}>
-                    <Button m="xs">
-                      {t("modal:deeplink.DL.beetBTN")}
-                    </Button>
-                  </a>
-                  <Button
-                    m="xs"
-                    onClick={() => {
-                      setDeepLink();
-                    }}
-                  >
-                    {t("modal:deeplink.DL.back")}
-                  </Button>
-                </>
-              )
-              : null
-          }
-        </Modal>
-
-        <Group position="center">
-          <Button style={{ marginTop: '20px' }} onClick={open}>
-            {t("upgrade:askBEET")}
-          </Button>
-        </Group>
+        <BeetModal
+          value={value}
+          opContents={[{
+            account_to_upgrade: account,
+            upgrade_to_lifetime_member: true,
+            extensions: []
+          }]}
+          opType="account_upgrade"
+          opNum={11}
+          opName="Account upgrade"
+          appName="Account_Upgrade"
+          requestedMethods={["BEET", "DEEPLINK", "LOCAL", "JSON"]}
+          filename="account_upgrade.json"
+        />
     </Card>
   );
 }

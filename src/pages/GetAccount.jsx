@@ -102,6 +102,7 @@ export default function GetAccount(properties) {
   const params = useParams();
   const { beetOnly } = properties;
   const { env } = properties;
+  const { basic } = properties;
 
   const setConnection = beetStore((state) => state.setConnection);
   const setAuthenticated = beetStore((state) => state.setAuthenticated);
@@ -133,7 +134,7 @@ export default function GetAccount(properties) {
   }
 
   return (
-    <Card shadow="md" radius="md" padding="sm" style={{ marginTop: '25px' }}>
+    <Card shadow={basic ? "" : "md"} radius="md" padding="sm" style={{ marginTop: '25px' }}>
       <Title order={4} align="center">
         {
           !accountMethod
@@ -175,7 +176,7 @@ export default function GetAccount(properties) {
         !account && accountMethod === "SEARCH"
           ? (
             <>
-              <AccountSearch env={env ?? params.env} />
+              <AccountSearch env={env || params.env} />
               <Center>
                 <Button onClick={() => setAccountMethod()}>
                   {t('beet:beetlink.backButton')}
