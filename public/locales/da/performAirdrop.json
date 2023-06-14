@@ -1,7 +1,7 @@
 {
   "header": {
     "title": "Udfør airdrop på {{titleName}} blockchain",
-    "back": "Airdrop oversigt",
+    "back": "Tilbage",
     "others": "Beregnet luftdråber"
   },
   "noTicket": "Billet blev ikke fundet",
@@ -14,7 +14,8 @@
         "th1": "id",
         "th2": "Antal",
         "th3": "Tildelte tokens"
-      }
+      },
+      "json": "Airdrop JSON-data"
     },
     "right": {
       "summary": {

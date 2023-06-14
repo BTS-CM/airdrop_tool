@@ -1,7 +1,7 @@
 {
   "header": {
     "title": "Realizar lanzamiento aéreo en el {{titleName}} cadena de bloques",
-    "back": "Resumen de lanzamiento aéreo",
+    "back": "Atrás",
     "others": "Lanzamientos aéreos calculados"
   },
   "noTicket": "Boleto no encontrado",
@@ -14,7 +14,8 @@
         "th1": "identificación",
         "th2": "Cantidad",
         "th3": "Fichas asignadas"
-      }
+      },
+      "json": "Lanzamiento aéreo de datos JSON"
     },
     "right": {
       "summary": {

@@ -1,39 +1,40 @@
 {
-    "deeplink": {
-      "noDL": {
-        "title": "Via rå Beet deeplink",
-        "step1": "Start BEET-pungen og naviger til 'Raw Link' i menuen.",
-        "step2": "Fra denne side kan du enten tillade alle operationer eller udelukkende tillade drift {{opNum}} '{{opName}}' (klik derefter på Gem).",
-        "step3": "Når 'Klar til rå links' vises i Beet, indsend denne anmodning.",
-        "label": "Indtast dit konto-id",
-        "btn": "Generer råt deeplink"
-      },
-      "DL": {
-        "title": "Rå dyblink genereret",
-        "step1": "Dit BEET-dyblink er blevet genereret, klik på knappen for at fortsætte.",
-        "step2": "Der vises en BEET-prompt, bekræft indholdet og godkend derefter opret billet-prompten.",
-        "step3": "Gå til siden 'Hent billetter' for at downloade din billet til analyse.",
-        "beetBTN": "Sendes til BEET",
-        "back": "Tilbage"
-      }
+  "title": "Udsendelse til blockchain",
+  "deeplink": {
+    "noDL": {
+      "title": "Via rå Beet deeplink",
+      "step1": "Start BEET-pungen og naviger til 'Raw Link' i menuen.",
+      "step2": "Fra denne side kan du enten tillade alle operationer eller udelukkende tillade drift {{opNum}} '{{opName}}' (klik derefter på Gem).",
+      "step3": "Når 'Klar til rå links' vises i Beet, indsend denne anmodning.",
+      "label": "Indtast dit konto-id",
+      "btn": "Generer råt deeplink"
     },
-    "local": {
-      "noGen": {
-        "title": "Via lokal fil upload",
-        "step1": "1. Start BEET-pungen og naviger til 'Lokal' i menuen.",
-        "step2": "2. Tillad enten alle på denne side eller tillad kun betjening {{opNum}} '{{opName}}'.",
-        "step3": "3. Når du er kommet til den lokale uploadside, skal du klikke på knappen nedenfor for at fortsætte.",
-        "btn": "Generer airdrop JSON-fil"
-      },
-      "generated": {
-        "title": "Lokal JSON-fil genereret",
-        "step1": "1. Din lokale JSON-fil er blevet genereret, klik på knappen for at downloade den.",
-        "step2": "2. Fra BEET Local-siden, upload JSON-filen, en prompt skulle vises.",
-        "step3": "3. Bekræft promptens indhold, før du godkender handlingerne.",
-        "beetBTN": "Download JSON-fil"
-      }
-    },
-    "JSON": {
-      "view": "Se JSON"
+    "DL": {
+      "title": "Rå dyblink genereret",
+      "step1": "Dit BEET-dyblink er blevet genereret, klik på knappen for at fortsætte.",
+      "step2": "Der vises en BEET-prompt, bekræft indholdet og godkend derefter opret billet-prompten.",
+      "step3": "Gå til siden 'Hent billetter' for at downloade din billet til analyse.",
+      "beetBTN": "Sendes til BEET",
+      "back": "Tilbage"
     }
+  },
+  "local": {
+    "noGen": {
+      "title": "Via lokal fil upload",
+      "step1": "1. Start BEET-pungen og naviger til 'Lokal' i menuen.",
+      "step2": "2. Tillad enten alle på denne side eller tillad kun betjening {{opNum}} '{{opName}}'.",
+      "step3": "3. Når du er kommet til den lokale uploadside, skal du klikke på knappen nedenfor for at fortsætte.",
+      "btn": "Generer airdrop JSON-fil"
+    },
+    "generated": {
+      "title": "Lokal JSON-fil genereret",
+      "step1": "1. Din lokale JSON-fil er blevet genereret, klik på knappen for at downloade den.",
+      "step2": "2. Fra BEET Local-siden, upload JSON-filen, en prompt skulle vises.",
+      "step3": "3. Bekræft promptens indhold, før du godkender handlingerne.",
+      "beetBTN": "Download JSON-fil"
+    }
+  },
+  "JSON": {
+    "view": "Se JSON"
   }
+}

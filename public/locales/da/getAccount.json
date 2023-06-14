@@ -1,5 +1,6 @@
 {
-    "title": "How do you want to proceed?",
-    "search": "Manually search for account",
-    "beet": "Continue with wallet"
+    "title": "EN {{chain}} konto er påkrævet for denne funktion",
+    "subtitle": "Hvordan vil du gå videre?",
+    "search": "Søg manuelt efter konto",
+    "beet": "Fortsæt med tegnebogen"
 }

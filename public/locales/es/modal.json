@@ -1,39 +1,40 @@
 {
-    "deeplink": {
-      "noDL": {
-        "title": "A través del enlace profundo de remolacha sin procesar",
-        "step1": "Inicie la billetera BEET y navegue hasta 'Raw Link' en el menú.",
-        "step2": "Desde esta página puede permitir todas las operaciones o permitir únicamente la operación {{opNum}} '{{opName}}' (luego haga clic en guardar).",
-        "step3": "Una vez que se muestre 'Listo para enlaces sin procesar' en Beet, envíe esta solicitud.",
-        "label": "Ingrese su ID de cuenta",
-        "btn": "Generar un enlace profundo sin procesar"
-      },
-      "DL": {
-        "title": "Enlace profundo sin procesar generado",
-        "step1": "Se ha generado su enlace profundo BEET, haga clic en el botón para continuar.",
-        "step2": "Aparecerá un aviso de BEET, verifique el contenido y luego apruebe el aviso de creación de ticket.",
-        "step3": "Vaya a la página 'Obtener boletos' para descargar su boleto para su análisis.",
-        "beetBTN": "Transmitir a BEET",
-        "back": "Atrás"
-      }
+  "title": "Transmitiendo a la cadena de bloques",
+  "deeplink": {
+    "noDL": {
+      "title": "A través del enlace profundo de remolacha sin procesar",
+      "step1": "Inicie la billetera BEET y navegue hasta 'Raw Link' en el menú.",
+      "step2": "Desde esta página puede permitir todas las operaciones o permitir únicamente la operación {{opNum}} '{{opName}}' (luego haga clic en guardar).",
+      "step3": "Una vez que se muestre 'Listo para enlaces sin procesar' en Beet, envíe esta solicitud.",
+      "label": "Ingrese su ID de cuenta",
+      "btn": "Generar un enlace profundo sin procesar"
     },
-    "local": {
-      "noGen": {
-        "title": "A través de la carga de archivos locales",
-        "step1": "1. Inicie la billetera BEET y navegue hasta 'Local' en el menú.",
-        "step2": "2. En esta página, permita todo o permita solo la operación {{opNum}} '{{opName}}'.",
-        "step3": "3. Una vez en la página de carga local, haga clic en el botón de abajo para continuar.",
-        "btn": "Generar archivo JSON de lanzamiento aéreo"
-      },
-      "generated": {
-        "title": "Archivo JSON local generado",
-        "step1": "1. Se ha generado su archivo JSON local, haga clic en el botón para descargarlo.",
-        "step2": "2. Desde la página local de BEET, cargue el archivo JSON; debería aparecer un aviso.",
-        "step3": "3. Verifique el contenido del aviso antes de aprobar las operaciones.",
-        "beetBTN": "Descargar archivo JSON"
-      }
-    },
-    "JSON": {
-      "view": "Ver JSON"
+    "DL": {
+      "title": "Enlace profundo sin procesar generado",
+      "step1": "Se ha generado su enlace profundo BEET, haga clic en el botón para continuar.",
+      "step2": "Aparecerá un aviso de BEET, verifique el contenido y luego apruebe el aviso de creación de ticket.",
+      "step3": "Vaya a la página 'Obtener boletos' para descargar su boleto para su análisis.",
+      "beetBTN": "Transmitir a BEET",
+      "back": "Atrás"
     }
+  },
+  "local": {
+    "noGen": {
+      "title": "A través de la carga de archivos locales",
+      "step1": "1. Inicie la billetera BEET y navegue hasta 'Local' en el menú.",
+      "step2": "2. En esta página, permita todo o permita solo la operación {{opNum}} '{{opName}}'.",
+      "step3": "3. Una vez en la página de carga local, haga clic en el botón de abajo para continuar.",
+      "btn": "Generar archivo JSON de lanzamiento aéreo"
+    },
+    "generated": {
+      "title": "Archivo JSON local generado",
+      "step1": "1. Se ha generado su archivo JSON local, haga clic en el botón para descargarlo.",
+      "step2": "2. Desde la página local de BEET, cargue el archivo JSON; debería aparecer un aviso.",
+      "step3": "3. Verifique el contenido del aviso antes de aprobar las operaciones.",
+      "beetBTN": "Descargar archivo JSON"
+    }
+  },
+  "JSON": {
+    "view": "Ver JSON"
   }
+}

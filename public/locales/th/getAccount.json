@@ -1,5 +1,6 @@
 {
-    "title": "How do you want to proceed?",
-    "search": "Manually search for account",
-    "beet": "Continue with wallet"
-}
+    "title": "ก {{chain}} จำเป็นต้องมีบัญชีสำหรับคุณสมบัตินี้",
+    "subtitle": "คุณต้องการดำเนินการอย่างไร",
+    "search": "ค้นหาบัญชีด้วยตนเอง",
+    "beet": "ต่อด้วยกระเป๋าสตางค์"
+  }

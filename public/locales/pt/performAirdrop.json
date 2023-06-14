@@ -1,7 +1,7 @@
 {
   "header": {
     "title": "Execute o lançamento aéreo no {{titleName}} blockchain",
-    "back": "Resumo do lançamento aéreo",
+    "back": "Voltar",
     "others": "airdrops calculados"
   },
   "noTicket": "Bilhete não encontrado",
@@ -14,7 +14,8 @@
         "th1": "eu ia",
         "th2": "Quantidade",
         "th3": "Tokens alocados"
-      }
+      },
+      "json": "Airdrop dados JSON"
     },
     "right": {
       "summary": {

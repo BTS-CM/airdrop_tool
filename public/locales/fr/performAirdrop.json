@@ -1,7 +1,7 @@
 {
   "header": {
     "title": "Effectuez un largage sur le {{titleName}} chaîne de blocs",
-    "back": "Résumé du largage",
+    "back": "Dos",
     "others": "Parachutages calculés"
   },
   "noTicket": "Billet introuvable",
@@ -14,7 +14,8 @@
         "th1": "identifiant",
         "th2": "Quantité",
         "th3": "Jetons alloués"
-      }
+      },
+      "json": "Données JSON Airdrop"
     },
     "right": {
       "summary": {

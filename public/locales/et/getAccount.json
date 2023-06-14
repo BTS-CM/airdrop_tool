@@ -1,5 +1,6 @@
 {
-    "title": "How do you want to proceed?",
-    "search": "Manually search for account",
-    "beet": "Continue with wallet"
-}
+    "title": "A {{chain}} selle funktsiooni jaoks on konto vajalik",
+    "subtitle": "Kuidas soovite edasi minna?",
+    "search": "Otsige kontot käsitsi",
+    "beet": "Jätkake rahakotiga"
+  }

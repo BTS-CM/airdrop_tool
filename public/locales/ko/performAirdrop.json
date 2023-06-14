@@ -1,8 +1,8 @@
 {
   "header": {
     "title": "에서 에어드롭을 수행합니다. {{titleName}} 블록체인",
-    "back": "에어드롭 요약",
-    "others": "계산된 에어드롭"
+    "back": "뒤쪽에",
+    "others": "계산된 에어드랍"
   },
   "noTicket": "티켓을 찾을 수 없음",
   "grid": {
@@ -14,7 +14,8 @@
         "th1": "ID",
         "th2": "수량",
         "th3": "할당된 토큰"
-      }
+      },
+      "json": "에어드롭 JSON 데이터"
     },
     "right": {
       "summary": {

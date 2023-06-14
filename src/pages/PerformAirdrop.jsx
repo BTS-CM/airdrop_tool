@@ -343,6 +343,7 @@ export default function PerformAirdrop(properties) {
 
   let validRows = [];
   let winnerChunks = [];
+  let winners = [];
   if (!tokenDetails || (requiredToken && finalReqQty && !requiredTokenDetails)) {
     validRows = [];
     winnerChunks = [];
@@ -350,6 +351,8 @@ export default function PerformAirdrop(properties) {
     const valid = tokenRows
       .sort((a, b) => b.assignedTokens - a.assignedTokens)
       .filter((user) => user.assignedTokens > humanReadableFloat(1, tokenDetails.precision) || (tokenDetails.precision === 0 && tokenDetails.readableMax === 1 && parseFloat(user.assignedTokens) === 1));
+
+    winners = valid;
 
     winnerChunks = valid.length
       ? sliceIntoChunks(valid.sort((a, b) => b.qty - a.qty), batchSize)
@@ -452,23 +455,43 @@ export default function PerformAirdrop(properties) {
                   validRows && validRows.length
                     ? (
                       <>
-                        <Text>
-                          <HiOutlineEmojiHappy />
-                          {' '}
-                          {t("performAirdrop:grid.left.table.title")}
-                        </Text>
-                        <Table highlightOnHover>
-                          <thead>
-                            <tr>
-                              <th>{t("performAirdrop:grid.left.table.th1")}</th>
-                              <th>{t("performAirdrop:grid.left.table.th2")}</th>
-                              <th>{t("performAirdrop:grid.left.table.th3")}</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {validRows}
-                          </tbody>
-                        </Table>
+                        <Accordion mt="xs" defaultValue="table">
+                          <Accordion.Item key="json" value="table">
+                            <Accordion.Control>
+                              {t("performAirdrop:grid.left.table.title")}
+                            </Accordion.Control>
+                            <Accordion.Panel>
+                              <Table highlightOnHover>
+                                <thead>
+                                  <tr>
+                                    <th>{t("performAirdrop:grid.left.table.th1")}</th>
+                                    <th>{t("performAirdrop:grid.left.table.th2")}</th>
+                                    <th>{t("performAirdrop:grid.left.table.th3")}</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {validRows}
+                                </tbody>
+                              </Table>
+                            </Accordion.Panel>
+                          </Accordion.Item>
+                          <Accordion.Item key="json" value="airdrop_json">
+                            <Accordion.Control>
+                              {t("performAirdrop:grid.left.json")}
+                            </Accordion.Control>
+                            <Accordion.Panel style={{ backgroundColor: '#FAFAFA' }}>
+                              <JsonInput
+                                placeholder="Textarea will autosize to fit the content"
+                                defaultValue={JSON.stringify(winners)}
+                                validationError="Invalid JSON"
+                                formatOnBlur
+                                autosize
+                                minRows={4}
+                                maxRows={15}
+                              />
+                            </Accordion.Panel>
+                          </Accordion.Item>
+                        </Accordion>
                       </>
                     )
                     : null
@@ -505,10 +528,10 @@ export default function PerformAirdrop(properties) {
                       {t("performAirdrop:grid.right.summary.ticketWinQty")}: {ticketQty}
                     </Text>
                     <Text fz="sm" c="dimmed" mt="xs">
-                    {t("performAirdrop:grid.right.summary.sendingAccount")}: {
-                    identity && identity.account ? identity.account.name : account
-                    } {identity && identity.account ? `(${identity.account.id})` : null}
-                  </Text>
+                      {t("performAirdrop:grid.right.summary.sendingAccount")}: {
+                      identity && identity.account ? identity.account.name : account
+                      } {identity && identity.account ? `(${identity.account.id})` : null}
+                    </Text>
                   </Card>
                   <Card shadow="md" radius="md" padding="sm">
                     <Text fz="lg" fw={600} mt="md">

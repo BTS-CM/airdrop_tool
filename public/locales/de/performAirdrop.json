@@ -1,7 +1,7 @@
 {
   "header": {
     "title": "Führen Sie einen Airdrop auf dem aus {{titleName}} Blockchain",
-    "back": "Airdrop-Zusammenfassung",
+    "back": "Zurück",
     "others": "Berechnete Lufttropfen"
   },
   "noTicket": "Ticket nicht gefunden",
@@ -14,7 +14,8 @@
         "th1": "Ausweis",
         "th2": "Menge",
         "th3": "Zugewiesene Token"
-      }
+      },
+      "json": "Airdrop-JSON-Daten"
     },
     "right": {
       "summary": {

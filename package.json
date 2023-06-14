@@ -93,14 +93,14 @@
     "electron": "^25.1.0",
     "electron-builder": "^23.6.0",
     "electronmon": "^2.0.2",
-    "esbuild": "^0.18.0",
+    "esbuild": "^0.18.2",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "vite-plugin-electron": "^0.11.2",
+    "vite-plugin-electron": "^0.12.0",
     "wait-on": "^7.0.1"
   },
   "browserslist": {

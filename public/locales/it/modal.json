@@ -1,39 +1,40 @@
 {
-    "deeplink": {
-      "noDL": {
-        "title": "Tramite deeplink crudo di barbabietola",
-        "step1": "Avvia il portafoglio BEET e vai a \"Raw Link\" nel menu.",
-        "step2": "Da questa pagina è possibile consentire tutte le operazioni o consentire solo l'operazione {{opNum}} '{{opName}}' (quindi fare clic su Salva).",
-        "step3": "Una volta che \"Pronto per i collegamenti grezzi\" viene visualizzato in Beet, invia questa richiesta.",
-        "label": "Inserisci il tuo ID account",
-        "btn": "Genera deeplink non elaborato"
-      },
-      "DL": {
-        "title": "Deeplink non elaborato generato",
-        "step1": "Il tuo deeplink BEET è stato generato, fai clic sul pulsante per procedere.",
-        "step2": "Verrà visualizzato un prompt BEET, verificare i contenuti quindi approvare la richiesta di creazione del ticket.",
-        "step3": "Vai alla pagina \"Recupera ticket\" per scaricare il tuo ticket per l'analisi.",
-        "beetBTN": "Trasmesso a BEET",
-        "back": "Indietro"
-      }
+  "title": "Trasmissione alla blockchain",
+  "deeplink": {
+    "noDL": {
+      "title": "Tramite deeplink crudo di barbabietola",
+      "step1": "Avvia il portafoglio BEET e vai a \"Raw Link\" nel menu.",
+      "step2": "Da questa pagina è possibile consentire tutte le operazioni o consentire solo l'operazione {{opNum}} '{{opName}}' (quindi fare clic su Salva).",
+      "step3": "Una volta che \"Pronto per i collegamenti grezzi\" viene visualizzato in Beet, invia questa richiesta.",
+      "label": "Inserisci il tuo ID account",
+      "btn": "Genera deeplink non elaborato"
     },
-    "local": {
-      "noGen": {
-        "title": "Tramite caricamento file locale",
-        "step1": "1. Avvia il portafoglio BEET e vai a \"Locale\" nel menu.",
-        "step2": "2. In questa pagina consentire tutto o consentire solo il funzionamento {{opNum}} '{{opName}}'.",
-        "step3": "3. Una volta nella pagina di caricamento locale, fare clic sul pulsante in basso per procedere.",
-        "btn": "Genera file JSON airdrop"
-      },
-      "generated": {
-        "title": "File JSON locale generato",
-        "step1": "1. Il tuo file JSON locale è stato generato, fai clic sul pulsante per scaricarlo.",
-        "step2": "2. Dalla pagina BEET Local, carica il file JSON, dovrebbe apparire un prompt.",
-        "step3": "3. Verificare il contenuto del prompt prima di approvare le operazioni.",
-        "beetBTN": "Scarica il file JSON"
-      }
-    },
-    "JSON": {
-      "view": "Visualizza JSON"
+    "DL": {
+      "title": "Deeplink non elaborato generato",
+      "step1": "Il tuo deeplink BEET è stato generato, fai clic sul pulsante per procedere.",
+      "step2": "Verrà visualizzato un prompt BEET, verificare i contenuti quindi approvare la richiesta di creazione del ticket.",
+      "step3": "Vai alla pagina \"Recupera ticket\" per scaricare il tuo ticket per l'analisi.",
+      "beetBTN": "Trasmesso a BEET",
+      "back": "Indietro"
     }
+  },
+  "local": {
+    "noGen": {
+      "title": "Tramite caricamento file locale",
+      "step1": "1. Avvia il portafoglio BEET e vai a \"Locale\" nel menu.",
+      "step2": "2. In questa pagina consentire tutto o consentire solo il funzionamento {{opNum}} '{{opName}}'.",
+      "step3": "3. Una volta nella pagina di caricamento locale, fare clic sul pulsante in basso per procedere.",
+      "btn": "Genera file JSON airdrop"
+    },
+    "generated": {
+      "title": "File JSON locale generato",
+      "step1": "1. Il tuo file JSON locale è stato generato, fai clic sul pulsante per scaricarlo.",
+      "step2": "2. Dalla pagina BEET Local, carica il file JSON, dovrebbe apparire un prompt.",
+      "step3": "3. Verificare il contenuto del prompt prima di approvare le operazioni.",
+      "beetBTN": "Scarica il file JSON"
+    }
+  },
+  "JSON": {
+    "view": "Visualizza JSON"
   }
+}

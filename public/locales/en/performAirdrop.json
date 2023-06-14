@@ -14,7 +14,8 @@
                 "th1": "id",
                 "th2": "Quantity",
                 "th3": "Allocated tokens"
-            }
+            },
+            "json": "Airdrop JSON data"
         },
         "right": {
             "summary": {

@@ -1,39 +1,40 @@
 {
-    "deeplink": {
-      "noDL": {
-        "title": "Via deeplink de beterraba crua",
-        "step1": "Inicie a carteira BEET e navegue até 'Raw Link' no menu.",
-        "step2": "A partir desta página, você pode permitir todas as operações ou apenas permitir a operação {{opNum}} '{{opName}}' (em seguida, clique em salvar).",
-        "step3": "Depois que 'Pronto para links brutos' aparecer no Beet, envie esta solicitação.",
-        "label": "Insira o ID da sua conta",
-        "btn": "Gerar deeplink bruto"
-      },
-      "DL": {
-        "title": "Deeplink bruto gerado",
-        "step1": "Seu deeplink BEET foi gerado, clique no botão para continuar.",
-        "step2": "Um prompt BEET será exibido, verifique o conteúdo e aprove o prompt de criação de ticket.",
-        "step3": "Acesse a página 'Buscar tickets' para baixar seu ticket para análise.",
-        "beetBTN": "Transmitir para BEET",
-        "back": "Voltar"
-      }
+  "title": "Transmitindo para o blockchain",
+  "deeplink": {
+    "noDL": {
+      "title": "Via deeplink de beterraba crua",
+      "step1": "Inicie a carteira BEET e navegue até 'Raw Link' no menu.",
+      "step2": "A partir desta página, você pode permitir todas as operações ou apenas permitir a operação {{opNum}} '{{opName}}' (em seguida, clique em salvar).",
+      "step3": "Depois que 'Pronto para links brutos' aparecer no Beet, envie esta solicitação.",
+      "label": "Insira o ID da sua conta",
+      "btn": "Gerar deeplink bruto"
     },
-    "local": {
-      "noGen": {
-        "title": "Por upload de arquivo local",
-        "step1": "1. Inicie a carteira BEET e navegue até 'Local' no menu.",
-        "step2": "2. Nesta página, permita tudo ou permita apenas a operação {{opNum}} '{{opName}}'.",
-        "step3": "3. Na página de upload local, clique no botão abaixo para prosseguir.",
-        "btn": "Gerar arquivo JSON airdrop"
-      },
-      "generated": {
-        "title": "Arquivo JSON local gerado",
-        "step1": "1. Seu arquivo JSON local foi gerado, clique no botão para baixá-lo.",
-        "step2": "2. Na página BEET Local, carregue o arquivo JSON, um prompt deve aparecer.",
-        "step3": "3. Verifique o conteúdo do prompt antes de aprovar as operações.",
-        "beetBTN": "Baixar arquivo JSON"
-      }
-    },
-    "JSON": {
-      "view": "Ver JSON"
+    "DL": {
+      "title": "Deeplink bruto gerado",
+      "step1": "Seu deeplink BEET foi gerado, clique no botão para continuar.",
+      "step2": "Um prompt BEET será exibido, verifique o conteúdo e aprove o prompt de criação de ticket.",
+      "step3": "Acesse a página 'Buscar tickets' para baixar seu ticket para análise.",
+      "beetBTN": "Transmitir para BEET",
+      "back": "Voltar"
     }
+  },
+  "local": {
+    "noGen": {
+      "title": "Por upload de arquivo local",
+      "step1": "1. Inicie a carteira BEET e navegue até 'Local' no menu.",
+      "step2": "2. Nesta página, permita tudo ou permita apenas a operação {{opNum}} '{{opName}}'.",
+      "step3": "3. Na página de upload local, clique no botão abaixo para continuar.",
+      "btn": "Gerar arquivo JSON airdrop"
+    },
+    "generated": {
+      "title": "Arquivo JSON local gerado",
+      "step1": "1. Seu arquivo JSON local foi gerado, clique no botão para baixá-lo.",
+      "step2": "2. Na página BEET Local, carregue o arquivo JSON, um prompt deve aparecer.",
+      "step3": "3. Verifique o conteúdo do prompt antes de aprovar as operações.",
+      "beetBTN": "Baixar arquivo JSON"
+    }
+  },
+  "JSON": {
+    "view": "Ver JSON"
   }
+}

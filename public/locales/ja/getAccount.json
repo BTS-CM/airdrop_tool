@@ -1,5 +1,6 @@
 {
-    "title": "How do you want to proceed?",
-    "search": "Manually search for account",
-    "beet": "Continue with wallet"
-}
+    "title": "あ {{chain}} この機能にはアカウントが必要です",
+    "subtitle": "どのように進めたいですか?",
+    "search": "アカウントを手動で検索する",
+    "beet": "ウォレットを続ける"
+  }

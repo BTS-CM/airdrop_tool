@@ -1,7 +1,7 @@
 {
   "header": {
     "title": "Eseguire l'airdrop sul {{titleName}} blockchain",
-    "back": "Riepilogo dell'airdrop",
+    "back": "Indietro",
     "others": "Lanci aerei calcolati"
   },
   "noTicket": "Biglietto non trovato",
@@ -14,7 +14,8 @@
         "th1": "id",
         "th2": "Quantità",
         "th3": "Token assegnati"
-      }
+      },
+      "json": "Airdrop dati JSON"
     },
     "right": {
       "summary": {

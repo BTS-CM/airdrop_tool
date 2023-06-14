@@ -1,7 +1,7 @@
 {
   "header": {
     "title": "Tehke õhutilk {{titleName}} plokiahel",
-    "back": "Airdropi kokkuvõte",
+    "back": "tagasi",
     "others": "Arvutatud õhutilgad"
   },
   "noTicket": "Piletit ei leitud",
@@ -14,7 +14,8 @@
         "th1": "id",
         "th2": "Kogus",
         "th3": "Eraldatud märgid"
-      }
+      },
+      "json": "Airdropi JSON-andmed"
     },
     "right": {
       "summary": {

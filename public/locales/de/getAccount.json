@@ -1,5 +1,6 @@
 {
-    "title": "How do you want to proceed?",
-    "search": "Manually search for account",
-    "beet": "Continue with wallet"
+    "title": "A {{chain}} Für diese Funktion ist ein Konto erforderlich",
+    "subtitle": "Wie wollen Sie fortfahren?",
+    "search": "Suchen Sie manuell nach einem Konto",
+    "beet": "Fahren Sie mit der Brieftasche fort"
 }

@@ -1,39 +1,40 @@
 {
-    "deeplink": {
-      "noDL": {
-        "title": "Toores peedi sügavlingi kaudu",
-        "step1": "Käivitage BEET rahakott ja navigeerige menüüs 'Raw Link'.",
-        "step2": "Sellel lehel saate lubada kõik toimingud või ainult toimingu {{opNum}} '{{opName}}' (seejärel klõpsake nuppu Salvesta).",
-        "step3": "Kui Beetis kuvatakse „Toorlinkide jaoks valmis”, esitage see taotlus.",
-        "label": "Sisestage oma konto ID",
-        "btn": "Looge toores süvalink"
-      },
-      "DL": {
-        "title": "Loodud toores süvalink",
-        "step1": "Teie BEET-sügavlink on loodud, jätkamiseks klõpsake nuppu.",
-        "step2": "Kuvatakse BEET-viip, kontrollige sisu ja kinnitage pileti loomise viip.",
-        "step3": "Minge lehele Piletite toomine, et oma pilet analüüsiks alla laadida.",
-        "beetBTN": "Ülekanne PEET-ile",
-        "back": "tagasi"
-      }
+  "title": "Ülekanne plokiahelasse",
+  "deeplink": {
+    "noDL": {
+      "title": "Toores peedi sügavlingi kaudu",
+      "step1": "Käivitage BEET rahakott ja navigeerige menüüs 'Raw Link'.",
+      "step2": "Sellel lehel saate lubada kõik toimingud või ainult toimingu {{opNum}} '{{opName}}' (seejärel klõpsake nuppu Salvesta).",
+      "step3": "Kui Beetis kuvatakse „Toorlinkide jaoks valmis”, esitage see taotlus.",
+      "label": "Sisestage oma konto ID",
+      "btn": "Looge toores süvalink"
     },
-    "local": {
-      "noGen": {
-        "title": "Kohaliku faili üleslaadimise kaudu",
-        "step1": "1. Käivitage BEET rahakott ja navigeerige menüüs jaotisse „Kohalik”.",
-        "step2": "2. Sellel lehel kas lubage kõik või ainult toiming {{opNum}} '{{opName}}'.",
-        "step3": "3. Kui olete kohalikul üleslaadimislehel, klõpsake jätkamiseks allolevat nuppu.",
-        "btn": "Loo airdrop JSON-fail"
-      },
-      "generated": {
-        "title": "Loodi kohalik JSON-fail",
-        "step1": "1. Teie kohalik JSON-fail on loodud. Selle allalaadimiseks klõpsake nuppu.",
-        "step2": "2. Laadige lehelt BEET Local üles JSON-fail, ilmuma peaks viip.",
-        "step3": "3. Enne toimingute kinnitamist kontrollige viipa sisu.",
-        "beetBTN": "Laadige alla JSON-fail"
-      }
-    },
-    "JSON": {
-      "view": "Kuva JSON"
+    "DL": {
+      "title": "Loodud toores sügavlink",
+      "step1": "Teie BEET-sügavlink on loodud, jätkamiseks klõpsake nuppu.",
+      "step2": "Kuvatakse BEET-viip, kontrollige sisu ja kinnitage pileti loomise viip.",
+      "step3": "Minge lehele Piletite toomine, et oma pilet analüüsiks alla laadida.",
+      "beetBTN": "Ülekanne PEET-ile",
+      "back": "tagasi"
     }
+  },
+  "local": {
+    "noGen": {
+      "title": "Kohaliku faili üleslaadimise kaudu",
+      "step1": "1. Käivitage BEET rahakott ja navigeerige menüüs jaotisse „Kohalik”.",
+      "step2": "2. Sellel lehel kas lubage kõik või ainult toiming {{opNum}} '{{opName}}'.",
+      "step3": "3. Kui olete kohalikul üleslaadimislehel, klõpsake jätkamiseks allolevat nuppu.",
+      "btn": "Loo airdrop JSON-fail"
+    },
+    "generated": {
+      "title": "Loodi kohalik JSON-fail",
+      "step1": "1. Teie kohalik JSON-fail on loodud. Selle allalaadimiseks klõpsake nuppu.",
+      "step2": "2. Laadige lehelt BEET Local üles JSON-fail, ilmuma peaks viip.",
+      "step3": "3. Enne toimingute kinnitamist kontrollige viipa sisu.",
+      "beetBTN": "Laadige alla JSON-fail"
+    }
+  },
+  "JSON": {
+    "view": "Kuva JSON"
   }
+}
