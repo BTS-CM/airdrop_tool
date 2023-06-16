@@ -1,5 +1,27 @@
 {
   "title": "Diffusion vers la blockchain",
+  "askBEET": "Commencer à diffuser sur BEET",
+  "menu": {
+    "title": "Comment veux-tu procéder?",
+    "beet": "BETTERAVE",
+    "deeplink": "Lien profond",
+    "local": "Fichier local",
+    "json": "Afficher JSON",
+    "qr": "QR Code",
+    "back": "Retourner"
+  },
+  "beet": {
+    "text": "Opération prête à diffuser sur le portefeuille BEET",
+    "init": "Prêt à communiquer avec BEET"
+  },
+  "qr": {
+    "ecl": "Niveau de correction d'erreur",
+    "size": "Taille du code QR",
+    "padding": "Rembourrage",
+    "style": "Style de point",
+    "bgc": "La couleur d'arrière-plan",
+    "fgc": "Couleur de premier plan"
+  },
   "deeplink": {
     "noDL": {
       "title": "Via le lien profond de la betterave crue",
@@ -36,5 +58,15 @@
   },
   "JSON": {
     "view": "Afficher JSON"
+  },
+  "outcomes": {
+    "success": {
+      "text": "Diffusé avec succès sur la blockchain !",
+      "btn": "Fermer"
+    },
+    "failure": {
+      "text": "L'invite n'a pas pu être diffusée sur la blockchain.",
+      "btn": "Essayer à nouveau"
+    }
   }
 }

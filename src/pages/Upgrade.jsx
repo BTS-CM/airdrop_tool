@@ -88,7 +88,7 @@ export default function Upgrade(properties) {
           opNum={11}
           opName="Account upgrade"
           appName="Account_Upgrade"
-          requestedMethods={["BEET", "DEEPLINK", "LOCAL", "JSON"]}
+          requestedMethods={["BEET", "DEEPLINK", "LOCAL", "JSON", "QR"]}
           filename="account_upgrade.json"
         />
     </Card>

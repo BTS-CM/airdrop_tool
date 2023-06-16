@@ -1,5 +1,27 @@
 {
   "title": "Trasmissione alla blockchain",
+  "askBEET": "Inizia a trasmettere a BEET",
+  "menu": {
+    "title": "Come vuoi procedere?",
+    "beet": "BARBABIETOLA",
+    "deeplink": "Collegamento diretto",
+    "local": "File locale",
+    "json": "Visualizza JSON",
+    "qr": "QR Code",
+    "back": "Torna indietro"
+  },
+  "beet": {
+    "text": "Operazione pronta per la trasmissione al portafoglio BEET",
+    "init": "Pronto a comunicare con BEET"
+  },
+  "qr": {
+    "ecl": "Livello di correzione degli errori",
+    "size": "Dimensione del codice QR",
+    "padding": "Imbottitura",
+    "style": "Stile punto",
+    "bgc": "Colore di sfondo",
+    "fgc": "Colore di primo piano"
+  },
   "deeplink": {
     "noDL": {
       "title": "Tramite deeplink crudo di barbabietola",
@@ -12,7 +34,7 @@
     "DL": {
       "title": "Deeplink non elaborato generato",
       "step1": "Il tuo deeplink BEET è stato generato, fai clic sul pulsante per procedere.",
-      "step2": "Verrà visualizzato un prompt BEET, verificare i contenuti quindi approvare la richiesta di creazione del ticket.",
+      "step2": "Verrà visualizzato un prompt BEET, verificare i contenuti quindi approvare il prompt di creazione del ticket.",
       "step3": "Vai alla pagina \"Recupera ticket\" per scaricare il tuo ticket per l'analisi.",
       "beetBTN": "Trasmesso a BEET",
       "back": "Indietro"
@@ -36,5 +58,15 @@
   },
   "JSON": {
     "view": "Visualizza JSON"
+  },
+  "outcomes": {
+    "success": {
+      "text": "Trasmissione riuscita alla blockchain!",
+      "btn": "Vicino"
+    },
+    "failure": {
+      "text": "Il prompt non è riuscito a trasmettere alla blockchain.",
+      "btn": "Riprova"
+    }
   }
 }

@@ -1,5 +1,27 @@
 {
   "title": "Udsendelse til blockchain",
+  "askBEET": "Begynd at udsende til BEET",
+  "menu": {
+    "title": "Hvordan vil du gå videre?",
+    "beet": "BEET",
+    "deeplink": "Deeplink",
+    "local": "Lokal fil",
+    "json": "Se JSON",
+    "qr": "QR kode",
+    "back": "Gå tilbage"
+  },
+  "beet": {
+    "text": "Klar til at sende operation til BEET-pung",
+    "init": "Klar til at kommunikere med BEET"
+  },
+  "qr": {
+    "ecl": "Fejlkorrektionsniveau",
+    "size": "QR-kode størrelse",
+    "padding": "Polstring",
+    "style": "Prik stil",
+    "bgc": "Baggrundsfarve",
+    "fgc": "Forgrundsfarve"
+  },
   "deeplink": {
     "noDL": {
       "title": "Via rå Beet deeplink",
@@ -36,5 +58,15 @@
   },
   "JSON": {
     "view": "Se JSON"
+  },
+  "outcomes": {
+    "success": {
+      "text": "Udsendelse til blockchain med succes!",
+      "btn": "Tæt"
+    },
+    "failure": {
+      "text": "Prompten kunne ikke udsendes til blockchain.",
+      "btn": "Prøv igen"
+    }
   }
 }

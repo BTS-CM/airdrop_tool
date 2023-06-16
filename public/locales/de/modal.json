@@ -1,5 +1,27 @@
 {
   "title": "Übertragung an die Blockchain",
+  "askBEET": "Beginnen Sie mit der Übertragung an BEET",
+  "menu": {
+    "title": "Wie wollen Sie fortfahren?",
+    "beet": "Rüben",
+    "deeplink": "Deeplink",
+    "local": "Lokale Datei",
+    "json": "JSON anzeigen",
+    "qr": "QR-Code",
+    "back": "Geh zurück"
+  },
+  "beet": {
+    "text": "Bereit zur Übertragung des Vorgangs an die BEET-Wallet",
+    "init": "Bereit zur Kommunikation mit BEET"
+  },
+  "qr": {
+    "ecl": "Fehlerkorrekturstufe",
+    "size": "Größe des QR-Codes",
+    "padding": "Polsterung",
+    "style": "Punktstil",
+    "bgc": "Hintergrundfarbe",
+    "fgc": "Vordergrundfarbe"
+  },
   "deeplink": {
     "noDL": {
       "title": "Über den Deeplink zu Rohrüben",
@@ -36,5 +58,15 @@
   },
   "JSON": {
     "view": "JSON anzeigen"
+  },
+  "outcomes": {
+    "success": {
+      "text": "Erfolgreich an die Blockchain übertragen!",
+      "btn": "Schließen"
+    },
+    "failure": {
+      "text": "Die Eingabeaufforderung konnte nicht an die Blockchain übertragen werden.",
+      "btn": "Versuchen Sie es erneut"
+    }
   }
 }

@@ -1,5 +1,27 @@
 {
   "title": "블록체인에 브로드캐스팅",
+  "askBEET": "BEET에 방송 시작",
+  "menu": {
+    "title": "어떻게 진행하시겠습니까?",
+    "beet": "비트",
+    "deeplink": "딥링크",
+    "local": "로컬 파일",
+    "json": "JSON 보기",
+    "qr": "QR 코드",
+    "back": "돌아가기"
+  },
+  "beet": {
+    "text": "BEET 지갑에 작업 브로드캐스트 준비",
+    "init": "BEET와 통신 준비 완료"
+  },
+  "qr": {
+    "ecl": "오류 수정 수준",
+    "size": "QR 코드 크기",
+    "padding": "심",
+    "style": "도트 스타일",
+    "bgc": "배경색",
+    "fgc": "전경색"
+  },
   "deeplink": {
     "noDL": {
       "title": "원시 비트 딥링크를 통해",
@@ -36,5 +58,15 @@
   },
   "JSON": {
     "view": "JSON 보기"
+  },
+  "outcomes": {
+    "success": {
+      "text": "블록체인에 성공적으로 방송되었습니다!",
+      "btn": "닫다"
+    },
+    "failure": {
+      "text": "프롬프트를 블록체인으로 브로드캐스트하지 못했습니다.",
+      "btn": "다시 시도하십시오"
+    }
   }
 }

@@ -1,5 +1,27 @@
 {
     "title": "Broadcasting to the blockchain",
+    "askBEET": "Begin broadcasting to BEET",
+    "menu": {
+        "title": "How do you want to proceed?",
+        "beet": "BEET",
+        "deeplink": "Deeplink",
+        "local": "Local file",
+        "json": "View JSON",
+        "qr": "QR Code",
+        "back": "Go back"
+    },
+    "beet": {
+        "text": "Ready to broadcast operation to BEET wallet",
+        "init": "Ready to communicate with BEET"
+    },
+    "qr": {
+        "ecl": "Error correction level",
+        "size": "QR code size",
+        "padding": "Padding",
+        "style": "Dot style",
+        "bgc": "Background colour",
+        "fgc": "Foreground colour"
+    },
     "deeplink": {
         "noDL": {
             "title": "Via raw Beet deeplink",
@@ -36,5 +58,15 @@
     },
     "JSON": {
         "view": "View JSON"
+    },
+    "outcomes": {
+        "success": {
+            "text": "Successfully broadcast to the blockchain!",
+            "btn": "Close"
+        },
+        "failure": {
+            "text": "Prompt failed to broadcast to blockchain.",
+            "btn": "Try again"
+        }
     }
 }

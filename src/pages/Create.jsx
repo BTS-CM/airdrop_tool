@@ -194,7 +194,7 @@ export default function Create(properties) {
           opNum={57}
           opName="Create Ticket"
           appName="CreateTicket"
-          requestedMethods={["BEET", "DEEPLINK", "LOCAL", "JSON"]}
+          requestedMethods={["BEET", "DEEPLINK", "LOCAL", "JSON", "QR"]}
           filename="creatre_ticket.json"
         />
       </Card>

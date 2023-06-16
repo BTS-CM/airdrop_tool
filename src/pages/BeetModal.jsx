@@ -7,16 +7,20 @@ import {
   Accordion,
   JsonInput,
   Modal,
+  Select,
   Button,
   Group,
+  ColorInput,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { useParams } from "react-router-dom";
+import { QRCode } from 'react-qrcode-logo';
 
 import {
   appStore, tempStore, beetStore
 } from '../lib/states';
-import { generateDeepLink, beetBroadcast } from '../lib/generate';
+import { beetBroadcast, generateDeepLink, generateQRContents } from '../lib/generate';
+
 import GetAccount from './GetAccount';
 
 export default function BeetModal(properties) {
@@ -47,6 +51,16 @@ export default function BeetModal(properties) {
 
   const [outcome, setOutcome] = useState();
   const [method, setMethod] = useState();
+
+  const [qrItr, setQRItr] = useState(0);
+  const [qrContents, setQRContents] = useState();
+
+  const [qrECL, setQRECL] = useState("M");
+  const [qrSize, setQRSize] = useState("250");
+  const [qrQZ, setQRQZ] = useState("25");
+  const [qrStyle, setQRStyle] = useState("dots");
+  const [qrBGC, setQRBGC] = useState("#ffffff");
+  const [qrFGC, setQRFGC] = useState("#000000");
 
   const nodes = appStore((state) => state.nodes);
   const currentNodes = nodes[value];
@@ -91,6 +105,31 @@ export default function BeetModal(properties) {
       fetchData();
     }
   }, [deepLinkItr]);
+
+  useEffect(() => {
+    async function fetchData() {
+      setTX(opContents);
+
+      let payload;
+      try {
+        payload = await generateQRContents(
+          opType,
+          opContents
+        );
+      } catch (error) {
+        console.log(error);
+        return;
+      }
+
+      if (payload) {
+        setQRContents(payload);
+      }
+    }
+
+    if (qrItr && qrItr > 0) {
+      fetchData();
+    }
+  }, [qrItr]);
 
   async function broadcast() {
     setInProgress(true);
@@ -166,6 +205,15 @@ export default function BeetModal(properties) {
                       ? <Button compact onClick={() => setMethod("JSON")}>View JSON</Button>
                       : null
                   }
+                  {
+                    requestedMethods && requestedMethods.includes("QR")
+                      ? (
+<Button compact onClick={() => setMethod("QR")}>
+                          {t("modal:menu.qr")}
+</Button>
+                      )
+                      : null
+                  }
                 </Group>
               </>
             )
@@ -183,7 +231,8 @@ export default function BeetModal(properties) {
                   setMethod();
                   setInProgress();
                   reset();
-                }}>
+                }}
+                >
                   Close
                 </Button>
               </>
@@ -360,6 +409,46 @@ export default function BeetModal(properties) {
             )
             : null
         }
+        {
+          account && method && method === "QR" && !qrContents
+            ? (
+              <Button
+                onClick={() => {
+                  setQRItr(qrItr + 1);
+                }}
+              >
+                {t('beet:buy.generateQR')}
+              </Button>
+            )
+            : null
+        }
+        {
+          account && method && method === "QR" && qrContents
+            ? (
+              <span>
+                <Text size="md">
+                  {t('beet:buy.scanQR')}
+                </Text>
+                <QRCode
+                  value={JSON.stringify(qrContents)}
+                  ecLevel={qrECL}
+                  size={parseInt(qrSize, 10)}
+                  quietZone={parseInt(qrQZ, 10)}
+                  qrStyle={qrStyle}
+                  bgColor={qrBGC}
+                  fgColor={qrFGC}
+                />
+               <Select label={t("modal:qr.ecl")} value={qrECL} onChange={setQRECL} data={["L", "M", "Q", "H"]} />
+               <Select label={t("modal:qr.size")} value={qrSize} onChange={setQRSize} data={["150", "250", "300", "350", "385"]} />
+               <Select label={t("modal:qr.padding")} value={qrQZ} onChange={setQRQZ} data={["5", "10", "25", "50"]} />
+               <Select label={t("modal:qr.style")} value={qrStyle} onChange={setQRStyle} data={["dots", "squares"]} />
+               <ColorInput placeholder="Pick color" label={t("modal:qr.bgc")} value={qrBGC} onChange={setQRBGC} />
+               <ColorInput placeholder="Pick color" label={t("modal:qr.fgc")} value={qrFGC} onChange={setQRFGC} />
+              </span>
+            )
+            : null
+        }
+
         <br />
         {
         method

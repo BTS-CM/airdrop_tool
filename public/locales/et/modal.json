@@ -1,16 +1,38 @@
 {
   "title": "Ülekanne plokiahelasse",
+  "askBEET": "Alustage saateid BEET-ile",
+  "menu": {
+    "title": "Kuidas soovite edasi minna?",
+    "beet": "PEET",
+    "deeplink": "Sügav link",
+    "local": "Kohalik fail",
+    "json": "Kuva JSON",
+    "qr": "QR kood",
+    "back": "Mine tagasi"
+  },
+  "beet": {
+    "text": "Valmis edastama operatsiooni BEET rahakotti",
+    "init": "Valmis suhtlema PEEDIGA"
+  },
+  "qr": {
+    "ecl": "Veaparanduse tase",
+    "size": "QR-koodi suurus",
+    "padding": "Polsterdus",
+    "style": "Punkti stiil",
+    "bgc": "Taustavärv",
+    "fgc": "Esiplaani värv"
+  },
   "deeplink": {
     "noDL": {
       "title": "Toores peedi sügavlingi kaudu",
       "step1": "Käivitage BEET rahakott ja navigeerige menüüs 'Raw Link'.",
-      "step2": "Sellel lehel saate lubada kõik toimingud või ainult toimingu {{opNum}} '{{opName}}' (seejärel klõpsake nuppu Salvesta).",
+      "step2": "Sellel lehel saate lubada kõik toimingud või ainult toimingud {{opNum}} '{{opName}}' (seejärel klõpsake nuppu Salvesta).",
       "step3": "Kui Beetis kuvatakse „Toorlinkide jaoks valmis”, esitage see taotlus.",
       "label": "Sisestage oma konto ID",
       "btn": "Looge toores süvalink"
     },
     "DL": {
-      "title": "Loodud toores sügavlink",
+      "title": "Loodud toores süvalink",
       "step1": "Teie BEET-sügavlink on loodud, jätkamiseks klõpsake nuppu.",
       "step2": "Kuvatakse BEET-viip, kontrollige sisu ja kinnitage pileti loomise viip.",
       "step3": "Minge lehele Piletite toomine, et oma pilet analüüsiks alla laadida.",
@@ -36,5 +58,15 @@
   },
   "JSON": {
     "view": "Kuva JSON"
+  },
+  "outcomes": {
+    "success": {
+      "text": "Edukalt edastamine plokiahelasse!",
+      "btn": "Sulge"
+    },
+    "failure": {
+      "text": "Viipa plokiahelasse edastamine ebaõnnestus.",
+      "btn": "Proovi uuesti"
+    }
   }
 }

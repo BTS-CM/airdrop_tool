@@ -1,5 +1,27 @@
 {
   "title": "Transmitiendo a la cadena de bloques",
+  "askBEET": "Comenzar a transmitir a BEET",
+  "menu": {
+    "title": "¿Como quieres proceder?",
+    "beet": "REMOLACHA",
+    "deeplink": "Enlace profundo",
+    "local": "Archivo local",
+    "json": "Ver JSON",
+    "qr": "Código QR",
+    "back": "Regresa"
+  },
+  "beet": {
+    "text": "Listo para transmitir la operación a la billetera BEET",
+    "init": "Listo para comunicarse con BEET"
+  },
+  "qr": {
+    "ecl": "Nivel de corrección de errores",
+    "size": "Tamaño del código QR",
+    "padding": "Relleno",
+    "style": "estilo de punto",
+    "bgc": "Color de fondo",
+    "fgc": "color de primer plano"
+  },
   "deeplink": {
     "noDL": {
       "title": "A través del enlace profundo de remolacha sin procesar",
@@ -36,5 +58,15 @@
   },
   "JSON": {
     "view": "Ver JSON"
+  },
+  "outcomes": {
+    "success": {
+      "text": "¡Transmitido con éxito a la cadena de bloques!",
+      "btn": "Cerca"
+    },
+    "failure": {
+      "text": "El aviso no se pudo transmitir a la cadena de bloques.",
+      "btn": "Intentar otra vez"
+    }
   }
 }

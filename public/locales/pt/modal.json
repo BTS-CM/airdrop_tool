@@ -1,5 +1,27 @@
 {
   "title": "Transmitindo para o blockchain",
+  "askBEET": "Comece a transmitir para o BEET",
+  "menu": {
+    "title": "Como você deseja proceder?",
+    "beet": "BETERRABA",
+    "deeplink": "Link profundo",
+    "local": "arquivo local",
+    "json": "Ver JSON",
+    "qr": "Código QR",
+    "back": "Volte"
+  },
+  "beet": {
+    "text": "Pronto para transmitir a operação para a carteira BEET",
+    "init": "Pronto para se comunicar com BEET"
+  },
+  "qr": {
+    "ecl": "Nível de correção de erro",
+    "size": "tamanho do código QR",
+    "padding": "Preenchimento",
+    "style": "estilo ponto",
+    "bgc": "Cor de fundo",
+    "fgc": "Cor de primeiro plano"
+  },
   "deeplink": {
     "noDL": {
       "title": "Via deeplink de beterraba crua",
@@ -11,7 +33,7 @@
     },
     "DL": {
       "title": "Deeplink bruto gerado",
-      "step1": "Seu deeplink BEET foi gerado, clique no botão para continuar.",
+      "step1": "Seu deeplink BEET foi gerado, clique no botão para prosseguir.",
       "step2": "Um prompt BEET será exibido, verifique o conteúdo e aprove o prompt de criação de ticket.",
       "step3": "Acesse a página 'Buscar tickets' para baixar seu ticket para análise.",
       "beetBTN": "Transmitir para BEET",
@@ -36,5 +58,15 @@
   },
   "JSON": {
     "view": "Ver JSON"
+  },
+  "outcomes": {
+    "success": {
+      "text": "Transmitido com sucesso para o blockchain!",
+      "btn": "Fechar"
+    },
+    "failure": {
+      "text": "O prompt falhou ao transmitir para o blockchain.",
+      "btn": "Tente novamente"
+    }
   }
 }
