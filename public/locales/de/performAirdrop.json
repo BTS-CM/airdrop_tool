@@ -11,9 +11,18 @@
       "processing": "Benutzerguthaben für erforderliches Token werden verarbeitet",
       "table": {
         "title": "Ticketinhaber im Airdrop inbegriffen",
-        "th1": "Ausweis",
+        "title2": "Ticketinhaber sind vom Airdrop ausgeschlossen",
+        "th1": "Konto",
         "th2": "Menge",
-        "th3": "Zugewiesene Token"
+        "th3": "Zuweisung",
+        "th4": "Grund",
+        "reasons": {
+          "ltm": "Lebenslange Mitgliedschaft fehlt",
+          "noBalance": "Erforderliches Token fehlt",
+          "insufficientBalance": "Nicht genügend erforderliche Token",
+          "self": "Kann nicht an mich selbst gesendet werden",
+          "minReward": "Zugeteilte Belohnung zu gering"
+        }
       },
       "json": "Airdrop-JSON-Daten"
     },

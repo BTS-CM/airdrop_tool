@@ -33,6 +33,10 @@
     "th8": "järgmine värskendusaeg",
     "th9": "järgmine alandamise aeg"
   },
+  "assetTable": {
+    "th1": "Vara",
+    "th2": "Kogus"
+  },
   "footer": {
     "title": "Kas soovite saada mõjuvõimu ja parandada oma õhus langemise tõenäosust?",
     "create": "Looge lehel veel üks pilet",

@@ -11,9 +11,18 @@
       "processing": "Traitement des soldes des utilisateurs pour le jeton requis",
       "table": {
         "title": "Détenteurs de billets inclus dans le largage aérien",
-        "th1": "identifiant",
+        "title2": "Les détenteurs de billets exclus du largage",
+        "th1": "Compte",
         "th2": "Quantité",
-        "th3": "Jetons alloués"
+        "th3": "Allocation",
+        "th4": "Raison",
+        "reasons": {
+          "ltm": "Adhésion à vie manquante",
+          "noBalance": "Jeton requis manquant",
+          "insufficientBalance": "Jetons requis insuffisants",
+          "self": "Impossible d'envoyer à soi-même",
+          "minReward": "Récompense attribuée trop petite"
+        }
       },
       "json": "Données JSON Airdrop"
     },

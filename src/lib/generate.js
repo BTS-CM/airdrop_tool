@@ -7,8 +7,8 @@ import { v4 as uuidv4 } from 'uuid';
 
 /**
  * Generate QR code contents for purchasing an NFT
- * @param {String} opType 
- * @param {Array} opContents 
+ * @param {String} opType
+ * @param {Array} opContents
  * @returns {Object}
  */
 async function generateQRContents(opType, opContents) {

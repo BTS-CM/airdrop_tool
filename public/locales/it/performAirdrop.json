@@ -11,9 +11,18 @@
       "processing": "Elaborazione dei saldi utente per il token richiesto",
       "table": {
         "title": "Possessori di biglietti inclusi in airdrop",
-        "th1": "id",
+        "title2": "Possessori di biglietto esclusi dall'airdrop",
+        "th1": "Account",
         "th2": "Quantità",
-        "th3": "Token assegnati"
+        "th3": "Allocazione",
+        "th4": "Motivo",
+        "reasons": {
+          "ltm": "Abbonamento a vita mancante",
+          "noBalance": "Token obbligatorio mancante",
+          "insufficientBalance": "Token richiesti insufficienti",
+          "self": "Impossibile inviare a se stessi",
+          "minReward": "Ricompensa assegnata troppo piccola"
+        }
       },
       "json": "Airdrop dati JSON"
     },

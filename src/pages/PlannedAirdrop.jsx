@@ -51,7 +51,7 @@ export default function PlannedAirdrop(properties) {
   const winnerAccordions = winners
     .sort((a, b) => b.qty - a.qty)
     .map((winner) => (
-      <Accordion.Item value={`${winner.id}_acc`}>
+      <Accordion.Item key={`${winner.id}_acc`} value={`${winner.id}_acc`}>
         <Accordion.Control>
           &quot;
           <Link to={`/Account/${params.env}/${winner.id}`}>{winner.id}</Link>
@@ -153,7 +153,7 @@ export default function PlannedAirdrop(properties) {
                 <Text fz="sm" c="dimmed" mt="sm">
                   {
                     plannedAirdropData.algos.map((algo) => (
-                      <Tooltip label={`${plannedAirdropData.calculatedAirdrop.generatedNumbers[algo].length} tickets`}>
+                      <Tooltip key={algo} label={`${plannedAirdropData.calculatedAirdrop.generatedNumbers[algo].length} tickets`}>
                         <Badge key={algo} style={{ margin: '1px' }}>{algo}</Badge>
                       </Tooltip>
                     ))

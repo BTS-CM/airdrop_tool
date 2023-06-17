@@ -17,12 +17,11 @@ import { HiOutlineChartPie } from "react-icons/hi";
 import { useTranslation } from 'react-i18next';
 import { Link, useParams } from "react-router-dom";
 
-import { appStore, ticketStore, leaderboardStore } from '../lib/states';
+import {
+  appStore, ticketStore, leaderboardStore, assetStore
+} from '../lib/states';
 import { lookupSymbols } from '../lib/directQueries';
-
-function humanReadableFloat(satoshis, precision) {
-  return satoshis / 10 ** precision;
-}
+import { humanReadableFloat } from '../lib/common';
 
 export default function Account(properties) {
   const { t, i18n } = useTranslation();
@@ -31,6 +30,10 @@ export default function Account(properties) {
   const btsLeaderboard = leaderboardStore((state) => state.bitshares);
   const btsTestnetLeaderboard = leaderboardStore((state) => state.bitshares_testnet);
   const tuscLeaderboard = leaderboardStore((state) => state.tusc);
+
+  const btsAssets = assetStore((state) => state.bitshares);
+  const btsTestnetAssets = assetStore((state) => state.bitshares_testnet);
+  const tuscAssets = assetStore((state) => state.tusc);
 
   const nodes = appStore((state) => state.nodes);
   const changeURL = appStore((state) => state.changeURL);
@@ -41,25 +44,36 @@ export default function Account(properties) {
   let currentLeaderboard = [];
   let assetName = "";
   let chainName = "";
+  let cachedAssets = [];
   if (params.env === 'bitshares') {
     currentLeaderboard = btsLeaderboard;
     assetName = "BTS";
     chainName = "Bitshares";
+    cachedAssets = btsAssets;
   } else if (params.env === 'bitshares_testnet') {
     currentLeaderboard = btsTestnetLeaderboard;
     assetName = "TEST";
     chainName = "Bitshares (Testnet)";
+    cachedAssets = btsTestnetAssets;
   } else if (params.env === 'tusc') {
     currentLeaderboard = tuscLeaderboard;
     assetName = "TUSC";
     chainName = "TUSC";
+    cachedAssets = tuscAssets;
   }
 
   useEffect(() => {
     async function fetchData() {
+      const foundCachedAsset = cachedAssets.find((asset) => asset.id === params.id);
+      if (foundCachedAsset) {
+        setAssetDetails(foundCachedAsset);
+        setInProgress(false);
+        return;
+      }
+
       let currentAsset;
       try {
-        currentAsset = await lookupSymbols(nodes[params.env][0], params.env, [params.id])
+        currentAsset = await lookupSymbols(nodes[params.env][0], params.env, [params.id]);
       } catch (error) {
         console.log(error);
         setInProgress(false);
@@ -82,20 +96,18 @@ export default function Account(properties) {
   const foundBalances = currentLeaderboard
     .filter((user) => user.balances.filter((x) => x.asset_id === params.id).length > 0);
 
-  const foundBalanceValues = foundBalances.map((user) => {
-    return {
-      value: user.balances.find((x) => x.asset_id === params.id).amount,
-      id: user.id,
-      name: user.account.name
-    }
-  }).filter((x) => x.value > 0).sort((a, b) => b.value - a.value);
-  
+  const foundBalanceValues = foundBalances.map((user) => ({
+    value: user.balances.find((x) => x.asset_id === params.id).amount,
+    id: user.id,
+    name: user.account.name
+  })).filter((x) => x.value > 0).sort((a, b) => b.value - a.value);
+
   const tableRows = foundBalanceValues.map((user) => (
     <tr key={user.id}>
       <td>
-        <Link to={`/Account/${params.env}/${user.id}`} style={{ textDecoration: 'none' }}>
-          {user.name} ({user.id})
-        </Link>
+        <Link style={{ textDecoration: 'none', color: 'black' }} to={`/Account/${params.env}/${user.id}`}>
+          <b>{user.name}</b>
+        </Link> ({user.id})
       </td>
       <td>
         {

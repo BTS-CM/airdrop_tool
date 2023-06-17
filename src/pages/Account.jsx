@@ -17,14 +17,10 @@ import { HiOutlineChartPie } from "react-icons/hi";
 import { useTranslation } from 'react-i18next';
 import { Link, useParams } from "react-router-dom";
 
-import { Apis } from 'bitsharesjs-ws';
-import { Apis as tuscApis } from 'tuscjs-ws';
-
-import { appStore, ticketStore, leaderboardStore } from '../lib/states';
-
-function humanReadableFloat(satoshis, precision) {
-  return satoshis / 10 ** precision;
-}
+import {
+  appStore, ticketStore, leaderboardStore, assetStore
+} from '../lib/states';
+import { humanReadableFloat } from '../lib/common';
 
 export default function Account(properties) {
   const { t, i18n } = useTranslation();
@@ -38,6 +34,10 @@ export default function Account(properties) {
   const btsTestnetLeaderboard = leaderboardStore((state) => state.bitshares_testnet);
   const tuscLeaderboard = leaderboardStore((state) => state.tusc);
 
+  const btsAssets = assetStore((state) => state.bitshares);
+  const btsTestnetAssets = assetStore((state) => state.bitshares_testnet);
+  const tuscAssets = assetStore((state) => state.tusc);
+
   const nodes = appStore((state) => state.nodes);
   const changeURL = appStore((state) => state.changeURL);
 
@@ -47,33 +47,56 @@ export default function Account(properties) {
   let assetName = "";
   let chainName = "";
   let targetJSON = [];
+  let cachedAssets = [];
   if (params.env === 'bitshares') {
     targetJSON = btsTickets;
     currentLeaderboard = btsLeaderboard;
     assetName = "BTS";
     chainName = "Bitshares";
+    cachedAssets = btsAssets;
   } else if (params.env === 'bitshares_testnet') {
     targetJSON = btsTestnetTickets;
     currentLeaderboard = btsTestnetLeaderboard;
     assetName = "TEST";
     chainName = "Bitshares (Testnet)";
+    cachedAssets = btsTestnetAssets;
   } else if (params.env === 'tusc') {
     targetJSON = tuscTickets;
     currentLeaderboard = tuscLeaderboard;
     assetName = "TUSC";
     chainName = "TUSC";
+    cachedAssets = tuscAssets;
   }
 
   const currentAccount = currentLeaderboard.find((x) => x.id === params.id);
 
   const accountBalanceRows = currentAccount && currentAccount.balances.length
-    ? currentAccount.balances.map((x) => (
-        <Link key={x.asset_id} style={{ textDecoration: 'none' }} to={`/Asset/${params.env}/${x.asset_id}`}>
-          <Badge m="xs">
-              {x.asset_id}
-          </Badge>
-        </Link>
-    ))
+    ? currentAccount.balances.map((x) => {
+      const thisAsset = cachedAssets.find((a) => a.id === x.asset_id);
+      const currentReadableFloat = parseFloat(
+        humanReadableFloat(x.amount, thisAsset.precision)
+          .toFixed(thisAsset.precision)
+      );
+
+      if (!currentReadableFloat) {
+        return null;
+      }
+
+      return (
+          <tr>
+            <td>
+              <Link style={{ textDecoration: 'none', color: 'black' }} key={x.asset_id} to={`/Asset/${params.env}/${x.asset_id}`}>
+                <b>{thisAsset.symbol}</b>
+              </Link>
+              <br />
+              ({x.asset_id})
+            </td>
+            <td>
+              { currentReadableFloat }
+            </td>
+          </tr>
+      );
+    })
     : null;
 
   const retrievedAccountTickets = targetJSON.filter((x) => x.account === params.id);
@@ -404,7 +427,21 @@ export default function Account(properties) {
                     {t('account:accountBalances')}
                   </Text>
                   <ScrollArea h={475}>
-                    {accountBalanceRows}
+                    <Table highlightOnHover>
+                      <thead>
+                        <tr>
+                          <th>
+                            {t('account:assetTable.th1')}
+                          </th>
+                          <th>
+                            {t('account:assetTable.th2')}
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {accountBalanceRows}
+                      </tbody>
+                    </Table>
                   </ScrollArea>
                 </Card>
               )

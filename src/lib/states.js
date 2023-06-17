@@ -50,6 +50,39 @@ const ticketStore = create(
   ),
 );
 
+// Storing asset names and precision values
+const assetStore = create(
+  persist(
+    (set, get) => ({
+      bitshares: [],
+      bitshares_testnet: [],
+      tusc: [],
+      changeAssets: (env, leaders) => {
+        if (env === 'bitshares') {
+          set({ bitshares: leaders });
+        } else if (env === 'bitshares_testnet') {
+          set({ bitshares_testnet: leaders });
+        } else if (env === 'tusc') {
+          set({ tusc: leaders });
+        }
+      },
+      eraseAssets: (env) => {
+        console.log(`Erasing ${env} leaderboards!`);
+        if (env === 'bitshares') {
+          set({ bitshares: [] });
+        } else if (env === 'bitshares_testnet') {
+          set({ bitshares_testnet: [] });
+        } else if (env === 'tusc') {
+          set({ tusc: [] });
+        }
+      },
+    }),
+    {
+      name: 'assetStorage',
+    },
+  ),
+);
+
 const leaderboardStore = create(
   persist(
     (set, get) => ({
@@ -429,6 +462,7 @@ const beetStore = create((set, get) => ({
 
 export {
   appStore,
+  assetStore,
   beetStore,
   tempStore,
   ticketStore,

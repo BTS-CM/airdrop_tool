@@ -11,9 +11,18 @@
       "processing": "Behandler brugersaldi for påkrævet token",
       "table": {
         "title": "Billetholdere inkluderet i airdrop",
-        "th1": "id",
+        "title2": "Billetholdere udelukket fra airdrop",
+        "th1": "Konto",
         "th2": "Antal",
-        "th3": "Tildelte tokens"
+        "th3": "Tildeling",
+        "th4": "Grund",
+        "reasons": {
+          "ltm": "Livsvarigt medlemskab mangler",
+          "noBalance": "Mangler påkrævet token",
+          "insufficientBalance": "Utilstrækkelige påkrævede tokens",
+          "self": "Kan ikke sende til sig selv",
+          "minReward": "Tildelt belønning for lille"
+        }
       },
       "json": "Airdrop JSON-data"
     },

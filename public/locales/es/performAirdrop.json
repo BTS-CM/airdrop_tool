@@ -11,9 +11,18 @@
       "processing": "Procesando saldos de usuario para el token requerido",
       "table": {
         "title": "Titulares de entradas incluidos en airdrop",
-        "th1": "identificación",
+        "title2": "Titulares de entradas excluidos del airdrop",
+        "th1": "Cuenta",
         "th2": "Cantidad",
-        "th3": "Fichas asignadas"
+        "th3": "Asignación",
+        "th4": "Razón",
+        "reasons": {
+          "ltm": "Falta la membresía de por vida",
+          "noBalance": "Falta el token requerido",
+          "insufficientBalance": "Tokens requeridos insuficientes",
+          "self": "No se puede enviar a uno mismo",
+          "minReward": "Recompensa asignada demasiado pequeña"
+        }
       },
       "json": "Lanzamiento aéreo de datos JSON"
     },
@@ -38,7 +47,7 @@
         "tokenQuantity": "Ingrese la cantidad de tokens que desea lanzar desde el aire",
         "distroRadio": {
           "title": "¿Cómo se deben asignar los tokens a los ganadores?",
-          "equally": "Igualdad entre ID de cuenta ganadoras",
+          "equally": "Igualdad entre los ID de cuenta ganadores",
           "proportionally": "Proporcional a los boletos ganados",
           "roundRobin": "Asigne tokens completos en forma de turno rotativo"
         },

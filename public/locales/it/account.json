@@ -33,9 +33,13 @@
     "th8": "ora del prossimo aggiornamento",
     "th9": "prossimo downgrade"
   },
+  "assetTable": {
+    "th1": "Risorsa",
+    "th2": "Quantità"
+  },
   "footer": {
     "title": "Vuoi guadagnare influenza e migliorare le tue probabilità di lancio aereo?",
-    "create": "Crea un altro ticket sul",
+    "create": "Crea un altro biglietto sul",
     "blockchain": "blockchain",
     "button": "Crea nuovo biglietto"
   }

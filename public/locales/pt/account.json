@@ -33,6 +33,10 @@
     "th8": "próxima atualização",
     "th9": "próximo tempo de rebaixamento"
   },
+  "assetTable": {
+    "th1": "Ativo",
+    "th2": "Quantidade"
+  },
   "footer": {
     "title": "Quer ganhar influência e melhorar suas chances de airdrop?",
     "create": "Crie outro ticket no",

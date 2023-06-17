@@ -33,6 +33,10 @@
     "th8": "heure de la prochaine mise à jour",
     "th9": "prochain downgrade"
   },
+  "assetTable": {
+    "th1": "Actif",
+    "th2": "Quantité"
+  },
   "footer": {
     "title": "Vous voulez gagner en influence et améliorer vos chances de largage ?",
     "create": "Créer un autre ticket sur le",

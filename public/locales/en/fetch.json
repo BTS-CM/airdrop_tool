@@ -10,6 +10,7 @@
         "th1": "Blockchain",
         "th2": "Tickets",
         "th3": "Quantity tokens locked",
+        "cached": "Cached assets",
         "th4": "JSON",
         "th5": "Delete"
     }

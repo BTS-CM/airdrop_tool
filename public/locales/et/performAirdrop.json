@@ -11,9 +11,18 @@
       "processing": "Nõutava märgi kasutajasaldode töötlemine",
       "table": {
         "title": "Piletihoidjad kuuluvad airdropi komplekti",
-        "th1": "id",
+        "title2": "Piletiomanikud on airdropist välja jäetud",
+        "th1": "Konto",
         "th2": "Kogus",
-        "th3": "Eraldatud märgid"
+        "th3": "Eraldamine",
+        "th4": "Põhjus",
+        "reasons": {
+          "ltm": "Eluaegne liikmesus puudub",
+          "noBalance": "Nõutav tunnus puudub",
+          "insufficientBalance": "Nõutavaid märke pole piisavalt",
+          "self": "Ise saata ei saa",
+          "minReward": "Eraldatud preemia on liiga väike"
+        }
       },
       "json": "Airdropi JSON-andmed"
     },

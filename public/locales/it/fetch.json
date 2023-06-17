@@ -1,16 +1,17 @@
 {
-    "topCard": {
-      "title": "Recupera i biglietti dalla blockchain",
-      "label": "Seleziona la blockchain di destinazione",
-      "desc": "Solo blockchain basate su grafene",
-      "btn1": "Recupera i biglietti",
-      "btn2": "Recupero"
-    },
-    "secondCard": {
-      "th1": "Blockchain",
-      "th2": "Biglietti",
-      "th3": "Gettoni quantità bloccati",
-      "th4": "JSON",
-      "th5": "Eliminare"
-    }
+  "topCard": {
+    "title": "Recupera i biglietti dalla blockchain",
+    "label": "Seleziona la blockchain di destinazione",
+    "desc": "Solo blockchain basate su grafene",
+    "btn1": "Recupera i biglietti",
+    "btn2": "Recupero"
+  },
+  "secondCard": {
+    "th1": "Blockchain",
+    "th2": "Biglietti",
+    "th3": "Gettoni quantità bloccati",
+    "cached": "Risorse memorizzate nella cache",
+    "th4": "JSON",
+    "th5": "Eliminare"
   }
+}

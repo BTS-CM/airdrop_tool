@@ -29,15 +29,8 @@ import {
 } from '../lib/states';
 import BeetModal from './BeetModal';
 
-/**
- * Convert human readable quantity into the token's blockchain representation
- * @param {Float} satoshis
- * @param {Number} precision
- * @returns {Number}
- */
-function blockchainFloat(satoshis, precision) {
-  return satoshis * 10 ** precision;
-}
+import { blockchainFloat } from '../lib/common';
+
 
 export default function Create(properties) {
   const { t, i18n } = useTranslation();

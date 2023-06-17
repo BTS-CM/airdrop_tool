@@ -1,16 +1,17 @@
 {
-    "topCard": {
-      "title": "Holen Sie sich Tickets aus der Blockchain",
-      "label": "Wählen Sie die Zielblockchain aus",
-      "desc": "Nur Blockchains auf Graphenbasis",
-      "btn1": "Karten holen",
-      "btn2": "Holen"
-    },
-    "secondCard": {
-      "th1": "Blockchain",
-      "th2": "Tickets",
-      "th3": "Anzahl der Token gesperrt",
-      "th4": "JSON",
-      "th5": "Löschen"
-    }
+  "topCard": {
+    "title": "Holen Sie sich Tickets aus der Blockchain",
+    "label": "Wählen Sie die Zielblockchain aus",
+    "desc": "Nur Blockchains auf Graphenbasis",
+    "btn1": "Karten holen",
+    "btn2": "Holen"
+  },
+  "secondCard": {
+    "th1": "Blockchain",
+    "th2": "Tickets",
+    "th3": "Anzahl der Token gesperrt",
+    "cached": "Zwischengespeicherte Assets",
+    "th4": "JSON",
+    "th5": "Löschen"
   }
+}

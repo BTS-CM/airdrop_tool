@@ -33,6 +33,10 @@
     "th8": "nächste Aktualisierungszeit",
     "th9": "nächster Downgrade-Zeitpunkt"
   },
+  "assetTable": {
+    "th1": "Anlage",
+    "th2": "Menge"
+  },
   "footer": {
     "title": "Möchten Sie Einfluss gewinnen und Ihre Airdrop-Chancen verbessern?",
     "create": "Erstellen Sie ein weiteres Ticket im",

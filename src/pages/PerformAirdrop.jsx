@@ -23,6 +23,7 @@ import {
   ActionIcon,
 } from '@mantine/core';
 import { Apis } from "bitsharesjs-ws";
+import _ from "lodash";
 
 import {
   HiOutlineEmojiSad,
@@ -32,75 +33,12 @@ import {
 } from "react-icons/hi";
 
 import {
-  airdropStore, appStore, leaderboardStore, beetStore, tempStore
+  airdropStore, appStore, leaderboardStore, beetStore, tempStore, assetStore
 } from "../lib/states";
 import AirdropCard from "./AirdropCard";
 import GetAccount from "./GetAccount";
-
-function sliceIntoChunks(arr, size) {
-  const chunks = [];
-  for (let i = 0; i < arr.length; i += size) {
-    const chunk = arr.slice(i, i + size);
-    chunks.push(chunk);
-  }
-  return chunks;
-}
-
-/**
- * Convert the token's blockchain representation into a human readable quantity
- * @param {Float} satoshis
- * @param {Number} precision
- * @returns {Number}
- */
-function humanReadableFloat(satoshis, precision) {
-  return parseFloat((satoshis / 10 ** precision).toFixed(precision));
-}
-
-/**
- * Convert human readable quantity into the token's blockchain representation
- * @param {Float} satoshis
- * @param {Number} precision
- * @returns {Number}
- */
-function blockchainFloat(satoshis, precision) {
-  return satoshis * 10 ** precision;
-}
-
-/**
- * Retrieve the details of an asset from the blockchain
- * @param {String} node
- * @param {String} searchInput
- * @param {String} env
- * @returns {Object}
- */
-async function getAsset(node, searchInput, env) {
-  try {
-    await Apis.instance(node, true).init_promise;
-  } catch (error) {
-    console.log(error);
-    const { changeURL } = appStore.getState();
-    changeURL(env);
-    return;
-  }
-
-  let symbols;
-  try {
-    symbols = await Apis.instance()
-      .db_api()
-      .exec('lookup_asset_symbols', [[searchInput]]);
-  } catch (error) {
-    console.log(error);
-    return;
-  }
-
-  const filteredSymbols = symbols.filter((x) => x !== null);
-  if (!filteredSymbols || !filteredSymbols.length) {
-    console.log("No results");
-    return;
-  }
-
-  return filteredSymbols[0];
-}
+import { lookupSymbols } from "../lib/directQueries";
+import { sliceIntoChunks, humanReadableFloat } from '../lib/common';
 
 export default function PerformAirdrop(properties) {
   const { t, i18n } = useTranslation();
@@ -114,16 +52,19 @@ export default function PerformAirdrop(properties) {
   const btsTestnetLeaderboard = leaderboardStore((state) => state.bitshares_testnet);
   const tuscLeaderboard = leaderboardStore((state) => state.tusc);
 
+  const btsAssets = assetStore((state) => state.bitshares);
+  const btsTestnetAssets = assetStore((state) => state.bitshares_testnet);
+  const tuscAssets = assetStore((state) => state.tusc);
+
   // for beet use
-  const connection = beetStore((state) => state.connection);
-  const isLinked = beetStore((state) => state.isLinked);
+  const changeURL = appStore((state) => state.changeURL);
   const identity = beetStore((state) => state.identity);
-  const reset = beetStore((state) => state.reset);
   const account = tempStore((state) => state.account);
 
   const [tokenQuantity, onTokenQuantity] = useState(1);
   const [tokenName, onTokenName] = useState("");
-  const [myID, setMyID] = useState();
+  const [finalTokenName, setFinalTokenName] = useState("");
+
   const [tokenDetails, setTokenDetails] = useState();
   const [batchSize, onBatchSize] = useState(50);
   const [distroMethod, setDistroMethod] = useState("Proportionally");
@@ -137,6 +78,11 @@ export default function PerformAirdrop(properties) {
   const [requiredTokenDetails, setRequiredTokenDetails] = useState();
   const [finalReqQty, setFinalReqQty] = useState();
 
+  const [tokenItr, setTokenItr] = useState(0);
+  const [reqdTokenItr, setReqdTokenItr] = useState(0);
+
+  const [inProgress, setInProgress] = useState(false);
+
   const nodes = appStore((state) => state.nodes);
   const currentNodes = nodes[params.env];
 
@@ -145,6 +91,7 @@ export default function PerformAirdrop(properties) {
   let relevantChain = "";
   let plannedAirdropData = {};
   let envLeaderboard = [];
+  let cachedAssets = [];
 
   if (params.env === 'bitshares') {
     plannedAirdropData = btsAirdrops.find((x) => params.id === x.id);
@@ -152,18 +99,21 @@ export default function PerformAirdrop(properties) {
     assetName = "BTS";
     relevantChain = 'BTS';
     titleName = "Bitshares";
+    cachedAssets = btsAssets;
   } else if (params.env === 'bitshares_testnet') {
     plannedAirdropData = btsTestnetAirdrops.find((x) => params.id === x.id);
     envLeaderboard = btsTestnetLeaderboard;
     assetName = "TEST";
     relevantChain = 'BTS_TEST';
     titleName = "Bitshares (Testnet)";
+    cachedAssets = btsTestnetAssets;
   } else if (params.env === 'tusc') {
     plannedAirdropData = tuscAirdrops.find((x) => params.id === x.id);
     envLeaderboard = tuscLeaderboard;
     assetName = "TUSC";
     relevantChain = 'TUSC';
     titleName = "TUSC";
+    cachedAssets = tuscAssets;
   }
 
   useEffect(() => {
@@ -176,35 +126,73 @@ export default function PerformAirdrop(properties) {
     }
   }, []);
 
-  // Lookup the token to airdrop
   useEffect(() => {
     const delayDebounceFn = setTimeout(async () => {
       if (tokenName && tokenName.length) {
-        setTokenDetails(); // erase last search
-
-        let assetDetails;
-        try {
-          assetDetails = await getAsset(currentNodes[0], tokenName);
-        } catch (error) {
-          console.log(error);
-          return;
-        }
-
-        if (!assetDetails) {
-          return;
-        }
-
-        setTokenDetails({
-          id: assetDetails.id,
-          precision: assetDetails.precision,
-          max_supply: assetDetails.options.max_supply,
-          readableMax: humanReadableFloat(assetDetails.options.max_supply, assetDetails.precision),
-        }); // store new
+        setFinalTokenName(tokenName);
       }
     }, 1000);
 
     return () => clearTimeout(delayDebounceFn);
   }, [tokenName]);
+
+  // Lookup the token to airdrop
+  useEffect(() => {
+    async function fetchAirdropDetails() {
+      const delayDebounceFn = setTimeout(async () => {
+        if (finalTokenName && finalTokenName.length) {
+          setTokenDetails(); // erase last search
+          setInProgress(true);
+
+          const foundCachedAsset = cachedAssets.find((asset) => asset.symbol === finalTokenName);
+          if (foundCachedAsset) {
+            setTokenDetails({
+              id: foundCachedAsset.id,
+              precision: foundCachedAsset.precision,
+              max_supply: foundCachedAsset.options.max_supply,
+              readableMax: humanReadableFloat(
+                foundCachedAsset.options.max_supply,
+                foundCachedAsset.precision
+              ),
+            });
+            setInProgress(false);
+            return;
+          }
+
+          let assetDetails;
+          try {
+            assetDetails = await lookupSymbols(currentNodes[0], params.env, [finalTokenName]);
+          } catch (error) {
+            console.log(error);
+            changeURL(params.env);
+            setInProgress(false);
+            return;
+          }
+
+          if (!assetDetails || !assetDetails.length) {
+            setInProgress(false);
+            return;
+          }
+
+          setTokenDetails({
+            id: assetDetails[0].id,
+            precision: assetDetails[0].precision,
+            max_supply: assetDetails[0].options.max_supply,
+            readableMax: humanReadableFloat(
+              assetDetails[0].options.max_supply,
+              assetDetails[0].precision
+            ),
+          }); // store new
+
+          setInProgress(false);
+        }
+      }, 1000);
+
+      return () => clearTimeout(delayDebounceFn);
+    }
+
+    fetchAirdropDetails();
+  }, [finalTokenName, tokenItr]);
 
   // Quantity of tokens to airdrop
   useEffect(() => {
@@ -217,35 +205,6 @@ export default function PerformAirdrop(properties) {
     return () => clearTimeout(delayDebounceFn);
   }, [tokenQuantity]);
 
-  // Optional: Require this token in winner balances
-  useEffect(() => {
-    const delayDebounceFn = setTimeout(async () => {
-      if (requiredToken && requiredToken.length) {
-        setRequiredTokenDetails(); // erase last search
-
-        let assetDetails;
-        try {
-          assetDetails = await getAsset(currentNodes[0], requiredToken);
-        } catch (error) {
-          console.log(error);
-          return;
-        }
-
-        if (!assetDetails) {
-          return;
-        }
-
-        setRequiredTokenDetails({
-          id: assetDetails.id,
-          symbol: requiredToken,
-          precision: assetDetails.precision,
-        }); // store new
-      }
-    }, 1000);
-
-    return () => clearTimeout(delayDebounceFn);
-  }, [requiredToken]);
-
   // Optional: Require this many tokens in user balance
   useEffect(() => {
     const delayDebounceFn = setTimeout(async () => {
@@ -257,37 +216,102 @@ export default function PerformAirdrop(properties) {
     return () => clearTimeout(delayDebounceFn);
   }, [requiredTokenQty]);
 
+  useEffect(() => {
+    async function fetchTokenDetails() {
+      const delayDebounceFn = setTimeout(async () => {
+        if (requiredToken && requiredToken.length) {
+          setRequiredTokenDetails(); // erase last search
+          setInProgress(true);
+
+          const foundCachedAsset = cachedAssets.find((asset) => asset.symbol === requiredToken);
+          if (foundCachedAsset) {
+            setRequiredTokenDetails({
+              id: foundCachedAsset.id,
+              symbol: requiredToken,
+              precision: foundCachedAsset.precision,
+            });
+            setInProgress(false);
+            return;
+          }
+
+          let assetDetails;
+          try {
+            assetDetails = await lookupSymbols(currentNodes[0], params.env, [requiredToken]);
+          } catch (error) {
+            console.log(error);
+            changeURL(params.env);
+            setInProgress(false);
+            return;
+          }
+
+          if (!assetDetails || !assetDetails.length) {
+            setInProgress(false);
+            return;
+          }
+
+          setRequiredTokenDetails({
+            id: assetDetails[0].id,
+            symbol: requiredToken,
+            precision: assetDetails[0].precision,
+          }); // store new
+
+          setInProgress(false);
+        }
+      }, 1000);
+
+      return () => clearTimeout(delayDebounceFn);
+    }
+
+    if (finalReqQty && finalReqQty > 0 && requiredToken && requiredToken.length) {
+      fetchTokenDetails();
+    }
+  }, [finalReqQty, reqdTokenItr]);
+
   // Initial winners
-  let sortedWinners = plannedAirdropData.calculatedAirdrop.summary.map((winner) => ({
+  const sortedWinners = plannedAirdropData.calculatedAirdrop.summary.map((winner) => ({
     ...winner,
     balances: envLeaderboard.find((x) => x.id === winner.id).balances,
   })).sort((a, b) => b.qty - a.qty);
 
-  if (tokenReq && tokenReq === 'yes' && requiredToken && finalReqQty && requiredTokenDetails) {
-    // Check for mandatory tokens in winner balances
-    sortedWinners = sortedWinners.filter((user) => user.balances.map((asset) => asset.asset_id).includes(requiredTokenDetails.id));
+  const invalidOutput = [];
+  for (let k = 0; k < sortedWinners.length; k++) {
+    const user = sortedWinners[k];
+    if (requiredTokenDetails) {
+      // Filter out users who don't meet token requirement
+      const balancePresent = user.balances.map((asset) => asset.asset_id).includes(requiredTokenDetails.id);
+      if (!balancePresent) {
+        // missing balance
+        invalidOutput.push({ ...user, reason: t("performAirdrop:grid.left.table.reasons.noBalance") });
+      } else {
+        const foundAsset = user.balances.find((asset) => asset.asset_id === requiredTokenDetails.id);
+        const foundAmount = humanReadableFloat(foundAsset.amount, requiredTokenDetails.precision);
+        if (foundAmount < finalReqQty) {
+          // insufficient balance
+          invalidOutput.push({ ...user, reason: t("performAirdrop:grid.left.table.reasons.insufficientBalance") });
+        }
+      }
+    }
 
-    sortedWinners = sortedWinners.filter((user) => {
-      const foundAsset = user.balances.find((asset) => asset.asset_id === requiredTokenDetails.id);
-      return humanReadableFloat(foundAsset.amount, requiredTokenDetails.precision) >= finalReqQty;
-    });
-  }
-
-  if (ltmReq && ltmReq === 'yes') {
-    // Filter out non LTM users from airdrop
-    sortedWinners = sortedWinners.filter((user) => {
+    if (ltmReq && ltmReq === 'yes') {
+      // Filter out non LTM users from airdrop
       const { id } = user;
       const { ltm } = envLeaderboard.find((x) => x.id === user.id).account;
-      return !!ltm;
-    });
+      if (!ltm) {
+        invalidOutput.push({ ...user, reason: t("performAirdrop:grid.left.table.reasons.ltm") });
+      }
+    }
+
+    if (account) {
+      if (user.id === account) {
+        invalidOutput.push({ ...user, reason: t("performAirdrop:grid.left.table.reasons.self") });
+      }
+    }
   }
 
-  if (myID) {
-    // User provided their ID -> filter their id from airdrop!
-    sortedWinners = sortedWinners.filter((user) => user.id !== myID);
-  }
+  const validOutput = _.difference(sortedWinners.map((person) => person.id), invalidOutput.map((person) => person.id))
+    .map((validEntry) => sortedWinners.find((winner) => winner.id === validEntry));
 
-  const ticketQty = sortedWinners
+  const ticketQty = validOutput
     .map((x) => x.qty)
     .reduce((accumulator, ticket) => accumulator + parseInt(ticket, 10), 0);
 
@@ -295,7 +319,7 @@ export default function PerformAirdrop(properties) {
   let remainingTokens = finalTokenQuantity ?? 0;
   const itrQty = distroMethod === "RoundRobin" && finalTokenQuantity
     ? finalTokenQuantity
-    : sortedWinners.length;
+    : validOutput.length;
 
   for (let i = 0; i < itrQty; i++) {
     if (i === 0) {
@@ -305,17 +329,17 @@ export default function PerformAirdrop(properties) {
 
     if (distroMethod === "Proportionally") {
       tokenRows.push({
-        ...sortedWinners[i],
-        assignedTokens: ((sortedWinners[i].qty / ticketQty) * finalTokenQuantity),
+        ...validOutput[i],
+        assignedTokens: ((validOutput[i].qty / ticketQty) * finalTokenQuantity),
       });
     } else if (distroMethod === "Equally") {
       tokenRows.push({
-        ...sortedWinners[i],
-        assignedTokens: ((1 / sortedWinners.length) * finalTokenQuantity),
+        ...validOutput[i],
+        assignedTokens: ((1 / validOutput.length) * finalTokenQuantity),
       });
     } else if (distroMethod === "RoundRobin") {
-      const algoItr = i >= sortedWinners.length
-        ? Math.round(((i / sortedWinners.length) % 1) * sortedWinners.length)
+      const algoItr = i >= validOutput.length
+        ? Math.round(((i / validOutput.length) % 1) * validOutput.length)
         : i;
 
       if (remainingTokens < 1) {
@@ -325,7 +349,7 @@ export default function PerformAirdrop(properties) {
 
       remainingTokens -= 1;
 
-      const currentWinner = sortedWinners[algoItr];
+      const currentWinner = validOutput[algoItr];
       let existingRow = tokenRows.find((x) => currentWinner.id === x.id);
       if (!existingRow) {
         tokenRows.push({
@@ -342,10 +366,12 @@ export default function PerformAirdrop(properties) {
   }
 
   let validRows = [];
+  let invalidRows = [];
   let winnerChunks = [];
   let winners = [];
   if (!tokenDetails || (requiredToken && finalReqQty && !requiredTokenDetails)) {
     validRows = [];
+    invalidRows = [];
     winnerChunks = [];
   } else {
     const valid = tokenRows
@@ -362,10 +388,15 @@ export default function PerformAirdrop(properties) {
       ? valid
         .map((winner) => (
           <tr key={winner.id}>
-            <td>
-              <Link style={{ textDecoration: 'none' }} to={`/Account/${params.env}/${winner.id}`}>
-                {winner.id}
-              </Link>
+            <td width="45%">
+              <Link style={{ textDecoration: 'none', color: 'black' }} to={`/Account/${params.env}/${winner.id}`}>
+                <b>{envLeaderboard.find((usr) => usr.id === winner.id).account.name}</b>
+              </Link><br />
+              (
+                <Link style={{ textDecoration: 'none' }} to={`/Account/${params.env}/${winner.id}`}>
+                  {winner.id}
+                </Link>
+              )
             </td>
             <td>
               {winner.qty}
@@ -374,6 +405,31 @@ export default function PerformAirdrop(properties) {
               { winner.assignedTokens.toFixed(tokenDetails.precision) }
               {' '}
               {tokenName || assetName}
+            </td>
+          </tr>
+        ))
+      : null;
+
+    invalidRows = invalidOutput.length
+      ? invalidOutput
+        .map((loser) => (
+          <tr key={loser.id}>
+            <td>
+              <Link style={{ textDecoration: 'none', color: 'black' }} to={`/Account/${params.env}/${loser.id}`}>
+                <b>{envLeaderboard.find((usr) => usr.id === loser.id).account.name}</b>
+              </Link><br />
+              (
+                <Link style={{ textDecoration: 'none' }} to={`/Account/${params.env}/${loser.id}`}>
+                  {loser.id}
+                </Link>
+              )
+            </td>
+            <td>
+              {
+                loser.reason
+                  ? loser.reason
+                  : t("performAirdrop:grid.left.table.reasons.minReward")
+              }
             </td>
           </tr>
         ))
@@ -398,6 +454,7 @@ export default function PerformAirdrop(properties) {
     ))
     : [];
 
+  //  || (!requiredTokenDetails && inProgress)
   return (
     <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
       <Title order={3} ta="center" mt="sm">
@@ -428,7 +485,7 @@ export default function PerformAirdrop(properties) {
             <SimpleGrid cols={2} spacing="sm" mt={10} breakpoints={[{ maxWidth: 'md', cols: 2 }]}>
               <Card shadow="md" radius="md" padding="xl" mt={20}>
                 {
-                  !tokenDetails
+                  (inProgress)
                     ? (
                       <>
                         <Loader variant="dots" />
@@ -440,23 +497,31 @@ export default function PerformAirdrop(properties) {
                     : null
                 }
                 {
-                  tokenReq && tokenReq === 'yes' && requiredToken && finalReqQty && !requiredTokenDetails
+                  requiredToken && !tokenDetails && !inProgress && finalTokenQuantity
                     ? (
                       <>
-                        <Loader variant="dots" />
-                        <Text size="md">
-                          {t("performAirdrop:grid.left.processing")}
-                        </Text>
+                        <Text>Sorry, something went wrong...</Text>
+                        <Button onClick={() => setTokenItr(tokenItr + 1)}>Refresh</Button>
                       </>
                     )
                     : null
                 }
                 {
-                  validRows && validRows.length
+                  requiredToken && !requiredTokenDetails && !inProgress && finalReqQty
+                    ? (
+                      <>
+                        <Text>Sorry, something went wrong...</Text>
+                        <Button onClick={() => setReqdTokenItr(reqdTokenItr + 1)}>Refresh</Button>
+                      </>
+                    )
+                    : null
+                }
+                {
+                  validRows && validRows.length// && (!tokenReq && !tokenReq === 'yes' && !requiredTokenDetails)
                     ? (
                       <>
                         <Accordion mt="xs" defaultValue="table">
-                          <Accordion.Item key="json" value="table">
+                          <Accordion.Item key="validTable" value="table">
                             <Accordion.Control>
                               {t("performAirdrop:grid.left.table.title")}
                             </Accordion.Control>
@@ -493,6 +558,32 @@ export default function PerformAirdrop(properties) {
                           </Accordion.Item>
                         </Accordion>
                       </>
+                    )
+                    : null
+                }
+                {
+                  invalidRows && invalidRows.length// && (!tokenReq && !tokenReq === 'yes' && !requiredTokenDetails)
+                    ? (
+                      <Accordion mt="xs">
+                        <Accordion.Item key="invalidTable" value="table2">
+                          <Accordion.Control>
+                            {t("performAirdrop:grid.left.table.title2")}
+                          </Accordion.Control>
+                          <Accordion.Panel>
+                            <Table highlightOnHover>
+                              <thead>
+                                <tr>
+                                  <th>{t("performAirdrop:grid.left.table.th1")}</th>
+                                  <th>{t("performAirdrop:grid.left.table.th4")}</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {invalidRows}
+                              </tbody>
+                            </Table>
+                          </Accordion.Panel>
+                        </Accordion.Item>
+                      </Accordion>
                     )
                     : null
                 }
@@ -646,18 +737,24 @@ export default function PerformAirdrop(properties) {
                                 )
                               }
                             />
-                            <TextInput
-                              type="number"
-                              withAsterisk
-                              placeholder={requiredTokenQty}
-                              label={t("performAirdrop:grid.right.options.reqRadio.requiredTokenQty")}
-                              style={{ maxWidth: '400px', marginTop: '10px' }}
-                              onChange={
-                                (event) => onRequiredTokenQty(
-                                  parseFloat(event.currentTarget.value)
+                            {
+                              requiredToken
+                                ? (
+                                    <TextInput
+                                      type="number"
+                                      withAsterisk
+                                      placeholder={requiredTokenQty}
+                                      label={t("performAirdrop:grid.right.options.reqRadio.requiredTokenQty")}
+                                      style={{ maxWidth: '400px', marginTop: '10px' }}
+                                      onChange={
+                                        (event) => onRequiredTokenQty(
+                                          parseFloat(event.currentTarget.value)
+                                        )
+                                      }
+                                    />
                                 )
-                              }
-                            />
+                                : null
+                            }
                           </>
                         )
                         : null

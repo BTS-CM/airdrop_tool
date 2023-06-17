@@ -1,7 +1,7 @@
 {
   "loadingAccount": "Indlæser kontooplysninger!",
   "upgrade": "Opgrader",
-  "qtyTokens": "Mængde-tokens",
+  "qtyTokens": "Mængde tokens",
   "createTime": "Oprettet",
   "assetsCreated": "Aktiver oprettet",
   "accountBalances": "Kontosaldi",
@@ -32,6 +32,10 @@
     "th7": "værdi",
     "th8": "næste opdateringstidspunkt",
     "th9": "næste nedgraderingstidspunkt"
+  },
+  "assetTable": {
+    "th1": "Aktiv",
+    "th2": "Antal"
   },
   "footer": {
     "title": "Vil du have indflydelse og forbedre dine airdrop odds?",

@@ -33,6 +33,10 @@
     "th8": "hora de próxima actualización",
     "th9": "siguiente tiempo de degradación"
   },
+  "assetTable": {
+    "th1": "Activo",
+    "th2": "Cantidad"
+  },
   "footer": {
     "title": "¿Quieres ganar influencia y mejorar tus probabilidades de lanzamiento aéreo?",
     "create": "Crea otro ticket en el",

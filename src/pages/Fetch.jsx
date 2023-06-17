@@ -18,35 +18,11 @@ import {
 import { useTranslation } from 'react-i18next';
 import _ from "lodash";
 
-import { appStore, ticketStore, leaderboardStore } from '../lib/states';
-
-function humanReadableFloat(satoshis, precision) {
-  return satoshis / 10 ** precision;
-}
-
-/**
- * Given an array of account IDs, retrieve their account names
- * @param {Array} accountIDs
- * @param {Object}
- */
-function _getFullAccounts(accountIDs) {
-  return new Promise((resolve, reject) => {
-    if (!accountIDs) {
-      resolve([]);
-      return;
-    }
-
-    Apis.instance().db_api().exec("get_full_accounts", [accountIDs, false]).then((results) => {
-      if (results && results.length) {
-        resolve(results);
-      }
-    })
-      .catch((error) => {
-        console.error('Error fetching account details:', error);
-        reject(error);
-      });
-  });
-}
+import {
+  appStore, ticketStore, leaderboardStore, assetStore
+} from '../lib/states';
+import { humanReadableFloat, sliceIntoChunks } from '../lib/common';
+import { lookupSymbols } from '../lib/directQueries';
 
 export default function Fetch(properties) {
   const { t, i18n } = useTranslation();
@@ -63,6 +39,12 @@ export default function Fetch(properties) {
   const nodes = appStore((state) => state.nodes);
   const changeURL = appStore((state) => state.changeURL);
 
+  const btsAssets = assetStore((state) => state.bitshares);
+  const btsTestnetAssets = assetStore((state) => state.bitshares_testnet);
+  const tuscAssets = assetStore((state) => state.tusc);
+  const changeAssets = assetStore((state) => state.changeAssets);
+  const eraseAssets = assetStore((state) => state.eraseAssets);
+
   const [value, setValue] = useState('bitshares');
   const [inProgress, setInProgress] = useState(false);
 
@@ -71,12 +53,16 @@ export default function Fetch(properties) {
     console.log("Fetching tickets");
 
     let currentTickets;
+    let currentAssets;
     if (value === 'bitshares') {
       currentTickets = btsTickets;
+      currentAssets = btsAssets;
     } else if (value === 'bitshares_testnet') {
       currentTickets = btsTestnetTickets;
+      currentAssets = btsTestnetAssets;
     } else if (value === 'tusc') {
       currentTickets = tuscTickets;
+      currentAssets = tuscAssets;
     }
 
     const lastID = currentTickets && currentTickets.length
@@ -196,6 +182,7 @@ export default function Fetch(properties) {
 
     console.log("Fetching user balances");
 
+    let assetsToFetch = [];
     const accountResults = [];
     const leaderboardBatches = _.chunk(
       leaderboard,
@@ -205,37 +192,83 @@ export default function Fetch(properties) {
     );
     for (let i = 0; i < leaderboardBatches.length; i++) {
       let currentBatch = leaderboardBatches[i];
+      const accountIDs = currentBatch.map((user) => user.id);
       let fetchedAccounts;
       try {
-        fetchedAccounts = await _getFullAccounts(
-          currentBatch.map((user) => user.id)
-        );
+        if (value === 'tusc') {
+          fetchedAccounts = await tuscApis.instance().db_api().exec("get_full_accounts", [accountIDs, false]).then((results) => {
+            if (results && results.length) {
+              return results;
+            }
+          });
+        } else {
+          fetchedAccounts = await Apis.instance().db_api().exec("get_full_accounts", [accountIDs, false]).then((results) => {
+            if (results && results.length) {
+              return results;
+            }
+          });
+        }
       } catch (error) {
         console.log(error);
         continue;
       }
 
+      // eslint-disable-next-line no-loop-func
       currentBatch = currentBatch.map((user) => {
         const foundAccount = fetchedAccounts.find((acc) => acc[0] === user.id)[1];
+        const foundAssets = foundAccount.balances.map((balance) => balance.asset_type);
+        assetsToFetch = assetsToFetch.concat(foundAssets);
 
         return {
           ...user,
-          balances: foundAccount.balances.map((balance) => {
-            return {amount: balance.balance , asset_id: balance.asset_type}
-          }),
+          balances: foundAccount.balances.map((balance) => ({
+            amount: balance.balance, asset_id: balance.asset_type
+          })),
           account: {
             name: foundAccount.account.name,
             ltm: foundAccount.account.id === foundAccount.account.lifetime_referrer,
             creation_time: foundAccount.account.creation_time,
             assets: foundAccount.assets
           }
-        }
+        };
       });
 
       if (fetchedAccounts && fetchedAccounts.length) {
         accountResults.push(...currentBatch);
       }
     }
+
+    // assetsToFetch
+    let fetchedAssets = [];
+    const fetchableAssetChunks = sliceIntoChunks([...new Set(assetsToFetch)], 50);
+    for (let i = 0; i < fetchableAssetChunks.length; i++) {
+      const currentChunk = fetchableAssetChunks[i];
+      let theseSymbols;
+      try {
+        theseSymbols = await lookupSymbols("", value, currentChunk, true);
+      } catch (error) {
+        console.log(error);
+        return;
+      }
+
+      if (!theseSymbols || !theseSymbols.length) {
+        return;
+      }
+
+      const requiredInfo = theseSymbols
+        .map((q) => ({
+          id: q.id,
+          symbol: q.symbol,
+          precision: q.precision,
+          issuer: q.issuer,
+          options: {
+            max_supply: q.options.max_supply
+          },
+          dynamic_asset_data_id: q.dynamic_asset_data_id
+        }));
+      fetchedAssets = fetchedAssets.concat(requiredInfo);
+    }
+    changeAssets(value, fetchedAssets);
 
     const sortedLeaderboard = accountResults.sort((a, b) => b.amount - a.amount);
 
@@ -312,6 +345,7 @@ export default function Fetch(properties) {
               <th>{t("fetch:secondCard.th1")}</th>
               <th>{t("fetch:secondCard.th2")}</th>
               <th>{t("fetch:secondCard.th3")}</th>
+              <th>{t("fetch:secondCard.cached")}</th>
               <th>{t("fetch:secondCard.th4")}</th>
               <th>{t("fetch:secondCard.th5")}</th>
             </tr>
@@ -322,12 +356,19 @@ export default function Fetch(properties) {
               <td>{btsTickets.length}</td>
               <td>
                 {
-                  btsTickets.length
+                  btsTickets && btsTickets.length
                     ? (
                       btsTickets
                         .map((x) => x.value)
                         .reduce((partialSum, a) => parseInt(partialSum, 10) + parseInt(a, 10), 0) / 100000
                     ).toFixed(0)
+                    : 0
+                }
+              </td>
+              <td>
+                {
+                  btsAssets && btsAssets.length
+                    ? btsAssets.length
                     : 0
                 }
               </td>
@@ -349,6 +390,7 @@ export default function Fetch(properties) {
                         <ActionIcon onClick={() => {
                           eraseTickets('bitshares');
                           eraseLeaders('bitshares');
+                          eraseAssets('bitshares');
                         }}
                         >
                           ❌
@@ -373,7 +415,13 @@ export default function Fetch(properties) {
                     ).toFixed(0)
                     : 0
                 }
-
+              </td>
+              <td>
+                {
+                  btsTestnetAssets && btsTestnetAssets.length
+                    ? btsTestnetAssets.length
+                    : 0
+                }
               </td>
               <td>
                 {
@@ -390,6 +438,7 @@ export default function Fetch(properties) {
                 <ActionIcon onClick={() => {
                   eraseTickets('bitshares_testnet');
                   eraseLeaders('bitshares_testnet');
+                  eraseAssets('bitshares_testnet');
                 }}
                 >
                   ❌
@@ -413,6 +462,13 @@ export default function Fetch(properties) {
               </td>
               <td>
                 {
+                  tuscAssets && tuscAssets.length
+                    ? tuscAssets.length
+                    : 0
+                }
+              </td>
+              <td>
+                {
                                 tuscTickets.length
                                   ? (
                                     <Link style={{ textDecoration: 'none' }} to="../Tickets/tusc">
@@ -426,6 +482,7 @@ export default function Fetch(properties) {
                 <ActionIcon onClick={() => {
                   eraseTickets('tusc');
                   eraseLeaders('tusc');
+                  eraseAssets('tusc');
                 }}
                 >
                   ❌

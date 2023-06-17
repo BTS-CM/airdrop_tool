@@ -15,10 +15,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 
 import { appStore, ticketStore } from '../lib/states';
-
-function humanReadableFloat(satoshis, precision) {
-  return satoshis / 10 ** precision;
-}
+import { humanReadableFloat } from '../lib/common';
 
 export default function Analyze(properties) {
   const { t, i18n } = useTranslation();

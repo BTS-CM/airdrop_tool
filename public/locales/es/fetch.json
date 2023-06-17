@@ -1,16 +1,17 @@
 {
-    "topCard": {
-      "title": "Obtenga boletos de la cadena de bloques",
-      "label": "Seleccione la cadena de bloques de destino",
-      "desc": "Solo cadenas de bloques basadas en grafeno",
-      "btn1": "Obtener boletos",
-      "btn2": "Atractivo"
-    },
-    "secondCard": {
-      "th1": "cadena de bloques",
-      "th2": "Entradas",
-      "th3": "Fichas de cantidad bloqueadas",
-      "th4": "JSON",
-      "th5": "Borrar"
-    }
+  "topCard": {
+    "title": "Obtenga boletos de la cadena de bloques",
+    "label": "Seleccione la cadena de bloques de destino",
+    "desc": "Solo cadenas de bloques basadas en grafeno",
+    "btn1": "Obtener boletos",
+    "btn2": "Atractivo"
+  },
+  "secondCard": {
+    "th1": "cadena de bloques",
+    "th2": "Entradas",
+    "th3": "Fichas de cantidad bloqueadas",
+    "cached": "Activos en caché",
+    "th4": "JSON",
+    "th5": "Borrar"
   }
+}

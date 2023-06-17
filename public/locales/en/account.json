@@ -33,6 +33,10 @@
         "th8": "next update time",
         "th9": "next downgrade time"
     },
+    "assetTable": {
+        "th1": "Asset",
+        "th2": "Quantity"
+    },
     "footer": {
         "title": "Want to gain influence and improve your airdrop odds?",
         "create": "Create another ticket on the",

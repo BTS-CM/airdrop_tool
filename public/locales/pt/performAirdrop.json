@@ -11,9 +11,18 @@
       "processing": "Processando saldos do usuário para o token necessário",
       "table": {
         "title": "Titulares de ingressos incluídos no airdrop",
-        "th1": "eu ia",
+        "title2": "Portadores de ingressos excluídos do airdrop",
+        "th1": "Conta",
         "th2": "Quantidade",
-        "th3": "Tokens alocados"
+        "th3": "Alocação",
+        "th4": "Razão",
+        "reasons": {
+          "ltm": "Associação vitalícia ausente",
+          "noBalance": "Token obrigatório ausente",
+          "insufficientBalance": "Tokens necessários insuficientes",
+          "self": "Não é possível enviar para si mesmo",
+          "minReward": "Recompensa alocada muito pequena"
+        }
       },
       "json": "Airdrop dados JSON"
     },

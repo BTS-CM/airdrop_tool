@@ -11,9 +11,18 @@
             "processing": "Processing user balances for required token",
             "table": {
                 "title": "Ticket holders included in airdrop",
-                "th1": "id",
+                "title2": "Ticket holders excluded from airdrop",
+                "th1": "Account",
                 "th2": "Quantity",
-                "th3": "Allocated tokens"
+                "th3": "Allocation",
+                "th4": "Reason",
+                "reasons": {
+                    "ltm": "Lifetime membership missing",
+                    "noBalance": "Missing required token",
+                    "insufficientBalance": "Insufficient required tokens",
+                    "self": "Cannot send to self",
+                    "minReward": "Allocated reward too small"
+                }
             },
             "json": "Airdrop JSON data"
         },

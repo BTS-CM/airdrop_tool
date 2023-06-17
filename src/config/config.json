@@ -14,9 +14,6 @@
                 "url": "wss://nexus01.co.uk/ws"
             },
             {
-                "url": "wss://api.dex.trading/"
-            },
-            {
                 "url": "wss://api.bitshares.bhuz.info/ws"
             },
             {

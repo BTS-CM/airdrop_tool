@@ -2,7 +2,7 @@
   "header": {
     "title": "에서 에어드롭을 수행합니다. {{titleName}} 블록체인",
     "back": "뒤쪽에",
-    "others": "계산된 에어드랍"
+    "others": "계산된 에어드롭"
   },
   "noTicket": "티켓을 찾을 수 없음",
   "grid": {
@@ -11,9 +11,18 @@
       "processing": "필요한 토큰에 대한 사용자 잔액 처리",
       "table": {
         "title": "에어드롭에 포함된 티켓 소지자",
-        "th1": "ID",
+        "title2": "에어드롭 대상에서 제외되는 티켓 소지자",
+        "th1": "계정",
         "th2": "수량",
-        "th3": "할당된 토큰"
+        "th3": "배당",
+        "th4": "이유",
+        "reasons": {
+          "ltm": "평생 회원 누락",
+          "noBalance": "필수 토큰 누락",
+          "insufficientBalance": "불충분한 필수 토큰",
+          "self": "자신에게 보낼 수 없음",
+          "minReward": "할당된 보상이 너무 작음"
+        }
       },
       "json": "에어드롭 JSON 데이터"
     },
@@ -32,7 +41,7 @@
       },
       "options": {
         "title": "에어드롭 옵션",
-        "titleName": "귀하의 {{titleName}} 계정 ID",
+        "titleName": "당신의 {{titleName}} 계정 ID",
         "assetName": "에어드롭하려는 자산의 이름을 입력하세요.",
         "batchSize": "에어드롭 전송 배치의 크기",
         "tokenQuantity": "에어드롭할 토큰 수량을 입력하세요.",
@@ -56,7 +65,7 @@
       "invalid": {
         "title": "에어드랍할게 없음",
         "reason": "유효한 티켓이 없기 때문에 에어드롭할 것이 없습니다.",
-        "resolution": "에어드랍 설정을 조정하거나 다른 에어드랍을 계산하여 진행하세요."
+        "resolution": "에어드랍 설정을 조정하거나 다른 에어드롭을 계산하여 진행하세요."
       },
       "valid": {
         "title": "에어드롭을 진행하시겠습니까?",

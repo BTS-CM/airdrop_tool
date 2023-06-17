@@ -1,8 +1,5 @@
 import { Vector3, Line3 } from 'three';
-
-function humanReadableFloat(satoshis, precision) {
-  return satoshis / 10 ** precision;
-}
+import { humanReadableFloat } from './common';
 
 /**
  * Splitting arrays into chunks

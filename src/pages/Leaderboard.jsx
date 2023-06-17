@@ -16,11 +16,7 @@ import {
   Group,
 } from '@mantine/core';
 
-import { appStore, ticketStore, leaderboardStore } from '../lib/states';
-
-function humanReadableFloat(satoshis, precision) {
-  return satoshis / 10 ** precision;
-}
+import { leaderboardStore } from '../lib/states';
 
 export default function Leaderboard(properties) {
   const { t, i18n } = useTranslation();

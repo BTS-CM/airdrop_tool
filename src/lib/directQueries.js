@@ -1,10 +1,6 @@
 import { Apis } from 'bitsharesjs-ws';
 import { Apis as tuscApis } from 'tuscjs-ws';
-import { appStore } from './states';
-
-function humanReadableFloat(satoshis, precision) {
-  return satoshis / 10 ** precision;
-}
+import { humanReadableFloat } from './common';
 
 /**
  * Search for an account, given 1.2.x or an account name.
@@ -130,21 +126,25 @@ async function fetchLeaderboardData(node, env, accounts) {
 /**
  * Fetch one/many asset symbol data
  * @param {String} node
- * @param {Array} accountID
+ * @param {String} env
+ * @param {Array} asset_ids
+ * @param {Bool} apiConnection
  * @returns {Array}
  */
-async function lookupSymbols(node, env, asset_ids) {
+async function lookupSymbols(node, env, asset_ids, apiConnection = null) {
   return new Promise(async (resolve, reject) => {
-    try {
-      if (env === 'tusc') {
-        await tuscApis.instance(node, true).init_promise;
-      } else {
-        await Apis.instance(node, true).init_promise;
+    if (!apiConnection) {
+      try {
+        if (env === 'tusc') {
+          await tuscApis.instance(node, true).init_promise;
+        } else {
+          await Apis.instance(node, true).init_promise;
+        }
+      } catch (error) {
+        console.log(error);
+        reject(error);
+        return;
       }
-    } catch (error) {
-      console.log(error);
-      reject(error);
-      return;
     }
 
     let symbols;
