@@ -47,6 +47,7 @@ export default function PerformAirdrop(properties) {
   const btsAirdrops = airdropStore((state) => state.bitshares);
   const btsTestnetAirdrops = airdropStore((state) => state.bitshares_testnet);
   const tuscAirdrops = airdropStore((state) => state.tusc);
+  const updateOne = airdropStore((state) => state.updateOne);
 
   const btsLeaderboard = leaderboardStore((state) => state.bitshares);
   const btsTestnetLeaderboard = leaderboardStore((state) => state.bitshares_testnet);
@@ -55,36 +56,6 @@ export default function PerformAirdrop(properties) {
   const btsAssets = assetStore((state) => state.bitshares);
   const btsTestnetAssets = assetStore((state) => state.bitshares_testnet);
   const tuscAssets = assetStore((state) => state.tusc);
-
-  // for beet use
-  const changeURL = appStore((state) => state.changeURL);
-  const identity = beetStore((state) => state.identity);
-  const account = tempStore((state) => state.account);
-
-  const [tokenQuantity, onTokenQuantity] = useState(1);
-  const [tokenName, onTokenName] = useState("");
-  const [finalTokenName, setFinalTokenName] = useState("");
-
-  const [tokenDetails, setTokenDetails] = useState();
-  const [batchSize, onBatchSize] = useState(50);
-  const [distroMethod, setDistroMethod] = useState("Proportionally");
-  const [ltmReq, setLTMReq] = useState("no");
-  const [tokenReq, setTokenReq] = useState("no");
-
-  const [requiredToken, onRequiredToken] = useState();
-  const [requiredTokenQty, onRequiredTokenQty] = useState();
-
-  const [finalTokenQuantity, setFinalTokenQuantity] = useState(1);
-  const [requiredTokenDetails, setRequiredTokenDetails] = useState();
-  const [finalReqQty, setFinalReqQty] = useState();
-
-  const [tokenItr, setTokenItr] = useState(0);
-  const [reqdTokenItr, setReqdTokenItr] = useState(0);
-
-  const [inProgress, setInProgress] = useState(false);
-
-  const nodes = appStore((state) => state.nodes);
-  const currentNodes = nodes[params.env];
 
   let assetName = "";
   let titleName = "token";
@@ -116,15 +87,84 @@ export default function PerformAirdrop(properties) {
     cachedAssets = tuscAssets;
   }
 
+  // Beet
+  const changeURL = appStore((state) => state.changeURL);
+  const identity = beetStore((state) => state.identity);
+  const account = tempStore((state) => state.account);
+  const [inProgress, setInProgress] = useState(false);
+
+  // Radio buttons
+  const [distroMethod, setDistroMethod] = useState(plannedAirdropData.settings.distroMethod);
+  const [ltmReq, setLTMReq] = useState(plannedAirdropData.settings.ltmReq);
+  const [tokenReq, setTokenReq] = useState(plannedAirdropData.settings.tokenReq);
+
+  // Debounced input
+  const [tokenName, onTokenName] = useState(plannedAirdropData.settings.tokenName);
+  const [tokenQuantity, onTokenQuantity] = useState(plannedAirdropData.settings.tokenQuantity);
+  const [batchSize, onBatchSize] = useState(plannedAirdropData.settings.batchSize);
+
+  const [requiredToken, onRequiredToken] = useState(plannedAirdropData.settings.requiredToken);
+  const [requiredTokenQty, onRequiredTokenQty] = useState(plannedAirdropData.settings.requiredTokenQty);
+
+  // Retrieved asset info
+  const [tokenDetails, setTokenDetails] = useState();
+  const [requiredTokenDetails, setRequiredTokenDetails] = useState();
+
+  // Debounced output
+  const [finalTokenName, setFinalTokenName] = useState("");
+  const [finalTokenQuantity, setFinalTokenQuantity] = useState(1);
+  const [finalReqTokenName, setFinalReqTokenName] = useState();
+  const [finalReqQty, setFinalReqQty] = useState();
+  const [finalBatchSize, setFinalBatchSize] = useState();
+
+  // Refresh iterators
+  const [tokenItr, setTokenItr] = useState(0);
+  const [reqdTokenItr, setReqdTokenItr] = useState(0);
+
+  const nodes = appStore((state) => state.nodes);
+  const currentNodes = nodes[params.env];
+
   useEffect(() => {
-    if (params.env === 'bitshares') {
-      onTokenName("BTS");
-    } else if (params.env === 'bitshares_testnet') {
-      onTokenName("TEST");
-    } else if (params.env === 'tusc') {
-      onTokenName("TUSC");
+    if (
+      finalTokenName
+      && finalBatchSize
+      && finalTokenQuantity
+      && distroMethod
+      && ltmReq
+      && tokenReq
+      && finalReqTokenName
+      && finalReqQty
+    ) {
+      const currentSettings = plannedAirdropData.settings;
+      const newSettings = {
+        tokenName: finalTokenName,
+        batchSize: finalBatchSize,
+        tokenQuantity: finalTokenQuantity,
+        distroMethod,
+        ltmReq,
+        tokenReq,
+        requiredToken: finalReqTokenName,
+        requiredTokenQty: finalReqQty
+      };
+
+      if (!_.isEqual(currentSettings, newSettings)) {
+        updateOne(
+          params.env,
+          params.id,
+          newSettings
+        );
+      }
     }
-  }, []);
+  }, [
+    distroMethod,
+    ltmReq,
+    tokenReq,
+    finalTokenName,
+    finalReqTokenName,
+    finalTokenQuantity,
+    finalBatchSize,
+    finalReqQty
+  ]);
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(async () => {
@@ -135,6 +175,16 @@ export default function PerformAirdrop(properties) {
 
     return () => clearTimeout(delayDebounceFn);
   }, [tokenName]);
+
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(async () => {
+      if (batchSize && batchSize > 0) {
+        setFinalBatchSize(batchSize);
+      }
+    }, 1000);
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [batchSize]);
 
   // Lookup the token to airdrop
   useEffect(() => {
@@ -205,6 +255,17 @@ export default function PerformAirdrop(properties) {
     return () => clearTimeout(delayDebounceFn);
   }, [tokenQuantity]);
 
+  // Optional: Require this asset in the user balance
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(async () => {
+      if (requiredToken && requiredToken !== "") {
+        setFinalReqTokenName(requiredToken); // store new
+      }
+    }, 1000);
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [requiredToken]);
+
   // Optional: Require this many tokens in user balance
   useEffect(() => {
     const delayDebounceFn = setTimeout(async () => {
@@ -219,15 +280,15 @@ export default function PerformAirdrop(properties) {
   useEffect(() => {
     async function fetchTokenDetails() {
       const delayDebounceFn = setTimeout(async () => {
-        if (requiredToken && requiredToken.length) {
+        if (finalReqTokenName && finalReqTokenName.length) {
           setRequiredTokenDetails(); // erase last search
           setInProgress(true);
 
-          const foundCachedAsset = cachedAssets.find((asset) => asset.symbol === requiredToken);
+          const foundCachedAsset = cachedAssets.find((asset) => asset.symbol === finalReqTokenName);
           if (foundCachedAsset) {
             setRequiredTokenDetails({
               id: foundCachedAsset.id,
-              symbol: requiredToken,
+              symbol: finalReqTokenName,
               precision: foundCachedAsset.precision,
             });
             setInProgress(false);
@@ -236,7 +297,7 @@ export default function PerformAirdrop(properties) {
 
           let assetDetails;
           try {
-            assetDetails = await lookupSymbols(currentNodes[0], params.env, [requiredToken]);
+            assetDetails = await lookupSymbols(currentNodes[0], params.env, [finalReqTokenName]);
           } catch (error) {
             console.log(error);
             changeURL(params.env);
@@ -251,7 +312,7 @@ export default function PerformAirdrop(properties) {
 
           setRequiredTokenDetails({
             id: assetDetails[0].id,
-            symbol: requiredToken,
+            symbol: finalReqTokenName,
             precision: assetDetails[0].precision,
           }); // store new
 
@@ -262,7 +323,7 @@ export default function PerformAirdrop(properties) {
       return () => clearTimeout(delayDebounceFn);
     }
 
-    if (finalReqQty && finalReqQty > 0 && requiredToken && requiredToken.length) {
+    if (finalReqQty && finalReqQty > 0 && finalReqTokenName && finalReqTokenName.length) {
       fetchTokenDetails();
     }
   }, [finalReqQty, reqdTokenItr]);
@@ -273,21 +334,25 @@ export default function PerformAirdrop(properties) {
     balances: envLeaderboard.find((x) => x.id === winner.id).balances,
   })).sort((a, b) => b.qty - a.qty);
 
-  const invalidOutput = [];
+  let invalidOutput = [];
   for (let k = 0; k < sortedWinners.length; k++) {
+    if (k === 0) {
+      invalidOutput = [];
+    }
     const user = sortedWinners[k];
-    if (requiredTokenDetails) {
+    const reasons = [];
+    if (tokenReq && tokenReq === "yes" && requiredTokenDetails) {
       // Filter out users who don't meet token requirement
       const balancePresent = user.balances.map((asset) => asset.asset_id).includes(requiredTokenDetails.id);
       if (!balancePresent) {
         // missing balance
-        invalidOutput.push({ ...user, reason: t("performAirdrop:grid.left.table.reasons.noBalance") });
+        reasons.push(t("performAirdrop:grid.left.table.reasons.noBalance"));
       } else {
         const foundAsset = user.balances.find((asset) => asset.asset_id === requiredTokenDetails.id);
         const foundAmount = humanReadableFloat(foundAsset.amount, requiredTokenDetails.precision);
         if (foundAmount < finalReqQty) {
           // insufficient balance
-          invalidOutput.push({ ...user, reason: t("performAirdrop:grid.left.table.reasons.insufficientBalance") });
+          reasons.push(t("performAirdrop:grid.left.table.reasons.insufficientBalance"));
         }
       }
     }
@@ -297,14 +362,18 @@ export default function PerformAirdrop(properties) {
       const { id } = user;
       const { ltm } = envLeaderboard.find((x) => x.id === user.id).account;
       if (!ltm) {
-        invalidOutput.push({ ...user, reason: t("performAirdrop:grid.left.table.reasons.ltm") });
+        reasons.push(t("performAirdrop:grid.left.table.reasons.ltm"));
       }
     }
 
     if (account) {
       if (user.id === account) {
-        invalidOutput.push({ ...user, reason: t("performAirdrop:grid.left.table.reasons.self") });
+        reasons.push(t("performAirdrop:grid.left.table.reasons.self"));
       }
+    }
+
+    if (reasons && reasons.length) {
+      invalidOutput.push({ ...user, reason: reasons.join(", ") });
     }
   }
 
@@ -369,7 +438,7 @@ export default function PerformAirdrop(properties) {
   let invalidRows = [];
   let winnerChunks = [];
   let winners = [];
-  if (!tokenDetails || (requiredToken && finalReqQty && !requiredTokenDetails)) {
+  if (!tokenDetails || (finalReqTokenName && finalReqQty && !requiredTokenDetails)) {
     validRows = [];
     invalidRows = [];
     winnerChunks = [];
@@ -381,13 +450,13 @@ export default function PerformAirdrop(properties) {
     winners = valid;
 
     winnerChunks = valid.length
-      ? sliceIntoChunks(valid.sort((a, b) => b.qty - a.qty), batchSize)
+      ? sliceIntoChunks(valid.sort((a, b) => b.qty - a.qty), finalBatchSize)
       : [];
 
     validRows = valid.length
       ? valid
         .map((winner) => (
-          <tr key={winner.id}>
+          <tr key={`winner_${winner.id}`}>
             <td width="45%">
               <Link style={{ textDecoration: 'none', color: 'black' }} to={`/Account/${params.env}/${winner.id}`}>
                 <b>{envLeaderboard.find((usr) => usr.id === winner.id).account.name}</b>
@@ -413,7 +482,7 @@ export default function PerformAirdrop(properties) {
     invalidRows = invalidOutput.length
       ? invalidOutput
         .map((loser) => (
-          <tr key={loser.id}>
+          <tr key={`loser_${loser.id}`}>
             <td>
               <Link style={{ textDecoration: 'none', color: 'black' }} to={`/Account/${params.env}/${loser.id}`}>
                 <b>{envLeaderboard.find((usr) => usr.id === loser.id).account.name}</b>
@@ -454,7 +523,6 @@ export default function PerformAirdrop(properties) {
     ))
     : [];
 
-  //  || (!requiredTokenDetails && inProgress)
   return (
     <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
       <Title order={3} ta="center" mt="sm">
@@ -497,7 +565,7 @@ export default function PerformAirdrop(properties) {
                     : null
                 }
                 {
-                  requiredToken && !tokenDetails && !inProgress && finalTokenQuantity
+                  finalReqTokenName && !tokenDetails && !inProgress && finalTokenQuantity
                     ? (
                       <>
                         <Text>Sorry, something went wrong...</Text>
@@ -507,7 +575,7 @@ export default function PerformAirdrop(properties) {
                     : null
                 }
                 {
-                  requiredToken && !requiredTokenDetails && !inProgress && finalReqQty
+                  finalReqTokenName && !requiredTokenDetails && !inProgress && finalReqQty
                     ? (
                       <>
                         <Text>Sorry, something went wrong...</Text>
@@ -517,7 +585,7 @@ export default function PerformAirdrop(properties) {
                     : null
                 }
                 {
-                  validRows && validRows.length// && (!tokenReq && !tokenReq === 'yes' && !requiredTokenDetails)
+                  validRows && validRows.length
                     ? (
                       <>
                         <Accordion mt="xs" defaultValue="table">
@@ -786,9 +854,9 @@ export default function PerformAirdrop(properties) {
                           </Text>
                           <Text fz="sm" c="dimmed" mt="xs">
                             {
-                              validRows.length / batchSize < 1
+                              validRows.length / finalBatchSize < 1
                                 ? t("performAirdrop:grid.right.valid.single", { batchSize })
-                                : t("performAirdrop:grid.right.valid.multi", { batchSize, qtyBatches: Math.ceil(validRows.length / batchSize) })
+                                : t("performAirdrop:grid.right.valid.multi", { batchSize, qtyBatches: Math.ceil(validRows.length / finalBatchSize) })
                             }
                           </Text>
                           <Text fz="sm" c="dimmed" mt="xs">

@@ -144,6 +144,29 @@ const airdropStore = create(
           set({ tusc: [] });
         }
       },
+      updateOne: (env, airdropID, updatedSettings) => {
+        let currentAirdrops;
+        if (env === "bitshares") {
+          currentAirdrops = get().bitshares;
+        } else if (env === "bitshares_testnet") {
+          currentAirdrops = get().bitshares_testnet;
+        } else if (env === "tusc") {
+          currentAirdrops = get().tusc;
+        }
+
+        const newAirdrops = currentAirdrops.filter((x) => x.id !== airdropID);
+        const updateTarget = currentAirdrops.find((x) => x.id === airdropID);
+        updateTarget.settings = updatedSettings;
+        newAirdrops.push(updateTarget);
+
+        if (env === 'bitshares') {
+          set({ bitshares: newAirdrops });
+        } else if (env === 'bitshares_testnet') {
+          set({ bitshares_testnet: newAirdrops });
+        } else if (env === 'tusc') {
+          set({ tusc: newAirdrops });
+        }
+      },
       eraseOne: (env, airdropID) => {
         console.log(`Erasing one ${env} airdrop with ID ${airdropID}!`);
 

@@ -190,6 +190,16 @@ export default function Calculate(properties) {
       filtered_signature,
       calculatedAirdrop,
       id: calcID,
+      settings: {
+        tokenName: "BTS",
+        batchSize: 50,
+        tokenQuantity: 1,
+        distroMethod: "Equally",
+        ltmReq: "no",
+        tokenReq: "no",
+        requiredToken: "BTS",
+        requiredTokenQty: 1
+      }
     };
 
     changeAirdrops(value, finalAirdropData);
