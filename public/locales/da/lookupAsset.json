@@ -1,0 +1,6 @@
+{
+    "title": "Aktivopslag",
+    "inputText": "Gå ind i {{chain}} aktivnavn eller id",
+    "header": "Kun aktiver ejet af {{chain}} ticket leaderboard-konti vil blive inkluderet i søgeresultaterne.",
+    "searching": "Leder efter {{chain}} aktiv med titlen {{input}}"
+  }

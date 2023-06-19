@@ -6,6 +6,8 @@
     "language": "언어",
     "createTicket": "티켓 만들기",
     "upgradeAccount": "업그레이드 계정",
+    "lookupAccount": "조회 계정",
+    "lookupAsset": "자산 조회",
     "fetchTickets": "티켓 가져오기",
     "calculateAirdrop": "에어드롭 계산",
     "calculatedAirdrops": "계산된 에어드롭",

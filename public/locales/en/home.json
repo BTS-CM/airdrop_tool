@@ -28,8 +28,20 @@
             "desc": "Perform token airdrops on the blockchain"
         },
         "createTicket": {
-            "title": "Ticket creation",
+            "title": "Create a ticket",
             "desc": "Lock tokens to vote and get airdrops"
+        },
+        "upgrade": {
+            "title": "Upgrade account",
+            "desc": "Purchase a lifetime membership"
+        },
+        "lookupAccount": {
+            "title": "Lookup an account",
+            "desc": "Search for blockchain accounts"
+        },
+        "lookupAsset": {
+            "title": "Lookup an asset",
+            "desc": "Search for blockchain assets"
         },
         "faq": {
             "title": "Frequently asked questions",

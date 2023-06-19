@@ -1,0 +1,7 @@
+{
+    "title": "búsqueda de cuenta",
+    "inputText": "Introducir el {{chain}} nombre de cuenta o identificación",
+    "header": "Solo cuentas en el {{chain}} la clasificación de boletos se incluirá en los resultados de búsqueda.",
+    "searching": "Buscando el {{chain}} cuenta titulada {{input}}",
+    "results": "Resultados de la búsqueda"
+  }

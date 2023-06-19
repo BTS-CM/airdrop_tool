@@ -1,0 +1,6 @@
+{
+    "title": "Recherche d'actifs",
+    "inputText": "Entrer le {{chain}} nom ou ID de l'actif",
+    "header": "Seuls les actifs détenus par {{chain}} les comptes de classement des tickets seront inclus dans les résultats de la recherche.",
+    "searching": "A la recherche du {{chain}} actif intitulé {{input}}"
+  }

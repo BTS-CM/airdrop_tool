@@ -1,0 +1,6 @@
+{
+    "title": "búsqueda de activos",
+    "inputText": "Introducir el {{chain}} nombre o identificación del activo",
+    "header": "Sólo los bienes en poder de {{chain}} Las cuentas de clasificación de boletos se incluirán en los resultados de búsqueda.",
+    "searching": "Buscando el {{chain}} activo titulado {{input}}"
+  }

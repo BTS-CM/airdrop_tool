@@ -1,0 +1,7 @@
+{
+    "title": "계정 조회",
+    "inputText": "들어가다 {{chain}} 계정 이름 또는 ID",
+    "header": "에 있는 계정만 {{chain}} 티켓 리더보드가 검색 결과에 포함됩니다.",
+    "searching": "찾고 {{chain}} 제목이 있는 계정 {{input}}",
+    "results": "검색 결과"
+  }

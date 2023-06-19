@@ -1,0 +1,6 @@
+{
+    "title": "자산 조회",
+    "inputText": "들어가다 {{chain}} 저작물 이름 또는 ID",
+    "header": "보유한 자산만 {{chain}} 티켓 리더보드 계정이 검색 결과에 포함됩니다.",
+    "searching": "찾고 {{chain}} 자산 제목 {{input}}"
+  }

@@ -1,0 +1,7 @@
+{
+    "title": "Kontoopslag",
+    "inputText": "Gå ind i {{chain}} kontonavn eller ID",
+    "header": "Kun konti i {{chain}} billetliste vil blive inkluderet i søgeresultaterne.",
+    "searching": "Leder efter {{chain}} konto med titlen {{input}}",
+    "results": "Søgeresultater"
+  }

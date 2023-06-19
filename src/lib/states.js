@@ -66,6 +66,26 @@ const assetStore = create(
           set({ tusc: leaders });
         }
       },
+      addOne: (env, newAsset) => {
+        let currentAssets;
+        if (env === "bitshares") {
+          currentAssets = get().bitshares;
+        } else if (env === "bitshares_testnet") {
+          currentAssets = get().bitshares_testnet;
+        } else if (env === "tusc") {
+          currentAssets = get().tusc;
+        }
+
+        currentAssets.push(newAsset);
+
+        if (env === 'bitshares') {
+          set({ bitshares: currentAssets });
+        } else if (env === 'bitshares_testnet') {
+          set({ bitshares_testnet: currentAssets });
+        } else if (env === 'tusc') {
+          set({ tusc: currentAssets });
+        }
+      },
       eraseAssets: (env) => {
         console.log(`Erasing ${env} leaderboards!`);
         if (env === 'bitshares') {

@@ -1,0 +1,6 @@
+{
+    "title": "pesquisa de ativos",
+    "inputText": "Introduzir o {{chain}} nome ou ID do recurso",
+    "header": "Somente ativos detidos por {{chain}} as contas do placar de tickets serão incluídas nos resultados da pesquisa.",
+    "searching": "Procurando o {{chain}} ativo intitulado {{input}}"
+  }

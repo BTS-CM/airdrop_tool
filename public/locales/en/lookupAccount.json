@@ -1,0 +1,7 @@
+{
+    "title": "Account lookup",
+    "inputText": "Enter the {{chain}} account name or ID",
+    "header": "Only accounts in the {{chain}} ticket leaderboard will be included in the search results.",
+    "searching": "Looking for the {{chain}} account titled {{input}}",
+    "results": "Search results"
+}

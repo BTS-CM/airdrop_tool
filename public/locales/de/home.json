@@ -1,43 +1,55 @@
 {
-    "title": "Willkommen beim Bitshares Beet Airdrop-Tool!",
-    "desc": "Die folgenden Funktionen sind für die Bitshares-Blockchains verfügbar!",
-    "footer": "Um den in diesem Tool verfügbaren Funktionsumfang vollständig nutzen zu können, ist das Bitshares BEET Multiwallet erforderlich.",
-    "grid": {
-      "ticketRetrieval": {
-        "title": "Ticketabruf",
-        "desc": "Holen Sie sich Blockchain-Abstimmungskarten"
-      },
-      "ticketAnalysis": {
-        "title": "Ticketdatenanalyse",
-        "desc": "Analysieren Sie den Inhalt von Stimmzetteln"
-      },
-      "ticketLeaderboard": {
-        "title": "Ticket-Bestenlisten",
-        "desc": "Sortiert Abstimmungstickets in Bestenlisten"
-      },
-      "airdropCalc": {
-        "title": "Airdrop-Berechnung",
-        "desc": "Erstellen Sie Airdrop-Vektoren mit nachweislich zufälligen Blockchain-basierten Eingaben"
-      },
-      "airdropAnalysis": {
-        "title": "Berechnete Airdrop-Analyse",
-        "desc": "Überprüfen Sie den Inhalt der berechneten Airdrops vor der Ausführung auf der Blockchain"
-      },
-      "airdropExecute": {
-        "title": "Airdrop-Ausführung",
-        "desc": "Führen Sie Token-Airdrops auf der Blockchain durch"
-      },
-      "createTicket": {
-        "title": "Ticketerstellung",
-        "desc": "Sperren Sie Token, um abzustimmen und Airdrops zu erhalten"
-      },
-      "faq": {
-        "title": "Häufig gestellte Fragen",
-        "desc": "Erfahren Sie mehr über Airdrops, Tickets und Blockchains"
-      },
-      "nodes": {
-        "title": "Konfigurierbare Knoten",
-        "desc": "Wechseln Sie zwischen Blockchain-Knoten"
-      }
+  "title": "Willkommen beim Bitshares Beet Airdrop-Tool!",
+  "desc": "Die folgenden Funktionen sind für die Bitshares-Blockchains verfügbar!",
+  "footer": "Um den in diesem Tool verfügbaren Funktionsumfang vollständig nutzen zu können, ist das Bitshares BEET Multiwallet erforderlich.",
+  "grid": {
+    "ticketRetrieval": {
+      "title": "Ticketabruf",
+      "desc": "Holen Sie sich Blockchain-Abstimmungskarten"
+    },
+    "ticketAnalysis": {
+      "title": "Ticketdatenanalyse",
+      "desc": "Analysieren Sie den Inhalt von Stimmzetteln"
+    },
+    "ticketLeaderboard": {
+      "title": "Ticket-Bestenlisten",
+      "desc": "Sortiert Abstimmungstickets in Bestenlisten"
+    },
+    "airdropCalc": {
+      "title": "Airdrop-Berechnung",
+      "desc": "Erstellen Sie Airdrop-Vektoren mit nachweislich zufälligen Blockchain-basierten Eingaben"
+    },
+    "airdropAnalysis": {
+      "title": "Berechnete Airdrop-Analyse",
+      "desc": "Überprüfen Sie den Inhalt der berechneten Airdrops vor der Ausführung auf der Blockchain"
+    },
+    "airdropExecute": {
+      "title": "Airdrop-Ausführung",
+      "desc": "Führen Sie Token-Airdrops auf der Blockchain durch"
+    },
+    "createTicket": {
+      "title": "Erstellen Sie ein Ticket",
+      "desc": "Sperren Sie Token, um abzustimmen und Airdrops zu erhalten"
+    },
+    "upgrade": {
+      "title": "Konto aktualisieren",
+      "desc": "Erwerben Sie eine lebenslange Mitgliedschaft"
+    },
+    "lookupAccount": {
+      "title": "Suchen Sie nach einem Konto",
+      "desc": "Suchen Sie nach Blockchain-Konten"
+    },
+    "lookupAsset": {
+      "title": "Suchen Sie nach einem Vermögenswert",
+      "desc": "Suchen Sie nach Blockchain-Assets"
+    },
+    "faq": {
+      "title": "Häufig gestellte Fragen",
+      "desc": "Erfahren Sie mehr über Airdrops, Tickets und Blockchains"
+    },
+    "nodes": {
+      "title": "Konfigurierbare Knoten",
+      "desc": "Wechseln Sie zwischen Blockchain-Knoten"
     }
   }
+}

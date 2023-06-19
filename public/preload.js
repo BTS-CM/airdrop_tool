@@ -23,6 +23,8 @@ window.electron = {
       'calculate',
       'beet',
       'calculatedAirdrops',
+      'lookupAccount',
+      'lookupAsset',
       'getAccount',
       'accountSearch',
       'create',

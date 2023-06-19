@@ -1,43 +1,55 @@
 {
-    "title": "Velkommen til Bitshares Beet Airdrop-værktøjet!",
-    "desc": "Følgende funktioner er tilgængelige for Bitshares blockchains!",
-    "footer": "For at få fuld brug af funktionssættet, der er tilgængeligt i dette værktøj, er Bitshares BEET multiwallet påkrævet.",
-    "grid": {
-      "ticketRetrieval": {
-        "title": "Billethentning",
-        "desc": "Hent blockchain stemmesedler"
-      },
-      "ticketAnalysis": {
-        "title": "Billetdataanalyse",
-        "desc": "Analyser indholdet af stemmesedler"
-      },
-      "ticketLeaderboard": {
-        "title": "Billet leaderboards",
-        "desc": "Sorterer stemmesedler i ranglister"
-      },
-      "airdropCalc": {
-        "title": "Airdrop beregning",
-        "desc": "Opret airdrop-vektorer med beviseligt tilfældige blockchain-baserede input"
-      },
-      "airdropAnalysis": {
-        "title": "Beregnet luftfaldsanalyse",
-        "desc": "Bekræft indholdet af beregnede luftdråber før udførelse på blockchain"
-      },
-      "airdropExecute": {
-        "title": "Airdrop udførelse",
-        "desc": "Udfør token airdrops på blockchain"
-      },
-      "createTicket": {
-        "title": "Billetoprettelse",
-        "desc": "Lås tokens for at stemme og få airdrops"
-      },
-      "faq": {
-        "title": "Ofte stillede spørgsmål",
-        "desc": "Lær mere om airdrops, billetter og blockchains"
-      },
-      "nodes": {
-        "title": "Konfigurerbare noder",
-        "desc": "Skift mellem blockchain noder"
-      }
+  "title": "Velkommen til Bitshares Beet Airdrop-værktøjet!",
+  "desc": "Følgende funktioner er tilgængelige for Bitshares blockchains!",
+  "footer": "For at få fuld brug af funktionssættet, der er tilgængeligt i dette værktøj, er Bitshares BEET multiwallet påkrævet.",
+  "grid": {
+    "ticketRetrieval": {
+      "title": "Billethentning",
+      "desc": "Hent blockchain stemmesedler"
+    },
+    "ticketAnalysis": {
+      "title": "Billetdataanalyse",
+      "desc": "Analyser indholdet af stemmesedler"
+    },
+    "ticketLeaderboard": {
+      "title": "Billet leaderboards",
+      "desc": "Sorterer stemmesedler i ranglister"
+    },
+    "airdropCalc": {
+      "title": "Airdrop beregning",
+      "desc": "Opret airdrop-vektorer med beviseligt tilfældige blockchain-baserede input"
+    },
+    "airdropAnalysis": {
+      "title": "Beregnet luftfaldsanalyse",
+      "desc": "Bekræft indholdet af beregnede luftdråber før udførelse på blockchain"
+    },
+    "airdropExecute": {
+      "title": "Airdrop udførelse",
+      "desc": "Udfør token airdrops på blockchain"
+    },
+    "createTicket": {
+      "title": "Opret en billet",
+      "desc": "Lås tokens for at stemme og få airdrops"
+    },
+    "upgrade": {
+      "title": "Opgrader konto",
+      "desc": "Køb et livstidsmedlemskab"
+    },
+    "lookupAccount": {
+      "title": "Slå en konto op",
+      "desc": "Søg efter blockchain-konti"
+    },
+    "lookupAsset": {
+      "title": "Søg efter et aktiv",
+      "desc": "Søg efter blockchain-aktiver"
+    },
+    "faq": {
+      "title": "Ofte stillede spørgsmål",
+      "desc": "Lær mere om airdrops, billetter og blockchains"
+    },
+    "nodes": {
+      "title": "Konfigurerbare noder",
+      "desc": "Skift mellem blockchain noder"
     }
   }
+}

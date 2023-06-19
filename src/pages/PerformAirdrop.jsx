@@ -56,6 +56,7 @@ export default function PerformAirdrop(properties) {
   const btsAssets = assetStore((state) => state.bitshares);
   const btsTestnetAssets = assetStore((state) => state.bitshares_testnet);
   const tuscAssets = assetStore((state) => state.tusc);
+  const addOne = assetStore((state) => state.addOne);
 
   let assetName = "";
   let titleName = "token";
@@ -224,6 +225,19 @@ export default function PerformAirdrop(properties) {
             return;
           }
 
+          const assetData = assetDetails.map((q) => ({
+            id: q.id,
+            symbol: q.symbol,
+            precision: q.precision,
+            issuer: q.issuer,
+            options: {
+              max_supply: q.options.max_supply
+            },
+            dynamic_asset_data_id: q.dynamic_asset_data_id
+          }));
+
+          addOne(params.env, assetData[0]);
+
           setTokenDetails({
             id: assetDetails[0].id,
             precision: assetDetails[0].precision,
@@ -309,6 +323,19 @@ export default function PerformAirdrop(properties) {
             setInProgress(false);
             return;
           }
+
+          const assetData = assetDetails.map((q) => ({
+            id: q.id,
+            symbol: q.symbol,
+            precision: q.precision,
+            issuer: q.issuer,
+            options: {
+              max_supply: q.options.max_supply
+            },
+            dynamic_asset_data_id: q.dynamic_asset_data_id
+          }));
+
+          addOne(params.env, assetData[0]);
 
           setRequiredTokenDetails({
             id: assetDetails[0].id,

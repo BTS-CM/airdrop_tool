@@ -17,6 +17,7 @@ import {
   HiViewList,
   HiOutlineCalculator,
   HiOutlineSave,
+  HiOutlineIdentification,
   HiOutlinePaperAirplane,
   HiPlus,
   HiOutlineLogin,
@@ -25,22 +26,6 @@ import {
   HiSearch,
   HiOutlineQuestionMarkCircle,
 } from "react-icons/hi";
-
-/*
-  <Link style={{ textDecoration: 'none' }} to="/faq">
-      <Card shadow="md" radius="md" padding="xl">
-          <ThemeIcon variant="light" size={40} radius={40}>
-              <HiSearch />
-          </ThemeIcon>
-          <Text fz="lg" fw={500} mt="sm">
-              Account search
-          </Text>
-          <Text fz="sm" c="dimmed" mt="sm">
-              Search for blockchain accounts
-          </Text>
-      </Card>
-  </Link>
-*/
 
 export default function Home(properties) {
   const { t, i18n } = useTranslation();
@@ -144,6 +129,45 @@ export default function Home(properties) {
             <Text fz="sm" c="dimmed" mt="sm">
               {t("home:grid.createTicket.desc")}
             </Text>
+          </Card>
+        </Link>
+        <Link style={{ textDecoration: 'none' }} to="/Upgrade">
+          <Card shadow="md" radius="md" padding="xl">
+            <ThemeIcon variant="light" size={40} radius={40}>
+              <HiOutlineIdentification />
+            </ThemeIcon>
+            <Text fz="lg" fw={500} mt="sm">
+              {t("home:grid.upgrade.title")}
+            </Text>
+            <Text fz="sm" c="dimmed" mt="sm">
+              {t("home:grid.upgrade.desc")}
+            </Text>
+          </Card>
+        </Link>
+        <Link style={{ textDecoration: 'none' }} to="/lookupAccount">
+          <Card shadow="md" radius="md" padding="xl">
+              <ThemeIcon variant="light" size={40} radius={40}>
+                  <HiSearch />
+              </ThemeIcon>
+              <Text fz="lg" fw={500} mt="sm">
+                {t("home:grid.lookupAccount.title")}
+              </Text>
+              <Text fz="sm" c="dimmed" mt="sm">
+                {t("home:grid.lookupAccount.desc")}
+              </Text>
+          </Card>
+        </Link>
+        <Link style={{ textDecoration: 'none' }} to="/lookupAsset">
+          <Card shadow="md" radius="md" padding="xl">
+              <ThemeIcon variant="light" size={40} radius={40}>
+                  <HiSearch />
+              </ThemeIcon>
+              <Text fz="lg" fw={500} mt="sm">
+                {t("home:grid.lookupAsset.title")}
+              </Text>
+              <Text fz="sm" c="dimmed" mt="sm">
+                {t("home:grid.lookupAsset.desc")}
+              </Text>
           </Card>
         </Link>
         <Link style={{ textDecoration: 'none' }} to="/faq">

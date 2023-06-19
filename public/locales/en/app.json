@@ -6,6 +6,8 @@
         "language": "Language",
         "createTicket": "Create ticket",
         "upgradeAccount": "Upgrade account",
+        "lookupAccount": "Lookup account",
+        "lookupAsset": "Lookup asset",
         "fetchTickets": "Fetch tickets",
         "calculateAirdrop": "Calculate airdrop",
         "calculatedAirdrops": "Calculated airdrops",

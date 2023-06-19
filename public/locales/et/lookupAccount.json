@@ -1,0 +1,7 @@
+{
+    "title": "Konto otsing",
+    "inputText": "Sisestage {{chain}} konto nimi või ID",
+    "header": "Ainult kontod {{chain}} piletite edetabel kaasatakse otsingutulemustesse.",
+    "searching": "Otsid {{chain}} konto pealkirjaga {{input}}",
+    "results": "Otsingu tulemused"
+  }

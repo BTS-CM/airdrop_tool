@@ -1,0 +1,6 @@
+{
+    "title": "Asset-Suche",
+    "inputText": "Geben Sie die ein {{chain}} Asset-Name oder ID",
+    "header": "Nur Vermögenswerte, die von gehalten werden {{chain}} Ticket-Ranglistenkonten werden in die Suchergebnisse einbezogen.",
+    "searching": "Auf der Suche nach dem {{chain}} Vermögenswert betitelt {{input}}"
+  }

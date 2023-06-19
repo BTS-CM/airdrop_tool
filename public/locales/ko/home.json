@@ -1,43 +1,55 @@
 {
-    "title": "Bitshares Beet Airdrop 도구에 오신 것을 환영합니다!",
-    "desc": "다음 기능은 Bitshares 블록체인에서 사용할 수 있습니다!",
-    "footer": "이 도구에서 사용할 수 있는 기능 세트를 최대한 활용하려면 Bitshares BEET 다중 지갑이 필요합니다.",
-    "grid": {
-      "ticketRetrieval": {
-        "title": "티켓 회수",
-        "desc": "블록체인 투표 티켓 가져오기"
-      },
-      "ticketAnalysis": {
-        "title": "티켓 데이터 분석",
-        "desc": "투표권 내용 분석"
-      },
-      "ticketLeaderboard": {
-        "title": "티켓 순위표",
-        "desc": "투표 티켓을 리더보드로 정렬"
-      },
-      "airdropCalc": {
-        "title": "에어드롭 계산",
-        "desc": "임의의 블록체인 기반 입력으로 에어드랍 벡터 생성"
-      },
-      "airdropAnalysis": {
-        "title": "계산된 에어드랍 분석",
-        "desc": "블록체인에서 실행하기 전에 계산된 에어드랍의 내용을 확인합니다."
-      },
-      "airdropExecute": {
-        "title": "에어드롭 실행",
-        "desc": "블록체인에서 토큰 에어드롭 수행"
-      },
-      "createTicket": {
-        "title": "티켓 생성",
-        "desc": "투표하고 에어드롭을 받으려면 토큰을 잠그세요"
-      },
-      "faq": {
-        "title": "자주 묻는 질문",
-        "desc": "에어드롭, 티켓 및 블록체인에 대해 자세히 알아보기"
-      },
-      "nodes": {
-        "title": "구성 가능한 노드",
-        "desc": "블록체인 노드 간 전환"
-      }
+  "title": "Bitshares Beet Airdrop 도구에 오신 것을 환영합니다!",
+  "desc": "다음 기능은 Bitshares 블록체인에서 사용할 수 있습니다!",
+  "footer": "이 도구에서 사용할 수 있는 기능 세트를 최대한 활용하려면 Bitshares BEET 다중 지갑이 필요합니다.",
+  "grid": {
+    "ticketRetrieval": {
+      "title": "티켓 회수",
+      "desc": "블록체인 투표 티켓 가져오기"
+    },
+    "ticketAnalysis": {
+      "title": "티켓 데이터 분석",
+      "desc": "투표권 내용 분석"
+    },
+    "ticketLeaderboard": {
+      "title": "티켓 리더보드",
+      "desc": "투표 티켓을 리더보드로 정렬"
+    },
+    "airdropCalc": {
+      "title": "에어드롭 계산",
+      "desc": "임의의 블록체인 기반 입력으로 에어드롭 벡터 생성"
+    },
+    "airdropAnalysis": {
+      "title": "계산된 에어드롭 분석",
+      "desc": "블록체인에서 실행하기 전에 계산된 에어드랍의 내용을 확인합니다."
+    },
+    "airdropExecute": {
+      "title": "에어드롭 실행",
+      "desc": "블록체인에서 토큰 에어드롭 수행"
+    },
+    "createTicket": {
+      "title": "티켓 만들기",
+      "desc": "투표하고 에어드롭을 받으려면 토큰을 잠그세요"
+    },
+    "upgrade": {
+      "title": "업그레이드 계정",
+      "desc": "평생회원권 구매"
+    },
+    "lookupAccount": {
+      "title": "계정 조회",
+      "desc": "블록체인 계정 검색"
+    },
+    "lookupAsset": {
+      "title": "자산 조회",
+      "desc": "블록체인 자산 검색"
+    },
+    "faq": {
+      "title": "자주 묻는 질문",
+      "desc": "에어드롭, 티켓 및 블록체인에 대해 자세히 알아보기"
+    },
+    "nodes": {
+      "title": "구성 가능한 노드",
+      "desc": "블록체인 노드 간 전환"
     }
   }
+}

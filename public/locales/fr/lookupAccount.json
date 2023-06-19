@@ -1,0 +1,7 @@
+{
+    "title": "Recherche de compte",
+    "inputText": "Entrer le {{chain}} nom ou identifiant du compte",
+    "header": "Seuls les comptes dans le {{chain}} le classement des billets sera inclus dans les résultats de la recherche.",
+    "searching": "A la recherche du {{chain}} compte intitulé {{input}}",
+    "results": "Résultats de recherche"
+  }

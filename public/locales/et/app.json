@@ -6,6 +6,8 @@
     "language": "Keel",
     "createTicket": "Loo pilet",
     "upgradeAccount": "Täiendage kontot",
+    "lookupAccount": "Otsi kontot",
+    "lookupAsset": "Otsi vara",
     "fetchTickets": "Too piletid",
     "calculateAirdrop": "Arvutage õhulangus",
     "calculatedAirdrops": "Arvutatud õhutilgad",

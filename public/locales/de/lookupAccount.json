@@ -1,0 +1,7 @@
+{
+    "title": "Kontosuche",
+    "inputText": "Geben Sie die ein {{chain}} Kontoname oder ID",
+    "header": "Nur Konten in der {{chain}} Die Ticket-Bestenliste wird in die Suchergebnisse aufgenommen.",
+    "searching": "Auf der Suche nach dem {{chain}} Konto mit dem Titel {{input}}",
+    "results": "Suchergebnisse"
+  }

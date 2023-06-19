@@ -1,0 +1,6 @@
+{
+    "title": "Ricerca risorse",
+    "inputText": "Inserisci il {{chain}} nome o ID dell'asset",
+    "header": "Solo beni detenuti da {{chain}} gli account della classifica dei biglietti saranno inclusi nei risultati della ricerca.",
+    "searching": "Alla ricerca del {{chain}} asset intitolato {{input}}"
+  }

@@ -1,0 +1,6 @@
+{
+    "title": "Varade otsimine",
+    "inputText": "Sisestage {{chain}} vara nimi või ID",
+    "header": "Ainult valduses olevad varad {{chain}} piletite edetabeli kontod kaasatakse otsingutulemustesse.",
+    "searching": "Otsid {{chain}} vara pealkirjaga {{input}}"
+  }

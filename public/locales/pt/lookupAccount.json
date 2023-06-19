@@ -1,0 +1,7 @@
+{
+    "title": "Pesquisa de conta",
+    "inputText": "Introduzir o {{chain}} nome ou ID da conta",
+    "header": "Apenas contas no {{chain}} tabela de classificação de ingressos será incluída nos resultados da pesquisa.",
+    "searching": "Procurando o {{chain}} conta intitulada {{input}}",
+    "results": "Procurar Resultados"
+  }

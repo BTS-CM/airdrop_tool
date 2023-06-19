@@ -34,6 +34,7 @@ export default function Account(properties) {
   const btsAssets = assetStore((state) => state.bitshares);
   const btsTestnetAssets = assetStore((state) => state.bitshares_testnet);
   const tuscAssets = assetStore((state) => state.tusc);
+  const addOne = assetStore((state) => state.addOne);
 
   const nodes = appStore((state) => state.nodes);
   const changeURL = appStore((state) => state.changeURL);
@@ -84,6 +85,20 @@ export default function Account(properties) {
       if (currentAsset && currentAsset.length) {
         setAssetDetails(currentAsset[0]);
       }
+
+      const assetData = currentAsset.map((q) => ({
+        id: q.id,
+        symbol: q.symbol,
+        precision: q.precision,
+        issuer: q.issuer,
+        options: {
+          max_supply: q.options.max_supply
+        },
+        dynamic_asset_data_id: q.dynamic_asset_data_id
+      }));
+
+      addOne(params.env, assetData[0]);
+
       setInProgress(false);
     }
     if (params.env && params.id && !inProgress) {
@@ -119,6 +134,8 @@ export default function Account(properties) {
     </tr>
   ));
 
+  console.log({assetDetails})
+
   let assetRows;
   if (assetDetails) {
     assetRows = [
@@ -126,21 +143,23 @@ export default function Account(properties) {
         {t("asset:symbol")}: {assetDetails.symbol}
       </Text>,
       <Text>
-        {t("asset:issuer")}: {assetDetails.issuer}
+        {t("asset:issuer")}: {assetDetails.issuer ?? '???'}
       </Text>,
       <Text>
         {t("asset:precision")}: {assetDetails.precision}
       </Text>,
       <Text>
         {t("asset:maxSupply")}: {
-          humanReadableFloat(
-            assetDetails.options.max_supply,
-            assetDetails.precision
-          ).toLocaleString()
+          assetDetails.options
+            ? humanReadableFloat(
+              assetDetails.options.max_supply,
+              assetDetails.precision
+            ).toLocaleString()
+            : '???'
         }
       </Text>,
       <Text>
-        {t("asset:dynamicData")}: {assetDetails.dynamic_asset_data_id}
+        {t("asset:dynamicData")}: {assetDetails.dynamic_asset_data_id ?? '???'}
       </Text>,
       <br />,
       <Text>

@@ -6,6 +6,8 @@
     "language": "言語",
     "createTicket": "チケットの作成",
     "upgradeAccount": "アカウントをアップグレードする",
+    "lookupAccount": "アカウントの検索",
+    "lookupAsset": "アセットの検索",
     "fetchTickets": "チケットを取得する",
     "calculateAirdrop": "エアドロップを計算する",
     "calculatedAirdrops": "計算されたエアドロップ",

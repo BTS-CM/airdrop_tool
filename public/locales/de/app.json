@@ -6,6 +6,8 @@
     "language": "Sprache",
     "createTicket": "Ticket erstellen",
     "upgradeAccount": "Konto aktualisieren",
+    "lookupAccount": "Suchkonto",
+    "lookupAsset": "Asset suchen",
     "fetchTickets": "Karten holen",
     "calculateAirdrop": "Airdrop berechnen",
     "calculatedAirdrops": "Berechnete Lufttropfen",

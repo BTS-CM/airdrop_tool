@@ -6,6 +6,8 @@
     "language": "Sprog",
     "createTicket": "Opret billet",
     "upgradeAccount": "Opgrader konto",
+    "lookupAccount": "Opslagskonto",
+    "lookupAsset": "Opslagsaktiv",
     "fetchTickets": "Hent billetter",
     "calculateAirdrop": "Beregn luftfald",
     "calculatedAirdrops": "Beregnet luftdråber",

@@ -1,0 +1,7 @@
+{
+    "title": "Ricerca dell'account",
+    "inputText": "Inserisci il {{chain}} nome account o ID",
+    "header": "Solo gli account in {{chain}} la classifica dei biglietti sarà inclusa nei risultati della ricerca.",
+    "searching": "Alla ricerca del {{chain}} conto intitolato {{input}}",
+    "results": "Risultati di ricerca"
+  }

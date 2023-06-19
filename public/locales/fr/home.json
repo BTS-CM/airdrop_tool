@@ -1,43 +1,55 @@
 {
-    "title": "Bienvenue dans l'outil Bitshares Beet Airdrop !",
-    "desc": "Les fonctionnalités suivantes sont disponibles pour les blockchains Bitshares !",
-    "footer": "Pour tirer pleinement parti de l'ensemble des fonctionnalités disponibles dans cet outil, le multiportefeuille Bitshares BEET est requis.",
-    "grid": {
-      "ticketRetrieval": {
-        "title": "Récupération des billets",
-        "desc": "Récupérer les tickets de vote blockchain"
-      },
-      "ticketAnalysis": {
-        "title": "Analyse des données de tickets",
-        "desc": "Analyser le contenu des billets de vote"
-      },
-      "ticketLeaderboard": {
-        "title": "Classements des billets",
-        "desc": "Trie les tickets de vote dans les classements"
-      },
-      "airdropCalc": {
-        "title": "Calcul du largage aérien",
-        "desc": "Créez des vecteurs de largage aérien avec des entrées basées sur une blockchain aléatoirement prouvée"
-      },
-      "airdropAnalysis": {
-        "title": "Analyse de largage calculée",
-        "desc": "Vérifier le contenu des parachutages calculés avant l'exécution sur la blockchain"
-      },
-      "airdropExecute": {
-        "title": "Exécution du largage aérien",
-        "desc": "Effectuer des parachutages de jetons sur la blockchain"
-      },
-      "createTicket": {
-        "title": "Création de ticket",
-        "desc": "Verrouillez les jetons pour voter et obtenir des parachutages"
-      },
-      "faq": {
-        "title": "Questions fréquemment posées",
-        "desc": "En savoir plus sur les parachutages, les tickets et les blockchains"
-      },
-      "nodes": {
-        "title": "Nœuds configurables",
-        "desc": "Basculer entre les nœuds de la blockchain"
-      }
+  "title": "Bienvenue dans l'outil Bitshares Beet Airdrop !",
+  "desc": "Les fonctionnalités suivantes sont disponibles pour les blockchains Bitshares !",
+  "footer": "Pour tirer pleinement parti de l'ensemble des fonctionnalités disponibles dans cet outil, le multiportefeuille Bitshares BEET est requis.",
+  "grid": {
+    "ticketRetrieval": {
+      "title": "Récupération des billets",
+      "desc": "Récupérer les tickets de vote blockchain"
+    },
+    "ticketAnalysis": {
+      "title": "Analyse des données de tickets",
+      "desc": "Analyser le contenu des billets de vote"
+    },
+    "ticketLeaderboard": {
+      "title": "Classements des billets",
+      "desc": "Trie les tickets de vote dans les classements"
+    },
+    "airdropCalc": {
+      "title": "Calcul du largage aérien",
+      "desc": "Créez des vecteurs de largage aérien avec des entrées basées sur une blockchain aléatoirement prouvée"
+    },
+    "airdropAnalysis": {
+      "title": "Analyse de largage calculée",
+      "desc": "Vérifier le contenu des parachutages calculés avant l'exécution sur la blockchain"
+    },
+    "airdropExecute": {
+      "title": "Exécution du largage aérien",
+      "desc": "Effectuer des parachutages de jetons sur la blockchain"
+    },
+    "createTicket": {
+      "title": "Créer un billet",
+      "desc": "Verrouillez les jetons pour voter et obtenir des parachutages"
+    },
+    "upgrade": {
+      "title": "Améliorer le compte",
+      "desc": "Achetez un abonnement à vie"
+    },
+    "lookupAccount": {
+      "title": "Rechercher un compte",
+      "desc": "Rechercher des comptes blockchain"
+    },
+    "lookupAsset": {
+      "title": "Rechercher un actif",
+      "desc": "Rechercher des actifs blockchain"
+    },
+    "faq": {
+      "title": "Questions fréquemment posées",
+      "desc": "En savoir plus sur les parachutages, les tickets et les blockchains"
+    },
+    "nodes": {
+      "title": "Nœuds configurables",
+      "desc": "Basculer entre les nœuds de la blockchain"
     }
   }
+}

@@ -6,6 +6,8 @@
     "language": "Linguagem",
     "createTicket": "Criar ticket",
     "upgradeAccount": "Atualizar conta",
+    "lookupAccount": "Procurar conta",
+    "lookupAsset": "Ativo de pesquisa",
     "fetchTickets": "Buscar ingressos",
     "calculateAirdrop": "Calcular lançamento aéreo",
     "calculatedAirdrops": "airdrops calculados",

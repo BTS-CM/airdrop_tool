@@ -6,6 +6,8 @@
     "language": "ภาษา",
     "createTicket": "สร้างตั๋ว",
     "upgradeAccount": "อัปเกรดบัญชี",
+    "lookupAccount": "ค้นหาบัญชี",
+    "lookupAsset": "ค้นหาเนื้อหา",
     "fetchTickets": "ดึงตั๋ว",
     "calculateAirdrop": "คำนวณการลดลงของอากาศ",
     "calculatedAirdrops": "คำนวณ airdrops",

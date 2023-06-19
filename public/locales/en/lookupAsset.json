@@ -1,0 +1,6 @@
+{
+    "title": "Asset lookup",
+    "inputText": "Enter the {{chain}} asset name or ID",
+    "header": "Only assets held by {{chain}} ticket leaderboard accounts will be included in the search results.",
+    "searching": "Looking for the {{chain}} asset titled {{input}}"
+}

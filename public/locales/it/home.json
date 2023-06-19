@@ -1,43 +1,55 @@
 {
-    "title": "Benvenuto nello strumento Bitshares Beet Airdrop!",
-    "desc": "Le seguenti funzionalità sono disponibili per le blockchain di Bitshares!",
-    "footer": "Per sfruttare appieno il set di funzionalità disponibile in questo strumento, è necessario il multiwallet BEET di Bitshares.",
-    "grid": {
-      "ticketRetrieval": {
-        "title": "Recupero del biglietto",
-        "desc": "Recupera i ticket di voto blockchain"
-      },
-      "ticketAnalysis": {
-        "title": "Analisi dati ticket",
-        "desc": "Analizzare il contenuto dei biglietti di voto"
-      },
-      "ticketLeaderboard": {
-        "title": "Classifiche dei biglietti",
-        "desc": "Ordina i ticket di voto nelle classifiche"
-      },
-      "airdropCalc": {
-        "title": "Calcolo del lancio aereo",
-        "desc": "Crea vettori airdrop con input basati su blockchain dimostrabilmente casuali"
-      },
-      "airdropAnalysis": {
-        "title": "Analisi airdrop calcolata",
-        "desc": "Verifica il contenuto degli airdrop calcolati prima dell'esecuzione sulla blockchain"
-      },
-      "airdropExecute": {
-        "title": "Esecuzione dell'airdrop",
-        "desc": "Esegui lanci di token sulla blockchain"
-      },
-      "createTicket": {
-        "title": "Creazione del biglietto",
-        "desc": "Blocca i token per votare e ottenere lanci aerei"
-      },
-      "faq": {
-        "title": "Domande frequenti",
-        "desc": "Ulteriori informazioni su lanci aerei, biglietti e blockchain"
-      },
-      "nodes": {
-        "title": "Nodi configurabili",
-        "desc": "Passa da un nodo blockchain all'altro"
-      }
+  "title": "Benvenuto nello strumento Bitshares Beet Airdrop!",
+  "desc": "Le seguenti funzionalità sono disponibili per le blockchain di Bitshares!",
+  "footer": "Per sfruttare appieno il set di funzionalità disponibile in questo strumento, è necessario il multiwallet BEET di Bitshares.",
+  "grid": {
+    "ticketRetrieval": {
+      "title": "Recupero del biglietto",
+      "desc": "Recupera i ticket di voto blockchain"
+    },
+    "ticketAnalysis": {
+      "title": "Analisi dati ticket",
+      "desc": "Analizza il contenuto dei ticket di voto"
+    },
+    "ticketLeaderboard": {
+      "title": "Classifiche dei biglietti",
+      "desc": "Ordina i ticket di voto nelle classifiche"
+    },
+    "airdropCalc": {
+      "title": "Calcolo del lancio aereo",
+      "desc": "Crea vettori airdrop con input basati su blockchain dimostrabilmente casuali"
+    },
+    "airdropAnalysis": {
+      "title": "Analisi airdrop calcolata",
+      "desc": "Verifica il contenuto degli airdrop calcolati prima dell'esecuzione sulla blockchain"
+    },
+    "airdropExecute": {
+      "title": "Esecuzione dell'airdrop",
+      "desc": "Esegui lanci di token sulla blockchain"
+    },
+    "createTicket": {
+      "title": "Crea un biglietto",
+      "desc": "Blocca i token per votare e ottenere lanci aerei"
+    },
+    "upgrade": {
+      "title": "Aggiorna l'account",
+      "desc": "Acquista un abbonamento a vita"
+    },
+    "lookupAccount": {
+      "title": "Cerca un account",
+      "desc": "Cerca account blockchain"
+    },
+    "lookupAsset": {
+      "title": "Cerca una risorsa",
+      "desc": "Cerca risorse blockchain"
+    },
+    "faq": {
+      "title": "Domande frequenti",
+      "desc": "Ulteriori informazioni su lanci aerei, biglietti e blockchain"
+    },
+    "nodes": {
+      "title": "Nodi configurabili",
+      "desc": "Passa da un nodo blockchain all'altro"
     }
   }
+}

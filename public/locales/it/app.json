@@ -6,6 +6,8 @@
     "language": "Lingua",
     "createTicket": "Crea biglietto",
     "upgradeAccount": "Aggiorna l'account",
+    "lookupAccount": "Conto di ricerca",
+    "lookupAsset": "Asset di ricerca",
     "fetchTickets": "Recupera i biglietti",
     "calculateAirdrop": "Calcola lancio aereo",
     "calculatedAirdrops": "Lanci aerei calcolati",
