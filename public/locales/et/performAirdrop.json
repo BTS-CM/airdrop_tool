@@ -11,6 +11,7 @@
       "processing": "Nõutava märgi kasutajasaldode töötlemine",
       "table": {
         "title": "Piletihoidjad kuuluvad airdropi",
+        "invalid": "Airdropi sihtmärke pole, palun hinnake õhutilgutamise seaded uuesti.",
         "title2": "Piletiomanikud on airdropist välja jäetud",
         "th1": "Konto",
         "th2": "Kogus",

@@ -11,6 +11,7 @@
       "processing": "Elaborazione dei saldi utente per il token richiesto",
       "table": {
         "title": "Possessori di biglietti inclusi in airdrop",
+        "invalid": "Non ci sono bersagli airdrop, si prega di rivalutare le impostazioni airdrop.",
         "title2": "Possessori di biglietto esclusi dall'airdrop",
         "th1": "Account",
         "th2": "Quantità",

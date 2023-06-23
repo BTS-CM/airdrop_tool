@@ -11,6 +11,7 @@
       "processing": "Behandler brugersaldi for påkrævet token",
       "table": {
         "title": "Billetholdere inkluderet i airdrop",
+        "invalid": "Der er ingen airdrop-mål. Reevaluer venligst airdrop-indstillingerne.",
         "title2": "Billetholdere udelukket fra airdrop",
         "th1": "Konto",
         "th2": "Antal",

@@ -11,6 +11,7 @@
       "processing": "Procesando saldos de usuario para el token requerido",
       "table": {
         "title": "Titulares de entradas incluidos en airdrop",
+        "invalid": "No hay objetivos de lanzamiento aéreo, vuelva a evaluar la configuración de lanzamiento aéreo.",
         "title2": "Titulares de entradas excluidos del airdrop",
         "th1": "Cuenta",
         "th2": "Cantidad",

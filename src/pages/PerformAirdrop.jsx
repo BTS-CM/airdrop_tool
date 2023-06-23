@@ -187,9 +187,9 @@ export default function PerformAirdrop(properties) {
   useEffect(() => {
     const delayDebounceFn = setTimeout(async () => {
       if (tokenName && tokenName.length) {
-        setFinalTokenName(tokenName);
+        setFinalTokenName(tokenName.toUpperCase());
       }
-    }, 1000);
+    }, 2000);
 
     return () => clearTimeout(delayDebounceFn);
   }, [tokenName]);
@@ -490,9 +490,13 @@ export default function PerformAirdrop(properties) {
     invalidRows = [];
     winnerChunks = [];
   } else {
-    const valid = tokenRows
-      .sort((a, b) => b.assignedTokens - a.assignedTokens)
-      .filter((user) => user.assignedTokens > humanReadableFloat(1, tokenDetails.precision) || (tokenDetails.precision === 0 && tokenDetails.readableMax === 1 && parseFloat(user.assignedTokens) === 1));
+    let valid = tokenRows.sort((a, b) => b.assignedTokens - a.assignedTokens);
+
+    if (tokenDetails.precision > 0) {
+      valid = valid.filter((user) => user.assignedTokens > humanReadableFloat(1, tokenDetails.precision));
+    } else if (tokenDetails.precision === 0 && tokenDetails.readableMax === 1) {
+      valid = valid.filter((user) => user.assignedTokens === 1);
+    }
 
     winners = valid;
 
@@ -504,7 +508,7 @@ export default function PerformAirdrop(properties) {
       ? valid
         .map((winner) => (
           <tr key={`winner_${winner.id}`}>
-            <td width="45%">
+            <td width="35%">
               <Link style={{ textDecoration: 'none', color: 'black' }} to={`/Account/${params.env}/${winner.id}`}>
                 <b>{envLeaderboard.find((usr) => usr.id === winner.id).account.name}</b>
               </Link><br />
@@ -514,13 +518,17 @@ export default function PerformAirdrop(properties) {
                 </Link>
               )
             </td>
-            <td>
+            <td width="25%">
               {winner.qty}
             </td>
-            <td>
-              { winner.assignedTokens.toFixed(tokenDetails.precision) }
-              {' '}
-              {tokenName || assetName}
+            <td width="40%">
+              {
+                tokenDetails.precision > 0
+                  ? winner.assignedTokens.toFixed(tokenDetails.precision)
+                  : winner.assignedTokens
+              }
+              <br />
+              {finalTokenName || assetName}
             </td>
           </tr>
         ))
@@ -556,7 +564,7 @@ export default function PerformAirdrop(properties) {
     ? winnerChunks.map((chunk, i) => (
       <AirdropCard
         tokenQuantity={tokenQuantity}
-        tokenName={tokenName}
+        tokenName={finalTokenName}
         distroMethod={distroMethod}
         chunk={chunk}
         chunkItr={i}
@@ -627,6 +635,26 @@ export default function PerformAirdrop(properties) {
                       <>
                         <Text>Sorry, something went wrong...</Text>
                         <Button onClick={() => setReqdTokenItr(reqdTokenItr + 1)}>Refresh</Button>
+                      </>
+                    )
+                    : null
+                }
+                {
+                  !validRows
+                    ? (
+                      <>
+                        <Accordion mt="xs" defaultValue="table">
+                          <Accordion.Item key="invalidTable" value="table">
+                            <Accordion.Control>
+                              {t("performAirdrop:grid.left.table.title")}
+                            </Accordion.Control>
+                            <Accordion.Panel>
+                              <Text>
+                                {t("performAirdrop:grid.left.table.invalid")}
+                              </Text>
+                            </Accordion.Panel>
+                          </Accordion.Item>
+                        </Accordion>
                       </>
                     )
                     : null

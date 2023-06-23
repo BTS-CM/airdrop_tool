@@ -11,6 +11,7 @@
       "processing": "Benutzerguthaben für erforderliches Token werden verarbeitet",
       "table": {
         "title": "Ticketinhaber im Airdrop inbegriffen",
+        "invalid": "Es sind keine Airdrop-Ziele vorhanden. Bitte überprüfen Sie die Airdrop-Einstellungen noch einmal.",
         "title2": "Ticketinhaber sind vom Airdrop ausgeschlossen",
         "th1": "Konto",
         "th2": "Menge",

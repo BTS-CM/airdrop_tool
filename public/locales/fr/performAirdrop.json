@@ -11,6 +11,7 @@
       "processing": "Traitement des soldes des utilisateurs pour le jeton requis",
       "table": {
         "title": "Détenteurs de billets inclus dans le largage aérien",
+        "invalid": "Il n'y a pas de cibles de largage, veuillez réévaluer les paramètres de largage.",
         "title2": "Les détenteurs de billets exclus du largage",
         "th1": "Compte",
         "th2": "Quantité",

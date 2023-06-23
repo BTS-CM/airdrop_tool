@@ -11,6 +11,7 @@
       "processing": "Processando saldos do usuário para o token necessário",
       "table": {
         "title": "Titulares de ingressos incluídos no airdrop",
+        "invalid": "Não há alvos de airdrop, reavalie as configurações de airdrop.",
         "title2": "Portadores de ingressos excluídos do airdrop",
         "th1": "Conta",
         "th2": "Quantidade",

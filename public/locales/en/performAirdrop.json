@@ -11,6 +11,7 @@
             "processing": "Processing user balances for required token",
             "table": {
                 "title": "Ticket holders included in airdrop",
+                "invalid": "There are no airdrop targets, please re-evaluate the airdrop settings.",
                 "title2": "Ticket holders excluded from airdrop",
                 "th1": "Account",
                 "th2": "Quantity",
