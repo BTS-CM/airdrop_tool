@@ -265,7 +265,10 @@ export default function BlockAccounts(properties) {
                     </thead>
                     <tbody>
                       {
-                        result.filter((x) => x.score < 0.5).map((x) => (
+                        result
+                          .filter((x) => x.score < 0.5) // limit search relevance
+                          .filter((x) => !blockList.includes(x.item.id)) // exclude blocked accounts
+                          .map((x) => (
                             <tr key={`${x.item.id}_search`}>
                               <td>
                                   <b>{x.item.name}</b> ({x.item.id})
@@ -275,7 +278,9 @@ export default function BlockAccounts(properties) {
                                     compact
                                     variant="outline"
                                     onClick={() => {
-                                      change(value, x.item.id); // add to block list
+                                      if (!blockList.includes(x.item.id)) {
+                                        change(value, x.item.id); // add to block list
+                                      }
                                       close();
                                     }}
                                   >
@@ -283,7 +288,7 @@ export default function BlockAccounts(properties) {
                                   </Button>
                               </td>
                             </tr>
-                        ))
+                          ))
                       }
                     </tbody>
                   </Table>
