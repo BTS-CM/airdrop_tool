@@ -30,6 +30,7 @@ window.electron = {
       'create',
       'upgrade',
       'faq',
+      'blockAccounts',
       'fetch',
       'modal',
       'home',

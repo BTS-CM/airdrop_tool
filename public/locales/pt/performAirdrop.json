@@ -17,6 +17,7 @@
         "th3": "Alocação",
         "th4": "Razão",
         "reasons": {
+          "blocked": "O usuário foi bloqueado",
           "ltm": "Associação vitalícia ausente",
           "noBalance": "Token obrigatório ausente",
           "insufficientBalance": "Tokens necessários insuficientes",
@@ -24,7 +25,8 @@
           "minReward": "Recompensa alocada muito pequena"
         }
       },
-      "json": "Airdrop dados JSON"
+      "json": "Airdrop dados JSON",
+      "jsonSimple": "Dados JSON de airdrop simples"
     },
     "right": {
       "summary": {
@@ -50,6 +52,9 @@
           "equally": "Igualmente entre IDs de contas vencedoras",
           "proportionally": "Proporcional aos bilhetes ganhos",
           "roundRobin": "Alocar tokens inteiros de maneira round robin"
+        },
+        "blocking": {
+          "title": "Excluir contas bloqueadas?"
         },
         "ltm": {
           "title": "Exige uma associação vitalícia?"

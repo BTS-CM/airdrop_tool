@@ -39,6 +39,10 @@
     "forever_freebie": {
       "name": "Gratuité pour toujours",
       "desc": "Chaque compte détenant un ticket d'une durée indéterminée et d'une quantité qualifiante reçoit 1 ticket gagnant"
+    },
+    "ltm_freebie": {
+      "name": "Adhésion gratuite à vie",
+      "desc": "Fournissez un billet gratuit aux détenteurs de billets qui ont une adhésion à vie."
     }
   },
   "calculatingTitle": "Calculs de parachutage en cours, veuillez patienter !",
@@ -55,7 +59,7 @@
     "title": "Quel type de blockhash voulez-vous utiliser pour une entrée aléatoire initiale prouvée ?",
     "radioLabel": "Sélectionnez un type de hachage initial",
     "radioDesc": "Original ou haché de manière sécurisée ?",
-    "plain": "Chaîne de signature de témoin simple",
+    "plain": "Chaîne de signature de témoin ordinaire",
     "witSig": "hachage de la signature du témoin"
   },
   "ticket": {

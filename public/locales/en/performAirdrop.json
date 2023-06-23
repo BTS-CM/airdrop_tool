@@ -17,6 +17,7 @@
                 "th3": "Allocation",
                 "th4": "Reason",
                 "reasons": {
+                    "blocked": "User has been blocked",
                     "ltm": "Lifetime membership missing",
                     "noBalance": "Missing required token",
                     "insufficientBalance": "Insufficient required tokens",
@@ -24,7 +25,8 @@
                     "minReward": "Allocated reward too small"
                 }
             },
-            "json": "Airdrop JSON data"
+            "json": "Airdrop JSON data",
+            "jsonSimple": "Simple airdrop JSON data"
         },
         "right": {
             "summary": {
@@ -50,6 +52,9 @@
                     "equally": "Equally between winning account IDs",
                     "proportionally": "Proportional to tickets won",
                     "roundRobin": "Allocate whole tokens in a round robin manner"
+                },
+                "blocking": {
+                    "title": "Exclude blocked accounts?"
                 },
                 "ltm": {
                     "title": "Require a lifetime-membership?"

@@ -39,6 +39,10 @@
     "forever_freebie": {
       "name": "Brinde para sempre",
       "desc": "Cada conta com um tíquete com duração indefinida e quantidade qualificada recebe 1 tíquete vencedor"
+    },
+    "ltm_freebie": {
+      "name": "Brinde de assinatura vitalícia",
+      "desc": "Forneça um ingresso gratuito aos titulares de tickers que tenham uma associação vitalícia."
     }
   },
   "calculatingTitle": "Realizando cálculos de airdrop, aguarde!",

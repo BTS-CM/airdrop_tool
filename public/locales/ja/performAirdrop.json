@@ -17,6 +17,7 @@
         "th3": "割り当て",
         "th4": "理由",
         "reasons": {
+          "blocked": "ユーザーがブロックされました",
           "ltm": "生涯メンバーシップがありません",
           "noBalance": "必要なトークンがありません",
           "insufficientBalance": "必要なトークンが不十分です",
@@ -24,7 +25,8 @@
           "minReward": "割り当てられた報酬が少なすぎます"
         }
       },
-      "json": "エアドロップ JSON データ"
+      "json": "エアドロップ JSON データ",
+      "jsonSimple": "シンプルなエアドロップ JSON データ"
     },
     "right": {
       "summary": {
@@ -50,6 +52,9 @@
           "equally": "当選したアカウント ID 間で均等",
           "proportionally": "当選したチケットに比例",
           "roundRobin": "ラウンドロビン方式でトークン全体を割り当てます"
+        },
+        "blocking": {
+          "title": "ブロックされたアカウントを除外しますか?"
         },
         "ltm": {
           "title": "生涯メンバーシップが必要ですか?"

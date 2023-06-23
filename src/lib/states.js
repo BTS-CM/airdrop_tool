@@ -25,23 +25,15 @@ const ticketStore = create(
       bitshares_testnet: [],
       tusc: [],
       changeTickets: (env, newTickets) => {
-        if (env === 'bitshares') {
-          set({ bitshares: newTickets });
-        } else if (env === 'bitshares_testnet') {
-          set({ bitshares_testnet: newTickets });
-        } else if (env === 'tusc') {
-          set({ tusc: newTickets });
-        }
+        const newObj = {};
+        newObj[env] = newTickets;
+        set(newObj);
       },
       eraseTickets: (env) => {
         console.log(`Erasing ${env} tickets!`);
-        if (env === 'bitshares') {
-          set({ bitshares: [] });
-        } else if (env === 'bitshares_testnet') {
-          set({ bitshares_testnet: [] });
-        } else if (env === 'tusc') {
-          set({ tusc: [] });
-        }
+        const newObj = {};
+        newObj[env] = [];
+        set(newObj);
       },
     }),
     {
@@ -58,43 +50,22 @@ const assetStore = create(
       bitshares_testnet: [],
       tusc: [],
       changeAssets: (env, leaders) => {
-        if (env === 'bitshares') {
-          set({ bitshares: leaders });
-        } else if (env === 'bitshares_testnet') {
-          set({ bitshares_testnet: leaders });
-        } else if (env === 'tusc') {
-          set({ tusc: leaders });
-        }
+        const newObj = {};
+        newObj[env] = leaders;
+        set(newObj);
       },
       addOne: (env, newAsset) => {
-        let currentAssets;
-        if (env === "bitshares") {
-          currentAssets = get().bitshares;
-        } else if (env === "bitshares_testnet") {
-          currentAssets = get().bitshares_testnet;
-        } else if (env === "tusc") {
-          currentAssets = get().tusc;
-        }
-
+        const currentAssets = get()[env];
         currentAssets.push(newAsset);
-
-        if (env === 'bitshares') {
-          set({ bitshares: currentAssets });
-        } else if (env === 'bitshares_testnet') {
-          set({ bitshares_testnet: currentAssets });
-        } else if (env === 'tusc') {
-          set({ tusc: currentAssets });
-        }
+        const newObj = {};
+        newObj[env] = currentAssets;
+        set(newObj);
       },
       eraseAssets: (env) => {
         console.log(`Erasing ${env} leaderboards!`);
-        if (env === 'bitshares') {
-          set({ bitshares: [] });
-        } else if (env === 'bitshares_testnet') {
-          set({ bitshares_testnet: [] });
-        } else if (env === 'tusc') {
-          set({ tusc: [] });
-        }
+        const newObj = {};
+        newObj[env] = [];
+        set(newObj);
       },
     }),
     {
@@ -110,27 +81,52 @@ const leaderboardStore = create(
       bitshares_testnet: [],
       tusc: [],
       changeLeaders: (env, leaders) => {
-        if (env === 'bitshares') {
-          set({ bitshares: leaders });
-        } else if (env === 'bitshares_testnet') {
-          set({ bitshares_testnet: leaders });
-        } else if (env === 'tusc') {
-          set({ tusc: leaders });
-        }
+        const newObj = {};
+        newObj[env] = leaders;
+        set(newObj);
       },
       eraseLeaders: (env) => {
         console.log(`Erasing ${env} leaderboards!`);
-        if (env === 'bitshares') {
-          set({ bitshares: [] });
-        } else if (env === 'bitshares_testnet') {
-          set({ bitshares_testnet: [] });
-        } else if (env === 'tusc') {
-          set({ tusc: [] });
-        }
+        const newObj = {};
+        newObj[env] = [];
+        set(newObj);
       },
     }),
     {
       name: 'leaderboardStorage',
+    },
+  ),
+);
+
+const blocklistStore = create(
+  persist(
+    (set, get) => ({
+      bitshares: [],
+      bitshares_testnet: [],
+      tusc: [],
+      change: (env, newBlockage) => {
+        const current = get()[env];
+        if (!current) return;
+        const newContents = {};
+        newContents[env] = current.concat(newBlockage);
+        set(newContents);
+      },
+      eraseAll: (env) => {
+        const newContents = {};
+        newContents[env] = [];
+        set(newContents);
+      },
+      eraseOne: (env, userID) => {
+        console.log(`Erasing one ${env} blocked account with ID ${userID}!`);
+        const current = get()[env];
+        const newBlockList = current.filter((x) => x !== userID);
+        const newContents = {};
+        newContents[env] = newBlockList;
+        set(newContents);
+      },
+    }),
+    {
+      name: 'blocklistStorage',
     },
   ),
 );
@@ -142,72 +138,36 @@ const airdropStore = create(
       bitshares_testnet: [],
       tusc: [],
       changeAirdrops: (env, airdrop) => {
-        let currentAirdrops;
-        if (env === 'bitshares') {
-          currentAirdrops = get().bitshares;
-          set({ bitshares: currentAirdrops.concat(airdrop) });
-        } else if (env === 'bitshares_testnet') {
-          currentAirdrops = get().bitshares_testnet;
-          set({ bitshares_testnet: currentAirdrops.concat(airdrop) });
-        } else if (env === 'tusc') {
-          currentAirdrops = get().tusc;
-          set({ tusc: currentAirdrops.concat(airdrop) });
-        }
+        const currentAirdrops = get()[env];
+        const newObj = {};
+        newObj[env] = currentAirdrops.concat(airdrop);
+        set(newObj);
       },
       eraseAirdrops: (env) => {
         console.log(`Erasing all ${env} airdrops!`);
-        if (env === 'bitshares') {
-          set({ bitshares: [] });
-        } else if (env === 'bitshares_testnet') {
-          set({ bitshares_testnet: [] });
-        } else if (env === 'tusc') {
-          set({ tusc: [] });
-        }
+        const newObj = {};
+        newObj[env] = [];
+        set(newObj);
       },
       updateOne: (env, airdropID, updatedSettings) => {
-        let currentAirdrops;
-        if (env === "bitshares") {
-          currentAirdrops = get().bitshares;
-        } else if (env === "bitshares_testnet") {
-          currentAirdrops = get().bitshares_testnet;
-        } else if (env === "tusc") {
-          currentAirdrops = get().tusc;
-        }
-
+        const currentAirdrops = get()[env];
         const newAirdrops = currentAirdrops.filter((x) => x.id !== airdropID);
         const updateTarget = currentAirdrops.find((x) => x.id === airdropID);
         updateTarget.settings = updatedSettings;
         newAirdrops.push(updateTarget);
 
-        if (env === 'bitshares') {
-          set({ bitshares: newAirdrops });
-        } else if (env === 'bitshares_testnet') {
-          set({ bitshares_testnet: newAirdrops });
-        } else if (env === 'tusc') {
-          set({ tusc: newAirdrops });
-        }
+        const newObj = {};
+        newObj[env] = newAirdrops;
+        set(newObj);
       },
       eraseOne: (env, airdropID) => {
         console.log(`Erasing one ${env} airdrop with ID ${airdropID}!`);
-
-        let currentAirdrops;
-        if (env === "bitshares") {
-          currentAirdrops = get().bitshares;
-        } else if (env === "bitshares_testnet") {
-          currentAirdrops = get().bitshares_testnet;
-        } else if (env === "tusc") {
-          currentAirdrops = get().tusc;
-        }
-
+        const currentAirdrops = get()[env];
         const newAirdrops = currentAirdrops.filter((x) => x.id !== airdropID);
 
-        if (env === 'bitshares') {
-          set({ bitshares: newAirdrops });
-        } else if (env === 'bitshares_testnet') {
-          set({ bitshares_testnet: newAirdrops });
-        } else if (env === 'tusc') {
-          set({ tusc: newAirdrops });
-        }
+        const newObj = {};
+        newObj[env] = newAirdrops;
+        set(newObj);
       },
     }),
     {
@@ -513,4 +473,5 @@ export {
   localePreferenceStore,
   identitiesStore,
   airdropStore,
+  blocklistStore
 };

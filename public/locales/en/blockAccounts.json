@@ -1,0 +1,22 @@
+{
+    "title": "Block accounts",
+    "qty": "Quantity of {{chain}} accounts blocked: {{qty}}",
+    "header": "How do you want to block an {{chain}} account?",
+    "buttons": {
+        "committee": "Fetch committee blocked accounts",
+        "committeeInProgress": "Fetching committee blocked accounts",
+        "eraseAll": "Erase all blocked accounts",
+        "search": "Search for an account"
+    },
+    "modal": {
+        "title": "Search for an account to block",
+        "block": "Block",
+        "results": "Search results",
+        "searching": "Searching for input account",
+        "inputText": "Account name or ID"
+    },
+    "table": {
+        "header": "Blocked accounts",
+        "remove": "Remove"
+    }
+}

@@ -17,6 +17,7 @@
         "th3": "Allocazione",
         "th4": "Motivo",
         "reasons": {
+          "blocked": "L'utente è stato bloccato",
           "ltm": "Abbonamento a vita mancante",
           "noBalance": "Token obbligatorio mancante",
           "insufficientBalance": "Token richiesti insufficienti",
@@ -24,7 +25,8 @@
           "minReward": "Ricompensa assegnata troppo piccola"
         }
       },
-      "json": "Airdrop dati JSON"
+      "json": "Airdrop dati JSON",
+      "jsonSimple": "Semplici dati JSON di airdrop"
     },
     "right": {
       "summary": {
@@ -50,6 +52,9 @@
           "equally": "Ugualmente tra gli ID account vincenti",
           "proportionally": "Proporzionale ai biglietti vinti",
           "roundRobin": "Assegna interi token in modo round robin"
+        },
+        "blocking": {
+          "title": "Escludere gli account bloccati?"
         },
         "ltm": {
           "title": "Hai bisogno di un abbonamento a vita?"

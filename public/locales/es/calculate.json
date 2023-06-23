@@ -39,6 +39,10 @@
     "forever_freebie": {
       "name": "regalo de siempre",
       "desc": "Cada cuenta que tenga un boleto con una duración para siempre y una cantidad calificada obtiene 1 boleto ganador"
+    },
+    "ltm_freebie": {
+      "name": "Obsequio de membresía de por vida",
+      "desc": "Proporcione un boleto gratis a los titulares de boletos que tengan una membresía de por vida."
     }
   },
   "calculatingTitle": "Realizando cálculos de airdrop, ¡espere!",

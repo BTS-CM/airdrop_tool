@@ -1,0 +1,22 @@
+{
+    "title": "Konten sperren",
+    "qty": "Menge von {{chain}} Konten gesperrt: {{qty}}",
+    "header": "Wie möchten Sie eine blockieren? {{chain}} Konto?",
+    "buttons": {
+      "committee": "Abrufausschuss hat Konten gesperrt",
+      "committeeInProgress": "Der Abrufausschuss hat Konten gesperrt",
+      "eraseAll": "Löschen Sie alle gesperrten Konten",
+      "search": "Suchen Sie nach einem Konto"
+    },
+    "modal": {
+      "title": "Suchen Sie nach einem Konto, das Sie sperren möchten",
+      "block": "Block",
+      "results": "Suchergebnisse",
+      "searching": "Suche nach Eingabekonto",
+      "inputText": "Kontoname oder ID"
+    },
+    "table": {
+      "header": "Gesperrte Konten",
+      "remove": "Entfernen"
+    }
+  }

@@ -170,8 +170,42 @@ async function lookupSymbols(node, env, asset_ids, apiConnection = null) {
   });
 }
 
+/*
+* Fetch account/address list to warn users about
+* List is maintained by the Bitshares committee
+* @param {String} node
+* @returns {Array}
+*/
+async function getBlockedAccounts(node) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      await Apis.instance(node, true).init_promise;
+    } catch (error) {
+      console.log(error);
+      reject(error);
+      return;
+    }
+
+    let object;
+    try {
+      object = await Apis.instance().db_api().exec("get_accounts", [['committee-blacklist-manager']]);
+    } catch (error) {
+      console.log(error);
+      reject(error);
+    }
+
+    if (!object) {
+      reject(new Error('Committee account details not found'));
+      return;
+    }
+
+    resolve(object);
+  });
+}
+
 export {
   lookupSymbols,
   fetchLeaderboardData,
   accountSearch,
+  getBlockedAccounts
 };

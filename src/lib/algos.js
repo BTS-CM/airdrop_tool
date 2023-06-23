@@ -332,6 +332,18 @@ function forever_freebie(leaderboardJSON, relevantTickets) {
 }
 
 /**
+ * Provides a free ticket to LTM holders
+ * @param {Array} initialChunks
+ * @returns {Number}
+ */
+function ltm_freebie(leaderboardJSON) {
+  const ltm_tickets = leaderboardJSON
+    .filter((user) => user.account.ltm)
+    .map((user) => (user.range.from));
+  return ltm_tickets;
+}
+
+/**
  * Converts the filtered hash into a single ticket
  * @param {Array} initialChunks
  * @returns {Number}
@@ -377,6 +389,8 @@ function getTickets(algoType, filtered_signature, leaderboardJSON, relevantTicke
       return bouncing_ball(initialChunks, maxDistance);
     case "freebie":
       return freebie(leaderboardJSON);
+    case "ltm_freebie":
+      return ltm_freebie(leaderboardJSON);
     case "forever_freebie":
       return forever_freebie(leaderboardJSON, relevantTickets);
     //case "single_winner":

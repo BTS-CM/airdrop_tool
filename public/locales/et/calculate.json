@@ -14,7 +14,7 @@
     },
     "reverse_pi": {
       "name": "Vastupidine PI",
-      "desc": "Räsi jagamine, räsitükkide ümberpööramine, matemaatika, PI-ga korrutamine, piletite väljastamine."
+      "desc": "Räsi jagamine, räsitükkide ümberpööramine, matemaatika tegemine, PI-ga korrutamine, piletite väljastamine."
     },
     "cubed": {
       "name": "Kuubikud",
@@ -39,6 +39,10 @@
     "forever_freebie": {
       "name": "Igavesti tasuta",
       "desc": "Iga konto, millel on igavese kestusega ja kvalifitseeruva koguse pilet, saab 1 võidupileti"
+    },
+    "ltm_freebie": {
+      "name": "Eluaegne liikmelisus tasuta",
+      "desc": "Pakkuge tasuta pilet tickeri omanikele, kellel on eluaegne liikmesus."
     }
   },
   "calculatingTitle": "Õhutilkade arvutuste tegemine, palun oodake!",
@@ -54,7 +58,7 @@
   "hash": {
     "title": "Millist blockhashit soovite kasutada esialgse tõestatavalt juhusliku sisendi jaoks?",
     "radioLabel": "Valige esialgne räsitüüp",
-    "radioDesc": "Originaal või turvaliselt räsitud?",
+    "radioDesc": "Originaalne või turvaliselt räsitud?",
     "plain": "Tavaline tunnistaja allkirja string",
     "witSig": "tunnistaja allkirja räsi"
   },

@@ -17,6 +17,7 @@
         "th3": "Zuweisung",
         "th4": "Grund",
         "reasons": {
+          "blocked": "Der Benutzer wurde blockiert",
           "ltm": "Lebenslange Mitgliedschaft fehlt",
           "noBalance": "Erforderliches Token fehlt",
           "insufficientBalance": "Nicht genügend erforderliche Token",
@@ -24,7 +25,8 @@
           "minReward": "Zugeteilte Belohnung zu gering"
         }
       },
-      "json": "Airdrop-JSON-Daten"
+      "json": "Airdrop-JSON-Daten",
+      "jsonSimple": "Einfache Airdrop-JSON-Daten"
     },
     "right": {
       "summary": {
@@ -50,6 +52,9 @@
           "equally": "Gleichermaßen zwischen Gewinnerkonto-IDs",
           "proportionally": "Proportional zu den gewonnenen Tickets",
           "roundRobin": "Weisen Sie ganze Token im Round-Robin-Verfahren zu"
+        },
+        "blocking": {
+          "title": "Sperrkonten ausschließen?"
         },
         "ltm": {
           "title": "Benötigen Sie eine lebenslange Mitgliedschaft?"

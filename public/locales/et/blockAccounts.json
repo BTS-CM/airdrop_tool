@@ -1,0 +1,22 @@
+{
+    "title": "Blokeeri kontod",
+    "qty": "Kogus {{chain}} blokeeritud kontod: {{qty}}",
+    "header": "Kuidas soovite blokeerida {{chain}} konto?",
+    "buttons": {
+      "committee": "Too komitee blokeeritud kontod",
+      "committeeInProgress": "Toomiskomisjon blokeeritud kontod",
+      "eraseAll": "Kustutage kõik blokeeritud kontod",
+      "search": "Otsige kontot"
+    },
+    "modal": {
+      "title": "Otsige blokeeritavat kontot",
+      "block": "Blokeeri",
+      "results": "Otsingu tulemused",
+      "searching": "Sisendkonto otsimine",
+      "inputText": "Konto nimi või ID"
+    },
+    "table": {
+      "header": "Blokeeritud kontod",
+      "remove": "Eemalda"
+    }
+  }

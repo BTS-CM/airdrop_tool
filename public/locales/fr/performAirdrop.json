@@ -17,6 +17,7 @@
         "th3": "Allocation",
         "th4": "Raison",
         "reasons": {
+          "blocked": "L'utilisateur a été bloqué",
           "ltm": "Adhésion à vie manquante",
           "noBalance": "Jeton requis manquant",
           "insufficientBalance": "Jetons requis insuffisants",
@@ -24,7 +25,8 @@
           "minReward": "Récompense attribuée trop petite"
         }
       },
-      "json": "Données JSON Airdrop"
+      "json": "Données JSON Airdrop",
+      "jsonSimple": "Données JSON Airdrop simples"
     },
     "right": {
       "summary": {
@@ -50,6 +52,9 @@
           "equally": "À parts égales entre les identifiants de compte gagnants",
           "proportionally": "Proportionnel aux billets gagnés",
           "roundRobin": "Allouer des jetons entiers de manière circulaire"
+        },
+        "blocking": {
+          "title": "Exclure les comptes bloqués ?"
         },
         "ltm": {
           "title": "Exiger une adhésion à vie?"

@@ -10,21 +10,23 @@
       "loading": "Varade andmete laadimine",
       "processing": "Nõutava märgi kasutajasaldode töötlemine",
       "table": {
-        "title": "Piletihoidjad kuuluvad airdropi komplekti",
+        "title": "Piletihoidjad kuuluvad airdropi",
         "title2": "Piletiomanikud on airdropist välja jäetud",
         "th1": "Konto",
         "th2": "Kogus",
         "th3": "Eraldamine",
         "th4": "Põhjus",
         "reasons": {
+          "blocked": "Kasutaja on blokeeritud",
           "ltm": "Eluaegne liikmesus puudub",
           "noBalance": "Nõutav tunnus puudub",
           "insufficientBalance": "Nõutavaid märke pole piisavalt",
           "self": "Ise saata ei saa",
-          "minReward": "Eraldatud preemia on liiga väike"
+          "minReward": "Eraldatud tasu on liiga väike"
         }
       },
-      "json": "Airdropi JSON-andmed"
+      "json": "Airdropi JSON-andmed",
+      "jsonSimple": "Lihtsad airdropi JSON-andmed"
     },
     "right": {
       "summary": {
@@ -50,6 +52,9 @@
           "equally": "Samamoodi võitnud konto ID-de vahel",
           "proportionally": "Proportsionaalne võidetud piletitega",
           "roundRobin": "Eraldage terved märgid ümmarguse meetodiga"
+        },
+        "blocking": {
+          "title": "Kas blokeerida blokeeritud kontod?"
         },
         "ltm": {
           "title": "Kas vajate eluaegset liikmelisust?"

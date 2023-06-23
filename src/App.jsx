@@ -32,6 +32,7 @@ import {
   HiWifi,
   HiSearch,
   HiOutlineIdentification,
+  HiBan,
 } from "react-icons/hi";
 
 import Home from "./pages/Home";
@@ -52,6 +53,7 @@ import Ticket from "./pages/Ticket";
 import Account from "./pages/Account";
 import FAQ from "./pages/Faq";
 import Asset from "./pages/Asset";
+import BlockAccounts from "./pages/BlockAccounts";
 
 import { localePreferenceStore } from "./lib/states";
 
@@ -187,6 +189,11 @@ function App() {
                       {t("app:menu.faq")}
                     </Menu.Item>
                   </Link>
+                  <Link style={{ textDecoration: 'none' }} to="./blockAccounts">
+                    <Menu.Item icon={<HiBan />}>
+                      {t("app:menu.blockAccounts")}
+                    </Menu.Item>
+                  </Link>
                   <Link style={{ textDecoration: 'none' }} to="./nodes">
                     <Menu.Item icon={<HiWifi />}>
                       {t("app:menu.changeNodes")}
@@ -244,6 +251,7 @@ function App() {
                 <Route path="/CalculatedAirdrops" element={<CalculatedAirdrops />} />
 
                 <Route path="/faq" element={<FAQ />} />
+                <Route path="/blockAccounts" element={<BlockAccounts />} />
                 <Route path="/Nodes" element={<Nodes />} />
               </Routes>
             </Col>

@@ -26,15 +26,20 @@ import { Apis } from "bitsharesjs-ws";
 import _ from "lodash";
 
 import {
-  HiOutlineEmojiSad,
-  HiOutlineEmojiHappy,
   HiOutlineShieldExclamation,
   HiOutlineShieldCheck,
 } from "react-icons/hi";
 
 import {
-  airdropStore, appStore, leaderboardStore, beetStore, tempStore, assetStore
+  airdropStore,
+  appStore,
+  leaderboardStore,
+  beetStore,
+  tempStore,
+  assetStore,
+  blocklistStore,
 } from "../lib/states";
+
 import AirdropCard from "./AirdropCard";
 import GetAccount from "./GetAccount";
 import { lookupSymbols } from "../lib/directQueries";
@@ -53,6 +58,10 @@ export default function PerformAirdrop(properties) {
   const btsTestnetLeaderboard = leaderboardStore((state) => state.bitshares_testnet);
   const tuscLeaderboard = leaderboardStore((state) => state.tusc);
 
+  const btsBlockedAccounts = blocklistStore((state) => state.bitshares);
+  const btsTestnetBlockedAccounts = blocklistStore((state) => state.bitshares_testnet);
+  const tuscBlockedAccounts = blocklistStore((state) => state.tusc);
+
   const btsAssets = assetStore((state) => state.bitshares);
   const btsTestnetAssets = assetStore((state) => state.bitshares_testnet);
   const tuscAssets = assetStore((state) => state.tusc);
@@ -64,6 +73,7 @@ export default function PerformAirdrop(properties) {
   let plannedAirdropData = {};
   let envLeaderboard = [];
   let cachedAssets = [];
+  let blockList = [];
 
   if (params.env === 'bitshares') {
     plannedAirdropData = btsAirdrops.find((x) => params.id === x.id);
@@ -72,6 +82,7 @@ export default function PerformAirdrop(properties) {
     relevantChain = 'BTS';
     titleName = "Bitshares";
     cachedAssets = btsAssets;
+    blockList = btsBlockedAccounts;
   } else if (params.env === 'bitshares_testnet') {
     plannedAirdropData = btsTestnetAirdrops.find((x) => params.id === x.id);
     envLeaderboard = btsTestnetLeaderboard;
@@ -79,6 +90,7 @@ export default function PerformAirdrop(properties) {
     relevantChain = 'BTS_TEST';
     titleName = "Bitshares (Testnet)";
     cachedAssets = btsTestnetAssets;
+    blockList = btsTestnetBlockedAccounts;
   } else if (params.env === 'tusc') {
     plannedAirdropData = tuscAirdrops.find((x) => params.id === x.id);
     envLeaderboard = tuscLeaderboard;
@@ -86,6 +98,7 @@ export default function PerformAirdrop(properties) {
     relevantChain = 'TUSC';
     titleName = "TUSC";
     cachedAssets = tuscAssets;
+    blockList = tuscBlockedAccounts;
   }
 
   // Beet
@@ -95,17 +108,18 @@ export default function PerformAirdrop(properties) {
   const [inProgress, setInProgress] = useState(false);
 
   // Radio buttons
-  const [distroMethod, setDistroMethod] = useState(plannedAirdropData.settings.distroMethod);
-  const [ltmReq, setLTMReq] = useState(plannedAirdropData.settings.ltmReq);
-  const [tokenReq, setTokenReq] = useState(plannedAirdropData.settings.tokenReq);
+  const [distroMethod, setDistroMethod] = useState(plannedAirdropData.settings.distroMethod ?? 'No');
+  const [blocking, setBlocking] = useState(plannedAirdropData.settings.blocking ?? 'No');
+  const [ltmReq, setLTMReq] = useState(plannedAirdropData.settings.ltmReq ?? 'No');
+  const [tokenReq, setTokenReq] = useState(plannedAirdropData.settings.tokenReq ?? 'No');
 
   // Debounced input
-  const [tokenName, onTokenName] = useState(plannedAirdropData.settings.tokenName);
-  const [tokenQuantity, onTokenQuantity] = useState(plannedAirdropData.settings.tokenQuantity);
-  const [batchSize, onBatchSize] = useState(plannedAirdropData.settings.batchSize);
+  const [tokenName, onTokenName] = useState(plannedAirdropData.settings.tokenName ?? assetName);
+  const [tokenQuantity, onTokenQuantity] = useState(plannedAirdropData.settings.tokenQuantity ?? 1);
+  const [batchSize, onBatchSize] = useState(plannedAirdropData.settings.batchSize ?? 50);
 
-  const [requiredToken, onRequiredToken] = useState(plannedAirdropData.settings.requiredToken);
-  const [requiredTokenQty, onRequiredTokenQty] = useState(plannedAirdropData.settings.requiredTokenQty);
+  const [requiredToken, onRequiredToken] = useState(plannedAirdropData.settings.requiredToken ?? 'No');
+  const [requiredTokenQty, onRequiredTokenQty] = useState(plannedAirdropData.settings.requiredTokenQty ?? 1);
 
   // Retrieved asset info
   const [tokenDetails, setTokenDetails] = useState();
@@ -131,6 +145,7 @@ export default function PerformAirdrop(properties) {
       && finalBatchSize
       && finalTokenQuantity
       && distroMethod
+      && blocking
       && ltmReq
       && tokenReq
       && finalReqTokenName
@@ -142,6 +157,7 @@ export default function PerformAirdrop(properties) {
         batchSize: finalBatchSize,
         tokenQuantity: finalTokenQuantity,
         distroMethod,
+        blocking,
         ltmReq,
         tokenReq,
         requiredToken: finalReqTokenName,
@@ -158,6 +174,7 @@ export default function PerformAirdrop(properties) {
     }
   }, [
     distroMethod,
+    blocking,
     ltmReq,
     tokenReq,
     finalTokenName,
@@ -384,21 +401,24 @@ export default function PerformAirdrop(properties) {
       }
     }
 
+    if (blocking && blocking === 'yes' && blockList.find((x) => x === user.id)) {
+      // Filter out blocked users from airdrop
+      reasons.push(t("performAirdrop:grid.left.table.reasons.blocked"));
+    }
+
     if (ltmReq && ltmReq === 'yes') {
       // Filter out non LTM users from airdrop
-      const { id } = user;
       const { ltm } = envLeaderboard.find((x) => x.id === user.id).account;
       if (!ltm) {
         reasons.push(t("performAirdrop:grid.left.table.reasons.ltm"));
       }
     }
 
-    if (account) {
-      if (user.id === account) {
-        reasons.push(t("performAirdrop:grid.left.table.reasons.self"));
-      }
+    if (account && user.id === account) {
+      reasons.push(t("performAirdrop:grid.left.table.reasons.self"));
     }
 
+    // If there's any reason to exclude, do so!
     if (reasons && reasons.length) {
       invalidOutput.push({ ...user, reason: reasons.join(", ") });
     }
@@ -651,6 +671,31 @@ export default function PerformAirdrop(properties) {
                               />
                             </Accordion.Panel>
                           </Accordion.Item>
+                          <Accordion.Item key="jsonSimple" value="airdrop_json_simple">
+                            <Accordion.Control>
+                              {t("performAirdrop:grid.left.jsonSimple")}
+                            </Accordion.Control>
+                            <Accordion.Panel style={{ backgroundColor: '#FAFAFA' }}>
+                              <JsonInput
+                                placeholder="Textarea will autosize to fit the content"
+                                defaultValue={
+                                  JSON.stringify(
+                                    winners.map((x) => ({
+                                      id: x.id,
+                                      ticketQty: x.qty,
+                                      percent: x.percent,
+                                      assignedTokens: x.assignedTokens
+                                    }))
+                                  )
+                                }
+                                validationError="Invalid JSON"
+                                formatOnBlur
+                                autosize
+                                minRows={4}
+                                maxRows={15}
+                              />
+                            </Accordion.Panel>
+                          </Accordion.Item>
                         </Accordion>
                       </>
                     )
@@ -775,6 +820,25 @@ export default function PerformAirdrop(properties) {
                         <Radio
                           value="RoundRobin"
                           label={t("performAirdrop:grid.right.options.distroRadio.roundRobin")}
+                        />
+                      </Group>
+                    </Radio.Group>
+                    <Radio.Group
+                      value={blocking}
+                      onChange={setBlocking}
+                      name="blocking"
+                      label={t("performAirdrop:grid.right.options.blocking.title")}
+                      style={{ marginTop: '10px' }}
+                      withAsterisk
+                    >
+                      <Group mt="xs">
+                        <Radio
+                          value="yes"
+                          label={t("performAirdrop:grid.right.options.reqRadio.yes")}
+                        />
+                        <Radio
+                          value="no"
+                          label={t("performAirdrop:grid.right.options.reqRadio.no")}
                         />
                       </Group>
                     </Radio.Group>

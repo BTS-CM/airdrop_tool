@@ -17,6 +17,7 @@
         "th3": "배당",
         "th4": "이유",
         "reasons": {
+          "blocked": "사용자가 차단되었습니다.",
           "ltm": "평생 회원 누락",
           "noBalance": "필수 토큰 누락",
           "insufficientBalance": "불충분한 필수 토큰",
@@ -24,7 +25,8 @@
           "minReward": "할당된 보상이 너무 작음"
         }
       },
-      "json": "에어드롭 JSON 데이터"
+      "json": "에어드롭 JSON 데이터",
+      "jsonSimple": "간단한 에어드롭 JSON 데이터"
     },
     "right": {
       "summary": {
@@ -50,6 +52,9 @@
           "equally": "당첨 계정 ID 간에 동일하게",
           "proportionally": "당첨된 티켓에 비례",
           "roundRobin": "라운드 로빈 방식으로 전체 토큰 할당"
+        },
+        "blocking": {
+          "title": "차단된 계정을 제외하시겠습니까?"
         },
         "ltm": {
           "title": "평생 회원이 필요하십니까?"

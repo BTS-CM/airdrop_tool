@@ -1,0 +1,22 @@
+{
+    "title": "Bloquear contas",
+    "qty": "Quantidade de {{chain}} contas bloqueadas: {{qty}}",
+    "header": "Como você deseja bloquear um {{chain}} conta?",
+    "buttons": {
+      "committee": "Buscar contas bloqueadas pelo comitê",
+      "committeeInProgress": "Buscando contas bloqueadas pelo comitê",
+      "eraseAll": "Apague todas as contas bloqueadas",
+      "search": "Pesquisar uma conta"
+    },
+    "modal": {
+      "title": "Procure uma conta para bloquear",
+      "block": "Bloquear",
+      "results": "Procurar Resultados",
+      "searching": "Procurando por conta de entrada",
+      "inputText": "Nome ou ID da conta"
+    },
+    "table": {
+      "header": "contas bloqueadas",
+      "remove": "Remover"
+    }
+  }

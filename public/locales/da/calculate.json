@@ -14,7 +14,7 @@
     },
     "reverse_pi": {
       "name": "Omvendt PI",
-      "desc": "Opdel hash, reverse hash chunks, lav matematik, gange med PI, output billetter."
+      "desc": "Opdel hash, reverse hash bidder, lav matematik, gange med PI, output billetter."
     },
     "cubed": {
       "name": "Terninger",
@@ -39,6 +39,10 @@
     "forever_freebie": {
       "name": "For evigt gratis",
       "desc": "Hver konto, der har en billet med en evig varighed og kvalificerende mængde, får 1 vinderkupon"
+    },
+    "ltm_freebie": {
+      "name": "Livsvarigt medlemskab gratis",
+      "desc": "Giv en gratis billet til ticker-indehavere, der har et livstidsmedlemskab."
     }
   },
   "calculatingTitle": "Udfører airdrop-beregninger, vent venligst!",
@@ -49,7 +53,7 @@
     "generatedBtn": "Se alle genererede luftdråber"
   },
   "title": "Beregn en beviseligt retfærdig airdrop-distribution for hvilken blockchain?",
-  "radioLabel": "Vælg den ønskede blockchain",
+  "radioLabel": "Vælg mål blockchain",
   "radioDesc": "Kun grafenbaserede blockchains",
   "hash": {
     "title": "Hvilken slags blockhash vil du bruge til indledende beviseligt tilfældige input?",
@@ -69,11 +73,11 @@
   },
   "blockNum": {
     "title": "Indtast det bloknummer, du ønsker at bruge til airdrop-formål",
-    "label": "Bloknummer"
+    "label": "Blok nummer"
   },
   "fetchTickets": "Du skal hente billetdataene for denne blockchain.",
   "distro": {
-    "title": "Vælg dine foretrukne metoder til at generere beviseligt retfærdige luftdråbefordelinger",
+    "title": "Vælg dine foretrukne metoder til at generere sandsynligt retfærdige luftdråbefordelinger",
     "th1": "Type",
     "th2": "Beskrivelse"
   },

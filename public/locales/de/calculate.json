@@ -39,6 +39,10 @@
     "forever_freebie": {
       "name": "Für immer kostenlos",
       "desc": "Jedes Konto, das ein Los mit unbegrenzter Laufzeit und qualifizierender Menge besitzt, erhält 1 Gewinnlos"
+    },
+    "ltm_freebie": {
+      "name": "Lebenslange Gratismitgliedschaft",
+      "desc": "Bieten Sie Ticker-Inhabern mit einer lebenslangen Mitgliedschaft ein kostenloses Ticket an."
     }
   },
   "calculatingTitle": "Airdrop-Berechnungen werden durchgeführt, bitte warten!",

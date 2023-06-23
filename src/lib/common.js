@@ -1,10 +1,10 @@
 function sliceIntoChunks(arr, size) {
-    const chunks = [];
-    for (let i = 0; i < arr.length; i += size) {
-        const chunk = arr.slice(i, i + size);
-        chunks.push(chunk);
-    }
-    return chunks;
+  const chunks = [];
+  for (let i = 0; i < arr.length; i += size) {
+    const chunk = arr.slice(i, i + size);
+    chunks.push(chunk);
+  }
+  return chunks;
 }
 
 /**
@@ -14,7 +14,7 @@ function sliceIntoChunks(arr, size) {
  * @returns {Number}
  */
 function humanReadableFloat(satoshis, precision) {
-    return parseFloat((satoshis / 10 ** precision).toFixed(precision));
+  return parseFloat((satoshis / 10 ** precision).toFixed(precision));
 }
 
 /**
@@ -24,11 +24,11 @@ function humanReadableFloat(satoshis, precision) {
  * @returns {Number}
  */
 function blockchainFloat(satoshis, precision) {
-    return satoshis * 10 ** precision;
+  return satoshis * 10 ** precision;
 }
 
 export {
-    sliceIntoChunks,
-    humanReadableFloat,
-    blockchainFloat
+  sliceIntoChunks,
+  humanReadableFloat,
+  blockchainFloat
 };

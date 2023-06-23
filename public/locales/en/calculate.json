@@ -39,6 +39,10 @@
         "forever_freebie": {
             "name": "Forever freebie",
             "desc": "Each account holding a ticket with a forever duration and qualifying quantity gets 1 winning ticket"
+        },
+        "ltm_freebie": {
+            "name": "Lifetime membership freebie",
+            "desc": "Provide a free ticket to ticker holders who have a lifetime membership."
         }
     },
     "calculatingTitle": "Performing airdrop calculations, please wait!",

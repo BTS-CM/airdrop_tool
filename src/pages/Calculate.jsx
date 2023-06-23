@@ -62,6 +62,7 @@ export default function Calculate(properties) {
     'avg_point_lines',
     'freebie',
     'forever_freebie',
+    'ltm_freebie'
   ]
     .map((x) => ({
       name: t(`calculate:calcs.${x}.name`),
@@ -195,6 +196,7 @@ export default function Calculate(properties) {
         batchSize: 50,
         tokenQuantity: 1,
         distroMethod: "Equally",
+        blocking: "no",
         ltmReq: "no",
         tokenReq: "no",
         requiredToken: "BTS",

@@ -1,0 +1,22 @@
+{
+    "title": "Bloker konti",
+    "qty": "Mængde af {{chain}} konti blokeret: {{qty}}",
+    "header": "Hvordan vil du blokere en {{chain}} konto?",
+    "buttons": {
+      "committee": "Hentekomitéen blokerede konti",
+      "committeeInProgress": "Hentekomité spærrede konti",
+      "eraseAll": "Slet alle blokerede konti",
+      "search": "Søg efter en konto"
+    },
+    "modal": {
+      "title": "Søg efter en konto at blokere",
+      "block": "Blok",
+      "results": "Søgeresultater",
+      "searching": "Søger efter inputkonto",
+      "inputText": "Kontonavn eller ID"
+    },
+    "table": {
+      "header": "Blokerede konti",
+      "remove": "Fjerne"
+    }
+  }

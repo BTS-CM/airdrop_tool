@@ -1,0 +1,22 @@
+{
+    "title": "Blocca account",
+    "qty": "Quantità di {{chain}} account bloccati: {{qty}}",
+    "header": "Come vuoi bloccare un {{chain}} account?",
+    "buttons": {
+      "committee": "Il comitato di recupero ha bloccato gli account",
+      "committeeInProgress": "Il comitato di recupero ha bloccato gli account",
+      "eraseAll": "Cancella tutti gli account bloccati",
+      "search": "Cerca un account"
+    },
+    "modal": {
+      "title": "Cerca un account da bloccare",
+      "block": "Bloccare",
+      "results": "Risultati di ricerca",
+      "searching": "Ricerca dell'account di input",
+      "inputText": "Nome account o ID"
+    },
+    "table": {
+      "header": "Account bloccati",
+      "remove": "Rimuovere"
+    }
+  }

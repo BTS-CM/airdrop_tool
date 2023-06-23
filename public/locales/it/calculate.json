@@ -39,6 +39,10 @@
     "forever_freebie": {
       "name": "Omaggio per sempre",
       "desc": "Ogni account che detiene un biglietto con durata per sempre e quantità qualificante ottiene 1 biglietto vincente"
+    },
+    "ltm_freebie": {
+      "name": "Omaggio abbonamento a vita",
+      "desc": "Fornisci un biglietto gratuito ai possessori di ticker che hanno un abbonamento a vita."
     }
   },
   "calculatingTitle": "Calcolo dell'airdrop in corso, attendere!",

@@ -1,0 +1,22 @@
+{
+    "title": "계정 차단",
+    "qty": "수량 {{chain}} 차단된 계정: {{qty}}",
+    "header": "어떻게 차단하시겠습니까? {{chain}} 계정?",
+    "buttons": {
+      "committee": "가져오기 위원회 차단 계정",
+      "committeeInProgress": "가져오기 위원회 차단 계정",
+      "eraseAll": "차단된 모든 계정 지우기",
+      "search": "계정 검색"
+    },
+    "modal": {
+      "title": "차단할 계정 검색",
+      "block": "차단하다",
+      "results": "검색 결과",
+      "searching": "입력 계정 검색 중",
+      "inputText": "계정 이름 또는 ID"
+    },
+    "table": {
+      "header": "차단된 계정",
+      "remove": "제거하다"
+    }
+  }

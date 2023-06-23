@@ -17,6 +17,7 @@
         "th3": "Tildeling",
         "th4": "Grund",
         "reasons": {
+          "blocked": "Brugeren er blevet blokeret",
           "ltm": "Livsvarigt medlemskab mangler",
           "noBalance": "Mangler påkrævet token",
           "insufficientBalance": "Utilstrækkelige påkrævede tokens",
@@ -24,7 +25,8 @@
           "minReward": "Tildelt belønning for lille"
         }
       },
-      "json": "Airdrop JSON-data"
+      "json": "Airdrop JSON-data",
+      "jsonSimple": "Simple airdrop JSON-data"
     },
     "right": {
       "summary": {
@@ -47,9 +49,12 @@
         "tokenQuantity": "Indtast det antal tokens, du ønsker at airdrop",
         "distroRadio": {
           "title": "Hvordan skal tokens tildeles til vindere?",
-          "equally": "Ligesom mellem vindende konto-id'er",
+          "equally": "Lige mellem vindende konto-id'er",
           "proportionally": "Proportional til vundne billetter",
           "roundRobin": "Tildel hele tokens på en round robin måde"
+        },
+        "blocking": {
+          "title": "Udelukke blokerede konti?"
         },
         "ltm": {
           "title": "Kræver du et livstidsmedlemskab?"

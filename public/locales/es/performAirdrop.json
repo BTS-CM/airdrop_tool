@@ -17,6 +17,7 @@
         "th3": "Asignación",
         "th4": "Razón",
         "reasons": {
+          "blocked": "El usuario ha sido bloqueado",
           "ltm": "Falta la membresía de por vida",
           "noBalance": "Falta el token requerido",
           "insufficientBalance": "Tokens requeridos insuficientes",
@@ -24,7 +25,8 @@
           "minReward": "Recompensa asignada demasiado pequeña"
         }
       },
-      "json": "Lanzamiento aéreo de datos JSON"
+      "json": "Lanzamiento aéreo de datos JSON",
+      "jsonSimple": "Datos JSON de lanzamiento aéreo simple"
     },
     "right": {
       "summary": {
@@ -47,9 +49,12 @@
         "tokenQuantity": "Ingrese la cantidad de tokens que desea lanzar desde el aire",
         "distroRadio": {
           "title": "¿Cómo se deben asignar los tokens a los ganadores?",
-          "equally": "Igualdad entre los ID de cuenta ganadores",
+          "equally": "Igualdad entre ID de cuenta ganadoras",
           "proportionally": "Proporcional a los boletos ganados",
           "roundRobin": "Asigne tokens completos en forma de turno rotativo"
+        },
+        "blocking": {
+          "title": "¿Excluir cuentas bloqueadas?"
         },
         "ltm": {
           "title": "¿Requiere una membresía de por vida?"
