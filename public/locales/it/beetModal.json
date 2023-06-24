@@ -1,0 +1,19 @@
+{
+  "prompt": "Come vuoi procedere?",
+  "close": "Vicino",
+  "failure": "Il prompt non è riuscito a trasmettere alla blockchain.",
+  "success": "Trasmissione riuscita alla blockchain!",
+  "ready": "Pronto per trasmettere l'airdrop al portafoglio BEET",
+  "buttons": {
+    "deeplink": "Collegamento diretto",
+    "local": "File locale",
+    "json": "Visualizza JSON",
+    "retry": "Riprova",
+    "back": "Torna indietro"
+  },
+  "askBEET": {
+    "create": "Crea biglietto",
+    "upgrade": "Aggiorna l'account",
+    "airdrop": "Eseguire il lancio aereo"
+  }
+}

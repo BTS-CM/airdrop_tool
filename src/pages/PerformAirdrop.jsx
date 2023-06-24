@@ -424,9 +424,11 @@ export default function PerformAirdrop(properties) {
     }
   }
 
+  // Remove the invalid ticket holders
   const validOutput = _.difference(sortedWinners.map((person) => person.id), invalidOutput.map((person) => person.id))
     .map((validEntry) => sortedWinners.find((winner) => winner.id === validEntry));
 
+  // Tally the valid ticket holders
   const ticketQty = validOutput
     .map((x) => x.qty)
     .reduce((accumulator, ticket) => accumulator + parseInt(ticket, 10), 0);
@@ -437,6 +439,7 @@ export default function PerformAirdrop(properties) {
     ? finalTokenQuantity
     : validOutput.length;
 
+  // Allocate assets (tokens) to the remaining valid ticket holders
   for (let i = 0; i < itrQty; i++) {
     if (i === 0) {
       tokenRows = [];
@@ -500,10 +503,12 @@ export default function PerformAirdrop(properties) {
 
     winners = valid;
 
+    // for airdrop cards
     winnerChunks = valid.length
       ? sliceIntoChunks(valid.sort((a, b) => b.qty - a.qty), finalBatchSize)
       : [];
 
+    // accordian table rows for those included in airdrop
     validRows = valid.length
       ? valid
         .map((winner) => (
@@ -534,6 +539,7 @@ export default function PerformAirdrop(properties) {
         ))
       : null;
 
+    // accordian table rows for those excluded from airdrop
     invalidRows = invalidOutput.length
       ? invalidOutput
         .map((loser) => (
@@ -560,6 +566,9 @@ export default function PerformAirdrop(properties) {
       : null;
   }
 
+  console.log({winnerChunks});
+
+  // Cards which enable user to perform airdrop
   const airdropCards = winnerChunks && winnerChunks.length
     ? winnerChunks.map((chunk, i) => (
       <AirdropCard
@@ -709,7 +718,7 @@ export default function PerformAirdrop(properties) {
                                 defaultValue={
                                   JSON.stringify(
                                     winners.map((x) => ({
-                                      id: x.id,
+                                      user: `${envLeaderboard.find((usr) => usr.id === x.id).account.name} (${x.id})`,
                                       ticketQty: x.qty,
                                       percent: x.percent,
                                       assignedTokens: x.assignedTokens

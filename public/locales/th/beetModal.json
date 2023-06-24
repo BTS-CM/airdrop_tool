@@ -1,0 +1,19 @@
+{
+  "prompt": "คุณต้องการดำเนินการอย่างไร",
+  "close": "ปิด",
+  "failure": "พรอมต์ไม่สามารถออกอากาศไปยัง blockchain",
+  "success": "ออกอากาศไปยัง blockchain สำเร็จ!",
+  "ready": "พร้อมที่จะออกอากาศ airdrop ไปยัง BEET wallet",
+  "buttons": {
+    "deeplink": "ลิงก์ลึก",
+    "local": "ไฟล์ในเครื่อง",
+    "json": "ดู JSON",
+    "retry": "ลองอีกครั้ง",
+    "back": "กลับไป"
+  },
+  "askBEET": {
+    "create": "สร้างตั๋ว",
+    "upgrade": "อัปเกรดบัญชี",
+    "airdrop": "ดำเนินการออกอากาศ"
+  }
+}

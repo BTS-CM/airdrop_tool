@@ -1,0 +1,19 @@
+{
+    "prompt": "How do you want to proceed?",
+    "close": "Close",
+    "failure": "Prompt failed to broadcast to blockchain.",
+    "success": "Successfully broadcast to the blockchain!",
+    "ready": "Ready to broadcast airdrop to BEET wallet",
+    "buttons": {
+        "deeplink": "Deeplink",
+        "local": "Local file",
+        "json": "View JSON",
+        "retry": "Try again",
+        "back": "Go back"
+    },
+    "askBEET": {
+        "create": "Create ticket",
+        "upgrade": "Upgrade account",
+        "airdrop": "Perform airdrop"
+    }
+}

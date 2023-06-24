@@ -175,6 +175,10 @@ export default function Create(properties) {
         <BeetModal
           value={value}
           opContents={[{
+            fee: {
+              amount: 0,
+              asset_id: "1.3.0"
+            },
             account,
             target_type: targetType,
             amount: {

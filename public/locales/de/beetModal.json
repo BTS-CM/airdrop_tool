@@ -1,0 +1,19 @@
+{
+  "prompt": "Wie wollen Sie fortfahren?",
+  "close": "Schließen",
+  "failure": "Die Eingabeaufforderung konnte nicht an die Blockchain gesendet werden.",
+  "success": "Erfolgreich an die Blockchain übertragen!",
+  "ready": "Bereit zur Übertragung des Airdrops an die BEET-Wallet",
+  "buttons": {
+    "deeplink": "Deeplink",
+    "local": "Lokale Datei",
+    "json": "JSON anzeigen",
+    "retry": "Versuchen Sie es erneut",
+    "back": "Geh zurück"
+  },
+  "askBEET": {
+    "create": "Ticket erstellen",
+    "upgrade": "Konto aktualisieren",
+    "airdrop": "Airdrop durchführen"
+  }
+}

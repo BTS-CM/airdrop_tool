@@ -1,0 +1,19 @@
+{
+  "prompt": "Hvordan vil du gå videre?",
+  "close": "Tæt",
+  "failure": "Prompten kunne ikke udsendes til blockchain.",
+  "success": "Udsendelse til blockchain med succes!",
+  "ready": "Klar til at sende airdrop til BEET-pung",
+  "buttons": {
+    "deeplink": "Deeplink",
+    "local": "Lokal fil",
+    "json": "Se JSON",
+    "retry": "Prøv igen",
+    "back": "Gå tilbage"
+  },
+  "askBEET": {
+    "create": "Opret billet",
+    "upgrade": "Opgrader konto",
+    "airdrop": "Udfør airdrop"
+  }
+}

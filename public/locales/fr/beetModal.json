@@ -1,0 +1,19 @@
+{
+  "prompt": "Comment veux-tu procéder?",
+  "close": "Fermer",
+  "failure": "L'invite n'a pas pu être diffusée sur la blockchain.",
+  "success": "Diffusé avec succès sur la blockchain !",
+  "ready": "Prêt à diffuser un airdrop sur le portefeuille BEET",
+  "buttons": {
+    "deeplink": "Lien profond",
+    "local": "Fichier local",
+    "json": "Afficher JSON",
+    "retry": "Essayer à nouveau",
+    "back": "Retourner"
+  },
+  "askBEET": {
+    "create": "Créer un billet",
+    "upgrade": "Améliorer le compte",
+    "airdrop": "Effectuer un largage aérien"
+  }
+}

@@ -20,6 +20,7 @@ window.electron = {
       'analyze',
       'app',
       'asset',
+      'beetModal',
       'calculate',
       'beet',
       'calculatedAirdrops',

@@ -1,0 +1,19 @@
+{
+  "prompt": "Como você deseja proceder?",
+  "close": "Fechar",
+  "failure": "O prompt falhou ao transmitir para o blockchain.",
+  "success": "Transmitido com sucesso para o blockchain!",
+  "ready": "Pronto para transmitir o airdrop para a carteira BEET",
+  "buttons": {
+    "deeplink": "Link profundo",
+    "local": "arquivo local",
+    "json": "Ver JSON",
+    "retry": "Tente novamente",
+    "back": "Volte"
+  },
+  "askBEET": {
+    "create": "Criar ticket",
+    "upgrade": "Atualizar conta",
+    "airdrop": "Executar lançamento aéreo"
+  }
+}

@@ -44,7 +44,6 @@ export default function BeetModal(properties) {
   const reset = beetStore((state) => state.reset);
 
   const account = tempStore((state) => state.account);
-  const setAccount = tempStore((state) => state.setAccount);
 
   const [tx, setTX] = useState();
   const [inProgress, setInProgress] = useState(false);
@@ -183,7 +182,9 @@ export default function BeetModal(properties) {
           account && !method
             ? (
               <>
-                <Text>How do you want to proceed?</Text>
+                <Text>
+                  {t("beetModal:prompt")}
+                </Text>
                 <Group mt="sm">
                   {
                     requestedMethods && requestedMethods.includes("BEET")
@@ -192,25 +193,37 @@ export default function BeetModal(properties) {
                   }
                   { // Won't work for large airdrops due to 2k url char limit in chromium
                     requestedMethods && requestedMethods.includes("DEEPLINK")
-                      ? <Button compact onClick={() => setMethod("DEEPLINK")}>Deeplink</Button>
+                      ? (
+                        <Button compact onClick={() => setMethod("DEEPLINK")}>
+                          {t("beetModal:buttons.deeplink")}
+                        </Button>
+                      )
                       : null
                   }
                   {
                     requestedMethods && requestedMethods.includes("LOCAL")
-                      ? <Button compact onClick={() => setMethod("LOCAL")}>Local file</Button>
+                      ? (
+                        <Button compact onClick={() => setMethod("LOCAL")}>
+                          {t("beetModal:buttons.local")}
+                        </Button>
+                      )
                       : null
                   }
                   {
                     requestedMethods && requestedMethods.includes("JSON")
-                      ? <Button compact onClick={() => setMethod("JSON")}>View JSON</Button>
+                      ? (
+                        <Button compact onClick={() => setMethod("JSON")}>
+                          {t("beetModal:buttons.json")}
+                        </Button>
+                      )
                       : null
                   }
                   {
                     requestedMethods && requestedMethods.includes("QR")
                       ? (
-<Button compact onClick={() => setMethod("QR")}>
+                        <Button compact onClick={() => setMethod("QR")}>
                           {t("modal:menu.qr")}
-</Button>
+                        </Button>
                       )
                       : null
                   }
@@ -223,7 +236,9 @@ export default function BeetModal(properties) {
           account && outcome && outcome === "SUCCESS"
             ? (
               <>
-                <Text>Successfully broadcast to the blockchain!</Text>
+                <Text>
+                  {t("beetModal:success")}
+                </Text>
                 <Button onClick={() => {
                   setDeepLink();
                   close();
@@ -233,7 +248,7 @@ export default function BeetModal(properties) {
                   reset();
                 }}
                 >
-                  Close
+                  {t("beetModal:close")}
                 </Button>
               </>
             )
@@ -243,14 +258,16 @@ export default function BeetModal(properties) {
           account && outcome && outcome === "FAILURE"
             ? (
               <>
-                <Text>Prompt failed to broadcast to blockchain.</Text>
+                <Text>
+                  {t("beetModal:failure")}
+                </Text>
                 <Button
                   onClick={() => {
                     setOutcome();
                     reset();
                   }}
                 >
-                  Try again
+                  {t("beetModal:buttons.retry")}
                 </Button>
               </>
             )
@@ -269,7 +286,9 @@ export default function BeetModal(properties) {
           account && method && method === "BEET" && connection && identity && !outcome
             ? (
               <>
-                <Text>Ready to broadcast airdrop to BEET wallet</Text>
+                <Text>
+                  {t("beetModal:ready")}
+                </Text>
                 <Text>{identity.chain}</Text>
                 <Button mt="sm" onClick={async () => await broadcast()}>
                   {t("modal:deeplink.DL.beetBTN")}
@@ -465,7 +484,7 @@ export default function BeetModal(properties) {
                 setOutcome();
               }}
             >
-              Go back
+              {t("beetModal:buttons.back")}
             </Button>
           )
           : null
@@ -473,7 +492,21 @@ export default function BeetModal(properties) {
       </Modal>
       <Group position="center">
         <Button style={{ marginTop: '20px' }} onClick={open}>
-          {t("create:askBEET")}
+          {
+            opType === "ticket_create"
+              ? t("beetModal:askBEET.create")
+              : null
+          }
+          {
+            opType === "account_upgrade"
+              ? t("beetModal:askBEET.upgrade")
+              : null
+          }
+          {
+            opType === "transfer"
+              ? t("beetModal:askBEET.airdrop")
+              : null
+          }
         </Button>
       </Group>
     </>

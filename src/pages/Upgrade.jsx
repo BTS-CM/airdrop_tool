@@ -80,6 +80,10 @@ export default function Upgrade(properties) {
         <BeetModal
           value={value}
           opContents={[{
+            fee: {
+              amount: 0,
+              asset_id: "1.3.0"
+            },
             account_to_upgrade: account,
             upgrade_to_lifetime_member: true,
             extensions: []

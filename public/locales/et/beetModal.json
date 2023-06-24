@@ -1,0 +1,19 @@
+{
+  "prompt": "Kuidas soovite edasi minna?",
+  "close": "Sulge",
+  "failure": "Viipa plokiahelasse edastamine ebaõnnestus.",
+  "success": "Edukalt edastamine plokiahelasse!",
+  "ready": "Valmis edastama airdrop-i BEET rahakotile",
+  "buttons": {
+    "deeplink": "Sügav link",
+    "local": "Kohalik fail",
+    "json": "Kuva JSON",
+    "retry": "Proovi uuesti",
+    "back": "Mine tagasi"
+  },
+  "askBEET": {
+    "create": "Loo pilet",
+    "upgrade": "Täiendage kontot",
+    "airdrop": "Tehke õhulaskmine"
+  }
+}

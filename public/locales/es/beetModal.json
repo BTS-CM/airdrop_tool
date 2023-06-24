@@ -1,0 +1,19 @@
+{
+  "prompt": "¿Como quieres proceder?",
+  "close": "Cerca",
+  "failure": "El aviso no se pudo transmitir a la cadena de bloques.",
+  "success": "¡Transmitido con éxito a la cadena de bloques!",
+  "ready": "Listo para transmitir airdrop a la billetera BEET",
+  "buttons": {
+    "deeplink": "Enlace profundo",
+    "local": "Archivo local",
+    "json": "Ver JSON",
+    "retry": "Intentar otra vez",
+    "back": "Regresa"
+  },
+  "askBEET": {
+    "create": "Crear Ticket",
+    "upgrade": "Actualizar cuenta",
+    "airdrop": "Realizar lanzamiento aéreo"
+  }
+}

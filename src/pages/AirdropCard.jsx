@@ -38,27 +38,19 @@ export default function modal(properties) {
     relevantChain = 'TUSC';
   }
 
-  const currentChunkValue = distroMethod === "Proportionally"
-    ? parseFloat(
-      chunk
-        .map((z) => ((z.qty / ticketQty) * tokenQuantity).toFixed(5))
-        .reduce((accumulator, ticket) => accumulator + parseFloat(ticket), 0).toFixed(5)
-    )
-    : (((1 / quantityWinners) * tokenQuantity).toFixed(5)) * chunk.length;
+  const currentChunkValue = chunk
+    .map((z) => z.assignedTokens)
+    .reduce((accumulator, ticket) => accumulator + ticket, 0);
 
   const ops = chunk.map((x) => ({
     fee: {
       amount: 0,
-      asset_id: tokenDetails.id,
+      asset_id: "1.3.0",
     },
     from: account,
     to: x.id,
     amount: {
-      amount: parseFloat(
-        distroMethod === "Proportionally"
-          ? ((x.qty / ticketQty) * tokenQuantity).toFixed(tokenDetails.precision)
-          : (((1 / quantityWinners) * tokenQuantity).toFixed(tokenDetails.precision)),
-      ) * 100000,
+      amount: x.assignedTokens,
       asset_id: tokenDetails.id,
     },
   }));
