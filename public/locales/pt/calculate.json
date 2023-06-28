@@ -1,7 +1,7 @@
 {
   "calcs": {
     "forward": {
-      "name": "Encaminhar pedaços",
+      "name": "Encaminhar blocos",
       "desc": "Divida o hash em números de ticket."
     },
     "reverse": {
@@ -43,6 +43,20 @@
     "ltm_freebie": {
       "name": "Brinde de assinatura vitalícia",
       "desc": "Forneça um ingresso gratuito aos titulares de tickers que tenham uma associação vitalícia."
+    },
+    "barrel_of_fish": {
+      "name": "barril de peixe",
+      "desc": "Escolha bilhetes de um barril de peixe",
+      "projectile": {
+        "distance": "Que distância o projétil deve percorrer no barril de peixe",
+        "beam": "O projétil deve passar diretamente do ponto A ao ponto B desimpedido.",
+        "slow": "Os projéteis irão desacelerar até parar rapidamente na água."
+      },
+      "splinter": {
+        "fragmentation": "O projétil irá estilhaçar com o impacto?",
+        "yes": "Sim, deve lascar uma vez no impacto.",
+        "no": "Não, é um único projétil sólido."
+      }
     }
   },
   "calculatingTitle": "Realizando cálculos de airdrop, aguarde!",

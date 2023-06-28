@@ -1,18 +1,22 @@
 {
-    "title": "Parachutages calculés",
-    "radioLbl": "Sélectionnez la blockchain cible",
-    "radioDesc": "Blockchains à base de graphène uniquement",
-    "none": {
-      "title": "Aucun airdrops pour cette blockchain ne semble encore avoir été créé ?",
-      "btn": "Calculer le largage"
-    },
-    "table": {
-      "th1": "IDENTIFIANT",
-      "th2": "Hacher",
-      "th3": "Numéro de bloc",
-      "th4": "Gagnants",
-      "th5": "Algorithmes",
-      "th6": "Dédoublonné",
-      "th7": "Seuls les gagnants"
-    }
+  "title": "Parachutages calculés",
+  "radioLbl": "Sélectionnez la blockchain cible",
+  "radioDesc": "Blockchains à base de graphène uniquement",
+  "none": {
+    "title": "Aucun airdrops pour cette blockchain ne semble encore avoir été créé ?",
+    "btn": "Calculer le largage"
+  },
+  "some": {
+    "title": "Vous voulez créer un autre airdrop ?",
+    "btn": "Calculer un autre airdrop"
+  },
+  "table": {
+    "th1": "IDENTIFIANT",
+    "th2": "Hacher",
+    "th3": "Numéro de bloc",
+    "th4": "Gagnants",
+    "th5": "Algorithmes",
+    "th6": "Dédoublonné",
+    "th7": "Seuls les gagnants"
   }
+}

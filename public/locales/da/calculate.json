@@ -43,6 +43,20 @@
     "ltm_freebie": {
       "name": "Livsvarigt medlemskab gratis",
       "desc": "Giv en gratis billet til ticker-indehavere, der har et livstidsmedlemskab."
+    },
+    "barrel_of_fish": {
+      "name": "Tønde med fisk",
+      "desc": "Vælg billetter fra en tønde fisk",
+      "projectile": {
+        "distance": "Hvor langt skal projektilet rejse i tønden med fisk",
+        "beam": "Projektilet skal passere direkte fra punkt A til punkt B uhindret.",
+        "slow": "Projektilerne vil langsomt standse hurtigt i vandet."
+      },
+      "splinter": {
+        "fragmentation": "Vil projektilet splintre ved stød?",
+        "yes": "Ja, den bør splintre én gang ved stød.",
+        "no": "Nej, det er et solidt enkelt projektil."
+      }
     }
   },
   "calculatingTitle": "Udfører airdrop-beregninger, vent venligst!",
@@ -73,7 +87,7 @@
   },
   "blockNum": {
     "title": "Indtast det bloknummer, du ønsker at bruge til airdrop-formål",
-    "label": "Blok nummer"
+    "label": "Bloknummer"
   },
   "fetchTickets": "Du skal hente billetdataene for denne blockchain.",
   "distro": {

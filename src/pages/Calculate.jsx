@@ -22,7 +22,9 @@ import {
 import blake from 'blakejs';
 
 import { executeCalculation } from '../lib/algos';
-import { appStore, leaderboardStore, airdropStore, ticketStore } from '../lib/states';
+import {
+  appStore, leaderboardStore, airdropStore, ticketStore
+} from '../lib/states';
 
 export default function Calculate(properties) {
   const { t, i18n } = useTranslation();
@@ -51,6 +53,9 @@ export default function Calculate(properties) {
 
   const [progress, setProgress] = useState('planning'); // planning, calculating, completed
 
+  const [projectiles, setProjectiles] = useState('beam');
+  const [splinter, setSplinter] = useState('yes');
+
   const calculationTypes = [
     'forward',
     'reverse',
@@ -62,7 +67,8 @@ export default function Calculate(properties) {
     'avg_point_lines',
     'freebie',
     'forever_freebie',
-    'ltm_freebie'
+    'ltm_freebie',
+    'barrel_of_fish'
   ]
     .map((x) => ({
       name: t(`calculate:calcs.${x}.name`),
@@ -94,25 +100,64 @@ export default function Calculate(properties) {
   const rows = calculationTypes.map((item) => {
     const selected = selection.includes(item.value);
     return (
-      <tr key={item.value}>
-        <td>
-          <Checkbox
-            checked={selection.includes(item.value)}
-            onChange={() => toggleRow(item.value)}
-            transitionDuration={0}
-          />
-        </td>
-        <td>
-          <Group spacing="sm">
-            <Text size="sm" weight={500}>
-              {item.name}
-            </Text>
-          </Group>
-        </td>
-        <td>
-          {item.desc}
-        </td>
-      </tr>
+      <>
+        <tr key={item.value}>
+          <td>
+            <Checkbox
+              checked={selected}
+              onChange={() => toggleRow(item.value)}
+              transitionDuration={0}
+            />
+          </td>
+          <td>
+            <Group spacing="sm">
+              <Text size="sm" weight={500}>
+                {item.name}
+              </Text>
+            </Group>
+          </td>
+          <td>
+            {item.desc}
+          </td>
+        </tr>
+        {
+          item.value === 'barrel_of_fish' && selected
+            ? (
+            <>
+              <tr>
+                <td colSpan={3}>
+                  <Radio.Group
+                    value={projectiles}
+                    onChange={setProjectiles}
+                    name="chosenProjectile"
+                    label={t("calculate:calcs.barrel_of_fish.projectile.distance")}
+                    withAsterisk
+                  >
+                      <Radio m="xs" value="beam" label={t("calculate:calcs.barrel_of_fish.projectile.beam")} />
+                      <Radio m="xs" value="slow" label={t("calculate:calcs.barrel_of_fish.projectile.slow")} />
+                  </Radio.Group>
+                </td>
+              </tr>
+              <tr>
+                <td colSpan={3}>
+                  <Radio.Group
+                    value={splinter}
+                    onChange={setSplinter}
+                    name="chosenSplinter"
+                    label={t("calculate:calcs.barrel_of_fish.splinter.fragmentation")}
+                    withAsterisk
+                  >
+                      <Radio m="xs" value="yes" label={t("calculate:calcs.barrel_of_fish.splinter.yes")} />
+                      <Radio m="xs" value="no" label={t("calculate:calcs.barrel_of_fish.splinter.no")} />
+                  </Radio.Group>
+                </td>
+              </tr>
+            </>
+            )
+            : null
+        }
+      </>
+
     );
   });
 
@@ -174,6 +219,8 @@ export default function Calculate(properties) {
         alwaysWinning,
         leaderboardJSON,
         relevantTickets,
+        projectiles,
+        splinter
       );
     } catch (error) {
       console.log(error);
@@ -228,7 +275,7 @@ export default function Calculate(properties) {
         <Button m="xs" onClick={() => setProgress('planning')}>
           {t("calculate:completed.anotherBtn")}
         </Button>
-        <Link to={`/AirdropPrep/${value}/${randID}`}>
+        <Link to={`/PlannedAirdrop/${value}/${randID}`}>
           <Button m="xs">
             {t("calculate:completed.airdropBtn")}
           </Button>

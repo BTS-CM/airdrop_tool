@@ -42,7 +42,21 @@
     },
     "ltm_freebie": {
       "name": "Eluaegne liikmelisus tasuta",
-      "desc": "Pakkuge tasuta pilet tickeri omanikele, kellel on eluaegne liikmesus."
+      "desc": "Pakkuge tasuta pilet tickeri omanikele, kellel on eluaegne liikmelisus."
+    },
+    "barrel_of_fish": {
+      "name": "Kalatünn",
+      "desc": "Vali piletid kalatünnist",
+      "projectile": {
+        "distance": "Kui kaugele peaks mürsk kalatünnis liikuma",
+        "beam": "Mürsk peaks takistusteta läbima otse punktist A punkti B.",
+        "slow": "Mürsud peatuvad vees kiiresti ja peatuvad."
+      },
+      "splinter": {
+        "fragmentation": "Kas mürsk puruneb kokkupõrkel?",
+        "yes": "Jah, see peaks löögil korra kildudeks minema.",
+        "no": "Ei, see on üks kindel mürsk."
+      }
     }
   },
   "calculatingTitle": "Õhutilkade arvutuste tegemine, palun oodake!",
@@ -52,7 +66,7 @@
     "airdropBtn": "Kuva loodud õhutilk",
     "generatedBtn": "Vaadake kõiki loodud õhutilku"
   },
-  "title": "Arvutage välja, millise plokiahela jaoks on tõestatavalt õiglane õhutilkade jaotus?",
+  "title": "Millise plokiahela jaoks arvutage välja tõestatavalt õiglane õhutilkade jaotus?",
   "radioLabel": "Valige sihtplokiahel",
   "radioDesc": "Ainult grafeenipõhised plokiahelad",
   "hash": {

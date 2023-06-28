@@ -43,6 +43,20 @@
         "ltm_freebie": {
             "name": "Lifetime membership freebie",
             "desc": "Provide a free ticket to ticker holders who have a lifetime membership."
+        },
+        "barrel_of_fish": {
+            "name": "Barrel of fish",
+            "desc": "Pick tickets from a barrel of fish",
+            "projectile": {
+                "distance": "How far should the projectile travel in the barrel of fish",
+                "beam": "The projectile should pass directly from point A to point B unimpeded.",
+                "slow": "The projectiles will slow to a halt quickly in the water."
+            },
+            "splinter": {
+                "fragmentation": "Will the projectile splinter on impact?",
+                "yes": "Yes, it should splinter once on impact.",
+                "no": "No, it's a solid single projectile."
+            }
         }
     },
     "calculatingTitle": "Performing airdrop calculations, please wait!",

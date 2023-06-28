@@ -43,6 +43,20 @@
     "ltm_freebie": {
       "name": "Obsequio de membresía de por vida",
       "desc": "Proporcione un boleto gratis a los titulares de boletos que tengan una membresía de por vida."
+    },
+    "barrel_of_fish": {
+      "name": "barril de pescado",
+      "desc": "Recoge boletos de un barril de pescado",
+      "projectile": {
+        "distance": "¿Qué distancia debe recorrer el proyectil en el barril de pescado?",
+        "beam": "El proyectil debe pasar directamente del punto A al punto B sin obstáculos.",
+        "slow": "Los proyectiles se detendrán rápidamente en el agua."
+      },
+      "splinter": {
+        "fragmentation": "¿Se astillará el proyectil al impactar?",
+        "yes": "Sí, debería astillarse una vez con el impacto.",
+        "no": "No, es un solo proyectil sólido."
+      }
     }
   },
   "calculatingTitle": "Realizando cálculos de airdrop, ¡espere!",

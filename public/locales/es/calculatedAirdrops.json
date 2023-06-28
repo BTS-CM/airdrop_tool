@@ -1,18 +1,22 @@
 {
-    "title": "Lanzamientos aéreos calculados",
-    "radioLbl": "Seleccione la cadena de bloques de destino",
-    "radioDesc": "Solo cadenas de bloques basadas en grafeno",
-    "none": {
-      "title": "¿Parece que todavía no se han creado lanzamientos aéreos para esta cadena de bloques?",
-      "btn": "Calcular lanzamiento aéreo"
-    },
-    "table": {
-      "th1": "IDENTIFICACIÓN",
-      "th2": "Picadillo",
-      "th3": "Número de bloque",
-      "th4": "Ganadores",
-      "th5": "Algoritmos",
-      "th6": "deduplicado",
-      "th7": "solo ganadores"
-    }
+  "title": "Lanzamientos aéreos calculados",
+  "radioLbl": "Seleccione la cadena de bloques de destino",
+  "radioDesc": "Solo cadenas de bloques basadas en grafeno",
+  "none": {
+    "title": "¿Parece que todavía no se han creado lanzamientos aéreos para esta cadena de bloques?",
+    "btn": "Calcular lanzamiento aéreo"
+  },
+  "some": {
+    "title": "¿Quieres crear otro airdrop?",
+    "btn": "Calcular otro lanzamiento aéreo"
+  },
+  "table": {
+    "th1": "IDENTIFICACIÓN",
+    "th2": "Picadillo",
+    "th3": "Número de bloque",
+    "th4": "Ganadores",
+    "th5": "Algoritmos",
+    "th6": "deduplicado",
+    "th7": "solo ganadores"
   }
+}

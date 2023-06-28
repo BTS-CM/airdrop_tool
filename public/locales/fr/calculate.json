@@ -43,6 +43,20 @@
     "ltm_freebie": {
       "name": "Adhésion gratuite à vie",
       "desc": "Fournissez un billet gratuit aux détenteurs de billets qui ont une adhésion à vie."
+    },
+    "barrel_of_fish": {
+      "name": "Baril de poisson",
+      "desc": "Choisissez des billets dans un baril de poisson",
+      "projectile": {
+        "distance": "Quelle distance le projectile doit-il parcourir dans le baril de poisson",
+        "beam": "Le projectile doit passer directement du point A au point B sans encombre.",
+        "slow": "Les projectiles ralentiront pour s'arrêter rapidement dans l'eau."
+      },
+      "splinter": {
+        "fragmentation": "Le projectile va-t-il éclater à l'impact ?",
+        "yes": "Oui, il devrait se briser une fois à l'impact.",
+        "no": "Non, c'est un projectile simple solide."
+      }
     }
   },
   "calculatingTitle": "Calculs de parachutage en cours, veuillez patienter !",
@@ -59,7 +73,7 @@
     "title": "Quel type de blockhash voulez-vous utiliser pour une entrée aléatoire initiale prouvée ?",
     "radioLabel": "Sélectionnez un type de hachage initial",
     "radioDesc": "Original ou haché de manière sécurisée ?",
-    "plain": "Chaîne de signature de témoin ordinaire",
+    "plain": "Chaîne de signature de témoin simple",
     "witSig": "hachage de la signature du témoin"
   },
   "ticket": {

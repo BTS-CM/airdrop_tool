@@ -43,6 +43,20 @@
     "ltm_freebie": {
       "name": "Lebenslange Gratismitgliedschaft",
       "desc": "Bieten Sie Ticker-Inhabern mit einer lebenslangen Mitgliedschaft ein kostenloses Ticket an."
+    },
+    "barrel_of_fish": {
+      "name": "Fass mit Fisch",
+      "desc": "Wählen Sie Tickets aus einem Fass Fisch",
+      "projectile": {
+        "distance": "Wie weit sollte das Projektil im Fischfass fliegen?",
+        "beam": "Das Projektil sollte ungehindert direkt von Punkt A nach Punkt B gelangen.",
+        "slow": "Die Projektile werden im Wasser schnell zum Stillstand kommen."
+      },
+      "splinter": {
+        "fragmentation": "Wird das Projektil beim Aufprall zersplittern?",
+        "yes": "Ja, es sollte beim Aufprall einmal splittern.",
+        "no": "Nein, es ist ein solides Einzelprojektil."
+      }
     }
   },
   "calculatingTitle": "Airdrop-Berechnungen werden durchgeführt, bitte warten!",

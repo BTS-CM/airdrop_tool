@@ -356,14 +356,72 @@ function single_winner(initialChunks) {
 */
 
 /**
+ * Shooting fish in a barrel is totally fair & we can prove it.
+ * The bullet hits the barrel and breaks into multiple fragments which each damage fish in their way
+ * 0 to 997,002,999
+ * Could increase to 0 to 9,979,011,999 if we increase the z axis to 4 digits from 3.
+ * Many draws
+ * @param {Array} initialChunks
+ * @param {String} projectile
+ * @param {String} splinter
+ * @returns {Array}
+ */
+function barrel_of_fish(initialChunks, maxDistance, projectile, splinter) {
+  const pointOfImpact = chunk(initialChunks[0], 3);
+
+  const poiVector = new Vector3(
+    filterParseInt(pointOfImpact[0]),
+    filterParseInt(pointOfImpact[1]),
+    filterParseInt(pointOfImpact[2])
+  );
+
+  const endVectors = splinter === 'yes'
+    ? initialChunks.slice(1)
+    : [initialChunks.slice(1)[0]];
+
+  const projectileDepth = projectile === 'beam'
+    ? 999
+    : 333;
+
+  let obliteratedFish = [];
+  for (let y = 0; y < endVectors.length; y++) {
+    const end = chunk(endVectors[y], 3);
+
+    const endPoint = new Vector3(
+      filterParseInt(end[0]),
+      filterParseInt(end[1]),
+      filterParseInt(end[2])
+    );
+    const path = new Line3(poiVector, endPoint);
+
+    const fishInWay = parseInt((path.distanceSq() / maxDistance) * projectileDepth, 10);
+
+    const currentChosenTickets = extractTickets(fishInWay, path, 0.001);
+    obliteratedFish = [...obliteratedFish, ...currentChosenTickets];
+  }
+
+  console.log(`1 entry point, ${endVectors.length} shards, ${obliteratedFish.length} fish obliterated 🐟🎣🍴`);
+  return [...obliteratedFish];
+}
+
+/**
  * Given a ticket algorithm and signature, return chosen tickets.
  * @param {String} algoType
  * @param {String} filtered_signature
  * @param {Array} leaderboardJSON
  * @param {Array} relevantTickets
+ * @param {String} bof_projectile
+ * @param {String} bof_splinter
  * @returns {Array}
  */
-function getTickets(algoType, filtered_signature, leaderboardJSON, relevantTickets) {
+function getTickets(
+  algoType,
+  filtered_signature,
+  leaderboardJSON,
+  relevantTickets,
+  bof_projectile = null,
+  bof_splinter = null
+) {
   const initialChunks = chunk(filtered_signature, 9);
 
   const minVector = new Vector3(0, 0, 0);
@@ -393,7 +451,9 @@ function getTickets(algoType, filtered_signature, leaderboardJSON, relevantTicke
       return ltm_freebie(leaderboardJSON);
     case "forever_freebie":
       return forever_freebie(leaderboardJSON, relevantTickets);
-    //case "single_winner":
+    case "barrel_of_fish":
+      return barrel_of_fish(initialChunks, maxDistance, bof_projectile, bof_splinter);
+    // case "single_winner":
     //  return single_winner(initialChunks);
     default:
       console.log(`Unknown algo type: ${algoType}`);
@@ -409,6 +469,8 @@ function getTickets(algoType, filtered_signature, leaderboardJSON, relevantTicke
  * @param {String} alwaysWinning
  * @param {Array} leaderboardJSON
  * @param {Array} relevantTickets
+ * @param {String} bof_projectile
+ * @param {String} bof_splinter
  * @returns {Object}
  */
 function executeCalculation(
@@ -418,6 +480,8 @@ function executeCalculation(
   alwaysWinning,
   leaderboardJSON,
   relevantTickets,
+  bof_projectile,
+  bof_splinter
 ) {
   const generatedNumbers = {};
   let winningTickets = [];
@@ -426,7 +490,14 @@ function executeCalculation(
   for (let i = 0; i < distributions.length; i++) {
     // Calculate winning tickets for each algo chosen, 1 at a time
     const algoType = distributions[i];
-    let algoTickets = getTickets(algoType, filtered_signature, leaderboardJSON, relevantTickets);
+    let algoTickets = getTickets(
+      algoType,
+      filtered_signature,
+      leaderboardJSON,
+      relevantTickets,
+      bof_projectile,
+      bof_splinter
+    );
 
     if (deduplicate === "Yes") {
       // User chose to avoid unique tickets being chosen multiple times
@@ -497,5 +568,5 @@ export {
   alien_blood,
   bouncing_ball,
   freebie,
-  //single_winner,
+  // single_winner,
 };

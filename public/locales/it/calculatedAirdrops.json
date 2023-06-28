@@ -1,18 +1,22 @@
 {
-    "title": "Lanci aerei calcolati",
-    "radioLbl": "Seleziona la blockchain di destinazione",
-    "radioDesc": "Solo blockchain basate su grafene",
-    "none": {
-      "title": "Nessun airdrop per questa blockchain sembra essere stato ancora creato?",
-      "btn": "Calcola lancio aereo"
-    },
-    "table": {
-      "th1": "ID",
-      "th2": "Hash",
-      "th3": "Numero di blocco",
-      "th4": "Vincitori",
-      "th5": "Algoritmi",
-      "th6": "Deduplicato",
-      "th7": "Solo vincitori"
-    }
+  "title": "Lanci aerei calcolati",
+  "radioLbl": "Seleziona la blockchain di destinazione",
+  "radioDesc": "Solo blockchain basate su grafene",
+  "none": {
+    "title": "Nessun airdrop per questa blockchain sembra essere stato ancora creato?",
+    "btn": "Calcola lancio aereo"
+  },
+  "some": {
+    "title": "Vuoi creare un altro airdrop?",
+    "btn": "Calcola un altro lancio aereo"
+  },
+  "table": {
+    "th1": "ID",
+    "th2": "Hash",
+    "th3": "Numero di blocco",
+    "th4": "Vincitori",
+    "th5": "Algoritmi",
+    "th6": "Deduplicato",
+    "th7": "Solo vincitori"
   }
+}

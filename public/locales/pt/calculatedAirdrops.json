@@ -1,18 +1,22 @@
 {
-    "title": "airdrops calculados",
-    "radioLbl": "Selecione o blockchain de destino",
-    "radioDesc": "Apenas blockchains baseados em grafeno",
-    "none": {
-      "title": "Nenhum airdrop para este blockchain parece ter sido criado ainda?",
-      "btn": "Calcular lançamento aéreo"
-    },
-    "table": {
-      "th1": "EU IA",
-      "th2": "Cerquilha",
-      "th3": "Número do bloco",
-      "th4": "vencedores",
-      "th5": "Algoritmos",
-      "th6": "Desduplicado",
-      "th7": "Apenas vencedores"
-    }
+  "title": "airdrops calculados",
+  "radioLbl": "Selecione o blockchain de destino",
+  "radioDesc": "Apenas blockchains baseados em grafeno",
+  "none": {
+    "title": "Nenhum airdrop para este blockchain parece ter sido criado ainda?",
+    "btn": "Calcular lançamento aéreo"
+  },
+  "some": {
+    "title": "Quer criar outro airdrop?",
+    "btn": "Calcular outro lançamento aéreo"
+  },
+  "table": {
+    "th1": "EU IA",
+    "th2": "Cerquilha",
+    "th3": "Número do bloco",
+    "th4": "vencedores",
+    "th5": "Algoritmos",
+    "th6": "Desduplicado",
+    "th7": "Apenas vencedores"
   }
+}

@@ -43,6 +43,20 @@
     "ltm_freebie": {
       "name": "Omaggio abbonamento a vita",
       "desc": "Fornisci un biglietto gratuito ai possessori di ticker che hanno un abbonamento a vita."
+    },
+    "barrel_of_fish": {
+      "name": "Barile di pesce",
+      "desc": "Scegli i biglietti da un barile di pesce",
+      "projectile": {
+        "distance": "Quanto lontano dovrebbe viaggiare il proiettile nel barile di pesce",
+        "beam": "Il proiettile dovrebbe passare direttamente dal punto A al punto B senza impedimenti.",
+        "slow": "I proiettili rallenteranno fino a fermarsi rapidamente nell'acqua."
+      },
+      "splinter": {
+        "fragmentation": "Il proiettile si scheggerà all'impatto?",
+        "yes": "Sì, dovrebbe scheggiarsi una volta all'impatto.",
+        "no": "No, è un singolo proiettile solido."
+      }
     }
   },
   "calculatingTitle": "Calcolo dell'airdrop in corso, attendere!",

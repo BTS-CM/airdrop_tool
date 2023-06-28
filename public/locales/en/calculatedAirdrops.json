@@ -6,6 +6,10 @@
         "title": "No airdrops for this blockchain seem to have been created yet?",
         "btn": "Calculate airdrop"
     },
+    "some": {
+        "title": "Want to create another airdrop?",
+        "btn": "Calculate another airdrop"
+    },
     "table": {
         "th1": "ID",
         "th2": "Hash",

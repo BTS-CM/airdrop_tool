@@ -1,18 +1,22 @@
 {
-    "title": "Arvutatud õhutilgad",
-    "radioLbl": "Valige sihtplokiahel",
-    "radioDesc": "Ainult grafeenipõhised plokiahelad",
-    "none": {
-      "title": "Tundub, et selle plokiahela jaoks pole veel ühtegi airdropsi loodud?",
-      "btn": "Arvutage õhulangus"
-    },
-    "table": {
-      "th1": "ID",
-      "th2": "Räsi",
-      "th3": "Blokeeri number",
-      "th4": "Võitjad",
-      "th5": "Algoritmid",
-      "th6": "Deduplikeeritud",
-      "th7": "Ainult võitjad"
-    }
+  "title": "Arvutatud õhutilgad",
+  "radioLbl": "Valige sihtplokiahel",
+  "radioDesc": "Ainult grafeenipõhised plokiahelad",
+  "none": {
+    "title": "Tundub, et selle plokiahela jaoks pole veel ühtegi airdropsi loodud?",
+    "btn": "Arvutage õhulangus"
+  },
+  "some": {
+    "title": "Kas soovite luua veel ühe õhulanguse?",
+    "btn": "Arvutage veel üks õhulangus"
+  },
+  "table": {
+    "th1": "ID",
+    "th2": "Räsi",
+    "th3": "Blokeeri number",
+    "th4": "Võitjad",
+    "th5": "Algoritmid",
+    "th6": "Deduplikeeritud",
+    "th7": "Ainult võitjad"
   }
+}

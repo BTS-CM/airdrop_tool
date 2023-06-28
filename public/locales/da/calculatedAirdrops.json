@@ -1,18 +1,22 @@
 {
-    "title": "Beregnet luftdråber",
-    "radioLbl": "Vælg den ønskede blockchain",
-    "radioDesc": "Kun grafenbaserede blockchains",
-    "none": {
-      "title": "Ingen airdrops til denne blockchain ser ud til at være blevet oprettet endnu?",
-      "btn": "Beregn luftfald"
-    },
-    "table": {
-      "th1": "ID",
-      "th2": "Hash",
-      "th3": "Bloknummer",
-      "th4": "Vindere",
-      "th5": "Algoritmer",
-      "th6": "Deduplikeret",
-      "th7": "Kun vindere"
-    }
+  "title": "Beregnet luftdråber",
+  "radioLbl": "Vælg mål blockchain",
+  "radioDesc": "Kun grafenbaserede blockchains",
+  "none": {
+    "title": "Ingen airdrops til denne blockchain ser ud til at være blevet oprettet endnu?",
+    "btn": "Beregn luftfald"
+  },
+  "some": {
+    "title": "Vil du oprette endnu en airdrop?",
+    "btn": "Beregn endnu et luftfald"
+  },
+  "table": {
+    "th1": "ID",
+    "th2": "Hash",
+    "th3": "Bloknummer",
+    "th4": "Vindere",
+    "th5": "Algoritmer",
+    "th6": "Deduplikeret",
+    "th7": "Kun vindere"
   }
+}

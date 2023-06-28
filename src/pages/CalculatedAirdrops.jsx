@@ -8,6 +8,7 @@ import {
   SimpleGrid,
   Badge,
   ActionIcon,
+  Center,
   Card,
   Radio,
   Table,
@@ -41,7 +42,7 @@ export default function CalculatedAirdrops(properties) {
     ? chosenAirdropData.map((airdrop) => (
       <tr key={airdrop.id}>
         <td>
-          <Link to={`/AirdropPrep/${value}/${airdrop.id}`}>
+          <Link to={`/PlannedAirdrop/${value}/${airdrop.id}`}>
             <Button compact style={{ margin: '1px' }}>
               {airdrop.id.slice(0, 8)}
               ...
@@ -124,6 +125,26 @@ export default function CalculatedAirdrops(properties) {
               </Table>
             </Card>
           )
+      }
+
+      {
+        tableRows && tableRows.length
+          ? (
+            <Center>
+              <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px', maxWidth: '450px' }}>
+                <Title order={5} ta="center" mt="sm">
+                  {t("calculatedAirdrops:some.title")}
+                  <br />
+                  <Link to="/Calculate">
+                    <Button mt="sm">
+                      {t("calculatedAirdrops:some.btn")}
+                    </Button>
+                  </Link>
+                </Title>
+              </Card>
+            </Center>
+          )
+          : null
       }
     </>
   );
