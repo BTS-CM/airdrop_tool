@@ -1,0 +1,12 @@
+{
+    "header1": {
+      "title": "Selección de cuenta para {{titleName}} entrega por paracaídas",
+      "back": "Volver al contenido de airdrop"
+    },
+    "header2": {
+      "title": "Listo para continuar con su {{titleName}} entrega por paracaídas",
+      "back": "Regresa",
+      "button": "Proceder al lanzamiento aéreo"
+    },
+    "noTicket": "ID de airdrop no válido"
+  }

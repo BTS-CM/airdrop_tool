@@ -134,8 +134,6 @@ export default function Account(properties) {
     </tr>
   ));
 
-  console.log({assetDetails})
-
   let assetRows;
   if (assetDetails) {
     assetRows = [

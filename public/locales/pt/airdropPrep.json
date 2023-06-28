@@ -1,0 +1,12 @@
+{
+    "header1": {
+      "title": "Seleção de conta para {{titleName}} lançamento aéreo",
+      "back": "Retornar ao conteúdo do airdrop"
+    },
+    "header2": {
+      "title": "Pronto para prosseguir com o seu {{titleName}} lançamento aéreo",
+      "back": "Volte",
+      "button": "Prossiga para o lançamento aéreo"
+    },
+    "noTicket": "ID de lançamento aéreo inválido"
+  }

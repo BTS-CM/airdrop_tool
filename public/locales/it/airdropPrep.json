@@ -1,0 +1,12 @@
+{
+    "header1": {
+      "title": "Selezione dell'account per {{titleName}} airdrop",
+      "back": "Torna ai contenuti dell'airdrop"
+    },
+    "header2": {
+      "title": "Pronto a procedere con il tuo {{titleName}} airdrop",
+      "back": "Torna indietro",
+      "button": "Procedi con l'airdrop"
+    },
+    "noTicket": "ID Airdrop non valido"
+  }

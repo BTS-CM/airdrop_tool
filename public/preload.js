@@ -19,6 +19,7 @@ window.electron = {
       'airdropCard',
       'analyze',
       'app',
+      'airdropPrep',
       'asset',
       'beetModal',
       'calculate',

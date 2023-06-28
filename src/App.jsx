@@ -54,6 +54,7 @@ import Account from "./pages/Account";
 import FAQ from "./pages/Faq";
 import Asset from "./pages/Asset";
 import BlockAccounts from "./pages/BlockAccounts";
+import AirdropPrep from "./pages/AirdropPrep";
 
 import { localePreferenceStore } from "./lib/states";
 
@@ -234,7 +235,10 @@ function App() {
                 <Route path="/Ticket/:env/:id" element={<Ticket />} />
                 <Route path="/Asset/:env/:id" element={<Asset />} />
                 <Route path="/Account/:env/:id" element={<Account />} />
+
                 <Route path="/PlannedAirdrop/:env/:id" element={<PlannedAirdrop />} />
+
+                <Route path="/AirdropPrep/:env/:id" element={<AirdropPrep />} />
                 <Route path="/PerformAirdrop/:env/:id" element={<PerformAirdrop />} />
 
                 <Route path="/Create" element={<Create />} />

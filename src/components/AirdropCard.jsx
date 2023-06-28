@@ -6,9 +6,9 @@ import {
 import { useTranslation } from 'react-i18next';
 
 import { tempStore } from '../lib/states';
-import BeetModal from './BeetModal';
+import BeetModal from '../pages/BeetModal';
 
-export default function modal(properties) {
+export default function AirdropCard(properties) {
   const { t, i18n } = useTranslation();
 
   const { tokenQuantity } = properties;

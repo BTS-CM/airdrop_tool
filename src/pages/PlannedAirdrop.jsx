@@ -89,7 +89,7 @@ export default function PlannedAirdrop(properties) {
       <Title order={2} ta="center" mt="sm">
         {t("plannedAirdrop:header.title", { chainName })}
         <br />
-        <Link to={`/PerformAirdrop/${params.env}/${params.id}`}>
+        <Link to={`/AirdropPrep/${params.env}/${params.id}`}>
           <Button compact>
             {t("plannedAirdrop:header.continue")}
           </Button>

@@ -228,7 +228,7 @@ export default function Calculate(properties) {
         <Button m="xs" onClick={() => setProgress('planning')}>
           {t("calculate:completed.anotherBtn")}
         </Button>
-        <Link to={`/PlannedAirdrop/${value}/${randID}`}>
+        <Link to={`/AirdropPrep/${value}/${randID}`}>
           <Button m="xs">
             {t("calculate:completed.airdropBtn")}
           </Button>

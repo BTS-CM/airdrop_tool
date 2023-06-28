@@ -22,7 +22,6 @@ import {
   TextInput,
   ActionIcon,
 } from '@mantine/core';
-import { Apis } from "bitsharesjs-ws";
 import _ from "lodash";
 
 import {
@@ -40,7 +39,9 @@ import {
   blocklistStore,
 } from "../lib/states";
 
-import AirdropCard from "./AirdropCard";
+import AirdropCard from "../components/AirdropCard";
+import AirdropLeftCard from '../components/AirdropLeftCard';
+
 import GetAccount from "./GetAccount";
 import { lookupSymbols } from "../lib/directQueries";
 import { sliceIntoChunks, humanReadableFloat } from '../lib/common';
@@ -378,195 +379,208 @@ export default function PerformAirdrop(properties) {
     balances: envLeaderboard.find((x) => x.id === winner.id).balances,
   })).sort((a, b) => b.qty - a.qty);
 
-  let invalidOutput = [];
-  for (let k = 0; k < sortedWinners.length; k++) {
-    if (k === 0) {
-      invalidOutput = [];
+  const [invalidOutput, setInvalidOutput] = useState([]);
+  useEffect(() => {
+    if (invalidOutput && invalidOutput.length) {
+      setInvalidOutput([]);
     }
-    const user = sortedWinners[k];
-    const reasons = [];
-    if (tokenReq && tokenReq === "yes" && requiredTokenDetails) {
-      // Filter out users who don't meet token requirement
-      const balancePresent = user.balances.map((asset) => asset.asset_id).includes(requiredTokenDetails.id);
-      if (!balancePresent) {
-        // missing balance
-        reasons.push(t("performAirdrop:grid.left.table.reasons.noBalance"));
-      } else {
-        const foundAsset = user.balances.find((asset) => asset.asset_id === requiredTokenDetails.id);
-        const foundAmount = humanReadableFloat(foundAsset.amount, requiredTokenDetails.precision);
-        if (foundAmount < finalReqQty) {
-          // insufficient balance
-          reasons.push(t("performAirdrop:grid.left.table.reasons.insufficientBalance"));
+    const invalid = [];
+    for (let k = 0; k < sortedWinners.length; k++) {
+      const user = sortedWinners[k];
+      const reasons = [];
+      if (tokenReq && tokenReq === "yes" && requiredTokenDetails) {
+        // Filter out users who don't meet token requirement
+        const balancePresent = user.balances.map((asset) => asset.asset_id).includes(requiredTokenDetails.id);
+        if (!balancePresent) {
+          // missing balance
+          reasons.push(t("performAirdrop:grid.left.table.reasons.noBalance"));
+        } else {
+          const foundAsset = user.balances.find((asset) => asset.asset_id === requiredTokenDetails.id);
+          const foundAmount = humanReadableFloat(foundAsset.amount, requiredTokenDetails.precision);
+          if (foundAmount < finalReqQty) {
+            // insufficient balance
+            reasons.push(t("performAirdrop:grid.left.table.reasons.insufficientBalance"));
+          }
         }
       }
-    }
 
-    if (blocking && blocking === 'yes' && blockList.find((x) => x === user.id)) {
-      // Filter out blocked users from airdrop
-      reasons.push(t("performAirdrop:grid.left.table.reasons.blocked"));
-    }
+      if (blocking && blocking === 'yes' && blockList.find((x) => x === user.id)) {
+        // Filter out blocked users from airdrop
+        reasons.push(t("performAirdrop:grid.left.table.reasons.blocked"));
+      }
 
-    if (ltmReq && ltmReq === 'yes') {
-      // Filter out non LTM users from airdrop
-      const { ltm } = envLeaderboard.find((x) => x.id === user.id).account;
-      if (!ltm) {
-        reasons.push(t("performAirdrop:grid.left.table.reasons.ltm"));
+      if (ltmReq && ltmReq === 'yes') {
+        // Filter out non LTM users from airdrop
+        const { ltm } = envLeaderboard.find((x) => x.id === user.id).account;
+        if (!ltm) {
+          reasons.push(t("performAirdrop:grid.left.table.reasons.ltm"));
+        }
+      }
+
+      if (account && user.id === account) {
+        reasons.push(t("performAirdrop:grid.left.table.reasons.self"));
+      }
+
+      // If there's any reason to exclude, do so!
+      if (reasons && reasons.length) {
+        invalid.push({ ...user, reason: reasons });
       }
     }
+    setInvalidOutput(invalid);
+  }, [
+    account,
+    tokenReq,
+    requiredTokenDetails,
+    blocking,
+    ltmReq
+  ]);
 
-    if (account && user.id === account) {
-      reasons.push(t("performAirdrop:grid.left.table.reasons.self"));
-    }
+  const [validOutput, setValidOutput] = useState([]);
+  const [ticketQty, setTicketQty] = useState(0);
+  useEffect(() => {
+    // Remove the invalid ticket holders
+    const validDiff = _.difference(sortedWinners.map((person) => person.id), invalidOutput.map((person) => person.id))
+      .map((validEntry) => sortedWinners.find((winner) => winner.id === validEntry));
 
-    // If there's any reason to exclude, do so!
-    if (reasons && reasons.length) {
-      invalidOutput.push({ ...user, reason: reasons.join(", ") });
-    }
-  }
+    setValidOutput(validDiff);
 
-  // Remove the invalid ticket holders
-  const validOutput = _.difference(sortedWinners.map((person) => person.id), invalidOutput.map((person) => person.id))
-    .map((validEntry) => sortedWinners.find((winner) => winner.id === validEntry));
+    // Tally the valid ticket holders
+    setTicketQty(
+      validDiff
+        .map((x) => x.qty)
+        .reduce((accumulator, ticket) => accumulator + parseInt(ticket, 10), 0)
+    );
+  }, [invalidOutput]);
 
-  // Tally the valid ticket holders
-  const ticketQty = validOutput
-    .map((x) => x.qty)
-    .reduce((accumulator, ticket) => accumulator + parseInt(ticket, 10), 0);
-
-  let tokenRows = [];
-  let remainingTokens = finalTokenQuantity ?? 0;
   const itrQty = distroMethod === "RoundRobin" && finalTokenQuantity
     ? finalTokenQuantity
     : validOutput.length;
 
-  // Allocate assets (tokens) to the remaining valid ticket holders
-  for (let i = 0; i < itrQty; i++) {
-    if (i === 0) {
-      tokenRows = [];
-      remainingTokens = finalTokenQuantity;
-    }
+  const [tokenRows, setTokenRows] = useState([]);
+  useEffect(() => {
+    if (finalTokenQuantity && ticketQty && itrQty && validOutput.length) {
+      let tempRows = [];
+      let remainingTokens = finalTokenQuantity ?? 0;
+      // Allocate assets (tokens) to the remaining valid ticket holders
+      for (let i = 0; i < itrQty; i++) {
+        if (i === 0) {
+          tempRows = [];
+          remainingTokens = finalTokenQuantity;
+        }
 
-    if (distroMethod === "Proportionally") {
-      tokenRows.push({
-        ...validOutput[i],
-        assignedTokens: ((validOutput[i].qty / ticketQty) * finalTokenQuantity),
-      });
-    } else if (distroMethod === "Equally") {
-      tokenRows.push({
-        ...validOutput[i],
-        assignedTokens: ((1 / validOutput.length) * finalTokenQuantity),
-      });
-    } else if (distroMethod === "RoundRobin") {
-      const algoItr = i >= validOutput.length
-        ? Math.round(((i / validOutput.length) % 1) * validOutput.length)
-        : i;
+        if (distroMethod === "Proportionally") {
+          tempRows.push({
+            ...validOutput[i],
+            assignedTokens: ((validOutput[i].qty / ticketQty) * finalTokenQuantity),
+          });
+        } else if (distroMethod === "Equally") {
+          tempRows.push({
+            ...validOutput[i],
+            assignedTokens: ((1 / validOutput.length) * finalTokenQuantity),
+          });
+        } else if (distroMethod === "RoundRobin") {
+          const algoItr = i >= validOutput.length
+            ? Math.round(((i / validOutput.length) % 1) * validOutput.length)
+            : i;
 
-      if (remainingTokens < 1) {
-        // No more to allocate
-        break;
+          remainingTokens -= 1;
+
+          const currentWinner = validOutput[algoItr];
+          let existingRow = tempRows.find((x) => currentWinner.id === x.id);
+          if (!existingRow) {
+            tempRows.push({
+              ...currentWinner, assignedTokens: 1,
+            });
+            continue;
+          }
+
+          existingRow = { ...existingRow, assignedTokens: existingRow.assignedTokens + 1 };
+
+          const filteredRows = tempRows.filter((x) => x.id !== currentWinner.id);
+          filteredRows.push(existingRow);
+          tempRows = filteredRows;
+        }
       }
 
-      remainingTokens -= 1;
+      setTokenRows(tempRows);
+    }
+  }, [
+    finalTokenQuantity,
+    itrQty,
+    distroMethod,
+    blocking,
+    ltmReq,
+    tokenReq,
+    requiredToken,
+    validOutput
+  ]);
 
-      const currentWinner = validOutput[algoItr];
-      let existingRow = tokenRows.find((x) => currentWinner.id === x.id);
-      if (!existingRow) {
-        tokenRows.push({
-          ...currentWinner, assignedTokens: 1,
+  const [winnerChunks, setWinnerChunks] = useState([]);
+  const [winners, setWinners] = useState([]);
+
+  useEffect(() => {
+    if (tokenRows && tokenRows.length) {
+      if (!tokenDetails || (finalReqTokenName && finalReqQty && !requiredTokenDetails)) {
+        setWinners([]);
+        setWinnerChunks([]);
+      } else {
+        let valid = tokenRows.sort((a, b) => b.assignedTokens - a.assignedTokens);
+
+        if (tokenDetails.precision > 0) {
+          valid = valid.filter((user) => user.assignedTokens > humanReadableFloat(1, tokenDetails.precision));
+        } else if (tokenDetails.precision === 0 && tokenDetails.readableMax === 1) {
+          valid = valid.filter((user) => user.assignedTokens === 1);
+        }
+
+        setWinners(valid); // for left airdrop cards
+        setWinnerChunks(
+          valid.length // for airdrop distribution cards
+            ? sliceIntoChunks(valid.sort((a, b) => b.qty - a.qty), finalBatchSize)
+            : []
+        );
+      }
+    }
+  }, [
+    tokenRows,
+    finalBatchSize,
+    tokenDetails,
+    finalReqTokenName,
+    finalReqQty,
+    requiredTokenDetails
+  ]);
+
+  const [finalInvalidOutput, setFinalInvalidOutput] = useState([]);
+  useEffect(() => {
+    // assign remaining reasons for invalid ticket holders
+    const assignedTokenUsers = winners.map((x) => x.id);
+    const unassignedUsers = sortedWinners.filter((x) => !assignedTokenUsers.includes(x.id));
+    const currentlyInvalidIDs = invalidOutput.map((person) => person.id);
+
+    let newInvalidOutput = [...invalidOutput];
+    for (let i = 0; i < unassignedUsers.length; i++) {
+      const current = unassignedUsers[i];
+      if (currentlyInvalidIDs.includes(current.id)) {
+        // update the reasons
+        const currentInvalid = invalidOutput.find((x) => x.id === current.id);
+
+        const updatedInvalid = {
+          ...currentInvalid,
+          reason: [...currentInvalid.reason, t("performAirdrop:grid.left.table.reasons.minReward")]
+        };
+
+        const filteredInvalid = newInvalidOutput.filter((x) => x.id !== current.id);
+        filteredInvalid.push(updatedInvalid);
+        newInvalidOutput = filteredInvalid;
+      } else {
+        // provide a remaining reason
+        newInvalidOutput.push({
+          ...current,
+          reason: [t("performAirdrop:grid.left.table.reasons.minReward")]
         });
-        continue;
       }
-
-      const filteredRows = tokenRows.filter((x) => x.id !== currentWinner.id);
-      existingRow = { ...existingRow, assignedTokens: existingRow.assignedTokens + 1 };
-      filteredRows.push(existingRow);
-      tokenRows = filteredRows;
     }
-  }
-
-  let validRows = [];
-  let invalidRows = [];
-  let winnerChunks = [];
-  let winners = [];
-  if (!tokenDetails || (finalReqTokenName && finalReqQty && !requiredTokenDetails)) {
-    validRows = [];
-    invalidRows = [];
-    winnerChunks = [];
-  } else {
-    let valid = tokenRows.sort((a, b) => b.assignedTokens - a.assignedTokens);
-
-    if (tokenDetails.precision > 0) {
-      valid = valid.filter((user) => user.assignedTokens > humanReadableFloat(1, tokenDetails.precision));
-    } else if (tokenDetails.precision === 0 && tokenDetails.readableMax === 1) {
-      valid = valid.filter((user) => user.assignedTokens === 1);
-    }
-
-    winners = valid;
-
-    // for airdrop cards
-    winnerChunks = valid.length
-      ? sliceIntoChunks(valid.sort((a, b) => b.qty - a.qty), finalBatchSize)
-      : [];
-
-    // accordian table rows for those included in airdrop
-    validRows = valid.length
-      ? valid
-        .map((winner) => (
-          <tr key={`winner_${winner.id}`}>
-            <td width="35%">
-              <Link style={{ textDecoration: 'none', color: 'black' }} to={`/Account/${params.env}/${winner.id}`}>
-                <b>{envLeaderboard.find((usr) => usr.id === winner.id).account.name}</b>
-              </Link><br />
-              (
-                <Link style={{ textDecoration: 'none' }} to={`/Account/${params.env}/${winner.id}`}>
-                  {winner.id}
-                </Link>
-              )
-            </td>
-            <td width="25%">
-              {winner.qty}
-            </td>
-            <td width="40%">
-              {
-                tokenDetails.precision > 0
-                  ? winner.assignedTokens.toFixed(tokenDetails.precision)
-                  : winner.assignedTokens
-              }
-              <br />
-              {finalTokenName || assetName}
-            </td>
-          </tr>
-        ))
-      : null;
-
-    // accordian table rows for those excluded from airdrop
-    invalidRows = invalidOutput.length
-      ? invalidOutput
-        .map((loser) => (
-          <tr key={`loser_${loser.id}`}>
-            <td>
-              <Link style={{ textDecoration: 'none', color: 'black' }} to={`/Account/${params.env}/${loser.id}`}>
-                <b>{envLeaderboard.find((usr) => usr.id === loser.id).account.name}</b>
-              </Link><br />
-              (
-                <Link style={{ textDecoration: 'none' }} to={`/Account/${params.env}/${loser.id}`}>
-                  {loser.id}
-                </Link>
-              )
-            </td>
-            <td>
-              {
-                loser.reason
-                  ? loser.reason
-                  : t("performAirdrop:grid.left.table.reasons.minReward")
-              }
-            </td>
-          </tr>
-        ))
-      : null;
-  }
-
-  console.log({winnerChunks});
+    setFinalInvalidOutput(newInvalidOutput);
+  }, [winners, invalidOutput]);
 
   // Cards which enable user to perform airdrop
   const airdropCards = winnerChunks && winnerChunks.length
@@ -578,7 +592,7 @@ export default function PerformAirdrop(properties) {
         chunk={chunk}
         chunkItr={i}
         winnerChunkQty={winnerChunks.length}
-        quantityWinners={validRows.length}
+        quantityWinners={winners.length}
         env={params.env}
         ticketQty={ticketQty}
         key={`airdrop_card_${i}`}
@@ -600,171 +614,27 @@ export default function PerformAirdrop(properties) {
       </Title>
 
       {
-        !plannedAirdropData && !account
-          ? <Text>{t("performAirdrop:noTicket")}</Text>
-          : null
-      }
-
-      {
-        !account
-          ? <GetAccount />
-          : null
-      }
-
-      {
         plannedAirdropData && account && account.length
           ? (
             <SimpleGrid cols={2} spacing="sm" mt={10} breakpoints={[{ maxWidth: 'md', cols: 2 }]}>
-              <Card shadow="md" radius="md" padding="xl" mt={20}>
-                {
-                  (inProgress)
-                    ? (
-                      <>
-                        <Loader variant="dots" />
-                        <Text size="md">
-                          {t("performAirdrop:grid.left.loading")}
-                        </Text>
-                      </>
-                    )
-                    : null
-                }
-                {
-                  finalReqTokenName && !tokenDetails && !inProgress && finalTokenQuantity
-                    ? (
-                      <>
-                        <Text>Sorry, something went wrong...</Text>
-                        <Button onClick={() => setTokenItr(tokenItr + 1)}>Refresh</Button>
-                      </>
-                    )
-                    : null
-                }
-                {
-                  finalReqTokenName && !requiredTokenDetails && !inProgress && finalReqQty
-                    ? (
-                      <>
-                        <Text>Sorry, something went wrong...</Text>
-                        <Button onClick={() => setReqdTokenItr(reqdTokenItr + 1)}>Refresh</Button>
-                      </>
-                    )
-                    : null
-                }
-                {
-                  !validRows
-                    ? (
-                      <>
-                        <Accordion mt="xs" defaultValue="table">
-                          <Accordion.Item key="invalidTable" value="table">
-                            <Accordion.Control>
-                              {t("performAirdrop:grid.left.table.title")}
-                            </Accordion.Control>
-                            <Accordion.Panel>
-                              <Text>
-                                {t("performAirdrop:grid.left.table.invalid")}
-                              </Text>
-                            </Accordion.Panel>
-                          </Accordion.Item>
-                        </Accordion>
-                      </>
-                    )
-                    : null
-                }
-                {
-                  validRows && validRows.length
-                    ? (
-                      <>
-                        <Accordion mt="xs" defaultValue="table">
-                          <Accordion.Item key="validTable" value="table">
-                            <Accordion.Control>
-                              {t("performAirdrop:grid.left.table.title")}
-                            </Accordion.Control>
-                            <Accordion.Panel>
-                              <Table highlightOnHover>
-                                <thead>
-                                  <tr>
-                                    <th>{t("performAirdrop:grid.left.table.th1")}</th>
-                                    <th>{t("performAirdrop:grid.left.table.th2")}</th>
-                                    <th>{t("performAirdrop:grid.left.table.th3")}</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  {validRows}
-                                </tbody>
-                              </Table>
-                            </Accordion.Panel>
-                          </Accordion.Item>
-                          <Accordion.Item key="json" value="airdrop_json">
-                            <Accordion.Control>
-                              {t("performAirdrop:grid.left.json")}
-                            </Accordion.Control>
-                            <Accordion.Panel style={{ backgroundColor: '#FAFAFA' }}>
-                              <JsonInput
-                                placeholder="Textarea will autosize to fit the content"
-                                defaultValue={JSON.stringify(winners)}
-                                validationError="Invalid JSON"
-                                formatOnBlur
-                                autosize
-                                minRows={4}
-                                maxRows={15}
-                              />
-                            </Accordion.Panel>
-                          </Accordion.Item>
-                          <Accordion.Item key="jsonSimple" value="airdrop_json_simple">
-                            <Accordion.Control>
-                              {t("performAirdrop:grid.left.jsonSimple")}
-                            </Accordion.Control>
-                            <Accordion.Panel style={{ backgroundColor: '#FAFAFA' }}>
-                              <JsonInput
-                                placeholder="Textarea will autosize to fit the content"
-                                defaultValue={
-                                  JSON.stringify(
-                                    winners.map((x) => ({
-                                      user: `${envLeaderboard.find((usr) => usr.id === x.id).account.name} (${x.id})`,
-                                      ticketQty: x.qty,
-                                      percent: x.percent,
-                                      assignedTokens: x.assignedTokens
-                                    }))
-                                  )
-                                }
-                                validationError="Invalid JSON"
-                                formatOnBlur
-                                autosize
-                                minRows={4}
-                                maxRows={15}
-                              />
-                            </Accordion.Panel>
-                          </Accordion.Item>
-                        </Accordion>
-                      </>
-                    )
-                    : null
-                }
-                {
-                  invalidRows && invalidRows.length// && (!tokenReq && !tokenReq === 'yes' && !requiredTokenDetails)
-                    ? (
-                      <Accordion mt="xs">
-                        <Accordion.Item key="invalidTable" value="table2">
-                          <Accordion.Control>
-                            {t("performAirdrop:grid.left.table.title2")}
-                          </Accordion.Control>
-                          <Accordion.Panel>
-                            <Table highlightOnHover>
-                              <thead>
-                                <tr>
-                                  <th>{t("performAirdrop:grid.left.table.th1")}</th>
-                                  <th>{t("performAirdrop:grid.left.table.th4")}</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                {invalidRows}
-                              </tbody>
-                            </Table>
-                          </Accordion.Panel>
-                        </Accordion.Item>
-                      </Accordion>
-                    )
-                    : null
-                }
-              </Card>
+              <AirdropLeftCard
+                envLeaderboard={envLeaderboard}
+                winners={winners}
+                invalidOutput={finalInvalidOutput}
+                inProgress={inProgress}
+                assetName={assetName}
+                finalTokenName={finalTokenName}
+                tokenDetails={tokenDetails}
+                finalTokenQuantity={finalTokenQuantity}
+                finalReqTokenName={finalReqTokenName}
+                requiredTokenDetails={requiredTokenDetails}
+                finalReqQty={finalReqQty}
+                setTokenItr={setTokenItr}
+                tokenItr={tokenItr}
+                setReqdTokenItr={setReqdTokenItr}
+                reqdTokenItr={reqdTokenItr}
+                tokenReq={tokenReq}
+              />
               <Card>
                 <SimpleGrid cols={1} spacing="sm">
                   <Card shadow="md" radius="md" padding="xl">
@@ -957,7 +827,7 @@ export default function PerformAirdrop(properties) {
                     }
                   </Card>
                   {
-                    !validRows || !validRows.length
+                    !winners || !winners.length
                       ? (
                         <Card shadow="md" radius="md" padding="sm" style={{ backgroundColor: '#FAFAFA' }}>
                           <Text fz="lg" fw={500} mt="md">
@@ -982,9 +852,9 @@ export default function PerformAirdrop(properties) {
                           </Text>
                           <Text fz="sm" c="dimmed" mt="xs">
                             {
-                              validRows.length / finalBatchSize < 1
+                              winners.length / finalBatchSize < 1
                                 ? t("performAirdrop:grid.right.valid.single", { batchSize })
-                                : t("performAirdrop:grid.right.valid.multi", { batchSize, qtyBatches: Math.ceil(validRows.length / finalBatchSize) })
+                                : t("performAirdrop:grid.right.valid.multi", { batchSize, qtyBatches: Math.ceil(winners.length / finalBatchSize) })
                             }
                           </Text>
                           <Text fz="sm" c="dimmed" mt="xs">

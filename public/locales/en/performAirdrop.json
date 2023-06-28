@@ -8,6 +8,8 @@
     "grid": {
         "left": {
             "loading": "Loading asset data",
+            "reloadingTokenDetails": "Trying to load asset data",
+            "reloadingRequiredTokenDetails": "Trying to load required token data",
             "processing": "Processing user balances for required token",
             "table": {
                 "title": "Ticket holders included in airdrop",

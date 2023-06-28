@@ -1,0 +1,12 @@
+{
+    "header1": {
+      "title": "Konto valik {{titleName}} õhutilk",
+      "back": "Naaske airdropi sisu juurde"
+    },
+    "header2": {
+      "title": "Valmis jätkama oma {{titleName}} õhutilk",
+      "back": "Mine tagasi",
+      "button": "Jätkake õhulennuga"
+    },
+    "noTicket": "Vale lennupileti ID"
+  }

@@ -1,0 +1,12 @@
+{
+    "header1": {
+      "title": "Kontoauswahl für {{titleName}} Luftabwurf",
+      "back": "Zurück zum Airdrop-Inhalt"
+    },
+    "header2": {
+      "title": "Bereit, mit Ihrem fortzufahren {{titleName}} Luftabwurf",
+      "back": "Geh zurück",
+      "button": "Fahren Sie mit dem Abwurf fort"
+    },
+    "noTicket": "Ungültige Airdrop-ID"
+  }

@@ -41,7 +41,7 @@ export default function CalculatedAirdrops(properties) {
     ? chosenAirdropData.map((airdrop) => (
       <tr key={airdrop.id}>
         <td>
-          <Link to={`/PlannedAirdrop/${value}/${airdrop.id}`}>
+          <Link to={`/AirdropPrep/${value}/${airdrop.id}`}>
             <Button compact style={{ margin: '1px' }}>
               {airdrop.id.slice(0, 8)}
               ...

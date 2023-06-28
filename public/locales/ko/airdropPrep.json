@@ -1,0 +1,12 @@
+{
+    "header1": {
+      "title": "계정 선택 {{titleName}} 공중 투하",
+      "back": "에어드롭 콘텐츠로 돌아가기"
+    },
+    "header2": {
+      "title": "진행할 준비가 되었습니다. {{titleName}} 공중 투하",
+      "back": "돌아가기",
+      "button": "에어드랍 진행"
+    },
+    "noTicket": "유효하지 않은 에어드롭 ID"
+  }

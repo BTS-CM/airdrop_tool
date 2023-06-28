@@ -1,0 +1,12 @@
+{
+    "header1": {
+      "title": "アカウントの選択 {{titleName}} エアドロップ",
+      "back": "エアドロップの内容に戻る"
+    },
+    "header2": {
+      "title": "続行する準備ができました {{titleName}} エアドロップ",
+      "back": "戻る",
+      "button": "エアドロップに進む"
+    },
+    "noTicket": "無効なエアドロップ ID"
+  }

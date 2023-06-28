@@ -1,0 +1,12 @@
+{
+    "header1": {
+      "title": "Sélection de compte pour {{titleName}} largage aérien",
+      "back": "Retour au contenu du largage"
+    },
+    "header2": {
+      "title": "Prêt à poursuivre votre {{titleName}} largage aérien",
+      "back": "Retourner",
+      "button": "Procéder au parachutage"
+    },
+    "noTicket": "ID de largage non valide"
+  }

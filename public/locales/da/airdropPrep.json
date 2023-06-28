@@ -1,0 +1,12 @@
+{
+    "header1": {
+      "title": "Kontovalg til {{titleName}} airdrop",
+      "back": "Vend tilbage til airdrop-indhold"
+    },
+    "header2": {
+      "title": "Klar til at fortsætte med din {{titleName}} airdrop",
+      "back": "Gå tilbage",
+      "button": "Fortsæt til airdrop"
+    },
+    "noTicket": "Ugyldigt airdrop-id"
+  }
