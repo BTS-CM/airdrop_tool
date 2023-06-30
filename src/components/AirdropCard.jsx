@@ -8,6 +8,8 @@ import { useTranslation } from 'react-i18next';
 import { tempStore } from '../lib/states';
 import BeetModal from '../pages/BeetModal';
 
+import { blockchainFloat } from '../lib/common';
+
 export default function AirdropCard(properties) {
   const { t, i18n } = useTranslation();
 
@@ -50,7 +52,7 @@ export default function AirdropCard(properties) {
     from: account,
     to: x.id,
     amount: {
-      amount: x.assignedTokens,
+      amount: blockchainFloat(x.assignedTokens, tokenDetails.precision),
       asset_id: tokenDetails.id,
     },
   }));
