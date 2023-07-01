@@ -117,7 +117,7 @@ export default function PerformAirdrop(properties) {
   // Debounced input
   const [tokenName, onTokenName] = useState(plannedAirdropData.settings.tokenName ?? assetName);
   const [tokenQuantity, onTokenQuantity] = useState(plannedAirdropData.settings.tokenQuantity ?? 1);
-  const [batchSize, onBatchSize] = useState(plannedAirdropData.settings.batchSize ?? 50);
+  const [batchSize, onBatchSize] = useState(plannedAirdropData.settings.batchSize ?? 100);
 
   const [requiredToken, onRequiredToken] = useState(plannedAirdropData.settings.requiredToken ?? 'No');
   const [requiredTokenQty, onRequiredTokenQty] = useState(plannedAirdropData.settings.requiredTokenQty ?? 1);

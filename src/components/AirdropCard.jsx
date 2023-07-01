@@ -44,18 +44,25 @@ export default function AirdropCard(properties) {
     .map((z) => z.assignedTokens)
     .reduce((accumulator, ticket) => accumulator + ticket, 0);
 
-  const ops = chunk.map((x) => ({
-    fee: {
-      amount: 0,
-      asset_id: "1.3.0",
-    },
-    from: account,
-    to: x.id,
-    amount: {
-      amount: blockchainFloat(x.assignedTokens, tokenDetails.precision),
-      asset_id: tokenDetails.id,
-    },
-  }));
+  const [ops, setOPS] = useState([]);
+  useEffect(() => {
+    if (tokenDetails) {
+      setOPS(
+        chunk.map((x) => ({
+          fee: {
+            amount: 0,
+            asset_id: "1.3.0",
+          },
+          from: account,
+          to: x.id,
+          amount: {
+            amount: blockchainFloat(x.assignedTokens, tokenDetails.precision),
+            asset_id: tokenDetails.id,
+          },
+        }))
+      )
+    }
+  }, [tokenDetails]);
 
   return (
     <Card key={`airdrop_${chunkItr}`} mt="md" shadow="md" radius="md" padding="xl">

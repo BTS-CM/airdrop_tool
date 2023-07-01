@@ -68,11 +68,9 @@ export default function AirdropLeftCard(properties) {
 
   const [validRows, setValidRows] = useState([]);
   const [invalidRows, setInvalidRows] = useState([]);
-  const [winnerJSON, setWinnerJSON] = useState(JSON.stringify([]));
   const [simpleWinnerJSON, setSimpleWinnerJSON] = useState(JSON.stringify([]));
 
   useEffect(() => {
-    setWinnerJSON(JSON.stringify([]));
     setSimpleWinnerJSON(JSON.stringify([]));
     if (!tokenDetails || (finalReqTokenName && finalReqQty && !requiredTokenDetails)) {
       setValidRows([]);
@@ -139,21 +137,6 @@ export default function AirdropLeftCard(properties) {
             </tr>
             ))
           : []
-      );
-
-      // JSON for winners
-      setWinnerJSON(
-        JSON.stringify(
-          !tokenReq || (tokenReq && tokenReq === "no")
-            ? winners.map((x) => {
-              // remove the balances from x
-              const { balances, ...rest } = x;
-              return rest;
-            })
-            : winners,
-          null,
-          4
-        )
       );
 
       setSimpleWinnerJSON(JSON.stringify(
@@ -253,23 +236,6 @@ export default function AirdropLeftCard(properties) {
                         {validRows}
                       </tbody>
                     </Table>
-                  </Accordion.Panel>
-                </Accordion.Item>
-                <Accordion.Item key="json" value="airdrop_json">
-                  <Accordion.Control>
-                    {t("performAirdrop:grid.left.json")}
-                  </Accordion.Control>
-                  <Accordion.Panel style={{ backgroundColor: '#FAFAFA' }}>
-                    <JsonInput
-                      placeholder="Textarea will autosize to fit the content"
-                      defaultValue={winnerJSON}
-                      value={winnerJSON}
-                      validationError="Invalid JSON"
-                      formatOnBlur
-                      autosize
-                      minRows={4}
-                      maxRows={15}
-                    />
                   </Accordion.Panel>
                 </Accordion.Item>
                 <Accordion.Item key="jsonSimple" value="airdrop_json_simple">
