@@ -182,7 +182,7 @@ export default function Create(properties) {
             account,
             target_type: targetType,
             amount: {
-              amount: blockchainFloat(tokenQuantity, 5),
+              amount: blockchainFloat(tokenQuantity, 5).toFixed(0),
               asset_id: "1.3.0",
             },
             extensions: []

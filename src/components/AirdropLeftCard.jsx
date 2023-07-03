@@ -97,9 +97,7 @@ export default function AirdropLeftCard(properties) {
               </td>
               <td width="40%">
                 {
-                  tokenDetails.precision > 0
-                    ? winner.assignedTokens.toFixed(tokenDetails.precision)
-                    : winner.assignedTokens
+                  winner.assignedTokens.toFixed(tokenDetails.precision)
                 }
                 <br />
                 {finalTokenName || assetName}

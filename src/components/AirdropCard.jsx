@@ -56,13 +56,13 @@ export default function AirdropCard(properties) {
           from: account,
           to: x.id,
           amount: {
-            amount: blockchainFloat(x.assignedTokens, tokenDetails.precision),
+            amount: blockchainFloat(x.assignedTokens, tokenDetails.precision).toFixed(0),
             asset_id: tokenDetails.id,
           },
         }))
-      )
+      );
     }
-  }, [tokenDetails]);
+  }, [tokenDetails, account, chunk]);
 
   return (
     <Card key={`airdrop_${chunkItr}`} mt="md" shadow="md" radius="md" padding="xl">
@@ -75,7 +75,7 @@ export default function AirdropCard(properties) {
       <Text fz="sm" c="dimmed">
         {`${chunk.length} ${t("airdropCard:accounts")} ${chunk.length > 1 ? `(${t("airdropCard:from")} ${chunk[0].id} ${t("airdropCard:to")} ${chunk[chunk.length - 1].id})` : ''}`}
         <br />
-        { `${currentChunkValue} ${tokenName || assetName} ${t("airdropCard:distro")}` }
+        { `${currentChunkValue.toFixed(tokenDetails.precision ?? 0)} ${tokenName || assetName} ${t("airdropCard:distro")}` }
       </Text>
       <BeetModal
         value={env}
