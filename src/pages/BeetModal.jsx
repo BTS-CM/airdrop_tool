@@ -301,19 +301,19 @@ export default function BeetModal(properties) {
           account && method && method === "DEEPLINK" && !deepLink && !inProgress
             ? (
               <>
-                <Text>{t("modal:local.noGen.title")}</Text>
+                <Text>{t("modal:deeplink.noDL.title")}</Text>
                 <Text m="sm" fz="xs">
-                  {t("modal:local.noGen.step1")}
+                  {t("modal:deeplink.noDL.step1")}
                   <br />
-                  {t("modal:local.noGen.step2", { opNum, opName })}
+                  {t("modal:deeplink.noDL.step2", { opNum, opName })}
                   <br />
-                  {t("modal:local.noGen.step3")}
+                  {t("modal:deeplink.noDL.step3")}
                 </Text>
                 <Button
                   mt="md"
                   onClick={() => setDeepLinkItr(deepLinkItr + 1)}
                 >
-                  {t("modal:local.noGen.btn")}
+                  {t("modal:deeplink.noDL.btn")}
                 </Button>
               </>
             )
