@@ -507,6 +507,11 @@ export default function BeetModal(properties) {
               ? t("beetModal:askBEET.airdrop")
               : null
           }
+          {
+            opType === "override_transfer"
+              ? t("beetModal:askBEET.override_transfer")
+              : null
+          }
         </Button>
       </Group>
     </>

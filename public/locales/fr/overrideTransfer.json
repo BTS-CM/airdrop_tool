@@ -1,0 +1,28 @@
+{
+    "whichBlockchain": "Sur quelle blockchain souhaitez-vous effectuer un transfert prioritaire ?",
+    "testnet": "réseau d'essai",
+    "title": "{{relevantChain}} remplacer le formulaire de transfert",
+    "description": "Ce formulaire vous permet d'effectuer un transfert prioritaire sur le solde d'un utilisateur. ",
+    "chooseAsset": {
+      "label": "Choisissez un élément que ce compte a émis :",
+      "description": "Choisissez l'actif dont vous souhaitez remplacer le transfert.",
+      "notFound": "Impossible de trouver un tel atout, désolé."
+    },
+    "chooseQty": {
+      "label": "Type de quantité",
+      "description": "Choisissez le type de quantité que vous souhaitez utiliser.",
+      "one": "Un",
+      "several": "Plusieurs",
+      "all": "Tous"
+    },
+    "table": {
+      "title": "Appliquer ce transfert prioritaire aux utilisateurs suivants ?",
+      "th1": "Compte",
+      "th2": "Solde actuel",
+      "th3": "Solde prévu",
+      "noUsers": "Aucun utilisateur trouvé avec cet élément."
+    },
+    "assetNotSupported": "Cet actif ne prend pas en charge les transferts prioritaires.",
+    "qty": "Quantité de {{symbol}} à récupérer sur chaque compte",
+    "noAssets": "Ce compte ne semble pas avoir délivré d'actifs aux détenteurs de billets."
+  }

@@ -1,0 +1,28 @@
+{
+    "whichBlockchain": "Which blockchain do you want to perform an override transfer on?",
+    "testnet": "test network",
+    "title": "{{relevantChain}} override transfer form",
+    "description": "This form allows you to perform an override transfer on a user's balance. This operation is irreversible.",
+    "chooseAsset": {
+        "label": "Choose an asset this account has issued:",
+        "description": "Choose the asset you want to override transfer.",
+        "notFound": "Couldn't find such an asset, sorry."
+    },
+    "chooseQty": {
+        "label": "Quantity Type",
+        "description": "Choose the type of quantity you want to use.",
+        "one": "One",
+        "several": "Several",
+        "all": "All"
+    },
+    "table": {
+        "title": "Apply this override transfer to the following users?",
+        "th1": "Account",
+        "th2": "Current balance",
+        "th3": "Planned balance",
+        "noUsers": "No users found with this asset."
+    },
+    "assetNotSupported": "This asset does not support override transfers.", 
+    "qty": "Amount of {{symbol}} to retrieve from each account",
+    "noAssets": "This account does not seem to have issued any assets to the ticket holders."
+}

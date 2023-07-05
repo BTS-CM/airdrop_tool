@@ -73,7 +73,7 @@ export default function GetAccount(properties) {
       <Title order={4} align="center">
         {
           !accountMethod
-            ? t("getAccount:title", {chain: titleName})
+            ? t("getAccount:title", { chain: titleName })
             : null
         }
       </Title>

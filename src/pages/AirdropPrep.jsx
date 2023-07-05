@@ -106,7 +106,7 @@ export default function PerformAirdrop(properties) {
           ? (
             <>
             <Center>
-              <Card shadow="md" radius="md" mt="md" withBorder style={{width: 450}}>
+              <Card shadow="md" radius="md" mt="md" withBorder style={{ width: 450 }}>
                 <Center>
                     <Text>{t("airdropPrep:header2.title", { titleName })}</Text>
                 </Center>

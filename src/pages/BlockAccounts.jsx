@@ -312,7 +312,7 @@ export default function BlockAccounts(properties) {
                   <thead>
                     <tr>
                       <th>{t("blockAccounts:table.header")}</th>
-                      <th></th>
+                      <th />
                     </tr>
                   </thead>
                   <tbody>

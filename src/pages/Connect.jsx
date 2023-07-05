@@ -12,7 +12,9 @@ import {
 } from '@mantine/core';
 import { useTranslation } from 'react-i18next';
 
-import { appStore, beetStore, identitiesStore, tempStore } from '../lib/states';
+import {
+  appStore, beetStore, identitiesStore, tempStore
+} from '../lib/states';
 
 function beetDownload() {
   window.electron.openURL('github');
@@ -31,7 +33,7 @@ export default function Connect(properties) {
   const removeIdentity = identitiesStore((state) => state.removeIdentity);
   const removeConnection = identitiesStore((state) => state.removeConnection);
   const [inProgress, setInProgress] = useState(false);
-  
+
   /**
    * Removing a previously linked identity from the identity store
    * @param {Object} rowIdentity
@@ -59,7 +61,6 @@ export default function Connect(properties) {
 
     setTimeout(() => {
       setInProgress(false);
-      return;
     }, 5000);
 
     let newConnection;
@@ -142,7 +143,7 @@ export default function Connect(properties) {
     response = (
       <Col span={12} key="connect">
         <Paper padding="sm" shadow="xs">
-          <Box mx="auto" sx={{padding: '10px', paddingTop: '10px'}}>
+          <Box mx="auto" sx={{ padding: '10px', paddingTop: '10px' }}>
             <Text size="md" align="center">
               {t('beet:connect.previousBEET')}
             </Text>
@@ -153,8 +154,8 @@ export default function Connect(properties) {
               <Table highlightOnHover>
                 <thead>
                   <tr>
-                    <th></th>
-                    <th></th>
+                    <th />
+                    <th />
                   </tr>
                 </thead>
                 <tbody>

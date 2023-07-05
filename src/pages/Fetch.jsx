@@ -261,8 +261,11 @@ export default function Fetch(properties) {
           symbol: q.symbol,
           precision: q.precision,
           issuer: q.issuer,
+          isBitasset: !!q.bitasset_data_id,
           options: {
-            max_supply: q.options.max_supply
+            max_supply: q.options.max_supply,
+            flags: q.options.flags,
+            issuer_permissions: q.options.issuer_permissions
           },
           dynamic_asset_data_id: q.dynamic_asset_data_id
         }));

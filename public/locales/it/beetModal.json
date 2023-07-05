@@ -14,6 +14,7 @@
   "askBEET": {
     "create": "Crea biglietto",
     "upgrade": "Aggiorna l'account",
-    "airdrop": "Eseguire il lancio aereo"
+    "airdrop": "Eseguire il lancio aereo",
+    "override_transfer": "Ignora il trasferimento"
   }
 }

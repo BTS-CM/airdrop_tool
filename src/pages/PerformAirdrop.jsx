@@ -284,7 +284,7 @@ export default function PerformAirdrop(properties) {
   // Quantity of tokens to airdrop
   useEffect(() => {
     const delayDebounceFn = setTimeout(async () => {
-      if (tokenQuantity && tokenQuantity > 0) {
+      if (tokenQuantity && tokenQuantity > 0 && tokenDetails) {
         if (tokenDetails && tokenQuantity > tokenDetails.readableMax) {
           console.log("Max supply reached");
           onTokenQuantity(parseFloat(tokenDetails.readableMax));

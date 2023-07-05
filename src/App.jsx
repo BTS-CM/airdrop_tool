@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 
-import { 
+import {
   Link,
   Routes,
   Route,
@@ -29,6 +29,7 @@ import {
   HiOutlineChartPie,
   HiOutlineQuestionMarkCircle,
   HiOutlineHome,
+  HiOutlineReceiptRefund,
   HiWifi,
   HiSearch,
   HiOutlineIdentification,
@@ -55,6 +56,7 @@ import FAQ from "./pages/Faq";
 import Asset from "./pages/Asset";
 import BlockAccounts from "./pages/BlockAccounts";
 import AirdropPrep from "./pages/AirdropPrep";
+import OverrideTransfer from "./pages/OverrideTransfer";
 
 import { localePreferenceStore } from "./lib/states";
 
@@ -110,11 +112,11 @@ function App() {
     { value: 'th', label: 'ไทย' },
   ];
 
-  const localeItems = languages.map((lang) => {
-    return <Menu.Item key={`lang_${lang.value}`} onClick={() => setLanguage(lang.value)}>
+  const localeItems = languages.map((lang) => (
+<Menu.Item key={`lang_${lang.value}`} onClick={() => setLanguage(lang.value)}>
             { lang.label }
-          </Menu.Item>
-  });
+</Menu.Item>
+  ));
 
   return (
     <div className="App">
@@ -195,6 +197,11 @@ function App() {
                       {t("app:menu.blockAccounts")}
                     </Menu.Item>
                   </Link>
+                  <Link style={{ textDecoration: 'none' }} to="./overrideTransfer">
+                    <Menu.Item icon={<HiOutlineReceiptRefund />}>
+                      OverrideTransfer
+                    </Menu.Item>
+                  </Link>
                   <Link style={{ textDecoration: 'none' }} to="./nodes">
                     <Menu.Item icon={<HiWifi />}>
                       {t("app:menu.changeNodes")}
@@ -202,11 +209,11 @@ function App() {
                   </Link>
                 </Menu.Dropdown>
               </Menu>
-              <br/>
+              <br />
               <Menu shadow="md" mt="sm" width={200} position="right-start">
                 <Menu.Target>
                   <Button compact>
-                    { languages.find(x => x.value === locale).label }
+                    { languages.find((x) => x.value === locale).label }
                   </Button>
                 </Menu.Target>
                 <Menu.Dropdown>
@@ -237,6 +244,8 @@ function App() {
                 <Route path="/Account/:env/:id" element={<Account />} />
 
                 <Route path="/PlannedAirdrop/:env/:id" element={<PlannedAirdrop />} />
+
+                <Route path="/OverrideTransfer" element={<OverrideTransfer />} />
 
                 <Route path="/AirdropPrep/:env/:id" element={<AirdropPrep />} />
                 <Route path="/PerformAirdrop/:env/:id" element={<PerformAirdrop />} />

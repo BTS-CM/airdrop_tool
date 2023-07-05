@@ -1,0 +1,28 @@
+{
+    "whichBlockchain": "Em qual blockchain você deseja realizar uma transferência de substituição?",
+    "testnet": "rede de teste",
+    "title": "{{relevantChain}} substituir formulário de transferência",
+    "description": "Este formulário permite que você execute uma transferência de substituição no saldo de um usuário. ",
+    "chooseAsset": {
+      "label": "Escolha um ativo que esta conta emitiu:",
+      "description": "Escolha o ativo que deseja substituir a transferência.",
+      "notFound": "Não foi possível encontrar tal recurso, desculpe."
+    },
+    "chooseQty": {
+      "label": "Tipo de quantidade",
+      "description": "Escolha o tipo de quantidade que deseja usar.",
+      "one": "Um",
+      "several": "Diversos",
+      "all": "Todos"
+    },
+    "table": {
+      "title": "Aplicar esta transferência de substituição aos seguintes usuários?",
+      "th1": "Conta",
+      "th2": "saldo atual",
+      "th3": "Saldo planejado",
+      "noUsers": "Nenhum usuário encontrado com este recurso."
+    },
+    "assetNotSupported": "Este recurso não suporta transferências de substituição.",
+    "qty": "Quantidade de {{symbol}} para recuperar de cada conta",
+    "noAssets": "Esta conta não parece ter emitido nenhum ativo para os detentores de ingressos."
+  }

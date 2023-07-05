@@ -1,0 +1,28 @@
+{
+    "whichBlockchain": "Millise plokiahela puhul soovite alistamise ülekande teha?",
+    "testnet": "testvõrk",
+    "title": "{{relevantChain}} alista ülekandevorm",
+    "description": "See vorm võimaldab teil teha kasutaja saldole alistamise. ",
+    "chooseAsset": {
+      "label": "Valige selle konto väljastatud vara:",
+      "description": "Valige vara, mille üleandmist soovite alistada.",
+      "notFound": "Vabandust, sellist vara ei leitud."
+    },
+    "chooseQty": {
+      "label": "Koguse tüüp",
+      "description": "Valige koguse tüüp, mida soovite kasutada.",
+      "one": "Üks",
+      "several": "Mitu",
+      "all": "Kõik"
+    },
+    "table": {
+      "title": "Kas rakendada see alistamise ülekanne järgmistele kasutajatele?",
+      "th1": "Konto",
+      "th2": "Kontojääk",
+      "th3": "Planeeritud tasakaal",
+      "noUsers": "Selle varaga kasutajaid ei leitud."
+    },
+    "assetNotSupported": "See vara ei toeta alistamise ülekandeid.",
+    "qty": "Kogus {{symbol}} igalt kontolt allalaadimiseks",
+    "noAssets": "Näib, et see konto ei ole piletiomanikele vara väljastanud."
+  }

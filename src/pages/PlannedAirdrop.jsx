@@ -71,7 +71,7 @@ export default function PlannedAirdrop(properties) {
         </Accordion.Control>
         <Accordion.Panel style={{ backgroundColor: '#FAFAFA' }}>
           <JsonInput
-            label={t("plannedAirdrop:jsonLabel", {id: winner.id})}
+            label={t("plannedAirdrop:jsonLabel", { id: winner.id })}
             placeholder="Textarea will autosize to fit the content"
             defaultValue={JSON.stringify(winner.tickets)}
             validationError="Invalid JSON"

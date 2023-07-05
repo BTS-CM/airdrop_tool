@@ -14,6 +14,7 @@
   "askBEET": {
     "create": "티켓 만들기",
     "upgrade": "업그레이드 계정",
-    "airdrop": "에어드롭 수행"
+    "airdrop": "에어드롭 수행",
+    "override_transfer": "대체 전송"
   }
 }

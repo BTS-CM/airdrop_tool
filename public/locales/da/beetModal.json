@@ -3,7 +3,7 @@
   "close": "Tæt",
   "failure": "Prompten kunne ikke udsendes til blockchain.",
   "success": "Udsendelse til blockchain med succes!",
-  "ready": "Klar til at sende airdrop til BEET-pung",
+  "ready": "Klar til at udsende airdrop til BEET-pung",
   "buttons": {
     "deeplink": "Deeplink",
     "local": "Lokal fil",
@@ -14,6 +14,7 @@
   "askBEET": {
     "create": "Opret billet",
     "upgrade": "Opgrader konto",
-    "airdrop": "Udfør airdrop"
+    "airdrop": "Udfør airdrop",
+    "override_transfer": "Tilsidesæt overførsel"
   }
 }

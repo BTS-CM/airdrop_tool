@@ -14,6 +14,7 @@
   "askBEET": {
     "create": "チケットの作成",
     "upgrade": "アカウントをアップグレードする",
-    "airdrop": "エアドロップを実行する"
+    "airdrop": "エアドロップを実行する",
+    "override_transfer": "オーバーライド転送"
   }
 }

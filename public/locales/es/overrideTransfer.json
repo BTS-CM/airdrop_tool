@@ -1,0 +1,28 @@
+{
+    "whichBlockchain": "¿En qué cadena de bloques desea realizar una transferencia de anulación?",
+    "testnet": "red de prueba",
+    "title": "{{relevantChain}} anular formulario de transferencia",
+    "description": "Este formulario le permite realizar una transferencia anulada en el saldo de un usuario. ",
+    "chooseAsset": {
+      "label": "Elija un activo que haya emitido esta cuenta:",
+      "description": "Elija el activo que desea anular la transferencia.",
+      "notFound": "No pude encontrar tal activo, lo siento."
+    },
+    "chooseQty": {
+      "label": "Tipo de cantidad",
+      "description": "Elija el tipo de cantidad que desea utilizar.",
+      "one": "Uno",
+      "several": "Varios",
+      "all": "Todo"
+    },
+    "table": {
+      "title": "¿Aplicar esta transferencia de anulación a los siguientes usuarios?",
+      "th1": "Cuenta",
+      "th2": "Saldo actual",
+      "th3": "Saldo planificado",
+      "noUsers": "No se encontraron usuarios con este recurso."
+    },
+    "assetNotSupported": "Este activo no admite transferencias anuladas.",
+    "qty": "Cantidad de {{symbol}} para recuperar de cada cuenta",
+    "noAssets": "Esta cuenta no parece haber emitido ningún activo a los poseedores de boletos."
+  }

@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import {
   Button, Group, Box, Text, Divider, Loader, Col, Paper,
 } from '@mantine/core';
-import { beetStore } from '../lib/states';
 import { useTranslation } from 'react-i18next';
+import { beetStore } from '../lib/states';
 
 export default function BeetLink(properties) {
   const { t, i18n } = useTranslation();

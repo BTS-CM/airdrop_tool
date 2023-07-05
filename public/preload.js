@@ -38,6 +38,7 @@ window.electron = {
       'home',
       'leaderboard',
       'nodes',
+      'overrideTransfer',
       'performAirdrop',
       'plannedAirdrop',
       'ticket',

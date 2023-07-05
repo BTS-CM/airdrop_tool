@@ -1,0 +1,28 @@
+{
+    "whichBlockchain": "Auf welcher Blockchain möchten Sie eine Override-Übertragung durchführen?",
+    "testnet": "Testnetzwerk",
+    "title": "{{relevantChain}} Überweisungsformular überschreiben",
+    "description": "Mit diesem Formular können Sie eine Überschreibungsübertragung für das Guthaben eines Benutzers durchführen. ",
+    "chooseAsset": {
+      "label": "Wählen Sie einen Vermögenswert aus, den dieses Konto ausgegeben hat:",
+      "description": "Wählen Sie den Vermögenswert aus, dessen Übertragung Sie überschreiben möchten.",
+      "notFound": "Ein solches Asset konnte leider nicht gefunden werden."
+    },
+    "chooseQty": {
+      "label": "Mengentyp",
+      "description": "Wählen Sie die Art der Menge, die Sie verwenden möchten.",
+      "one": "Eins",
+      "several": "Mehrere",
+      "all": "Alle"
+    },
+    "table": {
+      "title": "Diese außer Kraft gesetzte Übertragung auf die folgenden Benutzer anwenden?",
+      "th1": "Konto",
+      "th2": "Aktueller Kontostand",
+      "th3": "Geplanter Saldo",
+      "noUsers": "Mit diesem Asset wurden keine Benutzer gefunden."
+    },
+    "assetNotSupported": "Dieses Asset unterstützt keine Override-Übertragungen.",
+    "qty": "Menge von {{symbol}} von jedem Konto abzurufen",
+    "noAssets": "Dieses Konto scheint den Ticketinhabern keine Vermögenswerte ausgezahlt zu haben."
+  }

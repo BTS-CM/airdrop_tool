@@ -1,0 +1,28 @@
+{
+    "whichBlockchain": "Hvilken blockchain vil du udføre en tilsidesættelse af overførsel på?",
+    "testnet": "test netværk",
+    "title": "{{relevantChain}} tilsidesætte overførselsformularen",
+    "description": "Denne formular giver dig mulighed for at udføre en tilsidesættelse af en brugers saldo. ",
+    "chooseAsset": {
+      "label": "Vælg et aktiv, som denne konto har udstedt:",
+      "description": "Vælg det aktiv, du vil tilsidesætte overførslen.",
+      "notFound": "Kunne ikke finde sådan et aktiv, beklager."
+    },
+    "chooseQty": {
+      "label": "Mængde Type",
+      "description": "Vælg den type mængde, du vil bruge.",
+      "one": "En",
+      "several": "Flere",
+      "all": "Alle"
+    },
+    "table": {
+      "title": "Vil du anvende denne tilsidesættelsesoverførsel på følgende brugere?",
+      "th1": "Konto",
+      "th2": "Nuværende balance",
+      "th3": "Planlagt balance",
+      "noUsers": "Ingen brugere fundet med dette aktiv."
+    },
+    "assetNotSupported": "Dette aktiv understøtter ikke tilsidesættelse af overførsler.",
+    "qty": "Mængde af {{symbol}} at hente fra hver konto",
+    "noAssets": "Denne konto ser ikke ud til at have udstedt nogen aktiver til billetindehaverne."
+  }

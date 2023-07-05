@@ -154,7 +154,7 @@ async function generateDeepLink(appName, chain, node, opType, operations) {
 
 /**
  * Submit request to BEET to broadcast operations
- * @param {BeetConnection} connection 
+ * @param {BeetConnection} connection
  * @param {String} chain
  * @param {String} node
  * @param {String} opType

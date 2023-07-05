@@ -31,7 +31,6 @@ import BeetModal from './BeetModal';
 
 import { blockchainFloat } from '../lib/common';
 
-
 export default function Create(properties) {
   const { t, i18n } = useTranslation();
   const params = useParams();

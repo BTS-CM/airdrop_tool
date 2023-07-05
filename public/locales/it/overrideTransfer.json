@@ -1,0 +1,28 @@
+{
+    "whichBlockchain": "Su quale blockchain vuoi eseguire un trasferimento di override?",
+    "testnet": "rete di prova",
+    "title": "{{relevantChain}} ignorare il modulo di trasferimento",
+    "description": "Questo modulo consente di eseguire un trasferimento di sostituzione sul saldo di un utente. ",
+    "chooseAsset": {
+      "label": "Scegli una risorsa emessa da questo conto:",
+      "description": "Scegli l'asset di cui vuoi ignorare il trasferimento.",
+      "notFound": "Impossibile trovare una risorsa del genere, mi dispiace."
+    },
+    "chooseQty": {
+      "label": "Tipo di quantità",
+      "description": "Scegli il tipo di quantità che desideri utilizzare.",
+      "one": "Uno",
+      "several": "Parecchi",
+      "all": "Tutto"
+    },
+    "table": {
+      "title": "Applicare questo trasferimento di sostituzione ai seguenti utenti?",
+      "th1": "Account",
+      "th2": "Bilancio corrente",
+      "th3": "Equilibrio pianificato",
+      "noUsers": "Nessun utente trovato con questa risorsa."
+    },
+    "assetNotSupported": "Questa risorsa non supporta i trasferimenti di sostituzione.",
+    "qty": "Quantità di {{symbol}} recuperare da ciascun account",
+    "noAssets": "Questo conto non sembra aver emesso alcun bene ai possessori del biglietto."
+  }

@@ -14,6 +14,7 @@
     "askBEET": {
         "create": "Create ticket",
         "upgrade": "Upgrade account",
-        "airdrop": "Perform airdrop"
+        "airdrop": "Perform airdrop",
+        "override_transfer": "Override transfer"
     }
 }
