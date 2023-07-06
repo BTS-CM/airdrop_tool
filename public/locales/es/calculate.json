@@ -97,7 +97,8 @@
   },
   "blockNum": {
     "title": "Ingrese el número de bloque que desea usar para fines de airdrop",
-    "label": "Número de bloque"
+    "label": "Número de bloque",
+    "desc": "El número de bloque elegido se usará para generar el hash inicial para el cálculo del airdrop, lo que influirá en el resultado del airdrop."
   },
   "fetchTickets": "Debe obtener los datos del ticket para esta cadena de bloques.",
   "distro": {

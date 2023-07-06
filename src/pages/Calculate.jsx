@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Apis } from 'bitsharesjs-ws';
 import { v4 as uuidv4 } from 'uuid';
@@ -53,7 +53,7 @@ export default function Calculate(properties) {
   const [blockNumber, onBlockNumber] = useState(1000);
   const [selection, setSelection] = useState([]);
 
-  const [deduplicate, setDeduplicate] = useState("Yes");
+  const [deduplicate, setDeduplicate] = useState("No");
   const [alwaysWinning, setAlwaysWinning] = useState("Yes");
 
   const [progress, setProgress] = useState('planning'); // planning, calculating, completed
@@ -137,7 +137,7 @@ export default function Calculate(properties) {
           item.value === 'barrel_of_fish' && selected
             ? (
             <>
-              <tr>
+              <tr id="bof_proj">
                 <td colSpan={3}>
                   <Radio.Group
                     value={projectiles}
@@ -151,7 +151,7 @@ export default function Calculate(properties) {
                   </Radio.Group>
                 </td>
               </tr>
-              <tr>
+              <tr id="bof_splinter">
                 <td colSpan={3}>
                   <Radio.Group
                     value={splinter}
@@ -173,7 +173,7 @@ export default function Calculate(properties) {
           item.value === 'asset_freebie' && selected && relevantAssets && relevantAssets.length
             ? (
               <>
-                <tr>
+                <tr id="assetFreebie">
                   <td colSpan={3}>
                       <Select
                         mb="sm"
@@ -279,6 +279,7 @@ export default function Calculate(properties) {
       );
     } catch (error) {
       console.log(error);
+      return;
     }
 
     const calcID = uuidv4();
@@ -310,6 +311,116 @@ export default function Calculate(properties) {
 
     setProgress('completed');
   }
+
+  
+  const [airdropOptions, setAirdropOptions] = useState(null);
+  useEffect(() => {
+    if (
+      !leaderboardJSON
+      || !leaderboardJSON.length
+      || !selection
+      || !selection.length
+    ) {
+      setAirdropOptions(null);
+      return;
+    }
+
+    const algosWithOptions = [
+      'forward',
+      'reverse',
+      'pi',
+      'reverse_pi',
+      'cubed',
+      'bouncing_ball',
+      'alien_blood',
+      'avg_point_lines',
+      'barrel_of_fish',
+    ];
+
+    const settings = (
+      <>
+        <Title order={5} ta="left" mt="sm">
+          {t("calculate:ticket.title")}
+        </Title>
+        <Radio.Group
+          value={deduplicate}
+          onChange={setDeduplicate}
+          name="chosenDuplicate"
+          label={t("calculate:ticket.radioLabel")}
+          description={t("calculate:ticket.radioDesc")}
+          withAsterisk
+        >
+          <Group mt="xs">
+            <Radio value="Yes" label={t("calculate:ticket.yes")} />
+            <Radio value="No" label={t("calculate:ticket.no")} />
+          </Group>
+        </Radio.Group>
+        <Radio.Group
+          value={alwaysWinning}
+          onChange={setAlwaysWinning}
+          name="chosenWinning"
+          label={t("calculate:ticket.winLabel")}
+          description={t("calculate:ticket.winDesc")}
+          withAsterisk
+          mt="sm"
+        >
+          <Group mt="xs">
+            <Radio value="Yes" label={t("calculate:ticket.yes")} />
+            <Radio value="No" label={t("calculate:ticket.no")} />
+          </Group>
+        </Radio.Group>
+      </>
+    );
+
+    if (
+      selection
+      && selection.length
+      && !selection.some((item) => algosWithOptions.includes(item))
+    ) {
+      setAirdropOptions(
+        <Card shadow="md" radius="md" padding="xl" mt="sm">
+            {settings}
+        </Card>
+      );
+    } else if (
+      selection
+      && selection.length
+      && selection.some((item) => algosWithOptions.includes(item))
+    ) {
+      setAirdropOptions(
+        <Card shadow="md" radius="md" padding="xl" mt="sm">
+          {settings}
+
+          <Radio.Group
+            value={hash}
+            onChange={setHash}
+            name="chosenHash"
+            label={t("calculate:hash.title")}
+            description={`${t("calculate:hash.radioLabel")}: ${t("calculate:hash.radioDesc")}`}
+            withAsterisk
+            mt="sm"
+          >
+            <Group mt="xs">
+              <Radio value="plain" label={t("calculate:hash.plain")} />
+              <Radio value="Blake2B" label={`Blake2B (512 bit) ${t("calculate:hash.witSig")}`} />
+              <Radio value="Blake2S" label={`Blake2B (256 bit) ${t("calculate:hash.witSig")}`} />
+            </Group>
+          </Radio.Group>
+
+          <TextInput
+            type="number"
+            placeholder={blockNumber}
+            label={t("calculate:blockNum.title")}
+            description={t("calculate:blockNum.desc")}
+            style={{ maxWidth: '420px' }}
+            onChange={(event) => onBlockNumber(event.currentTarget.value)}
+            mt="sm"
+          />
+        </Card>
+      );
+    }
+  }, [leaderboardJSON, selection]);
+
 
   if (progress === 'calculating') {
     return (
@@ -346,7 +457,7 @@ export default function Calculate(properties) {
 
   return (
     <>
-      <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
+      <Card shadow="md" radius="md" padding="xl" mt="sm">
         <Title order={4} ta="left" mt="xs">
           {t("calculate:title")}
         </Title>
@@ -367,132 +478,52 @@ export default function Calculate(properties) {
         </Radio.Group>
       </Card>
 
-      {
-        !leaderboardJSON || !leaderboardJSON.length
-          ? null
-          : (
-            <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
-              <Title order={4} ta="left" mt="xs">
-                {t("calculate:hash.title")}
-              </Title>
-              <Radio.Group
-                value={hash}
-                onChange={setHash}
-                name="chosenHash"
-                label={t("calculate:hash.radioLabel")}
-                description={t("calculate:hash.radioDesc")}
-                withAsterisk
-              >
-                <Group mt="xs">
-                  <Radio value="plain" label={t("calculate:hash.plain")} />
-                  <Radio value="Blake2B" label={`Blake2B (512 bit) ${t("calculate:hash.witSig")}`} />
-                  <Radio value="Blake2S" label={`Blake2B (256 bit) ${t("calculate:hash.witSig")}`} />
-                </Group>
-              </Radio.Group>
-            </Card>
-          )
-      }
+        {
+          !leaderboardJSON || !leaderboardJSON.length
+            ? (
+              <Card shadow="md" radius="md" padding="xl" mt="sm">
+                <Title order={3} ta="center" mt="sm">
+                  {t("calculate:fetchTickets")}
+                </Title>
+              </Card>
+            )
+            : (
+              <Card shadow="md" radius="md" padding="xl" mt="sm">
+                <Title order={4} ta="left">
+                  {t("calculate:distro.title")}
+                </Title>
+                <ScrollArea>
+                  <Table miw={800} mt="ms" verticalSpacing="sm">
+                    <thead>
+                      <tr>
+                        <th style={{ width: '40px' }} />
+                        <th>{t("calculate:distro.th1")}</th>
+                        <th>{t("calculate:distro.th2")}</th>
+                      </tr>
+                    </thead>
+                    <tbody>{rows}</tbody>
+                  </Table>
+                </ScrollArea>
+              </Card>
+            )
+        }
 
-      {
-        !leaderboardJSON || !leaderboardJSON.length
-          ? null
-          : (
-            <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
-              <Title order={4} ta="left" mt="xs">
-                {t("calculate:ticket.title")}
-              </Title>
-              <Radio.Group
-                value={deduplicate}
-                onChange={setDeduplicate}
-                name="chosenDuplicate"
-                label={t("calculate:ticket.radioLabel")}
-                description={t("calculate:ticket.radioDesc")}
-                withAsterisk
-              >
-                <Group mt="xs">
-                  <Radio value="Yes" label={t("calculate:ticket.yes")} />
-                  <Radio value="No" label={t("calculate:ticket.no")} />
-                </Group>
-              </Radio.Group>
-              <Radio.Group
-                value={alwaysWinning}
-                onChange={setAlwaysWinning}
-                name="chosenWinning"
-                label={t("calculate:ticket.winLabel")}
-                description={t("calculate:ticket.winDesc")}
-                withAsterisk
-                style={{ marginTop: '15px' }}
-              >
-                <Group mt="xs">
-                  <Radio value="Yes" label={t("calculate:ticket.yes")} />
-                  <Radio value="No" label={t("calculate:ticket.no")} />
-                </Group>
-              </Radio.Group>
-            </Card>
-          )
-      }
+        {
+          airdropOptions
+        }
 
-      {
-        !leaderboardJSON || !leaderboardJSON.length
-          ? null
-          : (
-            <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
-              <Title order={4} ta="left" mt="xs">
-                {t("calculate:blockNum.title")}
-              </Title>
-              <TextInput
-                type="number"
-                placeholder={blockNumber}
-                label={t("calculate:blockNum.label")}
-                style={{ maxWidth: '250px' }}
-                onChange={(event) => onBlockNumber(event.currentTarget.value)}
-              />
-            </Card>
-          )
-      }
-
-      {
-        !leaderboardJSON || !leaderboardJSON.length
-          ? (
-            <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
-              <Title order={3} ta="center" mt="sm">
-                {t("calculate:fetchTickets")}
-              </Title>
-            </Card>
-          )
-          : (
-            <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
-              <Title order={4} ta="left" mt="xs">
-                {t("calculate:distro.title")}
-              </Title>
-              <ScrollArea>
-                <Table miw={800} verticalSpacing="sm">
-                  <thead>
-                    <tr>
-                      <th style={{ width: '40px' }} />
-                      <th>{t("calculate:distro.th1")}</th>
-                      <th>{t("calculate:distro.th2")}</th>
-                    </tr>
-                  </thead>
-                  <tbody>{rows}</tbody>
-                </Table>
-              </ScrollArea>
-            </Card>
-          )
-      }
-
-      {
-        !leaderboardJSON || !leaderboardJSON.length
-          ? null
-          : (
-            <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
-              <Title order={4} ta="left" mt="xs">
-                {t("calculate:proceed.title")}
-              </Title>
-              <Text>
-                {t("calculate:proceed.desc")}
-              </Text>
-              {
+        {
+          !leaderboardJSON || !leaderboardJSON.length
+            ? null
+            : (
+                <Card shadow="md" radius="md" padding="xl" mt="sm">
+                  <Title order={5} ta="left">
+                    {t("calculate:proceed.title")}
+                  </Title>
+                  <Text>
+                    {t("calculate:proceed.desc")}
+                  </Text>
+                  {
                     !selection.length
                       ? (
                         <Button disabled style={{ marginTop: '10px' }}>
@@ -504,11 +535,10 @@ export default function Calculate(properties) {
                           {t("calculate:proceed.btn")}
                         </Button>
                       )
-                }
-
-            </Card>
-          )
-      }
+                  }
+                </Card>
+            )
+        }
     </>
   );
 }

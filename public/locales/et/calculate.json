@@ -97,7 +97,8 @@
   },
   "blockNum": {
     "title": "Sisestage ploki number, mida soovite lennuväljal kasutada",
-    "label": "Blokeeri number"
+    "label": "Blokeeri number",
+    "desc": "Valitud ploki numbrit kasutatakse õhutilga arvutuse algse räsi genereerimiseks, mis mõjutab tilkade tulemust."
   },
   "fetchTickets": "Peate hankima selle plokiahela piletiandmed.",
   "distro": {

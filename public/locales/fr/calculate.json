@@ -97,7 +97,8 @@
   },
   "blockNum": {
     "title": "Entrez le numéro de bloc que vous souhaitez utiliser à des fins de parachutage",
-    "label": "Numéro de bloc"
+    "label": "Numéro de bloc",
+    "desc": "Le numéro de bloc choisi sera utilisé pour générer le hachage initial pour le calcul du largage, influençant le résultat du largage."
   },
   "fetchTickets": "Vous devez récupérer les données du ticket pour cette blockchain.",
   "distro": {
