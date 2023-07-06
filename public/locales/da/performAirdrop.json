@@ -8,6 +8,8 @@
   "grid": {
     "left": {
       "loading": "Indlæser aktivdata",
+      "reloadingTokenDetails": "Forsøger at indlæse aktivdata",
+      "reloadingRequiredTokenDetails": "Forsøger at indlæse nødvendige tokendata",
       "processing": "Behandler brugersaldi for påkrævet token",
       "table": {
         "title": "Billetholdere inkluderet i airdrop",
@@ -49,8 +51,8 @@
         "batchSize": "Størrelse på airdrop-overførselspartier",
         "tokenQuantity": "Indtast det antal tokens, du ønsker at airdrop",
         "distroRadio": {
-          "title": "Hvordan skal tokens tildeles til vindere?",
-          "equally": "Lige mellem vindende konto-id'er",
+          "title": "Hvordan skal tokens tildeles vinderne?",
+          "equally": "Ligesom mellem vindende konto-id'er",
           "proportionally": "Proportional til vundne billetter",
           "roundRobin": "Tildel hele tokens på en round robin måde"
         },
@@ -66,6 +68,11 @@
           "no": "Ingen",
           "requiredToken": "Angiv det påkrævede tokens symbol",
           "requiredTokenQty": "Angiv mængden af ​​nødvendige tokens"
+        },
+        "target": {
+          "ticketQty": "Antal vinderbilletter",
+          "ticketValue": "Værdien af ​​vindende billetter",
+          "title": "Hvad vil du basere denne airdrop på?"
         }
       },
       "invalid": {

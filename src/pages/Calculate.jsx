@@ -16,6 +16,7 @@ import {
   Button,
   ScrollArea,
   Checkbox,
+  Select,
   Group,
   TextInput,
 } from '@mantine/core';
@@ -23,7 +24,7 @@ import blake from 'blakejs';
 
 import { executeCalculation } from '../lib/algos';
 import {
-  appStore, leaderboardStore, airdropStore, ticketStore
+  appStore, leaderboardStore, airdropStore, ticketStore, assetStore
 } from '../lib/states';
 
 export default function Calculate(properties) {
@@ -31,6 +32,10 @@ export default function Calculate(properties) {
   const btsLeaderboard = leaderboardStore((state) => state.bitshares);
   const btsTestnetLeaderboard = leaderboardStore((state) => state.bitshares_testnet);
   const tuscLeaderboard = leaderboardStore((state) => state.tusc);
+
+  const btsAssets = assetStore((state) => state.bitshares);
+  const btsTestnetAssets = assetStore((state) => state.bitshares_testnet);
+  const tuscAssets = assetStore((state) => state.tusc);
 
   const btsTickets = ticketStore((state) => state.bitshares);
   const btsTestnetTickets = ticketStore((state) => state.bitshares);
@@ -56,6 +61,9 @@ export default function Calculate(properties) {
   const [projectiles, setProjectiles] = useState('beam');
   const [splinter, setSplinter] = useState('yes');
 
+  const [chosenAsset, setChosenAsset] = useState("1.3.0");
+  const [chosenAssetQty, setChosenAssetQty] = useState("one");
+
   const calculationTypes = [
     'forward',
     'reverse',
@@ -68,7 +76,8 @@ export default function Calculate(properties) {
     'freebie',
     'forever_freebie',
     'ltm_freebie',
-    'barrel_of_fish'
+    'barrel_of_fish',
+    'asset_freebie'
   ]
     .map((x) => ({
       name: t(`calculate:calcs.${x}.name`),
@@ -83,18 +92,22 @@ export default function Calculate(properties) {
   let assetName = "1.3.0";
   let leaderboardJSON = [];
   let relevantTickets = [];
+  let relevantAssets = [];
   if (value === 'bitshares') {
     leaderboardJSON = btsLeaderboard;
     relevantTickets = btsTickets;
     assetName = "BTS";
+    relevantAssets = btsAssets;
   } else if (value === 'bitshares_testnet') {
     leaderboardJSON = btsTestnetLeaderboard;
     relevantTickets = btsTestnetTickets;
     assetName = "TEST";
+    relevantAssets = btsTestnetAssets;
   } else if (value === 'tusc') {
     leaderboardJSON = tuscLeaderboard;
     relevantTickets = tuscTickets;
     assetName = "TUSC";
+    relevantAssets = tuscAssets;
   }
 
   const rows = calculationTypes.map((item) => {
@@ -156,6 +169,46 @@ export default function Calculate(properties) {
             )
             : null
         }
+        {
+          item.value === 'asset_freebie' && selected && relevantAssets && relevantAssets.length
+            ? (
+              <>
+                <tr>
+                  <td colSpan={3}>
+                      <Select
+                        mb="sm"
+                        label={t("calculate:calcs.asset_freebie.label")}
+                        placeholder={t("calculate:calcs.asset_freebie.placeholder")}
+                        value={chosenAsset}
+                        searchable
+                        nothingFound={
+                          t("calculate:calcs.asset_freebie.notFound")
+                        }
+                        dropdownPosition="bottom"
+                        onChange={setChosenAsset}
+                        data={
+                          relevantAssets.map((x) => ({
+                            value: x.id,
+                            label: `${x.symbol} (${x.id})`
+                          }))
+                        }
+                      />
+                      <Radio.Group
+                        value={chosenAssetQty}
+                        onChange={setChosenAssetQty}
+                        name="chosenAssetQty"
+                        label={t("calculate:calcs.asset_freebie.qtyType")}
+                        withAsterisk
+                      >
+                          <Radio m="xs" value="one" label={t("calculate:calcs.asset_freebie.one")} />
+                          <Radio m="xs" value="balance" label={t("calculate:calcs.asset_freebie.balance")} />
+                      </Radio.Group>
+                  </td>
+                </tr>
+              </>
+            )
+            : null
+        }
       </>
 
     );
@@ -170,7 +223,6 @@ export default function Calculate(properties) {
     return c >= '0' && c <= '9';
   }
 
-  let lastID;
   async function performCalculation() {
     setProgress('calculating');
 
@@ -218,9 +270,12 @@ export default function Calculate(properties) {
         deduplicate,
         alwaysWinning,
         leaderboardJSON,
+        relevantAssets,
         relevantTickets,
         projectiles,
-        splinter
+        splinter,
+        chosenAsset,
+        chosenAssetQty
       );
     } catch (error) {
       console.log(error);

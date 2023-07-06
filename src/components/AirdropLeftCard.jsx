@@ -63,7 +63,8 @@ export default function AirdropLeftCard(properties) {
     tokenItr,
     setReqdTokenItr,
     reqdTokenItr,
-    tokenReq
+    tokenReq,
+    airdropTarget
   } = properties;
 
   const [validRows, setValidRows] = useState([]);
@@ -81,28 +82,32 @@ export default function AirdropLeftCard(properties) {
         winners.length
           ? winners
             .map((winner) => (
-            <tr key={`winner_${winner.id}`}>
-              <td width="35%">
-                <Link style={{ textDecoration: 'none', color: 'black' }} to={`/Account/${params.env}/${winner.id}`}>
-                  <b>{envLeaderboard.find((usr) => usr.id === winner.id).account.name}</b>
-                </Link><br />
-                (
-                  <Link style={{ textDecoration: 'none' }} to={`/Account/${params.env}/${winner.id}`}>
-                    {winner.id}
-                  </Link>
-                )
-              </td>
-              <td width="25%">
-                {winner.qty}
-              </td>
-              <td width="40%">
-                {
-                  winner.assignedTokens.toFixed(tokenDetails.precision)
-                }
-                <br />
-                {finalTokenName || assetName}
-              </td>
-            </tr>
+              <tr key={`winner_${winner.id}`}>
+                <td width="35%">
+                  <Link style={{ textDecoration: 'none', color: 'black' }} to={`/Account/${params.env}/${winner.id}`}>
+                    <b>{envLeaderboard.find((usr) => usr.id === winner.id).account.name}</b>
+                  </Link><br />
+                  (
+                    <Link style={{ textDecoration: 'none' }} to={`/Account/${params.env}/${winner.id}`}>
+                      {winner.id}
+                    </Link>
+                  )
+                </td>
+                <td width="25%">
+                  {
+                    airdropTarget === "ticketQty"
+                      ? winner.qty
+                      : winner.ticketsValue
+                  }
+                </td>
+                <td width="40%">
+                  {
+                    winner.assignedTokens.toFixed(tokenDetails.precision)
+                  }
+                  <br />
+                  {finalTokenName || assetName}
+                </td>
+              </tr>
             ))
           : []
       );
@@ -141,6 +146,7 @@ export default function AirdropLeftCard(properties) {
         winners.map((x) => ({
           user: `${envLeaderboard.find((usr) => usr.id === x.id).account.name} (${x.id})`,
           ticketQty: x.qty,
+          ticketsValue: x.ticketsValue,
           percent: x.percent,
           assignedTokens: x.assignedTokens
         })),

@@ -8,6 +8,8 @@
   "grid": {
     "left": {
       "loading": "Asset-Daten werden geladen",
+      "reloadingTokenDetails": "Es wird versucht, Asset-Daten zu laden",
+      "reloadingRequiredTokenDetails": "Es wird versucht, die erforderlichen Token-Daten zu laden",
       "processing": "Benutzerguthaben für erforderliches Token werden verarbeitet",
       "table": {
         "title": "Ticketinhaber im Airdrop inbegriffen",
@@ -66,6 +68,11 @@
           "no": "NEIN",
           "requiredToken": "Geben Sie das Symbol des erforderlichen Tokens an",
           "requiredTokenQty": "Geben Sie die Menge der benötigten Token an"
+        },
+        "target": {
+          "ticketQty": "Anzahl der Gewinnlose",
+          "ticketValue": "Wert der gewonnenen Tickets",
+          "title": "Worauf soll dieser Airdrop basieren?"
         }
       },
       "invalid": {

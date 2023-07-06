@@ -6,7 +6,7 @@
     },
     "reverse": {
       "name": "Pedaços reversos",
-      "desc": "O hash reverso é dividido em números de ticket."
+      "desc": "O hash reverso é dividido em números de bilhete."
     },
     "pi": {
       "name": "PI",
@@ -18,7 +18,7 @@
     },
     "cubed": {
       "name": "Ao cubo",
-      "desc": "Divida o hash em pedaços de 3 dígitos, coloque cada pedaço em cubos, tíquetes de saída."
+      "desc": "Divida o hash em partes de 3 dígitos, coloque cada parte em cubos e gere tíquetes."
     },
     "bouncing_ball": {
       "name": "bola quicando",
@@ -42,7 +42,7 @@
     },
     "ltm_freebie": {
       "name": "Brinde de assinatura vitalícia",
-      "desc": "Forneça um ingresso gratuito aos titulares de tickers que tenham uma associação vitalícia."
+      "desc": "Forneça um ingresso gratuito para os titulares de tickers que tenham uma associação vitalícia."
     },
     "barrel_of_fish": {
       "name": "barril de peixe",
@@ -53,10 +53,20 @@
         "slow": "Os projéteis irão desacelerar até parar rapidamente na água."
       },
       "splinter": {
-        "fragmentation": "O projétil irá estilhaçar com o impacto?",
-        "yes": "Sim, deve lascar uma vez no impacto.",
+        "fragmentation": "O projétil se estilhaçará com o impacto?",
+        "yes": "Sim, deve lascar uma vez com o impacto.",
         "no": "Não, é um único projétil sólido."
       }
+    },
+    "asset_freebie": {
+      "label": "Pesquisar um recurso",
+      "name": "Brinde de ativo",
+      "desc": "Forneça um bilhete gratuito aos detentores de cotações que tenham um determinado ativo.",
+      "notFound": "Recurso não encontrado",
+      "placeholder": "Escolha o ativo ao qual deseja atribuir tickets",
+      "qtyType": "Quantos tickets você deseja atribuir aos detentores de ativos?",
+      "one": "Um bilhete por titular do ativo",
+      "balance": "O mesmo número de bilhetes que o saldo do titular do ativo"
     }
   },
   "calculatingTitle": "Realizando cálculos de airdrop, aguarde!",
@@ -82,7 +92,7 @@
     "radioDesc": "ou seja ",
     "yes": "Sim",
     "no": "Não",
-    "winLabel": "Os bilhetes premiados devem ser sempre escolhidos?",
+    "winLabel": "Os bilhetes premiados devem sempre ser escolhidos?",
     "winDesc": "Por exemplo. "
   },
   "blockNum": {
@@ -97,7 +107,7 @@
   },
   "proceed": {
     "title": "Prossiga com o cálculo do airdrop",
-    "desc": "Seu vetor de airdrop calculado será disponibilizado na página de airdrop depois de concluído.",
+    "desc": "Seu vetor de airdrop calculado será disponibilizado na página de airdrop assim que concluído.",
     "btn": "Executar cálculo de lançamento aéreo"
   }
 }

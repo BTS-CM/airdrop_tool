@@ -8,6 +8,8 @@
   "grid": {
     "left": {
       "loading": "アセットデータのロード",
+      "reloadingTokenDetails": "アセットデータをロードしようとしています",
+      "reloadingRequiredTokenDetails": "必要なトークン データをロードしようとしています",
       "processing": "必要なトークンのユーザー残高を処理しています",
       "table": {
         "title": "エアドロップに含まれるチケットホルダー",
@@ -66,6 +68,11 @@
           "no": "いいえ",
           "requiredToken": "必要なトークンのシンボルを指定します",
           "requiredTokenQty": "必要なトークンの量を提供します"
+        },
+        "target": {
+          "ticketQty": "当選チケットの枚数",
+          "ticketValue": "当選チケットの価値",
+          "title": "このエアドロップのベースは何ですか?"
         }
       },
       "invalid": {

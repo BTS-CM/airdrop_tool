@@ -344,6 +344,19 @@ function ltm_freebie(leaderboardJSON) {
 }
 
 /**
+ * Provides a free ticket to asset holders
+ * @param {Array} leaderboardJSON
+ * @param {String} freebieAsset
+ * @returns {Array}
+ */
+function asset_freebie(leaderboardJSON, freebieAsset) {
+  const asset_tickets = leaderboardJSON
+    .filter((user) => user.balances.find((asset) => asset.asset_id === freebieAsset))
+    .map((user) => user.range.from);
+  return asset_tickets;
+}
+
+/**
  * Converts the filtered hash into a single ticket
  * @param {Array} initialChunks
  * @returns {Number}
@@ -412,6 +425,7 @@ function barrel_of_fish(initialChunks, maxDistance, projectile, splinter) {
  * @param {Array} relevantTickets
  * @param {String} bof_projectile
  * @param {String} bof_splinter
+ * @param {String} freebieAsset
  * @returns {Array}
  */
 function getTickets(
@@ -420,7 +434,8 @@ function getTickets(
   leaderboardJSON,
   relevantTickets,
   bof_projectile = null,
-  bof_splinter = null
+  bof_splinter = null,
+  freebieAsset = null
 ) {
   const initialChunks = chunk(filtered_signature, 9);
 
@@ -453,6 +468,8 @@ function getTickets(
       return forever_freebie(leaderboardJSON, relevantTickets);
     case "barrel_of_fish":
       return barrel_of_fish(initialChunks, maxDistance, bof_projectile, bof_splinter);
+    case "asset_freebie":
+      return asset_freebie(leaderboardJSON, freebieAsset);
     // case "single_winner":
     //  return single_winner(initialChunks);
     default:
@@ -468,9 +485,12 @@ function getTickets(
  * @param {String} deduplicate
  * @param {String} alwaysWinning
  * @param {Array} leaderboardJSON
+ * @param {Array} relevantAssets
  * @param {Array} relevantTickets
  * @param {String} bof_projectile
  * @param {String} bof_splinter
+ * @param {String} freebieAsset
+ * @param {String} freebieAssetQty
  * @returns {Object}
  */
 function executeCalculation(
@@ -479,9 +499,12 @@ function executeCalculation(
   deduplicate,
   alwaysWinning,
   leaderboardJSON,
+  relevantAssets,
   relevantTickets,
   bof_projectile,
-  bof_splinter
+  bof_splinter,
+  freebieAsset,
+  freebieAssetQty
 ) {
   const generatedNumbers = {};
   let winningTickets = [];
@@ -496,7 +519,8 @@ function executeCalculation(
       leaderboardJSON,
       relevantTickets,
       bof_projectile,
-      bof_splinter
+      bof_splinter,
+      freebieAsset
     );
 
     if (deduplicate === "Yes") {
@@ -529,15 +553,34 @@ function executeCalculation(
     const algo = key;
     const algoNums = value;
 
+    const foundAsset = algo === "asset_freebie"
+      ? relevantAssets.find((x) => x.id === freebieAsset)
+      : null;
+
     for (let i = 0; i < algoNums.length; i++) {
       const currentNumber = algoNums[i];
       const search = leaderboardJSON
         .find((x) => currentNumber >= x.range.from && currentNumber <= x.range.to);
 
       if (search) {
+        const assetBalance = algo === "asset_freebie"
+          ? search.balances.find((x) => x.asset_id === freebieAsset)
+          : null;
+
+        const winningTicket = {
+          ticket: currentNumber,
+          algo,
+          value: algo === "asset_freebie" && freebieAssetQty === "balance" && assetBalance && foundAsset
+            ? humanReadableFloat(
+              assetBalance.amount,
+              foundAsset.precision
+            )
+            : 1
+        };
+
         winners[search.id] = Object.prototype.hasOwnProperty.call(winners, search.id)
-          ? [...winners[search.id], { ticket: currentNumber, algo }]
-          : [{ ticket: currentNumber, algo }];
+          ? [...winners[search.id], winningTicket]
+          : [winningTicket];
       }
     }
   }
@@ -549,6 +592,7 @@ function executeCalculation(
       id: key,
       tickets: value.sort((a, b) => a.ticket - b.ticket),
       qty: value.length,
+      ticketsValue: value.reduce((a, b) => a + b.value, 0),
       percent: currentPercent,
     });
   }
@@ -568,5 +612,6 @@ export {
   alien_blood,
   bouncing_ball,
   freebie,
+  asset_freebie,
   // single_winner,
 };

@@ -68,6 +68,11 @@
                     "no": "No",
                     "requiredToken": "Provide the required token's symbol",
                     "requiredTokenQty": "Provide the quantity of required tokens"
+                },
+                "target": {
+                    "ticketQty": "Quantity of winning tickets",
+                    "ticketValue": "Value of winning tickets",
+                    "title": "What do you want to base this airdrop on?"
                 }
             },
             "invalid": {

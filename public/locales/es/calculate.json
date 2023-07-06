@@ -57,6 +57,16 @@
         "yes": "Sí, debería astillarse una vez con el impacto.",
         "no": "No, es un solo proyectil sólido."
       }
+    },
+    "asset_freebie": {
+      "label": "Buscar un activo",
+      "name": "regalo de activos",
+      "desc": "Proporcione un boleto gratis a los titulares de tickers que tengan un determinado activo.",
+      "notFound": "Activo no encontrado",
+      "placeholder": "Elija el activo al que desea asignar entradas",
+      "qtyType": "¿Cuántos boletos desea asignar a los titulares de activos?",
+      "one": "Un ticket por titular de activo",
+      "balance": "El mismo número de boletos que el saldo del titular del activo"
     }
   },
   "calculatingTitle": "Realizando cálculos de airdrop, ¡espere!",

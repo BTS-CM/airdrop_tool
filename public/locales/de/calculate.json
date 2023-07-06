@@ -57,6 +57,16 @@
         "yes": "Ja, es sollte beim Aufprall einmal splittern.",
         "no": "Nein, es ist ein solides Einzelprojektil."
       }
+    },
+    "asset_freebie": {
+      "label": "Suchen Sie nach einem Vermögenswert",
+      "name": "Gratis-Asset",
+      "desc": "Bieten Sie Ticker-Inhabern, die über ein bestimmtes Vermögen verfügen, ein kostenloses Ticket an.",
+      "notFound": "Asset nicht gefunden",
+      "placeholder": "Wählen Sie das Asset aus, dem Sie Tickets zuweisen möchten",
+      "qtyType": "Wie viele Tickets möchten Sie den Asset-Inhabern zuweisen?",
+      "one": "Ein Ticket pro Vermögensinhaber",
+      "balance": "Die gleiche Anzahl an Tickets wie das Guthaben des Vermögensinhabers"
     }
   },
   "calculatingTitle": "Airdrop-Berechnungen werden durchgeführt, bitte warten!",

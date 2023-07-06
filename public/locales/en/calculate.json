@@ -57,6 +57,16 @@
                 "yes": "Yes, it should splinter once on impact.",
                 "no": "No, it's a solid single projectile."
             }
+        },
+        "asset_freebie": {
+            "label": "Lookup an asset",
+            "name": "Asset freebie",
+            "desc": "Provide a free ticket to ticker holders who have a certain asset.",
+            "notFound": "Asset not found",
+            "placeholder": "Choose the asset you want to assign tickets to",
+            "qtyType": "How many tickets do you want to assign the asset holders?",
+            "one": "One ticket per asset holder",
+            "balance": "The same number of tickets as the asset holder's balance"
         }
     },
     "calculatingTitle": "Performing airdrop calculations, please wait!",

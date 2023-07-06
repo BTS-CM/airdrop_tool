@@ -30,7 +30,7 @@
     },
     "avg_point_lines": {
       "name": "Gennemsnitlige punktlinjer",
-      "desc": "Beregn de gennemsnitlige x/y/z koordinater -> træk linjer til denne fra hver vektor => belønn dem på linjen"
+      "desc": "Beregn de gennemsnitlige x/y/z koordinater -> træk linjer til dette fra hver vektor => beløn dem på linjen"
     },
     "freebie": {
       "name": "Freebie",
@@ -38,14 +38,14 @@
     },
     "forever_freebie": {
       "name": "For evigt gratis",
-      "desc": "Hver konto, der har en billet med en evig varighed og kvalificerende mængde, får 1 vinderkupon"
+      "desc": "Hver konto med en billet med en evig varighed og kvalificerende mængde får 1 vinderkupon"
     },
     "ltm_freebie": {
       "name": "Livsvarigt medlemskab gratis",
       "desc": "Giv en gratis billet til ticker-indehavere, der har et livstidsmedlemskab."
     },
     "barrel_of_fish": {
-      "name": "Tønde med fisk",
+      "name": "Tønde fisk",
       "desc": "Vælg billetter fra en tønde fisk",
       "projectile": {
         "distance": "Hvor langt skal projektilet rejse i tønden med fisk",
@@ -53,10 +53,20 @@
         "slow": "Projektilerne vil langsomt standse hurtigt i vandet."
       },
       "splinter": {
-        "fragmentation": "Vil projektilet splintre ved stød?",
+        "fragmentation": "Vil projektilet splintre ved sammenstød?",
         "yes": "Ja, den bør splintre én gang ved stød.",
         "no": "Nej, det er et solidt enkelt projektil."
       }
+    },
+    "asset_freebie": {
+      "label": "Søg efter et aktiv",
+      "name": "Asset freebie",
+      "desc": "Giv en gratis billet til ticker-indehavere, der har et bestemt aktiv.",
+      "notFound": "Aktiv ikke fundet",
+      "placeholder": "Vælg det aktiv, du vil tildele billetter til",
+      "qtyType": "Hvor mange billetter vil du tildele aktivindehaverne?",
+      "one": "Én billet pr. aktivindehaver",
+      "balance": "Samme antal billetter som aktivindehaverens saldo"
     }
   },
   "calculatingTitle": "Udfører airdrop-beregninger, vent venligst!",
@@ -67,7 +77,7 @@
     "generatedBtn": "Se alle genererede luftdråber"
   },
   "title": "Beregn en beviseligt retfærdig airdrop-distribution for hvilken blockchain?",
-  "radioLabel": "Vælg mål blockchain",
+  "radioLabel": "Vælg den ønskede blockchain",
   "radioDesc": "Kun grafenbaserede blockchains",
   "hash": {
     "title": "Hvilken slags blockhash vil du bruge til indledende beviseligt tilfældige input?",
@@ -87,11 +97,11 @@
   },
   "blockNum": {
     "title": "Indtast det bloknummer, du ønsker at bruge til airdrop-formål",
-    "label": "Bloknummer"
+    "label": "Blok nummer"
   },
   "fetchTickets": "Du skal hente billetdataene for denne blockchain.",
   "distro": {
-    "title": "Vælg dine foretrukne metoder til at generere sandsynligt retfærdige luftdråbefordelinger",
+    "title": "Vælg dine foretrukne metoder til at generere beviseligt retfærdige luftdråbefordelinger",
     "th1": "Type",
     "th2": "Beskrivelse"
   },

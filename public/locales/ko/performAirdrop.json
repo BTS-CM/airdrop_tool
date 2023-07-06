@@ -8,6 +8,8 @@
   "grid": {
     "left": {
       "loading": "자산 데이터 로드 중",
+      "reloadingTokenDetails": "자산 데이터를 로드하는 중",
+      "reloadingRequiredTokenDetails": "필요한 토큰 데이터를 로드하려고 합니다.",
       "processing": "필요한 토큰에 대한 사용자 잔액 처리",
       "table": {
         "title": "에어드롭에 포함된 티켓 소지자",
@@ -44,7 +46,7 @@
       },
       "options": {
         "title": "에어드롭 옵션",
-        "titleName": "당신의 {{titleName}} 계정 ID",
+        "titleName": "귀하의 {{titleName}} 계정 ID",
         "assetName": "에어드롭하려는 자산의 이름을 입력하세요.",
         "batchSize": "에어드롭 전송 배치의 크기",
         "tokenQuantity": "에어드롭할 토큰 수량을 입력하세요.",
@@ -66,12 +68,17 @@
           "no": "아니요",
           "requiredToken": "필요한 토큰의 기호를 제공하십시오.",
           "requiredTokenQty": "필요한 토큰 수량 제공"
+        },
+        "target": {
+          "ticketQty": "당첨 티켓 수량",
+          "ticketValue": "당첨 티켓의 가치",
+          "title": "이 에어드롭의 기반은 무엇입니까?"
         }
       },
       "invalid": {
         "title": "에어드랍할게 없음",
         "reason": "유효한 티켓이 없기 때문에 에어드롭할 것이 없습니다.",
-        "resolution": "에어드랍 설정을 조정하거나 다른 에어드롭을 계산하여 진행하세요."
+        "resolution": "에어드랍 설정을 조정하거나 다른 에어드랍을 계산하여 진행하세요."
       },
       "valid": {
         "title": "에어드롭을 진행하시겠습니까?",

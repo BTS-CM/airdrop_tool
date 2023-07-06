@@ -8,6 +8,8 @@
   "grid": {
     "left": {
       "loading": "Chargement des données d'actif",
+      "reloadingTokenDetails": "Tentative de chargement des données d'éléments",
+      "reloadingRequiredTokenDetails": "Tentative de chargement des données de jeton requises",
       "processing": "Traitement des soldes des utilisateurs pour le jeton requis",
       "table": {
         "title": "Détenteurs de billets inclus dans le largage aérien",
@@ -49,7 +51,7 @@
         "batchSize": "Taille des lots de transfert de parachutage",
         "tokenQuantity": "Entrez la quantité de jetons que vous souhaitez airdrop",
         "distroRadio": {
-          "title": "Comment les jetons devraient-ils être attribués aux gagnants ?",
+          "title": "Comment les jetons doivent-ils être attribués aux gagnants ?",
           "equally": "À parts égales entre les identifiants de compte gagnants",
           "proportionally": "Proportionnel aux billets gagnés",
           "roundRobin": "Allouer des jetons entiers de manière circulaire"
@@ -66,6 +68,11 @@
           "no": "Non",
           "requiredToken": "Indiquez le symbole du jeton requis",
           "requiredTokenQty": "Fournir la quantité de jetons requis"
+        },
+        "target": {
+          "ticketQty": "Quantité de billets gagnants",
+          "ticketValue": "Valeur des billets gagnants",
+          "title": "Sur quoi voulez-vous baser cet airdrop ?"
         }
       },
       "invalid": {

@@ -8,6 +8,8 @@
   "grid": {
     "left": {
       "loading": "Varade andmete laadimine",
+      "reloadingTokenDetails": "Proovitakse laadida vara andmeid",
+      "reloadingRequiredTokenDetails": "Nõutavate loaandmete laadimine",
       "processing": "Nõutava märgi kasutajasaldode töötlemine",
       "table": {
         "title": "Piletihoidjad kuuluvad airdropi",
@@ -23,7 +25,7 @@
           "noBalance": "Nõutav tunnus puudub",
           "insufficientBalance": "Nõutavaid märke pole piisavalt",
           "self": "Ise saata ei saa",
-          "minReward": "Eraldatud tasu on liiga väike"
+          "minReward": "Eraldatud preemia on liiga väike"
         }
       },
       "json": "Airdropi JSON-andmed",
@@ -66,6 +68,11 @@
           "no": "Ei",
           "requiredToken": "Esitage nõutava märgi sümbol",
           "requiredTokenQty": "Esitage vajalike žetoonide kogus"
+        },
+        "target": {
+          "ticketQty": "Võidupiletite kogus",
+          "ticketValue": "Võidetud piletite väärtus",
+          "title": "Millele sa selle õhutilgutuse rajada tahad?"
         }
       },
       "invalid": {
@@ -77,7 +84,7 @@
         "title": "Kas jätkata airdropiga?",
         "note": "Pidage õhutilkade partiide kavandamisel silmas tehingute ja ploki suuruse piiranguid.",
         "single": "Partiipiiranguga {{batchSize}}, selle õhutilgutamiseks on vaja 1 partii.",
-        "multi": "Partiipiiranguga {{batchSize}}, {{qtyBatches}} selle õhutilgutamiseks on vaja partiid.",
+        "multi": "Partiipiiranguga {{batchSize}}, {{qtyBatches}} selle õhutilga täitmiseks on vaja partiid.",
         "reminder": "Pidage õhutilkade partiide kavandamisel silmas tehingute ja ploki suuruse piiranguid."
       }
     }

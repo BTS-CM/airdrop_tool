@@ -57,6 +57,16 @@
         "yes": "Sì, dovrebbe scheggiarsi una volta all'impatto.",
         "no": "No, è un singolo proiettile solido."
       }
+    },
+    "asset_freebie": {
+      "label": "Cerca una risorsa",
+      "name": "Beni gratuiti",
+      "desc": "Fornisci un biglietto gratuito ai possessori di ticker che possiedono un determinato asset.",
+      "notFound": "Asset non trovato",
+      "placeholder": "Scegli la risorsa a cui vuoi assegnare i biglietti",
+      "qtyType": "Quanti ticket vuoi assegnare agli asset holder?",
+      "one": "Un biglietto per possessore di asset",
+      "balance": "Lo stesso numero di biglietti del saldo del titolare dell'asset"
     }
   },
   "calculatingTitle": "Calcolo dell'airdrop in corso, attendere!",

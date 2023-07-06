@@ -22,7 +22,7 @@
     },
     "bouncing_ball": {
       "name": "Põrkav pall",
-      "desc": "maatriksis põrgatava palli tee -> vali piletid mööda teed"
+      "desc": "maatriksis põrkava palli tee -> vali piletid mööda teed"
     },
     "alien_blood": {
       "name": "Võõras veri",
@@ -42,7 +42,7 @@
     },
     "ltm_freebie": {
       "name": "Eluaegne liikmelisus tasuta",
-      "desc": "Pakkuge tasuta pilet tickeri omanikele, kellel on eluaegne liikmelisus."
+      "desc": "Pakkuge tasuta piletit tickeri omanikele, kellel on eluaegne liikmesus."
     },
     "barrel_of_fish": {
       "name": "Kalatünn",
@@ -57,6 +57,16 @@
         "yes": "Jah, see peaks löögil korra kildudeks minema.",
         "no": "Ei, see on üks kindel mürsk."
       }
+    },
+    "asset_freebie": {
+      "label": "Otsige vara üles",
+      "name": "Tasuta vara",
+      "desc": "Pakkuge tasuta pilet tickeri omanikele, kellel on teatud vara.",
+      "notFound": "Vara ei leitud",
+      "placeholder": "Valige vara, millele soovite piletid määrata",
+      "qtyType": "Mitu piletit soovite varaomanikele määrata?",
+      "one": "Üks pilet varaomaniku kohta",
+      "balance": "Sama arv pileteid kui varaomaniku saldo"
     }
   },
   "calculatingTitle": "Õhutilkade arvutuste tegemine, palun oodake!",

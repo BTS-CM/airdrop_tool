@@ -113,6 +113,7 @@ export default function PerformAirdrop(properties) {
   const [blocking, setBlocking] = useState(plannedAirdropData.settings.blocking ?? 'No');
   const [ltmReq, setLTMReq] = useState(plannedAirdropData.settings.ltmReq ?? 'No');
   const [tokenReq, setTokenReq] = useState(plannedAirdropData.settings.tokenReq ?? 'No');
+  const [airdropTarget, setAirdropTarget] = useState(plannedAirdropData.settings.airdropTarget ?? 'ticketQty');
 
   // Debounced input
   const [tokenName, onTokenName] = useState(plannedAirdropData.settings.tokenName ?? assetName);
@@ -151,6 +152,7 @@ export default function PerformAirdrop(properties) {
       && tokenReq
       && finalReqTokenName
       && finalReqQty
+      && airdropTarget
     ) {
       const currentSettings = plannedAirdropData.settings;
       const newSettings = {
@@ -162,7 +164,8 @@ export default function PerformAirdrop(properties) {
         ltmReq,
         tokenReq,
         requiredToken: finalReqTokenName,
-        requiredTokenQty: finalReqQty
+        requiredTokenQty: finalReqQty,
+        airdropTarget
       };
 
       if (!_.isEqual(currentSettings, newSettings)) {
@@ -182,7 +185,8 @@ export default function PerformAirdrop(properties) {
     finalReqTokenName,
     finalTokenQuantity,
     finalBatchSize,
-    finalReqQty
+    finalReqQty,
+    airdropTarget
   ]);
 
   useEffect(() => {
@@ -393,11 +397,29 @@ export default function PerformAirdrop(properties) {
     }
   }, [finalReqQty, reqdTokenItr]);
 
-  // Initial winners
-  const sortedWinners = plannedAirdropData.calculatedAirdrop.summary.map((winner) => ({
-    ...winner,
-    balances: envLeaderboard.find((x) => x.id === winner.id).balances,
-  })).sort((a, b) => b.qty - a.qty);
+  // Initial winners not yet sorted
+  const [sortedWinners, setSortedWinners] = useState(
+    plannedAirdropData.calculatedAirdrop.summary.map((winner) => ({
+      ...winner,
+      balances: envLeaderboard.find((x) => x.id === winner.id).balances,
+    }))
+  );
+
+  useEffect(() => {
+    if (airdropTarget && airdropTarget === "ticketQty") {
+      setSortedWinners(
+        sortedWinners
+          .filter((winner) => winner.qty > 0)
+          .sort((a, b) => b.qty - a.qty)
+      );
+    } else if (airdropTarget && airdropTarget === "ticketValue") {
+      setSortedWinners(
+        sortedWinners
+          .filter((winner) => winner.ticketsValue > 0)
+          .sort((a, b) => b.ticketsValue - a.ticketsValue)
+      );
+    }
+  }, [airdropTarget]);
 
   const [invalidOutput, setInvalidOutput] = useState([]);
   useEffect(() => {
@@ -457,6 +479,7 @@ export default function PerformAirdrop(properties) {
 
   const [validOutput, setValidOutput] = useState([]);
   const [ticketQty, setTicketQty] = useState(0);
+  const [totalTicketValue, setTotalTicketValue] = useState(0);
   useEffect(() => {
     // Remove the invalid ticket holders
     const validDiff = _.difference(
@@ -473,6 +496,12 @@ export default function PerformAirdrop(properties) {
         .map((x) => x.qty)
         .reduce((accumulator, ticket) => accumulator + parseInt(ticket, 10), 0)
     );
+
+    setTotalTicketValue(
+      validDiff
+        .map((x) => x.ticketsValue)
+        .reduce((accumulator, ticket) => accumulator + parseFloat(ticket), 0)
+    );
   }, [invalidOutput]);
 
   const itrQty = distroMethod === "RoundRobin" && finalTokenQuantity
@@ -484,23 +513,30 @@ export default function PerformAirdrop(properties) {
     if (finalTokenQuantity && ticketQty && itrQty && validOutput.length && tokenDetails) {
       let tempRows = [];
       let remainingTokens = finalTokenQuantity ?? 0;
-      let remainingTickets = ticketQty ?? 0;
+      let remainingTickets = airdropTarget && airdropTarget === "ticketValue"
+        ? totalTicketValue
+        : ticketQty;
       let equalTally = validOutput.length ?? 0;
       // Allocate assets (tokens) to the remaining valid ticket holders
       for (let i = 0; i < itrQty; i++) {
         if (i === 0) {
           tempRows = [];
           remainingTokens = finalTokenQuantity;
-          remainingTickets = ticketQty;
+          remainingTickets = airdropTarget && airdropTarget === "ticketValue"
+            ? totalTicketValue
+            : ticketQty;
           equalTally = validOutput.length;
         }
 
         if (distroMethod === "Proportionally") {
+          const propValue = airdropTarget && airdropTarget === "ticketValue"
+            ? validOutput[i].ticketsValue
+            : validOutput[i].qty;
           const proportionalAllocation = parseFloat(
-            ((validOutput[i].qty / remainingTickets) * remainingTokens).toFixed(tokenDetails.precision)
+            ((propValue / remainingTickets) * remainingTokens).toFixed(tokenDetails.precision)
           );
           remainingTokens -= proportionalAllocation;
-          remainingTickets -= validOutput[i].qty;
+          remainingTickets -= propValue;
           tempRows.push({ ...validOutput[i], assignedTokens: proportionalAllocation });
         } else if (distroMethod === "Equally") {
           const equalAllocation = parseFloat(
@@ -592,7 +628,8 @@ export default function PerformAirdrop(properties) {
     tokenDetails,
     finalReqTokenName,
     finalReqQty,
-    requiredTokenDetails
+    requiredTokenDetails,
+    airdropTarget
   ]);
 
   const [finalInvalidOutput, setFinalInvalidOutput] = useState([]);
@@ -683,6 +720,7 @@ export default function PerformAirdrop(properties) {
                       setReqdTokenItr={setReqdTokenItr}
                       reqdTokenItr={reqdTokenItr}
                       tokenReq={tokenReq}
+                      airdropTarget={airdropTarget}
                     />
                   )
                   : null
@@ -819,6 +857,25 @@ export default function PerformAirdrop(properties) {
                         <Radio
                           value="no"
                           label={t("performAirdrop:grid.right.options.reqRadio.no")}
+                        />
+                      </Group>
+                    </Radio.Group>
+                    <Radio.Group
+                      value={airdropTarget}
+                      onChange={setAirdropTarget}
+                      name="airdropTarget"
+                      label={t("performAirdrop:grid.right.options.target.title")}
+                      style={{ marginTop: '10px' }}
+                      withAsterisk
+                    >
+                      <Group mt="xs">
+                        <Radio
+                          value="ticketQty"
+                          label={t("performAirdrop:grid.right.options.target.ticketQty")}
+                        />
+                        <Radio
+                          value="ticketValue"
+                          label={t("performAirdrop:grid.right.options.target.ticketValue")}
                         />
                       </Group>
                     </Radio.Group>

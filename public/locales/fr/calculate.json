@@ -2,7 +2,7 @@
   "calcs": {
     "forward": {
       "name": "Transférer des morceaux",
-      "desc": "Divisez le hachage en numéros de ticket."
+      "desc": "Diviser le hachage en numéros de ticket."
     },
     "reverse": {
       "name": "Morceaux inversés",
@@ -57,13 +57,23 @@
         "yes": "Oui, il devrait se briser une fois à l'impact.",
         "no": "Non, c'est un projectile simple solide."
       }
+    },
+    "asset_freebie": {
+      "label": "Rechercher un actif",
+      "name": "Bonus d'actif",
+      "desc": "Fournissez un billet gratuit aux détenteurs de tickers qui ont un certain atout.",
+      "notFound": "Actif introuvable",
+      "placeholder": "Choisissez l'actif auquel vous souhaitez attribuer des tickets",
+      "qtyType": "Combien de tickets voulez-vous attribuer aux détenteurs d'actifs ?",
+      "one": "Un billet par détenteur d'actif",
+      "balance": "Le même nombre de tickets que le solde du détenteur de l'actif"
     }
   },
   "calculatingTitle": "Calculs de parachutage en cours, veuillez patienter !",
   "completed": {
     "title": "Calculs de parachutage terminés avec succès !",
     "anotherBtn": "Calculer un autre airdrop ?",
-    "airdropBtn": "Voir airdrop généré",
+    "airdropBtn": "Afficher le largage généré",
     "generatedBtn": "Voir tous les parachutages générés"
   },
   "title": "Calculer une distribution de parachutage équitablement prouvée pour quelle blockchain ?",
