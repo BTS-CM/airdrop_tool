@@ -312,32 +312,9 @@ export default function Calculate(properties) {
     setProgress('completed');
   }
 
-  
-  const [airdropOptions, setAirdropOptions] = useState(null);
+  const [settings, setSettings] = useState();
   useEffect(() => {
-    if (
-      !leaderboardJSON
-      || !leaderboardJSON.length
-      || !selection
-      || !selection.length
-    ) {
-      setAirdropOptions(null);
-      return;
-    }
-
-    const algosWithOptions = [
-      'forward',
-      'reverse',
-      'pi',
-      'reverse_pi',
-      'cubed',
-      'bouncing_ball',
-      'alien_blood',
-      'avg_point_lines',
-      'barrel_of_fish',
-    ];
-
-    const settings = (
+    setSettings((
       <>
         <Title order={5} ta="left" mt="sm">
           {t("calculate:ticket.title")}
@@ -370,57 +347,8 @@ export default function Calculate(properties) {
           </Group>
         </Radio.Group>
       </>
-    );
-
-    if (
-      selection
-      && selection.length
-      && !selection.some((item) => algosWithOptions.includes(item))
-    ) {
-      setAirdropOptions(
-        <Card shadow="md" radius="md" padding="xl" mt="sm">
-            {settings}
-        </Card>
-      );
-    } else if (
-      selection
-      && selection.length
-      && selection.some((item) => algosWithOptions.includes(item))
-    ) {
-      setAirdropOptions(
-        <Card shadow="md" radius="md" padding="xl" mt="sm">
-          {settings}
-
-          <Radio.Group
-            value={hash}
-            onChange={setHash}
-            name="chosenHash"
-            label={t("calculate:hash.title")}
-            description={`${t("calculate:hash.radioLabel")}: ${t("calculate:hash.radioDesc")}`}
-            withAsterisk
-            mt="sm"
-          >
-            <Group mt="xs">
-              <Radio value="plain" label={t("calculate:hash.plain")} />
-              <Radio value="Blake2B" label={`Blake2B (512 bit) ${t("calculate:hash.witSig")}`} />
-              <Radio value="Blake2S" label={`Blake2B (256 bit) ${t("calculate:hash.witSig")}`} />
-            </Group>
-          </Radio.Group>
-
-          <TextInput
-            type="number"
-            placeholder={blockNumber}
-            label={t("calculate:blockNum.title")}
-            description={t("calculate:blockNum.desc")}
-            style={{ maxWidth: '420px' }}
-            onChange={(event) => onBlockNumber(event.currentTarget.value)}
-            mt="sm"
-          />
-        </Card>
-      );
-    }
-  }, [leaderboardJSON, selection]);
-
+    ));
+  }, [deduplicate, alwaysWinning]);
 
   if (progress === 'calculating') {
     return (
@@ -509,8 +437,88 @@ export default function Calculate(properties) {
         }
 
         {
-          airdropOptions
-        }
+          selection
+          && selection.length
+            ? (
+              <Card shadow="md" radius="md" padding="xl" mt="sm">
+                <Title order={5} ta="left" mt="sm">
+                  {t("calculate:ticket.title")}
+                </Title>
+                <Radio.Group
+                  value={deduplicate}
+                  onChange={setDeduplicate}
+                  name="chosenDuplicate"
+                  label={t("calculate:ticket.radioLabel")}
+                  description={t("calculate:ticket.radioDesc")}
+                  withAsterisk
+                >
+                  <Group mt="xs">
+                    <Radio value="Yes" label={t("calculate:ticket.yes")} />
+                    <Radio value="No" label={t("calculate:ticket.no")} />
+                  </Group>
+                </Radio.Group>
+                <Radio.Group
+                  value={alwaysWinning}
+                  onChange={setAlwaysWinning}
+                  name="chosenWinning"
+                  label={t("calculate:ticket.winLabel")}
+                  description={t("calculate:ticket.winDesc")}
+                  withAsterisk
+                  mt="sm"
+                >
+                  <Group mt="xs">
+                    <Radio value="Yes" label={t("calculate:ticket.yes")} />
+                    <Radio value="No" label={t("calculate:ticket.no")} />
+                  </Group>
+                </Radio.Group>
+
+                {
+                  !selection.some((item) => [
+                    'forward',
+                    'reverse',
+                    'pi',
+                    'reverse_pi',
+                    'cubed',
+                    'bouncing_ball',
+                    'alien_blood',
+                    'avg_point_lines',
+                    'barrel_of_fish',
+                  ].includes(item)) 
+                    ? null
+                    : (
+                    <>
+                      <Radio.Group
+                        value={hash}
+                        onChange={setHash}
+                        name="chosenHash"
+                        label={t("calculate:hash.title")}
+                        description={`${t("calculate:hash.radioLabel")}: ${t("calculate:hash.radioDesc")}`}
+                        withAsterisk
+                        mt="sm"
+                      >
+                        <Group mt="xs">
+                          <Radio value="plain" label={t("calculate:hash.plain")} />
+                          <Radio value="Blake2B" label={`Blake2B (512 bit) ${t("calculate:hash.witSig")}`} />
+                          <Radio value="Blake2S" label={`Blake2B (256 bit) ${t("calculate:hash.witSig")}`} />
+                        </Group>
+                      </Radio.Group>
+
+                      <TextInput
+                        type="number"
+                        placeholder={blockNumber}
+                        label={t("calculate:blockNum.title")}
+                        description={t("calculate:blockNum.desc")}
+                        style={{ maxWidth: '420px' }}
+                        onChange={(event) => onBlockNumber(event.currentTarget.value)}
+                        mt="sm"
+                      />
+                    </>
+                    )
+                }
+              </Card>
+            )
+            : null
+          }
 
         {
           !leaderboardJSON || !leaderboardJSON.length

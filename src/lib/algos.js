@@ -326,7 +326,8 @@ function forever_freebie(leaderboardJSON, relevantTickets) {
     .map((validTicket) => validTicket.account);
 
   const uniqueAccounts = [...new Set(foreverTickets)]
-    .map((user) => leaderboardJSON.find((x) => x.id === user).range.from);
+    .map((user) => (leaderboardJSON.find((x) => x.id === user)?.range?.from ?? null))
+    .filter((user) => user !== null);
 
   return uniqueAccounts;
 }
