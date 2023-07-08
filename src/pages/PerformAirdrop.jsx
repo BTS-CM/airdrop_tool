@@ -395,7 +395,7 @@ export default function PerformAirdrop(properties) {
     if (finalReqQty && finalReqQty > 0 && finalReqTokenName && finalReqTokenName.length) {
       fetchTokenDetails();
     }
-  }, [finalReqQty, reqdTokenItr]);
+  }, [finalReqQty, finalReqTokenName, reqdTokenItr]);
 
   // Initial winners not yet sorted
   const [sortedWinners, setSortedWinners] = useState(
@@ -593,13 +593,12 @@ export default function PerformAirdrop(properties) {
         setWinnerChunks([]);
       } else {
         let valid = tokenRows.sort((a, b) => b.assignedTokens - a.assignedTokens);
-
         if (tokenDetails.precision > 0) {
           valid = valid.filter((user) => user.assignedTokens > humanReadableFloat(1, tokenDetails.precision));
         } else if (tokenDetails.precision === 0 && tokenDetails.readableMax === 1) {
           valid = valid.filter((user) => user.assignedTokens === 1);
         } else if (tokenDetails.precision === 0 && tokenDetails.readableMax > 1) {
-          valid = valid.filter((user) => user.assignedTokens > 1);
+          valid = valid.filter((user) => user.assignedTokens >= 1);
         }
 
         // if valid.length < tokenRows.length, then redistribute the missing user assignedTokens to those above proportionally
@@ -666,7 +665,7 @@ export default function PerformAirdrop(properties) {
   }, [winners, invalidOutput]);
 
   // Cards which enable user to perform airdrop
-  const airdropCards = winnerChunks && winnerChunks.length
+  const airdropCards = winnerChunks && winnerChunks.length && tokenDetails
     ? winnerChunks.map((chunk, i) => (
       <AirdropCard
         tokenQuantity={tokenQuantity}
