@@ -336,7 +336,12 @@ export default function PerformAirdrop(properties) {
   useEffect(() => {
     async function fetchTokenDetails() {
       const delayDebounceFn = setTimeout(async () => {
-        if (finalReqTokenName && finalReqTokenName.length) {
+        if (
+          requiredToken
+          && requiredToken === 'Yes'
+          && finalReqTokenName
+          && finalReqTokenName.length
+        ) {
           setRequiredTokenDetails(); // erase last search
           setInProgress(true);
 
@@ -588,7 +593,10 @@ export default function PerformAirdrop(properties) {
 
   useEffect(() => {
     if (tokenRows && tokenRows.length) {
-      if (!tokenDetails || (finalReqTokenName && finalReqQty && !requiredTokenDetails)) {
+      if (
+        !tokenDetails
+        || (requiredToken === "Yes" && finalReqTokenName && finalReqQty && !requiredTokenDetails)
+      ) {
         setWinners([]);
         setWinnerChunks([]);
       } else {
@@ -712,6 +720,7 @@ export default function PerformAirdrop(properties) {
                       tokenDetails={tokenDetails}
                       finalTokenQuantity={finalTokenQuantity}
                       finalReqTokenName={finalReqTokenName}
+                      requiredToken={requiredToken}
                       requiredTokenDetails={requiredTokenDetails}
                       finalReqQty={finalReqQty}
                       setTokenItr={setTokenItr}

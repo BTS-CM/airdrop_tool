@@ -52,6 +52,7 @@ export default function AirdropLeftCard(properties) {
     envLeaderboard,
     tokenDetails,
     finalReqTokenName,
+    requiredToken,
     finalReqQty,
     inProgress,
     finalTokenQuantity,
@@ -73,7 +74,7 @@ export default function AirdropLeftCard(properties) {
 
   useEffect(() => {
     setSimpleWinnerJSON(JSON.stringify([]));
-    if (!tokenDetails || (finalReqTokenName && finalReqQty && !requiredTokenDetails)) {
+    if (!tokenDetails || (requiredToken === "Yes" && finalReqTokenName && finalReqQty && !requiredTokenDetails)) {
       setValidRows([]);
       setInvalidRows([]);
     } else {
@@ -189,7 +190,7 @@ export default function AirdropLeftCard(properties) {
           : null
       }
       {
-        finalReqTokenName && !requiredTokenDetails && !inProgress && finalReqQty
+        requiredToken === "Yes" && finalReqTokenName && !requiredTokenDetails && !inProgress && finalReqQty
           ? (
             <>
               <Text>{t("performAirdrop:grid.left.reloadingRequiredTokenDetails")}</Text>
