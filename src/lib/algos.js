@@ -359,6 +359,7 @@ function asset_freebie(leaderboardJSON, freebieAsset) {
 
 /**
  * Converts the filtered hash into a single ticket
+ * TODO: Use smaller chunks to avoid too large a drawn ticket number
  * @param {Array} initialChunks
  * @returns {Number}
  */
@@ -419,6 +420,61 @@ function barrel_of_fish(initialChunks, maxDistance, projectile, splinter) {
 }
 
 /**
+ * Assigning tokens to ticket holders who have voted for the specified witnesses
+ * @param {Array} leaderboardJSON
+ * @param {Object} witnessVoteData
+ */
+function witness_vote(leaderboardJSON, witnessVoteData) {
+  const { validWitnessVotes, chosenWitnessAccounts, chosenWitnessType } = witnessVoteData;
+
+  const matchingVotes = validWitnessVotes
+    .filter((vote) => chosenWitnessAccounts.includes(vote.witness_account))
+    .map((validVote) => {
+      const { total_votes, userID, witness_account } = validVote;
+      const { from, to } = leaderboardJSON.find((user) => user.id === userID).range;
+      return from;
+    });
+
+  return [...new Set(matchingVotes)];
+}
+
+/**
+ * Assigning tokens to ticket holders who have voted for the specified committee members
+ * @param {Object} committeeVoteData
+ */
+function committee_vote(leaderboardJSON, committeeVoteData) {
+  const { validCommitteeVotes, chosenCommitteeAccounts, chosenCommitteeType } = committeeVoteData;
+
+  const matchingVotes = validCommitteeVotes
+    .filter((vote) => chosenCommitteeAccounts.includes(vote.committee_member_account))
+    .map((validVote) => {
+      const { userID } = validVote;
+      const { from } = leaderboardJSON.find((user) => user.id === userID).range;
+      return from;
+    });
+
+  return [...new Set(matchingVotes)];
+}
+
+/**
+ * Assigning tokens to ticket holders who have voted for the specified workers
+ * @param {Object} workerVoteData
+ */
+function worker_vote(leaderboardJSON, workerVoteData) {
+  const { validWorkerVotes, chosenWorkers } = workerVoteData;
+
+  const matchingVotes = validWorkerVotes
+    .filter((vote) => chosenWorkers.includes(vote.id))
+    .map((validVote) => {
+      const { userID } = validVote;
+      const { from } = leaderboardJSON.find((user) => user.id === userID).range;
+      return from;
+    });
+
+  return [...new Set(matchingVotes)];
+}
+
+/**
  * Given a ticket algorithm and signature, return chosen tickets.
  * @param {String} algoType
  * @param {String} filtered_signature
@@ -427,6 +483,9 @@ function barrel_of_fish(initialChunks, maxDistance, projectile, splinter) {
  * @param {String} bof_projectile
  * @param {String} bof_splinter
  * @param {String} freebieAsset
+ * @param {Object} witnessVoteData
+ * @param {Object} committeeVoteData
+ * @param {Object} workerVoteData
  * @returns {Array}
  */
 function getTickets(
@@ -436,7 +495,10 @@ function getTickets(
   relevantTickets,
   bof_projectile = null,
   bof_splinter = null,
-  freebieAsset = null
+  freebieAsset = null,
+  witnessVoteData = null,
+  committeeVoteData = null,
+  workerVoteData = null
 ) {
   const initialChunks = chunk(filtered_signature, 9);
 
@@ -471,8 +533,12 @@ function getTickets(
       return barrel_of_fish(initialChunks, maxDistance, bof_projectile, bof_splinter);
     case "asset_freebie":
       return asset_freebie(leaderboardJSON, freebieAsset);
-    // case "single_winner":
-    //  return single_winner(initialChunks);
+    case "witness_vote_freebie":
+      return witness_vote(leaderboardJSON, witnessVoteData);
+    case "committee_vote_freebie":
+      return committee_vote(leaderboardJSON, committeeVoteData);
+    case "worker_vote_freebie":
+      return worker_vote(leaderboardJSON, workerVoteData);
     default:
       console.log(`Unknown algo type: ${algoType}`);
       return [];
@@ -492,6 +558,9 @@ function getTickets(
  * @param {String} bof_splinter
  * @param {String} freebieAsset
  * @param {String} freebieAssetQty
+ * @param {Object} witnessVoteData
+ * @param {Object} committeeVoteData
+ * @param {Object} workerVoteData
  * @returns {Object}
  */
 function executeCalculation(
@@ -505,7 +574,10 @@ function executeCalculation(
   bof_projectile,
   bof_splinter,
   freebieAsset,
-  freebieAssetQty
+  freebieAssetQty,
+  witnessVoteData,
+  committeeVoteData,
+  workerVoteData
 ) {
   const generatedNumbers = {};
   let winningTickets = [];
@@ -521,7 +593,10 @@ function executeCalculation(
       relevantTickets,
       bof_projectile,
       bof_splinter,
-      freebieAsset
+      freebieAsset,
+      witnessVoteData,
+      committeeVoteData,
+      workerVoteData
     );
 
     if (deduplicate === "Yes") {
@@ -552,35 +627,73 @@ function executeCalculation(
   // Iterate through
   for (const [key, value] of Object.entries(generatedNumbers)) {
     const algo = key;
-    const algoNums = value;
+    const ticketNumbers = value;
 
     const foundAsset = algo === "asset_freebie"
       ? relevantAssets.find((x) => x.id === freebieAsset)
       : null;
 
-    for (let i = 0; i < algoNums.length; i++) {
-      const currentNumber = algoNums[i];
-      const search = leaderboardJSON
+    for (let i = 0; i < ticketNumbers.length; i++) {
+      const currentNumber = ticketNumbers[i];
+      const foundUser = leaderboardJSON
         .find((x) => currentNumber >= x.range.from && currentNumber <= x.range.to);
 
-      if (search) {
+      if (foundUser) {
         const assetBalance = algo === "asset_freebie"
-          ? search.balances.find((x) => x.asset_id === freebieAsset)
+          ? foundUser.balances.find((x) => x.asset_id === freebieAsset)
           : null;
+
+        let ticketValue = 1;
+        if (algo === "asset_freebie" && freebieAssetQty === "balance" && assetBalance && foundAsset) {
+          ticketValue = humanReadableFloat(
+            assetBalance.amount,
+            foundAsset.precision
+          );
+        } else if (algo === "witness_vote_freebie") {
+          const { validWitnessVotes, chosenWitnessAccounts, chosenWitnessType } = witnessVoteData;
+          const userVotes = validWitnessVotes
+            .filter(
+              (vote) => vote.userID === foundUser.id
+                        && chosenWitnessAccounts.includes(vote.witness_account)
+            )
+            .map((vote) => (chosenWitnessType === "balance" ? foundUser.amount : 1))
+            .reduce((a, b) => a + b, 0);
+
+          ticketValue = userVotes;
+        } else if (algo === "committee_vote_freebie") {
+          const {
+            validCommitteeVotes,
+            chosenCommitteeAccounts,
+            chosenCommitteeType
+          } = committeeVoteData;
+          const userVotes = validCommitteeVotes
+            .filter(
+              (vote) => vote.userID === foundUser.id
+                        && chosenCommitteeAccounts.includes(vote.committee_member_account)
+            )
+            .map((vote) => (chosenCommitteeType === "balance" ? foundUser.amount : 1))
+            .reduce((a, b) => a + b, 0);
+          ticketValue = userVotes;
+        } else if (algo === "worker_vote_freebie") {
+          const { validWorkerVotes, chosenWorkers, chosenWorkersType } = workerVoteData;
+          const userVotes = validWorkerVotes
+            .filter(
+              (vote) => vote.userID === foundUser.id
+                        && chosenWorkers.includes(vote.id)
+            )
+            .map((vote) => (chosenWorkersType === "balance" ? foundUser.amount : 1))
+            .reduce((a, b) => a + b, 0);
+          ticketValue = userVotes;
+        }
 
         const winningTicket = {
           ticket: currentNumber,
           algo,
-          value: algo === "asset_freebie" && freebieAssetQty === "balance" && assetBalance && foundAsset
-            ? humanReadableFloat(
-              assetBalance.amount,
-              foundAsset.precision
-            )
-            : 1
+          value: ticketValue
         };
 
-        winners[search.id] = Object.prototype.hasOwnProperty.call(winners, search.id)
-          ? [...winners[search.id], winningTicket]
+        winners[foundUser.id] = Object.prototype.hasOwnProperty.call(winners, foundUser.id)
+          ? [...winners[foundUser.id], winningTicket]
           : [winningTicket];
       }
     }

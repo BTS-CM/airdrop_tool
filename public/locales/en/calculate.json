@@ -67,6 +67,48 @@
             "qtyType": "How many tickets do you want to assign the asset holders?",
             "one": "One ticket per asset holder",
             "balance": "The same number of tickets as the asset holder's balance"
+        },
+        "witness_vote_freebie": {
+            "name": "Witness vote freebie",
+            "desc": "Assign tickets to users who have voted for one or more witnesses.",
+            "radio" : {
+                "label": "How do you want to assign tickets?",
+                "one": "One ticket per matching witness account vote.",
+                "balance": "Proportional to witness account vote weight."
+            },
+            "multiSelect": {
+                "label": "Witness accounts",
+                "placeholder": "Pick the witnesses the users have voted for",
+                "notFound": "Couldn't find the specified witness account."
+            }
+        },
+        "committee_vote_freebie": {
+            "name": "Committee vote freebie",
+            "desc": "Assign tickets to users who have voted for one or more committee members.",
+            "radio" : {
+                "label": "How do you want to assign tickets?",
+                "one": "One ticket per matching committee member vote.",
+                "balance": "Proportional to committee member vote weight."
+            },
+            "multiSelect": {
+                "label": "Committee members",
+                "placeholder": "Pick the committee members which users have voted for",
+                "notFound": "Couldn't find the specified committee member."
+            }
+        },
+        "worker_vote_freebie": {
+            "name": "Worker proposal vote freebie",
+            "desc": "Assign tickets to users who have voted for one or more worker proposals.",
+            "radio" : {
+                "label": "How do you want to assign tickets?",
+                "one": "One ticket per matching worker proposal vote.",
+                "balance": "Proportional to user's worker proposal vote weight."
+            },
+            "multiSelect": {
+                "label": "Worker proposals",
+                "placeholder": "Pick the worker proposals users have voted for",
+                "notFound": "Couldn't find the specified worker proposal."
+            }
         }
     },
     "calculatingTitle": "Performing airdrop calculations, please wait!",

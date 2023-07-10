@@ -218,7 +218,6 @@ export default function Fetch(properties) {
         const foundAccount = fetchedAccounts.find((acc) => acc[0] === user.id)[1];
         const foundAssets = foundAccount.balances.map((balance) => balance.asset_type);
         assetsToFetch = assetsToFetch.concat(foundAssets);
-
         return {
           ...user,
           balances: foundAccount.balances.map((balance) => ({
@@ -228,7 +227,34 @@ export default function Fetch(properties) {
             name: foundAccount.account.name,
             ltm: foundAccount.account.id === foundAccount.account.lifetime_referrer,
             creation_time: foundAccount.account.creation_time,
-            assets: foundAccount.assets
+            assets: foundAccount.assets,
+            votes: foundAccount.votes && foundAccount.votes.length
+              ? foundAccount.votes.map((vote) => {
+                if (vote.id.includes("1.14.")) {
+                  return {
+                    id: vote.id,
+                    name: vote.name,
+                    worker_account: vote.worker_account
+                  };
+                }
+
+                if (vote.id.includes("1.5.")) {
+                  return {
+                    id: vote.id,
+                    committee_member_account: vote.committee_member_account
+                  };
+                }
+
+                if (vote.id.includes("1.6.")) {
+                  return {
+                    id: vote.id,
+                    witness_account: vote.witness_account
+                  };
+                }
+
+                return null;
+              }).filter((x) => x)
+              : []
           }
         };
       });

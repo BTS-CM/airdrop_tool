@@ -17,6 +17,7 @@ import {
   ScrollArea,
   Checkbox,
   Select,
+  MultiSelect,
   Group,
   TextInput,
 } from '@mantine/core';
@@ -73,11 +74,14 @@ export default function Calculate(properties) {
     'bouncing_ball',
     'alien_blood',
     'avg_point_lines',
+    'barrel_of_fish',
     'freebie',
     'forever_freebie',
     'ltm_freebie',
-    'barrel_of_fish',
-    'asset_freebie'
+    'asset_freebie',
+    'witness_vote_freebie',
+    'committee_vote_freebie',
+    'worker_vote_freebie'
   ]
     .map((x) => ({
       name: t(`calculate:calcs.${x}.name`),
@@ -109,6 +113,70 @@ export default function Calculate(properties) {
     assetName = "TUSC";
     relevantAssets = tuscAssets;
   }
+
+  const [uniqueWitnessAccounts, setUniqueWitnessAccounts] = useState([]);
+  const [uniqueCommitteeAccounts, setUniqueCommitteeAccounts] = useState([]);
+  const [uniqueWorkerAccounts, setUniqueWorkers] = useState([]);
+
+  const [validWitnessVotes, setValidWitnessVotes] = useState([]);
+  const [validCommitteeVotes, setValidCommitteeVotes] = useState([]);
+  const [validWorkerVotes, setValidWorkerVotes] = useState([]);
+
+  const [chosenWitnessAccounts, setChosenWitnessAccounts] = useState([]);
+  const [chosenCommitteeAccounts, setChosenCommitteeAccounts] = useState([]);
+  const [chosenWorkers, setChosenWorkers] = useState([]);
+
+  const [chosenWitnessType, setChosenWitnessType] = useState("one");
+  const [chosenCommitteeType, setChosenCommitteeType] = useState("one");
+  const [chosenWorkersType, setChosenWorkersType] = useState("one");
+
+  useEffect(() => {
+    if (leaderboardJSON.length) {
+      const userVotes = leaderboardJSON.map((x) => (
+        x && x.account.votes
+          ? x.account.votes.map((y) => ({ ...y, userID: x.id, userName: x.account.name }))
+          : []));
+
+      const userVotesFlattened = [].concat(...userVotes);
+      const committeeVotes = userVotesFlattened.filter((vote) => vote.id.includes("1.5."));
+      const witnessVotes = userVotesFlattened.filter((vote) => vote.id.includes("1.6."));
+      const workerVotes = userVotesFlattened.filter((vote) => vote.id.includes("1.14."));
+
+      setUniqueWitnessAccounts(
+        [...new Set(witnessVotes.map((item) => item.witness_account))]
+          .map((x) => {
+            const foundWitness = leaderboardJSON.find((y) => x === y.id);
+            return {
+              value: x,
+              label: foundWitness ? `${foundWitness.account.name} (${x})` : x
+            };
+          }).filter((item, index, self) => index === self.findIndex((z) => z.value === item.value))
+      );
+      setUniqueCommitteeAccounts(
+        [...new Set(committeeVotes.map((item) => item.committee_member_account))]
+          .map((item) => {
+            const foundCommitteeMember = leaderboardJSON.find((y) => item === y.id);
+            return {
+              value: item,
+              label: foundCommitteeMember ? `${foundCommitteeMember.account.name} (${item})` : item
+            };
+          })
+      );
+      setUniqueWorkers(
+        workerVotes.map((item) => {
+          const foundWorker = leaderboardJSON.find((y) => item.worker_account === y.id);
+          return {
+            value: item.id,
+            label: `${item.name} (${item.id}) ${foundWorker ? foundWorker.account.name : ''} (${item.worker_account})`
+          };
+        }).filter((item, index, self) => index === self.findIndex((z) => z.value === item.value))
+      );
+
+      setValidWitnessVotes(witnessVotes);
+      setValidCommitteeVotes(committeeVotes);
+      setValidWorkerVotes(workerVotes);
+    }
+  }, [leaderboardJSON]);
 
   const rows = calculationTypes.map((item) => {
     const selected = selection.includes(item.value);
@@ -166,6 +234,108 @@ export default function Calculate(properties) {
                 </td>
               </tr>
             </>
+            )
+            : null
+        }
+        {
+          item.value === 'witness_vote_freebie' && selected
+            ? (
+            <>
+              <tr id="wvf_tr">
+                <td colSpan={3}>
+                  <MultiSelect
+                    data={
+                      uniqueWitnessAccounts
+                    }
+                    onChange={setChosenWitnessAccounts}
+                    label={t("calculate:calcs.witness_vote_freebie.multiSelect.label")}
+                    placeholder={t("calculate:calcs.witness_vote_freebie.multiSelect.placeholder")}
+                    searchable
+                    nothingFound={t("calculate:calcs.witness_vote_freebie.multiSelect.notFound")}
+                  />
+
+                  <Radio.Group
+                    mt="xs"
+                    value={chosenWitnessType}
+                    onChange={setChosenWitnessType}
+                    name="chosenWitnessType"
+                    label={t("calculate:calcs.witness_vote_freebie.radio.label")}
+                    withAsterisk
+                  >
+                        <Radio m="xs" value="one" label={t("calculate:calcs.witness_vote_freebie.radio.one")} />
+                        <Radio m="xs" value="balance" label={t("calculate:calcs.witness_vote_freebie.radio.balance")} />
+                  </Radio.Group>
+                </td>
+              </tr>
+            </>
+            )
+            : null
+        }
+        {
+          item.value === 'committee_vote_freebie' && selected
+            ? (
+              <>
+                <tr id="cvf_tr">
+                  <td colSpan={3}>
+                    <MultiSelect
+                      data={
+                        uniqueCommitteeAccounts
+                      }
+                      onChange={setChosenCommitteeAccounts}
+                      label={t("calculate:calcs.committee_vote_freebie.multiSelect.label")}
+                      placeholder={t("calculate:calcs.committee_vote_freebie.multiSelect.placeholder")}
+                      searchable
+                      nothingFound={t("calculate:calcs.committee_vote_freebie.multiSelect.notFound")}
+                    />
+
+                    <Radio.Group
+                      mt="xs"
+                      value={chosenCommitteeType}
+                      onChange={setChosenCommitteeType}
+                      name="chosenCommitteeType"
+                      label={t("calculate:calcs.committee_vote_freebie.radio.label")}
+                      withAsterisk
+                    >
+                          <Radio m="xs" value="one" label={t("calculate:calcs.committee_vote_freebie.radio.one")} />
+                          <Radio m="xs" value="balance" label={t("calculate:calcs.committee_vote_freebie.radio.balance")} />
+                    </Radio.Group>
+                  </td>
+                </tr>
+              </>
+            )
+            : null
+        }
+        {
+          item.value === 'worker_vote_freebie' && selected
+            ? (
+              <>
+                <tr id="wpvf_tr">
+                  <td colSpan={3}>
+                    <MultiSelect
+                      data={
+                        uniqueWorkerAccounts
+                      }
+                      onChange={setChosenWorkers}
+                      label={t("calculate:calcs.worker_vote_freebie.multiSelect.label")}
+                      placeholder={t("calculate:calcs.worker_vote_freebie.multiSelect.placeholder")}
+                      searchable
+                      nothingFound={t("calculate:calcs.worker_vote_freebie.multiSelect.notFound")}
+                    />
+
+                    <Radio.Group
+                      mt="xs"
+                      value={chosenWorkersType}
+                      onChange={setChosenWorkersType}
+                      name="chosenWorkersType"
+                      label={t("calculate:calcs.worker_vote_freebie.radio.label")}
+                      withAsterisk
+                    >
+                          <Radio m="xs" value="one" label={t("calculate:calcs.worker_vote_freebie.radio.one")} />
+                          <Radio m="xs" value="balance" label={t("calculate:calcs.worker_vote_freebie.radio.balance")} />
+                    </Radio.Group>
+                  </td>
+                </tr>
+              </>
             )
             : null
         }
@@ -275,7 +445,10 @@ export default function Calculate(properties) {
         projectiles,
         splinter,
         chosenAsset,
-        chosenAssetQty
+        chosenAssetQty,
+        { validWitnessVotes, chosenWitnessAccounts, chosenWitnessType },
+        { validCommitteeVotes, chosenCommitteeAccounts, chosenCommitteeType },
+        { validWorkerVotes, chosenWorkers, chosenWorkersType }
       );
     } catch (error) {
       console.log(error);
@@ -483,7 +656,7 @@ export default function Calculate(properties) {
                     'alien_blood',
                     'avg_point_lines',
                     'barrel_of_fish',
-                  ].includes(item)) 
+                  ].includes(item))
                     ? null
                     : (
                     <>
