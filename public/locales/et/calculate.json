@@ -22,7 +22,7 @@
     },
     "bouncing_ball": {
       "name": "Põrkav pall",
-      "desc": "maatriksis põrkava palli tee -> vali piletid mööda teed"
+      "desc": "maatriksis põrgatava palli tee -> vali piletid mööda teed"
     },
     "alien_blood": {
       "name": "Võõras veri",
@@ -45,7 +45,7 @@
       "desc": "Pakkuge tasuta piletit tickeri omanikele, kellel on eluaegne liikmesus."
     },
     "barrel_of_fish": {
-      "name": "Kalatünn",
+      "name": "Tünn kala",
       "desc": "Vali piletid kalatünnist",
       "projectile": {
         "distance": "Kui kaugele peaks mürsk kalatünnis liikuma",
@@ -67,6 +67,48 @@
       "qtyType": "Mitu piletit soovite varaomanikele määrata?",
       "one": "Üks pilet varaomaniku kohta",
       "balance": "Sama arv pileteid kui varaomaniku saldo"
+    },
+    "witness_vote_freebie": {
+      "name": "Tunnistaja hääl tasuta",
+      "desc": "Määrake piletid kasutajatele, kes on hääletanud ühe või mitme tunnistaja poolt.",
+      "radio": {
+        "label": "Kuidas soovite pileteid määrata?",
+        "one": "Üks pilet iga vastava tunnistaja konto hääle kohta.",
+        "balance": "Proportsionaalne konto hääle kaaluga."
+      },
+      "multiSelect": {
+        "label": "Tunnistajate ütlused",
+        "placeholder": "Valige tunnistajad, kelle poolt kasutajad on hääletanud",
+        "notFound": "Määratud tunnistaja kontot ei leitud."
+      }
+    },
+    "committee_vote_freebie": {
+      "name": "Komisjoni hääletasu",
+      "desc": "Määrake piletid kasutajatele, kes on hääletanud ühe või mitme komisjoni liikme poolt.",
+      "radio": {
+        "label": "Kuidas soovite pileteid määrata?",
+        "one": "Üks pilet sobituskomisjoni liikme hääle kohta.",
+        "balance": "Proportsionaalne komisjoni liikmete häälte kaaluga."
+      },
+      "multiSelect": {
+        "label": "komisjoni liikmed",
+        "placeholder": "Valige komisjoni liikmed, kelle poolt kasutajad on hääletanud",
+        "notFound": "Määratud komisjoni liiget ei leitud."
+      }
+    },
+    "worker_vote_freebie": {
+      "name": "Töötaja ettepaneku hääletasu",
+      "desc": "Määrake piletid kasutajatele, kes on hääletanud ühe või mitme töötaja ettepaneku poolt.",
+      "radio": {
+        "label": "Kuidas soovite pileteid määrata?",
+        "one": "Üks pilet sobiva töötaja ettepaneku hääle kohta.",
+        "balance": "Proportsionaalne kasutaja töötaja ettepaneku hääle kaaluga."
+      },
+      "multiSelect": {
+        "label": "Tööliste ettepanekud",
+        "placeholder": "Valige töötajate ettepanekud, mille poolt kasutajad on hääletanud",
+        "notFound": "Määratud töötaja ettepanekut ei leitud."
+      }
     }
   },
   "calculatingTitle": "Õhutilkade arvutuste tegemine, palun oodake!",

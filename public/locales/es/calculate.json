@@ -67,6 +67,48 @@
       "qtyType": "¿Cuántos boletos desea asignar a los titulares de activos?",
       "one": "Un ticket por titular de activo",
       "balance": "El mismo número de boletos que el saldo del titular del activo"
+    },
+    "witness_vote_freebie": {
+      "name": "Regalo de voto de testigo",
+      "desc": "Asigne tickets a los usuarios que hayan votado por uno o más testigos.",
+      "radio": {
+        "label": "¿Cómo quieres asignar las entradas?",
+        "one": "Un boleto por voto coincidente de cuenta de testigo.",
+        "balance": "Peso proporcional al voto de la cuenta testigo."
+      },
+      "multiSelect": {
+        "label": "relatos de testigos",
+        "placeholder": "Elija los testigos por los que los usuarios han votado",
+        "notFound": "No se pudo encontrar la cuenta de testigo especificada."
+      }
+    },
+    "committee_vote_freebie": {
+      "name": "regalo de voto del comité",
+      "desc": "Asigne tickets a los usuarios que hayan votado por uno o más miembros del comité.",
+      "radio": {
+        "label": "¿Cómo quieres asignar las entradas?",
+        "one": "Un boleto por voto de los miembros del comité correspondiente.",
+        "balance": "Proporcional al peso de los votos de los miembros del comité."
+      },
+      "multiSelect": {
+        "label": "Miembros del comité",
+        "placeholder": "Elija los miembros del comité por los que los usuarios han votado",
+        "notFound": "No se pudo encontrar al miembro del comité especificado."
+      }
+    },
+    "worker_vote_freebie": {
+      "name": "Obsequio de voto de propuesta de trabajador",
+      "desc": "Asigne tickets a los usuarios que hayan votado por una o más propuestas de trabajadores.",
+      "radio": {
+        "label": "¿Cómo quieres asignar las entradas?",
+        "one": "Un boleto por voto de propuesta de trabajador coincidente.",
+        "balance": "Proporcional al peso del voto de la propuesta del trabajador del usuario."
+      },
+      "multiSelect": {
+        "label": "Propuestas de los trabajadores",
+        "placeholder": "Elige las propuestas de trabajadores por las que han votado los usuarios",
+        "notFound": "No se pudo encontrar la propuesta de trabajador especificada."
+      }
     }
   },
   "calculatingTitle": "Realizando cálculos de airdrop, ¡espere!",

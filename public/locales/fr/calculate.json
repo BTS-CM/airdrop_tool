@@ -2,7 +2,7 @@
   "calcs": {
     "forward": {
       "name": "Transférer des morceaux",
-      "desc": "Diviser le hachage en numéros de ticket."
+      "desc": "Divisez le hachage en numéros de ticket."
     },
     "reverse": {
       "name": "Morceaux inversés",
@@ -65,15 +65,57 @@
       "notFound": "Actif introuvable",
       "placeholder": "Choisissez l'actif auquel vous souhaitez attribuer des tickets",
       "qtyType": "Combien de tickets voulez-vous attribuer aux détenteurs d'actifs ?",
-      "one": "Un billet par détenteur d'actif",
+      "one": "Un ticket par détenteur d'actifs",
       "balance": "Le même nombre de tickets que le solde du détenteur de l'actif"
+    },
+    "witness_vote_freebie": {
+      "name": "Billet de faveur pour le vote des témoins",
+      "desc": "Attribuez des tickets aux utilisateurs qui ont voté pour un ou plusieurs témoins.",
+      "radio": {
+        "label": "Comment voulez-vous attribuer les tickets ?",
+        "one": "Un ticket par vote de compte de témoin correspondant.",
+        "balance": "Proportionnel au poids du vote du compte témoin."
+      },
+      "multiSelect": {
+        "label": "Témoignages",
+        "placeholder": "Choisissez les témoins pour lesquels les utilisateurs ont voté",
+        "notFound": "Impossible de trouver le compte de témoin spécifié."
+      }
+    },
+    "committee_vote_freebie": {
+      "name": "Gratuité du vote du comité",
+      "desc": "Attribuez des tickets aux utilisateurs qui ont voté pour un ou plusieurs membres du comité.",
+      "radio": {
+        "label": "Comment voulez-vous attribuer les tickets ?",
+        "one": "Un billet par vote des membres du comité correspondant.",
+        "balance": "Proportionnel au poids du vote des membres du comité."
+      },
+      "multiSelect": {
+        "label": "les membres du comité",
+        "placeholder": "Choisissez les membres du comité pour lesquels les utilisateurs ont voté",
+        "notFound": "Impossible de trouver le membre de comité spécifié."
+      }
+    },
+    "worker_vote_freebie": {
+      "name": "Vote de proposition de travailleur gratuit",
+      "desc": "Attribuez des tickets aux utilisateurs qui ont voté pour une ou plusieurs propositions de collaborateurs.",
+      "radio": {
+        "label": "Comment voulez-vous attribuer les tickets ?",
+        "one": "Un billet par vote de proposition de travailleur correspondant.",
+        "balance": "Proportionnel au poids du vote de la proposition de travailleur de l'utilisateur."
+      },
+      "multiSelect": {
+        "label": "Propositions des travailleurs",
+        "placeholder": "Choisissez les propositions de travailleurs pour lesquelles les utilisateurs ont voté",
+        "notFound": "Impossible de trouver la proposition de collaborateur spécifiée."
+      }
     }
   },
   "calculatingTitle": "Calculs de parachutage en cours, veuillez patienter !",
   "completed": {
     "title": "Calculs de parachutage terminés avec succès !",
     "anotherBtn": "Calculer un autre airdrop ?",
-    "airdropBtn": "Afficher le largage généré",
+    "airdropBtn": "Voir airdrop généré",
     "generatedBtn": "Voir tous les parachutages générés"
   },
   "title": "Calculer une distribution de parachutage équitablement prouvée pour quelle blockchain ?",
@@ -83,7 +125,7 @@
     "title": "Quel type de blockhash voulez-vous utiliser pour une entrée aléatoire initiale prouvée ?",
     "radioLabel": "Sélectionnez un type de hachage initial",
     "radioDesc": "Original ou haché de manière sécurisée ?",
-    "plain": "Chaîne de signature de témoin simple",
+    "plain": "Chaîne de signature de témoin ordinaire",
     "witSig": "hachage de la signature du témoin"
   },
   "ticket": {

@@ -67,6 +67,48 @@
       "qtyType": "Wie viele Tickets möchten Sie den Asset-Inhabern zuweisen?",
       "one": "Ein Ticket pro Vermögensinhaber",
       "balance": "Die gleiche Anzahl an Tickets wie das Guthaben des Vermögensinhabers"
+    },
+    "witness_vote_freebie": {
+      "name": "Kostenlose Zeugenabstimmung",
+      "desc": "Weisen Sie Tickets Benutzern zu, die für einen oder mehrere Zeugen gestimmt haben.",
+      "radio": {
+        "label": "Wie möchten Sie Tickets zuordnen?",
+        "one": "Ein Ticket pro übereinstimmender Zeugenkonto-Stimme.",
+        "balance": "Proportional zum Stimmengewicht des Zeugenkontos."
+      },
+      "multiSelect": {
+        "label": "Zeugenaussagen",
+        "placeholder": "Wählen Sie die Zeugen aus, für die die Benutzer gestimmt haben",
+        "notFound": "Das angegebene Zeugenkonto konnte nicht gefunden werden."
+      }
+    },
+    "committee_vote_freebie": {
+      "name": "Gratis für die Ausschussabstimmung",
+      "desc": "Weisen Sie Tickets Benutzern zu, die für ein oder mehrere Ausschussmitglieder gestimmt haben.",
+      "radio": {
+        "label": "Wie möchten Sie Tickets zuordnen?",
+        "one": "Ein Ticket pro Abstimmung eines übereinstimmenden Ausschussmitglieds.",
+        "balance": "Proportional zum Stimmengewicht der Ausschussmitglieder."
+      },
+      "multiSelect": {
+        "label": "Ausschussmitglieder",
+        "placeholder": "Wählen Sie die Ausschussmitglieder aus, für die die Benutzer gestimmt haben",
+        "notFound": "Das angegebene Ausschussmitglied konnte nicht gefunden werden."
+      }
+    },
+    "worker_vote_freebie": {
+      "name": "Kostenlose Abstimmung für Arbeitnehmervorschläge",
+      "desc": "Weisen Sie Tickets Benutzern zu, die für einen oder mehrere Arbeitervorschläge gestimmt haben.",
+      "radio": {
+        "label": "Wie möchten Sie Tickets zuordnen?",
+        "one": "Ein Ticket pro Abstimmung über einen passenden Arbeitnehmervorschlag.",
+        "balance": "Proportional zum Stimmengewicht des Arbeitsvorschlags des Benutzers."
+      },
+      "multiSelect": {
+        "label": "Vorschläge für Arbeitnehmer",
+        "placeholder": "Wählen Sie die Arbeitsvorschläge aus, für die Benutzer gestimmt haben",
+        "notFound": "Der angegebene Worker-Vorschlag konnte nicht gefunden werden."
+      }
     }
   },
   "calculatingTitle": "Airdrop-Berechnungen werden durchgeführt, bitte warten!",

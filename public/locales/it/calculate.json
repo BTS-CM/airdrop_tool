@@ -61,12 +61,54 @@
     "asset_freebie": {
       "label": "Cerca una risorsa",
       "name": "Beni gratuiti",
-      "desc": "Fornisci un biglietto gratuito ai possessori di ticker che possiedono un determinato asset.",
+      "desc": "Fornisci un biglietto gratuito ai possessori di ticker che possiedono un determinato bene.",
       "notFound": "Asset non trovato",
       "placeholder": "Scegli la risorsa a cui vuoi assegnare i biglietti",
       "qtyType": "Quanti ticket vuoi assegnare agli asset holder?",
       "one": "Un biglietto per possessore di asset",
       "balance": "Lo stesso numero di biglietti del saldo del titolare dell'asset"
+    },
+    "witness_vote_freebie": {
+      "name": "Omaggio voto testimone",
+      "desc": "Assegna i biglietti agli utenti che hanno votato per uno o più testimoni.",
+      "radio": {
+        "label": "Come vuoi assegnare i biglietti?",
+        "one": "Un biglietto per ogni voto corrispondente sul conto dei testimoni.",
+        "balance": "Proporzionale al peso del voto dell'account testimone."
+      },
+      "multiSelect": {
+        "label": "Testimonianze",
+        "placeholder": "Scegli i testimoni per i quali gli utenti hanno votato",
+        "notFound": "Impossibile trovare l'account del testimone specificato."
+      }
+    },
+    "committee_vote_freebie": {
+      "name": "Voto del comitato omaggio",
+      "desc": "Assegna i ticket agli utenti che hanno votato per uno o più membri del comitato.",
+      "radio": {
+        "label": "Come vuoi assegnare i biglietti?",
+        "one": "Un biglietto per ogni voto dei membri del comitato corrispondente.",
+        "balance": "Proporzionale al peso dei voti dei membri del comitato."
+      },
+      "multiSelect": {
+        "label": "membri del Comitato",
+        "placeholder": "Scegli i membri del comitato per i quali gli utenti hanno votato",
+        "notFound": "Impossibile trovare il membro del comitato specificato."
+      }
+    },
+    "worker_vote_freebie": {
+      "name": "Omaggio voto proposta lavoratore",
+      "desc": "Assegna i ticket agli utenti che hanno votato per una o più proposte di lavoro.",
+      "radio": {
+        "label": "Come vuoi assegnare i biglietti?",
+        "one": "Un biglietto per ogni voto corrispondente alla proposta di lavoro.",
+        "balance": "Proporzionale al peso del voto della proposta di lavoro dell'utente."
+      },
+      "multiSelect": {
+        "label": "Proposte operaie",
+        "placeholder": "Scegli le proposte di lavoro per le quali gli utenti hanno votato",
+        "notFound": "Impossibile trovare la proposta di lavoro specificata."
+      }
     }
   },
   "calculatingTitle": "Calcolo dell'airdrop in corso, attendere!",

@@ -1,12 +1,12 @@
 {
   "calcs": {
     "forward": {
-      "name": "Encaminhar blocos",
+      "name": "Encaminhar pedaços",
       "desc": "Divida o hash em números de ticket."
     },
     "reverse": {
       "name": "Pedaços reversos",
-      "desc": "O hash reverso é dividido em números de bilhete."
+      "desc": "O hash reverso é dividido em números de ticket."
     },
     "pi": {
       "name": "PI",
@@ -18,7 +18,7 @@
     },
     "cubed": {
       "name": "Ao cubo",
-      "desc": "Divida o hash em partes de 3 dígitos, coloque cada parte em cubos e gere tíquetes."
+      "desc": "Divida o hash em pedaços de 3 dígitos, coloque cada pedaço em cubos, tíquetes de saída."
     },
     "bouncing_ball": {
       "name": "bola quicando",
@@ -42,7 +42,7 @@
     },
     "ltm_freebie": {
       "name": "Brinde de assinatura vitalícia",
-      "desc": "Forneça um ingresso gratuito para os titulares de tickers que tenham uma associação vitalícia."
+      "desc": "Forneça um ingresso gratuito aos titulares de tickers que tenham uma associação vitalícia."
     },
     "barrel_of_fish": {
       "name": "barril de peixe",
@@ -54,7 +54,7 @@
       },
       "splinter": {
         "fragmentation": "O projétil se estilhaçará com o impacto?",
-        "yes": "Sim, deve lascar uma vez com o impacto.",
+        "yes": "Sim, deve lascar uma vez no impacto.",
         "no": "Não, é um único projétil sólido."
       }
     },
@@ -67,6 +67,48 @@
       "qtyType": "Quantos tickets você deseja atribuir aos detentores de ativos?",
       "one": "Um bilhete por titular do ativo",
       "balance": "O mesmo número de bilhetes que o saldo do titular do ativo"
+    },
+    "witness_vote_freebie": {
+      "name": "Voto de testemunha grátis",
+      "desc": "Atribua tíquetes a usuários que votaram em uma ou mais testemunhas.",
+      "radio": {
+        "label": "Como você deseja atribuir tickets?",
+        "one": "Um bilhete por voto de conta de testemunha correspondente.",
+        "balance": "Proporcional ao peso do voto da conta testemunha."
+      },
+      "multiSelect": {
+        "label": "relatos de testemunhas",
+        "placeholder": "Escolha as testemunhas nas quais os usuários votaram",
+        "notFound": "Não foi possível encontrar a conta de testemunha especificada."
+      }
+    },
+    "committee_vote_freebie": {
+      "name": "brinde de votação do comitê",
+      "desc": "Atribua tíquetes a usuários que votaram em um ou mais membros do comitê.",
+      "radio": {
+        "label": "Como você deseja atribuir tickets?",
+        "one": "Um bilhete por voto de membro do comitê correspondente.",
+        "balance": "Proporcional ao peso dos votos dos membros do comitê."
+      },
+      "multiSelect": {
+        "label": "membros do Comitê",
+        "placeholder": "Escolha os membros do comitê nos quais os usuários votaram",
+        "notFound": "Não foi possível encontrar o membro do comitê especificado."
+      }
+    },
+    "worker_vote_freebie": {
+      "name": "Oferta de votação de proposta de trabalhador",
+      "desc": "Atribua tíquetes a usuários que votaram em uma ou mais propostas de trabalhadores.",
+      "radio": {
+        "label": "Como você deseja atribuir tickets?",
+        "one": "Um bilhete por voto de proposta de trabalhador correspondente.",
+        "balance": "Proporcional ao peso do voto da proposta do trabalhador do usuário."
+      },
+      "multiSelect": {
+        "label": "Propostas de trabalhadores",
+        "placeholder": "Escolha as propostas de trabalhadores nas quais os usuários votaram",
+        "notFound": "Não foi possível encontrar a proposta de trabalhador especificada."
+      }
     }
   },
   "calculatingTitle": "Realizando cálculos de airdrop, aguarde!",
@@ -92,7 +134,7 @@
     "radioDesc": "ou seja ",
     "yes": "Sim",
     "no": "Não",
-    "winLabel": "Os bilhetes premiados devem sempre ser escolhidos?",
+    "winLabel": "Os bilhetes premiados devem ser sempre escolhidos?",
     "winDesc": "Por exemplo. "
   },
   "blockNum": {
@@ -108,7 +150,7 @@
   },
   "proceed": {
     "title": "Prossiga com o cálculo do airdrop",
-    "desc": "Seu vetor de airdrop calculado será disponibilizado na página de airdrop assim que concluído.",
+    "desc": "Seu vetor de airdrop calculado será disponibilizado na página de airdrop depois de concluído.",
     "btn": "Executar cálculo de lançamento aéreo"
   }
 }
