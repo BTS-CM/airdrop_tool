@@ -1,0 +1,11 @@
+{
+    "header1": {
+      "title": "Kontoauswahl für Ihren Kunden {{titleName}} Luftabwurf",
+      "back": "Zurück zum Airdrop-Inhalt"
+    },
+    "header2": {
+      "title": "Bereit, mit Ihrem individuellen Auftrag fortzufahren {{titleName}} Luftabwurf",
+      "back": "Geh zurück",
+      "button": "Fahren Sie mit dem benutzerdefinierten Airdrop fort"
+    }
+  }

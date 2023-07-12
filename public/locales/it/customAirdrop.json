@@ -1,0 +1,76 @@
+{
+    "header": {
+      "title": "Esegui un airdrop personalizzato sul {{titleName}} blockchain",
+      "back": "Indietro"
+    },
+    "uploadBtn": "Carica il file JSON",
+    "uploadText": "Per procedere, carica un file JSON contenente i dati dell'airdrop personalizzato.",
+    "uploadText2": "Il file JSON dovrebbe contenere un array di destinatari airdrop: {{arrayFormat}}`",
+    "grid": {
+      "left": {
+        "loading": "Caricamento dati asset",
+        "reloadingTokenDetails": "Tentativo di caricare i dati delle risorse",
+        "table": {
+          "title": "Possessori di biglietti inclusi nell'airdrop personalizzato",
+          "invalid": "Non ci sono target airdrop personalizzati, rivaluta le impostazioni airdrop.",
+          "title2": "Possessori di biglietto esclusi dall'airdrop",
+          "th1": "Account",
+          "th2": "Quantità",
+          "th22": "Valore",
+          "th3": "Allocazione",
+          "th4": "Motivo",
+          "reasons": {
+            "blocked": "L'utente è stato bloccato",
+            "self": "Impossibile inviare a se stessi",
+            "minReward": "Ricompensa assegnata troppo piccola"
+          }
+        },
+        "json": "Airdrop dati JSON",
+        "jsonSimple": "Dati JSON Airdrop personalizzati"
+      },
+      "right": {
+        "summary": {
+          "title": "Riepilogo airdrop personalizzato",
+          "ticketWinQty": "Quantità di destinatari di airdrop",
+          "sendingAccount": "Invio di airdrop da"
+        },
+        "options": {
+          "title": "Opzioni di airdrop personalizzate",
+          "titleName": "Inserisci il tuo {{titleName}} Account ID",
+          "assetName": "Inserisci il nome dell'asset che desideri trasferire",
+          "batchSize": "Dimensione dei lotti di trasferimento airdrop",
+          "tokenQuantity": "Inserisci la quantità di token che desideri lanciare",
+          "distroRadio": {
+            "title": "Come dovrebbero essere assegnati i token ai vincitori?",
+            "equally": "Ugualmente tra gli ID account vincenti",
+            "proportionally": "Proporzionale ai biglietti vinti",
+            "roundRobin": "Assegna interi token in modo round robin"
+          },
+          "blocking": {
+            "title": "Escludere gli account bloccati?"
+          },
+          "reqRadio": {
+            "yes": "SÌ",
+            "no": "NO"
+          },
+          "target": {
+            "ticketQty": "Quantità di biglietti vincenti",
+            "ticketValue": "Valore dei biglietti vincenti",
+            "title": "Su cosa vuoi basare questo airdrop?"
+          }
+        },
+        "invalid": {
+          "title": "Niente da lanciare",
+          "reason": "Dato che non ci sono biglietti validi, non c'è niente da lanciare.",
+          "resolution": "Regola le impostazioni del lancio aereo o calcola un altro lancio aereo per procedere."
+        },
+        "valid": {
+          "title": "Procedere con l'airdrop personalizzato?",
+          "note": "Tieni a mente i limiti di dimensione delle transazioni e dei blocchi quando pianifichi lotti di lanci aerei.",
+          "single": "Con un limite di lotto di {{batchSize}}, è necessario 1 batch per completare questo lancio aereo personalizzato.",
+          "multi": "Con un limite di lotto di {{batchSize}}, {{qtyBatches}} i lotti sono necessari per completare questo airdrop personalizzato.",
+          "reminder": "Tieni a mente i limiti delle dimensioni delle transazioni e dei blocchi quando pianifichi lotti di lanci personalizzati."
+        }
+      }
+    }
+  }

@@ -10,6 +10,8 @@
     "lookupAsset": "Otsi vara",
     "fetchTickets": "Too piletid",
     "calculateAirdrop": "Arvutage õhulangus",
+    "overrideTransfer": "Ülekande tühistamine",
+    "customAirdrop": "Kohandatud õhutilk",
     "calculatedAirdrops": "Arvutatud õhutilgad",
     "analyzeTickets": "Analüüsige pileteid",
     "ticketLeaderboard": "Pileti edetabel",

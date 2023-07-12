@@ -1,0 +1,11 @@
+{
+    "header1": {
+      "title": "Selección de cuenta para su encargo {{titleName}} entrega por paracaídas",
+      "back": "Volver al contenido de airdrop"
+    },
+    "header2": {
+      "title": "Listo para continuar con su encargo {{titleName}} entrega por paracaídas",
+      "back": "Regresa",
+      "button": "Continuar con airdrop personalizado"
+    }
+  }

@@ -1,0 +1,11 @@
+{
+    "header1": {
+      "title": "Seleção de conta para o seu costume {{titleName}} lançamento aéreo",
+      "back": "Retornar ao conteúdo do airdrop"
+    },
+    "header2": {
+      "title": "Pronto para prosseguir com seu costume {{titleName}} lançamento aéreo",
+      "back": "Volte",
+      "button": "Prossiga com o airdrop personalizado"
+    }
+  }

@@ -1,0 +1,11 @@
+{
+    "header1": {
+      "title": "Kontovalg til din brugerdefinerede {{titleName}} airdrop",
+      "back": "Vend tilbage til airdrop-indhold"
+    },
+    "header2": {
+      "title": "Klar til at fortsætte med dit brugerdefinerede {{titleName}} airdrop",
+      "back": "Gå tilbage",
+      "button": "Fortsæt med tilpasset airdrop"
+    }
+  }

@@ -34,6 +34,7 @@ import {
   HiSearch,
   HiOutlineIdentification,
   HiBan,
+  HiOutlineClipboardList,
 } from "react-icons/hi";
 
 import Home from "./pages/Home";
@@ -49,6 +50,8 @@ import Calculate from "./pages/Calculate";
 import CalculatedAirdrops from "./pages/CalculatedAirdrops";
 import PlannedAirdrop from "./pages/PlannedAirdrop";
 import PerformAirdrop from "./pages/PerformAirdrop";
+import CustomAirdrop from "./pages/CustomAirdrop";
+import CustomAirdropPrep from "./pages/CustomAirdropPrep";
 import Nodes from "./pages/Nodes";
 import Ticket from "./pages/Ticket";
 import Account from "./pages/Account";
@@ -170,6 +173,11 @@ function App() {
                       {t("app:menu.calculateAirdrop")}
                     </Menu.Item>
                   </Link>
+                  <Link style={{ textDecoration: 'none' }} to="./CustomAirdropPrep">
+                    <Menu.Item icon={<HiOutlineClipboardList />}>
+                      {t("app:menu.customAirdrop")}
+                    </Menu.Item>
+                  </Link>
                   <Link style={{ textDecoration: 'none' }} to="./CalculatedAirdrops">
                     <Menu.Item icon={<HiOutlineChartPie />}>
                       {t("app:menu.calculatedAirdrops")}
@@ -199,7 +207,7 @@ function App() {
                   </Link>
                   <Link style={{ textDecoration: 'none' }} to="./overrideTransfer">
                     <Menu.Item icon={<HiOutlineReceiptRefund />}>
-                      OverrideTransfer
+                      {t("app:menu.overrideTransfer")}
                     </Menu.Item>
                   </Link>
                   <Link style={{ textDecoration: 'none' }} to="./nodes">
@@ -249,6 +257,9 @@ function App() {
 
                 <Route path="/AirdropPrep/:env/:id" element={<AirdropPrep />} />
                 <Route path="/PerformAirdrop/:env/:id" element={<PerformAirdrop />} />
+
+                <Route path="/CustomAirdropPrep" element={<CustomAirdropPrep />} />
+                <Route path="/CustomAirdrop/:env" element={<CustomAirdrop />} />
 
                 <Route path="/Create" element={<Create />} />
                 <Route path="/Create/:env/:id" element={<Create />} />

@@ -87,22 +87,24 @@ export default function GetAccount(properties) {
       {
         !account && !accountMethod && !beetOnly
           ? (
-            <Center>
-              <Group mt="sm">
-                <Button
-                  compact
-                  onClick={() => setAccountMethod("SEARCH")}
-                >
-                  {t("getAccount:search")}
-                </Button>
-                <Button
-                  compact
-                  onClick={() => setAccountMethod("BEET")}
-                >
-                  {t("getAccount:beet")}
-                </Button>
-              </Group>
-            </Center>
+            <>
+              <Center>
+                <Group mt="sm">
+                  <Button
+                    compact
+                    onClick={() => setAccountMethod("SEARCH")}
+                  >
+                    {t("getAccount:search")}
+                  </Button>
+                  <Button
+                    compact
+                    onClick={() => setAccountMethod("BEET")}
+                  >
+                    {t("getAccount:beet")}
+                  </Button>
+                </Group>
+              </Center>
+            </>
           )
           : null
       }

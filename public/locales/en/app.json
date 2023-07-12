@@ -10,6 +10,8 @@
         "lookupAsset": "Lookup asset",
         "fetchTickets": "Fetch tickets",
         "calculateAirdrop": "Calculate airdrop",
+        "overrideTransfer": "Override transfer",
+        "customAirdrop": "Custom airdrop",
         "calculatedAirdrops": "Calculated airdrops",
         "analyzeTickets": "Analyze tickets",
         "ticketLeaderboard": "Ticket leaderboard",

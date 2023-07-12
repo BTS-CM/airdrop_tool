@@ -10,6 +10,8 @@
     "lookupAsset": "Opslagsaktiv",
     "fetchTickets": "Hent billetter",
     "calculateAirdrop": "Beregn luftfald",
+    "overrideTransfer": "Tilsidesæt overførsel",
+    "customAirdrop": "Brugerdefineret airdrop",
     "calculatedAirdrops": "Beregnet luftdråber",
     "analyzeTickets": "Analyser billetter",
     "ticketLeaderboard": "Billet leaderboard",

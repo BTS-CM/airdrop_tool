@@ -1,0 +1,11 @@
+{
+    "header1": {
+      "title": "Sélection de compte pour votre personnalisé {{titleName}} largage aérien",
+      "back": "Retour au contenu du largage"
+    },
+    "header2": {
+      "title": "Prêt à procéder à votre coutume {{titleName}} largage aérien",
+      "back": "Retourner",
+      "button": "Procéder au largage personnalisé"
+    }
+  }

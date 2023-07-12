@@ -10,6 +10,8 @@
     "lookupAsset": "Asset di ricerca",
     "fetchTickets": "Recupera i biglietti",
     "calculateAirdrop": "Calcola lancio aereo",
+    "overrideTransfer": "Ignora il trasferimento",
+    "customAirdrop": "Lancio aereo personalizzato",
     "calculatedAirdrops": "Lanci aerei calcolati",
     "analyzeTickets": "Analizza i biglietti",
     "ticketLeaderboard": "Classifica dei biglietti",

@@ -10,6 +10,8 @@
     "lookupAsset": "アセットの検索",
     "fetchTickets": "チケットを取得する",
     "calculateAirdrop": "エアドロップを計算する",
+    "overrideTransfer": "オーバーライド転送",
+    "customAirdrop": "カスタムエアドロップ",
     "calculatedAirdrops": "計算されたエアドロップ",
     "analyzeTickets": "チケットを分析する",
     "ticketLeaderboard": "チケットリーダーボード",

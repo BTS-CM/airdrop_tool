@@ -10,6 +10,8 @@
     "lookupAsset": "자산 조회",
     "fetchTickets": "티켓 가져오기",
     "calculateAirdrop": "에어드롭 계산",
+    "overrideTransfer": "대체 전송",
+    "customAirdrop": "커스텀 에어드롭",
     "calculatedAirdrops": "계산된 에어드롭",
     "analyzeTickets": "티켓 분석",
     "ticketLeaderboard": "티켓 리더보드",

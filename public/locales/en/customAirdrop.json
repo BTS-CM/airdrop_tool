@@ -1,0 +1,76 @@
+{
+    "header": {
+        "title": "Perform custom airdrop on the {{titleName}} blockchain",
+        "back": "Back"
+    },
+    "uploadBtn": "Upload JSON file",
+    "uploadText": "To proceed, upload a JSON file containing the custom airdrop data.",
+    "uploadText2": "The JSON file should contain an array of airdrop recipients: {{arrayFormat}}`",
+    "grid": {
+        "left": {
+            "loading": "Loading asset data",
+            "reloadingTokenDetails": "Trying to load asset data",
+            "table": {
+                "title": "Ticket holders included in the custom airdrop",
+                "invalid": "There are no custom airdrop targets, please re-evaluate the airdrop settings.",
+                "title2": "Ticket holders excluded from airdrop",
+                "th1": "Account",
+                "th2": "Quantity",
+                "th22": "Value",
+                "th3": "Allocation",
+                "th4": "Reason",
+                "reasons": {
+                    "blocked": "User has been blocked",
+                    "self": "Cannot send to self",
+                    "minReward": "Allocated reward too small"
+                }
+            },
+            "json": "Airdrop JSON data",
+            "jsonSimple": "Custom airdrop JSON data"
+        },
+        "right": {
+            "summary": {
+                "title": "Custom airdrop summary",
+                "ticketWinQty": "Quantity of airdrop recipients",
+                "sendingAccount": "Sending airdrop from"
+            },
+            "options": {
+                "title": "Custom airdrop options",
+                "titleName": "Enter your {{titleName}} account ID",
+                "assetName": "Enter the name of the asset you wish to airdrop",
+                "batchSize": "Size of airdrop transfer batches",
+                "tokenQuantity": "Enter the quantity of tokens you wish to airdrop",
+                "distroRadio": {
+                    "title": "How should tokens be allocated to winners?",
+                    "equally": "Equally between winning account IDs",
+                    "proportionally": "Proportional to tickets won",
+                    "roundRobin": "Allocate whole tokens in a round robin manner"
+                },
+                "blocking": {
+                    "title": "Exclude blocked accounts?"
+                },
+                "reqRadio": {
+                    "yes": "Yes",
+                    "no": "No"
+                },
+                "target": {
+                    "ticketQty": "Quantity of winning tickets",
+                    "ticketValue": "Value of winning tickets",
+                    "title": "What do you want to base this airdrop on?"
+                }
+            },
+            "invalid": {
+                "title": "Nothing to airdrop",
+                "reason": "Given there are no valid tickets, there's nothing to airdrop.",
+                "resolution": "Adjust the airdrop settings or calculate another airdrop to proceed."
+            },
+            "valid": {
+                "title": "Proceed with custom airdrop?",
+                "note": "Keep in mind the transaction and block size limits when planning batches of airdrops.",
+                "single": "With a batch limit of {{batchSize}}, 1 batch is required to complete this custom airdrop.",
+                "multi": "With a batch limit of {{batchSize}}, {{qtyBatches}} batches are required to complete this custom airdrop.",
+                "reminder": "Keep in mind the transaction and block size limits when planning batches of custom airdrops."
+            }
+        }
+    }
+}

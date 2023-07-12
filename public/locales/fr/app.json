@@ -10,6 +10,8 @@
     "lookupAsset": "Rechercher un élément",
     "fetchTickets": "Récupérer les billets",
     "calculateAirdrop": "Calculer le largage",
+    "overrideTransfer": "Remplacer le transfert",
+    "customAirdrop": "Parachutage personnalisé",
     "calculatedAirdrops": "Parachutages calculés",
     "analyzeTickets": "Analyser les tickets",
     "ticketLeaderboard": "Classement des billets",

@@ -74,7 +74,16 @@ export default function AirdropLeftCard(properties) {
 
   useEffect(() => {
     setSimpleWinnerJSON(JSON.stringify([]));
-    if (!tokenDetails || (requiredToken === "Yes" && finalReqTokenName && finalReqQty && !requiredTokenDetails)) {
+    if (
+      !tokenDetails
+      || (
+        requiredToken
+        && requiredToken === "Yes"
+        && finalReqTokenName
+        && finalReqQty
+        && !requiredTokenDetails
+      )
+    ) {
       setValidRows([]);
       setInvalidRows([]);
     } else {
@@ -84,21 +93,35 @@ export default function AirdropLeftCard(properties) {
           ? winners
             .map((winner) => (
               <tr key={`winner_${winner.id}`}>
-                <td width="35%">
-                  <Link style={{ textDecoration: 'none', color: 'black' }} to={`/Account/${params.env}/${winner.id}`}>
-                    <b>{envLeaderboard.find((usr) => usr.id === winner.id).account.name}</b>
-                  </Link><br />
-                  (
-                    <Link style={{ textDecoration: 'none' }} to={`/Account/${params.env}/${winner.id}`}>
-                      {winner.id}
-                    </Link>
-                  )
-                </td>
+                {
+                  requiredToken
+                    ? (
+                      <td width="35%">
+                        <Link style={{ textDecoration: 'none', color: 'black' }} to={`/Account/${params.env}/${winner.id}`}>
+                          <b>
+                            {envLeaderboard.find((usr) => usr.id === winner.id).account.name}
+                          </b>
+                        </Link><br />
+                        (
+                          <Link style={{ textDecoration: 'none' }} to={`/Account/${params.env}/${winner.id}`}>
+                            {winner.id}
+                          </Link>
+                        )
+                      </td>
+                    )
+                    : (
+                      <td width="35%">
+                        <Link style={{ textDecoration: 'none' }} to={`/Account/${params.env}/${winner.id}`}>
+                          {winner.id}
+                        </Link>
+                      </td>
+                    )
+                }
                 <td width="25%">
                   {
                     airdropTarget === "ticketQty"
                       ? winner.qty
-                      : winner.ticketsValue
+                      : winner.ticketsValue || winner.value
                   }
                 </td>
                 <td width="40%">
@@ -119,16 +142,26 @@ export default function AirdropLeftCard(properties) {
           ? invalidOutput
             .map((loser) => (
             <tr key={`loser_${loser.id}`}>
-              <td>
-                <Link style={{ textDecoration: 'none', color: 'black' }} to={`/Account/${params.env}/${loser.id}`}>
-                  <b>{envLeaderboard.find((usr) => usr.id === loser.id).account.name}</b>
-                </Link><br />
-                (
-                  <Link style={{ textDecoration: 'none' }} to={`/Account/${params.env}/${loser.id}`}>
-                    {loser.id}
-                  </Link>
-                )
-              </td>
+              {
+                requiredToken
+                  ? (
+                    <td>
+                      <Link style={{ textDecoration: 'none', color: 'black' }} to={`/Account/${params.env}/${loser.id}`}>
+                        <b>{envLeaderboard.find((usr) => usr.id === loser.id).account.name}</b>
+                      </Link><br />
+                      (
+                        <Link style={{ textDecoration: 'none' }} to={`/Account/${params.env}/${loser.id}`}>
+                          {loser.id}
+                        </Link>
+                      )
+                    </td>
+                  )
+                  : (
+                    <Link style={{ textDecoration: 'none' }} to={`/Account/${params.env}/${loser.id}`}>
+                      {loser.id}
+                    </Link>
+                  )
+              }
               <td>
                 {
                   loser.reason && loser.reason.length > 1
@@ -145,9 +178,11 @@ export default function AirdropLeftCard(properties) {
 
       setSimpleWinnerJSON(JSON.stringify(
         winners.map((x) => ({
-          user: `${envLeaderboard.find((usr) => usr.id === x.id).account.name} (${x.id})`,
+          user: requiredToken
+            ? `${envLeaderboard.find((usr) => usr.id === x.id).account.name} (${x.id})`
+            : x.id,
           ticketQty: x.qty,
-          ticketsValue: x.ticketsValue,
+          ticketsValue: x.ticketsValue || x.value,
           percent: x.percent,
           assignedTokens: x.assignedTokens
         })),
@@ -233,7 +268,7 @@ export default function AirdropLeftCard(properties) {
                       <thead>
                         <tr>
                           <th>{t("performAirdrop:grid.left.table.th1")}</th>
-                          <th>{t("performAirdrop:grid.left.table.th2")}</th>
+                          <th>{t(`performAirdrop:grid.left.table.th2${airdropTarget === "ticketQty" ? '' : '2'}`)}</th>
                           <th>{t("performAirdrop:grid.left.table.th3")}</th>
                         </tr>
                       </thead>

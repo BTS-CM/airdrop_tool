@@ -24,7 +24,7 @@ import {
 
 import GetAccount from "./GetAccount";
 
-export default function PerformAirdrop(properties) {
+export default function AirdropPrep(properties) {
   const { t, i18n } = useTranslation();
   const params = useParams();
 

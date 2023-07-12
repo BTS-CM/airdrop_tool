@@ -1,0 +1,11 @@
+{
+    "header1": {
+        "title": "Account selection for your custom {{titleName}} airdrop",
+        "back": "Return to airdrop contents"
+    },
+    "header2": {
+        "title": "Ready to proceed with your custom {{titleName}} airdrop",
+        "back": "Go back",
+        "button": "Proceed with custom airdrop"
+    }
+}

@@ -10,6 +10,8 @@
     "lookupAsset": "ค้นหาเนื้อหา",
     "fetchTickets": "ดึงตั๋ว",
     "calculateAirdrop": "คำนวณการลดลงของอากาศ",
+    "overrideTransfer": "แทนที่การถ่ายโอน",
+    "customAirdrop": "แอร์ดรอปแบบกำหนดเอง",
     "calculatedAirdrops": "คำนวณ airdrops",
     "analyzeTickets": "วิเคราะห์ตั๋ว",
     "ticketLeaderboard": "ลีดเดอร์บอร์ดตั๋ว",
