@@ -272,7 +272,6 @@ export default function CustomAirdrop(properties) {
     if (!fileContents || !airdropTarget) {
       return;
     }
-    console.log({ fileContents, sortedWinners });
     setSortedWinners(
       airdropTarget === "ticketQty"
         ? fileContents.sort((a, b) => b.qty - a.qty)
@@ -419,7 +418,6 @@ export default function CustomAirdrop(properties) {
   const [winners, setWinners] = useState([]);
 
   useEffect(() => {
-    console.log({ tokenRows, tokenDetails });
     if (tokenRows && tokenRows.length && tokenDetails) {
       let valid = tokenRows.sort((a, b) => b.assignedTokens - a.assignedTokens);
       if (tokenDetails.precision > 0) {
