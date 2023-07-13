@@ -1,11 +1,14 @@
 {
     "header": {
         "title": "Perform custom airdrop on the {{titleName}} blockchain",
-        "back": "Back"
+        "subtitle": "Only the top 10 airdrop winners will be displayed on this page. View the airdrop batch JSON for more information.",
+        "back": "Back",
+        "switchEnv": "Switch blockchain",
+        "processing": "Processing the custom airdrop file, please wait."
     },
     "uploadBtn": "Upload JSON file",
     "uploadText": "To proceed, upload a JSON file containing the custom airdrop data.",
-    "uploadText2": "The JSON file should contain an array of airdrop recipients: {{arrayFormat}}`",
+    "uploadText2": "The JSON file should contain an array of airdrop recipients:`",
     "grid": {
         "left": {
             "loading": "Loading asset data",
@@ -21,6 +24,7 @@
                 "th4": "Reason",
                 "reasons": {
                     "blocked": "User has been blocked",
+                    "noObject": "Couldn't fetch account data.",
                     "self": "Cannot send to self",
                     "minReward": "Allocated reward too small"
                 }

@@ -1,76 +1,80 @@
 {
-    "header": {
-      "title": "Führen Sie einen benutzerdefinierten Airdrop durch {{titleName}} Blockchain",
-      "back": "Zurück"
-    },
-    "uploadBtn": "Laden Sie die JSON-Datei hoch",
-    "uploadText": "Um fortzufahren, laden Sie eine JSON-Datei hoch, die die benutzerdefinierten Airdrop-Daten enthält.",
-    "uploadText2": "Die JSON-Datei sollte ein Array von Airdrop-Empfängern enthalten: {{arrayFormat}}`",
-    "grid": {
-      "left": {
-        "loading": "Asset-Daten werden geladen",
-        "reloadingTokenDetails": "Es wird versucht, Asset-Daten zu laden",
-        "table": {
-          "title": "Ticketinhaber sind im benutzerdefinierten Airdrop enthalten",
-          "invalid": "Es gibt keine benutzerdefinierten Airdrop-Ziele. Bitte überprüfen Sie die Airdrop-Einstellungen noch einmal.",
-          "title2": "Ticketinhaber sind vom Airdrop ausgeschlossen",
-          "th1": "Konto",
-          "th2": "Menge",
-          "th22": "Wert",
-          "th3": "Zuweisung",
-          "th4": "Grund",
-          "reasons": {
-            "blocked": "Der Benutzer wurde blockiert",
-            "self": "Kann nicht an mich selbst gesendet werden",
-            "minReward": "Zugeteilte Belohnung zu gering"
-          }
-        },
-        "json": "Airdrop-JSON-Daten",
-        "jsonSimple": "Benutzerdefinierte Airdrop-JSON-Daten"
-      },
-      "right": {
-        "summary": {
-          "title": "Zusammenfassung der benutzerdefinierten Airdrops",
-          "ticketWinQty": "Anzahl der Airdrop-Empfänger",
-          "sendingAccount": "Airdrop senden von"
-        },
-        "options": {
-          "title": "Benutzerdefinierte Airdrop-Optionen",
-          "titleName": "Geben Sie Ihr {{titleName}} Konto-ID",
-          "assetName": "Geben Sie den Namen des Assets ein, das Sie per Airdrop abwerfen möchten",
-          "batchSize": "Größe der Airdrop-Transfer-Batches",
-          "tokenQuantity": "Geben Sie die Menge an Token ein, die Sie per Airdrop abwerfen möchten",
-          "distroRadio": {
-            "title": "Wie sollen die Token den Gewinnern zugeteilt werden?",
-            "equally": "Gleichermaßen zwischen Gewinnerkonto-IDs",
-            "proportionally": "Proportional zu den gewonnenen Tickets",
-            "roundRobin": "Weisen Sie ganze Token im Round-Robin-Verfahren zu"
-          },
-          "blocking": {
-            "title": "Sperrkonten ausschließen?"
-          },
-          "reqRadio": {
-            "yes": "Ja",
-            "no": "NEIN"
-          },
-          "target": {
-            "ticketQty": "Anzahl der Gewinnlose",
-            "ticketValue": "Wert der gewonnenen Tickets",
-            "title": "Worauf soll dieser Airdrop basieren?"
-          }
-        },
-        "invalid": {
-          "title": "Nichts zum Abwerfen",
-          "reason": "Da es keine gültigen Tickets gibt, gibt es nichts zu fliegen.",
-          "resolution": "Passen Sie die Airdrop-Einstellungen an oder berechnen Sie einen weiteren Airdrop, um fortzufahren."
-        },
-        "valid": {
-          "title": "Mit benutzerdefiniertem Airdrop fortfahren?",
-          "note": "Beachten Sie bei der Planung von Airdrop-Chargen die Transaktions- und Blockgrößenbeschränkungen.",
-          "single": "Mit einem Chargenlimit von {{batchSize}}, 1 Charge ist erforderlich, um diesen benutzerdefinierten Airdrop abzuschließen.",
-          "multi": "Mit einem Chargenlimit von {{batchSize}}, {{qtyBatches}} Es sind Chargen erforderlich, um diesen benutzerdefinierten Airdrop abzuschließen.",
-          "reminder": "Beachten Sie die Transaktions- und Blockgrößenbeschränkungen, wenn Sie Stapel benutzerdefinierter Airdrops planen."
+  "header": {
+    "title": "Führen Sie einen benutzerdefinierten Airdrop durch {{titleName}} Blockchain",
+    "subtitle": "Auf dieser Seite werden nur die zehn besten Airdrop-Gewinner angezeigt. ",
+    "back": "Zurück",
+    "switchEnv": "Blockchain wechseln",
+    "processing": "Die benutzerdefinierte Airdrop-Datei wird verarbeitet. Bitte warten Sie."
+  },
+  "uploadBtn": "Laden Sie die JSON-Datei hoch",
+  "uploadText": "Um fortzufahren, laden Sie eine JSON-Datei hoch, die die benutzerdefinierten Airdrop-Daten enthält.",
+  "uploadText2": "Die JSON-Datei sollte ein Array von Airdrop-Empfängern enthalten:`",
+  "grid": {
+    "left": {
+      "loading": "Asset-Daten werden geladen",
+      "reloadingTokenDetails": "Es wird versucht, Asset-Daten zu laden",
+      "table": {
+        "title": "Ticketinhaber sind im benutzerdefinierten Airdrop enthalten",
+        "invalid": "Es gibt keine benutzerdefinierten Airdrop-Ziele. Bitte überprüfen Sie die Airdrop-Einstellungen noch einmal.",
+        "title2": "Ticketinhaber sind vom Airdrop ausgeschlossen",
+        "th1": "Konto",
+        "th2": "Menge",
+        "th22": "Wert",
+        "th3": "Zuweisung",
+        "th4": "Grund",
+        "reasons": {
+          "blocked": "Der Benutzer wurde blockiert",
+          "noObject": "Kontodaten konnten nicht abgerufen werden.",
+          "self": "Kann nicht an mich selbst gesendet werden",
+          "minReward": "Zugeteilte Belohnung zu gering"
         }
+      },
+      "json": "Airdrop-JSON-Daten",
+      "jsonSimple": "Benutzerdefinierte Airdrop-JSON-Daten"
+    },
+    "right": {
+      "summary": {
+        "title": "Zusammenfassung der benutzerdefinierten Airdrops",
+        "ticketWinQty": "Anzahl der Airdrop-Empfänger",
+        "sendingAccount": "Airdrop senden von"
+      },
+      "options": {
+        "title": "Benutzerdefinierte Airdrop-Optionen",
+        "titleName": "Geben Sie Ihr {{titleName}} Konto-ID",
+        "assetName": "Geben Sie den Namen des Assets ein, das Sie per Airdrop abwerfen möchten",
+        "batchSize": "Größe der Airdrop-Transfer-Batches",
+        "tokenQuantity": "Geben Sie die Menge an Token ein, die Sie per Airdrop abwerfen möchten",
+        "distroRadio": {
+          "title": "Wie sollen die Token den Gewinnern zugeteilt werden?",
+          "equally": "Gleichermaßen zwischen Gewinnerkonto-IDs",
+          "proportionally": "Proportional zu den gewonnenen Tickets",
+          "roundRobin": "Weisen Sie ganze Token im Round-Robin-Verfahren zu"
+        },
+        "blocking": {
+          "title": "Sperrkonten ausschließen?"
+        },
+        "reqRadio": {
+          "yes": "Ja",
+          "no": "NEIN"
+        },
+        "target": {
+          "ticketQty": "Anzahl der Gewinnlose",
+          "ticketValue": "Wert der gewonnenen Tickets",
+          "title": "Worauf soll dieser Airdrop basieren?"
+        }
+      },
+      "invalid": {
+        "title": "Nichts zum Abwerfen",
+        "reason": "Da es keine gültigen Tickets gibt, gibt es nichts zu fliegen.",
+        "resolution": "Passen Sie die Airdrop-Einstellungen an oder berechnen Sie einen weiteren Airdrop, um fortzufahren."
+      },
+      "valid": {
+        "title": "Mit benutzerdefiniertem Airdrop fortfahren?",
+        "note": "Beachten Sie bei der Planung von Airdrop-Chargen die Transaktions- und Blockgrößenbeschränkungen.",
+        "single": "Mit einem Chargenlimit von {{batchSize}}, 1 Charge ist erforderlich, um diesen benutzerdefinierten Airdrop abzuschließen.",
+        "multi": "Mit einem Chargenlimit von {{batchSize}}, {{qtyBatches}} Es sind Chargen erforderlich, um diesen benutzerdefinierten Airdrop abzuschließen.",
+        "reminder": "Beachten Sie die Transaktions- und Blockgrößenbeschränkungen, wenn Sie Stapel benutzerdefinierter Airdrops planen."
       }
     }
   }
+}

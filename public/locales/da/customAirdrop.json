@@ -1,76 +1,80 @@
 {
-    "header": {
-      "title": "Udfør tilpasset airdrop på {{titleName}} blockchain",
-      "back": "Tilbage"
-    },
-    "uploadBtn": "Upload JSON-fil",
-    "uploadText": "For at fortsætte skal du uploade en JSON-fil, der indeholder de tilpassede airdrop-data.",
-    "uploadText2": "JSON-filen skal indeholde en række airdrop-modtagere: {{arrayFormat}}`",
-    "grid": {
-      "left": {
-        "loading": "Indlæser aktivdata",
-        "reloadingTokenDetails": "Forsøger at indlæse aktivdata",
-        "table": {
-          "title": "Billetholdere inkluderet i den tilpassede airdrop",
-          "invalid": "Der er ingen brugerdefinerede airdrop-mål. Reevaluer venligst airdrop-indstillingerne.",
-          "title2": "Billetholdere udelukket fra airdrop",
-          "th1": "Konto",
-          "th2": "Antal",
-          "th22": "Værdi",
-          "th3": "Tildeling",
-          "th4": "Grund",
-          "reasons": {
-            "blocked": "Brugeren er blevet blokeret",
-            "self": "Kan ikke sende til sig selv",
-            "minReward": "Tildelt belønning for lille"
-          }
-        },
-        "json": "Airdrop JSON-data",
-        "jsonSimple": "Tilpassede airdrop JSON-data"
-      },
-      "right": {
-        "summary": {
-          "title": "Brugerdefineret airdrop oversigt",
-          "ticketWinQty": "Antal airdrop-modtagere",
-          "sendingAccount": "Sender airdrop fra"
-        },
-        "options": {
-          "title": "Brugerdefinerede airdrop muligheder",
-          "titleName": "Indtast dit {{titleName}} Konto-id",
-          "assetName": "Indtast navnet på det aktiv, du ønsker at airdrop",
-          "batchSize": "Størrelse på airdrop-overførselspartier",
-          "tokenQuantity": "Indtast det antal tokens, du ønsker at airdrop",
-          "distroRadio": {
-            "title": "Hvordan skal tokens tildeles til vindere?",
-            "equally": "Ligesom mellem vindende konto-id'er",
-            "proportionally": "Proportional til vundne billetter",
-            "roundRobin": "Tildel hele tokens på en round robin måde"
-          },
-          "blocking": {
-            "title": "Udelukke blokerede konti?"
-          },
-          "reqRadio": {
-            "yes": "Ja",
-            "no": "Ingen"
-          },
-          "target": {
-            "ticketQty": "Antal vinderbilletter",
-            "ticketValue": "Værdien af ​​vindende billetter",
-            "title": "Hvad vil du basere denne airdrop på?"
-          }
-        },
-        "invalid": {
-          "title": "Intet at airdroppe",
-          "reason": "Da der ikke er nogen gyldige billetter, er der intet at sende.",
-          "resolution": "Juster airdrop-indstillingerne, eller beregn endnu et airdrop for at fortsætte."
-        },
-        "valid": {
-          "title": "Vil du fortsætte med tilpasset airdrop?",
-          "note": "Husk grænserne for transaktions- og blokstørrelse, når du planlægger partier af luftdråber.",
-          "single": "Med en batchgrænse på {{batchSize}}, 1 batch er påkrævet for at fuldføre denne brugerdefinerede airdrop.",
-          "multi": "Med en batchgrænse på {{batchSize}}, {{qtyBatches}} batches er nødvendige for at fuldføre denne brugerdefinerede airdrop.",
-          "reminder": "Husk grænserne for transaktions- og blokstørrelser, når du planlægger partier af tilpassede airdrops."
+  "header": {
+    "title": "Udfør tilpasset airdrop på {{titleName}} blockchain",
+    "subtitle": "Kun de 10 bedste airdrop-vindere vil blive vist på denne side. ",
+    "back": "Tilbage",
+    "switchEnv": "Skift blockchain",
+    "processing": "Behandler den tilpassede airdrop-fil. Vent venligst."
+  },
+  "uploadBtn": "Upload JSON-fil",
+  "uploadText": "For at fortsætte skal du uploade en JSON-fil, der indeholder de tilpassede airdrop-data.",
+  "uploadText2": "JSON-filen skal indeholde en række airdrop-modtagere:`",
+  "grid": {
+    "left": {
+      "loading": "Indlæser aktivdata",
+      "reloadingTokenDetails": "Forsøger at indlæse aktivdata",
+      "table": {
+        "title": "Billetholdere inkluderet i den tilpassede airdrop",
+        "invalid": "Der er ingen brugerdefinerede airdrop-mål. Reevaluer venligst airdrop-indstillingerne.",
+        "title2": "Billetholdere udelukket fra airdrop",
+        "th1": "Konto",
+        "th2": "Antal",
+        "th22": "Værdi",
+        "th3": "Tildeling",
+        "th4": "Grund",
+        "reasons": {
+          "blocked": "Brugeren er blevet blokeret",
+          "noObject": "Kontodataene kunne ikke hentes.",
+          "self": "Kan ikke sende til sig selv",
+          "minReward": "Tildelt belønning for lille"
         }
+      },
+      "json": "Airdrop JSON-data",
+      "jsonSimple": "Tilpassede airdrop JSON-data"
+    },
+    "right": {
+      "summary": {
+        "title": "Brugerdefineret airdrop oversigt",
+        "ticketWinQty": "Antal airdrop-modtagere",
+        "sendingAccount": "Sender airdrop fra"
+      },
+      "options": {
+        "title": "Brugerdefinerede airdrop muligheder",
+        "titleName": "Indtast dit {{titleName}} Konto-id",
+        "assetName": "Indtast navnet på det aktiv, du ønsker at airdrop",
+        "batchSize": "Størrelse på airdrop-overførselspartier",
+        "tokenQuantity": "Indtast det antal tokens, du ønsker at airdrop",
+        "distroRadio": {
+          "title": "Hvordan skal tokens tildeles til vindere?",
+          "equally": "Ligesom mellem vindende konto-id'er",
+          "proportionally": "Proportional til vundne billetter",
+          "roundRobin": "Tildel hele tokens på en round robin måde"
+        },
+        "blocking": {
+          "title": "Udelukke blokerede konti?"
+        },
+        "reqRadio": {
+          "yes": "Ja",
+          "no": "Ingen"
+        },
+        "target": {
+          "ticketQty": "Antal vinderbilletter",
+          "ticketValue": "Værdien af ​​vindende billetter",
+          "title": "Hvad vil du basere denne airdrop på?"
+        }
+      },
+      "invalid": {
+        "title": "Intet at airdroppe",
+        "reason": "Da der ikke er nogen gyldige billetter, er der intet at sende.",
+        "resolution": "Juster airdrop-indstillingerne, eller beregn endnu et airdrop for at fortsætte."
+      },
+      "valid": {
+        "title": "Vil du fortsætte med tilpasset airdrop?",
+        "note": "Husk grænserne for transaktions- og blokstørrelse, når du planlægger partier af luftdråber.",
+        "single": "Med en batchgrænse på {{batchSize}}, 1 batch er påkrævet for at fuldføre denne brugerdefinerede airdrop.",
+        "multi": "Med en batchgrænse på {{batchSize}}, {{qtyBatches}} batches er nødvendige for at fuldføre denne brugerdefinerede airdrop.",
+        "reminder": "Husk grænserne for transaktions- og blokstørrelser, når du planlægger partier af tilpassede airdrops."
       }
     }
   }
+}

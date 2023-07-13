@@ -1,6 +1,6 @@
 import { Apis } from 'bitsharesjs-ws';
 import { Apis as tuscApis } from 'tuscjs-ws';
-import { humanReadableFloat } from './common';
+import { humanReadableFloat, sliceIntoChunks } from './common';
 
 /**
  * Search for an account, given 1.2.x or an account name.
@@ -170,6 +170,56 @@ async function lookupSymbols(node, env, asset_ids, apiConnection = null) {
   });
 }
 
+/**
+ * Get multiple objects such as accounts, assets, etc
+ * @param {String} node
+ * @param {String} env
+ * @param {Array} object_ids
+ */
+async function getObjects(node, env, object_ids) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (env === 'tusc') {
+        await tuscApis.instance(node, true).init_promise;
+      } else {
+        await Apis.instance(node, true).init_promise;
+      }
+    } catch (error) {
+      console.log(error);
+      reject(error);
+      return;
+    }
+
+    let retrievedObjects = [];
+    const chunksOfInputs = sliceIntoChunks(object_ids, 100);
+    for (let i = 0; i < chunksOfInputs.length; i++) {
+      const currentChunk = chunksOfInputs[i];
+      //console.log(`Fetching chunk ${i + 1} of ${chunksOfInputs.length}`);
+
+      let got_objects;
+      try {
+        if (env === 'tusc') {
+          got_objects = await tuscApis.instance().db_api().exec("get_objects", [currentChunk, false]);
+        } else {
+          got_objects = await Apis.instance().db_api().exec("get_objects", [currentChunk, false]);
+        }
+      } catch (error) {
+        console.log(error);
+        reject(error);
+        return;
+      }
+
+      if (got_objects && got_objects.length) {
+        retrievedObjects = retrievedObjects.concat(got_objects.filter((x) => x !== null));
+      }
+    }
+
+    if (retrievedObjects && retrievedObjects.length) {
+      resolve(retrievedObjects);
+    }
+  });
+}
+
 /*
 * Fetch account/address list to warn users about
 * List is maintained by the Bitshares committee
@@ -207,5 +257,6 @@ export {
   lookupSymbols,
   fetchLeaderboardData,
   accountSearch,
-  getBlockedAccounts
+  getBlockedAccounts,
+  getObjects
 };

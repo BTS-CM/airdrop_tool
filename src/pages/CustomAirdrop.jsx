@@ -44,7 +44,7 @@ import {
 import AirdropCard from "../components/AirdropCard";
 import AirdropLeftCard from '../components/AirdropLeftCard';
 
-import { lookupSymbols } from "../lib/directQueries";
+import { lookupSymbols, getObjects } from "../lib/directQueries";
 import { sliceIntoChunks, humanReadableFloat } from '../lib/common';
 
 export default function CustomAirdrop(properties) {
@@ -109,8 +109,8 @@ export default function CustomAirdrop(properties) {
 
   // Debounced input
   const [tokenName, onTokenName] = useState(assetName);
-  const [tokenQuantity, onTokenQuantity] = useState(1);
-  const [batchSize, onBatchSize] = useState(100);
+  const [tokenQuantity, onTokenQuantity] = useState(100);
+  const [batchSize, onBatchSize] = useState(2000);
 
   // Retrieved asset info
   const [tokenDetails, setTokenDetails] = useState();
@@ -268,15 +268,33 @@ export default function CustomAirdrop(properties) {
     return () => clearTimeout(delayDebounceFn);
   }, [tokenQuantity, tokenDetails]);
 
+  const [processing, setProcessing] = useState(false);
+  const [retrievedObjects, setRetrievedObjects] = useState([]);
+  // fetch the usernames for all the fileContents[x].id
   useEffect(() => {
-    if (!fileContents || !airdropTarget) {
-      return;
+    async function processFile() {
+      setProcessing(true);
+      console.log("Processing file");
+      let objs;
+      try {
+        objs = await getObjects(currentNodes[0], params.env, fileContents.map((x) => x.id));
+      } catch (error) {
+        console.log(error);
+        setProcessing(false);
+        return;
+      }
+      setProcessing(false);
+      setRetrievedObjects(objs);
+      setSortedWinners(
+        airdropTarget === "ticketQty"
+          ? fileContents.sort((a, b) => b.qty - a.qty)
+          : fileContents.sort((a, b) => b.value - a.value)
+      );
     }
-    setSortedWinners(
-      airdropTarget === "ticketQty"
-        ? fileContents.sort((a, b) => b.qty - a.qty)
-        : fileContents.sort((a, b) => b.value - a.value)
-    );
+
+    if (fileContents && airdropTarget) {
+      processFile();
+    }
   }, [fileContents, airdropTarget]);
 
   const [invalidOutput, setInvalidOutput] = useState([]);
@@ -296,6 +314,11 @@ export default function CustomAirdrop(properties) {
       if (account && user.id === account) {
         // Filter airdropping account from airdrop
         reasons.push(t("customAirdrop:grid.left.table.reasons.self"));
+      }
+
+      if (retrievedObjects && !retrievedObjects.some((obj) => obj.id === user.id)) {
+        // Filter out users that don't have a corresponding object in retrievedObjects
+        reasons.push(t("customAirdrop:grid.left.table.reasons.noObject"));
       }
 
       if (reasons && reasons.length) {
@@ -491,7 +514,7 @@ export default function CustomAirdrop(properties) {
     ? (
       <AirdropLeftCard
         envLeaderboard={envLeaderboard}
-        winners={winners.sort((a, b) => b.assignedTokens - a.assignedTokens)}
+        winners={winners.sort((a, b) => b.assignedTokens - a.assignedTokens).slice(0, 10)}
         invalidOutput={finalInvalidOutput}
         inProgress={inProgress}
         assetName={assetName}
@@ -505,11 +528,22 @@ export default function CustomAirdrop(properties) {
     )
     : null;
 
+  
+
   return (
     <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
-      <Title order={3} ta="center" mt="sm">
+      <Title order={3} ta="center" mt="sm" mb="sm">
         {t("customAirdrop:header.title", { titleName })}
       </Title>
+      {
+        fileContents && account && account.length
+          ? (
+            <Title order={4} ta="center" mb="md">
+              {t("customAirdrop:header.subtitle")}
+            </Title>
+          )
+          : null
+      }
 
       {
         !fileContents
@@ -519,7 +553,10 @@ export default function CustomAirdrop(properties) {
                 {t("customAirdrop:uploadText")}
               </Text>
               <Text align="center">
-                {t("customAirdrop:uploadText2", { arrayFormat: "[{\"id\": \"1.2.x\", \"qty\": 1, \"value\": 2}]" })}
+                {t("customAirdrop:uploadText2")}
+              </Text>
+              <Text align="center">
+                {'[{"id": "1.2.x", "qty": 1, "value": 2}]'}
               </Text>
               <Center mt="sm">
                 <FileButton onChange={setFile} accept="file/JSON">
@@ -532,7 +569,22 @@ export default function CustomAirdrop(properties) {
       }
 
       {
-        fileContents && account && account.length
+        processing
+          ? (
+            <Card>
+              <Center>
+                <Loader variant="dots" />
+              </Center>
+              <Text ta="center" mt="md">
+                {t("customAirdrop:header.processing")}
+              </Text>
+            </Card>
+          )
+          : null
+      }
+
+      {
+        fileContents && account && account.length && !processing
           ? (
             <SimpleGrid cols={2} spacing="sm" mt={10} breakpoints={[{ maxWidth: 'md', cols: 2 }]}>
               {

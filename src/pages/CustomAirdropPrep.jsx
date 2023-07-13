@@ -86,9 +86,10 @@ export default function CustomcustomAirdropPrep(properties) {
               <Center>
                 <Button
                   compact
+                  mt="sm"
                   onClick={() => setEnvironment()}
                 >
-                  {t("customAirdrop:header.back")}
+                  {t("customAirdrop:header.switchEnv")}
                 </Button>
               </Center>
           </>

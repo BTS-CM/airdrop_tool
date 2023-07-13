@@ -1,76 +1,80 @@
 {
-    "header": {
-      "title": "Effectuez un largage personnalisé sur le {{titleName}} chaîne de blocs",
-      "back": "Dos"
-    },
-    "uploadBtn": "Téléchargez le fichier JSON",
-    "uploadText": "Pour continuer, téléchargez un fichier JSON contenant les données de largage personnalisées.",
-    "uploadText2": "Le fichier JSON doit contenir un tableau de destinataires airdrop : {{arrayFormat}}`",
-    "grid": {
-      "left": {
-        "loading": "Chargement des données d'actif",
-        "reloadingTokenDetails": "Tentative de chargement des données d'éléments",
-        "table": {
-          "title": "Détenteurs de billets inclus dans le largage personnalisé",
-          "invalid": "Il n'y a pas de cibles de largage personnalisées, veuillez réévaluer les paramètres de largage.",
-          "title2": "Les détenteurs de billets exclus du largage",
-          "th1": "Compte",
-          "th2": "Quantité",
-          "th22": "Valeur",
-          "th3": "Allocation",
-          "th4": "Raison",
-          "reasons": {
-            "blocked": "L'utilisateur a été bloqué",
-            "self": "Impossible d'envoyer à soi-même",
-            "minReward": "Récompense attribuée trop petite"
-          }
-        },
-        "json": "Données JSON Airdrop",
-        "jsonSimple": "Données JSON airdrop personnalisées"
-      },
-      "right": {
-        "summary": {
-          "title": "Récapitulatif de largage personnalisé",
-          "ticketWinQty": "Quantité de destinataires de parachutage",
-          "sendingAccount": "Envoi de parachutage depuis"
-        },
-        "options": {
-          "title": "Options de largage personnalisées",
-          "titleName": "Entrez votre {{titleName}} identifiant de compte",
-          "assetName": "Entrez le nom de l'actif que vous souhaitez airdrop",
-          "batchSize": "Taille des lots de transfert de parachutage",
-          "tokenQuantity": "Entrez la quantité de jetons que vous souhaitez airdrop",
-          "distroRadio": {
-            "title": "Comment les jetons devraient-ils être attribués aux gagnants ?",
-            "equally": "À parts égales entre les identifiants de compte gagnants",
-            "proportionally": "Proportionnel aux billets gagnés",
-            "roundRobin": "Allouer des jetons entiers à tour de rôle"
-          },
-          "blocking": {
-            "title": "Exclure les comptes bloqués ?"
-          },
-          "reqRadio": {
-            "yes": "Oui",
-            "no": "Non"
-          },
-          "target": {
-            "ticketQty": "Quantité de billets gagnants",
-            "ticketValue": "Valeur des billets gagnants",
-            "title": "Sur quoi voulez-vous baser cet airdrop ?"
-          }
-        },
-        "invalid": {
-          "title": "Rien à larguer",
-          "reason": "Étant donné qu'il n'y a pas de billets valides, il n'y a rien à larguer.",
-          "resolution": "Ajustez les paramètres de largage ou calculez un autre largage pour continuer."
-        },
-        "valid": {
-          "title": "Continuer avec le largage personnalisé ?",
-          "note": "Gardez à l'esprit les limites de transaction et de taille de bloc lors de la planification de lots de parachutages.",
-          "single": "Avec une limite de lot de {{batchSize}}, 1 lot est nécessaire pour terminer ce largage personnalisé.",
-          "multi": "Avec une limite de lot de {{batchSize}}, {{qtyBatches}} des lots sont nécessaires pour effectuer ce largage personnalisé.",
-          "reminder": "Gardez à l'esprit les limites de transaction et de taille de bloc lors de la planification de lots de parachutages personnalisés."
+  "header": {
+    "title": "Effectuez un largage personnalisé sur le {{titleName}} chaîne de blocs",
+    "subtitle": "Seuls les 10 meilleurs gagnants du airdrop seront affichés sur cette page. ",
+    "back": "Dos",
+    "switchEnv": "Changer de blockchain",
+    "processing": "Traitement du fichier airdrop personnalisé, veuillez patienter."
+  },
+  "uploadBtn": "Téléchargez le fichier JSON",
+  "uploadText": "Pour continuer, téléchargez un fichier JSON contenant les données de largage personnalisées.",
+  "uploadText2": "Le fichier JSON doit contenir un tableau de destinataires airdrop :`",
+  "grid": {
+    "left": {
+      "loading": "Chargement des données d'actif",
+      "reloadingTokenDetails": "Tentative de chargement des données d'éléments",
+      "table": {
+        "title": "Détenteurs de billets inclus dans le largage personnalisé",
+        "invalid": "Il n'y a pas de cibles de largage personnalisées, veuillez réévaluer les paramètres de largage.",
+        "title2": "Les détenteurs de billets exclus du largage",
+        "th1": "Compte",
+        "th2": "Quantité",
+        "th22": "Valeur",
+        "th3": "Allocation",
+        "th4": "Raison",
+        "reasons": {
+          "blocked": "L'utilisateur a été bloqué",
+          "noObject": "Impossible de récupérer les données du compte.",
+          "self": "Impossible d'envoyer à soi-même",
+          "minReward": "Récompense attribuée trop petite"
         }
+      },
+      "json": "Données JSON Airdrop",
+      "jsonSimple": "Données JSON airdrop personnalisées"
+    },
+    "right": {
+      "summary": {
+        "title": "Récapitulatif de largage personnalisé",
+        "ticketWinQty": "Quantité de destinataires de parachutage",
+        "sendingAccount": "Envoi de parachutage depuis"
+      },
+      "options": {
+        "title": "Options de largage personnalisées",
+        "titleName": "Entrez votre {{titleName}} identifiant de compte",
+        "assetName": "Entrez le nom de l'actif que vous souhaitez airdrop",
+        "batchSize": "Taille des lots de transfert de parachutage",
+        "tokenQuantity": "Entrez la quantité de jetons que vous souhaitez airdrop",
+        "distroRadio": {
+          "title": "Comment les jetons devraient-ils être attribués aux gagnants ?",
+          "equally": "À parts égales entre les identifiants de compte gagnants",
+          "proportionally": "Proportionnel aux billets gagnés",
+          "roundRobin": "Allouer des jetons entiers à tour de rôle"
+        },
+        "blocking": {
+          "title": "Exclure les comptes bloqués ?"
+        },
+        "reqRadio": {
+          "yes": "Oui",
+          "no": "Non"
+        },
+        "target": {
+          "ticketQty": "Quantité de billets gagnants",
+          "ticketValue": "Valeur des billets gagnants",
+          "title": "Sur quoi voulez-vous baser cet airdrop ?"
+        }
+      },
+      "invalid": {
+        "title": "Rien à larguer",
+        "reason": "Étant donné qu'il n'y a pas de billets valides, il n'y a rien à larguer.",
+        "resolution": "Ajustez les paramètres de largage ou calculez un autre largage pour continuer."
+      },
+      "valid": {
+        "title": "Continuer avec le largage personnalisé ?",
+        "note": "Gardez à l'esprit les limites de transaction et de taille de bloc lors de la planification de lots de parachutages.",
+        "single": "Avec une limite de lot de {{batchSize}}, 1 lot est nécessaire pour terminer ce largage personnalisé.",
+        "multi": "Avec une limite de lot de {{batchSize}}, {{qtyBatches}} des lots sont nécessaires pour effectuer ce largage personnalisé.",
+        "reminder": "Gardez à l'esprit les limites de transaction et de taille de bloc lors de la planification de lots de parachutages personnalisés."
       }
     }
   }
+}

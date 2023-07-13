@@ -1,76 +1,80 @@
 {
-    "header": {
-      "title": "Tehke seadmel kohandatud õhulangus {{titleName}} plokiahel",
-      "back": "tagasi"
-    },
-    "uploadBtn": "Laadige üles JSON-fail",
-    "uploadText": "Jätkamiseks laadige üles JSON-fail, mis sisaldab kohandatud airdropi andmeid.",
-    "uploadText2": "JSON-fail peaks sisaldama rida airdropi adressaate: {{arrayFormat}}`",
-    "grid": {
-      "left": {
-        "loading": "Varade andmete laadimine",
-        "reloadingTokenDetails": "Proovitakse laadida vara andmeid",
-        "table": {
-          "title": "Piletihoidjad kuuluvad kohandatud airdropi",
-          "invalid": "Kohandatud airdrop-sihtmärke pole, palun hinnake airdrop-i seaded uuesti.",
-          "title2": "Piletiomanikud on airdropist välja jäetud",
-          "th1": "Konto",
-          "th2": "Kogus",
-          "th22": "Väärtus",
-          "th3": "Eraldamine",
-          "th4": "Põhjus",
-          "reasons": {
-            "blocked": "Kasutaja on blokeeritud",
-            "self": "Ise saata ei saa",
-            "minReward": "Eraldatud preemia on liiga väike"
-          }
-        },
-        "json": "Airdropi JSON-andmed",
-        "jsonSimple": "Kohandatud airdropi JSON-andmed"
-      },
-      "right": {
-        "summary": {
-          "title": "Kohandatud airdropi kokkuvõte",
-          "ticketWinQty": "Airdropi saajate kogus",
-          "sendingAccount": "Airdropi saatmine aadressilt"
-        },
-        "options": {
-          "title": "Kohandatud airdrop valikud",
-          "titleName": "Sisestage oma {{titleName}} Konto ID",
-          "assetName": "Sisestage selle vara nimi, mida soovite eetrisse saata",
-          "batchSize": "Õhutilga ülekandepartiide suurus",
-          "tokenQuantity": "Sisestage žetoonide kogus, mida soovite õhust välja lasta",
-          "distroRadio": {
-            "title": "Kuidas tuleks žetoone võitjatele eraldada?",
-            "equally": "Samamoodi võitnud konto ID-de vahel",
-            "proportionally": "Proportsionaalne võidetud piletitega",
-            "roundRobin": "Eraldage terved märgid ümmarguse meetodiga"
-          },
-          "blocking": {
-            "title": "Kas blokeerida blokeeritud kontod?"
-          },
-          "reqRadio": {
-            "yes": "Jah",
-            "no": "Ei"
-          },
-          "target": {
-            "ticketQty": "Võidupiletite kogus",
-            "ticketValue": "Võidetud piletite väärtus",
-            "title": "Millele sa selle õhutilgutuse rajada tahad?"
-          }
-        },
-        "invalid": {
-          "title": "Pole midagi õhku lasta",
-          "reason": "Arvestades, et kehtivaid pileteid pole, pole ka midagi lendu lasta.",
-          "resolution": "Jätkamiseks reguleerige õhutilku sätteid või arvutage välja mõni muu õhutilk."
-        },
-        "valid": {
-          "title": "Kas jätkata kohandatud airdropiga?",
-          "note": "Pidage õhutilkade partiide kavandamisel silmas tehingute ja ploki suuruse piiranguid.",
-          "single": "Partiipiiranguga {{batchSize}}, selle kohandatud õhutilgutamise lõpuleviimiseks on vaja 1 partii.",
-          "multi": "Partiipiiranguga {{batchSize}}, {{qtyBatches}} Selle kohandatud õhutilgutamise lõpuleviimiseks on vaja partiid.",
-          "reminder": "Kohandatud õhutilkade partiide kavandamisel pidage meeles tehingute ja ploki suuruse piiranguid."
+  "header": {
+    "title": "Tehke seadmel kohandatud õhulangus {{titleName}} plokiahel",
+    "subtitle": "Sellel lehel kuvatakse ainult 10 parimat airdropi võitjat. ",
+    "back": "tagasi",
+    "switchEnv": "Vaheta plokiahelat",
+    "processing": "Kohandatud airdrop-faili töötlemine, palun oodake."
+  },
+  "uploadBtn": "Laadige üles JSON-fail",
+  "uploadText": "Jätkamiseks laadige üles JSON-fail, mis sisaldab kohandatud airdropi andmeid.",
+  "uploadText2": "JSON-fail peaks sisaldama airdropi adressaatide massiivi: \"",
+  "grid": {
+    "left": {
+      "loading": "Varade andmete laadimine",
+      "reloadingTokenDetails": "Proovitakse laadida vara andmeid",
+      "table": {
+        "title": "Piletihoidjad kuuluvad kohandatud airdropi",
+        "invalid": "Kohandatud airdrop-sihtmärke pole, palun hinnake airdrop-i seaded uuesti.",
+        "title2": "Piletiomanikud on airdropist välja jäetud",
+        "th1": "Konto",
+        "th2": "Kogus",
+        "th22": "Väärtus",
+        "th3": "Eraldamine",
+        "th4": "Põhjus",
+        "reasons": {
+          "blocked": "Kasutaja on blokeeritud",
+          "noObject": "Konto andmeid ei saanud tuua.",
+          "self": "Ise saata ei saa",
+          "minReward": "Eraldatud preemia on liiga väike"
         }
+      },
+      "json": "Airdropi JSON-andmed",
+      "jsonSimple": "Kohandatud airdropi JSON-andmed"
+    },
+    "right": {
+      "summary": {
+        "title": "Kohandatud airdropi kokkuvõte",
+        "ticketWinQty": "Airdropi saajate kogus",
+        "sendingAccount": "Airdropi saatmine aadressilt"
+      },
+      "options": {
+        "title": "Kohandatud airdrop valikud",
+        "titleName": "Sisestage oma {{titleName}} Konto ID",
+        "assetName": "Sisestage selle vara nimi, mida soovite eetrisse saata",
+        "batchSize": "Õhutilga ülekandepartiide suurus",
+        "tokenQuantity": "Sisestage žetoonide kogus, mida soovite õhust välja lasta",
+        "distroRadio": {
+          "title": "Kuidas tuleks žetoone võitjatele eraldada?",
+          "equally": "Samamoodi võitnud konto ID-de vahel",
+          "proportionally": "Proportsionaalne võidetud piletitega",
+          "roundRobin": "Eraldage terved märgid ümmarguse meetodiga"
+        },
+        "blocking": {
+          "title": "Kas blokeerida blokeeritud kontod?"
+        },
+        "reqRadio": {
+          "yes": "Jah",
+          "no": "Ei"
+        },
+        "target": {
+          "ticketQty": "Võidupiletite kogus",
+          "ticketValue": "Võidetud piletite väärtus",
+          "title": "Millele sa selle õhutilgutuse rajada tahad?"
+        }
+      },
+      "invalid": {
+        "title": "Pole midagi õhku lasta",
+        "reason": "Arvestades, et kehtivaid pileteid pole, pole ka midagi lendu lasta.",
+        "resolution": "Jätkamiseks reguleerige õhutilku sätteid või arvutage välja mõni muu õhutilk."
+      },
+      "valid": {
+        "title": "Kas jätkata kohandatud airdropiga?",
+        "note": "Pidage õhutilkade partiide kavandamisel silmas tehingute ja ploki suuruse piiranguid.",
+        "single": "Partiipiiranguga {{batchSize}}, selle kohandatud õhutilgutamise lõpuleviimiseks on vaja 1 partii.",
+        "multi": "Partiipiiranguga {{batchSize}}, {{qtyBatches}} Selle kohandatud õhutilgutamise lõpuleviimiseks on vaja partiid.",
+        "reminder": "Kohandatud õhutilkade partiide kavandamisel pidage meeles tehingute ja ploki suuruse piiranguid."
       }
     }
   }
+}

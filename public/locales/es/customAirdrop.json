@@ -1,76 +1,80 @@
 {
-    "header": {
-      "title": "Realice un lanzamiento aéreo personalizado en el {{titleName}} cadena de bloques",
-      "back": "Atrás"
-    },
-    "uploadBtn": "Subir archivo JSON",
-    "uploadText": "Para continuar, cargue un archivo JSON que contenga los datos personalizados del airdrop.",
-    "uploadText2": "El archivo JSON debe contener una matriz de destinatarios de airdrop: {{arrayFormat}}`",
-    "grid": {
-      "left": {
-        "loading": "Cargando datos de activos",
-        "reloadingTokenDetails": "Intentando cargar datos de activos",
-        "table": {
-          "title": "Titulares de entradas incluidos en el airdrop personalizado",
-          "invalid": "No hay objetivos de airdrop personalizados, vuelva a evaluar la configuración de airdrop.",
-          "title2": "Titulares de entradas excluidos del airdrop",
-          "th1": "Cuenta",
-          "th2": "Cantidad",
-          "th22": "Valor",
-          "th3": "Asignación",
-          "th4": "Razón",
-          "reasons": {
-            "blocked": "El usuario ha sido bloqueado",
-            "self": "No se puede enviar a uno mismo",
-            "minReward": "Recompensa asignada demasiado pequeña"
-          }
-        },
-        "json": "Lanzamiento aéreo de datos JSON",
-        "jsonSimple": "Datos JSON de airdrop personalizados"
-      },
-      "right": {
-        "summary": {
-          "title": "Resumen de airdrop personalizado",
-          "ticketWinQty": "Cantidad de destinatarios de airdrop",
-          "sendingAccount": "Enviando airdrop desde"
-        },
-        "options": {
-          "title": "Opciones de lanzamiento aéreo personalizado",
-          "titleName": "Entra tu {{titleName}} ID de la cuenta",
-          "assetName": "Ingrese el nombre del activo que desea lanzar desde el aire",
-          "batchSize": "Tamaño de los lotes de transferencia de airdrop",
-          "tokenQuantity": "Ingrese la cantidad de tokens que desea lanzar desde el aire",
-          "distroRadio": {
-            "title": "¿Cómo se deben asignar los tokens a los ganadores?",
-            "equally": "Por igual entre las ID de cuenta ganadoras",
-            "proportionally": "Proporcional a los boletos ganados",
-            "roundRobin": "Asigne tokens completos en forma de turno rotativo"
-          },
-          "blocking": {
-            "title": "¿Excluir cuentas bloqueadas?"
-          },
-          "reqRadio": {
-            "yes": "Sí",
-            "no": "No"
-          },
-          "target": {
-            "ticketQty": "Cantidad de boletos ganadores",
-            "ticketValue": "Valor de los boletos ganadores",
-            "title": "¿En qué quieres basar este airdrop?"
-          }
-        },
-        "invalid": {
-          "title": "Nada que lanzar desde el aire",
-          "reason": "Dado que no hay boletos válidos, no hay nada que lanzar desde el aire.",
-          "resolution": "Ajuste la configuración del lanzamiento aéreo o calcule otro lanzamiento aéreo para continuar."
-        },
-        "valid": {
-          "title": "¿Continuar con el airdrop personalizado?",
-          "note": "Tenga en cuenta los límites de tamaño de transacción y bloque al planificar lotes de airdrops.",
-          "single": "Con un límite de lote de {{batchSize}}, se requiere 1 lote para completar este airdrop personalizado.",
-          "multi": "Con un límite de lote de {{batchSize}}, {{qtyBatches}} Se requieren lotes para completar este airdrop personalizado.",
-          "reminder": "Tenga en cuenta los límites de tamaño de transacción y bloque al planificar lotes de airdrops personalizados."
+  "header": {
+    "title": "Realice un lanzamiento aéreo personalizado en el {{titleName}} cadena de bloques",
+    "subtitle": "En esta página solo se mostrarán los 10 mejores ganadores de airdrop. ",
+    "back": "Atrás",
+    "switchEnv": "Cambiar cadena de bloques",
+    "processing": "Procesando el archivo airdrop personalizado, espere."
+  },
+  "uploadBtn": "Subir archivo JSON",
+  "uploadText": "Para continuar, cargue un archivo JSON que contenga los datos personalizados del airdrop.",
+  "uploadText2": "El archivo JSON debe contener una matriz de destinatarios de airdrop:",
+  "grid": {
+    "left": {
+      "loading": "Cargando datos de activos",
+      "reloadingTokenDetails": "Intentando cargar datos de activos",
+      "table": {
+        "title": "Titulares de entradas incluidos en el airdrop personalizado",
+        "invalid": "No hay objetivos de airdrop personalizados, vuelva a evaluar la configuración de airdrop.",
+        "title2": "Titulares de entradas excluidos del airdrop",
+        "th1": "Cuenta",
+        "th2": "Cantidad",
+        "th22": "Valor",
+        "th3": "Asignación",
+        "th4": "Razón",
+        "reasons": {
+          "blocked": "El usuario ha sido bloqueado",
+          "noObject": "No se pudieron obtener los datos de la cuenta.",
+          "self": "No se puede enviar a uno mismo",
+          "minReward": "Recompensa asignada demasiado pequeña"
         }
+      },
+      "json": "Lanzamiento aéreo de datos JSON",
+      "jsonSimple": "Datos JSON de airdrop personalizados"
+    },
+    "right": {
+      "summary": {
+        "title": "Resumen de airdrop personalizado",
+        "ticketWinQty": "Cantidad de destinatarios de airdrop",
+        "sendingAccount": "Enviando airdrop desde"
+      },
+      "options": {
+        "title": "Opciones de lanzamiento aéreo personalizado",
+        "titleName": "Entra tu {{titleName}} ID de la cuenta",
+        "assetName": "Ingrese el nombre del activo que desea lanzar desde el aire",
+        "batchSize": "Tamaño de los lotes de transferencia de airdrop",
+        "tokenQuantity": "Ingrese la cantidad de tokens que desea lanzar desde el aire",
+        "distroRadio": {
+          "title": "¿Cómo se deben asignar los tokens a los ganadores?",
+          "equally": "Por igual entre las ID de cuenta ganadoras",
+          "proportionally": "Proporcional a los boletos ganados",
+          "roundRobin": "Asigne tokens completos en forma de turno rotativo"
+        },
+        "blocking": {
+          "title": "¿Excluir cuentas bloqueadas?"
+        },
+        "reqRadio": {
+          "yes": "Sí",
+          "no": "No"
+        },
+        "target": {
+          "ticketQty": "Cantidad de boletos ganadores",
+          "ticketValue": "Valor de los boletos ganadores",
+          "title": "¿En qué quieres basar este airdrop?"
+        }
+      },
+      "invalid": {
+        "title": "Nada que lanzar desde el aire",
+        "reason": "Dado que no hay boletos válidos, no hay nada que lanzar desde el aire.",
+        "resolution": "Ajuste la configuración del lanzamiento aéreo o calcule otro lanzamiento aéreo para continuar."
+      },
+      "valid": {
+        "title": "¿Continuar con el airdrop personalizado?",
+        "note": "Tenga en cuenta los límites de tamaño de transacción y bloque al planificar lotes de airdrops.",
+        "single": "Con un límite de lote de {{batchSize}}, se requiere 1 lote para completar este airdrop personalizado.",
+        "multi": "Con un límite de lote de {{batchSize}}, {{qtyBatches}} Se requieren lotes para completar este airdrop personalizado.",
+        "reminder": "Tenga en cuenta los límites de tamaño de transacción y bloque al planificar lotes de airdrops personalizados."
       }
     }
   }
+}
