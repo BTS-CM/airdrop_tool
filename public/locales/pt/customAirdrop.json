@@ -1,7 +1,6 @@
 {
   "header": {
     "title": "Execute airdrop personalizado no {{titleName}} blockchain",
-    "subtitle": "Apenas os 10 vencedores do airdrop serão exibidos nesta página. ",
     "back": "Voltar",
     "switchEnv": "Alternar blockchain",
     "processing": "Processando o arquivo airdrop personalizado, aguarde."
@@ -11,7 +10,7 @@
   "uploadText2": "O arquivo JSON deve conter uma matriz de destinatários do airdrop:`",
   "grid": {
     "left": {
-      "loading": "Carregando dados de ativos",
+      "loading": "Carregando dados de lançamento aéreo",
       "reloadingTokenDetails": "Tentando carregar dados de ativos",
       "table": {
         "title": "Titulares de ingressos incluídos no airdrop personalizado",
@@ -25,8 +24,11 @@
         "reasons": {
           "blocked": "O usuário foi bloqueado",
           "noObject": "Não foi possível obter os dados da conta.",
+          "blockedAssets": "O usuário bloqueou este recurso.",
           "self": "Não é possível enviar para si mesmo",
-          "minReward": "Recompensa alocada muito pequena"
+          "minReward": "Recompensa alocada muito pequena",
+          "excludedTicketHolder": "Excluído por retenção de bilhete",
+          "excludedNonTicketHolder": "Não está na tabela de classificação de ingressos"
         }
       },
       "json": "Airdrop dados JSON",
@@ -43,7 +45,7 @@
         "titleName": "Insira o seu {{titleName}} ID da conta",
         "assetName": "Digite o nome do ativo que você deseja lançar no ar",
         "batchSize": "Tamanho dos lotes de transferência de airdrop",
-        "tokenQuantity": "Insira a quantidade de tokens que deseja lançar no ar",
+        "tokenQuantity": "Insira a quantidade de tokens que você deseja lançar no ar",
         "distroRadio": {
           "title": "Como os tokens devem ser alocados aos vencedores?",
           "equally": "Igualmente entre IDs de contas vencedoras",
@@ -56,6 +58,12 @@
         "reqRadio": {
           "yes": "Sim",
           "no": "Não"
+        },
+        "ticketHolder": {
+          "title": "Quem deve ser incluído no airdrop?",
+          "onlyHolders": "Titulares de ingressos",
+          "noHolders": "Não titulares de ingressos",
+          "both": "Ambos (todos)"
         },
         "target": {
           "ticketQty": "Quantidade de bilhetes premiados",

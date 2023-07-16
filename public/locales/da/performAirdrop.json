@@ -11,6 +11,15 @@
       "reloadingTokenDetails": "Forsøger at indlæse aktivdata",
       "reloadingRequiredTokenDetails": "Forsøger at indlæse nødvendige tokendata",
       "processing": "Behandler brugersaldi for påkrævet token",
+      "modals": {
+        "excluded": "Mængde ekskluderet",
+        "included": "Antal inkluderet",
+        "preview": "Forhåndsvisning af airdrop",
+        "opening": "Åbner...",
+        "btn1": "Se airdrop-modtagere",
+        "btn2": "Se airdrop JSON",
+        "btn3": "Se ekskluderede brugere"
+      },
       "table": {
         "title": "Billetholdere inkluderet i airdrop",
         "invalid": "Der er ingen airdrop-mål. Reevaluer venligst airdrop-indstillingerne.",

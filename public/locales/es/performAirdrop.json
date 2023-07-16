@@ -11,6 +11,15 @@
       "reloadingTokenDetails": "Intentando cargar datos de activos",
       "reloadingRequiredTokenDetails": "Intentando cargar los datos del token requeridos",
       "processing": "Procesando saldos de usuario para el token requerido",
+      "modals": {
+        "excluded": "Cantidad excluida",
+        "included": "Cantidad incluida",
+        "preview": "Vista previa del lanzamiento aéreo",
+        "opening": "Apertura...",
+        "btn1": "Ver destinatarios de airdrop",
+        "btn2": "Ver lanzamiento aéreo JSON",
+        "btn3": "Ver usuarios excluidos"
+      },
       "table": {
         "title": "Titulares de entradas incluidos en airdrop",
         "invalid": "No hay objetivos de lanzamiento aéreo, vuelva a evaluar la configuración de lanzamiento aéreo.",

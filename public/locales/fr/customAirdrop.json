@@ -1,7 +1,6 @@
 {
   "header": {
     "title": "Effectuez un largage personnalisé sur le {{titleName}} chaîne de blocs",
-    "subtitle": "Seuls les 10 meilleurs gagnants du airdrop seront affichés sur cette page. ",
     "back": "Dos",
     "switchEnv": "Changer de blockchain",
     "processing": "Traitement du fichier airdrop personnalisé, veuillez patienter."
@@ -11,7 +10,7 @@
   "uploadText2": "Le fichier JSON doit contenir un tableau de destinataires airdrop :`",
   "grid": {
     "left": {
-      "loading": "Chargement des données d'actif",
+      "loading": "Chargement des données de largage",
       "reloadingTokenDetails": "Tentative de chargement des données d'éléments",
       "table": {
         "title": "Détenteurs de billets inclus dans le largage personnalisé",
@@ -25,8 +24,11 @@
         "reasons": {
           "blocked": "L'utilisateur a été bloqué",
           "noObject": "Impossible de récupérer les données du compte.",
+          "blockedAssets": "L'utilisateur a bloqué cet élément.",
           "self": "Impossible d'envoyer à soi-même",
-          "minReward": "Récompense attribuée trop petite"
+          "minReward": "Récompense attribuée trop petite",
+          "excludedTicketHolder": "Exclus pour la possession d'un billet",
+          "excludedNonTicketHolder": "Pas sur le classement des billets"
         }
       },
       "json": "Données JSON Airdrop",
@@ -34,7 +36,7 @@
     },
     "right": {
       "summary": {
-        "title": "Récapitulatif de largage personnalisé",
+        "title": "Résumé du largage personnalisé",
         "ticketWinQty": "Quantité de destinataires de parachutage",
         "sendingAccount": "Envoi de parachutage depuis"
       },
@@ -48,7 +50,7 @@
           "title": "Comment les jetons devraient-ils être attribués aux gagnants ?",
           "equally": "À parts égales entre les identifiants de compte gagnants",
           "proportionally": "Proportionnel aux billets gagnés",
-          "roundRobin": "Allouer des jetons entiers à tour de rôle"
+          "roundRobin": "Allouer des jetons entiers de manière circulaire"
         },
         "blocking": {
           "title": "Exclure les comptes bloqués ?"
@@ -56,6 +58,12 @@
         "reqRadio": {
           "yes": "Oui",
           "no": "Non"
+        },
+        "ticketHolder": {
+          "title": "Qui devrait être inclus dans l'airdrop ?",
+          "onlyHolders": "Détenteurs de billets",
+          "noHolders": "Non détenteurs de billets",
+          "both": "Les deux (tous)"
         },
         "target": {
           "ticketQty": "Quantité de billets gagnants",

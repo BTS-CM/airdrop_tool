@@ -1,17 +1,16 @@
 {
   "header": {
     "title": "Esegui un airdrop personalizzato sul {{titleName}} blockchain",
-    "subtitle": "In questa pagina verranno visualizzati solo i primi 10 vincitori di airdrop. ",
     "back": "Indietro",
     "switchEnv": "Cambia blockchain",
-    "processing": "Elaborazione del file airdrop personalizzato, attendere."
+    "processing": "Elaborazione del file airdrop personalizzato in corso, attendere."
   },
   "uploadBtn": "Carica il file JSON",
   "uploadText": "Per procedere, carica un file JSON contenente i dati dell'airdrop personalizzato.",
   "uploadText2": "Il file JSON dovrebbe contenere un array di destinatari airdrop:`",
   "grid": {
     "left": {
-      "loading": "Caricamento dati asset",
+      "loading": "Caricamento dei dati dell'airdrop",
       "reloadingTokenDetails": "Tentativo di caricare i dati delle risorse",
       "table": {
         "title": "Possessori di biglietti inclusi nell'airdrop personalizzato",
@@ -25,8 +24,11 @@
         "reasons": {
           "blocked": "L'utente è stato bloccato",
           "noObject": "Impossibile recuperare i dati dell'account.",
+          "blockedAssets": "L'utente ha bloccato questa risorsa.",
           "self": "Impossibile inviare a se stessi",
-          "minReward": "Ricompensa assegnata troppo piccola"
+          "minReward": "Ricompensa assegnata troppo piccola",
+          "excludedTicketHolder": "Escluso per possesso biglietto",
+          "excludedNonTicketHolder": "Non nella classifica dei biglietti"
         }
       },
       "json": "Airdrop dati JSON",
@@ -56,6 +58,12 @@
         "reqRadio": {
           "yes": "SÌ",
           "no": "NO"
+        },
+        "ticketHolder": {
+          "title": "Chi dovrebbe essere incluso nell'airdrop?",
+          "onlyHolders": "Possessori di biglietti",
+          "noHolders": "Non possessori di biglietto",
+          "both": "Entrambi (tutti)"
         },
         "target": {
           "ticketQty": "Quantità di biglietti vincenti",

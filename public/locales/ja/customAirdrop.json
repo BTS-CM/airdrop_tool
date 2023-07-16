@@ -1,7 +1,6 @@
 {
   "header": {
     "title": "でカスタムエアドロップを実行します {{titleName}} ブロックチェーン",
-    "subtitle": "このページにはエアドロップの勝者上位 10 名のみが表示されます。",
     "back": "戻る",
     "switchEnv": "スイッチブロックチェーン",
     "processing": "カスタム Airdrop ファイルを処理しています。お待ちください。"
@@ -11,7 +10,7 @@
   "uploadText2": "JSON ファイルには、エアドロップ受信者の配列が含まれている必要があります。",
   "grid": {
     "left": {
-      "loading": "アセットデータのロード",
+      "loading": "エアドロップデータをロードしています",
       "reloadingTokenDetails": "アセットデータをロードしようとしています",
       "table": {
         "title": "カスタムエアドロップに含まれるチケットホルダー",
@@ -25,8 +24,11 @@
         "reasons": {
           "blocked": "ユーザーがブロックされました",
           "noObject": "アカウントデータを取得できませんでした。",
+          "blockedAssets": "ユーザーがこのアセットをブロックしました。",
           "self": "自分自身に送信できません",
-          "minReward": "割り当てられた報酬が少なすぎます"
+          "minReward": "割り当てられた報酬が少なすぎます",
+          "excludedTicketHolder": "チケット保有対象外",
+          "excludedNonTicketHolder": "チケットリーダーボードに載っていない"
         }
       },
       "json": "エアドロップ JSON データ",
@@ -56,6 +58,12 @@
         "reqRadio": {
           "yes": "はい",
           "no": "いいえ"
+        },
+        "ticketHolder": {
+          "title": "誰をエアドロップに含めるべきですか?",
+          "onlyHolders": "チケットホルダー",
+          "noHolders": "チケットをお持ちでない方",
+          "both": "両方（すべて）"
         },
         "target": {
           "ticketQty": "当選チケットの枚数",

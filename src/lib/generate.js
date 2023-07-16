@@ -1,6 +1,6 @@
 /* eslint-disable consistent-return */
-import { TransactionBuilder } from 'bitsharesjs';
-import { TransactionBuilder as TuscTB } from 'tuscjs';
+import { TransactionBuilder, TransactionHelper } from 'bitsharesjs';
+import { TransactionBuilder as TuscTB, TransactionHelper as TuscTH } from 'tuscjs';
 import { Apis } from 'bitsharesjs-ws';
 import { Apis as tuscApis } from 'tuscjs-ws';
 import { v4 as uuidv4 } from 'uuid';
@@ -235,6 +235,13 @@ async function beetBroadcast(
       return;
     }
 
+    tr.finalize().then(() => {
+      const tr_size = tr.tr_buffer.byteLength;
+      console.log(`Transaction size: ${tr_size} bytes`);
+    }).catch((error) => {
+      console.error(error);
+    });
+
     let result;
     try {
       result = await tr.broadcast(); // broadcasting request to beet
@@ -249,8 +256,44 @@ async function beetBroadcast(
   });
 }
 
+/**
+ * Get the estimated bytes in the transaction
+ * @param {Number} opCost
+ * @param {String} chain
+ * @param {String} opType
+ * @param {Array} operations
+ * @returns {Object}
+ */
+async function getTrxBytes(
+  opCost,
+  chain,
+  opType,
+  operations
+) {
+  return new Promise(async (resolve, reject) => {
+    const updatedOps = operations.map((op) => ({
+      ...op,
+      fee: { ...op.fee, amount: opCost }
+    }));
+
+    const tr = chain === "TUSC" ? new TuscTB() : new TransactionBuilder();
+    for (let i = 0; i < operations.length; i++) {
+      tr.add_type_operation(opType, operations[i]);
+    }
+
+    tr.finalize().then(() => {
+      const tr_size = tr.tr_buffer.byteLength;
+      resolve(tr_size);
+    }).catch((error) => {
+      console.error(error);
+      reject();
+    });
+  });
+}
+
 export {
   beetBroadcast,
+  getTrxBytes,
   generateDeepLink,
   generateQRContents
 };

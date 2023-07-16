@@ -1,7 +1,6 @@
 {
   "header": {
     "title": "Realice un lanzamiento aéreo personalizado en el {{titleName}} cadena de bloques",
-    "subtitle": "En esta página solo se mostrarán los 10 mejores ganadores de airdrop. ",
     "back": "Atrás",
     "switchEnv": "Cambiar cadena de bloques",
     "processing": "Procesando el archivo airdrop personalizado, espere."
@@ -11,7 +10,7 @@
   "uploadText2": "El archivo JSON debe contener una matriz de destinatarios de airdrop:",
   "grid": {
     "left": {
-      "loading": "Cargando datos de activos",
+      "loading": "Cargando datos de airdrop",
       "reloadingTokenDetails": "Intentando cargar datos de activos",
       "table": {
         "title": "Titulares de entradas incluidos en el airdrop personalizado",
@@ -25,8 +24,11 @@
         "reasons": {
           "blocked": "El usuario ha sido bloqueado",
           "noObject": "No se pudieron obtener los datos de la cuenta.",
+          "blockedAssets": "El usuario ha bloqueado este recurso.",
           "self": "No se puede enviar a uno mismo",
-          "minReward": "Recompensa asignada demasiado pequeña"
+          "minReward": "Recompensa asignada demasiado pequeña",
+          "excludedTicketHolder": "Excluido por tener billete",
+          "excludedNonTicketHolder": "No en la clasificación de boletos"
         }
       },
       "json": "Lanzamiento aéreo de datos JSON",
@@ -46,7 +48,7 @@
         "tokenQuantity": "Ingrese la cantidad de tokens que desea lanzar desde el aire",
         "distroRadio": {
           "title": "¿Cómo se deben asignar los tokens a los ganadores?",
-          "equally": "Por igual entre las ID de cuenta ganadoras",
+          "equally": "Igualdad entre ID de cuenta ganadoras",
           "proportionally": "Proporcional a los boletos ganados",
           "roundRobin": "Asigne tokens completos en forma de turno rotativo"
         },
@@ -56,6 +58,12 @@
         "reqRadio": {
           "yes": "Sí",
           "no": "No"
+        },
+        "ticketHolder": {
+          "title": "¿Quién debe ser incluido en el airdrop?",
+          "onlyHolders": "Titulares de entradas",
+          "noHolders": "No titulares de entradas",
+          "both": "ambos (todos)"
         },
         "target": {
           "ticketQty": "Cantidad de boletos ganadores",

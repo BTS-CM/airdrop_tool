@@ -1,19 +1,34 @@
 {
-    "airdrop": "공중 투하",
-    "accounts": "계정",
-    "from": "~에서",
-    "to": "에게",
-    "distro": "배포 중",
-    "method": "로컬 파일 업로드를 통해",
-    "preStep1": "1. BEET 지갑을 실행하고 메뉴에서 '로컬'로 이동합니다.",
-    "preStep2": "2. 이 페이지에서 모두 허용하거나 0 '전송' 작업만 허용합니다.",
-    "preStep3": "3. 로컬 업로드 페이지에서 아래 버튼을 클릭하여 진행합니다.",
-    "generate": "에어드롭 JSON 파일 생성",
-    "confirmation": "에어드롭 JSON 생성",
-    "download1": "1. 에어드롭 JSON이 생성되었습니다. 버튼을 클릭하여 다운로드하세요.",
-    "download2": "2. BEET 로컬 페이지에서 JSON 파일을 업로드하면 프롬프트가 나타납니다.",
-    "download3": "3. 에어드롭을 승인하기 전에 프롬프트의 내용을 확인하십시오.",
-    "downloadButton": "에어드롭 JSON 다운로드",
-    "viewJSON": "제안된 에어드롭 작업 JSON",
-    "begin": "에어드롭 시작"
+  "airdrop": "공중 투하",
+  "accounts": "계정",
+  "from": "~에서",
+  "to": "에게",
+  "distro": "배포 중",
+  "method": "로컬 파일 업로드를 통해",
+  "preStep1": "1. BEET 지갑을 실행하고 메뉴에서 '로컬'로 이동합니다.",
+  "preStep2": "2. 이 페이지에서 모두 허용하거나 0 '전송' 작업만 허용합니다.",
+  "preStep3": "3. 로컬 업로드 페이지에서 아래 버튼을 클릭하여 진행합니다.",
+  "generate": "에어드롭 JSON 파일 생성",
+  "confirmation": "에어드롭 JSON 생성",
+  "download1": "1. 에어드롭 JSON이 생성되었습니다. 버튼을 클릭하여 다운로드하세요.",
+  "download2": "2. BEET 로컬 페이지에서 JSON 파일을 업로드하면 프롬프트가 나타납니다.",
+  "download3": "3. 에어드롭을 승인하기 전에 프롬프트의 내용을 확인하십시오.",
+  "downloadButton": "에어드롭 JSON 다운로드",
+  "viewJSON": "제안된 에어드롭 작업 JSON",
+  "begin": "에어드롭 시작",
+  "fees": {
+    "nonLTM": "{{nonLTM}} {{assetName}} 전액",
+    "LTM": "{{LTM}} {{assetName}} 평생회원 회비",
+    "tooBig": "너무 큰 에어드롭"
+  },
+  "deeplink": {
+    "noDL": {
+      "title": "원시 비트 딥링크를 통해",
+      "step1": "BEET 지갑을 실행하고 메뉴에서 'Raw Link'로 이동합니다.",
+      "step2": "이 페이지에서 모든 작업을 허용하거나 1'' 작업만 허용(그런 다음 저장을 클릭)할 수 있습니다.",
+      "step3": "Beet에 '원시 링크 준비 완료'가 표시되면 이 요청을 제출하십시오.",
+      "label": "계정 아이디를 입력하세요",
+      "btn": "원시 딥링크 생성"
+    }
   }
+}

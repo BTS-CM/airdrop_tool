@@ -1,7 +1,6 @@
 {
   "header": {
     "title": "Tehke seadmel kohandatud õhulangus {{titleName}} plokiahel",
-    "subtitle": "Sellel lehel kuvatakse ainult 10 parimat airdropi võitjat. ",
     "back": "tagasi",
     "switchEnv": "Vaheta plokiahelat",
     "processing": "Kohandatud airdrop-faili töötlemine, palun oodake."
@@ -11,7 +10,7 @@
   "uploadText2": "JSON-fail peaks sisaldama airdropi adressaatide massiivi: \"",
   "grid": {
     "left": {
-      "loading": "Varade andmete laadimine",
+      "loading": "Airdropi andmete laadimine",
       "reloadingTokenDetails": "Proovitakse laadida vara andmeid",
       "table": {
         "title": "Piletihoidjad kuuluvad kohandatud airdropi",
@@ -25,8 +24,11 @@
         "reasons": {
           "blocked": "Kasutaja on blokeeritud",
           "noObject": "Konto andmeid ei saanud tuua.",
+          "blockedAssets": "Kasutaja on selle vara blokeerinud.",
           "self": "Ise saata ei saa",
-          "minReward": "Eraldatud preemia on liiga väike"
+          "minReward": "Eraldatud preemia on liiga väike",
+          "excludedTicketHolder": "Välistatud pileti hoidmisel",
+          "excludedNonTicketHolder": "Mitte piletite edetabelis"
         }
       },
       "json": "Airdropi JSON-andmed",
@@ -56,6 +58,12 @@
         "reqRadio": {
           "yes": "Jah",
           "no": "Ei"
+        },
+        "ticketHolder": {
+          "title": "Keda tuleks õhulennul kaasata?",
+          "onlyHolders": "Piletiomanikud",
+          "noHolders": "Mittepiletiomanikud",
+          "both": "Mõlemad (kõik)"
         },
         "target": {
           "ticketQty": "Võidupiletite kogus",

@@ -16,6 +16,11 @@
     "downloadButton": "Download airdrop JSON",
     "viewJSON": "Proposed airdrop operation JSON",
     "begin": "Begin airdrop",
+    "fees": {
+        "nonLTM": "{{nonLTM}} {{assetName}} full fee",
+        "LTM": "{{LTM}} {{assetName}} fee for lifetime members",
+        "tooBig": "Airdrop too big"
+    },
     "deeplink": {
         "noDL": {
             "title": "Via raw Beet deeplink",

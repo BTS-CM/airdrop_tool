@@ -1,19 +1,34 @@
 {
-    "airdrop": "Entrega por paracaídas",
-    "accounts": "cuentas",
-    "from": "de",
-    "to": "a",
-    "distro": "siendo distribuido",
-    "method": "A través de la carga de archivos locales",
-    "preStep1": "1. Inicie la billetera BEET y navegue hasta 'Local' en el menú.",
-    "preStep2": "2. En esta página, permita todo o permita solo la operación 0 'Transferir'.",
-    "preStep3": "3. Una vez en la página de carga local, haga clic en el botón de abajo para continuar.",
-    "generate": "Generar archivo JSON de lanzamiento aéreo",
-    "confirmation": "Airdrop JSON generado",
-    "download1": "1. Se ha generado su airdrop JSON, haga clic en el botón para descargarlo.",
-    "download2": "2. Desde la página local de BEET, cargue el archivo JSON; debería aparecer un aviso.",
-    "download3": "3. Verifique el contenido del aviso antes de aprobar el airdrop.",
-    "downloadButton": "Descargar airdrop JSON",
-    "viewJSON": "JSON de operación de lanzamiento desde el aire propuesta",
-    "begin": "Comenzar lanzamiento aéreo"
+  "airdrop": "Entrega por paracaídas",
+  "accounts": "cuentas",
+  "from": "de",
+  "to": "a",
+  "distro": "siendo distribuido",
+  "method": "A través de la carga de archivos locales",
+  "preStep1": "1. Inicie la billetera BEET y navegue hasta 'Local' en el menú.",
+  "preStep2": "2. En esta página, permita todo o permita solo la operación 0 'Transferir'.",
+  "preStep3": "3. Una vez en la página de carga local, haga clic en el botón de abajo para continuar.",
+  "generate": "Generar archivo JSON de lanzamiento aéreo",
+  "confirmation": "Airdrop JSON generado",
+  "download1": "1. Se ha generado su airdrop JSON, haga clic en el botón para descargarlo.",
+  "download2": "2. Desde la página local de BEET, cargue el archivo JSON; debería aparecer un aviso.",
+  "download3": "3. Verifique el contenido del aviso antes de aprobar el airdrop.",
+  "downloadButton": "Descargar airdrop JSON",
+  "viewJSON": "JSON de operación de lanzamiento desde el aire propuesta",
+  "begin": "Comenzar lanzamiento aéreo",
+  "fees": {
+    "nonLTM": "{{nonLTM}} {{assetName}} tarifa completa",
+    "LTM": "{{LTM}} {{assetName}} cuota para miembros vitalicios",
+    "tooBig": "Airdrop demasiado grande"
+  },
+  "deeplink": {
+    "noDL": {
+      "title": "A través del enlace profundo de remolacha sin procesar",
+      "step1": "Inicie la billetera BEET y navegue hasta 'Raw Link' en el menú.",
+      "step2": "Desde esta página puede permitir todas las operaciones o permitir únicamente la operación 1 '' (luego haga clic en guardar).",
+      "step3": "Una vez que se muestre 'Listo para enlaces sin procesar' en Beet, envíe esta solicitud.",
+      "label": "Ingrese su ID de cuenta",
+      "btn": "Generar un enlace profundo sin procesar"
+    }
   }
+}

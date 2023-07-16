@@ -3,16 +3,22 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
+import { FixedSizeList as List } from 'react-window';
+import { useDisclosure } from '@mantine/hooks';
+
 import {
   Title,
   Text,
   SimpleGrid,
   Badge,
+  Stack,
   Card,
   Radio,
   Table,
   Button,
   ScrollArea,
+  CopyButton,
+  Modal,
   Group,
   Tooltip,
   Accordion,
@@ -68,142 +74,135 @@ export default function AirdropLeftCard(properties) {
     airdropTarget
   } = properties;
 
-  const [validRows, setValidRows] = useState([]);
-  const [invalidRows, setInvalidRows] = useState([]);
   const [simpleWinnerJSON, setSimpleWinnerJSON] = useState(JSON.stringify([]));
 
+  // for accodion detail windows
+  const [opened1, { open: open1, close: close1 }] = useDisclosure(false);
+  const [opened2, { open: open2, close: close2 }] = useDisclosure(false);
+  const [opened3, { open: open3, close: close3 }] = useDisclosure(false);
+
   useEffect(() => {
-    setSimpleWinnerJSON(JSON.stringify([]));
-    if (
-      !tokenDetails
-      || (
-        requiredToken
-        && requiredToken === "Yes"
-        && finalReqTokenName
-        && finalReqQty
-        && !requiredTokenDetails
-      )
-    ) {
-      setValidRows([]);
-      setInvalidRows([]);
-    } else {
-      // accordian table rows for those included in airdrop
-      setValidRows(
-        winners.length
-          ? winners
-            .map((winner) => (
-              <tr key={`winner_${winner.id}`}>
-                {
-                  requiredToken
-                    ? (
-                      <td width="35%">
-                        <Link style={{ textDecoration: 'none', color: 'black' }} to={`/Account/${params.env}/${winner.id}`}>
-                          <b>
-                            {envLeaderboard.find((usr) => usr.id === winner.id).account.name}
-                          </b>
-                        </Link><br />
-                        (
-                          <Link style={{ textDecoration: 'none' }} to={`/Account/${params.env}/${winner.id}`}>
-                            {winner.id}
-                          </Link>
-                        )
-                      </td>
-                    )
-                    : (
-                      <td width="35%">
-                        <Link style={{ textDecoration: 'none' }} to={`/Account/${params.env}/${winner.id}`}>
-                          {winner.id}
-                        </Link>
-                      </td>
-                    )
-                }
-                <td width="25%">
-                  {
-                    airdropTarget === "ticketQty"
-                      ? winner.qty
-                      : winner.ticketsValue || winner.value
-                  }
-                </td>
-                <td width="40%">
-                  {
-                    winner.assignedTokens.toFixed(tokenDetails.precision)
-                  }
-                  <br />
-                  {finalTokenName || assetName}
-                </td>
-              </tr>
-            ))
-          : []
-      );
+    setSimpleWinnerJSON(JSON.stringify(
+      winners.map((x) => ({
+        user: requiredToken
+          ? `${envLeaderboard.find((usr) => usr.id === x.id).account.name} (${x.id})`
+          : x.id,
+        ticketQty: x.qty,
+        ticketsValue: x.ticketsValue || x.value,
+        percent: x.percent,
+        assignedTokens: x.assignedTokens
+      })),
+      null,
+      4
+    ));
+  }, [winners, requiredToken]);
 
-      // accordian table rows for those excluded from airdrop
-      setInvalidRows(
-        invalidOutput.length
-          ? invalidOutput
-            .map((loser) => (
-            <tr key={`loser_${loser.id}`}>
-              {
-                requiredToken
-                  ? (
-                    <td>
-                      <Link style={{ textDecoration: 'none', color: 'black' }} to={`/Account/${params.env}/${loser.id}`}>
-                        <b>{envLeaderboard.find((usr) => usr.id === loser.id).account.name}</b>
-                      </Link><br />
-                      (
-                        <Link style={{ textDecoration: 'none' }} to={`/Account/${params.env}/${loser.id}`}>
-                          {loser.id}
-                        </Link>
-                      )
-                    </td>
-                  )
-                  : (
-                    <Link style={{ textDecoration: 'none' }} to={`/Account/${params.env}/${loser.id}`}>
-                      {loser.id}
-                    </Link>
-                  )
-              }
-              <td>
-                {
-                  loser.reason && loser.reason.length > 1
-                    ? loser.reason.map((reason, i) => (
-                      <><Text>{i + 1}. {reason}</Text></>
-                    ))
-                    : <Text>1. {loser.reason}</Text>
-                }
-              </td>
-            </tr>
-            ))
-          : []
-      );
-
-      setSimpleWinnerJSON(JSON.stringify(
-        winners.map((x) => ({
-          user: requiredToken
-            ? `${envLeaderboard.find((usr) => usr.id === x.id).account.name} (${x.id})`
-            : x.id,
-          ticketQty: x.qty,
-          ticketsValue: x.ticketsValue || x.value,
-          percent: x.percent,
-          assignedTokens: x.assignedTokens
-        })),
-        null,
-        4
-      ));
+  const validNewRows = ({ index, style }) => {
+    if (!winners[index]) {
+      return null;
     }
-  }, [
-    winners,
-    invalidOutput,
-    tokenDetails,
-    finalTokenQuantity,
-    finalReqTokenName,
-    finalReqQty,
-    requiredTokenDetails
-  ]);
+
+    const currentWinner = winners[index];
+    const currentID = currentWinner.id;
+    return (
+      <div style={{ ...style, width: "100%" }}>
+        <Group position="center" key={`winner_${index}`} style={{ width: "100%" }}>
+          <div style={{ width: '10%' }}>
+            {index + 1}
+          </div>
+          <div style={{ width: '30%' }}>
+            {
+              requiredToken
+                ? (
+                  <>
+                    <Link style={{ textDecoration: 'none', color: 'black' }} to={`/Account/${params.env}/${currentID}`}>
+                      <b>
+                        {envLeaderboard.find((usr) => usr.id === currentID).account.name}
+                      </b>
+                    </Link><br />
+                    (
+                      <Link style={{ textDecoration: 'none' }} to={`/Account/${params.env}/${currentID}`}>
+                        {currentID}
+                      </Link>
+                    )
+                  </>
+                )
+                : (
+                  <Link style={{ textDecoration: 'none' }} to={`/Account/${params.env}/${currentID}`}>
+                    {currentID}
+                  </Link>
+                )
+            }
+          </div>
+          <div style={{ width: '5%' }}>
+            {
+              airdropTarget === "ticketQty"
+                ? currentWinner.qty
+                : currentWinner.ticketsValue || currentWinner.value
+            }
+          </div>
+          <div style={{ width: '40%', textAlign: 'center' }}>
+            {
+              currentWinner.assignedTokens.toFixed(tokenDetails.precision)
+            } {finalTokenName || assetName}
+          </div>
+        </Group>
+      </div>
+    );
+  };
+
+  const invalidNewRows = ({ index, style }) => {
+    if (!invalidOutput[index]) {
+      return null;
+    }
+
+    const currentLoser = invalidOutput[index];
+    const currentID = currentLoser.id;
+    return (
+      <div style={{ ...style, width: "100%" }}>
+        <Group position="center" key={`loser_${index}`} style={{ width: "100%" }}>
+          <div style={{ width: '10%' }}>
+            {index + 1}
+          </div>
+          <div style={{ width: '20%' }}>
+            {
+              requiredToken
+                ? (
+                  <>
+                    <Link style={{ textDecoration: 'none', color: 'black' }} to={`/Account/${params.env}/${currentID}`}>
+                      <b>
+                        {envLeaderboard.find((usr) => usr.id === currentID).account.name}
+                      </b>
+                    </Link><br />
+                    (
+                      <Link style={{ textDecoration: 'none' }} to={`/Account/${params.env}/${currentID}`}>
+                        {currentID}
+                      </Link>
+                    )
+                  </>
+                )
+                : (
+                  <Link style={{ textDecoration: 'none' }} to={`/Account/${params.env}/${currentID}`}>
+                    {currentID}
+                  </Link>
+                )
+            }
+          </div>
+          <div style={{ width: '60%' }}>
+            {
+              currentLoser.reason.map((x) => t(`customAirdrop:grid.left.table.reasons.${x}`)).join(", ")
+            }
+          </div>
+        </Group>
+      </div>
+    );
+  };
 
   return (
+    <>
     <Card shadow="md" radius="md" padding="xl" mt={20}>
       {
-        (inProgress)
+        inProgress
           ? (
             <>
               <Loader variant="dots" />
@@ -235,7 +234,7 @@ export default function AirdropLeftCard(properties) {
           : null
       }
       {
-        !validRows
+        !winners && !inProgress
           ? (
             <>
               <Accordion mt="xs" defaultValue="table">
@@ -255,7 +254,7 @@ export default function AirdropLeftCard(properties) {
           : null
       }
       {
-        validRows && validRows.length
+        winners && winners.length && !inProgress
           ? (
             <>
               <Accordion mt="xs" defaultValue="table">
@@ -264,18 +263,30 @@ export default function AirdropLeftCard(properties) {
                     {t("performAirdrop:grid.left.table.title")}
                   </Accordion.Control>
                   <Accordion.Panel>
-                    <Table highlightOnHover>
-                      <thead>
-                        <tr>
-                          <th>{t("performAirdrop:grid.left.table.th1")}</th>
-                          <th>{t(`performAirdrop:grid.left.table.th2${airdropTarget === "ticketQty" ? '' : '2'}`)}</th>
-                          <th>{t("performAirdrop:grid.left.table.th3")}</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {validRows}
-                      </tbody>
-                    </Table>
+                    <Text><b>{t("performAirdrop:grid.left.modals.included")}</b>: {winners.length}</Text>
+                    <Text><b>{t("performAirdrop:grid.left.modals.preview")}</b>:</Text>
+                    <Stack spacing="xs" justify="flex-start">
+                      {
+                        winners.slice(0, 3).map((winner, i) => (
+                          <Text key={`winner_${winner.id}`}>
+                            {i + 1}. &ldquo;<b>{winner.name || '???'}</b>&rdquo; ({winner.id}): {winner.assignedTokens} {finalTokenName || assetName}
+                          </Text>
+                        ))
+                      }
+                    </Stack>
+                    {
+                      opened1
+                        ? (
+                          <Button disabled style={{ marginTop: '20px' }}>
+                            {t("performAirdrop:grid.left.modals.opening")}
+                          </Button>
+                        )
+                        : (
+                          <Button style={{ marginTop: '20px' }} onClick={open1}>
+                            {t("performAirdrop:grid.left.modals.btn1")}
+                          </Button>
+                        )
+                    }
                   </Accordion.Panel>
                 </Accordion.Item>
                 <Accordion.Item key="jsonSimple" value="airdrop_json_simple">
@@ -283,16 +294,20 @@ export default function AirdropLeftCard(properties) {
                     {t("performAirdrop:grid.left.jsonSimple")}
                   </Accordion.Control>
                   <Accordion.Panel style={{ backgroundColor: '#FAFAFA' }}>
-                    <JsonInput
-                      placeholder="Textarea will autosize to fit the content"
-                      defaultValue={simpleWinnerJSON}
-                      value={simpleWinnerJSON}
-                      validationError="Invalid JSON"
-                      formatOnBlur
-                      autosize
-                      minRows={4}
-                      maxRows={15}
-                    />
+                    <Text><b>{t("performAirdrop:grid.left.modals.included")}</b>: {winners.length}</Text>
+                    {
+                      opened2
+                        ? (
+                          <Button disabled style={{ marginTop: '20px' }}>
+                            {t("performAirdrop:grid.left.modals.opening")}
+                          </Button>
+                        )
+                        : (
+                          <Button style={{ marginTop: '20px' }} onClick={open2}>
+                            {t("performAirdrop:grid.left.modals.btn2")}
+                          </Button>
+                        )
+                    }
                   </Accordion.Panel>
                 </Accordion.Item>
               </Accordion>
@@ -301,7 +316,7 @@ export default function AirdropLeftCard(properties) {
           : null
       }
       {
-        invalidRows && invalidRows.length
+        invalidOutput && invalidOutput.length && !inProgress
           ? (
             <Accordion mt="xs">
               <Accordion.Item key="invalidTable" value="table2">
@@ -309,17 +324,20 @@ export default function AirdropLeftCard(properties) {
                   {t("performAirdrop:grid.left.table.title2")}
                 </Accordion.Control>
                 <Accordion.Panel>
-                  <Table highlightOnHover>
-                    <thead>
-                      <tr>
-                        <th>{t("performAirdrop:grid.left.table.th1")}</th>
-                        <th>{t("performAirdrop:grid.left.table.th4")}</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {invalidRows}
-                    </tbody>
-                  </Table>
+                  <Text><b>{t("performAirdrop:grid.left.modals.excluded")}</b>: {invalidOutput.length}</Text>
+                  {
+                    opened3
+                      ? (
+                        <Button disabled style={{ marginTop: '20px' }}>
+                          {t("performAirdrop:grid.left.modals.opening")}
+                        </Button>
+                      )
+                      : (
+                        <Button style={{ marginTop: '20px' }} onClick={open3}>
+                          {t("performAirdrop:grid.left.modals.btn3")}
+                        </Button>
+                      )
+                  }
                 </Accordion.Panel>
               </Accordion.Item>
             </Accordion>
@@ -327,5 +345,113 @@ export default function AirdropLeftCard(properties) {
           : null
       }
     </Card>
+    <Modal
+      opened={opened1}
+      onClose={() => {
+        close1();
+      }}
+      size="xl"
+      title={t("performAirdrop:grid.left.table.title")}
+    >
+      {
+        winners && winners.length && !inProgress
+          ? (
+          <Table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>{t("performAirdrop:grid.left.table.th1")}</th>
+                <th>{t(`performAirdrop:grid.left.table.th2${airdropTarget === "ticketQty" ? '' : '2'}`)}</th>
+                <th>{t("performAirdrop:grid.left.table.th3")}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colSpan="4" style={{ width: "100%" }}>
+                  <List
+                    height={300}
+                    itemCount={winners.length}
+                    itemSize={35}
+                    width="100%"
+                  >
+                    {validNewRows}
+                  </List>
+                </td>
+              </tr>
+            </tbody>
+          </Table>
+          )
+          : null
+      }
+
+    </Modal>
+    <Modal
+      opened={opened2}
+      onClose={() => {
+        close2();
+      }}
+      size="xl"
+      title={t("performAirdrop:grid.left.jsonSimple")}
+    >
+      {
+        simpleWinnerJSON
+          ? (
+            <>
+              <JsonInput
+                placeholder="Textarea will autosize to fit the content"
+                defaultValue={simpleWinnerJSON}
+                value={simpleWinnerJSON}
+                validationError="Invalid JSON"
+                formatOnBlur
+                autosize
+                minRows={4}
+                maxRows={15}
+              />
+              <br />
+              <CopyButton value={simpleWinnerJSON}>
+                {({ copied, copy }) => (
+                  <Button color={copied ? 'teal' : 'blue'} onClick={copy}>
+                    {copied ? 'Copied' : 'Copy'}
+                  </Button>
+                )}
+              </CopyButton>
+            </>
+          )
+          : null
+      }
+    </Modal>
+    <Modal
+      opened={opened3}
+      onClose={() => {
+        close3();
+      }}
+      size="xl"
+      title={t("performAirdrop:grid.left.table.title2")}
+    >
+      <Table highlightOnHover>
+        <thead>
+          <tr>
+            <th width="10%">#</th>
+            <th width="20%">{t("performAirdrop:grid.left.table.th1")}</th>
+            <th width="70%">{t("performAirdrop:grid.left.table.th4")}</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr>
+              <td colSpan="3" style={{ width: "100%" }}>
+                <List
+                  height={300}
+                  itemCount={winners.length}
+                  itemSize={35}
+                  width="100%"
+                >
+                  {invalidNewRows}
+                </List>
+              </td>
+            </tr>
+        </tbody>
+      </Table>
+    </Modal>
+    </>
   );
 }

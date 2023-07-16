@@ -1,7 +1,6 @@
 {
   "header": {
     "title": "Führen Sie einen benutzerdefinierten Airdrop durch {{titleName}} Blockchain",
-    "subtitle": "Auf dieser Seite werden nur die zehn besten Airdrop-Gewinner angezeigt. ",
     "back": "Zurück",
     "switchEnv": "Blockchain wechseln",
     "processing": "Die benutzerdefinierte Airdrop-Datei wird verarbeitet. Bitte warten Sie."
@@ -11,10 +10,10 @@
   "uploadText2": "Die JSON-Datei sollte ein Array von Airdrop-Empfängern enthalten:`",
   "grid": {
     "left": {
-      "loading": "Asset-Daten werden geladen",
+      "loading": "Airdrop-Daten werden geladen",
       "reloadingTokenDetails": "Es wird versucht, Asset-Daten zu laden",
       "table": {
-        "title": "Ticketinhaber sind im benutzerdefinierten Airdrop enthalten",
+        "title": "Ticketinhaber sind im individuellen Airdrop enthalten",
         "invalid": "Es gibt keine benutzerdefinierten Airdrop-Ziele. Bitte überprüfen Sie die Airdrop-Einstellungen noch einmal.",
         "title2": "Ticketinhaber sind vom Airdrop ausgeschlossen",
         "th1": "Konto",
@@ -25,8 +24,11 @@
         "reasons": {
           "blocked": "Der Benutzer wurde blockiert",
           "noObject": "Kontodaten konnten nicht abgerufen werden.",
+          "blockedAssets": "Der Benutzer hat dieses Asset blockiert.",
           "self": "Kann nicht an mich selbst gesendet werden",
-          "minReward": "Zugeteilte Belohnung zu gering"
+          "minReward": "Zugeteilte Belohnung zu gering",
+          "excludedTicketHolder": "Ausgeschlossen für Inhabertickets",
+          "excludedNonTicketHolder": "Nicht auf der Ticket-Bestenliste"
         }
       },
       "json": "Airdrop-JSON-Daten",
@@ -56,6 +58,12 @@
         "reqRadio": {
           "yes": "Ja",
           "no": "NEIN"
+        },
+        "ticketHolder": {
+          "title": "Wer sollte in den Airdrop einbezogen werden?",
+          "onlyHolders": "Ticketinhaber",
+          "noHolders": "Nicht-Ticketinhaber",
+          "both": "Beide (alle)"
         },
         "target": {
           "ticketQty": "Anzahl der Gewinnlose",

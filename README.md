@@ -13,5 +13,5 @@ An airdropping tool for Bitshares based blockchains.
 This tool integrates with the [latest BEET wallet](https://github.com/bitshares/beet/releases).
 
 If interested in running the code locally follow these terminal steps:
-* run `yarn install`
-* run `yarn run dev`
+* run `npm install`
+* run `npm run build && npm run dev`

@@ -1,19 +1,34 @@
 {
-    "airdrop": "Airdrop",
-    "accounts": "contas",
-    "from": "de",
-    "to": "para",
-    "distro": "sendo distribuído",
-    "method": "Por upload de arquivo local",
-    "preStep1": "1. Inicie a carteira BEET e navegue até 'Local' no menu.",
-    "preStep2": "2. Nesta página, permita tudo ou apenas a operação 0 'Transferir'.",
-    "preStep3": "3. Na página de upload local, clique no botão abaixo para continuar.",
-    "generate": "Gerar arquivo JSON airdrop",
-    "confirmation": "Airdrop JSON gerado",
-    "download1": "1. Seu airdrop JSON foi gerado, clique no botão para baixá-lo.",
-    "download2": "2. Na página BEET Local, carregue o arquivo JSON, um prompt deve aparecer.",
-    "download3": "3. Verifique o conteúdo do prompt antes de aprovar o airdrop.",
-    "downloadButton": "Baixar airdrop JSON",
-    "viewJSON": "JSON da operação airdrop proposta",
-    "begin": "Iniciar lançamento aéreo"
+  "airdrop": "Airdrop",
+  "accounts": "contas",
+  "from": "de",
+  "to": "para",
+  "distro": "sendo distribuído",
+  "method": "Por upload de arquivo local",
+  "preStep1": "1. Inicie a carteira BEET e navegue até 'Local' no menu.",
+  "preStep2": "2. Nesta página, permita tudo ou apenas a operação 0 'Transferir'.",
+  "preStep3": "3. Na página de upload local, clique no botão abaixo para continuar.",
+  "generate": "Gerar arquivo JSON airdrop",
+  "confirmation": "Airdrop JSON gerado",
+  "download1": "1. Seu airdrop JSON foi gerado, clique no botão para baixá-lo.",
+  "download2": "2. Na página BEET Local, carregue o arquivo JSON, um prompt deve aparecer.",
+  "download3": "3. Verifique o conteúdo do prompt antes de aprovar o airdrop.",
+  "downloadButton": "Baixar airdrop JSON",
+  "viewJSON": "JSON da operação airdrop proposta",
+  "begin": "Iniciar lançamento aéreo",
+  "fees": {
+    "nonLTM": "{{nonLTM}} {{assetName}} taxa total",
+    "LTM": "{{LTM}} {{assetName}} taxa para membros vitalícios",
+    "tooBig": "Airdrop muito grande"
+  },
+  "deeplink": {
+    "noDL": {
+      "title": "Via deeplink de beterraba crua",
+      "step1": "Inicie a carteira BEET e navegue até 'Raw Link' no menu.",
+      "step2": "A partir desta página, você pode permitir todas as operações ou permitir apenas a operação 1 '' (depois clique em salvar).",
+      "step3": "Depois que 'Pronto para links brutos' aparecer no Beet, envie esta solicitação.",
+      "label": "Insira o ID da sua conta",
+      "btn": "Gerar deeplink bruto"
+    }
   }
+}

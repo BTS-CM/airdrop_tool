@@ -1,19 +1,34 @@
 {
-    "airdrop": "Parachutage",
-    "accounts": "comptes",
-    "from": "depuis",
-    "to": "pour",
-    "distro": "être distribué",
-    "method": "Via le téléchargement de fichiers locaux",
-    "preStep1": "1. Lancez le portefeuille BEET et accédez à \"Local\" dans le menu.",
-    "preStep2": "2. Sur cette page, autorisez tout ou autorisez uniquement l'opération 0 \"Transfert\".",
-    "preStep3": "3. Une fois sur la page de téléchargement local, cliquez sur le bouton ci-dessous pour continuer.",
-    "generate": "Générer le fichier JSON airdrop",
-    "confirmation": "Airdrop JSON généré",
-    "download1": "1. Votre airdrop JSON a été généré, cliquez sur le bouton pour le télécharger.",
-    "download2": "2. À partir de la page BEET Local, téléchargez le fichier JSON, une invite devrait apparaître.",
-    "download3": "3. Vérifiez le contenu de l'invite avant d'approuver le parachutage.",
-    "downloadButton": "Télécharger airdrop JSON",
-    "viewJSON": "Opération de largage proposée JSON",
-    "begin": "Commencer le largage"
+  "airdrop": "Parachutage",
+  "accounts": "comptes",
+  "from": "depuis",
+  "to": "pour",
+  "distro": "être distribué",
+  "method": "Via le téléchargement de fichiers locaux",
+  "preStep1": "1. Lancez le portefeuille BEET et accédez à \"Local\" dans le menu.",
+  "preStep2": "2. Sur cette page, autorisez tout ou autorisez uniquement l'opération 0 \"Transfert\".",
+  "preStep3": "3. Une fois sur la page de téléchargement local, cliquez sur le bouton ci-dessous pour continuer.",
+  "generate": "Générer le fichier JSON airdrop",
+  "confirmation": "Airdrop JSON généré",
+  "download1": "1. Votre airdrop JSON a été généré, cliquez sur le bouton pour le télécharger.",
+  "download2": "2. À partir de la page BEET Local, téléchargez le fichier JSON, une invite devrait apparaître.",
+  "download3": "3. Vérifiez le contenu de l'invite avant d'approuver le parachutage.",
+  "downloadButton": "Télécharger airdrop JSON",
+  "viewJSON": "Opération de largage proposée JSON",
+  "begin": "Commencer le largage",
+  "fees": {
+    "nonLTM": "{{nonLTM}} {{assetName}} plein tarif",
+    "LTM": "{{LTM}} {{assetName}} frais pour les membres à vie",
+    "tooBig": "Parachutage trop gros"
+  },
+  "deeplink": {
+    "noDL": {
+      "title": "Via le lien profond de la betterave crue",
+      "step1": "Lancez le portefeuille BEET et accédez à \"Raw Link\" dans le menu.",
+      "step2": "À partir de cette page, vous pouvez soit autoriser toutes les opérations, soit autoriser uniquement l'opération 1 '' (puis cliquez sur enregistrer).",
+      "step3": "Une fois que \"Ready for raw links\" s'affiche dans Beet, soumettez cette demande.",
+      "label": "Entrez votre identifiant de compte",
+      "btn": "Générer un lien profond brut"
+    }
   }
+}

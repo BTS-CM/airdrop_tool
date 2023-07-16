@@ -1,4 +1,4 @@
-function sliceIntoChunks(arr, size) {
+export function sliceIntoChunks(arr, size) {
   const chunks = [];
   for (let i = 0; i < arr.length; i += size) {
     const chunk = arr.slice(i, i + size);
@@ -13,7 +13,7 @@ function sliceIntoChunks(arr, size) {
  * @param {Number} precision
  * @returns {Number}
  */
-function humanReadableFloat(satoshis, precision) {
+export function humanReadableFloat(satoshis, precision) {
   return parseFloat((satoshis / 10 ** precision).toFixed(precision));
 }
 
@@ -23,7 +23,7 @@ function humanReadableFloat(satoshis, precision) {
  * @param {Number} precision
  * @returns {Number}
  */
-function blockchainFloat(satoshis, precision) {
+export function blockchainFloat(satoshis, precision) {
   return satoshis * 10 ** precision;
 }
 
@@ -33,7 +33,7 @@ function blockchainFloat(satoshis, precision) {
  * @param {Boolean} isBitAsset
  * @returns Object
  */
-function getFlagBooleans(mask, isBitAsset = false) {
+export function getFlagBooleans(mask, isBitAsset = false) {
   const permission_flags = {
     /** < an issuer-specified percentage of all market trades in this asset is paid to the issuer */
     charge_market_fee: 0x01,
@@ -106,10 +106,3 @@ function getFlagBooleans(mask, isBitAsset = false) {
 
   return booleans;
 }
-
-export {
-  sliceIntoChunks,
-  humanReadableFloat,
-  blockchainFloat,
-  getFlagBooleans
-};

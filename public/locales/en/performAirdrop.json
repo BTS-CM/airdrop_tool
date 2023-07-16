@@ -11,6 +11,15 @@
             "reloadingTokenDetails": "Trying to load asset data",
             "reloadingRequiredTokenDetails": "Trying to load required token data",
             "processing": "Processing user balances for required token",
+            "modals": {
+                "excluded": "Quantity excluded",
+                "included": "Quantity included",
+                "preview": "Preview airdrop",
+                "opening": "Opening ...",
+                "btn1": "View airdrop recipients",
+                "btn2": "View airdrop JSON",
+                "btn3": "View excluded users"
+            },
             "table": {
                 "title": "Ticket holders included in airdrop",
                 "invalid": "There are no airdrop targets, please re-evaluate the airdrop settings.",

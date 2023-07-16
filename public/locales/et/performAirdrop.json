@@ -11,8 +11,17 @@
       "reloadingTokenDetails": "Proovitakse laadida vara andmeid",
       "reloadingRequiredTokenDetails": "Nõutavate loaandmete laadimine",
       "processing": "Nõutava märgi kasutajasaldode töötlemine",
+      "modals": {
+        "excluded": "Kogus välistatud",
+        "included": "Kogus kaasas",
+        "preview": "Õhutilga eelvaade",
+        "opening": "Avamine...",
+        "btn1": "Vaadake õhutilga adressaate",
+        "btn2": "Vaadake airdropi JSON-i",
+        "btn3": "Kuva välistatud kasutajad"
+      },
       "table": {
-        "title": "Piletihoidjad kuuluvad airdropi",
+        "title": "Piletihoidjad kuuluvad airdropi komplekti",
         "invalid": "Airdropi sihtmärke pole, palun hinnake õhutilgutamise seaded uuesti.",
         "title2": "Piletiomanikud on airdropist välja jäetud",
         "th1": "Konto",

@@ -181,7 +181,7 @@ export default function LookupAccount(properties) {
                   <tbody>
                     {
                       result.map((x) => (
-                          <tr>
+                          <tr key={x.item.name}>
                             <td>
                               <Link style={{ textDecoration: 'none', color: 'black' }} to={`/account/${value}/${x.item.id}`}>
                                 <b>{x.item.name}</b> ({x.item.id})

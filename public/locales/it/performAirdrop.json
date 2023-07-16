@@ -11,6 +11,15 @@
       "reloadingTokenDetails": "Tentativo di caricare i dati delle risorse",
       "reloadingRequiredTokenDetails": "Tentativo di caricare i dati del token richiesti",
       "processing": "Elaborazione dei saldi utente per il token richiesto",
+      "modals": {
+        "excluded": "Quantità esclusa",
+        "included": "Quantità inclusa",
+        "preview": "Anteprima dell'airdrop",
+        "opening": "Apertura...",
+        "btn1": "Visualizza i destinatari dell'airdrop",
+        "btn2": "Visualizza airdrop JSON",
+        "btn3": "Visualizza gli utenti esclusi"
+      },
       "table": {
         "title": "Possessori di biglietti inclusi in airdrop",
         "invalid": "Non ci sono bersagli airdrop, si prega di rivalutare le impostazioni airdrop.",

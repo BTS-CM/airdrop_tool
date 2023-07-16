@@ -1,19 +1,34 @@
 {
-    "airdrop": "Lancio aereo",
-    "accounts": "conti",
-    "from": "da",
-    "to": "A",
-    "distro": "essere distribuito",
-    "method": "Tramite caricamento file locale",
-    "preStep1": "1. Avvia il portafoglio BEET e vai a \"Locale\" nel menu.",
-    "preStep2": "2. In questa pagina consentire tutto o consentire solo l'operazione 0 'Trasferimento'.",
-    "preStep3": "3. Una volta nella pagina di caricamento locale, fare clic sul pulsante in basso per procedere.",
-    "generate": "Genera file JSON airdrop",
-    "confirmation": "Airdrop JSON generato",
-    "download1": "1. Il tuo JSON airdrop è stato generato, fai clic sul pulsante per scaricarlo.",
-    "download2": "2. Dalla pagina BEET Local, carica il file JSON, dovrebbe apparire un prompt.",
-    "download3": "3. Verificare il contenuto del prompt prima di approvare l'airdrop.",
-    "downloadButton": "Scarica airdrop JSON",
-    "viewJSON": "Operazione Airdrop proposta JSON",
-    "begin": "Inizia il lancio aereo"
+  "airdrop": "Lancio aereo",
+  "accounts": "conti",
+  "from": "da",
+  "to": "A",
+  "distro": "essere distribuito",
+  "method": "Tramite caricamento file locale",
+  "preStep1": "1. Avvia il portafoglio BEET e vai a \"Locale\" nel menu.",
+  "preStep2": "2. In questa pagina consentire tutto o consentire solo l'operazione 0 'Trasferimento'.",
+  "preStep3": "3. Una volta nella pagina di caricamento locale, fare clic sul pulsante in basso per procedere.",
+  "generate": "Genera file JSON airdrop",
+  "confirmation": "Airdrop JSON generato",
+  "download1": "1. Il tuo JSON airdrop è stato generato, fai clic sul pulsante per scaricarlo.",
+  "download2": "2. Dalla pagina BEET Local, carica il file JSON, dovrebbe apparire un prompt.",
+  "download3": "3. Verificare il contenuto del prompt prima di approvare l'airdrop.",
+  "downloadButton": "Scarica airdrop JSON",
+  "viewJSON": "Operazione Airdrop proposta JSON",
+  "begin": "Inizia il lancio aereo",
+  "fees": {
+    "nonLTM": "{{nonLTM}} {{assetName}} canone intero",
+    "LTM": "{{LTM}} {{assetName}} quota per i soci a vita",
+    "tooBig": "Airdrop troppo grande"
+  },
+  "deeplink": {
+    "noDL": {
+      "title": "Tramite deeplink crudo di barbabietola",
+      "step1": "Avvia il portafoglio BEET e vai a \"Raw Link\" nel menu.",
+      "step2": "Da questa pagina è possibile consentire tutte le operazioni o consentire solo l'operazione 1'' (quindi fare clic su Salva).",
+      "step3": "Una volta che \"Pronto per i collegamenti grezzi\" viene visualizzato in Beet, invia questa richiesta.",
+      "label": "Inserisci il tuo ID account",
+      "btn": "Genera deeplink non elaborato"
+    }
   }
+}

@@ -1,7 +1,6 @@
 {
   "header": {
     "title": "에서 맞춤형 에어드랍을 수행합니다. {{titleName}} 블록체인",
-    "subtitle": "상위 10명의 에어드랍 당첨자만 이 페이지에 표시됩니다. ",
     "back": "뒤쪽에",
     "switchEnv": "블록체인 전환",
     "processing": "사용자 지정 에어드랍 파일을 처리 중입니다. 잠시만 기다려 주십시오."
@@ -11,7 +10,7 @@
   "uploadText2": "JSON 파일에는 에어드롭 수신자 배열이 포함되어야 합니다.`",
   "grid": {
     "left": {
-      "loading": "자산 데이터 로드 중",
+      "loading": "에어드랍 데이터 불러오기",
       "reloadingTokenDetails": "자산 데이터를 로드하는 중",
       "table": {
         "title": "커스텀 에어드롭에 포함된 티켓 소지자",
@@ -25,8 +24,11 @@
         "reasons": {
           "blocked": "사용자가 차단되었습니다.",
           "noObject": "계정 데이터를 가져올 수 없습니다.",
+          "blockedAssets": "사용자가 이 자산을 차단했습니다.",
           "self": "자신에게 보낼 수 없음",
-          "minReward": "할당된 보상이 너무 작음"
+          "minReward": "할당된 보상이 너무 작음",
+          "excludedTicketHolder": "입장권 보유 제외",
+          "excludedNonTicketHolder": "티켓 리더보드에 없음"
         }
       },
       "json": "에어드롭 JSON 데이터",
@@ -39,7 +41,7 @@
         "sendingAccount": "에서 에어드랍 보내기"
       },
       "options": {
-        "title": "맞춤형 에어드롭 옵션",
+        "title": "맞춤형 에어드랍 옵션",
         "titleName": "귀하의 {{titleName}} 계정 ID",
         "assetName": "에어드롭하려는 자산의 이름을 입력하세요.",
         "batchSize": "에어드롭 전송 배치의 크기",
@@ -57,6 +59,12 @@
           "yes": "예",
           "no": "아니요"
         },
+        "ticketHolder": {
+          "title": "누가 에어드랍에 포함되어야 하나요?",
+          "onlyHolders": "티켓 소지자",
+          "noHolders": "비 티켓 소지자",
+          "both": "둘 다 (모두)"
+        },
         "target": {
           "ticketQty": "당첨 티켓 수량",
           "ticketValue": "당첨 티켓의 가치",
@@ -66,7 +74,7 @@
       "invalid": {
         "title": "에어드랍할게 없음",
         "reason": "유효한 티켓이 없기 때문에 에어드롭할 것이 없습니다.",
-        "resolution": "에어드랍 설정을 조정하거나 다른 에어드롭을 계산하여 진행하세요."
+        "resolution": "에어드랍 설정을 조정하거나 다른 에어드랍을 계산하여 진행하세요."
       },
       "valid": {
         "title": "커스텀 에어드롭을 진행하시겠습니까?",

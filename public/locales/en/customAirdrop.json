@@ -1,7 +1,6 @@
 {
     "header": {
         "title": "Perform custom airdrop on the {{titleName}} blockchain",
-        "subtitle": "Only the top 10 airdrop winners will be displayed on this page. View the airdrop batch JSON for more information.",
         "back": "Back",
         "switchEnv": "Switch blockchain",
         "processing": "Processing the custom airdrop file, please wait."
@@ -11,7 +10,7 @@
     "uploadText2": "The JSON file should contain an array of airdrop recipients:`",
     "grid": {
         "left": {
-            "loading": "Loading asset data",
+            "loading": "Loading airdrop data",
             "reloadingTokenDetails": "Trying to load asset data",
             "table": {
                 "title": "Ticket holders included in the custom airdrop",
@@ -25,8 +24,11 @@
                 "reasons": {
                     "blocked": "User has been blocked",
                     "noObject": "Couldn't fetch account data.",
+                    "blockedAssets": "User has blocked this asset.",
                     "self": "Cannot send to self",
-                    "minReward": "Allocated reward too small"
+                    "minReward": "Allocated reward too small",
+                    "excludedTicketHolder": "Excluded for holding ticket",
+                    "excludedNonTicketHolder": "Not on the ticket leaderboard"
                 }
             },
             "json": "Airdrop JSON data",
@@ -56,6 +58,12 @@
                 "reqRadio": {
                     "yes": "Yes",
                     "no": "No"
+                },
+                "ticketHolder": {
+                    "title": "Who should be included in the airdrop?",
+                    "onlyHolders": "Ticket holders",
+                    "noHolders": "Non-ticket holders",
+                    "both": "Both (all)"
                 },
                 "target": {
                     "ticketQty": "Quantity of winning tickets",

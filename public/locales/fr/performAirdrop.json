@@ -11,6 +11,15 @@
       "reloadingTokenDetails": "Tentative de chargement des données d'éléments",
       "reloadingRequiredTokenDetails": "Tentative de chargement des données de jeton requises",
       "processing": "Traitement des soldes des utilisateurs pour le jeton requis",
+      "modals": {
+        "excluded": "Quantité exclue",
+        "included": "Quantité incluse",
+        "preview": "Aperçu du largage",
+        "opening": "Ouverture...",
+        "btn1": "Afficher les destinataires des parachutages",
+        "btn2": "Voir airdrop JSON",
+        "btn3": "Afficher les utilisateurs exclus"
+      },
       "table": {
         "title": "Détenteurs de billets inclus dans le largage aérien",
         "invalid": "Il n'y a pas de cibles de largage, veuillez réévaluer les paramètres de largage.",
@@ -51,7 +60,7 @@
         "batchSize": "Taille des lots de transfert de parachutage",
         "tokenQuantity": "Entrez la quantité de jetons que vous souhaitez airdrop",
         "distroRadio": {
-          "title": "Comment les jetons doivent-ils être attribués aux gagnants ?",
+          "title": "Comment les jetons devraient-ils être attribués aux gagnants ?",
           "equally": "À parts égales entre les identifiants de compte gagnants",
           "proportionally": "Proportionnel aux billets gagnés",
           "roundRobin": "Allouer des jetons entiers de manière circulaire"

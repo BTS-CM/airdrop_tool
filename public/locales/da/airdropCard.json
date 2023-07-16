@@ -1,19 +1,34 @@
 {
-    "airdrop": "Airdrop",
-    "accounts": "regnskaber",
-    "from": "fra",
-    "to": "til",
-    "distro": "bliver distribueret",
-    "method": "Via lokal fil upload",
-    "preStep1": "1. Start BEET-pungen og naviger til 'Lokal' i menuen.",
-    "preStep2": "2. På denne side tillad enten alle, eller tillad kun operation 0 'Overførsel'.",
-    "preStep3": "3. Når du er kommet til den lokale uploadside, skal du klikke på knappen nedenfor for at fortsætte.",
-    "generate": "Generer airdrop JSON-fil",
-    "confirmation": "Airdrop JSON genereret",
-    "download1": "1. Din airdrop JSON er blevet genereret, klik på knappen for at downloade den.",
-    "download2": "2. Fra BEET Local-siden, upload JSON-filen, en prompt skulle vises.",
-    "download3": "3. Bekræft promptens indhold, før du godkender airdrop.",
-    "downloadButton": "Download airdrop JSON",
-    "viewJSON": "Foreslået airdrop operation JSON",
-    "begin": "Begynd airdrop"
+  "airdrop": "Airdrop",
+  "accounts": "regnskaber",
+  "from": "fra",
+  "to": "til",
+  "distro": "bliver distribueret",
+  "method": "Via lokal fil upload",
+  "preStep1": "1. Start BEET-pungen og naviger til 'Lokal' i menuen.",
+  "preStep2": "2. På denne side tillad enten alle, eller tillad kun operation 0 'Overførsel'.",
+  "preStep3": "3. Når du er kommet til den lokale uploadside, skal du klikke på knappen nedenfor for at fortsætte.",
+  "generate": "Generer airdrop JSON-fil",
+  "confirmation": "Airdrop JSON genereret",
+  "download1": "1. Din airdrop JSON er blevet genereret, klik på knappen for at downloade den.",
+  "download2": "2. Fra BEET Local-siden, upload JSON-filen, en prompt skulle vises.",
+  "download3": "3. Bekræft promptens indhold, før du godkender airdrop.",
+  "downloadButton": "Download airdrop JSON",
+  "viewJSON": "Foreslået airdrop operation JSON",
+  "begin": "Begynd airdrop",
+  "fees": {
+    "nonLTM": "{{nonLTM}} {{assetName}} fuldt honorar",
+    "LTM": "{{LTM}} {{assetName}} kontingent for livsvarige medlemmer",
+    "tooBig": "Airdrop for stort"
+  },
+  "deeplink": {
+    "noDL": {
+      "title": "Via rå Beet deeplink",
+      "step1": "Start BEET-pungen og naviger til 'Raw Link' i menuen.",
+      "step2": "Fra denne side kan du enten tillade alle operationer eller udelukkende tillade operation 1 '' (klik derefter på Gem).",
+      "step3": "Når 'Klar til rå links' vises i Beet, indsend denne anmodning.",
+      "label": "Indtast dit konto-id",
+      "btn": "Generer råt deeplink"
+    }
   }
+}

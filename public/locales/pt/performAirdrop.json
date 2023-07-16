@@ -11,10 +11,19 @@
       "reloadingTokenDetails": "Tentando carregar dados de ativos",
       "reloadingRequiredTokenDetails": "Tentando carregar os dados de token necessários",
       "processing": "Processando saldos do usuário para o token necessário",
+      "modals": {
+        "excluded": "Quantidade excluída",
+        "included": "Quantidade incluída",
+        "preview": "Visualizar lançamento aéreo",
+        "opening": "Abertura ...",
+        "btn1": "Veja os destinatários do airdrop",
+        "btn2": "Exibir JSON do airdrop",
+        "btn3": "Ver usuários excluídos"
+      },
       "table": {
         "title": "Titulares de ingressos incluídos no airdrop",
         "invalid": "Não há alvos de airdrop, reavalie as configurações de airdrop.",
-        "title2": "Titulares de ingressos excluídos do airdrop",
+        "title2": "Portadores de ingressos excluídos do airdrop",
         "th1": "Conta",
         "th2": "Quantidade",
         "th3": "Alocação",
@@ -49,7 +58,7 @@
         "titleName": "Insira o seu {{titleName}} ID da conta",
         "assetName": "Digite o nome do ativo que você deseja lançar no ar",
         "batchSize": "Tamanho dos lotes de transferência de airdrop",
-        "tokenQuantity": "Insira a quantidade de tokens que deseja lançar no ar",
+        "tokenQuantity": "Insira a quantidade de tokens que você deseja lançar no ar",
         "distroRadio": {
           "title": "Como os tokens devem ser alocados aos vencedores?",
           "equally": "Igualmente entre IDs de contas vencedoras",
@@ -72,7 +81,7 @@
         "target": {
           "ticketQty": "Quantidade de bilhetes premiados",
           "ticketValue": "Valor dos bilhetes premiados",
-          "title": "Em que você deseja basear este airdrop?"
+          "title": "Em que você deseja basear esse airdrop?"
         }
       },
       "invalid": {

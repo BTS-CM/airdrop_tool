@@ -1,19 +1,34 @@
 {
-    "airdrop": "Luftabwurf",
-    "accounts": "Konten",
-    "from": "aus",
-    "to": "Zu",
-    "distro": "verteilt wird",
-    "method": "Über lokalen Datei-Upload",
-    "preStep1": "1. Starten Sie die BEET-Wallet und navigieren Sie im Menü zu „Lokal“.",
-    "preStep2": "2. Auf dieser Seite können Sie entweder alle zulassen oder nur den Vorgang 0 „Transfer“ zulassen.",
-    "preStep3": "3. Klicken Sie auf der lokalen Upload-Seite auf die Schaltfläche unten, um fortzufahren.",
-    "generate": "Generieren Sie eine Airdrop-JSON-Datei",
-    "confirmation": "Airdrop JSON generiert",
-    "download1": "1. Ihr Airdrop-JSON wurde generiert. Klicken Sie auf die Schaltfläche, um ihn herunterzuladen.",
-    "download2": "2. Laden Sie auf der BEET Local-Seite die JSON-Datei hoch. Es sollte eine Eingabeaufforderung angezeigt werden.",
-    "download3": "3. Überprüfen Sie den Inhalt der Eingabeaufforderung, bevor Sie den Airdrop genehmigen.",
-    "downloadButton": "Laden Sie Airdrop JSON herunter",
-    "viewJSON": "Vorgeschlagener Airdrop-Vorgang JSON",
-    "begin": "Beginnen Sie mit dem Luftabwurf"
+  "airdrop": "Luftabwurf",
+  "accounts": "Konten",
+  "from": "aus",
+  "to": "Zu",
+  "distro": "verteilt wird",
+  "method": "Über lokalen Datei-Upload",
+  "preStep1": "1. Starten Sie die BEET-Wallet und navigieren Sie im Menü zu „Lokal“.",
+  "preStep2": "2. Auf dieser Seite können Sie entweder alle zulassen oder nur den Vorgang 0 „Transfer“ zulassen.",
+  "preStep3": "3. Klicken Sie auf der lokalen Upload-Seite auf die Schaltfläche unten, um fortzufahren.",
+  "generate": "Generieren Sie eine Airdrop-JSON-Datei",
+  "confirmation": "Airdrop JSON generiert",
+  "download1": "1. Ihr Airdrop-JSON wurde generiert. Klicken Sie auf die Schaltfläche, um ihn herunterzuladen.",
+  "download2": "2. Laden Sie auf der BEET Local-Seite die JSON-Datei hoch. Es sollte eine Eingabeaufforderung angezeigt werden.",
+  "download3": "3. Überprüfen Sie den Inhalt der Eingabeaufforderung, bevor Sie den Airdrop genehmigen.",
+  "downloadButton": "Laden Sie Airdrop JSON herunter",
+  "viewJSON": "Vorgeschlagener Airdrop-Vorgang JSON",
+  "begin": "Beginnen Sie mit dem Luftabwurf",
+  "fees": {
+    "nonLTM": "{{nonLTM}} {{assetName}} volle Gebühr",
+    "LTM": "{{LTM}} {{assetName}} Gebühr für lebenslange Mitglieder",
+    "tooBig": "Airdrop zu groß"
+  },
+  "deeplink": {
+    "noDL": {
+      "title": "Über den Deeplink zu Rohrüben",
+      "step1": "Starten Sie die BEET-Wallet und navigieren Sie im Menü zu „Raw Link“.",
+      "step2": "Auf dieser Seite können Sie entweder alle Vorgänge oder nur Vorgang 1 zulassen (klicken Sie dann auf „Speichern“).",
+      "step3": "Sobald in Beet „Bereit für Rohlinks“ angezeigt wird, senden Sie diese Anfrage.",
+      "label": "Geben Sie Ihre Konto-ID ein",
+      "btn": "Roh-Deeplink generieren"
+    }
   }
+}

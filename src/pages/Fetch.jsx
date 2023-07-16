@@ -22,7 +22,7 @@ import {
   appStore, ticketStore, leaderboardStore, assetStore
 } from '../lib/states';
 import { humanReadableFloat, sliceIntoChunks } from '../lib/common';
-import { lookupSymbols } from '../lib/directQueries';
+import { lookupSymbols, getBlockchainFees } from '../lib/directQueries';
 
 export default function Fetch(properties) {
   const { t, i18n } = useTranslation();
@@ -38,6 +38,8 @@ export default function Fetch(properties) {
 
   const nodes = appStore((state) => state.nodes);
   const changeURL = appStore((state) => state.changeURL);
+
+  const setFees = appStore((state) => state.setFees);
 
   const btsAssets = assetStore((state) => state.bitshares);
   const btsTestnetAssets = assetStore((state) => state.bitshares_testnet);
@@ -180,8 +182,20 @@ export default function Fetch(properties) {
       });
     }
 
-    console.log("Fetching user balances");
+    console.log("Fetching fee schedule");
+    let feeResponse;
+    try {
+      feeResponse = await getBlockchainFees(nodes[value][0], value);
+    } catch (error) {
+      console.log(error);
+    }
 
+    if (feeResponse) {
+      console.log({ value, feeResponse });
+      setFees(value, feeResponse);
+    }
+
+    console.log("Fetching user balances");
     let assetsToFetch = [];
     const accountResults = [];
     const leaderboardBatches = _.chunk(

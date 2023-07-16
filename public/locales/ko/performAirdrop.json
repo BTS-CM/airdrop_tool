@@ -11,6 +11,15 @@
       "reloadingTokenDetails": "자산 데이터를 로드하는 중",
       "reloadingRequiredTokenDetails": "필요한 토큰 데이터를 로드하려고 합니다.",
       "processing": "필요한 토큰에 대한 사용자 잔액 처리",
+      "modals": {
+        "excluded": "수량 제외",
+        "included": "포함된 수량",
+        "preview": "에어드롭 미리보기",
+        "opening": "열리는 ...",
+        "btn1": "에어드랍 수령자 보기",
+        "btn2": "에어드롭 JSON 보기",
+        "btn3": "제외된 사용자 보기"
+      },
       "table": {
         "title": "에어드롭에 포함된 티켓 소지자",
         "invalid": "에어드롭 대상이 없습니다. 에어드롭 설정을 다시 평가하십시오.",
@@ -72,7 +81,7 @@
         "target": {
           "ticketQty": "당첨 티켓 수량",
           "ticketValue": "당첨 티켓의 가치",
-          "title": "이 에어드롭의 기반은 무엇입니까?"
+          "title": "이 에어드랍의 기반은 무엇입니까?"
         }
       },
       "invalid": {

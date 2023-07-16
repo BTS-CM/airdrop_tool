@@ -243,6 +243,7 @@ const tempStore = create(
     setAccount: (newAccount) => set({ account: newAccount }),
     reset: () => set({
       account: "",
+      fees: {},
     }),
   })
 );
@@ -258,6 +259,9 @@ const appStore = create(
         bitshares_testnet: config.bitshares_testnet.nodeList.map((node) => node.url),
         tusc: config.tusc.nodeList.map((node) => node.url),
       },
+      bitshares_fees: null, // {fee, maxBytes}
+      bitshares_testnet_fees: null,
+      tusc_fees: null,
       account: "",
       replaceNodes: (env, nodes) => {
         if (env === 'bitshares') {
@@ -275,6 +279,21 @@ const appStore = create(
         }
       },
       setAccount: (newAccount) => set({ account: newAccount }),
+      setFees: (env, newFees) => {
+        if (env === 'bitshares') {
+          set({
+            bitshares_fees: newFees,
+          });
+        } else if (env === 'bitshares_testnet') {
+          set({
+            bitshares_testnet_fees: newFees,
+          });
+        } else if (env === 'tusc') {
+          set({
+            tusc_fees: newFees,
+          });
+        }
+      },
       changeURL: (env) => {
         /**
          * The current node url isn't healthy anymore
@@ -305,6 +324,9 @@ const appStore = create(
           bitshares_testnet: [],
           tusc: [],
         },
+        bitshares_fees: null, // {fee, maxBytes}
+        bitshares_testnet_fees: null,
+        tusc_fees: null,
         account: "",
       }),
       removeURL: (env, url) => {

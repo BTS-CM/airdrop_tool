@@ -1,7 +1,6 @@
 {
   "header": {
     "title": "Udfør tilpasset airdrop på {{titleName}} blockchain",
-    "subtitle": "Kun de 10 bedste airdrop-vindere vil blive vist på denne side. ",
     "back": "Tilbage",
     "switchEnv": "Skift blockchain",
     "processing": "Behandler den tilpassede airdrop-fil. Vent venligst."
@@ -11,7 +10,7 @@
   "uploadText2": "JSON-filen skal indeholde en række airdrop-modtagere:`",
   "grid": {
     "left": {
-      "loading": "Indlæser aktivdata",
+      "loading": "Indlæser airdrop-data",
       "reloadingTokenDetails": "Forsøger at indlæse aktivdata",
       "table": {
         "title": "Billetholdere inkluderet i den tilpassede airdrop",
@@ -25,8 +24,11 @@
         "reasons": {
           "blocked": "Brugeren er blevet blokeret",
           "noObject": "Kontodataene kunne ikke hentes.",
+          "blockedAssets": "Brugeren har blokeret dette aktiv.",
           "self": "Kan ikke sende til sig selv",
-          "minReward": "Tildelt belønning for lille"
+          "minReward": "Tildelt belønning for lille",
+          "excludedTicketHolder": "Udelukket for at holde billet",
+          "excludedNonTicketHolder": "Ikke på billettavlen"
         }
       },
       "json": "Airdrop JSON-data",
@@ -45,7 +47,7 @@
         "batchSize": "Størrelse på airdrop-overførselspartier",
         "tokenQuantity": "Indtast det antal tokens, du ønsker at airdrop",
         "distroRadio": {
-          "title": "Hvordan skal tokens tildeles til vindere?",
+          "title": "Hvordan skal tokens tildeles vinderne?",
           "equally": "Ligesom mellem vindende konto-id'er",
           "proportionally": "Proportional til vundne billetter",
           "roundRobin": "Tildel hele tokens på en round robin måde"
@@ -56,6 +58,12 @@
         "reqRadio": {
           "yes": "Ja",
           "no": "Ingen"
+        },
+        "ticketHolder": {
+          "title": "Hvem skal inkluderes i airdrop?",
+          "onlyHolders": "Billetholdere",
+          "noHolders": "Ikke-billetholdere",
+          "both": "Begge (alle)"
         },
         "target": {
           "ticketQty": "Antal vinderbilletter",

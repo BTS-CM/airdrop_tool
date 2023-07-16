@@ -1,6 +1,7 @@
 import { Apis } from 'bitsharesjs-ws';
 import { Apis as tuscApis } from 'tuscjs-ws';
-import { humanReadableFloat, sliceIntoChunks } from './common';
+
+import { sliceIntoChunks, humanReadableFloat } from './common';
 
 /**
  * Search for an account, given 1.2.x or an account name.
@@ -171,6 +172,46 @@ async function lookupSymbols(node, env, asset_ids, apiConnection = null) {
 }
 
 /**
+ * Get the list of blockchain fees
+ * @param {String} node
+ * @param {String} env
+ */
+async function getBlockchainFees(node, env) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (env === 'tusc') {
+        await tuscApis.instance(node, true).init_promise;
+      } else {
+        await Apis.instance(node, true).init_promise;
+      }
+    } catch (error) {
+      console.log(error);
+      reject(error);
+      return;
+    }
+
+    let retrievedGlobalParameters;
+    try {
+      retrievedGlobalParameters = await Apis.instance().db_api().exec('get_objects', [['2.0.0']]);
+    } catch (error) {
+      console.log(error);
+      reject(error);
+    }
+
+    if (retrievedGlobalParameters && retrievedGlobalParameters.length) {
+      const transferCost = humanReadableFloat(
+        retrievedGlobalParameters[0].parameters.current_fees.parameters[0][1].fee,
+        5
+      );
+      resolve({
+        fee: transferCost,
+        maxBytes: retrievedGlobalParameters[0].parameters.maximum_transaction_size
+      });
+    }
+  });
+}
+
+/**
  * Get multiple objects such as accounts, assets, etc
  * @param {String} node
  * @param {String} env
@@ -258,5 +299,6 @@ export {
   fetchLeaderboardData,
   accountSearch,
   getBlockedAccounts,
-  getObjects
+  getObjects,
+  getBlockchainFees
 };
