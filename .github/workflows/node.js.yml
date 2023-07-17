@@ -44,7 +44,7 @@ jobs:
     - name: Use Node.js 16.17.0
       uses: actions/setup-node@v3
       with:
-        node-version: 16.17.0
+        node-version: 18.16.1
 
     #- name: Clean yarn cache
     #  run: yarn cache clean
