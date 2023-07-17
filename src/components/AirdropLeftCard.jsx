@@ -7,47 +7,18 @@ import { FixedSizeList as List } from 'react-window';
 import { useDisclosure } from '@mantine/hooks';
 
 import {
-  Title,
   Text,
-  SimpleGrid,
-  Badge,
   Stack,
   Card,
-  Radio,
   Table,
   Button,
-  ScrollArea,
   CopyButton,
   Modal,
   Group,
-  Tooltip,
   Accordion,
-  NumberInput,
   JsonInput,
   Loader,
-  TextInput,
-  ActionIcon,
 } from '@mantine/core';
-import _ from "lodash";
-
-import {
-  HiOutlineShieldExclamation,
-  HiOutlineShieldCheck,
-} from "react-icons/hi";
-
-import {
-  airdropStore,
-  appStore,
-  leaderboardStore,
-  beetStore,
-  tempStore,
-  assetStore,
-  blocklistStore,
-} from "../lib/states";
-
-import GetAccount from "../pages/GetAccount";
-import { lookupSymbols } from "../lib/directQueries";
-import { sliceIntoChunks, humanReadableFloat } from '../lib/common';
 
 export default function AirdropLeftCard(properties) {
   const { t, i18n } = useTranslation();
@@ -71,7 +42,8 @@ export default function AirdropLeftCard(properties) {
     setReqdTokenItr,
     reqdTokenItr,
     tokenReq,
-    airdropTarget
+    airdropTarget,
+    simple
   } = properties;
 
   const [simpleWinnerJSON, setSimpleWinnerJSON] = useState(JSON.stringify([]));
@@ -112,19 +84,17 @@ export default function AirdropLeftCard(properties) {
           </div>
           <div style={{ width: '30%' }}>
             {
-              requiredToken
+              !simple
                 ? (
                   <>
                     <Link style={{ textDecoration: 'none', color: 'black' }} to={`/Account/${params.env}/${currentID}`}>
-                      <b>
-                        {envLeaderboard.find((usr) => usr.id === currentID).account.name}
-                      </b>
-                    </Link><br />
-                    (
-                      <Link style={{ textDecoration: 'none' }} to={`/Account/${params.env}/${currentID}`}>
-                        {currentID}
-                      </Link>
-                    )
+                      {
+                        envLeaderboard.find((usr) => usr.id === currentID)
+                          ? <b>{envLeaderboard.find((usr) => usr.id === currentID).account.name}</b>
+                          : currentID
+                      }
+                      <b>{envLeaderboard.find((usr) => usr.id === currentID).account.name}</b> ({currentID})
+                    </Link>
                   </>
                 )
                 : (
@@ -161,24 +131,17 @@ export default function AirdropLeftCard(properties) {
     return (
       <div style={{ ...style, width: "100%" }}>
         <Group position="center" key={`loser_${index}`} style={{ width: "100%" }}>
-          <div style={{ width: '10%' }}>
+          <div style={{ width: '5%' }}>
             {index + 1}
           </div>
-          <div style={{ width: '20%' }}>
+          <div style={{ width: '30%' }}>
             {
-              requiredToken
+              !simple
                 ? (
                   <>
                     <Link style={{ textDecoration: 'none', color: 'black' }} to={`/Account/${params.env}/${currentID}`}>
-                      <b>
-                        {envLeaderboard.find((usr) => usr.id === currentID).account.name}
-                      </b>
-                    </Link><br />
-                    (
-                      <Link style={{ textDecoration: 'none' }} to={`/Account/${params.env}/${currentID}`}>
-                        {currentID}
-                      </Link>
-                    )
+                      <b>{envLeaderboard.find((usr) => usr.id === currentID).account.name}</b> ({currentID})
+                    </Link>
                   </>
                 )
                 : (
@@ -188,7 +151,7 @@ export default function AirdropLeftCard(properties) {
                 )
             }
           </div>
-          <div style={{ width: '60%' }}>
+          <div style={{ width: '50%' }}>
             {
               currentLoser.reason.map((x) => t(`customAirdrop:grid.left.table.reasons.${x}`)).join(", ")
             }
@@ -269,7 +232,7 @@ export default function AirdropLeftCard(properties) {
                       {
                         winners.slice(0, 3).map((winner, i) => (
                           <Text key={`winner_${winner.id}`}>
-                            {i + 1}. &ldquo;<b>{winner.name || '???'}</b>&rdquo; ({winner.id}): {winner.assignedTokens} {finalTokenName || assetName}
+                            {i + 1}. <b>{envLeaderboard.find((usr) => usr.id === winner.id)?.account?.name || winner.id}</b>: {winner.assignedTokens} {finalTokenName || assetName}
                           </Text>
                         ))
                       }
@@ -361,7 +324,13 @@ export default function AirdropLeftCard(properties) {
               <tr>
                 <th>#</th>
                 <th>{t("performAirdrop:grid.left.table.th1")}</th>
-                <th>{t(`performAirdrop:grid.left.table.th2${airdropTarget === "ticketQty" ? '' : '2'}`)}</th>
+                <th>
+                  {
+                    airdropTarget === "ticketQty"
+                      ? t("performAirdrop:grid.left.table.th2")
+                      : t("performAirdrop:grid.left.table.th22")
+                  }
+                </th>
                 <th>{t("performAirdrop:grid.left.table.th3")}</th>
               </tr>
             </thead>
@@ -441,7 +410,7 @@ export default function AirdropLeftCard(properties) {
               <td colSpan="3" style={{ width: "100%" }}>
                 <List
                   height={300}
-                  itemCount={winners.length}
+                  itemCount={invalidOutput.length}
                   itemSize={35}
                   width="100%"
                 >

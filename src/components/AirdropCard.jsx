@@ -28,9 +28,6 @@ export default function AirdropCard(properties) {
   const bitshares_testnet_fees = appStore((state) => state.bitshares_testnet_fees);
   const tusc_fees = appStore((state) => state.tusc_fees);
 
-  const nodes = appStore((state) => state.nodes);
-  const currentNodes = nodes[env];
-
   let assetName = "";
   let relevantChain = "";
   let relevantFees;
@@ -75,9 +72,9 @@ export default function AirdropCard(properties) {
   const [cardBytes, setCardBytes] = useState();
   useEffect(() => {
     async function checkTRXBytes() {
-      let blah;
+      let calculatedBytes;
       try {
-        blah = await getTrxBytes(
+        calculatedBytes = await getTrxBytes(
           relevantFees.fee,
           env,
           'transfer',
@@ -86,8 +83,8 @@ export default function AirdropCard(properties) {
       } catch (error) {
         console.log(error);
       }
-      if (blah) {
-        setCardBytes(blah);
+      if (calculatedBytes) {
+        setCardBytes(calculatedBytes);
       }
     }
 

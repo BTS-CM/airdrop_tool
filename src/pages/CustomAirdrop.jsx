@@ -47,6 +47,14 @@ import AirdropLeftCard from '../components/AirdropLeftCard';
 import { lookupSymbols, getObjects } from "../lib/directQueries";
 import { sliceIntoChunks, humanReadableFloat } from '../lib/common';
 
+import {
+  fetchAirdropDetails,
+  tokenQuantities,
+  getTokenRows,
+  getValidRows,
+  filterMinRewards
+} from "../lib/airdrop";
+
 export default function CustomAirdrop(properties) {
   const { t, i18n } = useTranslation();
   const params = useParams();
@@ -105,7 +113,7 @@ export default function CustomAirdrop(properties) {
   // Debounced input
   const [tokenName, onTokenName] = useState(assetName);
   const [tokenQuantity, onTokenQuantity] = useState(100);
-  const [batchSize, onBatchSize] = useState(2000);
+  const [batchSize, onBatchSize] = useState(10000);
 
   // Retrieved asset info
   const [tokenDetails, setTokenDetails] = useState();
@@ -123,11 +131,6 @@ export default function CustomAirdrop(properties) {
 
   const nodes = appStore((state) => state.nodes);
   const currentNodes = nodes[params.env];
-
-  const countDecimals = (value) => {
-    if ((value % 1) !== 0) { return value.toString().split(".")[1].length; }
-    return 0;
-  };
 
   const [file, setFile] = useState();
   const [fileContents, setFileContents] = useState();
@@ -171,100 +174,29 @@ export default function CustomAirdrop(properties) {
 
   // Lookup the token to airdrop
   useEffect(() => {
-    async function fetchAirdropDetails() {
-      const delayDebounceFn = setTimeout(async () => {
-        if (account && account.length && finalTokenName && finalTokenName.length) {
-          setTokenDetails(); // erase last search
-          setInProgress(true);
-
-          const foundCachedAsset = cachedAssets.find((asset) => asset.symbol === finalTokenName);
-          if (foundCachedAsset) {
-            setTokenDetails({
-              id: foundCachedAsset.id,
-              precision: foundCachedAsset.precision,
-              max_supply: foundCachedAsset.options.max_supply,
-              readableMax: humanReadableFloat(
-                foundCachedAsset.options.max_supply,
-                foundCachedAsset.precision
-              ),
-            });
-            setInProgress(false);
-            return;
-          }
-
-          let assetDetails;
-          try {
-            assetDetails = await lookupSymbols(currentNodes[0], params.env, [finalTokenName]);
-          } catch (error) {
-            console.log(error);
-            changeURL(params.env);
-            setInProgress(false);
-            return;
-          }
-
-          if (!assetDetails || !assetDetails.length) {
-            setInProgress(false);
-            return;
-          }
-
-          const assetData = assetDetails.map((q) => ({
-            id: q.id,
-            symbol: q.symbol,
-            precision: q.precision,
-            issuer: q.issuer,
-            options: {
-              max_supply: q.options.max_supply
-            },
-            dynamic_asset_data_id: q.dynamic_asset_data_id
-          }));
-
-          addOne(params.env, assetData[0]);
-
-          setTokenDetails({
-            id: assetDetails[0].id,
-            precision: assetDetails[0].precision,
-            max_supply: assetDetails[0].options.max_supply,
-            readableMax: humanReadableFloat(
-              assetDetails[0].options.max_supply,
-              assetDetails[0].precision
-            ),
-          }); // store new
-
-          setInProgress(false);
-        }
-      }, 1000);
-
-      return () => clearTimeout(delayDebounceFn);
-    }
-
-    fetchAirdropDetails();
+    fetchAirdropDetails(
+      {
+        account,
+        finalTokenName,
+        cachedAssets,
+        currentNodes,
+        env: params.env
+      },
+      {
+        addOne, changeURL, setTokenDetails, setInProgress
+      }
+    );
   }, [account, finalTokenName, tokenItr]);
 
   // Quantity of tokens to airdrop
-  useEffect(() => {
-    const delayDebounceFn = setTimeout(async () => {
-      if (tokenQuantity && tokenQuantity > 0 && tokenDetails) {
-        if (tokenDetails && tokenQuantity > tokenDetails.readableMax) {
-          console.log("Max supply reached");
-          onTokenQuantity(parseFloat(tokenDetails.readableMax));
-          return;
-        }
-        if (tokenDetails && tokenQuantity < humanReadableFloat(1, tokenDetails.precision)) {
-          console.log("Less than min supply");
-          onTokenQuantity(humanReadableFloat(1, tokenDetails.precision));
-          return;
-        }
-        if (countDecimals(tokenQuantity) > tokenDetails.precision) {
-          console.log("Too many decimals");
-          onTokenQuantity(tokenQuantity.toFixed(tokenDetails.precision));
-          return;
-        }
-        setFinalTokenQuantity(tokenQuantity); // store new
-      }
-    }, 1000);
-
-    return () => clearTimeout(delayDebounceFn);
-  }, [tokenQuantity, tokenDetails]);
+  useEffect(() => tokenQuantities(
+    {
+      tokenDetails, tokenQuantity
+    },
+    {
+      onTokenQuantity, setFinalTokenQuantity
+    }
+  ), [tokenQuantity, tokenDetails]);
 
   const [processing, setProcessing] = useState(false);
   const [retrievedObjects, setRetrievedObjects] = useState([]);
@@ -434,60 +366,33 @@ export default function CustomAirdrop(properties) {
   );
 
   const [tokenRows, setTokenRows] = useState([]);
-  const memoizedTokenRows = useMemo(() => {
-    if (finalTokenQuantity && ticketQty && itrQty && validOutput.length && tokenDetails) {
-      const tempRows = [];
-      let remainingTokens = finalTokenQuantity ?? 0;
-      let remainingTickets = airdropTarget && airdropTarget === "ticketValue"
-        ? totalTicketValue
-        : ticketQty;
-      let equalTally = validOutput.length ?? 0;
 
-      if (distroMethod === "RoundRobin") {
-        const tokensPerTicket = Math.floor(finalTokenQuantity / validOutput.length);
-        const remainingTokensMod = finalTokenQuantity % validOutput.length;
-
-        for (let i = 0; i < validOutput.length; i++) {
-          const currentWinner = validOutput[i];
-          const assignedTokens = tokensPerTicket + (i < remainingTokensMod ? 1 : 0);
-
-          tempRows.push({
-            ...currentWinner,
-            assignedTokens,
-          });
-        }
-      } else {
-        // Allocate assets (tokens) to the remaining valid ticket holders
-        for (let i = 0; i < itrQty; i++) {
-          if (distroMethod === "Proportionally") {
-            const propValue = airdropTarget && airdropTarget === "ticketValue"
-              ? validOutput[i].value
-              : validOutput[i].qty;
-            const proportionalAllocation = parseFloat(
-              ((propValue / remainingTickets) * remainingTokens).toFixed(tokenDetails.precision)
-            );
-            remainingTokens -= proportionalAllocation;
-            remainingTickets -= propValue;
-            tempRows.push({ ...validOutput[i], assignedTokens: proportionalAllocation });
-          } else if (distroMethod === "Equally") {
-            const equalAllocation = parseFloat(
-              ((1 / equalTally) * remainingTokens).toFixed(tokenDetails.precision)
-            );
-            remainingTokens -= equalAllocation;
-            equalTally -= 1;
-            tempRows.push({ ...validOutput[i], assignedTokens: equalAllocation });
-          }
-        }
+  useEffect(() => {
+    async function fetchTokenRows() {
+      let rows;
+      try {
+        rows = await getTokenRows(
+          finalTokenQuantity,
+          itrQty,
+          distroMethod,
+          validOutput,
+          tokenDetails,
+          airdropTarget,
+          ticketQty,
+          totalTicketValue
+        );
+      } catch (error) {
+        console.log(error);
       }
 
-      return tempRows;
+      setTokenRows(rows);
     }
-    return [];
+
+    fetchTokenRows();
   }, [
     finalTokenQuantity,
     itrQty,
     distroMethod,
-    blocking,
     validOutput,
     tokenDetails,
     airdropTarget,
@@ -495,44 +400,24 @@ export default function CustomAirdrop(properties) {
     totalTicketValue
   ]);
 
-  useEffect(() => {
-    setTokenRows(memoizedTokenRows);
-  }, [memoizedTokenRows]);
-
   const totalAssignedTokens = useMemo(
-    () => tokenRows.reduce((total, user) => total + user.assignedTokens, 0),
+    () => {
+      if (!tokenRows || !Array.isArray(tokenRows) || !tokenRows.length) {
+        return 0;
+      }
+      return tokenRows.reduce((total, user) => total + user.assignedTokens, 0);
+    },
     [tokenRows]
   );
 
-  const memoizedValidTokenRows = useMemo(() => {
-    if (tokenRows && tokenRows.length && tokenDetails) {
-      if (leftAirdropCard) {
-        setLeftAirdropCard(null);
-      }
-      let valid = tokenRows.sort((a, b) => b.assignedTokens - a.assignedTokens);
-      if (tokenDetails.precision > 0) {
-        valid = valid.filter((user) => user.assignedTokens > humanReadableFloat(1, tokenDetails.precision));
-      } else if (tokenDetails.precision === 0 && tokenDetails.readableMax === 1) {
-        valid = valid.filter((user) => user.assignedTokens === 1);
-      } else if (tokenDetails.precision === 0 && tokenDetails.readableMax > 1) {
-        valid = valid.filter((user) => user.assignedTokens >= 1);
-      }
-
-      // if valid.length < tokenRows.length, then redistribute the missing user assignedTokens to those above proportionally
-      if (valid.length < tokenRows.length) {
-        // Calculate the total assigned tokens
-        const validAssignedTokens = valid.reduce((total, user) => total + user.assignedTokens, 0);
-
-        const missingTokens = totalAssignedTokens - validAssignedTokens;
-        if (valid && valid.length) {
-          valid[0].assignedTokens += missingTokens;
-        }
-      }
-
-      return valid;
+  const memoizedValidTokenRows = useMemo(() => getValidRows(
+    {
+      tokenRows, tokenDetails, totalAssignedTokens, leftAirdropCard
+    },
+    {
+      setLeftAirdropCard
     }
-    return [];
-  }, [tokenRows, tokenDetails]);
+  ), [tokenRows, tokenDetails]);
 
   const [winnerChunks, setWinnerChunks] = useState([]);
   const [winners, setWinners] = useState([]);
@@ -541,11 +426,11 @@ export default function CustomAirdrop(properties) {
       return;
     }
     // for left airdrop cards
-    setWinners(memoizedValidTokenRows);
+    setWinners(memoizedValidTokenRows || []);
 
     // for airdrop distribution cards
     setWinnerChunks(
-      memoizedValidTokenRows.length
+      memoizedValidTokenRows && memoizedValidTokenRows.length
         ? sliceIntoChunks(memoizedValidTokenRows, finalBatchSize)
         : []
     );
@@ -556,7 +441,7 @@ export default function CustomAirdrop(properties) {
   ]);
 
   const assignedTokenUsers = useMemo(
-    () => (winners.map((x) => x.id)),
+    () => (winners && winners.map((x) => x.id)) || [],
     [winners]
   );
 
@@ -571,31 +456,14 @@ export default function CustomAirdrop(properties) {
     if (!fileContents) {
       return;
     }
-    if (leftAirdropCard) {
-      setLeftAirdropCard(null);
-    }
-    console.log("finalInvalidOutput: start");
-    const invalidOutputMap = new Map(invalidOutput.map((x) => [x.id, x]));
-    const newInvalidOutput = unassignedUsers.map((current) => {
-      const currentInvalid = invalidOutputMap.get(current.id);
-      if (currentInvalid) {
-        const updatedInvalid = {
-          ...currentInvalid,
-          reason: [...currentInvalid.reason, "minReward"]
-        };
-        return updatedInvalid;
-      }
-      return {
-        ...current,
-        reason: ["minReward"]
-      };
-    });
-    console.log("finalInvalidOutput: end");
-    setFinalInvalidOutput(newInvalidOutput);
+    filterMinRewards(
+      { invalidOutput, unassignedUsers, leftAirdropCard },
+      { setFinalInvalidOutput, setLeftAirdropCard }
+    );
   }, [fileContents, unassignedUsers, invalidOutput]);
 
   useEffect(() => {
-    if (winners && !inProgress) {
+    if (winners && winners.length && !inProgress) {
       setLeftAirdropCard(
         <AirdropLeftCard
           envLeaderboard={envLeaderboard}
@@ -609,6 +477,7 @@ export default function CustomAirdrop(properties) {
           setTokenItr={setTokenItr}
           tokenItr={tokenItr}
           airdropTarget={airdropTarget}
+          simple={true}
         />
       );
     }
@@ -619,19 +488,14 @@ export default function CustomAirdrop(properties) {
     if (winnerChunks && winnerChunks.length && tokenDetails) {
       setValidAirdropCards(
         winnerChunks.map((chunk, i) => (
-            <AirdropCard
-              tokenQuantity={tokenQuantity}
-              tokenName={finalTokenName}
-              distroMethod={distroMethod}
-              chunk={chunk}
-              chunkItr={i}
-              winnerChunkQty={winnerChunks.length}
-              quantityWinners={winners.length}
-              env={params.env}
-              ticketQty={ticketQty}
-              key={`airdrop_card_${i}`}
-              tokenDetails={tokenDetails}
-            />
+          <AirdropCard
+            tokenName={finalTokenName}
+            chunk={chunk}
+            chunkItr={i}
+            winnerChunkQty={winnerChunks.length}
+            env={params.env}
+            tokenDetails={tokenDetails}
+          />
         ))
       );
     } else {

@@ -191,7 +191,6 @@ export default function Fetch(properties) {
     }
 
     if (feeResponse) {
-      console.log({ value, feeResponse });
       setFees(value, feeResponse);
     }
 
