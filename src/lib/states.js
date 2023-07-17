@@ -318,6 +318,21 @@ const appStore = create(
           }));
         }
       },
+      resetFees: (env) => {
+        if (env === 'bitshares') {
+          set({
+            bitshares_fees: null
+          });
+        } else if (env === 'bitshares_testnet') {
+          set({
+            bitshares_testnet_fees: null
+          });
+        } else if (env === 'tusc') {
+          set({
+            tusc_fees: null
+          });
+        }
+      },
       reset: () => set({
         nodes: {
           bitshares: [],

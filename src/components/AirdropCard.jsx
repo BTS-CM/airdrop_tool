@@ -75,7 +75,7 @@ export default function AirdropCard(properties) {
       let calculatedBytes;
       try {
         calculatedBytes = await getTrxBytes(
-          relevantFees.fee,
+          relevantFees.fee || 1,
           env,
           'transfer',
           ops
@@ -107,25 +107,33 @@ export default function AirdropCard(properties) {
         { `${currentChunkValue.toFixed(tokenDetails.precision ?? 0)} ${tokenName || assetName} ${t("airdropCard:distro")}` }
         <br />
         {
-          t("airdropCard:fees.nonLTM", {
-            nonLTM: parseFloat((chunk.length * relevantFees.fee).toFixed(5)),
-            assetName,
-          })
+          relevantFees && relevantFees.fee && relevantFees.maxBytes
+            ? (
+            <>
+              {
+                t("airdropCard:fees.nonLTM", {
+                  nonLTM: parseFloat((chunk.length * relevantFees.fee).toFixed(5)),
+                  assetName,
+                })
+              }
+              <br />
+              {
+                t("airdropCard:fees.LTM", {
+                  LTM: parseFloat((chunk.length * (relevantFees.fee * 0.2)).toFixed(5)),
+                  assetName,
+                })
+              }
+              <br />
+              { cardBytes } / { relevantFees.maxBytes } bytes ({
+                parseFloat((cardBytes / relevantFees.maxBytes) * 100).toFixed(2)
+              } %)
+            </>
+            )
+            : null
         }
-        <br />
-        {
-          t("airdropCard:fees.LTM", {
-            LTM: parseFloat((chunk.length * (relevantFees.fee * 0.2)).toFixed(5)),
-            assetName,
-          })
-        }
-        <br />
-        { cardBytes } / { relevantFees.maxBytes } bytes ({
-          parseFloat((cardBytes / relevantFees.maxBytes) * 100).toFixed(2)
-        } %)
       </Text>
       {
-        cardBytes <= relevantFees.maxBytes
+        !relevantFees || (relevantFees && cardBytes <= relevantFees.maxBytes)
           ? (
             <BeetModal
               value={env}

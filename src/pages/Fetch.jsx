@@ -40,6 +40,7 @@ export default function Fetch(properties) {
   const changeURL = appStore((state) => state.changeURL);
 
   const setFees = appStore((state) => state.setFees);
+  const resetFees = appStore((state) => state.resetFees);
 
   const btsAssets = assetStore((state) => state.bitshares);
   const btsTestnetAssets = assetStore((state) => state.bitshares_testnet);
@@ -349,32 +350,32 @@ export default function Fetch(properties) {
         >
           <Group mt="xs">
             {
-                !inProgress
-                  ? <Radio value="bitshares" label="Bitshares" />
-                  : <Radio disabled value="bitshares" label="Bitshares" />
+              !inProgress
+                ? <Radio value="bitshares" label="Bitshares" />
+                : <Radio disabled value="bitshares" label="Bitshares" />
             }
             {
-                !inProgress
-                  ? <Radio value="bitshares_testnet" label="Bitshares (Testnet)" />
-                  : <Radio disabled value="bitshares_testnet" label="Bitshares (Testnet)" />
+              !inProgress
+                ? <Radio value="bitshares_testnet" label="Bitshares (Testnet)" />
+                : <Radio disabled value="bitshares_testnet" label="Bitshares (Testnet)" />
             }
             {
-                !inProgress
-                  ? <Radio value="tusc" label="TUSC" />
-                  : <Radio disabled value="tusc" label="TUSC" />
+              !inProgress
+                ? <Radio value="tusc" label="TUSC" />
+                : <Radio disabled value="tusc" label="TUSC" />
             }
             {
-                !inProgress
-                  ? (
-                    <Button onClick={() => execFetch()} style={{ marginLeft: '20px' }}>
-                      {t("fetch:topCard.btn1")}
-                    </Button>
-                  )
-                  : (
-                    <Button disabled style={{ marginLeft: '20px' }}>
-                      ⏳ {t("fetch:topCard.btn2")}
-                    </Button>
-                  )
+              !inProgress
+                ? (
+                  <Button onClick={() => execFetch()} style={{ marginLeft: '20px' }}>
+                    {t("fetch:topCard.btn1")}
+                  </Button>
+                )
+                : (
+                  <Button disabled style={{ marginLeft: '20px' }}>
+                    ⏳ {t("fetch:topCard.btn2")}
+                  </Button>
+                )
             }
           </Group>
         </Radio.Group>
@@ -422,7 +423,7 @@ export default function Fetch(properties) {
                           <ActionIcon>📄</ActionIcon>
                         </Link>
                       )
-                      : <a>⛔</a>
+                      : null
                 }
               </td>
               <td>
@@ -433,12 +434,13 @@ export default function Fetch(properties) {
                           eraseTickets('bitshares');
                           eraseLeaders('bitshares');
                           eraseAssets('bitshares');
+                          resetFees('bitshares');
                         }}
                         >
                           ❌
                         </ActionIcon>
                     )
-                    : (<ActionIcon disabled>❌</ActionIcon>)
+                    : null
                 }
 
               </td>
@@ -473,18 +475,25 @@ export default function Fetch(properties) {
                         <ActionIcon>📄</ActionIcon>
                       </Link>
                     )
-                    : <a>⛔</a>
+                    : null
                 }
               </td>
               <td>
-                <ActionIcon onClick={() => {
-                  eraseTickets('bitshares_testnet');
-                  eraseLeaders('bitshares_testnet');
-                  eraseAssets('bitshares_testnet');
-                }}
-                >
-                  ❌
-                </ActionIcon>
+                {
+                  tuscTickets.length
+                    ? (
+                      <ActionIcon onClick={() => {
+                        eraseTickets('bitshares_testnet');
+                        eraseLeaders('bitshares_testnet');
+                        eraseAssets('bitshares_testnet');
+                        resetFees('bitshares_testnet');
+                      }}
+                      >
+                        ❌
+                      </ActionIcon>
+                    )
+                    : null
+                }
               </td>
             </tr>
             <tr key="TUSC">
@@ -511,24 +520,31 @@ export default function Fetch(properties) {
               </td>
               <td>
                 {
-                                tuscTickets.length
-                                  ? (
-                                    <Link style={{ textDecoration: 'none' }} to="../Tickets/tusc">
-                                      <ActionIcon>📄</ActionIcon>
-                                    </Link>
-                                  )
-                                  : <a>⛔</a>
-                            }
+                  tuscTickets.length
+                    ? (
+                      <Link style={{ textDecoration: 'none' }} to="../Tickets/tusc">
+                        <ActionIcon>📄</ActionIcon>
+                      </Link>
+                    )
+                    : null
+                }
               </td>
               <td>
-                <ActionIcon onClick={() => {
-                  eraseTickets('tusc');
-                  eraseLeaders('tusc');
-                  eraseAssets('tusc');
-                }}
-                >
-                  ❌
-                </ActionIcon>
+                {
+                  tuscTickets.length
+                    ? (
+                      <ActionIcon onClick={() => {
+                        eraseTickets('tusc');
+                        eraseLeaders('tusc');
+                        eraseAssets('tusc');
+                        resetFees('tusc');
+                      }}
+                      >
+                        ❌
+                      </ActionIcon>
+                    )
+                    : null
+                }
               </td>
             </tr>
           </tbody>
