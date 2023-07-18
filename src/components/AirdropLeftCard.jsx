@@ -56,7 +56,7 @@ export default function AirdropLeftCard(properties) {
   useEffect(() => {
     setSimpleWinnerJSON(JSON.stringify(
       winners.map((x) => ({
-        user: requiredToken
+        user: !simple
           ? `${envLeaderboard.find((usr) => usr.id === x.id).account.name} (${x.id})`
           : x.id,
         ticketQty: x.qty,
@@ -67,7 +67,7 @@ export default function AirdropLeftCard(properties) {
       null,
       4
     ));
-  }, [winners, requiredToken]);
+  }, [winners]);
 
   const validNewRows = ({ index, style }) => {
     if (!winners[index]) {
