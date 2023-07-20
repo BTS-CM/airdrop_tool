@@ -193,7 +193,6 @@ export default function CustomAirdrop(properties) {
   useEffect(() => {
     if (
       (!account || !account.length)
-      || (!validTicketHolders || !validTicketHolders.length)
       || (!fileUsers || !fileUsers.length)
     ) {
       console.log("no account or no valid ticket holders");
@@ -220,7 +219,7 @@ export default function CustomAirdrop(properties) {
         reasons.push("self");
       }
 
-      if (ticketHolder && ticketHolder !== 'both') {
+      if (validTicketHolders && validTicketHolders.length && ticketHolder && ticketHolder !== 'both') {
         const ticketCheck = validTicketHolders.includes(user.id);
         if (ticketHolder === 'onlyHolders' && !ticketCheck) {
           // Filter out non-ticket holders
@@ -633,29 +632,35 @@ export default function CustomAirdrop(properties) {
                   />
                 </Group>
               </Radio.Group>
-              <Radio.Group
-                value={ticketHolder}
-                onChange={setTicketHolder}
-                name="ticketHolder"
-                label={t("customAirdrop:grid.right.options.ticketHolder.title")}
-                style={{ marginTop: '10px' }}
-                withAsterisk
-              >
-                <Group mt="xs">
-                  <Radio
-                    value="onlyHolders"
-                    label={t("customAirdrop:grid.right.options.ticketHolder.onlyHolders")}
-                  />
-                  <Radio
-                    value="noHolders"
-                    label={t("customAirdrop:grid.right.options.ticketHolder.noHolders")}
-                  />
-                  <Radio
-                    value="both"
-                    label={t("customAirdrop:grid.right.options.ticketHolder.both")}
-                  />
-                </Group>
-              </Radio.Group>
+              {
+                envLeaderboard && envLeaderboard.length
+                  ? (
+                    <Radio.Group
+                      value={ticketHolder}
+                      onChange={setTicketHolder}
+                      name="ticketHolder"
+                      label={t("customAirdrop:grid.right.options.ticketHolder.title")}
+                      style={{ marginTop: '10px' }}
+                      withAsterisk
+                    >
+                      <Group mt="xs">
+                        <Radio
+                          value="onlyHolders"
+                          label={t("customAirdrop:grid.right.options.ticketHolder.onlyHolders")}
+                        />
+                        <Radio
+                          value="noHolders"
+                          label={t("customAirdrop:grid.right.options.ticketHolder.noHolders")}
+                        />
+                        <Radio
+                          value="both"
+                          label={t("customAirdrop:grid.right.options.ticketHolder.both")}
+                        />
+                      </Group>
+                    </Radio.Group>
+                  )
+                  : null
+              }
               <Radio.Group
                 value={airdropTarget}
                 onChange={setAirdropTarget}
