@@ -26,6 +26,7 @@
         "title2": "Les détenteurs de billets exclus du largage",
         "th1": "Compte",
         "th2": "Quantité",
+        "th22": "Valeur",
         "th3": "Allocation",
         "th4": "Raison",
         "reasons": {
@@ -38,7 +39,9 @@
         }
       },
       "json": "Données JSON Airdrop",
-      "jsonSimple": "Données JSON Airdrop simples"
+      "jsonSimple": "Données JSON Airdrop simples",
+      "copy": "Copier JSON",
+      "copied": "Copié !"
     },
     "right": {
       "summary": {

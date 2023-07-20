@@ -26,6 +26,7 @@
         "title2": "Possessori di biglietto esclusi dall'airdrop",
         "th1": "Account",
         "th2": "Quantità",
+        "th22": "Valore",
         "th3": "Allocazione",
         "th4": "Motivo",
         "reasons": {
@@ -38,7 +39,9 @@
         }
       },
       "json": "Airdrop dati JSON",
-      "jsonSimple": "Semplici dati JSON di airdrop"
+      "jsonSimple": "Semplici dati JSON di airdrop",
+      "copy": "Copia JSON",
+      "copied": "Copiato!"
     },
     "right": {
       "summary": {

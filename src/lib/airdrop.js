@@ -1,3 +1,4 @@
+import { sort } from 'fast-sort';
 import { humanReadableFloat } from "./common";
 import { lookupSymbols } from "./directQueries";
 
@@ -9,39 +10,49 @@ const _countDecimals = (value) => {
 /**
  * Retrieve the valid rows from the tokenRows
  * @param {Object} valid
- * @param {Object} zustandSet
  * @returns {Array}
  */
-function getValidRows(valid, zustandSet) {
-  const { tokenRows, tokenDetails, totalAssignedTokens, leftAirdropCard } = valid;
-  const { setLeftAirdropCard } = zustandSet;
+function getValidRows(valid) {
+  const {
+    tokenRows, tokenDetails, totalAssignedTokens
+  } = valid;
   if (tokenRows && tokenRows.length && tokenDetails) {
-    if (leftAirdropCard) {
-      setLeftAirdropCard(null);
-    }
-    let validTokenRow = tokenRows.sort((a, b) => b.assignedTokens - a.assignedTokens);
-    if (tokenDetails.precision > 0) {
-      validTokenRow = validTokenRow.filter(
-        (user) => user.assignedTokens > humanReadableFloat(1, tokenDetails.precision)
-      );
-    } else if (tokenDetails.precision === 0 && tokenDetails.readableMax === 1) {
-      validTokenRow = validTokenRow.filter((user) => user.assignedTokens === 1);
-    } else if (tokenDetails.precision === 0 && tokenDetails.readableMax > 1) {
-      validTokenRow = validTokenRow.filter((user) => user.assignedTokens >= 1);
-    }
-
-    // redistribute the missing user assignedTokens to those above proportionally
-    if (validTokenRow.length < tokenRows.length) {
-      // Calculate the total assigned tokens
-      const validAssignedTokens = validTokenRow.reduce((total, user) => total + user.assignedTokens, 0);
-
-      const missingTokens = totalAssignedTokens - validAssignedTokens;
-      if (validTokenRow && validTokenRow.length) {
-        validTokenRow[0].assignedTokens += missingTokens;
+    const filteredTokenRows = [];
+    const minReadable = humanReadableFloat(1, tokenDetails.precision);
+    for (let i = 0; i < tokenRows.length; i++) {
+      const user = tokenRows[i];
+      if (tokenDetails.precision > 0) {
+        if (user.assignedTokens > minReadable) {
+          filteredTokenRows.push(user);
+        }
+      } else if (tokenDetails.precision === 0 && tokenDetails.readableMax === 1) {
+        if (user.assignedTokens === 1) {
+          filteredTokenRows.push(user);
+        }
+      } else if (tokenDetails.precision === 0 && tokenDetails.readableMax > 1) {
+        if (user.assignedTokens >= 1) {
+          filteredTokenRows.push(user);
+        }
       }
     }
 
-    return validTokenRow;
+    // redistribute the missing user assignedTokens to those above proportionally
+    if (filteredTokenRows.length < tokenRows.length) {
+      // Calculate the total assigned tokens
+      let validAssignedTokens = 0;
+      for (let i = 0; i < filteredTokenRows.length; i++) {
+        const user = filteredTokenRows[i];
+        validAssignedTokens += user.assignedTokens;
+      }
+
+      const missingTokens = totalAssignedTokens - validAssignedTokens;
+      if (filteredTokenRows && filteredTokenRows.length) {
+        filteredTokenRows[0].assignedTokens += missingTokens;
+      }
+    }
+
+    const sortedTokenRows = sort(filteredTokenRows).desc((u) => u.assignedTokens);
+    return sortedTokenRows;
   }
   return [];
 }
@@ -190,35 +201,42 @@ async function getTokenRows(
       const remainingTokensMod = finalTokenQuantity % validOutput.length;
 
       for (let i = 0; i < validOutput.length; i++) {
-        const currentWinner = validOutput[i];
         const assignedTokens = tokensPerTicket + (i < remainingTokensMod ? 1 : 0);
-
-        tempRows.push({
-          ...currentWinner,
-          assignedTokens,
-        });
+        validOutput[i].assignedTokens = assignedTokens;
+        tempRows.push(validOutput[i]);
       }
-    } else {
+    } else if (distroMethod === "Proportionally") {
       // Allocate assets (tokens) to the remaining valid ticket holders
       for (let i = 0; i < itrQty; i++) {
-        if (distroMethod === "Proportionally") {
-          const propValue = airdropTarget && airdropTarget === "ticketValue"
-            ? validOutput[i].value
-            : validOutput[i].qty;
-          const proportionalAllocation = parseFloat(
-            ((propValue / remainingTickets) * remainingTokens).toFixed(tokenDetails.precision)
-          );
-          remainingTokens -= proportionalAllocation;
-          remainingTickets -= propValue;
-          tempRows.push({ ...validOutput[i], assignedTokens: proportionalAllocation });
-        } else if (distroMethod === "Equally") {
-          const equalAllocation = parseFloat(
-            ((1 / equalTally) * remainingTokens).toFixed(tokenDetails.precision)
-          );
-          remainingTokens -= equalAllocation;
-          equalTally -= 1;
-          tempRows.push({ ...validOutput[i], assignedTokens: equalAllocation });
+        const propValue = airdropTarget && airdropTarget === "ticketValue"
+          ? validOutput[i].value
+          : validOutput[i].qty;
+
+        const proportionalAllocation = parseFloat(
+          ((propValue / remainingTickets) * remainingTokens).toFixed(tokenDetails.precision)
+        );
+
+        if (!proportionalAllocation || Number.isNaN(proportionalAllocation)) {
+          //validOutput[i].assignedTokens = 0;
+          //tempRows.push(validOutput[i]);
+          continue;
         }
+
+        remainingTokens -= proportionalAllocation;
+        remainingTickets -= propValue;
+
+        validOutput[i].assignedTokens = proportionalAllocation;
+        tempRows.push(validOutput[i]);
+      }
+    } else if (distroMethod === "Equally") {
+      for (let i = 0; i < itrQty; i++) {
+        const equalAllocation = parseFloat(
+          ((1 / equalTally) * remainingTokens).toFixed(tokenDetails.precision)
+        );
+        remainingTokens -= equalAllocation;
+        equalTally -= 1;
+        validOutput[i].assignedTokens = equalAllocation;
+        tempRows.push(validOutput[i]);
       }
     }
 
@@ -233,26 +251,21 @@ async function getTokenRows(
  * @param {Object} zustandSet
  */
 function filterMinRewards(variables, zustandSet) {
-  const { invalidOutput, unassignedUsers, leftAirdropCard } = variables;
-  const { setFinalInvalidOutput, setLeftAirdropCard } = zustandSet;
-  if (leftAirdropCard) {
-    setLeftAirdropCard(null);
-  }
-  const invalidOutputMap = new Map(invalidOutput.map((x) => [x.id, x]));
-  const newInvalidOutput = unassignedUsers.map((current) => {
+  const { invalidOutput, unassignedUsers } = variables;
+  const { setFinalInvalidOutput } = zustandSet;
+
+  // console.log({ invalidOutput, unassignedUsers })
+  const invalidOutputMap = new Map(Array.from(invalidOutput, (x) => [x.id, x]));
+  const newInvalidOutput = unassignedUsers.reduce((acc, current) => {
     const currentInvalid = invalidOutputMap.get(current.id);
     if (currentInvalid) {
-      const updatedInvalid = {
-        ...currentInvalid,
-        reason: [...currentInvalid.reason, "minReward"]
-      };
-      return updatedInvalid;
+      currentInvalid.reason = currentInvalid.reason.concat("minReward");
+      acc.push(currentInvalid);
+    } else {
+      acc.push({ ...current, reason: ["minReward"] });
     }
-    return {
-      ...current,
-      reason: ["minReward"]
-    };
-  });
+    return acc;
+  }, []);
   setFinalInvalidOutput(newInvalidOutput);
 }
 

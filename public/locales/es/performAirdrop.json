@@ -26,6 +26,7 @@
         "title2": "Titulares de entradas excluidos del airdrop",
         "th1": "Cuenta",
         "th2": "Cantidad",
+        "th22": "Valor",
         "th3": "Asignación",
         "th4": "Razón",
         "reasons": {
@@ -38,7 +39,9 @@
         }
       },
       "json": "Lanzamiento aéreo de datos JSON",
-      "jsonSimple": "Datos JSON de lanzamiento aéreo simple"
+      "jsonSimple": "Datos JSON de lanzamiento aéreo simple",
+      "copy": "Copiar JSON",
+      "copied": "¡Copiado!"
     },
     "right": {
       "summary": {

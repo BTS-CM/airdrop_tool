@@ -26,11 +26,12 @@
         "title2": "에어드롭 대상에서 제외되는 티켓 소지자",
         "th1": "계정",
         "th2": "수량",
+        "th22": "값",
         "th3": "배당",
         "th4": "이유",
         "reasons": {
           "blocked": "사용자가 차단되었습니다.",
-          "ltm": "평생 회원 누락",
+          "ltm": "평생 멤버십 누락",
           "noBalance": "필수 토큰 누락",
           "insufficientBalance": "불충분한 필수 토큰",
           "self": "자신에게 보낼 수 없음",
@@ -38,7 +39,9 @@
         }
       },
       "json": "에어드롭 JSON 데이터",
-      "jsonSimple": "간단한 에어드롭 JSON 데이터"
+      "jsonSimple": "간단한 에어드롭 JSON 데이터",
+      "copy": "JSON 복사",
+      "copied": "복사했습니다!"
     },
     "right": {
       "summary": {
@@ -55,7 +58,7 @@
       },
       "options": {
         "title": "에어드롭 옵션",
-        "titleName": "귀하의 {{titleName}} 계정 ID",
+        "titleName": "당신의 {{titleName}} 계정 ID",
         "assetName": "에어드롭하려는 자산의 이름을 입력하세요.",
         "batchSize": "에어드롭 전송 배치의 크기",
         "tokenQuantity": "에어드롭할 토큰 수량을 입력하세요.",
@@ -87,7 +90,7 @@
       "invalid": {
         "title": "에어드랍할게 없음",
         "reason": "유효한 티켓이 없기 때문에 에어드롭할 것이 없습니다.",
-        "resolution": "에어드랍 설정을 조정하거나 다른 에어드랍을 계산하여 진행하세요."
+        "resolution": "에어드랍 설정을 조정하거나 다른 에어드롭을 계산하여 진행하세요."
       },
       "valid": {
         "title": "에어드롭을 진행하시겠습니까?",

@@ -7,32 +7,22 @@ import {
   Title,
   Text,
   SimpleGrid,
-  Badge,
   Card,
   Radio,
-  Table,
   Button,
-  ScrollArea,
   Group,
-  FileButton,
   Center,
-  Tooltip,
-  Accordion,
-  NumberInput,
-  JsonInput,
   Loader,
   TextInput,
-  ActionIcon,
 } from '@mantine/core';
 import _ from "lodash";
-
+import { sort } from 'fast-sort';
 import {
   HiOutlineShieldExclamation,
   HiOutlineShieldCheck,
 } from "react-icons/hi";
 
 import {
-  airdropStore,
   appStore,
   leaderboardStore,
   beetStore,
@@ -41,11 +31,10 @@ import {
   blocklistStore,
 } from "../lib/states";
 
-import AirdropCard from "../components/AirdropCard";
+import AirdropCards from '../components/AirdropCards';
 import AirdropLeftCard from '../components/AirdropLeftCard';
 
-import { lookupSymbols, getObjects } from "../lib/directQueries";
-import { sliceIntoChunks, humanReadableFloat } from '../lib/common';
+import { sliceIntoChunks } from '../lib/common';
 
 import {
   fetchAirdropDetails,
@@ -102,6 +91,7 @@ export default function CustomAirdrop(properties) {
   const changeURL = appStore((state) => state.changeURL);
   const identity = beetStore((state) => state.identity);
   const account = tempStore((state) => state.account);
+  const fileContents = tempStore((state) => state.fileContents);
   const [inProgress, setInProgress] = useState(false);
 
   // Radio buttons
@@ -131,26 +121,25 @@ export default function CustomAirdrop(properties) {
 
   const nodes = appStore((state) => state.nodes);
   const currentNodes = nodes[params.env];
-
-  const [file, setFile] = useState();
-  const [fileContents, setFileContents] = useState();
-  const [sortedWinners, setSortedWinners] = useState([]);
+  const [fileUsers, setFileUsers] = useState();
 
   useEffect(() => {
-    if (file) {
-      const reader = new FileReader();
-      reader.readAsText(file);
-      reader.onload = () => {
-        const contents = JSON.parse(reader.result);
-        if (contents && contents.length && contents[0].id) {
-          setFileContents(contents);
-        }
-      };
-      reader.onerror = () => {
-        console.error(reader.error);
-      };
+    if (fileContents && fileContents.length) {
+      onTokenQuantity(fileContents.length);
     }
-  }, [file]);
+  }, [fileContents]);
+
+  useEffect(() => {
+    if (fileContents) {
+      console.time("sorting");
+      setFileUsers(
+        airdropTarget === "ticketQty"
+          ? sort(fileContents).desc((u) => u.qty)
+          : sort(fileContents).desc((u) => u.value)
+      );
+      console.timeEnd("sorting");
+    }
+  }, [fileContents, airdropTarget]);
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(async () => {
@@ -198,72 +187,28 @@ export default function CustomAirdrop(properties) {
     }
   ), [tokenQuantity, tokenDetails]);
 
-  const [processing, setProcessing] = useState(false);
-  const [retrievedObjects, setRetrievedObjects] = useState([]);
-  // fetch the usernames for all the fileContents[x].id
-  useEffect(() => {
-    async function processFile() {
-      setProcessing(true);
-      console.log("Processing file");
-
-      let objs = fileContents.filter((x) => x.name).length
-        ? fileContents.filter((x) => x.name).map((x) => ({ name: x.name, id: x.id }))
-        : [];
-
-      const missingNames = fileContents.filter((x) => !x.name);
-      if (missingNames && missingNames.length) {
-        let missingObjs;
-        try {
-          missingObjs = await getObjects(currentNodes[0], params.env, missingNames.map((x) => x.id));
-        } catch (error) {
-          console.log(error);
-          setProcessing(false);
-          return;
-        }
-        objs = objs.concat(missingObjs.map((x) => ({ name: x.name, id: x.id, allowed_assets: x.allowed_assets })));
-      }
-
-      setProcessing(false);
-      setRetrievedObjects(objs);
-    }
-
-    if (fileContents) {
-      processFile();
-    }
-  }, [fileContents]);
-
-  useEffect(() => {
-    if (fileContents) {
-      setSortedWinners(
-        airdropTarget === "ticketQty"
-          ? fileContents.sort((a, b) => b.qty - a.qty)
-          : fileContents.sort((a, b) => b.value - a.value)
-      );
-    }
-  }, [fileContents, airdropTarget]);
-
-  const [invalidOutput, setInvalidOutput] = useState([]);
+  const [invalidOutput, setInvalidOutput] = useState();
   const validTicketHolders = useMemo(() => envLeaderboard.map((x) => x.id), [envLeaderboard]);
-  const retrievedObjectsIds = useMemo(() => retrievedObjects.map((x) => x.id), [retrievedObjects]);
 
   useEffect(() => {
     if (
       (!account || !account.length)
       || (!validTicketHolders || !validTicketHolders.length)
-      || (!retrievedObjectsIds || !retrievedObjectsIds.length)
+      || (!fileUsers || !fileUsers.length)
     ) {
+      console.log("no account or no valid ticket holders");
       return;
     }
     if (invalidOutput && invalidOutput.length) {
       setInvalidOutput([]);
     }
-    setInProgress(true);
     if (leftAirdropCard) {
       setLeftAirdropCard(null);
     }
     const invalid = [];
-    for (let k = 0; k < sortedWinners.length; k++) {
-      const user = sortedWinners[k];
+    console.time("checkInvalid");
+    for (let k = 0; k < fileUsers.length; k++) {
+      const user = fileUsers[k];
       const reasons = [];
       if (blocking && blocking === 'yes' && blockList.find((x) => x === user.id)) {
         // Filter out blocked users from airdrop
@@ -286,90 +231,77 @@ export default function CustomAirdrop(properties) {
         }
       }
 
-      if (retrievedObjects) {
-        const check = retrievedObjectsIds.some((id) => id === user.id);
-        if (!check) {
-          // Filter out users that don't have a corresponding object in retrievedObjects
-          reasons.push("noObject");
-        } else {
-          // Check if the account is blocking incoming assets!
-          // Old disabled account feature
-          const foundIndex = retrievedObjectsIds.indexOf(user.id);
-          if (foundIndex !== -1 && retrievedObjects[foundIndex].allowed_assets && retrievedObjects[foundIndex].allowed_assets.length) {
-            const foundObject = retrievedObjects[foundIndex];
-            const foundToken = foundObject.allowed_assets.find(
-              (asset) => asset.asset_id === tokenDetails.id
-            );
-            if (!foundToken) {
-              reasons.push("blockedAssets");
-            }
-          }
-        }
-      }
-
       if (reasons && reasons.length) {
         // If there's any reason to exclude, do so!
         invalid.push({ ...user, reason: reasons });
       }
     }
-    setInProgress(false);
     setInvalidOutput(invalid);
+    console.timeEnd("checkInvalid");
   }, [
     account,
     blocking,
-    sortedWinners,
+    fileUsers,
     ticketHolder,
     tokenDetails,
-    retrievedObjects,
     validTicketHolders,
-    retrievedObjectsIds
   ]);
 
-  const [validOutput, setValidOutput] = useState([]);
+  const validOutput = useMemo(() => {
+    if (!invalidOutput || !fileUsers) {
+      return null;
+    }
+    console.time("memoizedValidDiff");
+    const invalidIds = new Set();
+    for (let i = 0; i < invalidOutput.length; i++) {
+      invalidIds.add(invalidOutput[i].id);
+    }
+    const validWinners = [];
+    for (let i = 0; i < fileUsers.length; i++) {
+      if (!invalidIds.has(fileUsers[i].id)) {
+        validWinners.push(fileUsers[i]);
+      }
+    }
+    console.timeEnd("memoizedValidDiff");
+    return validWinners;
+  }, [invalidOutput, fileUsers]);
+
   const [ticketQty, setTicketQty] = useState(0);
   const [totalTicketValue, setTotalTicketValue] = useState(0);
-
-  const memoizedSortedWinnerIds = useMemo(() => sortedWinners.map(({ id }) => id), [sortedWinners]);
-  const memoizedValidDiff = useMemo(() => {
-    const validIds = _.difference(
-      memoizedSortedWinnerIds,
-      invalidOutput.map(({ id }) => id)
-    );
-    return sortedWinners.filter(({ id }) => validIds.includes(id));
-  }, [memoizedSortedWinnerIds, invalidOutput, sortedWinners]);
-
   useEffect(() => {
-    // Remove the invalid ticket holders
-    setValidOutput(memoizedValidDiff);
-
     // Tally the valid ticket holders
-    setTicketQty(
-      memoizedValidDiff
-        .map((x) => x.qty)
-        .reduce((accumulator, ticket) => accumulator + parseInt(ticket, 10), 0)
-    );
-
-    setTotalTicketValue(
-      memoizedValidDiff
-        .map((x) => x.value)
-        .reduce((accumulator, ticket) => accumulator + parseFloat(ticket), 0)
-    );
-  }, [memoizedValidDiff]);
+    if (!validOutput || !validOutput.length) {
+      return;
+    }
+    console.time("tallyValidOutput");
+    const { totalQty, totalValue } = validOutput.reduce((accumulator, { qty, value }) => {
+      accumulator.totalQty += parseInt(qty, 10);
+      accumulator.totalValue += parseFloat(value);
+      return accumulator;
+    }, { totalQty: 0, totalValue: 0 });
+    setTicketQty(totalQty);
+    setTotalTicketValue(totalValue);
+    console.timeEnd("tallyValidOutput");
+  }, [validOutput]);
 
   const itrQty = useMemo(
     () => (
       distroMethod === "RoundRobin" && finalTokenQuantity
         ? finalTokenQuantity
-        : validOutput.length
+        : validOutput?.length || 1000
     ),
-    [distroMethod, finalTokenQuantity, validOutput.length]
+    [distroMethod, finalTokenQuantity, validOutput]
   );
 
-  const [tokenRows, setTokenRows] = useState([]);
-
+  const [tokenRows, setTokenRows] = useState();
   useEffect(() => {
+    /*
+      This assigns the chosen asset to the validOutput users
+    */
     async function fetchTokenRows() {
       let rows;
+      // 3-3.5s
+      console.time("getTokenRows");
       try {
         rows = await getTokenRows(
           finalTokenQuantity,
@@ -384,11 +316,22 @@ export default function CustomAirdrop(properties) {
       } catch (error) {
         console.log(error);
       }
-
+      console.timeEnd("getTokenRows");
       setTokenRows(rows);
     }
 
-    fetchTokenRows();
+    if (
+      finalTokenQuantity
+      && itrQty
+      && distroMethod
+      && validOutput
+      && tokenDetails
+      && airdropTarget
+      && ticketQty
+      && totalTicketValue
+    ) {
+      fetchTokenRows();
+    }
   }, [
     finalTokenQuantity,
     itrQty,
@@ -400,70 +343,128 @@ export default function CustomAirdrop(properties) {
     totalTicketValue
   ]);
 
-  const totalAssignedTokens = useMemo(
-    () => {
-      if (!tokenRows || !Array.isArray(tokenRows) || !tokenRows.length) {
-        return 0;
-      }
-      return tokenRows.reduce((total, user) => total + user.assignedTokens, 0);
-    },
-    [tokenRows]
-  );
-
-  const memoizedValidTokenRows = useMemo(() => getValidRows(
-    {
-      tokenRows, tokenDetails, totalAssignedTokens, leftAirdropCard
-    },
-    {
-      setLeftAirdropCard
+  const winners = useMemo(() => {
+    if (!tokenRows || !tokenDetails) {
+      return null;
     }
-  ), [tokenRows, tokenDetails]);
+    console.time("winners");
+    const totalAssignedTokens = tokenRows.reduce((total, user) => total + user.assignedTokens, 0);
 
-  const [winnerChunks, setWinnerChunks] = useState([]);
-  const [winners, setWinners] = useState([]);
-  useEffect(() => {
-    if (!account) {
-      return;
+    let validRows;
+    try {
+      validRows = getValidRows(
+        {
+          tokenRows, tokenDetails, totalAssignedTokens
+        }
+      );
+    } catch (error) {
+      console.log(error);
     }
-    // for left airdrop cards
-    setWinners(memoizedValidTokenRows || []);
+    console.timeEnd("winners");
 
+    return validRows;
+  }, [tokenRows, tokenDetails]);
+
+  const winnerChunks = useMemo(() => {
+    if (!winners || !winners.length || !finalBatchSize) {
+      return null;
+    }
     // for airdrop distribution cards
-    setWinnerChunks(
-      memoizedValidTokenRows && memoizedValidTokenRows.length
-        ? sliceIntoChunks(memoizedValidTokenRows, finalBatchSize)
-        : []
-    );
-  }, [
-    account,
-    memoizedValidTokenRows,
-    finalBatchSize
-  ]);
-
-  const assignedTokenUsers = useMemo(
-    () => (winners && winners.map((x) => x.id)) || [],
-    [winners]
-  );
+    console.time("sliceIntoChunks");
+    const slices = sliceIntoChunks(winners, finalBatchSize);
+    console.timeEnd("sliceIntoChunks");
+    return slices;
+  }, [winners, finalBatchSize]);
 
   const unassignedUsers = useMemo(
-    () => (sortedWinners.filter((x) => !assignedTokenUsers.includes(x.id))),
-    [sortedWinners, assignedTokenUsers]
+    () => {
+      if (!winners || !winners.length || !fileUsers) {
+        return [];
+      }
+      console.time("unassignedUsers");
+      const winnerIDs = winners.reduce((acc, current) => {
+        acc[current.id] = true;
+        return acc;
+      }, {});
+      const _result = fileUsers.filter((x) => !winnerIDs[x.id]);
+      console.timeEnd("unassignedUsers");
+      return _result;
+    },
+    [winners, fileUsers]
   );
 
-  const [finalInvalidOutput, setFinalInvalidOutput] = useState([]);
+  /*
+  const { assignedTokenUsers, unassignedUsers } = useMemo(() => {
+    const assignedTokenUsersSet = new Set();
+    const unassignedUsersArr = [];
+    if (winners && winners.length) {
+      for (let i = 0; i < winners.length; i++) {
+        const user = winners[i];
+        if (assignedTokenUsersSet.has(user.id)) {
+          continue;
+        }
+        if (user.assignedTokens > 0) {
+          assignedTokenUsersSet.add(user.id);
+        } else {
+          unassignedUsersArr.push(user);
+        }
+      }
+    }
+    console.log({
+      assignedTokenUsers: assignedTokenUsersSet.size,
+      unassignedUsers: unassignedUsersArr.length,
+      msg: "assignedTokenUsers_memo",
+    });
+    return {
+      assignedTokenUsers: Array.from(assignedTokenUsersSet),
+      unassignedUsers: unassignedUsersArr
+    };
+  }, [winners]);
+  */
+
+  const [finalInvalidOutput, setFinalInvalidOutput] = useState();
   useEffect(() => {
     // assign remaining reasons for invalid ticket holders
-    if (!fileContents) {
-      return;
+    // if (invalidOutput.length === 0 && unassignedUsers.length === 0) {
+    // {msg: 'completed filterMinRewards', invalidOutput: 0, finalInvalidOutput: 0, unassignedUsers: 0, assignedTokenUsers: 0}
+    // }
+    async function filterMin() {
+      console.time("filterMinRewards");
+      try {
+        await filterMinRewards(
+          { invalidOutput, unassignedUsers },
+          { setFinalInvalidOutput }
+        );
+      } catch (error) {
+        console.log(error);
+        return;
+      }
+      console.timeEnd("filterMinRewards");
+      /*
+      console.log({
+        msg: "completed filterMinRewards",
+        invalidOutput: invalidOutput.length,
+        unassignedUsers: unassignedUsers.length,
+      });
+      */
     }
-    filterMinRewards(
-      { invalidOutput, unassignedUsers, leftAirdropCard },
-      { setFinalInvalidOutput, setLeftAirdropCard }
-    );
-  }, [fileContents, unassignedUsers, invalidOutput]);
+
+    if ((invalidOutput && invalidOutput.length) || (unassignedUsers && unassignedUsers.length)) {
+      filterMin();
+    } else {
+      setFinalInvalidOutput([]);
+    }
+  }, [unassignedUsers, invalidOutput]);
 
   useEffect(() => {
     if (winners && winners.length && !inProgress) {
+      /*
+      console.log({
+        winners, finalInvalidOutput, inProgress, finalTokenName, tokenDetails, finalTokenQuantity, tokenItr, airdropTarget, location: "airdropleftcard"
+      });
+      */
+      console.log({ winners, inProgress, location: "airdropleftcard" });
+      console.time("setLeftAirdropCard");
       setLeftAirdropCard(
         <AirdropLeftCard
           envLeaderboard={envLeaderboard}
@@ -477,15 +478,21 @@ export default function CustomAirdrop(properties) {
           setTokenItr={setTokenItr}
           tokenItr={tokenItr}
           airdropTarget={airdropTarget}
-          simple={true}
+          simple
         />
       );
+      console.timeEnd("setLeftAirdropCard");
+    } else {
+      console.log("No winners or in progress");
     }
   }, [winners, finalInvalidOutput, inProgress, finalTokenName, tokenDetails, finalTokenQuantity, tokenItr, airdropTarget]);
 
+  /*
   const [validAirdropCards, setValidAirdropCards] = useState(null);
   useEffect(() => {
     if (winnerChunks && winnerChunks.length && tokenDetails) {
+
+      console.time("setValidAirdropCards");
       setValidAirdropCards(
         winnerChunks.map((chunk, i) => (
           <AirdropCard
@@ -498,261 +505,209 @@ export default function CustomAirdrop(properties) {
           />
         ))
       );
+      console.timeEnd("setValidAirdropCards");
     } else {
+      // console.log("No winner chunks or token details");
       setValidAirdropCards(null);
     }
   }, [winnerChunks, tokenDetails, finalTokenName, tokenQuantity, distroMethod, winners, ticketQty, params.env]);
+  */
 
   return (
     <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
       <Title order={3} ta="center" mt="sm" mb="sm">
         {t("customAirdrop:header.title", { titleName })}
       </Title>
-      {
-        !fileContents
-          ? (
-            <>
-              <Text align="center">
-                {t("customAirdrop:uploadText")}
-              </Text>
-              <Text align="center">
-                {t("customAirdrop:uploadText2")}
-              </Text>
-              <Text align="center">
-                {'[{"id": "1.2.x", "qty": 1, "value": 2}]'}
-              </Text>
-              <Center mt="sm">
-                <FileButton onChange={setFile} accept="file/JSON">
-                  {(props) => <Button {...props}>{t("customAirdrop:uploadBtn")}</Button>}
-                </FileButton>
-              </Center>
-            </>
-          )
-          : null
-      }
 
-      {
-        processing
-          ? (
-            <Card>
+      <SimpleGrid cols={2} spacing="sm" mt={10} breakpoints={[{ maxWidth: 'md', cols: 2 }]}>
+        {
+          leftAirdropCard || (
+            <Card shadow="md" radius="md" padding="xl">
+
+              <Title ta="center" order={4}>
+                {t("customAirdrop:grid.left.loading")}
+              </Title>
+
               <Center>
-                <Loader variant="dots" />
+                <Text mt="sm">
+                  {t("customAirdrop:header.processing")}
+                </Text>
               </Center>
-              <Text ta="center" mt="md">
-                {t("customAirdrop:header.processing")}
-              </Text>
+              <Center>
+                <Loader variant="dots" mt="md" />
+              </Center>
             </Card>
           )
-          : null
-      }
-
-      {
-        fileContents && account && account.length && !processing
-          ? (
-            <SimpleGrid cols={2} spacing="sm" mt={10} breakpoints={[{ maxWidth: 'md', cols: 2 }]}>
-              {
-                leftAirdropCard || (
-                  <Card shadow="md" radius="md" padding="xl">
-
-                    <Title ta="center" order={4}>
-                      {t("customAirdrop:grid.left.loading")}
-                    </Title>
-
-                    <Center>
-                      <Text mt="sm">
-                        {t("customAirdrop:header.processing")}
-                      </Text>
-                    </Center>
-                    <Center>
-                      <Loader variant="dots" mt="md" />
-                    </Center>
+        }
+        <Card>
+          <SimpleGrid cols={1} spacing="sm">
+            <Card shadow="md" radius="md" padding="xl">
+              <Text fz="lg" fw={500} mt="xs">
+                {t("customAirdrop:grid.right.summary.title")}
+              </Text>
+              <Text fz="sm" c="dimmed" mt="xs">
+                {t("customAirdrop:grid.right.summary.ticketWinQty")}: {ticketQty}
+              </Text>
+              <Text fz="sm" c="dimmed" mt="xs">
+                {t("customAirdrop:grid.right.summary.sendingAccount")}: {
+                identity && identity.account ? identity.account.name : account
+                } {identity && identity.account ? `(${identity.account.id})` : null}
+              </Text>
+            </Card>
+            <Card shadow="md" radius="md" padding="sm">
+              <Text fz="lg" fw={600} mt="md">
+                {t("customAirdrop:grid.right.options.title")}
+              </Text>
+              <TextInput
+                type="string"
+                withAsterisk
+                placeholder={tokenName || assetName}
+                label={t("customAirdrop:grid.right.options.assetName")}
+                style={{ maxWidth: '400px', marginTop: '10px' }}
+                onChange={(event) => onTokenName(event.currentTarget.value)}
+              />
+              <TextInput
+                type="number"
+                withAsterisk
+                placeholder={batchSize}
+                label={t("customAirdrop:grid.right.options.batchSize")}
+                style={{ maxWidth: '400px', marginTop: '10px' }}
+                onChange={
+                  (event) => onBatchSize(parseInt(event.currentTarget.value, 10))
+                }
+              />
+              <TextInput
+                type="number"
+                withAsterisk
+                placeholder={tokenQuantity}
+                value={tokenQuantity}
+                label={t("customAirdrop:grid.right.options.tokenQuantity")}
+                style={{ maxWidth: '400px', marginTop: '10px' }}
+                onChange={
+                  (event) => {
+                    onTokenQuantity(
+                      parseFloat(event.currentTarget.value)
+                    );
+                  }
+                }
+              />
+              <Radio.Group
+                value={distroMethod}
+                onChange={setDistroMethod}
+                name="distroMethod"
+                label={t("customAirdrop:grid.right.options.distroRadio.title")}
+                style={{ marginTop: '10px' }}
+                withAsterisk
+              >
+                <Group mt="xs">
+                  <Radio
+                    value="Equally"
+                    label={t("customAirdrop:grid.right.options.distroRadio.equally")}
+                  />
+                  <Radio
+                    value="Proportionally"
+                    label={t("customAirdrop:grid.right.options.distroRadio.proportionally")}
+                  />
+                  <Radio
+                    value="RoundRobin"
+                    label={t("customAirdrop:grid.right.options.distroRadio.roundRobin")}
+                  />
+                </Group>
+              </Radio.Group>
+              <Radio.Group
+                value={blocking}
+                onChange={setBlocking}
+                name="blocking"
+                label={t("customAirdrop:grid.right.options.blocking.title")}
+                style={{ marginTop: '10px' }}
+                withAsterisk
+              >
+                <Group mt="xs">
+                  <Radio
+                    value="yes"
+                    label={t("customAirdrop:grid.right.options.reqRadio.yes")}
+                  />
+                  <Radio
+                    value="no"
+                    label={t("customAirdrop:grid.right.options.reqRadio.no")}
+                  />
+                </Group>
+              </Radio.Group>
+              <Radio.Group
+                value={ticketHolder}
+                onChange={setTicketHolder}
+                name="ticketHolder"
+                label={t("customAirdrop:grid.right.options.ticketHolder.title")}
+                style={{ marginTop: '10px' }}
+                withAsterisk
+              >
+                <Group mt="xs">
+                  <Radio
+                    value="onlyHolders"
+                    label={t("customAirdrop:grid.right.options.ticketHolder.onlyHolders")}
+                  />
+                  <Radio
+                    value="noHolders"
+                    label={t("customAirdrop:grid.right.options.ticketHolder.noHolders")}
+                  />
+                  <Radio
+                    value="both"
+                    label={t("customAirdrop:grid.right.options.ticketHolder.both")}
+                  />
+                </Group>
+              </Radio.Group>
+              <Radio.Group
+                value={airdropTarget}
+                onChange={setAirdropTarget}
+                name="airdropTarget"
+                label={t("customAirdrop:grid.right.options.target.title")}
+                style={{ marginTop: '10px' }}
+                withAsterisk
+              >
+                <Group mt="xs">
+                  <Radio
+                    value="ticketQty"
+                    label={t("customAirdrop:grid.right.options.target.ticketQty")}
+                  />
+                  <Radio
+                    value="ticketValue"
+                    label={t("customAirdrop:grid.right.options.target.ticketValue")}
+                  />
+                </Group>
+              </Radio.Group>
+            </Card>
+            {
+              !winners || !winners.length
+                ? (
+                  <Card shadow="md" radius="md" padding="sm" style={{ backgroundColor: '#FAFAFA' }}>
+                    <Text fz="lg" fw={500} mt="md">
+                      <HiOutlineShieldExclamation />
+                      {' '}
+                      {t("customAirdrop:grid.right.invalid.title")}
+                    </Text>
+                    <Text fz="sm" c="dimmed" mt="xs">
+                      {t("customAirdrop:grid.right.invalid.reason")}
+                    </Text>
+                    <Text fz="sm" c="dimmed" mt="xs">
+                      {t("customAirdrop:grid.right.invalid.resolution")}
+                    </Text>
                   </Card>
                 )
-              }
-
-              <Card>
-                <SimpleGrid cols={1} spacing="sm">
-                  <Card shadow="md" radius="md" padding="xl">
-                    <Text fz="lg" fw={500} mt="xs">
-                      {t("customAirdrop:grid.right.summary.title")}
-                    </Text>
-                    <Text fz="sm" c="dimmed" mt="xs">
-                      {t("customAirdrop:grid.right.summary.ticketWinQty")}: {ticketQty}
-                    </Text>
-                    <Text fz="sm" c="dimmed" mt="xs">
-                      {t("customAirdrop:grid.right.summary.sendingAccount")}: {
-                      identity && identity.account ? identity.account.name : account
-                      } {identity && identity.account ? `(${identity.account.id})` : null}
-                    </Text>
-                  </Card>
-                  <Card shadow="md" radius="md" padding="sm">
-                    <Text fz="lg" fw={600} mt="md">
-                      {t("customAirdrop:grid.right.options.title")}
-                    </Text>
-                    <TextInput
-                      type="string"
-                      withAsterisk
-                      placeholder={tokenName || assetName}
-                      label={t("customAirdrop:grid.right.options.assetName")}
-                      style={{ maxWidth: '400px', marginTop: '10px' }}
-                      onChange={(event) => onTokenName(event.currentTarget.value)}
-                    />
-                    <TextInput
-                      type="number"
-                      withAsterisk
-                      placeholder={batchSize}
-                      label={t("customAirdrop:grid.right.options.batchSize")}
-                      style={{ maxWidth: '400px', marginTop: '10px' }}
-                      onChange={
-                        (event) => onBatchSize(parseInt(event.currentTarget.value, 10))
-                      }
-                    />
-                    <TextInput
-                      type="number"
-                      withAsterisk
-                      placeholder={tokenQuantity}
-                      value={tokenQuantity}
-                      label={t("customAirdrop:grid.right.options.tokenQuantity")}
-                      style={{ maxWidth: '400px', marginTop: '10px' }}
-                      onChange={
-                        (event) => {
-                          onTokenQuantity(
-                            parseFloat(event.currentTarget.value)
-                          );
-                        }
-                      }
-                    />
-                    <Radio.Group
-                      value={distroMethod}
-                      onChange={setDistroMethod}
-                      name="distroMethod"
-                      label={t("customAirdrop:grid.right.options.distroRadio.title")}
-                      style={{ marginTop: '10px' }}
-                      withAsterisk
-                    >
-                      <Group mt="xs">
-                        <Radio
-                          value="Equally"
-                          label={t("customAirdrop:grid.right.options.distroRadio.equally")}
-                        />
-                        <Radio
-                          value="Proportionally"
-                          label={t("customAirdrop:grid.right.options.distroRadio.proportionally")}
-                        />
-                        <Radio
-                          value="RoundRobin"
-                          label={t("customAirdrop:grid.right.options.distroRadio.roundRobin")}
-                        />
-                      </Group>
-                    </Radio.Group>
-                    <Radio.Group
-                      value={blocking}
-                      onChange={setBlocking}
-                      name="blocking"
-                      label={t("customAirdrop:grid.right.options.blocking.title")}
-                      style={{ marginTop: '10px' }}
-                      withAsterisk
-                    >
-                      <Group mt="xs">
-                        <Radio
-                          value="yes"
-                          label={t("customAirdrop:grid.right.options.reqRadio.yes")}
-                        />
-                        <Radio
-                          value="no"
-                          label={t("customAirdrop:grid.right.options.reqRadio.no")}
-                        />
-                      </Group>
-                    </Radio.Group>
-                    <Radio.Group
-                      value={ticketHolder}
-                      onChange={setTicketHolder}
-                      name="ticketHolder"
-                      label={t("customAirdrop:grid.right.options.ticketHolder.title")}
-                      style={{ marginTop: '10px' }}
-                      withAsterisk
-                    >
-                      <Group mt="xs">
-                        <Radio
-                          value="onlyHolders"
-                          label={t("customAirdrop:grid.right.options.ticketHolder.onlyHolders")}
-                        />
-                        <Radio
-                          value="noHolders"
-                          label={t("customAirdrop:grid.right.options.ticketHolder.noHolders")}
-                        />
-                        <Radio
-                          value="both"
-                          label={t("customAirdrop:grid.right.options.ticketHolder.both")}
-                        />
-                      </Group>
-                    </Radio.Group>
-                    <Radio.Group
-                      value={airdropTarget}
-                      onChange={setAirdropTarget}
-                      name="airdropTarget"
-                      label={t("customAirdrop:grid.right.options.target.title")}
-                      style={{ marginTop: '10px' }}
-                      withAsterisk
-                    >
-                      <Group mt="xs">
-                        <Radio
-                          value="ticketQty"
-                          label={t("customAirdrop:grid.right.options.target.ticketQty")}
-                        />
-                        <Radio
-                          value="ticketValue"
-                          label={t("customAirdrop:grid.right.options.target.ticketValue")}
-                        />
-                      </Group>
-                    </Radio.Group>
-                  </Card>
-                  {
-                    !winners || !winners.length
-                      ? (
-                        <Card shadow="md" radius="md" padding="sm" style={{ backgroundColor: '#FAFAFA' }}>
-                          <Text fz="lg" fw={500} mt="md">
-                            <HiOutlineShieldExclamation />
-                            {' '}
-                            {t("customAirdrop:grid.right.invalid.title")}
-                          </Text>
-                          <Text fz="sm" c="dimmed" mt="xs">
-                            {t("customAirdrop:grid.right.invalid.reason")}
-                          </Text>
-                          <Text fz="sm" c="dimmed" mt="xs">
-                            {t("customAirdrop:grid.right.invalid.resolution")}
-                          </Text>
-                        </Card>
-                      )
-                      : (
-                        <Card shadow="md" radius="md" padding="sm" style={{ backgroundColor: '#FAFAFA' }}>
-                          <Text fz="lg" fw={500} mt="md">
-                            <HiOutlineShieldCheck />
-                            {' '}
-                            {t("customAirdrop:grid.right.valid.title")}
-                          </Text>
-                          <Text fz="sm" c="dimmed" mt="xs">
-                            {
-                              winners.length / finalBatchSize < 1
-                                ? t("customAirdrop:grid.right.valid.single", { batchSize })
-                                : t("customAirdrop:grid.right.valid.multi", { batchSize, qtyBatches: Math.ceil(winners.length / finalBatchSize) })
-                            }
-                          </Text>
-                          <Text fz="sm" c="dimmed" mt="xs">
-                            {t("customAirdrop:grid.right.valid.reminder")}
-                          </Text>
-                          {
-                            validAirdropCards
-                          }
-                        </Card>
-                      )
-                  }
-                </SimpleGrid>
-              </Card>
-            </SimpleGrid>
-          )
-          : null
-      }
+                : (
+                  <AirdropCards
+                    winners={winners}
+                    winnerChunks={winnerChunks}
+                    finalBatchSize={finalBatchSize}
+                    batchSize={batchSize}
+                    finalTokenName={finalTokenName}
+                    tokenDetails={tokenDetails}
+                    env={params.env}
+                  />
+                )
+            }
+          </SimpleGrid>
+        </Card>
+      </SimpleGrid>
 
       <Center>
         <Link to="/CustomAirdropPrep">

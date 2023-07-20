@@ -26,6 +26,7 @@
         "title2": "Piletiomanikud on airdropist välja jäetud",
         "th1": "Konto",
         "th2": "Kogus",
+        "th22": "Väärtus",
         "th3": "Eraldamine",
         "th4": "Põhjus",
         "reasons": {
@@ -38,7 +39,9 @@
         }
       },
       "json": "Airdropi JSON-andmed",
-      "jsonSimple": "Lihtsad airdropi JSON-andmed"
+      "jsonSimple": "Lihtsad airdropi JSON-andmed",
+      "copy": "Kopeerige JSON",
+      "copied": "Kopeeritud!"
     },
     "right": {
       "summary": {

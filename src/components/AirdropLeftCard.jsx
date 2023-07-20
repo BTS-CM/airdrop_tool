@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 /* eslint-disable react/jsx-one-expression-per-line */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import { FixedSizeList as List } from 'react-window';
@@ -13,6 +13,7 @@ import {
   Table,
   Button,
   CopyButton,
+  Pagination,
   Modal,
   Group,
   Accordion,
@@ -54,33 +55,59 @@ export default function AirdropLeftCard(properties) {
   const [opened3, { open: open3, close: close3 }] = useDisclosure(false);
 
   useEffect(() => {
-    setSimpleWinnerJSON(JSON.stringify(
-      winners.map((x) => ({
-        user: !simple
-          ? `${envLeaderboard.find((usr) => usr.id === x.id).account.name} (${x.id})`
-          : x.id,
-        ticketQty: x.qty,
-        ticketsValue: x.ticketsValue || x.value,
-        percent: x.percent,
-        assignedTokens: x.assignedTokens
-      })),
-      null,
-      4
-    ));
+    console.time("json");
+    const tempJSON = [];
+    for (let i = 0; i < winners.length; i++) {
+      const x = winners[i];
+      const user = !simple
+        ? `${envLeaderboard.find((usr) => usr.id === x.id).account.name} (${x.id})`
+        : x.id;
+      const ticketQty = x.qty;
+      const ticketsValue = x.ticketsValue || x.value;
+      const { percent } = x;
+      const { assignedTokens } = x;
+      tempJSON.push({
+        user,
+        ticketQty,
+        ticketsValue,
+        percent,
+        assignedTokens
+      });
+    }
+    setSimpleWinnerJSON(JSON.stringify(tempJSON, null, 4));
+    console.timeEnd("json");
   }, [winners]);
 
+  const validPages = useMemo(() => {
+    if (!winners || !winners.length) {
+      return 0;
+    }
+    return winners.length <= 500000 ? 1 : Math.ceil(winners.length / 500000);
+  }, [winners]);
+
+  const invalidPages = useMemo(() => {
+    if (!invalidOutput || !invalidOutput.length) {
+      return 0;
+    }
+    return invalidOutput.length <= 500000 ? 1 : Math.ceil(invalidOutput.length / 500000);
+  }, [invalidOutput]);
+
+  const [activePage1, setPage1] = useState(1);
+  const [activePage2, setPage2] = useState(1);
+
   const validNewRows = ({ index, style }) => {
-    if (!winners[index]) {
+    const newIndex = activePage1 > 1 ? ((activePage1 - 1) * 500000) + index : index;
+    if (!winners[newIndex]) {
       return null;
     }
 
-    const currentWinner = winners[index];
+    const currentWinner = winners[newIndex];
     const currentID = currentWinner.id;
     return (
       <div style={{ ...style, width: "100%" }}>
-        <Group position="center" key={`winner_${index}`} style={{ width: "100%" }}>
+        <Group position="center" key={`winner_${newIndex}`} style={{ width: "100%" }}>
           <div style={{ width: '10%' }}>
-            {index + 1}
+            {newIndex + 1}
           </div>
           <div style={{ width: '30%' }}>
             {
@@ -122,17 +149,18 @@ export default function AirdropLeftCard(properties) {
   };
 
   const invalidNewRows = ({ index, style }) => {
-    if (!invalidOutput[index]) {
+    const newIndex = activePage2 > 1 ? ((activePage2 - 1) * 500000) + index : index;
+    if (!invalidOutput[newIndex]) {
       return null;
     }
 
-    const currentLoser = invalidOutput[index];
+    const currentLoser = invalidOutput[newIndex];
     const currentID = currentLoser.id;
     return (
       <div style={{ ...style, width: "100%" }}>
-        <Group position="center" key={`loser_${index}`} style={{ width: "100%" }}>
+        <Group position="center" key={`loser_${newIndex}`} style={{ width: "100%" }}>
           <div style={{ width: '5%' }}>
-            {index + 1}
+            {newIndex + 1}
           </div>
           <div style={{ width: '30%' }}>
             {
@@ -319,68 +347,91 @@ export default function AirdropLeftCard(properties) {
       {
         winners && winners.length && !inProgress
           ? (
-          <Table>
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>{t("performAirdrop:grid.left.table.th1")}</th>
-                <th>
-                  {
-                    airdropTarget === "ticketQty"
-                      ? t("performAirdrop:grid.left.table.th2")
-                      : t("performAirdrop:grid.left.table.th22")
-                  }
-                </th>
-                <th>{t("performAirdrop:grid.left.table.th3")}</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td colSpan="4" style={{ width: "100%" }}>
-                  <List
-                    height={300}
-                    itemCount={winners.length}
-                    itemSize={35}
-                    width="100%"
-                  >
-                    {validNewRows}
-                  </List>
-                </td>
-              </tr>
-            </tbody>
-          </Table>
+            <>
+              <Table>
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>{t("performAirdrop:grid.left.table.th1")}</th>
+                    <th>
+                      {
+                        airdropTarget === "ticketQty"
+                          ? t("performAirdrop:grid.left.table.th2")
+                          : t("performAirdrop:grid.left.table.th22")
+                      }
+                    </th>
+                    <th>{t("performAirdrop:grid.left.table.th3")}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td colSpan="4" style={{ width: "100%" }}>
+                      <List
+                        height={300}
+                        itemCount={winners.length}
+                        itemSize={35}
+                        width="100%"
+                      >
+                        {validNewRows}
+                      </List>
+                    </td>
+                  </tr>
+                </tbody>
+              </Table>
+              <br />
+              <Pagination
+                value={activePage1}
+                onChange={setPage1}
+                total={validPages}
+              />
+            </>
           )
           : null
       }
-
     </Modal>
     <Modal
       opened={opened2}
       onClose={() => {
         close2();
       }}
-      size="xl"
+      size={
+        simple
+          ? "sm"
+          : "xl"
+      }
       title={t("performAirdrop:grid.left.jsonSimple")}
     >
       {
         simpleWinnerJSON
           ? (
             <>
-              <JsonInput
-                placeholder="Textarea will autosize to fit the content"
-                defaultValue={simpleWinnerJSON}
-                value={simpleWinnerJSON}
-                validationError="Invalid JSON"
-                formatOnBlur
-                autosize
-                minRows={4}
-                maxRows={15}
-              />
-              <br />
+              {
+                !simple
+                  ? (
+                    <>
+                      <JsonInput
+                        placeholder="Textarea will autosize to fit the content"
+                        defaultValue={simpleWinnerJSON}
+                        value={simpleWinnerJSON}
+                        validationError="Invalid JSON"
+                        formatOnBlur
+                        autosize
+                        minRows={4}
+                        maxRows={15}
+                      />
+                      <br />
+                    </>
+                  )
+                  : null
+              }
               <CopyButton value={simpleWinnerJSON}>
                 {({ copied, copy }) => (
                   <Button color={copied ? 'teal' : 'blue'} onClick={copy}>
-                    {copied ? 'Copied' : 'Copy'}
+                    {
+                      copied
+                        ? t("performAirdrop:grid.left.copied")
+                        : t("performAirdrop:grid.left.copy")
+                    }
                   </Button>
                 )}
               </CopyButton>
@@ -416,6 +467,11 @@ export default function AirdropLeftCard(properties) {
                 >
                   {invalidNewRows}
                 </List>
+                <Pagination
+                  value={activePage2}
+                  onChange={setPage2}
+                  total={invalidPages}
+                />
               </td>
             </tr>
         </tbody>

@@ -240,10 +240,12 @@ const identitiesStore = create(
 const tempStore = create(
   (set, get) => ({
     account: "",
+    fileContents: null,
     setAccount: (newAccount) => set({ account: newAccount }),
+    setFileContents: (newFileContents) => set({ fileContents: newFileContents }),
     reset: () => set({
       account: "",
-      fees: {},
+      fileContents: null
     }),
   })
 );

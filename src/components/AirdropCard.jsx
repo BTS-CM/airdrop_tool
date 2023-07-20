@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import {
   Text,
   Card,
@@ -49,24 +49,22 @@ export default function AirdropCard(properties) {
     .map((z) => z.assignedTokens)
     .reduce((accumulator, ticket) => accumulator + ticket, 0);
 
-  const [ops, setOPS] = useState([]);
-  useEffect(() => {
+  const ops = useMemo(() => {
     if (tokenDetails) {
-      setOPS(
-        chunk.map((x) => ({
-          fee: {
-            amount: 0,
-            asset_id: "1.3.0",
-          },
-          from: account,
-          to: x.id,
-          amount: {
-            amount: blockchainFloat(x.assignedTokens, tokenDetails.precision).toFixed(0),
-            asset_id: tokenDetails.id,
-          },
-        }))
-      );
+      return chunk.map((x) => ({
+        fee: {
+          amount: 0,
+          asset_id: "1.3.0",
+        },
+        from: account,
+        to: x.id,
+        amount: {
+          amount: blockchainFloat(x.assignedTokens, tokenDetails.precision).toFixed(0),
+          asset_id: tokenDetails.id,
+        },
+      }));
     }
+    return [];
   }, [tokenDetails, account, chunk]);
 
   const [cardBytes, setCardBytes] = useState();
@@ -94,7 +92,7 @@ export default function AirdropCard(properties) {
   }, [ops]);
 
   return (
-    <Card key={`airdrop_${chunkItr}`} mt="md" shadow="md" radius="md" padding="xl">
+    <Card key={`airdrop_${chunkItr}`} mt="md" radius="md" padding="xl">
       <Text>
         {t("airdropCard:airdrop")} #
         {chunkItr + 1}
@@ -147,11 +145,9 @@ export default function AirdropCard(properties) {
             />
           )
           : (
-            <Center>
-              <Button disabled>
-                {t("airdropCard:fees.tooBig")}
-              </Button>
-            </Center>
+            <Button disabled>
+              {t("airdropCard:fees.tooBig")}
+            </Button>
           )
       }
 

@@ -26,6 +26,7 @@
         "title2": "Billetholdere udelukket fra airdrop",
         "th1": "Konto",
         "th2": "Antal",
+        "th22": "Værdi",
         "th3": "Tildeling",
         "th4": "Grund",
         "reasons": {
@@ -38,7 +39,9 @@
         }
       },
       "json": "Airdrop JSON-data",
-      "jsonSimple": "Simple airdrop JSON-data"
+      "jsonSimple": "Simple airdrop JSON-data",
+      "copy": "Kopier JSON",
+      "copied": "Kopieret!"
     },
     "right": {
       "summary": {

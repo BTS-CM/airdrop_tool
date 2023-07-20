@@ -1,15 +1,6 @@
 const fs = require('fs');
 const assetHolders = require('./fetchedData/assetHolders.json');
-
-/**
- * Convert the token's blockchain representation into a human readable quantity
- * @param {Float} satoshis
- * @param {Number} precision
- * @returns {Number}
- */
-function humanReadableFloat(satoshis, precision) {
-  return parseFloat((satoshis / 10 ** precision).toFixed(precision));
-}
+const { humanReadableFloat } = require('./lib/common');
 
 const output = assetHolders.map((holder) => ({
   name: holder.name,

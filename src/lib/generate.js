@@ -278,7 +278,7 @@ async function getTrxBytes(
 
     const tr = chain === "TUSC" ? new TuscTB() : new TransactionBuilder();
     for (let i = 0; i < operations.length; i++) {
-      tr.add_type_operation(opType, operations[i]);
+      tr.add_type_operation(opType, updatedOps[i]);
     }
 
     tr.finalize().then(() => {

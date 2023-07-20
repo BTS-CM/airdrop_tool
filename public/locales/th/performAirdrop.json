@@ -26,6 +26,7 @@
         "title2": "ผู้ถือตั๋วไม่รวมอยู่ใน airdrop",
         "th1": "บัญชี",
         "th2": "ปริมาณ",
+        "th22": "ค่า",
         "th3": "การจัดสรร",
         "th4": "เหตุผล",
         "reasons": {
@@ -38,7 +39,9 @@
         }
       },
       "json": "ข้อมูล JSON ของ Airdrop",
-      "jsonSimple": "ข้อมูล JSON แบบ airdrop อย่างง่าย"
+      "jsonSimple": "ข้อมูล JSON แบบ airdrop อย่างง่าย",
+      "copy": "คัดลอก JSON",
+      "copied": "คัดลอก!"
     },
     "right": {
       "summary": {

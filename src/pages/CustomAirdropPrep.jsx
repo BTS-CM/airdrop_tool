@@ -10,6 +10,7 @@ import {
   Center,
   Button,
   Radio,
+  FileButton,
   Group
 } from '@mantine/core';
 import _ from "lodash";
@@ -41,9 +42,10 @@ export default function CustomcustomAirdropPrep(properties) {
     titleName = "TUSC";
   }
 
-  // Beet
   const account = tempStore((state) => state.account);
   const resetAccount = tempStore((state) => state.reset);
+  const fileContents = tempStore((state) => state.fileContents);
+  const setFileContents = tempStore((state) => state.setFileContents);
 
   useEffect(() => {
     if (account) {
@@ -51,6 +53,24 @@ export default function CustomcustomAirdropPrep(properties) {
       resetAccount();
     }
   }, []);
+
+  const [file, setFile] = useState();
+
+  useEffect(() => {
+    if (file) {
+      const reader = new FileReader();
+      reader.readAsText(file);
+      reader.onload = () => {
+        const contents = JSON.parse(reader.result);
+        if (contents && contents.length && contents[0].id) {
+          setFileContents(contents);
+        }
+      };
+      reader.onerror = () => {
+        console.error(reader.error);
+      };
+    }
+  }, [file]);
 
   return (
     <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>
@@ -98,7 +118,30 @@ export default function CustomcustomAirdropPrep(properties) {
       }
 
       {
-        environment && account
+        environment && account && !fileContents
+          ? (
+            <>
+              <Text align="center">
+                {t("customAirdrop:uploadText")}
+              </Text>
+              <Text align="center">
+                {t("customAirdrop:uploadText2")}
+              </Text>
+              <Text align="center">
+                {'[{"id": "1.2.x", "qty": 1, "value": 2}]'}
+              </Text>
+              <Center mt="sm">
+                <FileButton onChange={setFile} accept="file/JSON">
+                  {(props) => <Button {...props}>{t("customAirdrop:uploadBtn")}</Button>}
+                </FileButton>
+              </Center>
+            </>
+          )
+          : null
+      }
+
+      {
+        environment && account && fileContents
           ? (
             <>
             <Center>

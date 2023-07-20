@@ -26,6 +26,7 @@
         "title2": "Ticketinhaber sind vom Airdrop ausgeschlossen",
         "th1": "Konto",
         "th2": "Menge",
+        "th22": "Wert",
         "th3": "Zuweisung",
         "th4": "Grund",
         "reasons": {
@@ -38,7 +39,9 @@
         }
       },
       "json": "Airdrop-JSON-Daten",
-      "jsonSimple": "Einfache Airdrop-JSON-Daten"
+      "jsonSimple": "Einfache Airdrop-JSON-Daten",
+      "copy": "JSON kopieren",
+      "copied": "Kopiert!"
     },
     "right": {
       "summary": {

@@ -167,6 +167,7 @@ export default function BeetModal(properties) {
           reset();
         }}
         title={t("modal:title")}
+        shadow="xl"
       >
         {
           inProgress

@@ -26,6 +26,7 @@
                 "title2": "Ticket holders excluded from airdrop",
                 "th1": "Account",
                 "th2": "Quantity",
+                "th22": "Value",
                 "th3": "Allocation",
                 "th4": "Reason",
                 "reasons": {
@@ -38,7 +39,9 @@
                 }
             },
             "json": "Airdrop JSON data",
-            "jsonSimple": "Simple airdrop JSON data"
+            "jsonSimple": "Simple airdrop JSON data",
+            "copy": "Copy JSON",
+            "copied": "Copied!"
         },
         "right": {
             "summary": {
