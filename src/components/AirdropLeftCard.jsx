@@ -368,7 +368,11 @@ export default function AirdropLeftCard(properties) {
                     <td colSpan="4" style={{ width: "100%" }}>
                       <List
                         height={300}
-                        itemCount={winners.length}
+                        itemCount={
+                          winners && winners.length < 500000
+                            ? winners.length
+                            : 500000
+                        }
                         itemSize={35}
                         width="100%"
                       >
@@ -461,7 +465,11 @@ export default function AirdropLeftCard(properties) {
               <td colSpan="3" style={{ width: "100%" }}>
                 <List
                   height={300}
-                  itemCount={invalidOutput.length}
+                  itemCount={
+                    invalidOutput && invalidOutput.length < 500000
+                      ? invalidOutput.length
+                      : 500000
+                  }
                   itemSize={35}
                   width="100%"
                 >
