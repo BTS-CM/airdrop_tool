@@ -25,7 +25,7 @@ import {
   blocklistStore,
 } from "../lib/states";
 
-import GetAccount from "./GetAccount";
+import GetAccount from "../components/GetAccount";
 
 export default function CustomcustomAirdropPrep(properties) {
   const { t, i18n } = useTranslation();

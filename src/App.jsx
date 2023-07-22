@@ -46,7 +46,7 @@ import LookupAccount from "./pages/LookupAccount";
 import LookupAsset from "./pages/LookupAsset";
 import Analyze from "./pages/Analyze";
 import Leaderboard from "./pages/Leaderboard";
-import Calculate from "./pages/Calculate";
+import Calculate from "./components/Calculate";
 import CalculatedAirdrops from "./pages/CalculatedAirdrops";
 import PlannedAirdrop from "./pages/PlannedAirdrop";
 import PerformAirdrop from "./pages/PerformAirdrop";

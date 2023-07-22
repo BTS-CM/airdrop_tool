@@ -27,7 +27,7 @@ import { Link, useParams } from "react-router-dom";
 import {
   leaderboardStore, appStore, tempStore, beetStore
 } from '../lib/states';
-import BeetModal from './BeetModal';
+import BeetModal from '../components/BeetModal';
 
 import { blockchainFloat } from '../lib/common';
 

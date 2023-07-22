@@ -2,7 +2,7 @@ const fs = require('fs');
 
 const assetId = '1.3.0'; // Replace with your asset id
 const limit = 100; // Max limit on the asset holders API
-const totalHolders = 10000; // How many holders you want to fetch
+const totalHolders = 100000; // How many holders you want to fetch
 const outputFile = './fetchedData/assetHolders.json';
 
 const getAssetHolders = async (start) => {

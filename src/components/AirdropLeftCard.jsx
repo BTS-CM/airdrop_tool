@@ -181,7 +181,7 @@ export default function AirdropLeftCard(properties) {
           </div>
           <div style={{ width: '50%' }}>
             {
-              currentLoser.reason.map((x) => t(`customAirdrop:grid.left.table.reasons.${x}`)).join(", ")
+              currentLoser.reason.map((x) => t(`${simple ? 'customAirdrop' : 'performAirdrop'}:grid.left.table.reasons.${x}`)).join(", ")
             }
           </div>
         </Group>

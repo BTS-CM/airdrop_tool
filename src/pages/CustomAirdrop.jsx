@@ -409,11 +409,6 @@ export default function CustomAirdrop(properties) {
         }
       }
     }
-    console.log({
-      assignedTokenUsers: assignedTokenUsersSet.size,
-      unassignedUsers: unassignedUsersArr.length,
-      msg: "assignedTokenUsers_memo",
-    });
     return {
       assignedTokenUsers: Array.from(assignedTokenUsersSet),
       unassignedUsers: unassignedUsersArr
@@ -439,13 +434,6 @@ export default function CustomAirdrop(properties) {
         return;
       }
       console.timeEnd("filterMinRewards");
-      /*
-      console.log({
-        msg: "completed filterMinRewards",
-        invalidOutput: invalidOutput.length,
-        unassignedUsers: unassignedUsers.length,
-      });
-      */
     }
 
     if ((invalidOutput && invalidOutput.length) || (unassignedUsers && unassignedUsers.length)) {
@@ -457,12 +445,6 @@ export default function CustomAirdrop(properties) {
 
   useEffect(() => {
     if (winners && winners.length && !inProgress) {
-      /*
-      console.log({
-        winners, finalInvalidOutput, inProgress, finalTokenName, tokenDetails, finalTokenQuantity, tokenItr, airdropTarget, location: "airdropleftcard"
-      });
-      */
-      console.log({ winners, inProgress, location: "airdropleftcard" });
       console.time("setLeftAirdropCard");
       setLeftAirdropCard(
         <AirdropLeftCard
@@ -485,32 +467,6 @@ export default function CustomAirdrop(properties) {
       console.log("No winners or in progress");
     }
   }, [winners, finalInvalidOutput, inProgress, finalTokenName, tokenDetails, finalTokenQuantity, tokenItr, airdropTarget]);
-
-  /*
-  const [validAirdropCards, setValidAirdropCards] = useState(null);
-  useEffect(() => {
-    if (winnerChunks && winnerChunks.length && tokenDetails) {
-
-      console.time("setValidAirdropCards");
-      setValidAirdropCards(
-        winnerChunks.map((chunk, i) => (
-          <AirdropCard
-            tokenName={finalTokenName}
-            chunk={chunk}
-            chunkItr={i}
-            winnerChunkQty={winnerChunks.length}
-            env={params.env}
-            tokenDetails={tokenDetails}
-          />
-        ))
-      );
-      console.timeEnd("setValidAirdropCards");
-    } else {
-      // console.log("No winner chunks or token details");
-      setValidAirdropCards(null);
-    }
-  }, [winnerChunks, tokenDetails, finalTokenName, tokenQuantity, distroMethod, winners, ticketQty, params.env]);
-  */
 
   return (
     <Card shadow="md" radius="md" padding="xl" style={{ marginTop: '25px' }}>

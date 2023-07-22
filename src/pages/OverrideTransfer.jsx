@@ -21,8 +21,8 @@ import { useParams } from "react-router-dom";
 import {
   leaderboardStore, tempStore, assetStore
 } from '../lib/states';
-import BeetModal from './BeetModal';
-import GetAccount from "./GetAccount";
+import BeetModal from '../components/BeetModal';
+import GetAccount from "../components/GetAccount";
 
 import { blockchainFloat, getFlagBooleans, humanReadableFloat } from '../lib/common';
 

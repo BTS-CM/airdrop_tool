@@ -8,10 +8,20 @@ An airdropping tool for Bitshares based blockchains.
 * Creates ticket leaderboards
 * Enables ticket & account analysis
 * Enables airdrop distribution calculation based on provably fair inputs
+* Create custom airdrops from uploaded JSON data
 * Begin airdropping blockchain tokens in custom sized batches
 
 This tool integrates with the [latest BEET wallet](https://github.com/bitshares/beet/releases).
 
-If interested in running the code locally follow these terminal steps:
-* run `npm install`
-* run `npm run build && npm run dev`
+Perform the following terminal steps in this folder:
+
+* With yarn
+  * `yarn install`
+  * `yarn run build && yarn run dev`
+* With npm
+  * `npm install`
+  * `npm run build && npm run dev`
+
+Releases built via github actions:
+
+* [Windows, Linux & MacOS](https://github.com/BTS-CM/airdrop_tool/releases)

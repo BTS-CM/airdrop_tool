@@ -26,7 +26,7 @@ import {
   appStore, leaderboardStore, airdropStore, ticketStore, tempStore
 } from '../lib/states';
 
-import BeetModal from './BeetModal';
+import BeetModal from '../components/BeetModal';
 
 export default function Upgrade(properties) {
   const { t, i18n } = useTranslation();

@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next';
 
 import { appStore, tempStore } from '../lib/states';
 import { getTrxBytes } from '../lib/generate';
-import BeetModal from '../pages/BeetModal';
+import BeetModal from './BeetModal';
 
 import { blockchainFloat } from '../lib/common';
 
