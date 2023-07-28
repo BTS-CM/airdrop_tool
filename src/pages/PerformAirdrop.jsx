@@ -23,6 +23,10 @@ import {
 } from "react-icons/hi";
 
 import {
+  BiError,
+} from "react-icons/bi";
+
+import {
   airdropStore,
   appStore,
   leaderboardStore,
@@ -218,7 +222,11 @@ export default function PerformAirdrop(properties) {
   useEffect(() => {
     fetchAirdropDetails(
       {
-        account, finalTokenName, cachedAssets
+        account,
+        finalTokenName,
+        cachedAssets,
+        currentNodes,
+        env: params.env
       },
       {
         addOne, changeURL, setTokenDetails, setInProgress
@@ -605,25 +613,48 @@ export default function PerformAirdrop(properties) {
           ? (
             <SimpleGrid cols={2} spacing="sm" mt={10} breakpoints={[{ maxWidth: 'md', cols: 2 }]}>
               {
-                leftAirdropCard || (
-                  <Card shadow="md" radius="md" padding="xl">
+                !tokenRows
+                  ? (
+                    <Card shadow="md" radius="md" padding="xl">
+                      <Title ta="center" order={4}>
+                        {t("customAirdrop:grid.left.loading")}
+                      </Title>
 
-                    <Title ta="center" order={4}>
-                      {t("customAirdrop:grid.left.loading")}
-                    </Title>
-
-                    <Center>
-                      <Text mt="sm">
-                        {t("customAirdrop:header.processing")}
-                      </Text>
-                    </Center>
-                    <Center>
-                      <Loader variant="dots" mt="md" />
-                    </Center>
-                  </Card>
-                )
+                      <Center>
+                        <Text mt="sm">
+                          {t("customAirdrop:header.processing")}
+                        </Text>
+                      </Center>
+                      <Center>
+                        <Loader variant="dots" mt="md" />
+                      </Center>
+                    </Card>
+                  )
+                  : null
               }
+              {
+                tokenRows && (!winners || !winners.length)
+                  ? (
+                    <Card shadow="md" radius="md" padding="xl">
+                      <Center>
+                        <BiError size={50} />
+                      </Center>
+                      <Title ta="center" order={4}>
+                        {t("customAirdrop:grid.right.invalid.title")}
+                      </Title>
 
+                      <Center>
+                        <Text mt="sm">
+                          {t("customAirdrop:grid.right.invalid.resolution")}
+                        </Text>
+                      </Center>
+                    </Card>
+                  )
+                  : null
+              }
+              {
+                (winners && winners.length && leftAirdropCard) || null
+              }
               <Card>
                 <SimpleGrid cols={1} spacing="sm">
                   <Card shadow="md" radius="md" padding="xl">

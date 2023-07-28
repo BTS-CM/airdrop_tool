@@ -19,8 +19,11 @@ import _ from "lodash";
 import { sort } from 'fast-sort';
 import {
   HiOutlineShieldExclamation,
-  HiOutlineShieldCheck,
 } from "react-icons/hi";
+
+import {
+  BiError,
+} from "react-icons/bi";
 
 import {
   appStore,
@@ -219,7 +222,12 @@ export default function CustomAirdrop(properties) {
         reasons.push("self");
       }
 
-      if (validTicketHolders && validTicketHolders.length && ticketHolder && ticketHolder !== 'both') {
+      if (
+        validTicketHolders
+        && validTicketHolders.length
+        && ticketHolder
+        && ticketHolder !== 'both'
+      ) {
         const ticketCheck = validTicketHolders.includes(user.id);
         if (ticketHolder === 'onlyHolders' && !ticketCheck) {
           // Filter out non-ticket holders
@@ -343,7 +351,7 @@ export default function CustomAirdrop(properties) {
   ]);
 
   const winners = useMemo(() => {
-    if (!tokenRows || !tokenDetails) {
+    if ((!tokenRows || !tokenRows.length) || !tokenDetails) {
       return null;
     }
     console.time("winners");
@@ -476,23 +484,47 @@ export default function CustomAirdrop(properties) {
 
       <SimpleGrid cols={2} spacing="sm" mt={10} breakpoints={[{ maxWidth: 'md', cols: 2 }]}>
         {
-          leftAirdropCard || (
-            <Card shadow="md" radius="md" padding="xl">
+          !tokenRows
+            ? (
+              <Card shadow="md" radius="md" padding="xl">
+                <Title ta="center" order={4}>
+                  {t("customAirdrop:grid.left.loading")}
+                </Title>
 
-              <Title ta="center" order={4}>
-                {t("customAirdrop:grid.left.loading")}
-              </Title>
+                <Center>
+                  <Text mt="sm">
+                    {t("customAirdrop:header.processing")}
+                  </Text>
+                </Center>
+                <Center>
+                  <Loader variant="dots" mt="md" />
+                </Center>
+              </Card>
+            )
+            : null
+        }
+        {
+          tokenRows && !winners
+            ? (
+              <Card shadow="md" radius="md" padding="xl">
+                <Center>
+                  <BiError size={50} />
+                </Center>
+                <Title ta="center" order={4}>
+                  {t("customAirdrop:grid.right.invalid.title")}
+                </Title>
 
-              <Center>
-                <Text mt="sm">
-                  {t("customAirdrop:header.processing")}
-                </Text>
-              </Center>
-              <Center>
-                <Loader variant="dots" mt="md" />
-              </Center>
-            </Card>
-          )
+                <Center>
+                  <Text mt="sm">
+                    {t("customAirdrop:grid.right.invalid.resolution")}
+                  </Text>
+                </Center>
+              </Card>
+            )
+            : null
+        }
+        {
+          winners && winners.length && leftAirdropCard
         }
         <Card>
           <SimpleGrid cols={1} spacing="sm">

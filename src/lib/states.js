@@ -49,9 +49,9 @@ const assetStore = create(
       bitshares: [],
       bitshares_testnet: [],
       tusc: [],
-      changeAssets: (env, leaders) => {
+      changeAssets: (env, newAssets) => {
         const newObj = {};
-        newObj[env] = leaders;
+        newObj[env] = newAssets;
         set(newObj);
       },
       addOne: (env, newAsset) => {
@@ -264,7 +264,6 @@ const appStore = create(
       bitshares_fees: null, // {fee, maxBytes}
       bitshares_testnet_fees: null,
       tusc_fees: null,
-      account: "",
       replaceNodes: (env, nodes) => {
         if (env === 'bitshares') {
           set(async (state) => ({
@@ -280,7 +279,6 @@ const appStore = create(
           }));
         }
       },
-      setAccount: (newAccount) => set({ account: newAccount }),
       setFees: (env, newFees) => {
         if (env === 'bitshares') {
           set({
@@ -344,7 +342,6 @@ const appStore = create(
         bitshares_fees: null, // {fee, maxBytes}
         bitshares_testnet_fees: null,
         tusc_fees: null,
-        account: "",
       }),
       removeURL: (env, url) => {
         let nodesToChange = get().nodes[env];

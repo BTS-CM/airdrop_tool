@@ -233,6 +233,11 @@ async function getTokenRows(
         const equalAllocation = parseFloat(
           ((1 / equalTally) * remainingTokens).toFixed(tokenDetails.precision)
         );
+
+        if (!equalAllocation || Number.isNaN(equalAllocation)) {
+          continue;
+        }
+
         remainingTokens -= equalAllocation;
         equalTally -= 1;
         validOutput[i].assignedTokens = equalAllocation;
@@ -254,7 +259,6 @@ function filterMinRewards(variables, zustandSet) {
   const { invalidOutput, unassignedUsers } = variables;
   const { setFinalInvalidOutput } = zustandSet;
 
-  // console.log({ invalidOutput, unassignedUsers })
   const invalidOutputMap = new Map(Array.from(invalidOutput, (x) => [x.id, x]));
   const newInvalidOutput = unassignedUsers.reduce((acc, current) => {
     const currentInvalid = invalidOutputMap.get(current.id);

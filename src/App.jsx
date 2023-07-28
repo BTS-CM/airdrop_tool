@@ -116,9 +116,9 @@ function App() {
   ];
 
   const localeItems = languages.map((lang) => (
-<Menu.Item key={`lang_${lang.value}`} onClick={() => setLanguage(lang.value)}>
-            { lang.label }
-</Menu.Item>
+    <Menu.Item key={`lang_${lang.value}`} onClick={() => setLanguage(lang.value)}>
+      { lang.label }
+    </Menu.Item>
   ));
 
   return (
