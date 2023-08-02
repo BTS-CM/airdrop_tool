@@ -30,7 +30,7 @@ const getOrderBookData = async (baseSymbol, quoteSymbol, limit) => {
   await new Promise((resolve) => {
     setTimeout(() => {
       resolve();
-    }, 1000);
+    }, 333);
   });
   let getBase;
   try {
@@ -82,8 +82,8 @@ const processOrders = (orders, basePrecision, avgPrice) => orders.map((order) =>
   );
   return {
     value: diff > 0.001 * avgPrice
-      ? 1 / diff
-      : 1 / (diff + humanReadableFloat((avgPrice * 0.001), basePrecision)),
+      ? (1 / diff) * parseFloat(order.base)
+      : (1 / (diff + humanReadableFloat((avgPrice * 0.001), basePrecision))) * parseFloat(order.base),
     id: order.owner_id,
     name: order.owner_name,
     qty: 1
@@ -103,6 +103,11 @@ const getMarketParticipants = async () => {
       orderBookData = await getOrderBookData(inputBaseSymbol, inputQuoteSymbol, 100); // Change these values for your own airdrop!
     } catch (error) {
       console.log(error);
+      continue;
+    }
+
+    if (!orderBookData) {
+      console.log("Query failure");
       continue;
     }
 
