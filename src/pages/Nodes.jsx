@@ -2,18 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   Title,
-  Text,
-  SimpleGrid,
-  Badge,
   Card,
   Radio,
   Table,
   Button,
-  ScrollArea,
   Group,
-  Tooltip,
-  Accordion,
-  JsonInput,
   ActionIcon,
   TextInput,
 } from '@mantine/core';

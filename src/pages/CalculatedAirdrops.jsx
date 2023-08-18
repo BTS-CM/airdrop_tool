@@ -1,19 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import {
   Title,
-  Text,
-  SimpleGrid,
-  Badge,
   ActionIcon,
   Center,
   Card,
   Radio,
   Table,
   Button,
-  ScrollArea,
   Group,
 } from '@mantine/core';
 

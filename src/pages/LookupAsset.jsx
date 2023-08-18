@@ -5,23 +5,13 @@ import { useTranslation } from 'react-i18next';
 import {
   Title,
   Text,
-  SimpleGrid,
   useMantineTheme,
   TextInput,
-  Loader,
   Card,
-  Accordion,
-  Box,
-  JsonInput,
   ActionIcon,
-  Modal,
   Radio,
   Table,
-  Button,
-  Col,
-  Paper,
   Group,
-  Badge,
 } from '@mantine/core';
 import { Link, useParams } from "react-router-dom";
 import Fuse from 'fuse.js';

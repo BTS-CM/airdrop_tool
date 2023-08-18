@@ -6,10 +6,7 @@ import {
   Card,
   Radio,
   Table,
-  Button,
   Group,
-  ScrollArea,
-  ActionIcon,
 } from '@mantine/core';
 import { Link } from "react-router-dom";
 import { useTranslation } from 'react-i18next';

@@ -2,15 +2,9 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
-  Title,
   Text,
   SimpleGrid,
   Card,
-  Radio,
-  Table,
-  Button,
-  Group,
-  ActionIcon,
 } from '@mantine/core';
 import { Link, useParams } from "react-router-dom";
 

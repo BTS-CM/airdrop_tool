@@ -8,7 +8,6 @@ import {
 import { useTranslation } from 'react-i18next';
 
 import { appStore, tempStore } from '../lib/states';
-import { getTrxBytes } from '../lib/generate';
 import BeetModal from './BeetModal';
 
 import { blockchainFloat } from '../lib/common';
@@ -72,7 +71,7 @@ export default function AirdropCard(properties) {
     async function checkTRXBytes() {
       let calculatedBytes;
       try {
-        calculatedBytes = await getTrxBytes(
+        calculatedBytes = await window.electron.getTrxBytes(
           relevantFees.fee || 1,
           env,
           'transfer',

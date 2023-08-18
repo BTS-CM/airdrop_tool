@@ -19,7 +19,6 @@ import { QRCode } from 'react-qrcode-logo';
 import {
   appStore, tempStore, beetStore
 } from '../lib/states';
-import { beetBroadcast, generateDeepLink, generateQRContents } from '../lib/generate';
 
 import GetAccount from './GetAccount';
 
@@ -83,7 +82,7 @@ export default function BeetModal(properties) {
 
       let payload;
       try {
-        payload = await generateDeepLink(
+        payload = await window.electron.generateDeepLink(
           appName,
           relevantChain,
           currentNodes[0],
@@ -111,7 +110,7 @@ export default function BeetModal(properties) {
 
       let payload;
       try {
-        payload = await generateQRContents(
+        payload = await window.electron.generateQRContents(
           opType,
           opContents
         );
@@ -135,7 +134,7 @@ export default function BeetModal(properties) {
     setOutcome();
     let response;
     try {
-      response = await beetBroadcast(
+      response = await window.electron.beetBroadcast(
         connection,
         relevantChain,
         currentNodes[0],

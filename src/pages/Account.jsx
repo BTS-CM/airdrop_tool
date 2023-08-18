@@ -1,16 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
-  Title,
   Text,
   SimpleGrid,
   Card,
-  Radio,
   Table,
-  Badge,
   Button,
   ScrollArea,
-  Group,
-  ActionIcon,
   Loader,
 } from '@mantine/core';
 import { HiOutlineChartPie } from "react-icons/hi";
@@ -37,9 +32,6 @@ export default function Account(properties) {
   const btsAssets = assetStore((state) => state.bitshares);
   const btsTestnetAssets = assetStore((state) => state.bitshares_testnet);
   const tuscAssets = assetStore((state) => state.tusc);
-
-  const nodes = appStore((state) => state.nodes);
-  const changeURL = appStore((state) => state.changeURL);
 
   const [inProgress, setInProgress] = useState(false);
 
@@ -101,7 +93,6 @@ export default function Account(properties) {
 
   const retrievedAccountTickets = targetJSON.filter((x) => x.account === params.id);
 
-  const ids = [];
   const tableRows = retrievedAccountTickets.map((ticket) => (
     <tr key={ticket.id}>
       <td>

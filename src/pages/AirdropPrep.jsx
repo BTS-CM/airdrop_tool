@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 /* eslint-disable react/jsx-one-expression-per-line */
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link, useParams } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import {
@@ -10,7 +10,6 @@ import {
   Center,
   Button,
 } from '@mantine/core';
-import _ from "lodash";
 
 import {
   airdropStore,

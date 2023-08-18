@@ -1,6 +1,5 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { connect, checkBeet, link } from 'beet-js';
 import config from '../config/config.json';
 
 const localePreferenceStore = create(
@@ -383,36 +382,38 @@ const beetStore = create((set, get) => ({
      */
     let beetOnline;
     try {
-      beetOnline = await checkBeet(true);
+      beetOnline = await window.electron.checkBeet(true);
     } catch (error) {
       console.log(error);
     }
 
     if (!beetOnline) {
-      console.log('beet not online');
+      console.log('beet not online')
       return;
     }
 
     let connected;
     try {
-      connected = await connect(
-        "Airdrop tool",
+      connected = await window.electron.connect(
+        "NFT Viewer",
         "Application",
         "localhost",
         null,
         identity ?? null
       );
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
 
+    connected = JSON.parse(connected);
+    
     if (!connected) {
       console.error("Couldn't connect to Beet");
       set({
         connection: null,
         authenticated: null,
         isLinked: null
-      });
+      })
       return;
     }
 
@@ -438,58 +439,79 @@ const beetStore = create((set, get) => ({
 
     set({
       connection: connected,
-      authenticated: true,
+      authenticated: connected.authenticated,
       isLinked: false
     });
-    /*
-    if (identity) {
-      set({ identity });
-    }
-    */
   },
   link: async (environment) => {
     /**
      * Re/Link to Beet wallet
      * @param {String} environment
      */
+    let linkAttempt;
+    try {
+      linkAttempt = await window.electron.link(
+        environment === 'bitshares' ? 'BTS' : 'BTS_TEST'
+      );
+    } catch (error) {
+      console.error(error)
+      set({ isLinked: null, identity: null })
+      return;
+    }
+
+    if (!linkAttempt) {
+      set({ isLinked: null, identity: null })
+      return;
+    }
+
+    const parsedLinkAttempt = JSON.parse(linkAttempt);
+
+    if (!parsedLinkAttempt || !parsedLinkAttempt.identity) {
+      console.log('No identity in linkAttempt');
+      set({ isLinked: null, identity: null })
+      return;
+    }
+
+    const { storeConnection } = identitiesStore.getState();
+
+    try {
+      storeConnection(parsedLinkAttempt);
+    } catch (error) {
+      console.log(error);
+    }
+    
+    const { setAccount } = tempStore.getState();
+    try {
+      setAccount(parsedLinkAttempt.identity.requested.account.id);
+    } catch (error) {
+      console.log(error);
+    }
+
+    set({ isLinked: true, identity: parsedLinkAttempt.identity })
+  },
+  relink: async (environment) => {
+    /**
+     * Relink to Beet wallet
+     * @param {String} environment
+     */
     const currentConnection = get().connection;
 
     let linkAttempt;
     try {
-      linkAttempt = await link(environment, currentConnection);
+      linkAttempt = await window.electron.link(
+        environment === 'bitshares' ? 'BTS' : 'BTS_TEST',
+        currentConnection,
+      );
     } catch (error) {
       console.error(error);
-      set({ isLinked: null, identity: null });
       return;
     }
 
-    if (!currentConnection.identity) {
-      set({ isLinked: null, identity: null });
-      return;
-    }
-
-    const { storeConnection, setIdentities } = identitiesStore.getState();
-
-    try {
-      storeConnection(currentConnection);
-    } catch (error) {
-      console.log(error);
-    }
-
-    const { setAccount } = tempStore.getState();
-    try {
-      setAccount(currentConnection.identity.requested.account.id);
-    } catch (error) {
-      console.log(error);
-    }
-
-    setIdentities(currentConnection.identity);
-
-    set({ isLinked: true, identity: currentConnection.identity });
+    set({ connection: currentConnection, isLinked: true });
   },
   setConnection: (res) => set({ connection: res }),
   setAuthenticated: (auth) => set({ authenticated: auth }),
-  setIsLinked: (link) => set({ isLinked: link }),
+  setIsLinked: (linkage) => set({ isLinked: linkage }),
   setIdentity: (id) => set({ identity: id }),
   reset: () => set({
     connection: null,

@@ -1,5 +1,5 @@
 import { Vector3, Line3 } from 'three';
-import { humanReadableFloat } from './common';
+import { humanReadableFloat } from '../../src/lib/common';
 
 /**
  * Splitting arrays into chunks

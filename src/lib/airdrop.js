@@ -1,6 +1,5 @@
 import { sort } from 'fast-sort';
 import { humanReadableFloat } from "./common";
-import { lookupSymbols } from "./directQueries";
 
 const _countDecimals = (value) => {
   if ((value % 1) !== 0) { return value.toString().split(".")[1].length; }
@@ -123,7 +122,7 @@ async function fetchAirdropDetails(variables, zustandSet) {
 
       let assetDetails;
       try {
-        assetDetails = await lookupSymbols(currentNodes[0], env, [finalTokenName]);
+        assetDetails = await window.electron.lookupSymbols(currentNodes[0], env, [finalTokenName]);
       } catch (error) {
         console.log(error);
         changeURL(env);

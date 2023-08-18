@@ -15,7 +15,6 @@ import {
   Col,
   Button,
   Image,
-  Select,
   ScrollArea,
 } from '@mantine/core';
 import { useTranslation } from 'react-i18next';

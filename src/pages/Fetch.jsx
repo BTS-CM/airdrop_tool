@@ -5,15 +5,12 @@ import { Apis as tuscApis } from 'tuscjs-ws';
 import { Link } from "react-router-dom";
 import {
   Title,
-  Text,
-  SimpleGrid,
   Card,
   Radio,
   Table,
   Button,
   ActionIcon,
   Group,
-  Loader,
 } from '@mantine/core';
 import { useTranslation } from 'react-i18next';
 import _ from "lodash";
@@ -22,7 +19,6 @@ import {
   appStore, ticketStore, leaderboardStore, assetStore
 } from '../lib/states';
 import { humanReadableFloat, sliceIntoChunks } from '../lib/common';
-import { lookupSymbols, getBlockchainFees } from '../lib/directQueries';
 
 export default function Fetch(properties) {
   const { t, i18n } = useTranslation();
@@ -186,7 +182,7 @@ export default function Fetch(properties) {
     console.log("Fetching fee schedule");
     let feeResponse;
     try {
-      feeResponse = await getBlockchainFees(nodes[value][0], value);
+      feeResponse = await window.electron.getBlockchainFees(nodes[value][0], value);
     } catch (error) {
       console.log(error);
     }
@@ -285,7 +281,7 @@ export default function Fetch(properties) {
       const currentChunk = fetchableAssetChunks[i];
       let theseSymbols;
       try {
-        theseSymbols = await lookupSymbols("", value, currentChunk, true);
+        theseSymbols = await window.electron.lookupSymbols("", value, currentChunk, true);
       } catch (error) {
         console.log(error);
         return;

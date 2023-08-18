@@ -10,6 +10,40 @@ const inputs = [
   { base: "BTS", quote: "GDEX.USDT" },
   { base: "BTS", quote: "HONEST.USD" },
   { base: "BTS", quote: "HERTZ" },
+  { base: "BTS", quote: "CNY" },
+  { base: "BTS", quote: "CNY1.0" },
+  { base: "BTS", quote: "USD1.0" },
+  { base: "BTS", quote: "EUR" },
+  { base: "BTS", quote: "EUR1.0" },
+  { base: "BTS", quote: "BTC1.0" },
+  { base: "BTS", quote: "JPY" },
+  { base: "BTS", quote: "GBP" },
+  { base: "BTS", quote: "ARS" },
+  { base: "BTS", quote: "AUD" },
+  { base: "BTS", quote: "CAD" },
+  { base: "BTS", quote: "SILVER" },
+  { base: "BTS", quote: "GOLD" },
+  { base: "BTS", quote: "BTC" },
+  { base: "BTS", quote: "TWENTIX" },
+  { base: "BTS", quote: "HERO" },
+  { base: "BTS", quote: "HONEST.GBP" },
+  { base: "BTS", quote: "HONEST.EUR" },
+  { base: "BTS", quote: "HONEST.USDSHORT" },
+  { base: "BTS", quote: "HONEST.BTCSHORT" },
+  { base: "BTS", quote: "HONEST.EOS" },
+  { base: "BTS", quote: "HONEST.XRP" },
+  { base: "BTS", quote: "HONEST.ADA" },
+  { base: "BTS", quote: "HONEST.XAU" },
+  { base: "BTS", quote: "HONEST.EOSSHORT" },
+  { base: "BTS", quote: "HONEST.XMRSHORT" },
+  { base: "BTS", quote: "HONEST.XRPSHORT" },
+  { base: "BTS", quote: "HONEST.JPYSHORT" },
+  { base: "BTS", quote: "HONEST.CNYSHORT" },
+  { base: "BTS", quote: "HONEST.DOTSHORT" },
+  { base: "BTS", quote: "HONEST.ETHSHORT" },
+  { base: "BTS", quote: "URTHR" },
+  { base: "BTS", quote: "SKULD" },
+  { base: "BTS", quote: "VERTHANDI" }
 ];
 
 // END CONFIGURATION
@@ -80,10 +114,17 @@ const processOrders = (orders, basePrecision, avgPrice) => orders.map((order) =>
   const diff = Math.abs(
     parseFloat(parseFloat(order.price).toFixed(basePrecision)) - parseFloat(parseFloat(avgPrice).toFixed(basePrecision))
   );
+  let calculatedValue;
+  if (diff === 0) {
+    calculatedValue = parseFloat(order.base);
+  } else if (diff > 0.001 * avgPrice) {
+    calculatedValue = (1 / diff) * parseFloat(order.base);
+  } else {
+    calculatedValue = (1 / (diff + humanReadableFloat((avgPrice * 0.001), basePrecision))) * parseFloat(order.base);
+  }
+
   return {
-    value: diff > 0.001 * avgPrice
-      ? (1 / diff) * parseFloat(order.base)
-      : (1 / (diff + humanReadableFloat((avgPrice * 0.001), basePrecision))) * parseFloat(order.base),
+    value: calculatedValue,
     id: order.owner_id,
     name: order.owner_name,
     qty: 1
@@ -96,11 +137,9 @@ const getMarketParticipants = async () => {
     const inputBaseSymbol = inputs[j].base;
     const inputQuoteSymbol = inputs[j].quote;
 
-    console.log(`Processing ${inputBaseSymbol}_${inputQuoteSymbol}`);
-
     let orderBookData;
     try {
-      orderBookData = await getOrderBookData(inputBaseSymbol, inputQuoteSymbol, 100); // Change these values for your own airdrop!
+      orderBookData = await getOrderBookData(inputBaseSymbol, inputQuoteSymbol, 300);
     } catch (error) {
       console.log(error);
       continue;
@@ -113,8 +152,13 @@ const getMarketParticipants = async () => {
 
     const { base, quote, orderBook } = orderBookData;
 
-    if (quote.bitasset_data) {
-      // Asset is a smartcoin - use CER
+    if (
+      quote.bitasset_data_id
+      && (quote.options.core_exchange_rate.base.asset_id === base.id || quote.options.core_exchange_rate.quote.asset_id === base.id)
+    ) {
+      console.log(`Processing smartcoin market: ${inputBaseSymbol}_${inputQuoteSymbol}`);
+
+      // Market pair is a smartcoin market - use CER
       const baseCerValue = humanReadableFloat(
         quote.options.core_exchange_rate.base.amount,
         quote.precision
@@ -131,16 +175,31 @@ const getMarketParticipants = async () => {
       continue;
     }
 
-    // Non smartcoin - use top bid & lowest ask instead of cer
-    const topBid = orderBook.bids[0];
-    const lowestAsk = orderBook.asks[0];
+    console.log(`Processing UIA market: ${inputBaseSymbol}_${inputQuoteSymbol}`);
+    // Use avg of the top bid & lowest ask instead of cer
+    let mergedOrders = [];
+    if (orderBook.bids.length && orderBook.asks.length) {
+      const topBid = orderBook.bids[0];
+      const lowestAsk = orderBook.asks[0];
+      const avgPrice = (parseFloat(topBid.price) + parseFloat(lowestAsk.price)) / 2;
 
-    const avgPrice = (parseFloat(topBid.price) + parseFloat(lowestAsk.price)) / 2;
+      const parsedBids = processOrders(orderBook.bids, base.precision, avgPrice ?? topBid.price);
+      const parsedAsks = processOrders(orderBook.asks, base.precision, avgPrice ?? lowestAsk.price);
 
-    const parsedBids = processOrders(orderBook.bids, base.precision, avgPrice);
-    const parsedAsks = processOrders(orderBook.asks, base.precision, avgPrice);
+      mergedOrders = [...parsedBids, ...parsedAsks];
+    } else if (orderBook.bids.length) {
+      const topBid = orderBook.bids[0];
+      const parsedBids = processOrders(orderBook.bids, base.precision, topBid.price);
+      mergedOrders = [...parsedBids];
+    } else if (orderBook.asks.length) {
+      const lowestAsk = orderBook.asks[0];
+      const parsedAsks = processOrders(orderBook.asks, base.precision, lowestAsk.price);
+      mergedOrders = [...parsedAsks];
+    } else {
+      console.log(`No market orders found for ${inputBaseSymbol}_${inputQuoteSymbol}`);
+      continue;
+    }
 
-    const mergedOrders = [...parsedBids, ...parsedAsks];
     multipleMergedOrders = [...multipleMergedOrders, ...mergedOrders];
   }
 

@@ -16,7 +16,6 @@ import { TbInputSearch, TbArrowNarrowRight } from "react-icons/tb";
 import { useTranslation } from 'react-i18next';
 
 import { appStore, tempStore } from '../lib/states';
-import { accountSearch } from '../lib/directQueries';
 
 export default function AccountSearch(properties) {
   const { t, i18n } = useTranslation();
@@ -51,7 +50,7 @@ export default function AccountSearch(properties) {
 
     let searchResult;
     try {
-      searchResult = await accountSearch(nodes[env][0], env, searchInput);
+      searchResult = await window.electron.accountSearch(nodes[env][0], env, searchInput);
     } catch (error) {
       console.log(error);
       setInProgress(false);

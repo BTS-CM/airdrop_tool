@@ -41,7 +41,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
     
-    - name: Use Node.js 16.17.0
+    - name: Use Node.js 18.16.1
       uses: actions/setup-node@v3
       with:
         node-version: 18.16.1
