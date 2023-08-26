@@ -17,7 +17,7 @@ import { useParams } from "react-router-dom";
 import { QRCode } from 'react-qrcode-logo';
 
 import {
-  appStore, tempStore, beetStore
+  appStore, tempStore, beetStore, identitiesStore
 } from '../lib/states';
 
 import GetAccount from './GetAccount';
@@ -38,9 +38,14 @@ export default function BeetModal(properties) {
   const [deepLinkItr, setDeepLinkItr] = useState(0);
   const [opened, { open, close }] = useDisclosure(false);
 
-  const connection = beetStore((state) => state.connection);
+  const storeConnection = identitiesStore((state) => state.storeConnection);
+  const getStoredIds = identitiesStore((state) => state.getStoredIds);
+
   const identity = beetStore((state) => state.identity);
   const reset = beetStore((state) => state.reset);
+  const setConnection = beetStore((state) => state.setConnection);
+  const setAuthenticated = beetStore((state) => state.setAuthenticated);
+  const setIsLinked = beetStore((state) => state.setIsLinked);
 
   const account = tempStore((state) => state.account);
 
@@ -75,6 +80,17 @@ export default function BeetModal(properties) {
     assetName = "TUSC";
     relevantChain = 'TUSC';
   }
+
+  const [downloadClicked, setDownloadClicked] = useState(false);
+
+  const handleDownloadClick = () => {
+    if (!downloadClicked) {
+      setDownloadClicked(true);
+      setTimeout(() => {
+        setDownloadClicked(false);
+      }, 10000);
+    }
+  };
 
   useEffect(() => {
     async function fetchData() {
@@ -132,21 +148,31 @@ export default function BeetModal(properties) {
   async function broadcast() {
     setInProgress(true);
     setOutcome();
+
+    const idFields = await getStoredIds(identity.identityhash);
+
     let response;
     try {
       response = await window.electron.beetBroadcast(
-        connection,
         relevantChain,
         currentNodes[0],
         opType,
-        opContents
+        opContents,
+        identity ?? null,
+        idFields
       );
     } catch (error) {
-      console.log(error);
+      console.log(JSON.stringify(error));
       setInProgress(false);
       setOutcome("FAILURE");
       return;
     }
+
+    const { connection, result } = await response;
+    storeConnection(connection);
+    setConnection(connection);
+    setAuthenticated(true);
+    setIsLinked(true);
 
     setOutcome("SUCCESS");
     setInProgress(false);
@@ -283,7 +309,7 @@ export default function BeetModal(properties) {
             : null
         }
         {
-          account && method && method === "BEET" && connection && identity && !outcome
+          account && method && method === "BEET" && identity && !outcome
             ? (
               <>
                 <Text>
@@ -374,16 +400,27 @@ export default function BeetModal(properties) {
                   <br />
                   {t("modal:local.generated.step3")}
                 </Text>
-                <a
-                  href={`data:text/json;charset=utf-8,${deepLink}`}
-                  download={filename}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <Button mt="md">
-                    {t("modal:local.generated.beetBTN")}
-                  </Button>
-                </a>
+                {
+                  downloadClicked
+                    ? (
+                    <Button mt="md" disabled>
+                      {t("modal:local.generated.beetBTN")}
+                    </Button>
+                    )
+                    : (
+                    <a
+                      href={`data:text/json;charset=utf-8,${deepLink}`}
+                      download={`${filename}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      onClick={handleDownloadClick}
+                    >
+                      <Button mt="md">
+                        {t("modal:local.generated.beetBTN")}
+                      </Button>
+                    </a>
+                    )
+                }
               </>
             )
             : null

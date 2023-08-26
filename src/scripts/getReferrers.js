@@ -1,8 +1,6 @@
 const fs = require('fs');
 const inputUsers = require('./fetchedData/assetHolders.json'); // [{"name":"accountName","account_id":"1.2.x","amount":"12345"}]
 
-const { getObjects } = require('./lib/directQueries');
-
 const getUserReferralQty = async (accountName) => {
   console.log(`Fetching refferral qty for ${accountName}`);
   let referralQty;
@@ -56,7 +54,7 @@ const main = async () => {
 
   let retrievedUserObjects;
   try {
-    retrievedUserObjects = await getObjects("wss://node.xbts.io/ws", "bitshares", userIDs);
+    retrievedUserObjects = await window.electron.getObjects("wss://node.xbts.io/ws", "bitshares", userIDs);
   } catch (error) {
     console.log({ error, location: "getObjects", userIDs });
   }

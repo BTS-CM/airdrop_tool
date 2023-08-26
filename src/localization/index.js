@@ -1,5 +1,6 @@
 import i18next from 'i18next';
 import { initReactI18next } from "react-i18next";
+import resources from 'virtual:i18next-loader'
 import { localePreferenceStore } from '../lib/states';
 
 const pages = [
@@ -28,7 +29,7 @@ const locale = oldLocale || 'en';
 i18next
   .use(initReactI18next)
   .init({
-    resources: window.electron.fetchLocales(),
+    resources: resources,
     lng: locale,
     defaultNS: pages,
     fallbackLng: ['en'],

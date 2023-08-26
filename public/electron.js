@@ -21,7 +21,8 @@ const {
   accountSearch,
   getBlockedAccounts,
   getObjects,
-  getBlockchainFees
+  getTickets,
+  fetchAccounts
 } = require('./lib/queries');
 
 const createWindow = () => {
@@ -100,12 +101,19 @@ ipcMain.handle('getUUID', async (event, arg) => await uuidv4());
 
 ipcMain.handle('executeCalculation', async (event, ...args) => await executeCalculation(...args));
 
-ipcMain.handle('lookupSymbols', async (event, args) => await lookupSymbols(...args));
-ipcMain.handle('fetchLeaderboardData', async (event, args) => await fetchLeaderboardData(...args));
-ipcMain.handle('accountSearch', async (event, args) => await accountSearch(...args));
-ipcMain.handle('getBlockedAccounts', async (event, args) => await getBlockedAccounts(...args));
-ipcMain.handle('getObjects', async (event, args) => await getObjects(...args));
-ipcMain.handle('getBlockchainFees', async (event, args) => await getBlockchainFees(...args));
+ipcMain.handle('lookupSymbols', async (event, ...args) => await lookupSymbols(...args));
+ipcMain.handle('fetchLeaderboardData', async (event, ...args) => await fetchLeaderboardData(...args));
+ipcMain.handle('accountSearch', async (event, ...args) => await accountSearch(...args));
+ipcMain.handle('getBlockedAccounts', async (event, ...args) => await getBlockedAccounts(...args));
+ipcMain.handle('getObjects', async (event, ...args) => await getObjects(...args));
+
+ipcMain.handle('getTickets', async (event, ...args) => {
+  return await getTickets(...args);
+});
+
+ipcMain.handle('fetchAccounts', async (event, ...args) => {
+  return await fetchAccounts(...args);
+});
 
 import('beet-js').then((beet) => {
   ipcMain.handle('checkBeet', async (event, ...args) => {

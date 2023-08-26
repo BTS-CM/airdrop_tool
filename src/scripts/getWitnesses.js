@@ -21,7 +21,6 @@ const main = async () => {
     qty: 1,
     value: humanReadableFloat(witness.total_votes, 5)
   }));
-  //console.log({ witnessesAirdrop });
   writeToFile(witnessesAirdrop);
 };
 

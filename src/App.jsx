@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import {
   Link,
@@ -60,7 +60,12 @@ import BlockAccounts from "./pages/BlockAccounts";
 import AirdropPrep from "./pages/AirdropPrep";
 import OverrideTransfer from "./pages/OverrideTransfer";
 
-import { localePreferenceStore } from "./lib/states";
+import {
+  localePreferenceStore,
+  appStore,
+  beetStore,
+  identitiesStore
+} from "./lib/states";
 
 function openGallery() {
   window.electron.openURL('gallery');
@@ -77,6 +82,10 @@ function openBeet() {
 function App() {
   const { t, i18n } = useTranslation();
   const location = useLocation();
+
+  const isLinked = beetStore((state) => state.isLinked);
+  const identity = beetStore((state) => state.identity);
+  const setIdentities = identitiesStore((state) => state.setIdentities);
 
   const changeLocale = localePreferenceStore((state) => state.changeLocale);
   const locale = localePreferenceStore((state) => state.locale);
@@ -119,6 +128,12 @@ function App() {
       { lang.label }
     </Menu.Item>
   ));
+
+  useEffect(() => {
+    if (isLinked && identity) {
+      setIdentities(identity);
+    }
+  }, [isLinked, identity]);
 
   return (
     <div className="App">

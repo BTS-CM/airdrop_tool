@@ -73,7 +73,7 @@ export default function AirdropCard(properties) {
       try {
         calculatedBytes = await window.electron.getTrxBytes(
           relevantFees.fee || 1,
-          env,
+          relevantChain,
           'transfer',
           ops
         );

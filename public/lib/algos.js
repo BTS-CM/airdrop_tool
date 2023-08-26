@@ -1,5 +1,14 @@
-import { Vector3, Line3 } from 'three';
-import { humanReadableFloat } from '../../src/lib/common';
+const { Vector3, Line3 } = require('three');
+
+/**
+ * Convert the token's blockchain representation into a human readable quantity
+ * @param {Float} satoshis
+ * @param {Number} precision
+ * @returns {Number}
+ */
+function humanReadableFloat(satoshis, precision) {
+  return parseFloat((satoshis / 10 ** precision).toFixed(precision));
+}
 
 /**
  * Splitting arrays into chunks
@@ -715,7 +724,7 @@ function executeCalculation(
   return { summary, generatedNumbers };
 }
 
-export {
+module.exports = {
   executeCalculation, // main calculation
   forward,
   reverse,

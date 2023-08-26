@@ -1,9 +1,9 @@
 /* eslint-disable consistent-return */
-import { TransactionBuilder, TransactionHelper } from 'bitsharesjs';
-import { TransactionBuilder as TuscTB, TransactionHelper as TuscTH } from 'tuscjs';
-import { Apis } from 'bitsharesjs-ws';
-import { Apis as tuscApis } from 'tuscjs-ws';
-import { v4 as uuidv4 } from 'uuid';
+const { v4: uuidv4 } = require('uuid');
+const { TransactionBuilder, TransactionHelper } = require('bitsharesjs');
+const { TransactionBuilder: TuscTB, TransactionHelper: TuscTH } = require('tuscjs');
+const { Apis } = require('bitsharesjs-ws');
+const { Apis: tuscApis } = require('tuscjs-ws');
 
 /**
  * Generate QR code contents for purchasing an NFT
@@ -193,7 +193,7 @@ async function beetBroadcast(
       }
     } catch (error) {
       console.log(error);
-      reject();
+      reject(error);
       return;
     }
 
@@ -206,53 +206,71 @@ async function beetBroadcast(
     try {
       await tr.set_required_fees();
     } catch (error) {
-      console.error(error);
-      reject();
+      console.log(error);
+      reject(error);
       return;
     }
 
     try {
       await tr.update_head_block();
     } catch (error) {
-      console.error(error);
-      reject();
+      console.log(error);
+      reject(error);
       return;
     }
 
     try {
       await tr.set_expire_seconds(4000);
     } catch (error) {
-      console.error(error);
-      reject();
+      console.log(error);
+      reject(error);
       return;
     }
 
     try {
       tr.add_signer("inject_wif");
     } catch (error) {
-      console.error(error);
-      reject();
+      console.log(error);
+      reject(error);
       return;
     }
 
-    tr.finalize().then(() => {
+    /*
+    tr.finalize().then(async () => {
       const tr_size = tr.tr_buffer.byteLength;
       console.log(`Transaction size: ${tr_size} bytes`);
     }).catch((error) => {
       console.error(error);
+      reject(error);
     });
+    */
+
+    try {
+      await tr.finalize();
+    } catch (error) {
+      reject(error);
+      return;
+    }
+
+    const tr_size = tr.tr_buffer.byteLength;
+    console.log(`Transaction size: ${tr_size} bytes`);
 
     let result;
     try {
       result = await tr.broadcast(); // broadcasting request to beet
     } catch (error) {
-      console.error(error);
-      reject();
+      console.log({error, location: 'broadcast'});
+      reject(error);
       return;
     }
 
-    console.log(result);
-    resolve(result);
+    try {
+      await Apis.close();
+    } catch (error) {
+      console.log({error, location: 'close'});
+    }
+
+    resolve({ connection, result });
   });
 }
 
@@ -283,7 +301,7 @@ async function getTrxBytes(
 
     tr.finalize().then(() => {
       const tr_size = tr.tr_buffer.byteLength;
-      resolve(tr_size);
+      resolve(tr_size ?? 0);
     }).catch((error) => {
       console.error(error);
       reject();
@@ -291,7 +309,7 @@ async function getTrxBytes(
   });
 }
 
-export {
+module.exports = {
   beetBroadcast,
   getTrxBytes,
   generateDeepLink,
