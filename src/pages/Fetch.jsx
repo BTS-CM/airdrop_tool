@@ -5,15 +5,12 @@ import { Apis as tuscApis } from 'tuscjs-ws';
 import { Link } from "react-router-dom";
 import {
   Title,
-  Text,
-  SimpleGrid,
   Card,
   Radio,
   Table,
   Button,
   ActionIcon,
   Group,
-  Loader,
 } from '@mantine/core';
 import { useTranslation } from 'react-i18next';
 import _ from "lodash";
@@ -22,7 +19,6 @@ import {
   appStore, ticketStore, leaderboardStore, assetStore
 } from '../lib/states';
 import { humanReadableFloat, sliceIntoChunks } from '../lib/common';
-import { lookupSymbols, getBlockchainFees } from '../lib/directQueries';
 
 export default function Fetch(properties) {
   const { t, i18n } = useTranslation();
@@ -72,54 +68,21 @@ export default function Fetch(properties) {
       ? parseInt((currentTickets.at(-1).id).split("1.18.")[1], 10) + 1
       : 0;
 
+    let updatedTickets;
     try {
-      if (value === 'tusc') {
-        await tuscApis.instance(nodes[value][0], true).init_promise;
-      } else {
-        await Apis.instance(nodes[value][0], true).init_promise;
-      }
+      updatedTickets = await window.electron.getTickets(
+        nodes[value][0],
+        value,
+        lastID,
+        currentTickets
+      );
     } catch (error) {
       console.log(error);
-      changeURL(value);
+      setInProgress(false);
       return;
     }
 
-    const ids = [];
-    const updatedTickets = [];
-    for (let i = 0; i < 100; i++) {
-      let response;
-      try {
-        if (value === 'tusc') {
-          response = await tuscApis.instance().db_api().exec("list_tickets", [100, `1.18.${lastID + (i * 100)}`]);
-        } else {
-          response = await Apis.instance().db_api().exec("list_tickets", [100, `1.18.${lastID + (i * 100)}`]);
-        }
-      } catch (error) {
-        console.log(error);
-        break;
-      }
-
-      if (!response || !response.length) {
-        console.log("no response");
-        break;
-      }
-
-      for (let k = 0; k < response.length; k++) {
-        if (!currentTickets.find((x) => x.id === response[k].id)) {
-          if (!ids.includes(response[k].id)) {
-            ids.push(response[k].id);
-            updatedTickets.push(response[k]);
-          }
-        }
-      }
-
-      if (response.length < 100) {
-        console.log(`Finished fetching ${updatedTickets.length} tickets!`);
-        break;
-      }
-    }
-
-    if (!updatedTickets.length) {
+    if (!updatedTickets || !updatedTickets.length) {
       setInProgress(false);
       return;
     }
@@ -183,134 +146,31 @@ export default function Fetch(properties) {
       });
     }
 
-    console.log("Fetching fee schedule");
-    let feeResponse;
+    console.log("Fetching user and blockchain data");
+
+    let fetchedAccounts;
     try {
-      feeResponse = await getBlockchainFees(nodes[value][0], value);
+      fetchedAccounts = await window.electron.fetchAccounts(
+        leaderboard,
+        value,
+        nodes[value][0],
+      );
     } catch (error) {
       console.log(error);
+      setInProgress(false);
+      return;
     }
+    const {
+      feeResponse,
+      fetchedAssets,
+      accountResults
+    } = await fetchedAccounts;
 
     if (feeResponse) {
+      console.log("Setting blockchain fee schedule")
       setFees(value, feeResponse);
     }
 
-    console.log("Fetching user balances");
-    let assetsToFetch = [];
-    const accountResults = [];
-    const leaderboardBatches = _.chunk(
-      leaderboard,
-      value === 'bitshares'
-        ? 50
-        : 10
-    );
-    for (let i = 0; i < leaderboardBatches.length; i++) {
-      let currentBatch = leaderboardBatches[i];
-      const accountIDs = currentBatch.map((user) => user.id);
-      let fetchedAccounts;
-      try {
-        if (value === 'tusc') {
-          fetchedAccounts = await tuscApis.instance().db_api().exec("get_full_accounts", [accountIDs, false]).then((results) => {
-            if (results && results.length) {
-              return results;
-            }
-          });
-        } else {
-          fetchedAccounts = await Apis.instance().db_api().exec("get_full_accounts", [accountIDs, false]).then((results) => {
-            if (results && results.length) {
-              return results;
-            }
-          });
-        }
-      } catch (error) {
-        console.log(error);
-        continue;
-      }
-
-      // eslint-disable-next-line no-loop-func
-      currentBatch = currentBatch.map((user) => {
-        const foundAccount = fetchedAccounts.find((acc) => acc[0] === user.id)[1];
-        const foundAssets = foundAccount.balances.map((balance) => balance.asset_type);
-        assetsToFetch = assetsToFetch.concat(foundAssets);
-        return {
-          ...user,
-          balances: foundAccount.balances.map((balance) => ({
-            amount: balance.balance, asset_id: balance.asset_type
-          })),
-          account: {
-            name: foundAccount.account.name,
-            ltm: foundAccount.account.id === foundAccount.account.lifetime_referrer,
-            creation_time: foundAccount.account.creation_time,
-            assets: foundAccount.assets,
-            votes: foundAccount.votes && foundAccount.votes.length
-              ? foundAccount.votes.map((vote) => {
-                if (vote.id.includes("1.14.")) {
-                  return {
-                    id: vote.id,
-                    name: vote.name,
-                    worker_account: vote.worker_account
-                  };
-                }
-
-                if (vote.id.includes("1.5.")) {
-                  return {
-                    id: vote.id,
-                    committee_member_account: vote.committee_member_account
-                  };
-                }
-
-                if (vote.id.includes("1.6.")) {
-                  return {
-                    id: vote.id,
-                    witness_account: vote.witness_account
-                  };
-                }
-
-                return null;
-              }).filter((x) => x)
-              : []
-          }
-        };
-      });
-
-      if (fetchedAccounts && fetchedAccounts.length) {
-        accountResults.push(...currentBatch);
-      }
-    }
-
-    // assetsToFetch
-    let fetchedAssets = [];
-    const fetchableAssetChunks = sliceIntoChunks([...new Set(assetsToFetch)], 50);
-    for (let i = 0; i < fetchableAssetChunks.length; i++) {
-      const currentChunk = fetchableAssetChunks[i];
-      let theseSymbols;
-      try {
-        theseSymbols = await lookupSymbols("", value, currentChunk, true);
-      } catch (error) {
-        console.log(error);
-        return;
-      }
-
-      if (!theseSymbols || !theseSymbols.length) {
-        return;
-      }
-
-      const requiredInfo = theseSymbols
-        .map((q) => ({
-          id: q.id,
-          symbol: q.symbol,
-          precision: q.precision,
-          issuer: q.issuer,
-          isBitasset: !!q.bitasset_data_id,
-          options: {
-            max_supply: q.options.max_supply,
-            flags: q.options.flags,
-            issuer_permissions: q.options.issuer_permissions
-          },
-          dynamic_asset_data_id: q.dynamic_asset_data_id
-        }));
-      fetchedAssets = fetchedAssets.concat(requiredInfo);
-    }
     changeAssets(value, fetchedAssets);
 
     const sortedLeaderboard = accountResults.sort((a, b) => b.amount - a.amount);
@@ -328,6 +188,7 @@ export default function Fetch(properties) {
       from += current.amount + 1;
     }
 
+    console.log("Finished fetching blockchain data");
     setInProgress(false);
     changeTickets(value, mergedTickets);
     changeLeaders(value, finalLeaderboard);
@@ -480,7 +341,7 @@ export default function Fetch(properties) {
               </td>
               <td>
                 {
-                  tuscTickets.length
+                  btsTestnetTickets.length
                     ? (
                       <ActionIcon onClick={() => {
                         eraseTickets('bitshares_testnet');

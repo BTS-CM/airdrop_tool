@@ -39,7 +39,6 @@ import {
 import AirdropCard from "../components/AirdropCard";
 import AirdropLeftCard from '../components/AirdropLeftCard';
 
-import { lookupSymbols } from "../lib/directQueries";
 import { sliceIntoChunks, humanReadableFloat } from '../lib/common';
 import {
   fetchAirdropDetails,
@@ -296,7 +295,7 @@ export default function PerformAirdrop(properties) {
 
           let assetDetails;
           try {
-            assetDetails = await lookupSymbols(currentNodes[0], params.env, [finalReqTokenName]);
+            assetDetails = await window.electron.lookupSymbols(currentNodes[0], params.env, [finalReqTokenName]);
           } catch (error) {
             console.log(error);
             changeURL(params.env);

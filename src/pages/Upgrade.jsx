@@ -6,24 +6,14 @@ import { useTranslation } from 'react-i18next';
 import {
   Title,
   Text,
-  SimpleGrid,
-  TextInput,
   Card,
-  Box,
-  Modal,
   Radio,
-  Table,
-  Button,
-  Col,
-  Paper,
   Group,
-  Badge,
 } from '@mantine/core';
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-import { generateDeepLink } from '../lib/generate';
 import {
-  appStore, leaderboardStore, airdropStore, ticketStore, tempStore
+  appStore, tempStore
 } from '../lib/states';
 
 import BeetModal from '../components/BeetModal';

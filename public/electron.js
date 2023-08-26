@@ -1,10 +1,29 @@
-const path = require('path');
-const url = require("url");
-
 const {
   app, BrowserWindow, ipcMain, shell,
 // eslint-disable-next-line import/no-extraneous-dependencies
 } = require('electron');
+const path = require('path');
+const url = require("url");
+const { v4: uuidv4 } = require('uuid');
+
+const {
+  beetBroadcast,
+  getTrxBytes,
+  generateDeepLink,
+  generateQRContents
+} = require('./lib/generate');
+
+const { executeCalculation } = require('./lib/algos');
+
+const {
+  lookupSymbols,
+  fetchLeaderboardData,
+  accountSearch,
+  getBlockedAccounts,
+  getObjects,
+  getTickets,
+  fetchAccounts
+} = require('./lib/queries');
 
 const createWindow = () => {
   // Create the browser window.
@@ -12,9 +31,9 @@ const createWindow = () => {
     width: 800,
     height: 600,
     webPreferences: {
-      nodeIntegration: true,
-      enableRemoteModule: true,
-      contextIsolation: false,
+      nodeIntegration: false,
+      enableRemoteModule: false,
+      contextIsolation: true,
       preload: path.join(__dirname, "preload.js"),
       partition: 'persist:nft_airdrop_tool',
     }
@@ -27,7 +46,6 @@ const createWindow = () => {
       slashes: true,
     })
     : "http://localhost:3001";
-
 
   mainWindow.loadURL(indexURL);
 
@@ -77,4 +95,124 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit();
   }
+});
+
+ipcMain.handle('getUUID', async (event, arg) => await uuidv4());
+
+ipcMain.handle('executeCalculation', async (event, ...args) => await executeCalculation(...args));
+
+ipcMain.handle('lookupSymbols', async (event, ...args) => await lookupSymbols(...args));
+ipcMain.handle('fetchLeaderboardData', async (event, ...args) => await fetchLeaderboardData(...args));
+ipcMain.handle('accountSearch', async (event, ...args) => await accountSearch(...args));
+ipcMain.handle('getBlockedAccounts', async (event, ...args) => await getBlockedAccounts(...args));
+ipcMain.handle('getObjects', async (event, ...args) => await getObjects(...args));
+
+ipcMain.handle('getTickets', async (event, ...args) => {
+  return await getTickets(...args);
+});
+
+ipcMain.handle('fetchAccounts', async (event, ...args) => {
+  return await fetchAccounts(...args);
+});
+
+import('beet-js').then((beet) => {
+  ipcMain.handle('checkBeet', async (event, ...args) => {
+    console.log('checkBeet');
+    return await beet.checkBeet(...args);
+  });
+
+  ipcMain.handle('connect', async (event, ...args) => {
+    console.log('connect');
+    const connection = await beet.connect(...args);
+    return JSON.stringify(connection, (key, value) => {
+      if (key === 'io' || key === 'socket' || key === 'nsp') {
+        return undefined;
+      }
+      return value;
+    });
+  });
+
+  ipcMain.handle('link', async (event, ...args) => {
+    if (!args.length) {
+      console.log(new Error('No arguments provided'));
+      return;
+    }
+
+    const beetOnline = await beet.checkBeet(true);
+    if (!beetOnline) {
+      console.log('Beet is not online');
+      return;
+    }
+
+    const connection = await beet.connect(
+      "NFT Viewer",
+      "Application",
+      "localhost",
+      null,
+      null
+    );
+
+    const chain = args[0] ?? null;
+    let linkage;
+    try {
+      linkage = await beet.link(chain, connection);
+    } catch (error) {
+      console.log(error);
+      return;
+    }
+
+    return JSON.stringify(connection, (key, value) => {
+      if (key === 'io' || key === 'socket' || key === 'nsp') {
+        return undefined;
+      }
+      return value;
+    });
+  });
+
+  ipcMain.handle('beetBroadcast', async (event, ...args) => {
+    const chain = args[0] ?? null;
+    const node = args[1] ?? null;
+    const opType = args[2] ?? null;
+    const operations = args[3] ?? null;
+    const identity = args[4] ?? null;
+    const {
+      beetkey,
+      next_identification,
+      secret
+    } = args[5] ?? null;
+
+    const connection = await beet.connect(
+      "NFT Viewer",
+      "Application",
+      "localhost",
+      null,
+      identity
+    );
+
+    if (!connection) {
+      console.log('No connection');
+      return;
+    }
+
+    connection.beetkey = beetkey;
+    connection.next_identification = next_identification;
+    connection.secret = secret;
+    connection.id = next_identification;
+
+    return await beetBroadcast(
+      connection,
+      chain,
+      node,
+      opType,
+      operations
+    );
+  });
+
+  ipcMain.handle('generateDeepLink', async (event, ...args) => await generateDeepLink(...args));
+
+  ipcMain.handle('generateQRContents', async (event, ...args) => await generateQRContents(...args));
+
+  ipcMain.handle('getTrxBytes', async (event, ...args) => await getTrxBytes(...args));
+}).catch((err) => {
+  console.error(err);
 });

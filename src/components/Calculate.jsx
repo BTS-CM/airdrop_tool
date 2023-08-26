@@ -23,7 +23,6 @@ import {
 } from '@mantine/core';
 import blake from 'blakejs';
 
-import { executeCalculation } from '../lib/algos';
 import {
   appStore, leaderboardStore, airdropStore, ticketStore, assetStore
 } from '../lib/states';
@@ -434,7 +433,7 @@ export default function Calculate(properties) {
 
     let calculatedAirdrop;
     try {
-      calculatedAirdrop = await executeCalculation(
+      calculatedAirdrop = await window.electron.executeCalculation(
         filtered_signature,
         selection,
         deduplicate,

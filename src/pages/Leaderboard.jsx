@@ -1,16 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import {
   Title,
-  Text,
-  SimpleGrid,
   Badge,
   Card,
   Radio,
   Table,
-  Button,
-  ScrollArea,
   Accordion,
   JsonInput,
   Group,

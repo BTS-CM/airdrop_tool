@@ -9,20 +9,13 @@ import {
   Card,
   Center,
   Button,
-  Radio,
   FileButton,
   Group
 } from '@mantine/core';
 import _ from "lodash";
 
 import {
-  airdropStore,
-  appStore,
-  leaderboardStore,
-  beetStore,
   tempStore,
-  assetStore,
-  blocklistStore,
 } from "../lib/states";
 
 import GetAccount from "../components/GetAccount";

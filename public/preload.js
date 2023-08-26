@@ -1,7 +1,7 @@
 // All of the Node.js APIs are available in the preload process.
 // It has the same sandbox as a Chrome extension.
 // eslint-disable-next-line import/no-extraneous-dependencies
-const { ipcRenderer } = require("electron");
+const { ipcRenderer, contextBridge } = require("electron");
 
 // Note: Changes to this file will require a build before electron:start works
 
@@ -9,52 +9,77 @@ async function _openURL(target) {
   ipcRenderer.send('openURL', target);
 }
 
-window.electron = {
+// Expose only the necessary APIs to the renderer process using context bridge
+contextBridge.exposeInMainWorld('electron', {
+  // Misc
   openURL: async (target) => _openURL(target),
-  fetchLocales: () => {
-    const translations = {};
-    const languages = ['en', 'da', 'de', 'et', 'es', 'fr', 'it', 'ja', 'ko', 'pt', 'th'];
-    const pages = [
-      'account',
-      'airdropCard',
-      'analyze',
-      'app',
-      'airdropPrep',
-      'customAirdropPrep',
-      'asset',
-      'beetModal',
-      'calculate',
-      'beet',
-      'calculatedAirdrops',
-      'lookupAccount',
-      'lookupAsset',
-      'getAccount',
-      'accountSearch',
-      'create',
-      'upgrade',
-      'faq',
-      'blockAccounts',
-      'customAirdrop',
-      'fetch',
-      'modal',
-      'home',
-      'leaderboard',
-      'nodes',
-      'overrideTransfer',
-      'performAirdrop',
-      'plannedAirdrop',
-      'ticket',
-      'tickets',
-    ];
-    languages.forEach((language) => {
-      const localPages = {};
-      pages.forEach((page) => {
-        // eslint-disable-next-line import/no-dynamic-require, global-require
-        const pageContents = require(`./locales/${language}/${page}.json`);
-        localPages[page] = pageContents;
-      });
-      translations[language] = localPages;
-    });
-    return translations;
+  getUUID: async () => await ipcRenderer.invoke('getUUID'),
+  executeCalculation: async (
+    filtered_signature,
+    distributions,
+    deduplicate,
+    alwaysWinning,
+    leaderboardJSON,
+    relevantAssets,
+    relevantTickets,
+    bof_projectile,
+    bof_splinter,
+    freebieAsset,
+    freebieAssetQty,
+    witnessVoteData,
+    committeeVoteData,
+    workerVoteData
+  ) => await ipcRenderer.invoke(
+    'executeCalculation',
+    filtered_signature,
+    distributions,
+    deduplicate,
+    alwaysWinning,
+    leaderboardJSON,
+    relevantAssets,
+    relevantTickets,
+    bof_projectile,
+    bof_splinter,
+    freebieAsset,
+    freebieAssetQty,
+    witnessVoteData,
+    committeeVoteData,
+    workerVoteData
+  ),
+  // Queries
+  lookupSymbols: async (node, env, asset_ids, apiConnection) => await ipcRenderer.invoke('lookupSymbols', node, env, asset_ids, apiConnection),
+  fetchLeaderboardData: async (node, env, accounts) => await ipcRenderer.invoke('fetchLeaderboardData', node, env, accounts),
+  accountSearch: async (node, env, search_string) => await ipcRenderer.invoke('accountSearch', node, env, search_string),
+  getBlockedAccounts: async (node) => await ipcRenderer.invoke('getBlockedAccounts', node),
+  getObjects: async (node, env, object_ids) => await ipcRenderer.invoke('getObjects', node, env, object_ids),
+  getTickets: async (node, env, lastID, currentTickets) => {
+    return await ipcRenderer.invoke('getTickets', node, env, lastID, currentTickets)
   },
-};
+  fetchAccounts: async (leaderboard, env, node) => {
+    return await ipcRenderer.invoke('fetchAccounts', leaderboard, env, node)
+  },
+  // Generations
+  getTrxBytes: async (opCost, chain, opType, operations) => await ipcRenderer.invoke('getTrxBytes', opCost, chain, opType, operations),
+  generateDeepLink: async (appName, chain, node, opType, operations) => await ipcRenderer.invoke('generateDeepLink', appName, chain, node, opType, operations),
+  generateQRContents: async (opType, opContents) => await ipcRenderer.invoke('generateQRContents', opType, opContents),
+  // Beet
+  checkBeet: async (enableSSL) => await ipcRenderer.invoke('checkBeet', enableSSL),
+  connect: async (appName, browser, origin, existingBeetConnection, identity) => await ipcRenderer.invoke('connect', appName, browser, origin, existingBeetConnection, identity),
+  link: async (chain, beetConnection) => await ipcRenderer.invoke('link', chain, beetConnection),
+  beetBroadcast: async (
+    chain,
+    node,
+    opType,
+    operations,
+    identity,
+    beetObject
+  ) => await ipcRenderer.invoke(
+    'beetBroadcast',
+    chain,
+    node,
+    opType,
+    operations,
+    identity,
+    beetObject
+  ),
+});

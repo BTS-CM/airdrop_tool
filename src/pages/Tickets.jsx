@@ -3,13 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import {
   Title,
-  Text,
-  SimpleGrid,
   Card,
-  Radio,
-  Table,
-  Button,
-  Group,
   JsonInput,
 } from '@mantine/core';
 import { useParams } from 'react-router-dom';

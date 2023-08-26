@@ -5,23 +5,15 @@ import { useTranslation } from 'react-i18next';
 import {
   Title,
   Text,
-  SimpleGrid,
   useMantineTheme,
   TextInput,
-  Loader,
   Card,
-  Accordion,
-  Box,
-  JsonInput,
   ActionIcon,
   Modal,
   Radio,
   Table,
   Button,
-  Col,
-  Paper,
   Group,
-  Badge,
   ScrollArea,
 } from '@mantine/core';
 import { Link, useParams } from "react-router-dom";
@@ -29,7 +21,6 @@ import Fuse from 'fuse.js';
 import { TbInputSearch, TbArrowNarrowRight } from "react-icons/tb";
 
 import { leaderboardStore, blocklistStore, appStore } from '../lib/states';
-import { getBlockedAccounts } from '../lib/directQueries';
 
 export default function BlockAccounts(properties) {
   const { t, i18n } = useTranslation();
@@ -114,7 +105,7 @@ export default function BlockAccounts(properties) {
     setInProgress(true);
     let committeeAccount;
     try {
-      committeeAccount = await getBlockedAccounts(currentNodes[0]);
+      committeeAccount = await window.electron.getBlockedAccounts(currentNodes[0]);
     } catch (error) {
       console.log(error);
       setInProgress(false);

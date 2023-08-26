@@ -4,23 +4,16 @@ import {
   Text,
   SimpleGrid,
   Card,
-  Radio,
   Table,
-  Badge,
-  Button,
   ScrollArea,
-  Group,
-  ActionIcon,
   Loader,
 } from '@mantine/core';
-import { HiOutlineChartPie } from "react-icons/hi";
 import { useTranslation } from 'react-i18next';
 import { Link, useParams } from "react-router-dom";
 
 import {
   appStore, ticketStore, leaderboardStore, assetStore
 } from '../lib/states';
-import { lookupSymbols } from '../lib/directQueries';
 import { humanReadableFloat } from '../lib/common';
 
 export default function Account(properties) {
@@ -74,7 +67,11 @@ export default function Account(properties) {
 
       let currentAsset;
       try {
-        currentAsset = await lookupSymbols(nodes[params.env][0], params.env, [params.id]);
+        currentAsset = await window.electron.lookupSymbols(
+          nodes[params.env][0],
+          params.env,
+          [params.id]
+        );
       } catch (error) {
         console.log(error);
         setInProgress(false);
@@ -107,7 +104,6 @@ export default function Account(properties) {
     }
   }, []);
 
-  const ids = [];
   const foundBalances = currentLeaderboard
     .filter((user) => user.balances.filter((x) => x.asset_id === params.id).length > 0);
 

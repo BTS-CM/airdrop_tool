@@ -1,31 +1,20 @@
 /* eslint-disable max-len */
-import React, { useState, useEffect } from 'react';
-import { useDisclosure } from '@mantine/hooks';
+import React, { useState } from 'react';
 
 import { useTranslation } from 'react-i18next';
 import {
   Title,
   Text,
-  SimpleGrid,
   TextInput,
-  Loader,
   Card,
-  Accordion,
-  Box,
-  JsonInput,
-  Modal,
   Radio,
   Table,
-  Button,
-  Col,
-  Paper,
   Group,
-  Badge,
 } from '@mantine/core';
 import { Link, useParams } from "react-router-dom";
 
 import {
-  leaderboardStore, appStore, tempStore, beetStore
+  leaderboardStore, tempStore
 } from '../lib/states';
 import BeetModal from '../components/BeetModal';
 
@@ -38,34 +27,13 @@ export default function Create(properties) {
     (params && params.env) ?? 'bitshares'
   );
   const [ticketType, setTicketType] = useState("lock_180_days");
-  const [deepLink, setDeepLink] = useState();
-  const [accountID, onAccountID] = useState((params && params.id) ?? "1.2.x");
-
-  const [deepLinkItr, setDeepLinkItr] = useState(0);
-
   const [tokenQuantity, onTokenQuantity] = useState(1);
-  const [opened, { open, close }] = useDisclosure(false);
 
   const btsLeaderboard = leaderboardStore((state) => state.bitshares);
   const btsTestnetLeaderboard = leaderboardStore((state) => state.bitshares_testnet);
   const tuscLeaderboard = leaderboardStore((state) => state.tusc);
 
-  const connection = beetStore((state) => state.connection);
-  const isLinked = beetStore((state) => state.isLinked);
-  const identity = beetStore((state) => state.identity);
-  const reset = beetStore((state) => state.reset);
-
   const account = tempStore((state) => state.account);
-  const setAccount = tempStore((state) => state.setAccount);
-
-  const [tx, setTX] = useState();
-  const [inProgress, setInProgress] = useState(false);
-
-  const [outcome, setOutcome] = useState();
-  const [method, setMethod] = useState();
-
-  const nodes = appStore((state) => state.nodes);
-  const currentNodes = nodes[value];
 
   let relevantChain = "bitshares";
   let assetName = "1.3.0";

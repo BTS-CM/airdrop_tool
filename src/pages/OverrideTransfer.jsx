@@ -16,7 +16,6 @@ import {
   Center,
   ScrollArea
 } from '@mantine/core';
-import { useParams } from "react-router-dom";
 
 import {
   leaderboardStore, tempStore, assetStore
