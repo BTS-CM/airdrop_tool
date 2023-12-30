@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite';
-import i18nextLoader from 'vite-plugin-i18next-loader'
+import i18nextLoader from 'vite-plugin-i18next-loader';
 import react from '@vitejs/plugin-react';
 import electron from 'vite-plugin-electron';
 import { polyfillNode } from "esbuild-plugin-polyfill-node";
@@ -10,6 +10,9 @@ export default defineConfig({
     react(),
     electron({
       entry: 'public/electron.js',
+      preload: {
+        input: `public/preload.js`,
+      },
       base: './',
     }),
     i18nextLoader({

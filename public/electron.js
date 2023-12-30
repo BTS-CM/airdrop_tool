@@ -11,9 +11,9 @@ const {
   getTrxBytes,
   generateDeepLink,
   generateQRContents
-} = require('./lib/generate');
+} = require(path.join(__dirname, '..', 'dist', 'lib', 'generate.js'));
 
-const { executeCalculation } = require('./lib/algos');
+const { executeCalculation } = require(path.join(__dirname, '..', 'dist', 'lib', 'algos.js'));
 
 const {
   lookupSymbols,
@@ -23,7 +23,7 @@ const {
   getObjects,
   getTickets,
   fetchAccounts
-} = require('./lib/queries');
+} = require(path.join(__dirname, '..', 'dist', 'lib', 'queries.js'));
 
 const createWindow = () => {
   // Create the browser window.
@@ -34,7 +34,7 @@ const createWindow = () => {
       nodeIntegration: false,
       enableRemoteModule: false,
       contextIsolation: true,
-      preload: path.join(__dirname, "preload.js"),
+      preload: path.join(__dirname, '..', 'dist-electron', 'preload.js'),
       partition: 'persist:nft_airdrop_tool',
     }
   });
@@ -86,15 +86,15 @@ app.whenReady().then(() => {
     event.preventDefault();
     callback(true);
   });
-});
 
-// Quit when all windows are closed, except on macOS. There, it's common
-// for applications and their menu bar to stay active until the user quits
-// explicitly with Cmd + Q.
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
+  // Quit when all windows are closed, except on macOS. There, it's common
+  // for applications and their menu bar to stay active until the user quits
+  // explicitly with Cmd + Q.
+  app.on('window-all-closed', () => {
+    if (process.platform !== 'darwin') {
+      app.quit();
+    }
+  });
 });
 
 ipcMain.handle('getUUID', async (event, arg) => await uuidv4());

@@ -8,7 +8,7 @@
   "description": "An airdropping tool for Bitshares based blockchains",
   "homepage": "./",
   "private": true,
-  "main": "./dist/electron.js",
+  "main": "./dist-electron/electron.js",
   "scripts": {
     "start": "vite --port=3001",
     "build": "vite build",
@@ -18,10 +18,10 @@
     "format": "prettier --write ./src/*.* --config ./.prettierrc",
     "electron": "electron .",
     "electron:start": "concurrently -k \"cross-env BROWSER=none vite preview --port 3001\" \"wait-on http://localhost:3001 && electronmon .\"",
-    "test": "concurrently -k \"cross-env BROWSER=none vite build\" \"electron-builder -w -c.extraMetadata.main=dist/electron.js\"",
-    "electron:package:macos-latest": "yarn build && electron-builder -m -c.extraMetadata.main=dist/electron.js --publish never",
-    "electron:package:windows-latest": "yarn build && electron-builder -w -c.extraMetadata.main=dist/electron.js --publish never",
-    "electron:package:ubuntu-latest": "yarn build && electron-builder -l -c.extraMetadata.main=dist/electron.js --publish never"
+    "test": "concurrently -k \"cross-env BROWSER=none vite build\" \"electron-builder -w -c.extraMetadata.main=dist-electron/electron.js\"",
+    "electron:package:macos-latest": "yarn build && electron-builder -m -c.extraMetadata.main=dist-electron/electron.js --publish never",
+    "electron:package:windows-latest": "yarn build && electron-builder -w -c.extraMetadata.main=dist-electron/electron.js --publish never",
+    "electron:package:ubuntu-latest": "yarn build && electron-builder -l -c.extraMetadata.main=dist-electron/electron.js --publish never"
   },
   "repository": {
     "type": "git",
