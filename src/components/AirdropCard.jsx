@@ -129,26 +129,24 @@ export default function AirdropCard(properties) {
             : null
         }
       </Text>
-      {
-        !relevantFees || (relevantFees && cardBytes <= relevantFees.maxBytes)
-          ? (
-            <BeetModal
-              value={env}
-              opContents={ops}
-              opType="transfer"
-              opNum={0}
-              opName="Transfer"
-              appName="Transfer"
-              requestedMethods={["BEET", "LOCAL", "JSON"]}
-              filename="airdrop.json"
-            />
-          )
-          : (
-            <Button disabled>
-              {t("airdropCard:fees.tooBig")}
-            </Button>
-          )
-      }
+      
+      <BeetModal
+        value={env}
+        opContents={ops}
+        opType="transfer"
+        opNum={0}
+        opName="Transfer"
+        appName="Transfer"
+        requestedMethods={["BEET", "LOCAL", "JSON"]}
+        filename="airdrop.json"
+      />
+
+      {cardBytes && relevantFees && cardBytes > relevantFees.maxBytes ? (
+        <>
+          <br />
+          {t("airdropCard:fees.tooBig")}
+        </>
+      ) : null}
 
     </Card>
   );
