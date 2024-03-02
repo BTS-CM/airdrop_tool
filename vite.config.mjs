@@ -9,8 +9,14 @@ export default defineConfig({
   plugins: [
     react(),
     electron({
-      entry: 'public/electron.js',
-      base: './',
+      main: {
+        entry: 'public/electron.js',
+        base: './',
+      },
+      preload: {
+        input: 'public/preload.js',
+        base: './',
+      },
     }),
     i18nextLoader({
       paths: ['./src/locales'],

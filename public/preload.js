@@ -52,12 +52,8 @@ contextBridge.exposeInMainWorld('electron', {
   accountSearch: async (node, env, search_string) => await ipcRenderer.invoke('accountSearch', node, env, search_string),
   getBlockedAccounts: async (node) => await ipcRenderer.invoke('getBlockedAccounts', node),
   getObjects: async (node, env, object_ids) => await ipcRenderer.invoke('getObjects', node, env, object_ids),
-  getTickets: async (node, env, lastID, currentTickets) => {
-    return await ipcRenderer.invoke('getTickets', node, env, lastID, currentTickets)
-  },
-  fetchAccounts: async (leaderboard, env, node) => {
-    return await ipcRenderer.invoke('fetchAccounts', leaderboard, env, node)
-  },
+  getTickets: async (node, env, lastID, currentTickets) => await ipcRenderer.invoke('getTickets', node, env, lastID, currentTickets),
+  fetchAccounts: async (leaderboard, env, node) => await ipcRenderer.invoke('fetchAccounts', leaderboard, env, node),
   // Generations
   getTrxBytes: async (opCost, chain, opType, operations) => await ipcRenderer.invoke('getTrxBytes', opCost, chain, opType, operations),
   generateDeepLink: async (appName, chain, node, opType, operations) => await ipcRenderer.invoke('generateDeepLink', appName, chain, node, opType, operations),
