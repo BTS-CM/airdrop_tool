@@ -39,12 +39,13 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+        uses: actions/checkout@v4
     
-    - name: Use Node.js 18.16.1
-      uses: actions/setup-node@v3
+    - name: Use Node.js
+      uses: actions/setup-node@v4
       with:
-        node-version: 18.16.1
+        node-version: "node"
+        cache: "npm"
 
     #- name: Clean yarn cache
     #  run: yarn cache clean
@@ -58,7 +59,7 @@ jobs:
       run: npm run electron:package:${{ matrix.os }}
 
     - name: Upload .${{ matrix.release_format }} file
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: airdrop_tool.${{ matrix.release_format }}
         path: dist/airdrop_tool.${{ matrix.release_format }}
@@ -80,17 +81,17 @@ jobs:
       run: chmod +x vt
     - name: Download exe
       id: download
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: airdrop_tool.exe
         path: ~/
     - name: Download deb
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: airdrop_tool.deb
         path: ~/
     - name: Download dmg
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: airdrop_tool.dmg
         path: ~/
